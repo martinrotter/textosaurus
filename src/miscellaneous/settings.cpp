@@ -15,6 +15,10 @@ DKEY GUI::ToolbarStyle = "toolbar_style";
 
 DVALUE(Qt::ToolButtonStyle) GUI::ToolbarStyleDef = Qt::ToolButtonIconOnly;
 
+DKEY GUI::ToolbarActions = "toolbar";
+
+DVALUE(char*) GUI::ToolbarActionsDef = "m_actionFileNew,m_actionFileOpen";
+
 DKEY GUI::StatusbarActions = "status_bar";
 
 DVALUE(char*) GUI::StatusbarActionsDef = "m_actionFullscreen,m_actionQuit";

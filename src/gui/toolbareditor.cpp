@@ -114,6 +114,10 @@ void ToolBarEditor::loadEditor(const QList<QAction*> activated_actions, const QL
   m_ui->m_listActivatedActions->setCurrentRow(m_ui->m_listActivatedActions->count() >= 0 ? 0 : -1);
 }
 
+BaseBar* ToolBarEditor::toolBar() const {
+  return m_toolBar;
+}
+
 bool ToolBarEditor::eventFilter(QObject* object, QEvent* event) {
   if (object == m_ui->m_listActivatedActions) {
     if (event->type() == QEvent::KeyPress) {

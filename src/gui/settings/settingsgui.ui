@@ -160,7 +160,7 @@
          </property>
          <item>
           <property name="text">
-           <string>Statusbar</string>
+           <string>Main toolbar</string>
           </property>
          </item>
         </widget>
@@ -176,7 +176,7 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="m_pageStatusbar">
+         <widget class="QWidget" name="m_pageToolBar">
           <layout class="QHBoxLayout" name="horizontalLayout_18">
            <property name="leftMargin">
             <number>0</number>
@@ -191,7 +191,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="ToolBarEditor" name="m_editorStatusbar" native="true"/>
+            <widget class="ToolBarEditor" name="m_editorToolBar" native="true"/>
            </item>
           </layout>
          </widget>

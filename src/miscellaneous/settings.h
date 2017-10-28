@@ -32,6 +32,10 @@ namespace GUI {
 
   VALUE(Qt::ToolButtonStyle) ToolbarStyleDef;
 
+  KEY ToolbarActions;
+
+  VALUE(char*) ToolbarActionsDef;
+
   KEY StatusbarActions;
 
   VALUE(char*) StatusbarActionsDef;

@@ -146,9 +146,6 @@
    <property name="toolTip">
     <string>Display settings of the application.</string>
    </property>
-   <property name="shortcut">
-    <string notr="true">Ctrl+S</string>
-   </property>
   </action>
   <action name="m_actionAboutGuard">
    <property name="text">
@@ -308,10 +305,16 @@
    <property name="text">
     <string>&amp;New file</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+N</string>
+   </property>
   </action>
   <action name="m_actionFileOpen">
    <property name="text">
     <string>&amp;Open file...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+O</string>
    </property>
   </action>
   <action name="actionReload_file_from_disk">

@@ -8,6 +8,7 @@
 #include "ui_formmain.h"
 
 class StatusBar;
+class ToolBar;
 
 class FormMain : public QMainWindow {
   Q_OBJECT
@@ -23,6 +24,7 @@ class FormMain : public QMainWindow {
 
     // Returns global tab widget.
     TabWidget* tabWidget() const;
+    ToolBar* toolBar() const;
 
     // Access to statusbar.
     StatusBar* statusBar() const;
@@ -67,6 +69,7 @@ class FormMain : public QMainWindow {
 
     QScopedPointer<Ui::FormMain> m_ui;
     StatusBar* m_statusBar;
+    ToolBar* m_toolBar;
 };
 
 #endif // FORMMAIN_H

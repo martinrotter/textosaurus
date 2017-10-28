@@ -10,6 +10,7 @@
 #include "gui/plaintoolbutton.h"
 #include "gui/statusbar.h"
 #include "gui/tabbar.h"
+#include "gui/toolbar.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/mutex.h"
@@ -34,6 +35,7 @@ FormMain::FormMain(QWidget* parent, Qt::WindowFlags f)
   // even if main menu is not visible.
   addActions(qApp->userActions());
   setStatusBar(m_statusBar = new StatusBar(this));
+  addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
   // Prepare main window and tabs.
   prepareMenus();
@@ -44,7 +46,9 @@ FormMain::FormMain(QWidget* parent, Qt::WindowFlags f)
   // Setup some appearance of the window.
   setupIcons();
   loadSize();
+
   m_statusBar->loadSavedActions();
+  m_toolBar->loadSavedActions();
 }
 
 FormMain::~FormMain() {
@@ -53,6 +57,10 @@ FormMain::~FormMain() {
 
 TabWidget* FormMain::tabWidget() const {
   return m_ui->m_tabWidget;
+}
+
+ToolBar* FormMain::toolBar() const {
+  return m_toolBar;
 }
 
 StatusBar* FormMain::statusBar() const {
@@ -67,6 +75,8 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui->m_actionDownloadManager;
   actions << m_ui->m_actionRestart;
   actions << m_ui->m_actionQuit;
+  actions << m_ui->m_actionFileNew;
+  actions << m_ui->m_actionFileOpen;
 
 #if !defined(Q_OS_MAC)
   actions << m_ui->m_actionFullscreen;
@@ -79,12 +89,12 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui->m_actionTabsPrevious;
   actions << m_ui->m_actionTabsCloseAll;
   actions << m_ui->m_actionTabsCloseAllExceptCurrent;
+
   return actions;
 }
 
 void FormMain::prepareMenus() {
 #if defined(Q_OS_MAC)
-  m_ui->m_actionSwitchMainMenu->setVisible(false);
   m_ui->m_actionFullscreen->setVisible(false);
 #endif
 }
@@ -139,6 +149,9 @@ void FormMain::setupIcons() {
   m_ui->m_actionReportBug->setIcon(icon_theme_factory->fromTheme(QSL("call-start")));
   m_ui->m_actionDonate->setIcon(icon_theme_factory->fromTheme(QSL("applications-office")));
   m_ui->m_actionDisplayWiki->setIcon(icon_theme_factory->fromTheme(QSL("applications-science")));
+
+  m_ui->m_actionFileNew->setIcon(icon_theme_factory->fromTheme(QSL("document-new")));
+  m_ui->m_actionFileOpen->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
 
   // View.
   m_ui->m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
@@ -208,6 +221,8 @@ void FormMain::saveSize() {
   settings->setValue(GROUP(GUI), GUI::MainWindowInitialSize, size());
   settings->setValue(GROUP(GUI), GUI::MainWindowStartsMaximized, is_maximized);
   settings->setValue(GROUP(GUI), GUI::MainWindowStartsFullscreen, is_fullscreen);
+
+  settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, m_ui->m_actionSwitchToolBar->isChecked());
   settings->setValue(GROUP(GUI), GUI::StatusBarVisible, m_ui->m_actionSwitchStatusBar->isChecked());
 }
 
@@ -219,6 +234,7 @@ void FormMain::createConnections() {
   // Menu "View" connections.
   connect(m_ui->m_actionFullscreen, &QAction::toggled, this, &FormMain::switchFullscreenMode);
   connect(m_ui->m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
+  connect(m_ui->m_actionSwitchToolBar, &QAction::toggled, toolBar(), &ToolBar::setVisible);
   connect(m_ui->m_actionSwitchStatusBar, &QAction::toggled, statusBar(), &StatusBar::setVisible);
 
   // Menu "Tools" connections.

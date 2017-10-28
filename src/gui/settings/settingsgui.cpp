@@ -3,8 +3,9 @@
 #include "gui/settings/settingsgui.h"
 
 #include "gui/dialogs/formmain.h"
-#include "gui/statusbar.h"
 #include "gui/tabwidget.h"
+#include "gui/toolbar.h"
+#include "gui/toolbareditor.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/settings.h"
@@ -14,8 +15,8 @@
 
 SettingsGui::SettingsGui(Settings* settings, QWidget* parent) : SettingsPanel(settings, parent), m_ui(new Ui::SettingsGui) {
   m_ui->setupUi(this);
-  m_ui->m_editorStatusbar->activeItemsWidget()->viewport()->installEventFilter(this);
-  m_ui->m_editorStatusbar->availableItemsWidget()->viewport()->installEventFilter(this);
+  m_ui->m_editorToolBar->activeItemsWidget()->viewport()->installEventFilter(this);
+  m_ui->m_editorToolBar->availableItemsWidget()->viewport()->installEventFilter(this);
 
   // Setup skins.
   connect(m_ui->m_cmbIconTheme, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SettingsGui::requireRestart);
@@ -28,7 +29,7 @@ SettingsGui::SettingsGui(Settings* settings, QWidget* parent) : SettingsPanel(se
   connect(m_ui->m_grbCloseTabs, &QGroupBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui->m_cmbToolbarButtonStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
           &SettingsGui::dirtifySettings);
-  connect(m_ui->m_editorStatusbar, &ToolBarEditor::setupChanged, this, &SettingsGui::dirtifySettings);
+  connect(m_ui->m_editorToolBar, &ToolBarEditor::setupChanged, this, &SettingsGui::dirtifySettings);
   connect(m_ui->m_listStyles, &QListWidget::currentItemChanged, this, &SettingsGui::dirtifySettings);
   connect(m_ui->m_cmbSelectToolBar, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), m_ui->m_stackedToolbars,
           &QStackedWidget::setCurrentIndex);
@@ -107,7 +108,7 @@ void SettingsGui::loadSettings() {
                                                                                                              GUI::ToolbarStyle)).toInt()));
 
   // Load toolbars.
-  m_ui->m_editorStatusbar->loadFromToolBar(qApp->mainForm()->statusBar());
+  m_ui->m_editorToolBar->loadFromToolBar(qApp->mainForm()->toolBar());
   onEndLoadSettings();
 }
 
@@ -146,7 +147,10 @@ void SettingsGui::saveSettings() {
   settings()->setValue(GROUP(GUI), GUI::TabCloseDoubleClick, m_ui->m_checkCloseTabsDoubleClick->isChecked());
   settings()->setValue(GROUP(GUI), GUI::TabNewDoubleClick, m_ui->m_checkNewTabDoubleClick->isChecked());
   settings()->setValue(GROUP(GUI), GUI::HideTabBarIfOnlyOneTab, m_ui->m_checkHideTabBarIfOneTabVisible->isChecked());
-  m_ui->m_editorStatusbar->saveToolBar();
+  m_ui->m_editorToolBar->saveToolBar();
+
+  qApp->mainForm()->toolBar()->refreshVisualProperties();
+
   qApp->mainForm()->tabWidget()->checkTabBarVisibility();
 
   onEndSaveSettings();

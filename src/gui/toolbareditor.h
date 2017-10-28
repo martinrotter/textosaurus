@@ -34,6 +34,8 @@ class ToolBarEditor : public QWidget {
       return m_ui->m_listAvailableActions;
     }
 
+    BaseBar* toolBar() const;
+
   protected:
     bool eventFilter(QObject* object, QEvent* event);
 
