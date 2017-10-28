@@ -219,7 +219,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/statusbar.h \
             src/gui/styleditemdelegatewithoutfocus.h \
             src/gui/tabbar.h \
-            src/gui/tabcontent.h \
             src/gui/tabwidget.h \
             src/gui/timespinbox.h \
             src/gui/toolbareditor.h \
@@ -281,7 +280,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/statusbar.cpp \
             src/gui/styleditemdelegatewithoutfocus.cpp \
             src/gui/tabbar.cpp \
-            src/gui/tabcontent.cpp \
             src/gui/tabwidget.cpp \
             src/gui/timespinbox.cpp \
             src/gui/toolbareditor.cpp \

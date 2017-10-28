@@ -30,8 +30,6 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
 
   addPermanentWidget(m_lblProgressDownload);
   addPermanentWidget(m_barProgressDownload);
-
-  showProgressDownload(15, "cascsa");
 }
 
 StatusBar::~StatusBar() {

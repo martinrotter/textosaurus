@@ -5,12 +5,9 @@
 
 #include <QStatusBar>
 
-#include "gui/basetoolbar.h"
-
 class QProgressBar;
 class PlainToolButton;
 class QLabel;
-class Mutex;
 
 class StatusBar : public QStatusBar {
   Q_OBJECT
