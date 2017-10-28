@@ -8,6 +8,7 @@
 #include "gui/statusbar.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/iofactory.h"
+#include "miscellaneous/textapplication.h"
 #include "network-web/webfactory.h"
 
 #include <QProcess>
@@ -15,7 +16,7 @@
 
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
-  m_userActions(QList<QAction*>()), m_mainForm(nullptr),
+  m_userActions(QList<QAction*>()), m_textApplication(new TextApplication(this)), m_mainForm(nullptr),
   m_settings(Settings::setupSettings(this)), m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
@@ -51,6 +52,10 @@ bool Application::isFirstRun(const QString& version) const {
   else {
     return false;
   }
+}
+
+TextApplication* Application::textApplication() const {
+  return m_textApplication;
 }
 
 WebFactory* Application::web() const {

@@ -28,6 +28,7 @@ class FormMain;
 class IconFactory;
 class QAction;
 class WebFactory;
+class TextApplication;
 
 class Application : public QtSingleApplication {
   Q_OBJECT
@@ -47,6 +48,7 @@ class Application : public QtSingleApplication {
     // Check whether GIVEN VERSION of the application starts for the first time.
     bool isFirstRun(const QString& version) const;
 
+    TextApplication* textApplication() const;
     WebFactory* web() const;
     SystemFactory* system();
     Localization* localization();
@@ -100,6 +102,7 @@ class Application : public QtSingleApplication {
     void eliminateFirstRun(const QString& version);
 
     QList<QAction*> m_userActions;
+    TextApplication* m_textApplication;
     FormMain* m_mainForm;
     Settings* m_settings;
     WebFactory* m_webFactory;
