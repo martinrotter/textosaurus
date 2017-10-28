@@ -136,7 +136,14 @@ DEFINES += QSCINTILLA_DLL
 
 win32 {
   # Add QScintilla from fixed path.
-  LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5
+  CONFIG(release, debug|release) {
+    message(scipio: Linking with release QScintilla library.)
+    LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5
+  }
+  else {
+    message(scipio: Linking with debug QScintilla library.)
+    LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5d
+  }
 
   INCLUDEPATH += $$PWD/resources/binaries/qscintilla
   DEPENDPATH += $$PWD/resources/binaries/qscintilla

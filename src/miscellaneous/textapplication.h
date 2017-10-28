@@ -5,15 +5,20 @@
 
 #include <QObject>
 
+class TabWidget;
+class FormMain;
+
 class TextApplication : public QObject {
   Q_OBJECT
 
   public:
     explicit TextApplication(QObject* parent = nullptr);
 
-  signals:
+    void setMainForm(FormMain* main_form);
 
-  public slots:
+  private:
+    TabWidget* m_tabWidget;
+    FormMain* m_mainForm;
 };
 
 #endif // TEXTAPPLICATION_H

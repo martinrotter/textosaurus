@@ -106,6 +106,7 @@ QWidget* Application::mainFormWidget() {
 
 void Application::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
+  m_textApplication->setMainForm(main_form);
 }
 
 QString Application::configFolder() {
