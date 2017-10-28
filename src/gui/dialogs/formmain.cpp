@@ -120,7 +120,7 @@ void FormMain::switchVisibility() {
 
 void FormMain::display() {
   // Make sure window is not minimized.
-  setWindowState(windowState() & ~Qt::WindowMinimized);
+  setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 
   // Display the window and make sure it is raised on top.
   show();

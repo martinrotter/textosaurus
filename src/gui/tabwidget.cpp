@@ -19,7 +19,6 @@
 TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent), m_menuMain(nullptr) {
   setTabBar(new TabBar(this));
   setupMainMenuButton();
-  initializeTabs();
   createConnections();
 }
 
@@ -58,7 +57,7 @@ void TabWidget::openMainMenu() {
 
 void TabWidget::showDownloadManager() {
   for (int i = 0; i < count(); i++) {
-    if (widget(i)->metaObject()->className() == QSL("DownloadManager")) {
+    if (tabBar()->tabType(i) == TabBar::TabType::DownloadManager) {
       setCurrentIndex(i);
       return;
     }
@@ -89,34 +88,15 @@ void TabWidget::checkTabBarVisibility() {
 void TabWidget::tabInserted(int index) {
   QTabWidget::tabInserted(index);
   checkTabBarVisibility();
-  const int count_of_tabs = count();
-
-  if (index < count_of_tabs - 1 && count_of_tabs > 1) {
-    // New tab was inserted and the tab is not the last one.
-    fixContentsAfterMove(index, count_of_tabs - 1);
-  }
 }
 
 void TabWidget::tabRemoved(int index) {
   QTabWidget::tabRemoved(index);
   checkTabBarVisibility();
-  const int count_of_tabs = count();
-
-  if (index < count_of_tabs && count_of_tabs > 1) {
-    // Some tab was removed and the tab was not the last one.
-    fixContentsAfterMove(index, count_of_tabs - 1);
-  }
 }
 
 void TabWidget::createConnections() {
   connect(tabBar(), &TabBar::tabCloseRequested, this, &TabWidget::closeTab);
-  connect(tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TabWidget::addNewEmptyTab);
-  connect(tabBar(), &TabBar::tabMoved, this, &TabWidget::fixContentsAfterMove);
-}
-
-void TabWidget::initializeTabs() {
-  // TODO: tady vytvořit tabovou instanci text editoru
-  QTabWidget::addTab(new TextEditor(), "text");
 }
 
 void TabWidget::setupIcons() {
@@ -131,11 +111,11 @@ void TabWidget::setupIcons() {
 }
 
 bool TabWidget::closeTab(int index) {
-  if (tabBar()->tabType(index) == TabBar::Closable) {
+  if (tabBar()->tabType(index) == TabBar::TabType::Closable || tabBar()->tabType(index) == TabBar::TabType::TextEditor) {
     removeTab(index, true);
     return true;
   }
-  else if (tabBar()->tabType(index) == TabBar::DownloadManager) {
+  else if (tabBar()->tabType(index) == TabBar::TabType::DownloadManager) {
     removeTab(index, false);
     return true;
   }
@@ -163,10 +143,6 @@ void TabWidget::closeAllTabs() {
   for (int i = count() - 1; i >= 0; i--) {
     closeTab(i);
   }
-}
-
-void TabWidget::addNewEmptyTab() {
-  // TODO: pridat novy prazdny dokument
 }
 
 void TabWidget::gotoNextTab() {
@@ -210,7 +186,11 @@ void TabWidget::removeTab(int index, bool clear_from_memory) {
   QTabWidget::removeTab(index);
 }
 
-int TabWidget::addTab(TabContent* widget, const QIcon& icon, const QString& label, const TabBar::TabType& type) {
+TextEditor* TabWidget::textEditorAt(int index) const {
+  return qobject_cast<TextEditor*>(widget(index));
+}
+
+int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, const TabBar::TabType& type) {
   const int index = QTabWidget::addTab(widget, icon, label);
 
   tabBar()->setTabType(index, type);
@@ -218,7 +198,7 @@ int TabWidget::addTab(TabContent* widget, const QIcon& icon, const QString& labe
   return index;
 }
 
-int TabWidget::addTab(TabContent* widget, const QString& label, const TabBar::TabType& type) {
+int TabWidget::addTab(QWidget* widget, const QString& label, const TabBar::TabType& type) {
   const int index = QTabWidget::addTab(widget, label);
 
   tabBar()->setTabType(index, type);
@@ -251,15 +231,4 @@ void TabWidget::changeTitle(int index, const QString& new_title) {
   setTabText(index, new_title);
   setTabToolTip(index, new_title);
   indentTabText(index);
-}
-
-void TabWidget::fixContentsAfterMove(int from, int to) {
-  from = qMin(from, to);
-  to = qMax(from, to);
-
-  for (; from <= to; from++) {
-    TabContent* content = static_cast<TabContent*>(widget(from));
-
-    content->setIndex(from);
-  }
 }

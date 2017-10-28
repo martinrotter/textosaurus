@@ -6,8 +6,6 @@
 #include "ui_downloaditem.h"
 #include "ui_downloadmanager.h"
 
-#include "gui/tabcontent.h"
-
 #include <QDateTime>
 #include <QFile>
 #include <QNetworkReply>
@@ -76,11 +74,7 @@ class DownloadItem : public QWidget {
     bool m_canceledFileSelect;
 };
 
-#if defined(USE_WEBENGINE)
-class WebBrowser;
-#endif
-
-class DownloadManager : public TabContent {
+class DownloadManager : public QWidget {
   Q_OBJECT
   Q_PROPERTY(RemovePolicy removePolicy READ removePolicy WRITE setRemovePolicy NOTIFY removePolicyChanged)
 
@@ -97,12 +91,6 @@ class DownloadManager : public TabContent {
 
     explicit DownloadManager(QWidget* parent = nullptr);
     virtual ~DownloadManager();
-
-#if defined(USE_WEBENGINE)
-    WebBrowser* webBrowser() const {
-      return nullptr;
-    }
-#endif
 
     QNetworkAccessManager* networkManager() const;
 

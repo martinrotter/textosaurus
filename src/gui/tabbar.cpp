@@ -25,6 +25,7 @@ void TabBar::setTabType(int index, const TabBar::TabType& type) {
                                                                                                  this));
 
   switch (type) {
+    case TabBar::TextEditor:
     case TabBar::DownloadManager:
     case TabBar::Closable: {
       PlainToolButton* close_button = new PlainToolButton(this);
@@ -41,7 +42,6 @@ void TabBar::setTabType(int index, const TabBar::TabType& type) {
     }
 
     case TabBar::NonClosable:
-    case TabBar::TextEditor:
     default:
       setTabButton(index, button_position, 0);
       break;

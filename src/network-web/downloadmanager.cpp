@@ -419,7 +419,7 @@ void DownloadItem::updateInfoAndUrlLabel() {
   m_ui->m_lblLocalFilename->setText(tr("Local file: %1").arg(QDir::toNativeSeparators(m_output.fileName())));
 }
 
-DownloadManager::DownloadManager(QWidget* parent) : TabContent(parent), m_ui(new Ui::DownloadManager),
+DownloadManager::DownloadManager(QWidget* parent) : QWidget(parent), m_ui(new Ui::DownloadManager),
   m_autoSaver(new AutoSaver(this)), m_model(new DownloadModel(this)),
   m_networkManager(SilentNetworkAccessManager::instance()), m_iconProvider(nullptr), m_removePolicy(Never) {
   m_ui->setupUi(this);

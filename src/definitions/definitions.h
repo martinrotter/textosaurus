@@ -5,6 +5,7 @@
 
 #include <QtGlobal>
 
+#define MAX_TEXT_FILE_SIZE                    qint64(INT_MAX)
 #define ARGUMENTS_LIST_SEPARATOR              "\n"
 #define IS_IN_ARRAY(offset, array)            ((offset >= 0) && (offset < array.count()))
 #define URI_SCHEME_HTTP                       "http://"

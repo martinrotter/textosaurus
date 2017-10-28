@@ -5,6 +5,7 @@
 
 #include <QObject>
 
+class TextEditor;
 class TabWidget;
 class FormMain;
 
@@ -14,7 +15,17 @@ class TextApplication : public QObject {
   public:
     explicit TextApplication(QObject* parent = nullptr);
 
+    QList<TextEditor*> editors()  const;
+
     void setMainForm(FormMain* main_form);
+
+  public slots:
+    void openTextFile();
+    void loadTextEditorFromFile(const QString& file_path);
+    int addEmptyTextEditor();
+
+  private slots:
+    void changeCurrentEditor(int index);
 
   private:
     TabWidget* m_tabWidget;

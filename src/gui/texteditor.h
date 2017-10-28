@@ -9,7 +9,16 @@ class TextEditor : public QsciScintilla {
   Q_OBJECT
 
   public:
-    explicit TextEditor();
+    explicit TextEditor(QWidget* parent = nullptr);
+
+    QString filePath() const;
+    void setFilePath(const QString& file_path);
+
+  public slots:
+    void loadFromFile(QFile& file);
+
+  private:
+    QString m_filePath;
 };
 
 #endif // TEXTEDITOR_H

@@ -10,9 +10,6 @@
     <height>677</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string notr="true">MainWindow</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="leftMargin">
@@ -45,13 +42,34 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <widget class="QMenu" name="menuSave_file_with_encoding">
+     <property name="title">
+      <string>Save file with encoding...</string>
+     </property>
+    </widget>
+    <widget class="QMenu" name="menuOpen_file_with_encoding">
+     <property name="title">
+      <string>Open file with encoding...</string>
+     </property>
+    </widget>
+    <addaction name="action_New_empty_text_file"/>
+    <addaction name="separator"/>
+    <addaction name="m_actionFileOpen"/>
+    <addaction name="menuOpen_file_with_encoding"/>
+    <addaction name="actionReload_file_from_disk"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave_file"/>
+    <addaction name="actionSave_file_as"/>
+    <addaction name="menuSave_file_with_encoding"/>
+    <addaction name="actionSave_all_files"/>
+    <addaction name="separator"/>
     <addaction name="m_actionRestart"/>
     <addaction name="m_actionQuit"/>
    </widget>
@@ -94,8 +112,10 @@
     <property name="title">
      <string>Tabs</string>
     </property>
+    <addaction name="actionNew_empty_text_editor"/>
     <addaction name="m_actionTabsCloseAll"/>
     <addaction name="m_actionTabsCloseAllExceptCurrent"/>
+    <addaction name="actionClose_all_saved_tabs"/>
     <addaction name="separator"/>
     <addaction name="m_actionTabsNext"/>
     <addaction name="m_actionTabsPrevious"/>
@@ -294,6 +314,56 @@
     <string>Go to &amp;previous tab</string>
    </property>
   </action>
+  <action name="actionNew_empty_text_editor">
+   <property name="text">
+    <string>Open &amp;new empty text editor</string>
+   </property>
+  </action>
+  <action name="action_New_empty_text_file">
+   <property name="text">
+    <string>&amp;New file</string>
+   </property>
+  </action>
+  <action name="m_actionFileOpen">
+   <property name="text">
+    <string>&amp;Open file...</string>
+   </property>
+  </action>
+  <action name="actionReload_file_from_disk">
+   <property name="text">
+    <string>Reload file from disk</string>
+   </property>
+  </action>
+  <action name="actionSave_file">
+   <property name="text">
+    <string>Save file</string>
+   </property>
+  </action>
+  <action name="actionSave_file_as">
+   <property name="text">
+    <string>Save file as...</string>
+   </property>
+  </action>
+  <action name="actionSave_all_files">
+   <property name="text">
+    <string>Save all files</string>
+   </property>
+  </action>
+  <action name="actionClose_all_saved_tabs">
+   <property name="text">
+    <string>Close all &amp;saved tabs</string>
+   </property>
+  </action>
+  <action name="actionaa">
+   <property name="text">
+    <string>aa</string>
+   </property>
+  </action>
+  <action name="actionaa_2">
+   <property name="text">
+    <string>aa</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -303,6 +373,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_tabWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
