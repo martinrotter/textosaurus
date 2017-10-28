@@ -238,7 +238,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/qtsingleapplication/qtlocalpeer.h \
             src/qtsingleapplication/qtlockedfile.h \
             src/qtsingleapplication/qtsingleapplication.h \
-            src/qtsingleapplication/qtsinglecoreapplication.h
+            src/qtsingleapplication/qtsinglecoreapplication.h \
+            src/gui/texteditor.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -297,7 +298,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/qtsingleapplication/qtlocalpeer.cpp \
             src/qtsingleapplication/qtlockedfile.cpp \
             src/qtsingleapplication/qtsingleapplication.cpp \
-            src/qtsingleapplication/qtsinglecoreapplication.cpp
+            src/qtsingleapplication/qtsinglecoreapplication.cpp \
+            src/gui/texteditor.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

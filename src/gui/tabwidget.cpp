@@ -6,6 +6,7 @@
 #include "gui/dialogs/formmain.h"
 #include "gui/plaintoolbutton.h"
 #include "gui/tabbar.h"
+#include "gui/texteditor.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/settings.h"
@@ -115,6 +116,7 @@ void TabWidget::createConnections() {
 
 void TabWidget::initializeTabs() {
   // TODO: tady vytvořit tabovou instanci text editoru
+  QTabWidget::addTab(new TextEditor(), "text");
 }
 
 void TabWidget::setupIcons() {

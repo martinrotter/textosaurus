@@ -71,7 +71,7 @@ void FormAbout::loadLicenseAndInformation() {
                              "<ul><li><a href=\"mailto://%1\">%1</a> ~e-mail</li>"
                              "<li><a href=\"%2\">%2</a> ~website</li></ul>"
                              "You can obtain source code for %5 from its website."
-                             "<br><br><br>Copyright (C) 2011-%3 %4</body>").arg(APP_EMAIL, APP_URL,
+                             "<br><br><br>Copyright (C) 2017-%3 %4</body>").arg(APP_EMAIL, APP_URL,
                                                                                 QString::number(QDateTime::currentDateTime()
                                                                                                 .date()
                                                                                                 .year()),
