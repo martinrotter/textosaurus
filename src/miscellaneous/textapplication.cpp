@@ -6,6 +6,7 @@
 #include "gui/messagebox.h"
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
+#include "gui/toolbar.h"
 #include "miscellaneous/textfactory.h"
 
 #include <QFileDialog>
@@ -56,25 +57,51 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) && file.size() > BIG_TEXT_FILE_SIZE) {
     if (MessageBox::show(m_mainForm, QMessageBox::Question, tr("Opening big file"),
                          tr("You want to open big text file in encoding which is different from %1. This operation "
-                            "might take quite some time."), tr("Do you really want to open the file?"),
+                            "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
+                         tr("Do you really want to open the file?"),
                          file.fileName(), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
       return;
     }
   }
 
-  int index = addEmptyTextEditor();
-  TextEditor* new_editor = m_tabWidget->textEditorAt(index);
+  TextEditor* new_editor = addEmptyTextEditor();
 
   if (new_editor != nullptr) {
     new_editor->loadFromFile(file, encoding);
   }
 }
 
-int TextApplication::addEmptyTextEditor() {
-  return m_tabWidget->addTab(new TextEditor(m_tabWidget),
-                             qApp->icons()->fromTheme(QSL("application-text")),
-                             tr("Unsaved file"),
-                             TabBar::TabType::TextEditor);
+TextEditor* TextApplication::addEmptyTextEditor() {
+  TextEditor* editor = new TextEditor(m_tabWidget);
+  int index = m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")),
+                                  tr("New text file"), TabBar::TabType::TextEditor);
+
+  connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
+  connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoaded);
+
+  return editor;
+}
+
+void TextApplication::onEditorLoaded() {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  renameEditor(editor);
+}
+
+void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
+  int index = m_tabWidget->indexOf(editor);
+
+  if (index >= 0) {
+    m_tabWidget->tabBar()->setTabIcon(index, modified ?
+                                      qApp->icons()->fromTheme(QSL("dialog-warning")) :
+                                      qApp->icons()->fromTheme(QSL("text-plain")));
+  }
+}
+
+void TextApplication::onEditorTextChanged(bool modified) {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  markEditorModified(editor, modified);
 }
 
 void TextApplication::setMainForm(FormMain* main_form) {
@@ -101,6 +128,8 @@ void TextApplication::setMainForm(FormMain* main_form) {
       TextFactory::initializeEncodingMenu(m_mainForm->m_ui->m_menuFileSaveWIthEncoding);;
     }
   });
+
+  changeCurrentEditor();
 }
 
 void TextApplication::openTextFile(QAction* action) {
@@ -118,5 +147,22 @@ void TextApplication::openTextFile(QAction* action) {
 }
 
 void TextApplication::changeCurrentEditor(int index) {
+  TextEditor* editor = m_tabWidget->textEditorAt(index);
+
+  if (editor != nullptr) {
+    m_mainForm->toolBar()->setEnabled(true);
+  }
+  else {
+    m_mainForm->toolBar()->setEnabled(false);
+  }
+
   // TODO: je vybranej novej editor, načíst detaily do status baru a jinam.
+}
+
+void TextApplication::renameEditor(TextEditor* editor) {
+  int index = m_tabWidget->indexOf(editor);
+
+  if (index >= 0) {
+    m_tabWidget->tabBar()->setTabText(index, editor->filePath());
+  }
 }

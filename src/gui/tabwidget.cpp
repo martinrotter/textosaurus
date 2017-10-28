@@ -157,9 +157,9 @@ int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, 
   tabBar()->setTabType(index, type);
   indentTabText(index);
 
-  if (count() == 1) {
-    emit currentChanged(index);
-  }
+  /*if (count() == 1) {
+     emit currentChanged(index);
+     }*/
 
   return index;
 }
@@ -170,9 +170,9 @@ int TabWidget::addTab(QWidget* widget, const QString& label, const TabBar::TabTy
   tabBar()->setTabType(index, type);
   indentTabText(index);
 
-  if (count() == 1) {
-    emit currentChanged(index);
-  }
+  /*if (count() == 1) {
+     emit currentChanged(index);
+     }*/
 
   return index;
 }
@@ -183,9 +183,9 @@ int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QS
   tabBar()->setTabType(tab_index, type);
   indentTabText(index);
 
-  if (count() == 1) {
-    emit currentChanged(index);
-  }
+  /*if (count() == 1) {
+     emit currentChanged(index);
+     }*/
 
   return tab_index;
 }
@@ -196,9 +196,9 @@ int TabWidget::insertTab(int index, QWidget* widget, const QString& label, const
   tabBar()->setTabType(tab_index, type);
   indentTabText(index);
 
-  if (count() == 1) {
-    emit currentChanged(index);
-  }
+  /*if (count() == 1) {
+     emit currentChanged(index);
+     }*/
 
   return tab_index;
 }

@@ -16,6 +16,7 @@
 #include "miscellaneous/mutex.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/systemfactory.h"
+#include "miscellaneous/textapplication.h"
 #include "network-web/webfactory.h"
 
 #include <QCloseEvent>
@@ -37,6 +38,8 @@ FormMain::FormMain(QWidget* parent, Qt::WindowFlags f)
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
+  qApp->textApplication()->setMainForm(this);
+
   // Prepare main window and tabs.
   prepareMenus();
 
@@ -46,8 +49,6 @@ FormMain::FormMain(QWidget* parent, Qt::WindowFlags f)
   // Setup some appearance of the window.
   setupIcons();
   loadSize();
-
-  ensureToolBarVisibility();
 }
 
 FormMain::~FormMain() {
@@ -110,16 +111,6 @@ void FormMain::switchFullscreenMode() {
     else {
       showNormal();
     }
-  }
-}
-
-void FormMain::ensureToolBarVisibility() {
-  if (m_ui->m_actionSwitchToolBar->isChecked()) {
-    m_toolBar->setVisible(true);
-    m_toolBar->setEnabled(tabWidget()->tabBar()->tabType(tabWidget()->currentIndex()) == TabBar::TabType::TextEditor);
-  }
-  else {
-    m_toolBar->setVisible(false);
   }
 }
 
@@ -236,8 +227,6 @@ void FormMain::saveSize() {
 }
 
 void FormMain::createConnections() {
-  connect(tabWidget(), &TabWidget::currentChanged, this, &FormMain::ensureToolBarVisibility);
-
   // Menu "File" connections.
   connect(m_ui->m_actionQuit, &QAction::triggered, qApp, &Application::quit);
   connect(m_ui->m_actionRestart, &QAction::triggered, qApp, &Application::restart);
@@ -245,7 +234,7 @@ void FormMain::createConnections() {
   // Menu "View" connections.
   connect(m_ui->m_actionFullscreen, &QAction::toggled, this, &FormMain::switchFullscreenMode);
   connect(m_ui->m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
-  connect(m_ui->m_actionSwitchToolBar, &QAction::toggled, this, &FormMain::ensureToolBarVisibility);
+  connect(m_ui->m_actionSwitchToolBar, &QAction::toggled, toolBar(), &ToolBar::setVisible);
   connect(m_ui->m_actionSwitchStatusBar, &QAction::toggled, statusBar(), &StatusBar::setVisible);
 
   // Menu "Tools" connections.

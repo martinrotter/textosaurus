@@ -19,6 +19,10 @@ class TextEditor : public QsciScintilla {
     // Opens given file in this text editor, file is opened for reading.
     void loadFromFile(QFile& file, const QString& encoding);
 
+  signals:
+    void loadedFromFile(QString m_sourceFilePath);
+    void savedToFile(QString m_destinationFilePath);
+
   private:
     QString m_filePath;
     QByteArray m_encoding;

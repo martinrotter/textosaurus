@@ -25,10 +25,16 @@ class TextApplication : public QObject {
   public slots:
     void openTextFile(QAction* action = nullptr);
     void loadTextEditorFromFile(const QString& file_path, const QString& encoding = QSL(DEFAULT_TEXT_FILE_ENCODING));
-    int addEmptyTextEditor();
+    TextEditor* addEmptyTextEditor();
 
   private slots:
-    void changeCurrentEditor(int index);
+    void onEditorLoaded();
+    void onEditorTextChanged(bool modified);
+    void changeCurrentEditor(int index = -1);
+
+  private:
+    void renameEditor(TextEditor* editor);
+    void markEditorModified(TextEditor* editor, bool modified);
 
   private:
     TabWidget* m_tabWidget;

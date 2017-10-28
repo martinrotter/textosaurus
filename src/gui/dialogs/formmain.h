@@ -50,7 +50,6 @@ class FormMain : public QMainWindow {
     void switchFullscreenMode();
 
   private slots:
-    void ensureToolBarVisibility();
 
     // Displays various dialogs.
     void showWiki();

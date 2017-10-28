@@ -25,11 +25,17 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   QTextStream str(&file); str.setCodec(m_encoding = encoding.toLatin1().constData());
   QString next_line;
 
+  blockSignals(true);
+
   while (!(next_line = str.read(50000000)).isEmpty()) {
     append(next_line);
   }
 
+  blockSignals(false);
+
   Application::restoreOverrideCursor();
+
+  emit loadedFromFile(m_filePath);
 }
 
 QByteArray TextEditor::encoding() const
