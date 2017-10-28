@@ -1,0 +1,218 @@
+#!/bin/bash
+
+## transka - (Very) simple BASH script which allows its user to operate with Transifex translations.
+## 
+## license: GNU GPLv3
+## author: Martin Rotter
+
+
+# System constants.
+EXIT_SUCCESS=0
+EXIT_FAILURE=1
+
+if [[ $# == 0 ]]; then
+  echo "transka - a (very) simple BASH script which allows its user to operate with Transifex translations"
+  echo ""
+  echo "Run transka with \"-h\" switch to see help."
+  exit $EXIT_SUCCESS
+fi
+
+if [[ $# == 1 ]]; then
+  if [[ $1 == "--help" || $1 == "-h" ]]; then
+    echo "transka - a (very) simple BASH script which allows its user to operate with Transifex translations"
+    echo ""
+    echo "Usage: transka [arguments]"
+    echo "  -u USERNAME - your Transifex username"
+    echo "  -p PASSWORD - your Transifex password"
+    echo "  -ps PROJECT_SLUG - your Transifex project slug"
+    echo "  -rs RESOURCE_SLUG - your Transifex resource slug"
+    echo "  -dr OUTPUT_FILE - downloads resource into destination file"
+    echo "  -ur INPUT_FILE - uploads resource from given file"
+    echo "  -dt TRANSLATION_CODE OUTPUT_FILE - downloads translation with given country code into destination file"
+    echo "  -ut TRANSLATION_CODE INPUT_FILE - uploads translation with given country code from given file"
+    echo ""
+    echo "Examples:"
+    echo "a) Uploads new resource file and downloads existing translation file."
+    echo "  transka -u \"mark\" -p \"pass\""
+    echo "          -ps \"cute-project\" -rs \"project-translations\""
+    echo "          -dr \"resource.ts\" -dt \"en_GB\" \"en-gb.ts\""
+  elif [[ $1 == "--version" || $1 == "-v" ]]; then
+    echo "transka - a (very) simple BASH script which allows its user to operate with Transifex translations"
+    echo ""
+    echo "Version: 0.0.1"
+  fi
+  
+  exit $EXIT_SUCCESS
+fi
+
+# Transifex API.
+BASE_API="https://www.transifex.com/api/2"
+
+# Variables.
+declare USERNAME
+declare PASSWORD
+declare SLUG_PROJECT
+declare SLUG_RESOURCE
+
+# Check for existence of all dependencies.
+#
+# Returns EXIT_SUCCESS if all run-time dependencies are met,
+# otherwise returns non-zero result.
+check_deps() {
+  which curl > /dev/null 2>&1
+}
+
+get_dependencies_names() {
+  echo "curl"
+}
+
+# Stores internally project slug.
+#
+# Arguments:
+# $1 - project slug
+set_project_slug() {
+	SLUG_PROJECT=$1
+}
+
+# Stores internally resource slug.
+#
+# Arguments:
+# $1 - resource slug
+set_resource_slug() {
+	SLUG_RESOURCE=$1
+}
+
+# Stores internally username/password.
+#
+# Arguments:
+# $1 - username
+# $2 - password
+set_credentials() {
+	USERNAME=$1
+	PASSWORD=$2
+}
+
+# Stores internally username.
+#
+# Arguments:
+# $1 - username
+set_username() {
+  USERNAME=$1
+}
+
+# Stores internally password.
+#
+# Arguments:
+# $1 - password
+set_password() {
+  PASSWORD=$1
+}
+
+# Downloads and returns raw text of resource.
+#
+# Arguments:
+# $1 - destination file path
+download_resource() {
+	curl \
+		-L --user "$USERNAME":"$PASSWORD" \
+		-o "$1" \
+		-X GET "$BASE_API/project/$SLUG_PROJECT/resource/$SLUG_RESOURCE/content/?mode=default&file"
+}
+
+# Uploads new raw resource content.
+#
+# Arguments:
+# $1 - file path to source resource
+upload_resource() {
+	curl \
+		-L --user "$USERNAME":"$PASSWORD" \
+		-X PUT -F "file=@$1" \
+		-H "Content-Type: multipart/form-data" "$BASE_API/project/$SLUG_PROJECT/resource/$SLUG_RESOURCE/content/"
+}
+
+# Downloads and translation.
+#
+# Arguments:
+# $1 - translation code (e.g. "cs_CZ")
+# $2 - destination file path
+download_translation() {
+	curl \
+		-L --user "$USERNAME":"$PASSWORD" \
+		-o "$2" \
+		-X GET "$BASE_API/project/$SLUG_PROJECT/resource/$SLUG_RESOURCE/translation/$1/?mode=default&file"
+}
+
+# Uploads new raw resource translation.
+#
+# Arguments:
+# $1 - translation code (e.g. "cs_CZ")
+# $2 - path to translation file
+upload_translation() {
+	curl \
+		-L --user "$USERNAME":"$PASSWORD" \
+		-X PUT -F "file=@$2" \
+		-H "Content-Type: multipart/form-data" "$BASE_API/project/$SLUG_PROJECT/resource/$SLUG_RESOURCE/translation/$1/"
+}
+
+# Check for existence of dependencies like curl.
+check_deps
+
+if [[ $? != $EXIT_SUCCESS ]]; then
+  echo "Dependencies not installed correctly. Dependencies are: $(get_dependencies_names)"
+  exit $EXIT_FAILURE
+fi
+
+PARAM_ITER=1
+PARAM_COUNT=$#
+
+until [ $PARAM_ITER -gt $PARAM_COUNT ]; do
+  case ${!PARAM_ITER} in
+    -u)
+      ((PARAM_ITER++))
+      set_username ${!PARAM_ITER}
+    ;;
+    
+    -p)
+      ((PARAM_ITER++))
+      set_password ${!PARAM_ITER}
+    ;;
+    
+    -ps)
+      ((PARAM_ITER++))
+      set_project_slug ${!PARAM_ITER}
+    ;;
+    
+    -rs)
+      ((PARAM_ITER++))
+      set_resource_slug ${!PARAM_ITER}
+    ;;
+    
+    -ur)
+      ((PARAM_ITER++))
+      upload_resource ${!PARAM_ITER}
+    ;;
+    
+    -dr)
+      ((PARAM_ITER++))
+      download_resource ${!PARAM_ITER}
+    ;;
+    
+    -ut)
+      ((PARAM_ITER++))
+      LANG_CODE=${!PARAM_ITER}
+      ((PARAM_ITER++))
+      upload_translation $LANG_CODE ${!PARAM_ITER}
+    ;;
+    
+    -dt)
+      ((PARAM_ITER++))
+      LANG_CODE=${!PARAM_ITER}
+      ((PARAM_ITER++))
+      download_translation $LANG_CODE ${!PARAM_ITER}
+    ;;
+  esac
+  
+  ((PARAM_ITER++))
+done
+
+exit $EXIT_SUCCESS

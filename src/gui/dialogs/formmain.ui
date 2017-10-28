@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormMain</class>
+ <widget class="QMainWindow" name="FormMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1296</width>
+    <height>677</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="TabWidget" name="m_tabWidget">
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="m_menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1296</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="m_menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="m_actionRestart"/>
+    <addaction name="m_actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="m_menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="m_actionCheckForUpdates"/>
+    <addaction name="m_actionReportBug"/>
+    <addaction name="m_actionDisplayWiki"/>
+    <addaction name="m_actionDonate"/>
+    <addaction name="m_actionAboutGuard"/>
+   </widget>
+   <widget class="QMenu" name="m_menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="m_menuShowHide">
+     <property name="title">
+      <string>Show/hide</string>
+     </property>
+     <addaction name="m_actionSwitchMainMenu"/>
+     <addaction name="m_actionSwitchToolBar"/>
+     <addaction name="m_actionSwitchStatusBar"/>
+    </widget>
+    <addaction name="m_menuShowHide"/>
+    <addaction name="m_actionFullscreen"/>
+    <addaction name="m_actionSwitchMainWindow"/>
+   </widget>
+   <widget class="QMenu" name="m_menuTools">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="m_actionSettings"/>
+    <addaction name="separator"/>
+    <addaction name="m_actionDownloadManager"/>
+   </widget>
+   <widget class="QMenu" name="m_menuWebBrowserTabs">
+    <property name="title">
+     <string>Tabs</string>
+    </property>
+    <addaction name="m_actionTabsCloseAll"/>
+    <addaction name="m_actionTabsCloseAllExceptCurrent"/>
+    <addaction name="separator"/>
+    <addaction name="m_actionTabsNext"/>
+    <addaction name="m_actionTabsPrevious"/>
+   </widget>
+   <addaction name="m_menuFile"/>
+   <addaction name="m_menuView"/>
+   <addaction name="m_menuWebBrowserTabs"/>
+   <addaction name="m_menuTools"/>
+   <addaction name="m_menuHelp"/>
+  </widget>
+  <action name="m_actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Quit the application.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="m_actionSettings">
+   <property name="text">
+    <string>&amp;Settings</string>
+   </property>
+   <property name="toolTip">
+    <string>Display settings of the application.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+S</string>
+   </property>
+  </action>
+  <action name="m_actionAboutGuard">
+   <property name="text">
+    <string>&amp;About application</string>
+   </property>
+   <property name="toolTip">
+    <string>Displays extra info about this application.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="m_actionFullscreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>View &amp;fullscreen</string>
+   </property>
+   <property name="toolTip">
+    <string>Switch fullscreen mode.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">F</string>
+   </property>
+  </action>
+  <action name="m_actionNoActions">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>No actions available</string>
+   </property>
+   <property name="toolTip">
+    <string>No actions are available right now.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionSwitchMainWindow">
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Switch visibility of main &amp;window</string>
+   </property>
+   <property name="toolTip">
+    <string>Hides main window if it is visible and shows it if it is hidden.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionCheckForUpdates">
+   <property name="text">
+    <string>Check for &amp;updates</string>
+   </property>
+   <property name="toolTip">
+    <string>Check if new update for the application is available for download.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionSwitchMainMenu">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Main menu</string>
+   </property>
+   <property name="toolTip">
+    <string>Hides or displays the main menu.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">M</string>
+   </property>
+  </action>
+  <action name="m_actionReportBug">
+   <property name="text">
+    <string>Report a &amp;bug...</string>
+   </property>
+  </action>
+  <action name="m_actionSwitchToolBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Toolbar</string>
+   </property>
+   <property name="toolTip">
+    <string>Switch visibility of toolbar.</string>
+   </property>
+   <property name="shortcut">
+    <string>T</string>
+   </property>
+  </action>
+  <action name="m_actionDonate">
+   <property name="text">
+    <string>&amp;Donate...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionDisplayWiki">
+   <property name="text">
+    <string>Display &amp;wiki</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionRestart">
+   <property name="text">
+    <string>&amp;Restart</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionDownloadManager">
+   <property name="text">
+    <string>&amp;Downloads</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionSwitchStatusBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Status bar</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="m_actionTabsCloseAll">
+   <property name="text">
+    <string>Close all tabs</string>
+   </property>
+  </action>
+  <action name="m_actionTabsCloseAllExceptCurrent">
+   <property name="text">
+    <string>Close all tabs except current</string>
+   </property>
+  </action>
+  <action name="m_actionTabsNext">
+   <property name="text">
+    <string>Go to &amp;next tab</string>
+   </property>
+  </action>
+  <action name="m_actionTabsPrevious">
+   <property name="text">
+    <string>Go to &amp;previous tab</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>tabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
