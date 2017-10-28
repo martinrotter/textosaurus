@@ -155,9 +155,6 @@
    <property name="toolTip">
     <string>Switch fullscreen mode.</string>
    </property>
-   <property name="shortcut">
-    <string notr="true">F</string>
-   </property>
   </action>
   <action name="m_actionNoActions">
    <property name="enabled">
@@ -211,9 +208,6 @@
    <property name="toolTip">
     <string>Hides or displays the main menu.</string>
    </property>
-   <property name="shortcut">
-    <string notr="true">M</string>
-   </property>
   </action>
   <action name="m_actionReportBug">
    <property name="text">
@@ -232,9 +226,6 @@
    </property>
    <property name="toolTip">
     <string>Switch visibility of toolbar.</string>
-   </property>
-   <property name="shortcut">
-    <string>T</string>
    </property>
   </action>
   <action name="m_actionDonate">
