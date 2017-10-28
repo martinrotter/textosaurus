@@ -64,7 +64,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
 
   connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::changeCurrentEditor);
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
-
+  connect(m_mainForm->m_ui->m_actionFileNew, &QAction::triggered, this, &TextApplication::addEmptyTextEditor);
   connect(m_mainForm->m_ui->m_actionFileOpen, &QAction::triggered, this, &TextApplication::openTextFile);
 }
 

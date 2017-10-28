@@ -74,11 +74,6 @@ QList<QAction*> FormMain::allActions() const {
 
   actions << m_ui->m_actionAboutGuard;
   actions << m_ui->m_actionSwitchMainWindow;
-
-#if !defined(Q_OS_MAC)
-  actions << m_ui->m_actionSwitchMainMenu;
-#endif
-
   actions << m_ui->m_actionSwitchStatusBar;
   actions << m_ui->m_actionTabsNext;
   actions << m_ui->m_actionTabsPrevious;
@@ -148,7 +143,6 @@ void FormMain::setupIcons() {
   // View.
   m_ui->m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui->m_actionFullscreen->setIcon(icon_theme_factory->fromTheme(QSL("view-fullscreen")));
-  m_ui->m_actionSwitchMainMenu->setIcon(icon_theme_factory->fromTheme(QSL("view-restore")));
   m_ui->m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("dialog-information")));
   m_ui->m_menuShowHide->setIcon(icon_theme_factory->fromTheme(QSL("view-restore")));
 
@@ -183,7 +177,7 @@ void FormMain::loadSize() {
     m_ui->m_actionFullscreen->setChecked(true);
   }
 
-  m_ui->m_actionSwitchMainMenu->setChecked(settings->value(GROUP(GUI), SETTING(GUI::MainMenuVisible)).toBool());
+  m_ui->m_actionSwitchToolBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
   m_ui->m_actionSwitchStatusBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
 }
 
@@ -210,7 +204,6 @@ void FormMain::saveSize() {
     qApp->processEvents();
   }
 
-  settings->setValue(GROUP(GUI), GUI::MainMenuVisible, m_ui->m_actionSwitchMainMenu->isChecked());
   settings->setValue(GROUP(GUI), GUI::MainWindowInitialPosition, pos());
   settings->setValue(GROUP(GUI), GUI::MainWindowInitialSize, size());
   settings->setValue(GROUP(GUI), GUI::MainWindowStartsMaximized, is_maximized);
@@ -225,7 +218,6 @@ void FormMain::createConnections() {
 
   // Menu "View" connections.
   connect(m_ui->m_actionFullscreen, &QAction::toggled, this, &FormMain::switchFullscreenMode);
-  connect(m_ui->m_actionSwitchMainMenu, &QAction::toggled, m_ui->m_menuBar, &QMenuBar::setVisible);
   connect(m_ui->m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
   connect(m_ui->m_actionSwitchStatusBar, &QAction::toggled, statusBar(), &StatusBar::setVisible);
 

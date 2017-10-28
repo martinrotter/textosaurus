@@ -12,7 +12,6 @@ class TextEditor : public QsciScintilla {
     explicit TextEditor(QWidget* parent = nullptr);
 
     QString filePath() const;
-    void setFilePath(const QString& file_path);
 
   public slots:
     void loadFromFile(QFile& file);

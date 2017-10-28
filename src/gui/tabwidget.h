@@ -63,9 +63,6 @@ class TabWidget : public QTabWidget {
     // Creates necesary connections.
     void createConnections();
 
-    // Sets up properties of custom corner button.
-    void setupMainMenuButton();
-
     // Handlers of insertin/removing of tabs.
     void tabInserted(int index);
     void tabRemoved(int index);
@@ -76,14 +73,8 @@ class TabWidget : public QTabWidget {
     void changeTitle(int index, const QString& new_title);
     void changeIcon(int index, const QIcon& new_icon);
 
-    // Opens main menu.
-    void openMainMenu();
-
   private:
     void indentTabText(int index);
-
-    PlainToolButton* m_btnMainMenu;
-    QMenu* m_menuMain;
 };
 
 inline TabBar* TabWidget::tabBar() const {

@@ -59,7 +59,7 @@
       <string>Open file with encoding...</string>
      </property>
     </widget>
-    <addaction name="action_New_empty_text_file"/>
+    <addaction name="m_actionFileNew"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileOpen"/>
     <addaction name="menuOpen_file_with_encoding"/>
@@ -92,7 +92,6 @@
       <string>UI elements</string>
      </property>
      <addaction name="m_actionFullscreen"/>
-     <addaction name="m_actionSwitchMainMenu"/>
      <addaction name="m_actionSwitchToolBar"/>
      <addaction name="m_actionSwitchStatusBar"/>
      <addaction name="separator"/>
@@ -215,20 +214,6 @@
     <string notr="true"/>
    </property>
   </action>
-  <action name="m_actionSwitchMainMenu">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>View &amp;main menu</string>
-   </property>
-   <property name="toolTip">
-    <string>Hides or displays the main menu.</string>
-   </property>
-  </action>
   <action name="m_actionReportBug">
    <property name="text">
     <string>Report a &amp;bug...</string>
@@ -319,7 +304,7 @@
     <string>Open &amp;new empty text editor</string>
    </property>
   </action>
-  <action name="action_New_empty_text_file">
+  <action name="m_actionFileNew">
    <property name="text">
     <string>&amp;New file</string>
    </property>

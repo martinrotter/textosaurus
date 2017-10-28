@@ -11,48 +11,19 @@
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/textfactory.h"
-#include "network-web/webfactory.h"
 
-#include <QMenu>
 #include <QToolButton>
 
-TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent), m_menuMain(nullptr) {
+TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setTabBar(new TabBar(this));
-  setupMainMenuButton();
   createConnections();
+  checkTabBarVisibility();
+  setDocumentMode(true);
+  setUsesScrollButtons(false);
 }
 
 TabWidget::~TabWidget() {
   qDebug("Destroying TabWidget instance.");
-}
-
-void TabWidget::setupMainMenuButton() {
-  m_btnMainMenu = new PlainToolButton(this);
-  m_btnMainMenu->setAutoRaise(true);
-  m_btnMainMenu->setPadding(3);
-  m_btnMainMenu->setToolTip(tr("Displays main menu."));
-  m_btnMainMenu->setIcon(qApp->icons()->fromTheme(QSL("go-home")));
-  m_btnMainMenu->setPopupMode(QToolButton::InstantPopup);
-
-  connect(m_btnMainMenu, &PlainToolButton::clicked, this, &TabWidget::openMainMenu);
-}
-
-void TabWidget::openMainMenu() {
-  if (m_menuMain == nullptr) {
-    m_menuMain = new QMenu(tr("Main menu"), this);
-    m_menuMain->addMenu(qApp->mainForm()->m_ui->m_menuFile);
-    m_menuMain->addMenu(qApp->mainForm()->m_ui->m_menuView);
-    m_menuMain->addMenu(qApp->mainForm()->m_ui->m_menuWebBrowserTabs);
-    m_menuMain->addMenu(qApp->mainForm()->m_ui->m_menuTools);
-    m_menuMain->addMenu(qApp->mainForm()->m_ui->m_menuHelp);
-  }
-
-  QPoint button_position = m_btnMainMenu->pos();
-  const QSize target_size = m_btnMainMenu->size() / 2.0;
-
-  button_position.setX(button_position.x() + target_size.width());
-  button_position.setY(button_position.y() + target_size.height());
-  m_menuMain->exec(mapToGlobal(button_position));
 }
 
 void TabWidget::showDownloadManager() {
@@ -70,19 +41,9 @@ void TabWidget::showDownloadManager() {
 }
 
 void TabWidget::checkTabBarVisibility() {
-  const bool should_be_visible = count() > 1 || !qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideTabBarIfOnlyOneTab)).toBool();
+  const bool should_be_bar_visible = count() > 1 || !qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideTabBarIfOnlyOneTab)).toBool();
 
-  if (should_be_visible) {
-    setCornerWidget(m_btnMainMenu, Qt::TopLeftCorner);
-    m_btnMainMenu->setVisible(true);
-  }
-  else {
-    setCornerWidget(0, Qt::TopLeftCorner);
-    setCornerWidget(0, Qt::TopRightCorner);
-    m_btnMainMenu->setVisible(false);
-  }
-
-  tabBar()->setVisible(should_be_visible);
+  tabBar()->setVisible(should_be_bar_visible);
 }
 
 void TabWidget::tabInserted(int index) {
