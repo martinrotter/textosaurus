@@ -46,9 +46,6 @@ FormMain::FormMain(QWidget* parent, Qt::WindowFlags f)
   // Setup some appearance of the window.
   setupIcons();
   loadSize();
-
-  m_statusBar->loadSavedActions();
-  m_toolBar->loadSavedActions();
 }
 
 FormMain::~FormMain() {
