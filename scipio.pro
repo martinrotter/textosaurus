@@ -134,7 +134,17 @@ VERSION = $$APP_VERSION
 # Add QScintilla stuff.
 DEFINES += QSCINTILLA_DLL
 
+win32 {
+  # Add QScintilla from fixed path.
+  LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5
 
+  INCLUDEPATH += $$PWD/resources/binaries/qscintilla
+  DEPENDPATH += $$PWD/resources/binaries/qscintilla
+}
+else {
+  # Use system-wide QScintilla.
+  LIBS += -lqscintilla2_qt5
+}
 
 win32 {
   # Makes sure we use correct subsystem on Windows.
