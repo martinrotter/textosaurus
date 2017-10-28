@@ -47,23 +47,8 @@ class SystemFactory : public QObject {
     explicit SystemFactory(QObject* parent = nullptr);
     virtual ~SystemFactory();
 
-    // Returns current status of auto-start function.
-    SystemFactory::AutoStartStatus autoStartStatus() const;
-
-    // Sets new status for auto-start function.
-    // Function returns false if setting of
-    // new status failed.
-    bool setAutoStartStatus(AutoStartStatus new_status);
-
 #if defined(Q_OS_WIN)
     bool removeTrolltechJunkRegistryKeys();
-#endif
-
-#if defined(Q_OS_LINUX)
-
-    // Returns standard location where auto-start .desktop files
-    // should be placed.
-    QString autostartDesktopFileLocation() const;
 #endif
 
     // Retrieves username of currently logged-in user.

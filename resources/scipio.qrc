@@ -23,7 +23,6 @@
         <file>graphics/misc/flags/sv.png</file>
         <file>graphics/misc/flags/zh.png</file>
         <file>desktop/com.github.scipio.desktop</file>
-        <file>desktop/com.github.scipio.desktop.autostart</file>
         <file>localizations/scipio_en.qm</file>
         <file>localizations/scipio_en_GB.qm</file>
         <file>localizations/qt_bg.qm</file>

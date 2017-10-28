@@ -24,20 +24,13 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="m_checkAutostart">
-     <property name="text">
-      <string>Launch %1 on operating system startup</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
     <widget class="QCheckBox" name="m_checkForUpdatesOnStart">
      <property name="text">
       <string>Check for updates on application startup</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="1" column="0">
     <widget class="QCheckBox" name="m_checkRemoveTrolltechJunk">
      <property name="text">
       <string>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits (Use at your own risk!)</string>

@@ -79,7 +79,6 @@
 #define APP_LANG_PATH QSL(":/localizations")
 
 #if defined(Q_OS_LINUX)
-#define APP_DESKTOP_SOURCE_ENTRY_FILE "com.github.scipio.desktop.autostart"
 #define APP_DESKTOP_ENTRY_FILE "com.github.scipio.desktop"
 
 #define APP_DESKTOP_ENTRY_PATH QSL(":/desktop")
