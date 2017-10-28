@@ -45,7 +45,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -71,15 +71,16 @@
     </property>
     <widget class="QMenu" name="m_menuShowHide">
      <property name="title">
-      <string>Show/hide</string>
+      <string>UI elements</string>
      </property>
+     <addaction name="m_actionFullscreen"/>
      <addaction name="m_actionSwitchMainMenu"/>
      <addaction name="m_actionSwitchToolBar"/>
      <addaction name="m_actionSwitchStatusBar"/>
+     <addaction name="separator"/>
+     <addaction name="m_actionSwitchMainWindow"/>
     </widget>
     <addaction name="m_menuShowHide"/>
-    <addaction name="m_actionFullscreen"/>
-    <addaction name="m_actionSwitchMainWindow"/>
    </widget>
    <widget class="QMenu" name="m_menuTools">
     <property name="title">
@@ -205,7 +206,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Main menu</string>
+    <string>View &amp;main menu</string>
    </property>
    <property name="toolTip">
     <string>Hides or displays the main menu.</string>
@@ -227,7 +228,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Toolbar</string>
+    <string>View &amp;toolbar</string>
    </property>
    <property name="toolTip">
     <string>Switch visibility of toolbar.</string>
@@ -276,7 +277,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Status bar</string>
+    <string>View &amp;statusbar</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
