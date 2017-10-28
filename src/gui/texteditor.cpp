@@ -11,25 +11,26 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QString()) {
+TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QString()), m_encoding(QByteArray()) {
   setUtf8(true);
   setFont(QFont("Dejavu Sans Mono"));
 }
 
-void TextEditor::loadFromFile(QFile& file) {
+void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   m_filePath = file.fileName();
 
-  file.open(QIODevice::OpenModeFlag::ReadOnly);
   QTextStream str(&file);
 
-  str.setCodec("utf-8");
+  str.setCodec(m_encoding = encoding.toLatin1().constData());
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
-  QString stra = str.readAll();
-
+  setText(str.readAll());
   Application::restoreOverrideCursor();
+}
 
-  setText(stra);
+QByteArray TextEditor::encoding() const
+{
+  return m_encoding;
 }
 
 QString TextEditor::filePath() const {

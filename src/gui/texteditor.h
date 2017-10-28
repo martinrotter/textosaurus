@@ -12,12 +12,16 @@ class TextEditor : public QsciScintilla {
     explicit TextEditor(QWidget* parent = nullptr);
 
     QString filePath() const;
+    QByteArray encoding() const;
 
   public slots:
-    void loadFromFile(QFile& file);
+
+    // Opens given file in this text editor, file is opened for reading.
+    void loadFromFile(QFile& file, const QString& encoding);
 
   private:
     QString m_filePath;
+    QByteArray m_encoding;
 };
 
 #endif // TEXTEDITOR_H

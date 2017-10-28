@@ -42,19 +42,19 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <widget class="QMenu" name="menuSave_file_with_encoding">
+    <widget class="QMenu" name="m_menuFileSaveWIthEncoding">
      <property name="title">
       <string>Save file with encoding...</string>
      </property>
     </widget>
-    <widget class="QMenu" name="menuOpen_file_with_encoding">
+    <widget class="QMenu" name="m_menuFileOpenWithEncoding">
      <property name="title">
       <string>Open file with encoding...</string>
      </property>
@@ -62,13 +62,13 @@
     <addaction name="m_actionFileNew"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileOpen"/>
-    <addaction name="menuOpen_file_with_encoding"/>
-    <addaction name="actionReload_file_from_disk"/>
+    <addaction name="m_menuFileOpenWithEncoding"/>
+    <addaction name="m_actionFileReload"/>
     <addaction name="separator"/>
-    <addaction name="actionSave_file"/>
-    <addaction name="actionSave_file_as"/>
-    <addaction name="menuSave_file_with_encoding"/>
-    <addaction name="actionSave_all_files"/>
+    <addaction name="m_actionFileSave"/>
+    <addaction name="m_actionFileSaveAs"/>
+    <addaction name="m_menuFileSaveWIthEncoding"/>
+    <addaction name="m_actionFileSaveAll"/>
     <addaction name="separator"/>
     <addaction name="m_actionRestart"/>
     <addaction name="m_actionQuit"/>
@@ -111,10 +111,9 @@
     <property name="title">
      <string>Tabs</string>
     </property>
-    <addaction name="actionNew_empty_text_editor"/>
     <addaction name="m_actionTabsCloseAll"/>
     <addaction name="m_actionTabsCloseAllExceptCurrent"/>
-    <addaction name="actionClose_all_saved_tabs"/>
+    <addaction name="m_actionTabsCloseAllSaved"/>
     <addaction name="separator"/>
     <addaction name="m_actionTabsNext"/>
     <addaction name="m_actionTabsPrevious"/>
@@ -296,11 +295,6 @@
     <string>Go to &amp;previous tab</string>
    </property>
   </action>
-  <action name="actionNew_empty_text_editor">
-   <property name="text">
-    <string>Open &amp;new empty text editor</string>
-   </property>
-  </action>
   <action name="m_actionFileNew">
    <property name="text">
     <string>&amp;New file</string>
@@ -317,39 +311,29 @@
     <string notr="true">Ctrl+O</string>
    </property>
   </action>
-  <action name="actionReload_file_from_disk">
+  <action name="m_actionFileReload">
    <property name="text">
     <string>Reload file from disk</string>
    </property>
   </action>
-  <action name="actionSave_file">
+  <action name="m_actionFileSave">
    <property name="text">
     <string>Save file</string>
    </property>
   </action>
-  <action name="actionSave_file_as">
+  <action name="m_actionFileSaveAs">
    <property name="text">
     <string>Save file as...</string>
    </property>
   </action>
-  <action name="actionSave_all_files">
+  <action name="m_actionFileSaveAll">
    <property name="text">
     <string>Save all files</string>
    </property>
   </action>
-  <action name="actionClose_all_saved_tabs">
+  <action name="m_actionTabsCloseAllSaved">
    <property name="text">
     <string>Close all &amp;saved tabs</string>
-   </property>
-  </action>
-  <action name="actionaa">
-   <property name="text">
-    <string>aa</string>
-   </property>
-  </action>
-  <action name="actionaa_2">
-   <property name="text">
-    <string>aa</string>
    </property>
   </action>
  </widget>

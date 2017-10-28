@@ -6,8 +6,10 @@
 #include "gui/messagebox.h"
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
+#include "miscellaneous/textfactory.h"
 
 #include <QFileDialog>
+#include <QTextCodec>
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent) {}
 
@@ -25,7 +27,7 @@ QList<TextEditor*> TextApplication::editors() const {
   return editors;
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path) {
+void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& encoding) {
   QFile file(file_path);
 
   if (!file.exists()) {
@@ -43,11 +45,17 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path) {
     return;
   }
 
+  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+    QMessageBox::critical(m_mainForm, tr("Cannot read file"),
+                          tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
+    return;
+  }
+
   int index = addEmptyTextEditor();
   TextEditor* new_editor = m_tabWidget->textEditorAt(index);
 
   if (new_editor != nullptr) {
-    new_editor->loadFromFile(file);
+    new_editor->loadFromFile(file, encoding);
   }
 }
 
@@ -65,15 +73,36 @@ void TextApplication::setMainForm(FormMain* main_form) {
   connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::changeCurrentEditor);
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
   connect(m_mainForm->m_ui->m_actionFileNew, &QAction::triggered, this, &TextApplication::addEmptyTextEditor);
-  connect(m_mainForm->m_ui->m_actionFileOpen, &QAction::triggered, this, &TextApplication::openTextFile);
+  connect(m_mainForm->m_ui->m_actionFileOpen, &QAction::triggered, this, [this]() {
+    openTextFile();
+  });
+
+  // Setup menus.
+  connect(m_mainForm->m_ui->m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_mainForm->m_ui->m_menuFileOpenWithEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_mainForm->m_ui->m_menuFileOpenWithEncoding);
+    }
+  });
+  connect(m_mainForm->m_ui->m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
+
+  connect(m_mainForm->m_ui->m_menuFileSaveWIthEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_mainForm->m_ui->m_menuFileSaveWIthEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_mainForm->m_ui->m_menuFileSaveWIthEncoding);;
+    }
+  });
 }
 
-void TextApplication::openTextFile() {
+void TextApplication::openTextFile(QAction* action) {
   QString file_path = QFileDialog::getOpenFileName(m_mainForm, tr("Open file"), qApp->documentsFolder(),
                                                    tr("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
-    loadTextEditorFromFile(file_path);
+    if (action != nullptr && !action->data().isNull()) {
+      loadTextEditorFromFile(file_path, action->data().toString());
+    }
+    else {
+      loadTextEditorFromFile(file_path);
+    }
   }
 }
 

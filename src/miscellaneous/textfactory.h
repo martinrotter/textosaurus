@@ -8,6 +8,9 @@
 #include <QDateTime>
 #include <QFontMetrics>
 
+class QMenu;
+class TextApplication;
+
 class TextFactory {
   private:
 
@@ -25,6 +28,7 @@ class TextFactory {
     // Returns invalid date/time if processing fails.
     // NOTE: This method tries to always return time in UTC+00:00.
     static QDateTime parseDateTime(const QString& date_time);
+    static void initializeEncodingMenu(QMenu* const menu);
 
     // Converts 1970-epoch miliseconds to date/time.
     // NOTE: This apparently returns date/time in localtime.

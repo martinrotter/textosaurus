@@ -7,11 +7,14 @@
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/simplecrypt/simplecrypt.h"
+#include "miscellaneous/textapplication.h"
 
 #include <QDir>
 #include <QLocale>
+#include <QMenu>
 #include <QString>
 #include <QStringList>
+#include <QTextCodec>
 
 quint64 TextFactory::s_encryptionKey = 0x0;
 
@@ -99,6 +102,23 @@ QDateTime TextFactory::parseDateTime(const QString& date_time) {
 
   // Parsing failed, return invalid datetime.
   return QDateTime();
+}
+
+void TextFactory::initializeEncodingMenu(QMenu* const menu) {
+  QList<int> mibs = QTextCodec::availableMibs();
+  QStringList codecs; codecs.reserve(mibs.size());
+
+  for (int mib : mibs) {
+    codecs.append(QTextCodec::codecForMib(mib)->name());
+  }
+
+  qSort(codecs);
+
+  foreach (const QString& codec, codecs) {
+    QAction* act = menu->addAction(QString("&") + codec);
+
+    act->setData(codec);
+  }
 }
 
 QDateTime TextFactory::parseDateTime(qint64 milis_from_epoch) {
