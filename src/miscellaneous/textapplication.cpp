@@ -18,8 +18,10 @@ QList<TextEditor*> TextApplication::editors() const {
 
   if (m_tabWidget != nullptr) {
     for (int i = 0; i < m_tabWidget->count(); i++) {
-      if (m_tabWidget->tabBar()->tabType(i) == TabBar::TabType::TextEditor) {
-        editors.append(qobject_cast<TextEditor*>(m_tabWidget->widget(i)));
+      TextEditor* edit = m_tabWidget->textEditorAt(i);
+
+      if (edit != nullptr) {
+        editors.append(edit);
       }
     }
   }
@@ -49,6 +51,15 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
     QMessageBox::critical(m_mainForm, tr("Cannot read file"),
                           tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
     return;
+  }
+
+  if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) && file.size() > BIG_TEXT_FILE_SIZE) {
+    if (MessageBox::show(m_mainForm, QMessageBox::Question, tr("Opening big file"),
+                         tr("You want to open big text file in encoding which is different from %1. This operation "
+                            "might take quite some time."), tr("Do you really want to open the file?"),
+                         file.fileName(), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
+      return;
+    }
   }
 
   int index = addEmptyTextEditor();

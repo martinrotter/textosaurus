@@ -8,6 +8,7 @@
 #include "miscellaneous/iofactory.h"
 
 #include <QDir>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QTextCodec>
 #include <QTextStream>
 
@@ -19,12 +20,15 @@ TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QStr
 void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   m_filePath = file.fileName();
 
-  QTextStream str(&file);
-
-  str.setCodec(m_encoding = encoding.toLatin1().constData());
-
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
-  setText(str.readAll());
+
+  QTextStream str(&file); str.setCodec(m_encoding = encoding.toLatin1().constData());
+  QString next_line;
+
+  while (!(next_line = str.read(50000000)).isEmpty()) {
+    append(next_line);
+  }
+
   Application::restoreOverrideCursor();
 }
 

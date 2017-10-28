@@ -6,6 +6,7 @@
 #include <QtGlobal>
 
 #define DEFAULT_TEXT_FILE_ENCODING            "UTF-8"
+#define BIG_TEXT_FILE_SIZE                    qint64(50000000)
 #define MAX_TEXT_FILE_SIZE                    qint64(INT_MAX)
 #define ARGUMENTS_LIST_SEPARATOR              "\n"
 #define IS_IN_ARRAY(offset, array)            ((offset >= 0) && (offset < array.count()))

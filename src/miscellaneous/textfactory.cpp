@@ -108,14 +108,48 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu) {
   QList<int> mibs = QTextCodec::availableMibs();
   QStringList codecs; codecs.reserve(mibs.size());
 
+  QMap<QString, QMenu*> submenus;
+
+  submenus["Big"] = new QMenu(QSL("Big"), menu);
+  submenus["IBM"] = new QMenu(QSL("IBM"), menu);
+  submenus["ISO"] = new QMenu(QSL("ISO"), menu);
+  submenus["UTF"] = new QMenu(QSL("UTF"), menu);
+  submenus["windows"] = new QMenu(QSL("windows"), menu);
+
   for (int mib : mibs) {
-    codecs.append(QTextCodec::codecForMib(mib)->name());
+    QString name = QTextCodec::codecForMib(mib)->name();
+
+    if (!codecs.contains(name)) {
+      codecs.append(name);
+    }
   }
 
   qSort(codecs);
+  QString predefined_group = QString("^(") + submenus.keys().join(QL1C('|')) + QString(")\\S+");
+  QRegularExpression predefined_group_regex(predefined_group);
+
+  predefined_group_regex.setPatternOptions(QRegularExpression::PatternOption::CaseInsensitiveOption);
+
+  menu->addMenu(submenus["Big"]);
+  menu->addMenu(submenus["IBM"]);
+  menu->addMenu(submenus["ISO"]);
+  menu->addMenu(submenus["UTF"]);
+  menu->addMenu(submenus["windows"]);
 
   foreach (const QString& codec, codecs) {
-    QAction* act = menu->addAction(QString("&") + codec);
+    auto match = predefined_group_regex.match(codec);
+    QAction* act;
+
+    if (match.hasMatch()) {
+      QString capture = match.captured(1);
+
+      if (submenus.contains(capture)) {
+        act = submenus[capture]->addAction(QString("&") + codec);
+      }
+    }
+    else {
+      act = menu->addAction(QString("&") + codec);
+    }
 
     act->setData(codec);
   }
