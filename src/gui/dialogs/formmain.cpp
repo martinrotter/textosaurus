@@ -26,9 +26,8 @@
 #include <QScopedPointer>
 #include <QTimer>
 
-FormMain::FormMain(QWidget* parent, Qt::WindowFlags f)
-  : QMainWindow(parent, f), m_ui(new Ui::FormMain) {
-  m_ui->setupUi(this);
+FormMain::FormMain(QWidget* parent) : QMainWindow(parent) {
+  m_ui.setupUi(this);
   qApp->setMainForm(this);
 
   // Add these actions to the list of actions of the main window.
@@ -56,7 +55,7 @@ FormMain::~FormMain() {
 }
 
 TabWidget* FormMain::tabWidget() const {
-  return m_ui->m_tabWidget;
+  return m_ui.m_tabWidget;
 }
 
 ToolBar* FormMain::toolBar() const {
@@ -71,30 +70,30 @@ QList<QAction*> FormMain::allActions() const {
   QList<QAction*> actions;
 
   // Add basic actions.
-  actions << m_ui->m_actionSettings;
-  actions << m_ui->m_actionRestart;
-  actions << m_ui->m_actionQuit;
-  actions << m_ui->m_actionFileNew;
-  actions << m_ui->m_actionFileOpen;
+  actions << m_ui.m_actionSettings;
+  actions << m_ui.m_actionRestart;
+  actions << m_ui.m_actionQuit;
+  actions << m_ui.m_actionFileNew;
+  actions << m_ui.m_actionFileOpen;
 
 #if !defined(Q_OS_MAC)
-  actions << m_ui->m_actionFullscreen;
+  actions << m_ui.m_actionFullscreen;
 #endif
 
-  actions << m_ui->m_actionAboutGuard;
-  actions << m_ui->m_actionSwitchMainWindow;
-  actions << m_ui->m_actionSwitchStatusBar;
-  actions << m_ui->m_actionTabsNext;
-  actions << m_ui->m_actionTabsPrevious;
-  actions << m_ui->m_actionTabsCloseAll;
-  actions << m_ui->m_actionTabsCloseAllExceptCurrent;
+  actions << m_ui.m_actionAboutGuard;
+  actions << m_ui.m_actionSwitchMainWindow;
+  actions << m_ui.m_actionSwitchStatusBar;
+  actions << m_ui.m_actionTabsNext;
+  actions << m_ui.m_actionTabsPrevious;
+  actions << m_ui.m_actionTabsCloseAll;
+  actions << m_ui.m_actionTabsCloseAllExceptCurrent;
 
   return actions;
 }
 
 void FormMain::prepareMenus() {
 #if defined(Q_OS_MAC)
-  m_ui->m_actionFullscreen->setVisible(false);
+  m_ui.m_actionFullscreen->setVisible(false);
 #endif
 }
 
@@ -110,6 +109,18 @@ void FormMain::switchFullscreenMode() {
     else {
       showNormal();
     }
+  }
+}
+
+void FormMain::closeEvent(QCloseEvent* event) {
+  bool should_stop = true;
+  emit closeRequested(&should_stop);
+
+  if (should_stop) {
+    event->accept();
+  }
+  else {
+    event->ignore();
   }
 }
 
@@ -139,32 +150,32 @@ void FormMain::setupIcons() {
   IconFactory* icon_theme_factory = qApp->icons();
 
   // Setup icons of this main window.
-  m_ui->m_actionSettings->setIcon(icon_theme_factory->fromTheme(QSL("document-properties")));
-  m_ui->m_actionQuit->setIcon(icon_theme_factory->fromTheme(QSL("application-exit")));
-  m_ui->m_actionRestart->setIcon(icon_theme_factory->fromTheme(QSL("view-refresh")));
-  m_ui->m_actionAboutGuard->setIcon(icon_theme_factory->fromTheme(QSL("help-about")));
-  m_ui->m_actionCheckForUpdates->setIcon(icon_theme_factory->fromTheme(QSL("system-upgrade")));
-  m_ui->m_actionReportBug->setIcon(icon_theme_factory->fromTheme(QSL("call-start")));
-  m_ui->m_actionDonate->setIcon(icon_theme_factory->fromTheme(QSL("applications-office")));
-  m_ui->m_actionDisplayWiki->setIcon(icon_theme_factory->fromTheme(QSL("applications-science")));
+  m_ui.m_actionSettings->setIcon(icon_theme_factory->fromTheme(QSL("document-properties")));
+  m_ui.m_actionQuit->setIcon(icon_theme_factory->fromTheme(QSL("application-exit")));
+  m_ui.m_actionRestart->setIcon(icon_theme_factory->fromTheme(QSL("view-refresh")));
+  m_ui.m_actionAboutGuard->setIcon(icon_theme_factory->fromTheme(QSL("help-about")));
+  m_ui.m_actionCheckForUpdates->setIcon(icon_theme_factory->fromTheme(QSL("system-upgrade")));
+  m_ui.m_actionReportBug->setIcon(icon_theme_factory->fromTheme(QSL("call-start")));
+  m_ui.m_actionDonate->setIcon(icon_theme_factory->fromTheme(QSL("applications-office")));
+  m_ui.m_actionDisplayWiki->setIcon(icon_theme_factory->fromTheme(QSL("applications-science")));
 
-  m_ui->m_actionFileNew->setIcon(icon_theme_factory->fromTheme(QSL("document-new")));
-  m_ui->m_actionFileOpen->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
+  m_ui.m_actionFileNew->setIcon(icon_theme_factory->fromTheme(QSL("document-new")));
+  m_ui.m_actionFileOpen->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
 
   // View.
-  m_ui->m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
-  m_ui->m_actionFullscreen->setIcon(icon_theme_factory->fromTheme(QSL("view-fullscreen")));
-  m_ui->m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("dialog-information")));
-  m_ui->m_menuShowHide->setIcon(icon_theme_factory->fromTheme(QSL("view-restore")));
+  m_ui.m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
+  m_ui.m_actionFullscreen->setIcon(icon_theme_factory->fromTheme(QSL("view-fullscreen")));
+  m_ui.m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("dialog-information")));
+  m_ui.m_menuShowHide->setIcon(icon_theme_factory->fromTheme(QSL("view-restore")));
 
   // Tabs & web browser.
-  m_ui->m_actionTabsCloseAll->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
-  m_ui->m_actionTabsCloseAllExceptCurrent->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
-  m_ui->m_actionTabsNext->setIcon(icon_theme_factory->fromTheme(QSL("go-next")));
-  m_ui->m_actionTabsPrevious->setIcon(icon_theme_factory->fromTheme(QSL("go-previous")));
+  m_ui.m_actionTabsCloseAll->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
+  m_ui.m_actionTabsCloseAllExceptCurrent->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
+  m_ui.m_actionTabsNext->setIcon(icon_theme_factory->fromTheme(QSL("go-next")));
+  m_ui.m_actionTabsPrevious->setIcon(icon_theme_factory->fromTheme(QSL("go-previous")));
 
   // Setup icons on TabWidget too.
-  m_ui->m_tabWidget->setupIcons();
+  m_ui.m_tabWidget->setupIcons();
 }
 
 void FormMain::loadSize() {
@@ -185,11 +196,11 @@ void FormMain::loadSize() {
   // If user exited the application while in fullsreen mode,
   // then re-enable it now.
   if (settings->value(GROUP(GUI), SETTING(GUI::MainWindowStartsFullscreen)).toBool()) {
-    m_ui->m_actionFullscreen->setChecked(true);
+    m_ui.m_actionFullscreen->setChecked(true);
   }
 
-  m_ui->m_actionSwitchToolBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
-  m_ui->m_actionSwitchStatusBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
+  m_ui.m_actionSwitchToolBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
+  m_ui.m_actionSwitchStatusBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
 }
 
 void FormMain::saveSize() {
@@ -198,7 +209,7 @@ void FormMain::saveSize() {
   bool is_maximized = false;
 
   if (is_fullscreen) {
-    m_ui->m_actionFullscreen->setChecked(false);
+    m_ui.m_actionFullscreen->setChecked(false);
 
     // We (process events to really) un-fullscreen, so that we can determine if window is really maximized.
     qApp->processEvents();
@@ -220,42 +231,46 @@ void FormMain::saveSize() {
   settings->setValue(GROUP(GUI), GUI::MainWindowStartsMaximized, is_maximized);
   settings->setValue(GROUP(GUI), GUI::MainWindowStartsFullscreen, is_fullscreen);
 
-  settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, m_ui->m_actionSwitchToolBar->isChecked());
-  settings->setValue(GROUP(GUI), GUI::StatusBarVisible, m_ui->m_actionSwitchStatusBar->isChecked());
+  settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, m_ui.m_actionSwitchToolBar->isChecked());
+  settings->setValue(GROUP(GUI), GUI::StatusBarVisible, m_ui.m_actionSwitchStatusBar->isChecked());
 }
 
 void FormMain::createConnections() {
   // Menu "File" connections.
-  connect(m_ui->m_actionQuit, &QAction::triggered, qApp, &Application::quit);
-  connect(m_ui->m_actionRestart, &QAction::triggered, qApp, &Application::restart);
+  connect(m_ui.m_actionQuit, &QAction::triggered, this, &FormMain::close);
+  connect(m_ui.m_actionRestart, &QAction::triggered, this, [this]() {
+    if (close()) {
+      qApp->restart();
+    }
+  });
 
   // Menu "View" connections.
-  connect(m_ui->m_actionFullscreen, &QAction::toggled, this, &FormMain::switchFullscreenMode);
-  connect(m_ui->m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
-  connect(m_ui->m_actionSwitchToolBar, &QAction::toggled, toolBar(), &ToolBar::setVisible);
-  connect(m_ui->m_actionSwitchStatusBar, &QAction::toggled, statusBar(), &StatusBar::setVisible);
+  connect(m_ui.m_actionFullscreen, &QAction::toggled, this, &FormMain::switchFullscreenMode);
+  connect(m_ui.m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
+  connect(m_ui.m_actionSwitchToolBar, &QAction::toggled, toolBar(), &ToolBar::setVisible);
+  connect(m_ui.m_actionSwitchStatusBar, &QAction::toggled, statusBar(), &StatusBar::setVisible);
 
   // Menu "Tools" connections.
-  connect(m_ui->m_actionSettings, &QAction::triggered, this, [this]() {
+  connect(m_ui.m_actionSettings, &QAction::triggered, this, [this]() {
     FormSettings(*this).exec();
   });
 
   // Menu "Help" connections.
-  connect(m_ui->m_actionAboutGuard, &QAction::triggered, this, [this]() {
+  connect(m_ui.m_actionAboutGuard, &QAction::triggered, this, [this]() {
     FormAbout(this).exec();
   });
-  connect(m_ui->m_actionCheckForUpdates, &QAction::triggered, this, [this]() {
+  connect(m_ui.m_actionCheckForUpdates, &QAction::triggered, this, [this]() {
     FormUpdate(this).exec();
   });
-  connect(m_ui->m_actionReportBug, &QAction::triggered, this, &FormMain::reportABug);
-  connect(m_ui->m_actionDonate, &QAction::triggered, this, &FormMain::donate);
-  connect(m_ui->m_actionDisplayWiki, &QAction::triggered, this, &FormMain::showWiki);
+  connect(m_ui.m_actionReportBug, &QAction::triggered, this, &FormMain::reportABug);
+  connect(m_ui.m_actionDonate, &QAction::triggered, this, &FormMain::donate);
+  connect(m_ui.m_actionDisplayWiki, &QAction::triggered, this, &FormMain::showWiki);
 
   // Tab widget connections.
-  connect(m_ui->m_actionTabsNext, &QAction::triggered, m_ui->m_tabWidget, &TabWidget::gotoNextTab);
-  connect(m_ui->m_actionTabsPrevious, &QAction::triggered, m_ui->m_tabWidget, &TabWidget::gotoPreviousTab);
-  connect(m_ui->m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_ui->m_tabWidget, &TabWidget::closeAllTabsExceptCurrent);
-  connect(m_ui->m_actionTabsCloseAll, &QAction::triggered, m_ui->m_tabWidget, &TabWidget::closeAllTabs);
+  connect(m_ui.m_actionTabsNext, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::gotoNextTab);
+  connect(m_ui.m_actionTabsPrevious, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::gotoPreviousTab);
+  connect(m_ui.m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::closeAllTabsExceptCurrent);
+  connect(m_ui.m_actionTabsCloseAll, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::closeAllTabs);
 }
 
 void FormMain::showWiki() {

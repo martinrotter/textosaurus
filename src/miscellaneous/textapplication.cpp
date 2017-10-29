@@ -12,7 +12,9 @@
 #include <QFileDialog>
 #include <QTextCodec>
 
-TextApplication::TextApplication(QObject* parent) : QObject(parent) {}
+TextApplication::TextApplication(QObject* parent) : QObject(parent) {
+  connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
+}
 
 TextEditor* TextApplication::currentEditor() const {
   return m_tabWidget->textEditorAt(m_tabWidget->currentIndex());
@@ -142,31 +144,47 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
   m_tabWidget = main_form->tabWidget();
 
+  connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
   connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
-  connect(m_mainForm->m_ui->m_actionFileNew, &QAction::triggered, this, [this]() {
+  connect(m_mainForm->m_ui.m_actionFileNew, &QAction::triggered, this, [this]() {
     TextEditor* editor = addEmptyTextEditor();
     m_tabWidget->setCurrentWidget(editor);
   });
-  connect(m_mainForm->m_ui->m_actionFileOpen, &QAction::triggered, this, [this]() {
+  connect(m_mainForm->m_ui.m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
   });
 
   // Setup menus.
-  connect(m_mainForm->m_ui->m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
-    if (m_mainForm->m_ui->m_menuFileOpenWithEncoding->isEmpty()) {
-      TextFactory::initializeEncodingMenu(m_mainForm->m_ui->m_menuFileOpenWithEncoding);
+  connect(m_mainForm->m_ui.m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_mainForm->m_ui.m_menuFileOpenWithEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileOpenWithEncoding);
     }
   });
-  connect(m_mainForm->m_ui->m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
+  connect(m_mainForm->m_ui.m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
 
-  connect(m_mainForm->m_ui->m_menuFileSaveWIthEncoding, &QMenu::aboutToShow, this, [this]() {
-    if (m_mainForm->m_ui->m_menuFileSaveWIthEncoding->isEmpty()) {
-      TextFactory::initializeEncodingMenu(m_mainForm->m_ui->m_menuFileSaveWIthEncoding);;
+  connect(m_mainForm->m_ui.m_menuFileSaveWIthEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_mainForm->m_ui.m_menuFileSaveWIthEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileSaveWIthEncoding);;
     }
   });
 
   onEditorTabSwitched();
+}
+
+void TextApplication::quit(bool* ok) {
+  foreach (TextEditor* edit, editors()) {
+    bool editor_ok;
+
+    edit->closeEditor(&editor_ok);
+
+    if (!editor_ok) {
+      *ok = false;
+      return;
+    }
+  }
+
+  *ok = true;
 }
 
 void TextApplication::openTextFile(QAction* action) {
@@ -194,19 +212,19 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     }
 
     // We update stuff related to document changes always.
-    m_mainForm->m_ui->m_actionFileSave->setEnabled(editor->isModified());
-    m_mainForm->m_ui->m_actionFileSaveAs->setEnabled(true);
-    m_mainForm->m_ui->m_menuFileSaveWIthEncoding->setEnabled(true);
+    m_mainForm->m_ui.m_actionFileSave->setEnabled(editor->isModified());
+    m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(true);
+    m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(true);
   }
   else {
     // No editor selected.
-    m_mainForm->m_ui->m_actionFileSave->setEnabled(false);
-    m_mainForm->m_ui->m_actionFileSaveAs->setEnabled(false);
-    m_mainForm->m_ui->m_menuFileSaveWIthEncoding->setEnabled(false);
+    m_mainForm->m_ui.m_actionFileSave->setEnabled(false);
+    m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(false);
+    m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(false);
   }
 
   // Enable this if there is at least one unsaved editor.
-  m_mainForm->m_ui->m_actionFileSaveAll->setEnabled(anyModifiedEditor());
+  m_mainForm->m_ui.m_actionFileSaveAll->setEnabled(anyModifiedEditor());
 
   // TODO: je vybranej novej editor, načíst detaily do status baru a jinam.
 }

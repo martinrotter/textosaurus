@@ -27,6 +27,9 @@ class TextApplication : public QObject {
     void setMainForm(FormMain* main_form);
 
   public slots:
+
+    // Closes all opened text documents (asks to save them if necessary).
+    void quit(bool* ok);
     void openTextFile(QAction* action = nullptr);
     void loadTextEditorFromFile(const QString& file_path, const QString& encoding = QSL(DEFAULT_TEXT_FILE_ENCODING));
     TextEditor* addEmptyTextEditor();

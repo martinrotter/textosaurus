@@ -42,7 +42,7 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
 void TextEditor::closeEvent(QCloseEvent* event) {
   bool ok;
 
-  closeEditor(ok);
+  closeEditor(&ok);
 
   if (!ok) {
     event->ignore();
@@ -67,7 +67,7 @@ QByteArray TextEditor::encoding() const {
   return m_encoding;
 }
 
-void TextEditor::save(bool& ok) {
+void TextEditor::save(bool* ok) {
   if (m_filePath.isEmpty()) {
     // Newly created document, save as.
     saveAs(ok);
@@ -78,21 +78,21 @@ void TextEditor::save(bool& ok) {
   }
 }
 
-void TextEditor::saveAs(bool& ok) {
+void TextEditor::saveAs(bool* ok) {
   // We save this documents as new file.
   QString file_path = QFileDialog::getSaveFileName(qApp->mainFormWidget(), tr("Save file as"),
                                                    qApp->documentsFolder(), QSL("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
     saveToFile(file_path);
-    ok = true;
+    *ok = true;
   }
   else {
-    ok = false;
+    *ok = false;
   }
 }
 
-void TextEditor::closeEditor(bool& ok) {
+void TextEditor::closeEditor(bool* ok) {
   if (isModified()) {
     emit requestVisibility();
 
@@ -107,25 +107,25 @@ void TextEditor::closeEditor(bool& ok) {
       case QMessageBox::StandardButton::Save:
         bool ok_save;
 
-        save(ok_save);
-        ok = ok_save;
+        save(&ok_save);
+        *ok = ok_save;
         break;
 
       case QMessageBox::StandardButton::Discard:
-        ok = true;
+        *ok = true;
         break;
 
       case QMessageBox::StandardButton::Cancel:
-        ok = false;
+        *ok = false;
         break;
 
       default:
-        ok = false;
+        *ok = false;
         break;
     }
   }
   else {
-    ok = true;
+    *ok = true;
   }
 }
 

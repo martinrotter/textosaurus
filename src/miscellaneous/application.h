@@ -89,7 +89,7 @@ class Application : public QtSingleApplication {
     void processExecutionMessage(const QString& message);
 
   signals:
-    void dataSaveRequested(bool& ok);
+    void dataSaveRequested(bool* ok);
 
   private slots:
 

@@ -19,14 +19,11 @@ class FormMain : public QMainWindow {
   public:
 
     // Constructors and destructors.
-    explicit FormMain(QWidget* parent = nullptr, Qt::WindowFlags f = 0);
+    explicit FormMain(QWidget* parent = nullptr);
     virtual ~FormMain();
 
-    // Returns global tab widget.
     TabWidget* tabWidget() const;
     ToolBar* toolBar() const;
-
-    // Access to statusbar.
     StatusBar* statusBar() const;
 
     // Returns list of all globally available actions.
@@ -49,25 +46,23 @@ class FormMain : public QMainWindow {
     // Turns on/off fullscreen mode
     void switchFullscreenMode();
 
-  private slots:
+  protected:
+    void closeEvent(QCloseEvent* event);
 
-    // Displays various dialogs.
+  signals:
+    void closeRequested(bool* should_stop);
+
+  private slots:
     void showWiki();
     void reportABug();
     void donate();
 
   private:
-
-    // Creates all needed menus and sets them up.
     void prepareMenus();
-
-    // Creates needed connections for this window.
     void createConnections();
-
-    // Sets up proper icons for this widget.
     void setupIcons();
 
-    QScopedPointer<Ui::FormMain> m_ui;
+    Ui::FormMain m_ui;
     StatusBar* m_statusBar;
     ToolBar* m_toolBar;
 };

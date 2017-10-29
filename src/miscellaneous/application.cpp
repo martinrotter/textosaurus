@@ -182,7 +182,7 @@ void Application::onCommitData(QSessionManager& manager) {
   // Now we need to ask user to save any unsaved documents.
   if (manager.allowsInteraction()) {
     bool ok;
-    emit dataSaveRequested(ok);
+    emit dataSaveRequested(&ok);
 
     manager.release();
 
