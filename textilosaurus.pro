@@ -23,7 +23,6 @@
 #            step, defaults to "$$OUT_PWD/usr" on Linux and to "$$OUT_PWD/app" on Windows.
 #   LRELEASE_EXECUTABLE - specifies the name/path of "lrelease" executable, defaults to "lrelease".
 #
-#
 # Other information:
 #   - supports Windows, Linux,
 #   - Qt 5.5.0 or higher is required,
