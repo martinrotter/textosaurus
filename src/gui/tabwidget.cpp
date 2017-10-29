@@ -26,20 +26,6 @@ TabWidget::~TabWidget() {
   qDebug("Destroying TabWidget instance.");
 }
 
-void TabWidget::showDownloadManager() {
-  for (int i = 0; i < count(); i++) {
-    if (tabBar()->tabType(i) == TabBar::TabType::DownloadManager) {
-      setCurrentIndex(i);
-      return;
-    }
-  }
-
-  // Download manager is not opened. Create tab with it.
-  qApp->downloadManager()->setParent(this);
-  addTab(qApp->downloadManager(), qApp->icons()->fromTheme(QSL("emblem-downloads")), tr("Downloads"), TabBar::DownloadManager);
-  setCurrentIndex(count() - 1);
-}
-
 void TabWidget::checkTabBarVisibility() {
   const bool should_be_bar_visible = count() > 1 || !qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideTabBarIfOnlyOneTab)).toBool();
 
@@ -72,12 +58,8 @@ void TabWidget::setupIcons() {
 }
 
 bool TabWidget::closeTab(int index) {
-  if (tabBar()->tabType(index) == TabBar::TabType::Closable || tabBar()->tabType(index) == TabBar::TabType::TextEditor) {
+  if (tabBar()->tabType(index) == TabBar::TabType::TextEditor) {
     removeTab(index, true);
-    return true;
-  }
-  else if (tabBar()->tabType(index) == TabBar::TabType::DownloadManager) {
-    removeTab(index, false);
     return true;
   }
   else {
@@ -151,7 +133,7 @@ TextEditor* TabWidget::textEditorAt(int index) const {
   return qobject_cast<TextEditor*>(widget(index));
 }
 
-int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, const TabBar::TabType& type) {
+int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, TabBar::TabType type) {
   const int index = QTabWidget::addTab(widget, icon, label);
 
   tabBar()->setTabType(index, type);
@@ -164,7 +146,7 @@ int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, 
   return index;
 }
 
-int TabWidget::addTab(QWidget* widget, const QString& label, const TabBar::TabType& type) {
+int TabWidget::addTab(QWidget* widget, const QString& label, TabBar::TabType type) {
   const int index = QTabWidget::addTab(widget, label);
 
   tabBar()->setTabType(index, type);
@@ -177,7 +159,7 @@ int TabWidget::addTab(QWidget* widget, const QString& label, const TabBar::TabTy
   return index;
 }
 
-int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QString& label, const TabBar::TabType& type) {
+int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QString& label, TabBar::TabType type) {
   const int tab_index = QTabWidget::insertTab(index, widget, icon, label);
 
   tabBar()->setTabType(tab_index, type);
@@ -190,7 +172,7 @@ int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QS
   return tab_index;
 }
 
-int TabWidget::insertTab(int index, QWidget* widget, const QString& label, const TabBar::TabType& type) {
+int TabWidget::insertTab(int index, QWidget* widget, const QString& label, TabBar::TabType type) {
   const int tab_index = QTabWidget::insertTab(index, widget, label);
 
   tabBar()->setTabType(tab_index, type);

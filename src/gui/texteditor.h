@@ -15,6 +15,7 @@ class TextEditor : public QsciScintilla {
     QByteArray encoding() const;
 
   public slots:
+    void reloadSettings();
 
     // Opens given file in this text editor, file is opened for reading.
     void loadFromFile(QFile& file, const QString& encoding);

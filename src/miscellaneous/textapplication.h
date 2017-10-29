@@ -12,6 +12,7 @@ class TabWidget;
 class FormMain;
 class QAction;
 
+// Main class which ties text box functionality into GUI and gels all together.
 class TextApplication : public QObject {
   Q_OBJECT
 

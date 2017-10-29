@@ -143,34 +143,6 @@ namespace General {
   VALUE(QString) LanguageDef;
 }
 
-// Downloads.
-namespace Downloads {
-  KEY ID;
-  KEY AlwaysPromptForFilename;
-
-  VALUE(bool) AlwaysPromptForFilenameDef;
-
-  KEY TargetDirectory;
-
-  VALUE(QString) TargetDirectoryDef;
-
-  KEY RemovePolicy;
-
-  VALUE(int) RemovePolicyDef;
-
-  KEY TargetExplicitDirectory;
-
-  VALUE(QString) TargetExplicitDirectoryDef;
-
-  KEY ShowDownloadsWhenNewDownloadStarts;
-
-  VALUE(bool) ShowDownloadsWhenNewDownloadStartsDef;
-
-  KEY ItemUrl;
-  KEY ItemLocation;
-  KEY ItemDone;
-}
-
 // Proxy.
 namespace Proxy {
   KEY ID;

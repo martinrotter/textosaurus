@@ -13,10 +13,7 @@ class TabBar : public QTabBar {
 
   public:
     enum TabType {
-      TextEditor = 1,
-      DownloadManager = 2,
-      NonClosable = 4,
-      Closable = 8
+      TextEditor = 1
     };
 
     // Constructors.
@@ -24,11 +21,9 @@ class TabBar : public QTabBar {
     virtual ~TabBar();
 
     // Getter/setter for tab type.
-    void setTabType(int index, const TabBar::TabType& type);
+    void setTabType(int index, TabBar::TabType type = TabType::TextEditor);
 
-    inline TabBar::TabType tabType(int index) const {
-      return static_cast<TabBar::TabType>(tabData(index).value<int>());
-    }
+    TabBar::TabType tabType(int index) const;
 
   private slots:
 
@@ -47,5 +42,9 @@ class TabBar : public QTabBar {
     // Emmited if empty space on tab bar is double clicked.
     void emptySpaceDoubleClicked();
 };
+
+inline TabBar::TabType TabBar::tabType(int index) const {
+  return static_cast<TabBar::TabType>(tabData(index).value<int>());
+}
 
 #endif // TABBAR_H

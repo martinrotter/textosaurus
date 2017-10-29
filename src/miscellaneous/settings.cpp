@@ -121,32 +121,6 @@ DKEY General::Language = "language";
 
 DVALUE(QString) General::LanguageDef = QLocale::system().name();
 
-// Downloads.
-DKEY Downloads::ID = "download_manager";
-DKEY Downloads::AlwaysPromptForFilename = "prompt_for_filename";
-
-DVALUE(bool) Downloads::AlwaysPromptForFilenameDef = false;
-
-DKEY Downloads::TargetDirectory = "target_directory";
-
-DVALUE(QString) Downloads::TargetDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DesktopLocation);
-
-DKEY Downloads::RemovePolicy = "remove_policy";
-
-DVALUE(int) Downloads::RemovePolicyDef = DownloadManager::Never;
-
-DKEY Downloads::TargetExplicitDirectory = "target_explicit_directory";
-
-DVALUE(QString) Downloads::TargetExplicitDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DesktopLocation);
-
-DKEY Downloads::ShowDownloadsWhenNewDownloadStarts = "show_downloads_on_new_download_start";
-
-DVALUE(bool) Downloads::ShowDownloadsWhenNewDownloadStartsDef = true;
-
-DKEY Downloads::ItemUrl = "download_%1_url";
-DKEY Downloads::ItemLocation = "download_%1_location";
-DKEY Downloads::ItemDone = "download_%1_done";
-
 // Proxy.
 DKEY Proxy::ID = "proxy";
 DKEY Proxy::Type = "proxy_type";

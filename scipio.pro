@@ -202,22 +202,18 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/dialogs/formmain.h \
             src/gui/dialogs/formsettings.h \
             src/gui/dialogs/formupdate.h \
-            src/gui/edittableview.h \
             src/gui/guiutilities.h \
             src/gui/labelwithstatus.h \
             src/gui/lineeditwithstatus.h \
             src/gui/messagebox.h \
             src/gui/plaintoolbutton.h \
             src/gui/settings/settingsbrowsermail.h \
-            src/gui/settings/settingsdownloads.h \
             src/gui/settings/settingsgeneral.h \
             src/gui/settings/settingsgui.h \
             src/gui/settings/settingslocalization.h \
             src/gui/settings/settingspanel.h \
             src/gui/settings/settingsshortcuts.h \
-            src/gui/squeezelabel.h \
             src/gui/statusbar.h \
-            src/gui/styleditemdelegatewithoutfocus.h \
             src/gui/tabbar.h \
             src/gui/tabwidget.h \
             src/gui/timespinbox.h \
@@ -237,7 +233,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/miscellaneous/settingsproperties.h \
             src/network-web/basenetworkaccessmanager.h \
             src/network-web/downloader.h \
-            src/network-web/downloadmanager.h \
             src/network-web/networkfactory.h \
             src/network-web/silentnetworkaccessmanager.h \
             src/network-web/webfactory.h \
@@ -263,22 +258,18 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/dialogs/formmain.cpp \
             src/gui/dialogs/formsettings.cpp \
             src/gui/dialogs/formupdate.cpp \
-            src/gui/edittableview.cpp \
             src/gui/guiutilities.cpp \
             src/gui/labelwithstatus.cpp \
             src/gui/lineeditwithstatus.cpp \
             src/gui/messagebox.cpp \
             src/gui/plaintoolbutton.cpp \
             src/gui/settings/settingsbrowsermail.cpp \
-            src/gui/settings/settingsdownloads.cpp \
             src/gui/settings/settingsgeneral.cpp \
             src/gui/settings/settingsgui.cpp \
             src/gui/settings/settingslocalization.cpp \
             src/gui/settings/settingspanel.cpp \
             src/gui/settings/settingsshortcuts.cpp \
-            src/gui/squeezelabel.cpp \
             src/gui/statusbar.cpp \
-            src/gui/styleditemdelegatewithoutfocus.cpp \
             src/gui/tabbar.cpp \
             src/gui/tabwidget.cpp \
             src/gui/timespinbox.cpp \
@@ -298,7 +289,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/miscellaneous/textfactory.cpp \
             src/network-web/basenetworkaccessmanager.cpp \
             src/network-web/downloader.cpp \
-            src/network-web/downloadmanager.cpp \
             src/network-web/networkfactory.cpp \
             src/network-web/silentnetworkaccessmanager.cpp \
             src/network-web/webfactory.cpp \
@@ -319,14 +309,11 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/dialogs/formsettings.ui \
             src/gui/dialogs/formupdate.ui \
             src/gui/settings/settingsbrowsermail.ui \
-            src/gui/settings/settingsdownloads.ui \
             src/gui/settings/settingsgeneral.ui \
             src/gui/settings/settingsgui.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
-            src/gui/toolbareditor.ui \
-            src/network-web/downloaditem.ui \
-            src/network-web/downloadmanager.ui
+            src/gui/toolbareditor.ui
 
 TRANSLATIONS += $$PWD/localization/scipio_en_GB.ts \
                 $$PWD/localization/scipio_en.ts

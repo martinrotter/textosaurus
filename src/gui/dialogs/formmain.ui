@@ -42,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -63,7 +63,6 @@
     <addaction name="separator"/>
     <addaction name="m_actionFileOpen"/>
     <addaction name="m_menuFileOpenWithEncoding"/>
-    <addaction name="m_actionFileReload"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileSave"/>
     <addaction name="m_actionFileSaveAs"/>
@@ -104,8 +103,6 @@
      <string>&amp;Tools</string>
     </property>
     <addaction name="m_actionSettings"/>
-    <addaction name="separator"/>
-    <addaction name="m_actionDownloadManager"/>
    </widget>
    <widget class="QMenu" name="m_menuWebBrowserTabs">
     <property name="title">
@@ -253,14 +250,6 @@
     <string notr="true"/>
    </property>
   </action>
-  <action name="m_actionDownloadManager">
-   <property name="text">
-    <string>&amp;Downloads</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
   <action name="m_actionSwitchStatusBar">
    <property name="checkable">
     <bool>true</bool>
@@ -309,11 +298,6 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+O</string>
-   </property>
-  </action>
-  <action name="m_actionFileReload">
-   <property name="text">
-    <string>Reload file from disk</string>
    </property>
   </action>
   <action name="m_actionFileSave">

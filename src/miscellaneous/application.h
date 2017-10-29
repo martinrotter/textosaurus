@@ -10,7 +10,6 @@
 #include "miscellaneous/localization.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/systemfactory.h"
-#include "network-web/downloadmanager.h"
 
 #include <QList>
 #include <QMessageBox>
@@ -53,7 +52,6 @@ class Application : public QtSingleApplication {
     SystemFactory* system();
     Localization* localization();
     IconFactory* icons();
-    DownloadManager* downloadManager();
     Settings* settings() const;
     FormMain* mainForm();
     QWidget* mainFormWidget();
@@ -109,7 +107,6 @@ class Application : public QtSingleApplication {
     SystemFactory* m_system;
     Localization* m_localization;
     IconFactory* m_icons;
-    DownloadManager* m_downloadManager;
     bool m_shouldRestart;
 };
 

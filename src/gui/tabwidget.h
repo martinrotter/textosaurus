@@ -11,7 +11,6 @@
 
 class QMenu;
 class PlainToolButton;
-class FeedMessageViewer;
 class TextEditor;
 
 class TabWidget : public QTabWidget {
@@ -25,13 +24,13 @@ class TabWidget : public QTabWidget {
 
     // Manimulators for tabs.
     int addTab(QWidget* widget, const QString&,
-               const TabBar::TabType& type = TabBar::NonClosable);
+               TabBar::TabType type = TabBar::TabType::TextEditor);
     int addTab(QWidget* widget, const QIcon& icon,
-               const QString& label, const TabBar::TabType& type = TabBar::NonClosable);
+               const QString& label, TabBar::TabType type = TabBar::TabType::TextEditor);
     int insertTab(int index, QWidget* widget, const QString& label,
-                  const TabBar::TabType& type = TabBar::Closable);
+                  TabBar::TabType type = TabBar::TabType::TextEditor);
     int insertTab(int index, QWidget* widget, const QIcon& icon,
-                  const QString& label, const TabBar::TabType& type = TabBar::NonClosable);
+                  const QString& label, TabBar::TabType type = TabBar::TabType::TextEditor);
     void removeTab(int index, bool clear_from_memory);
 
     TextEditor* textEditorAt(int index) const;
@@ -51,9 +50,6 @@ class TabWidget : public QTabWidget {
     bool closeTab(int index);
     void closeAllTabsExceptCurrent();
     void closeAllTabs();
-
-    // Displays download manager.
-    void showDownloadManager();
 
     void gotoNextTab();
     void gotoPreviousTab();

@@ -20,6 +20,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QProcess>
+#include <QRegularExpression>
 #include <QString>
 
 typedef QPair<UpdateInfo, QNetworkReply::NetworkError> UpdateCheck;

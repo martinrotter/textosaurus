@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QLocale>
 #include <QMenu>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 #include <QTextCodec>

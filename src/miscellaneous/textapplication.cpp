@@ -68,14 +68,14 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
 
   if (new_editor != nullptr) {
     new_editor->loadFromFile(file, encoding);
+    m_tabWidget->setCurrentWidget(new_editor);
   }
 }
 
 TextEditor* TextApplication::addEmptyTextEditor() {
   TextEditor* editor = new TextEditor(m_tabWidget);
-  int index = m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")),
-                                  tr("New text file"), TabBar::TabType::TextEditor);
 
+  m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoaded);
 

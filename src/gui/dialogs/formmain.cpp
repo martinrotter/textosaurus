@@ -72,7 +72,6 @@ QList<QAction*> FormMain::allActions() const {
 
   // Add basic actions.
   actions << m_ui->m_actionSettings;
-  actions << m_ui->m_actionDownloadManager;
   actions << m_ui->m_actionRestart;
   actions << m_ui->m_actionQuit;
   actions << m_ui->m_actionFileNew;
@@ -124,13 +123,13 @@ void FormMain::switchVisibility() {
 }
 
 void FormMain::display() {
-  // Make sure window is not minimized.
-  setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-
   // Display the window and make sure it is raised on top.
   show();
   activateWindow();
   raise();
+
+  // Make sure window is not minimized.
+  setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 
   // Raise alert event. Check the documentation for more info on this.
   Application::alert(this);
@@ -140,7 +139,6 @@ void FormMain::setupIcons() {
   IconFactory* icon_theme_factory = qApp->icons();
 
   // Setup icons of this main window.
-  m_ui->m_actionDownloadManager->setIcon(icon_theme_factory->fromTheme(QSL("emblem-downloads")));
   m_ui->m_actionSettings->setIcon(icon_theme_factory->fromTheme(QSL("document-properties")));
   m_ui->m_actionQuit->setIcon(icon_theme_factory->fromTheme(QSL("application-exit")));
   m_ui->m_actionRestart->setIcon(icon_theme_factory->fromTheme(QSL("view-refresh")));
@@ -241,7 +239,6 @@ void FormMain::createConnections() {
   connect(m_ui->m_actionSettings, &QAction::triggered, this, [this]() {
     FormSettings(*this).exec();
   });
-  connect(m_ui->m_actionDownloadManager, &QAction::triggered, m_ui->m_tabWidget, &TabWidget::showDownloadManager);
 
   // Menu "Help" connections.
   connect(m_ui->m_actionAboutGuard, &QAction::triggered, this, [this]() {

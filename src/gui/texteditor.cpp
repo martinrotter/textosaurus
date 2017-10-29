@@ -8,13 +8,13 @@
 #include "miscellaneous/iofactory.h"
 
 #include <QDir>
+#include <QFontDatabase>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QTextCodec>
 #include <QTextStream>
 
 TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QString()), m_encoding(QByteArray()) {
-  setUtf8(true);
-  setFont(QFont("Dejavu Sans Mono"));
+  reloadSettings();
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
@@ -38,9 +38,14 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   emit loadedFromFile(m_filePath);
 }
 
-QByteArray TextEditor::encoding() const
-{
+QByteArray TextEditor::encoding() const {
   return m_encoding;
+}
+
+void TextEditor::reloadSettings() {
+  // TODO: nacist font atd.
+  setUtf8(true);
+  setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
 }
 
 QString TextEditor::filePath() const {

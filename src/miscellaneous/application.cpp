@@ -20,7 +20,7 @@ Application::Application(const QString& id, int& argc, char** argv)
   m_settings(Settings::setupSettings(this)), m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
-  m_downloadManager(nullptr), m_shouldRestart(false) {
+  m_shouldRestart(false) {
   connect(this, &Application::aboutToQuit, this, &Application::onAboutToQuit);
   connect(this, &Application::commitDataRequest, this, &Application::onCommitData);
   connect(this, &Application::saveStateRequest, this, &Application::onSaveState);
@@ -80,16 +80,6 @@ void Application::eliminateFirstRun(const QString& version) {
 
 IconFactory* Application::icons() {
   return m_icons;
-}
-
-DownloadManager* Application::downloadManager() {
-  if (m_downloadManager == nullptr) {
-    m_downloadManager = new DownloadManager();
-    connect(m_downloadManager, &DownloadManager::downloadFinished, mainForm()->statusBar(), &StatusBar::clearProgressDownload);
-    connect(m_downloadManager, &DownloadManager::downloadProgressed, mainForm()->statusBar(), &StatusBar::showProgressDownload);
-  }
-
-  return m_downloadManager;
 }
 
 Settings* Application::settings() const {
