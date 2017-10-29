@@ -122,11 +122,15 @@ void TabWidget::indentTabText(int index) {
 }
 
 void TabWidget::removeTab(int index, bool clear_from_memory) {
-  if (clear_from_memory) {
-    widget(index)->deleteLater();
-  }
+  bool closed = widget(index)->close();
 
-  QTabWidget::removeTab(index);
+  if (closed) {
+    if (clear_from_memory) {
+      widget(index)->deleteLater();
+    }
+
+    QTabWidget::removeTab(index);
+  }
 }
 
 TextEditor* TabWidget::textEditorAt(int index) const {

@@ -14,6 +14,10 @@
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent) {}
 
+TextEditor* TextApplication::currentEditor() const {
+  return m_tabWidget->textEditorAt(m_tabWidget->currentIndex());
+}
+
 QList<TextEditor*> TextApplication::editors() const {
   QList<TextEditor*> editors;
 
@@ -89,8 +93,17 @@ TextEditor* TextApplication::addEmptyTextEditor() {
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
   connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSavedToFile);
+  connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
 
   return editor;
+}
+
+void TextApplication::onEditorRequestVisibility() {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  if (editor != nullptr) {
+    m_tabWidget->setCurrentWidget(editor);
+  }
 }
 
 void TextApplication::onEditorSavedToFile() {

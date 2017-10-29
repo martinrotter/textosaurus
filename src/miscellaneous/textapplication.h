@@ -19,6 +19,8 @@ class TextApplication : public QObject {
   public:
     explicit TextApplication(QObject* parent = nullptr);
 
+    TextEditor* currentEditor() const;
+
     QList<TextEditor*> editors()  const;
     bool anyModifiedEditor() const;
 
@@ -30,6 +32,7 @@ class TextApplication : public QObject {
     TextEditor* addEmptyTextEditor();
 
   private slots:
+    void onEditorRequestVisibility();
     void onEditorSavedToFile();
     void onEditorLoadedFromFile();
     void onEditorTextChanged(bool modified);
