@@ -116,7 +116,10 @@ void TextApplication::saveCurrentEditorAs() {
 
   if (editor != nullptr) {
     bool ok;
+    QAction* sndr = qobject_cast<QAction*>(sender());
+    QString encoding = (sndr != nullptr && !sndr->data().isNull()) ? sndr->data().toString() : QString();
 
+    // TODO: pokracovat, predat kodovani nebo pouzit to z editoru
     editor->saveAs(&ok);
   }
 }
@@ -202,6 +205,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
       TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileSaveWIthEncoding);;
     }
   });
+  connect(m_mainForm->m_ui.m_menuFileSaveWIthEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
 
   onEditorTabSwitched();
 }
