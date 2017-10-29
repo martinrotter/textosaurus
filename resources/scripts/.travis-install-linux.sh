@@ -2,12 +2,12 @@
 
 # Setup Qt build environment.
 source /opt/qt59/bin/qt59-env.sh
-mkdir rssguard-build && cd rssguard-build
+mkdir textilosaurus-build && cd textilosaurus-build
 
 # Build application.
-qmake ..
+qmake .."WITH_UBUNTU=true"
 make
-qmake ..
+qmake .."WITH_UBUNTU=true"
 make install
 
 # Obtain linuxdeployqt.

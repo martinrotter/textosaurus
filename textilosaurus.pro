@@ -148,6 +148,12 @@ win32 {
 else {
   # Use system-wide QScintilla.
   LIBS += -lqscintilla2_qt5
+
+  equals(WITH_UBUNTU, true) {
+    message(textilosaurus: Adding extra include path for Ubuntu.)
+    INCLUDEPATH += /usr/include/qt5
+    DEPENDPATH += /usr/include/qt5
+  }
 }
 
 win32 {
