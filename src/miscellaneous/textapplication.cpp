@@ -188,16 +188,13 @@ void TextApplication::quit(bool* ok) {
 }
 
 void TextApplication::openTextFile(QAction* action) {
-  QString file_path = QFileDialog::getOpenFileName(m_mainForm, tr("Open file"), qApp->documentsFolder(),
+  QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : DEFAULT_TEXT_FILE_ENCODING;
+  QString file_path = QFileDialog::getOpenFileName(m_mainForm, tr("Open file with %1 encoding").arg(encoding),
+                                                   qApp->documentsFolder(),
                                                    tr("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
-    if (action != nullptr && !action->data().isNull()) {
-      loadTextEditorFromFile(file_path, action->data().toString());
-    }
-    else {
-      loadTextEditorFromFile(file_path);
-    }
+    loadTextEditorFromFile(file_path, encoding);
   }
 }
 
