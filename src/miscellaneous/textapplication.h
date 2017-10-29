@@ -34,6 +34,10 @@ class TextApplication : public QObject {
     void loadTextEditorFromFile(const QString& file_path, const QString& encoding = QSL(DEFAULT_TEXT_FILE_ENCODING));
     TextEditor* addEmptyTextEditor();
 
+    void saveCurrentEditor();
+    void saveCurrentEditorAs();
+    void saveAllEditors();
+
   private slots:
     void onEditorRequestVisibility();
     void onEditorSavedToFile();

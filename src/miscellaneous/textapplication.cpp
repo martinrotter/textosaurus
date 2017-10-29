@@ -100,6 +100,34 @@ TextEditor* TextApplication::addEmptyTextEditor() {
   return editor;
 }
 
+void TextApplication::saveCurrentEditor() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    bool ok;
+
+    editor->save(&ok);
+  }
+}
+
+void TextApplication::saveCurrentEditorAs() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    bool ok;
+
+    editor->saveAs(&ok);
+  }
+}
+
+void TextApplication::saveAllEditors() {
+  bool ok;
+
+  foreach (TextEditor* editor, editors()) {
+    editor->save(&ok);
+  }
+}
+
 void TextApplication::onEditorRequestVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
@@ -147,6 +175,8 @@ void TextApplication::setMainForm(FormMain* main_form) {
   connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
   connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
+  connect(m_mainForm->m_ui.m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
+  connect(m_mainForm->m_ui.m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
   connect(m_mainForm->m_ui.m_actionFileNew, &QAction::triggered, this, [this]() {
     TextEditor* editor = addEmptyTextEditor();
     m_tabWidget->setCurrentWidget(editor);
