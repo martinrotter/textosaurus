@@ -38,6 +38,7 @@ class TextApplication : public QObject {
     void saveCurrentEditorAs();
     void saveCurrentEditorAsWithEncoding(QAction* action);
     void saveAllEditors();
+    void closeAllUnmodifiedEditors();
 
   private slots:
     void onEditorRequestVisibility();

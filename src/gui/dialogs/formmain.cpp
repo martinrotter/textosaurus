@@ -161,6 +161,11 @@ void FormMain::setupIcons() {
 
   m_ui.m_actionFileNew->setIcon(icon_theme_factory->fromTheme(QSL("document-new")));
   m_ui.m_actionFileOpen->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
+  m_ui.m_menuFileOpenWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
+  m_ui.m_actionFileSave->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));
+  m_ui.m_actionFileSaveAs->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
+  m_ui.m_actionFileSaveAll->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));
+  m_ui.m_menuFileSaveWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
 
   // View.
   m_ui.m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
@@ -171,6 +176,7 @@ void FormMain::setupIcons() {
   // Tabs & web browser.
   m_ui.m_actionTabsCloseAll->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionTabsCloseAllExceptCurrent->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
+  m_ui.m_actionTabsCloseAllUnmodified->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionTabsNext->setIcon(icon_theme_factory->fromTheme(QSL("go-next")));
   m_ui.m_actionTabsPrevious->setIcon(icon_theme_factory->fromTheme(QSL("go-previous")));
 

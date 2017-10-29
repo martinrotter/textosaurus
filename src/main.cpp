@@ -19,7 +19,6 @@
 
 #include <QDebug>
 #include <QThread>
-#include <QTimer>
 #include <QTranslator>
 
 #if defined (Q_OS_MAC)

@@ -140,6 +140,14 @@ void TextApplication::saveAllEditors() {
   }
 }
 
+void TextApplication::closeAllUnmodifiedEditors() {
+  foreach (TextEditor* editor, editors()) {
+    if (!editor->isModified()) {
+      m_tabWidget->closeTab(m_tabWidget->indexOf(editor));
+    }
+  }
+}
+
 void TextApplication::onEditorRequestVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
@@ -189,6 +197,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
   connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
+  connect(m_mainForm->m_ui.m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_mainForm->m_ui.m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_mainForm->m_ui.m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
   connect(m_mainForm->m_ui.m_actionFileSaveAll, &QAction::triggered, this, &TextApplication::saveAllEditors);
@@ -208,12 +217,12 @@ void TextApplication::setMainForm(FormMain* main_form) {
   });
   connect(m_mainForm->m_ui.m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
 
-  connect(m_mainForm->m_ui.m_menuFileSaveWIthEncoding, &QMenu::aboutToShow, this, [this]() {
-    if (m_mainForm->m_ui.m_menuFileSaveWIthEncoding->isEmpty()) {
-      TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileSaveWIthEncoding);;
+  connect(m_mainForm->m_ui.m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_mainForm->m_ui.m_menuFileSaveWithEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileSaveWithEncoding);;
     }
   });
-  connect(m_mainForm->m_ui.m_menuFileSaveWIthEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
+  connect(m_mainForm->m_ui.m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
 
   onEditorTabSwitched();
 }
@@ -261,13 +270,13 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       // We update stuff related to document changes always.
       m_mainForm->m_ui.m_actionFileSave->setEnabled(editor->isModified());
       m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(true);
-      m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(true);
+      m_mainForm->m_ui.m_menuFileSaveWithEncoding->setEnabled(true);
     }
     else {
       // No editor selected.
       m_mainForm->m_ui.m_actionFileSave->setEnabled(false);
       m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(false);
-      m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(false);
+      m_mainForm->m_ui.m_menuFileSaveWithEncoding->setEnabled(false);
     }
   }
 
