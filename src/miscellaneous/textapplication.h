@@ -41,6 +41,7 @@ class TextApplication : public QObject {
     void onEditorTextChanged(bool modified);
     void onEditorTabSwitched(int index = -1);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
+    void updateStatusBarFromEditor(TextEditor* editor);
 
   private:
     void renameEditor(TextEditor* editor);

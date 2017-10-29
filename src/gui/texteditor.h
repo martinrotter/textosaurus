@@ -5,6 +5,8 @@
 
 #include <Qsci/qsciscintilla.h>
 
+#include "definitions/definitions.h"
+
 class TextEditor : public QsciScintilla {
   Q_OBJECT
 
@@ -37,7 +39,7 @@ class TextEditor : public QsciScintilla {
     void savedToFile(QString m_destinationFilePath);
 
   private:
-    void saveToFile(const QString& file_path);
+    void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
     QString m_filePath;

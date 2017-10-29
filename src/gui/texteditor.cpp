@@ -10,6 +10,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
+#include <Qsci/qscilexerpython.h>.h>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QTextCodec>
 #include <QTextStream>
@@ -52,8 +53,21 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
 }
 
-void TextEditor::saveToFile(const QString& file_path) {
-  IOFactory::writeFile(file_path, text().toUtf8());
+void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
+  if (!encoding.isEmpty()) {
+    m_encoding = encoding.toLocal8Bit();
+  }
+
+  QFile file(file_path);
+
+  if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
+    *ok = false;
+    return;
+  }
+
+  QTextStream str(&file); str.setCodec(m_encoding.constData());
+
+  str << text();
 
   if (m_filePath != file_path) {
     m_filePath = file_path;
@@ -61,6 +75,7 @@ void TextEditor::saveToFile(const QString& file_path) {
   }
 
   setModified(false);
+  *ok = true;
 }
 
 QByteArray TextEditor::encoding() const {
@@ -74,7 +89,7 @@ void TextEditor::save(bool* ok) {
   }
   else if (isModified()) {
     // We just save this modified document to same file.
-    saveToFile(m_filePath);
+    saveToFile(m_filePath, ok);
   }
 }
 
@@ -84,8 +99,7 @@ void TextEditor::saveAs(bool* ok) {
                                                    qApp->documentsFolder(), QSL("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
-    saveToFile(file_path);
-    *ok = true;
+    saveToFile(file_path, ok);
   }
   else {
     *ok = false;
@@ -133,6 +147,9 @@ void TextEditor::reloadSettings() {
   // TODO: nacist font atd.
   setUtf8(true);
   setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  setEolVisibility(true);
+  setLexer(new QsciLexerPython(this));
+  setAutoIndent(true);
 }
 
 QString TextEditor::filePath() const {

@@ -82,6 +82,9 @@ void SystemFactory::checkForUpdates() const {
       QByteArray obtained_data = downloader->lastOutputData();
       result.first = parseUpdatesFile(obtained_data);
     }
+    else {
+      result.first = QList<UpdateInfo>();
+    }
 
     emit updatesChecked(result);
     downloader->deleteLater();

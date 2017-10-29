@@ -203,6 +203,7 @@ void TextApplication::openTextFile(QAction* action) {
 
 void TextApplication::onEditorTabSwitched(int index) {
   updateToolBarFromEditor(m_tabWidget->textEditorAt(index), false);
+  updateStatusBarFromEditor(m_tabWidget->textEditorAt(index));
 }
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
@@ -227,6 +228,10 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
   m_mainForm->m_ui.m_actionFileSaveAll->setEnabled(anyModifiedEditor());
 
   // TODO: je vybranej novej editor, načíst detaily do status baru a jinam.
+}
+
+void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
+  //m_mainForm->statusBar().
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {

@@ -71,10 +71,13 @@ void FormUpdate::checkForUpdates() {
     }
     else {
       const bool self_update_supported = isSelfUpdateSupported();
-      m_updateInfo = update.first.at(0);
-      m_ui.m_tabInfo->setEnabled(true);
-      m_ui.m_lblAvailableRelease->setText(m_updateInfo.m_availableVersion);
-      m_ui.m_txtChanges->setText(m_updateInfo.m_changes);
+
+      if (!update.first.isEmpty()) {
+        m_updateInfo = update.first.at(0);
+        m_ui.m_tabInfo->setEnabled(true);
+        m_ui.m_lblAvailableRelease->setText(m_updateInfo.m_availableVersion);
+        m_ui.m_txtChanges->setText(m_updateInfo.m_changes);
+      }
 
       if (SystemFactory::isVersionNewer(m_updateInfo.m_availableVersion, APP_VERSION)) {
         m_btnUpdate->setVisible(true);

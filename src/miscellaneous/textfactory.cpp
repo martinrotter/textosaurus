@@ -139,7 +139,7 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu) {
 
   foreach (const QString& codec, codecs) {
     auto match = predefined_group_regex.match(codec);
-    QAction* act;
+    QAction* act = nullptr;
 
     if (match.hasMatch()) {
       QString capture = match.captured(1);
@@ -152,7 +152,9 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu) {
       act = menu->addAction(QString("&") + codec);
     }
 
-    act->setData(codec);
+    if (act != nullptr) {
+      act->setData(codec);
+    }
   }
 }
 
