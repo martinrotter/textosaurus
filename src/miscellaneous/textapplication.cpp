@@ -4,6 +4,7 @@
 
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
+#include "gui/statusbar.h"
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
 #include "gui/toolbar.h"
@@ -141,6 +142,7 @@ void TextApplication::onEditorSavedToFile() {
 
   renameEditor(editor);
   updateToolBarFromEditor(editor, true);
+  updateStatusBarFromEditor(editor);
 }
 
 void TextApplication::onEditorLoadedFromFile() {
@@ -148,6 +150,7 @@ void TextApplication::onEditorLoadedFromFile() {
 
   renameEditor(editor);
   updateToolBarFromEditor(editor, true);
+  updateStatusBarFromEditor(editor);
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
@@ -253,12 +256,12 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 
   // Enable this if there is at least one unsaved editor.
   m_mainForm->m_ui.m_actionFileSaveAll->setEnabled(anyModifiedEditor());
-
-  // TODO: je vybranej novej editor, načíst detaily do status baru a jinam.
 }
 
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
-  //m_mainForm->statusBar().
+  if (editor != nullptr) {
+    m_mainForm->statusBar()->setEncoding(editor->encoding());
+  }
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {

@@ -15,7 +15,7 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QString()), m_encoding(QByteArray()) {
+TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
   reloadSettings();
 }
 
