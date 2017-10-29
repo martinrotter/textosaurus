@@ -18,7 +18,7 @@ class TextEditor : public QsciScintilla {
 
   public slots:
     void save(bool* ok);
-    void saveAs(bool* ok);
+    void saveAs(bool* ok, const QString& encoding = QString());
 
     void reloadSettings();
 

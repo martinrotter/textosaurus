@@ -36,6 +36,7 @@ class TextApplication : public QObject {
 
     void saveCurrentEditor();
     void saveCurrentEditorAs();
+    void saveCurrentEditorAsWithEncoding(QAction* action);
     void saveAllEditors();
 
   private slots:

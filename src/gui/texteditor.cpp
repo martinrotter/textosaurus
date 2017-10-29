@@ -10,8 +10,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
-#include <Qsci/qscilexerpython.h>.h>
-#include <QtConcurrent/QtConcurrentRun>
+#include <Qsci/qscilexerpython.h>
 #include <QTextCodec>
 #include <QTextStream>
 
@@ -93,13 +92,18 @@ void TextEditor::save(bool* ok) {
   }
 }
 
-void TextEditor::saveAs(bool* ok) {
+void TextEditor::saveAs(bool* ok, const QString& encoding) {
   // We save this documents as new file.
   QString file_path = QFileDialog::getSaveFileName(qApp->mainFormWidget(), tr("Save file as"),
                                                    qApp->documentsFolder(), QSL("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
-    saveToFile(file_path, ok);
+    if (encoding.isEmpty()) {
+      saveToFile(file_path, ok);
+    }
+    else {
+      saveToFile(file_path, ok, encoding);
+    }
   }
   else {
     *ok = false;
