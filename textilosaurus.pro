@@ -145,14 +145,21 @@ win32 {
   INCLUDEPATH += $$PWD/resources/binaries/qscintilla
   DEPENDPATH += $$PWD/resources/binaries/qscintilla
 }
-else {
-  # Use system-wide QScintilla.
-  LIBS += -lqscintilla2_qt5
 
+mac {
+
+}
+
+unix:!mac {
+  # Use system-wide QScintilla.
   equals(WITH_UBUNTU, true) {
     message(textilosaurus: Adding extra include path for Ubuntu.)
+    LIBS += -lqt5scintilla2
     INCLUDEPATH += /usr/include/qt5
     DEPENDPATH += /usr/include/qt5
+  }
+  else {
+    LIBS += -lqscintilla2_qt5
   }
 }
 
