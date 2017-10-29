@@ -9,6 +9,8 @@ if test "$TRAVIS_OS_NAME" = "osx"; then
   brew link --force qt5
   brew install curl
   brew link --force curl
+  brew install qscintilla2
+  brew link --force qscintilla2
 else
   # Linux.
   sudo add-apt-repository ppa:beineri/opt-qt591-trusty -y

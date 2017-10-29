@@ -5,9 +5,9 @@ source /opt/qt59/bin/qt59-env.sh
 mkdir textilosaurus-build && cd textilosaurus-build
 
 # Build application.
-qmake .."WITH_UBUNTU=true"
+qmake ../textilosaurus.pro
 make
-qmake .."WITH_UBUNTU=true"
+qmake ../textilosaurus.pro "WITH_UBUNTU=true"
 make install
 
 # Obtain linuxdeployqt.
@@ -15,6 +15,7 @@ wget -c https://github.com/probonopd/linuxdeployqt/releases/download/continuous/
 chmod a+x linuxdeployqt-continuous-x86_64.AppImage 
 
 # Create AppImage.
+find . -type f
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textilosaurus.desktop" -bundle-non-qt-libs -no-translations
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textilosaurus.desktop" -appimage -no-translations
