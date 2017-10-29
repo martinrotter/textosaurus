@@ -1,0 +1,19 @@
+language: cpp
+osx_image: xcode7.3
+sudo: required
+dist: trusty
+os:
+- linux
+- osx
+compiler:
+- gcc
+git:
+  submodules: false
+  depth: 10
+before_install: "./resources/scripts/.travis-before-install.sh"
+install: true
+script:
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./resources/scripts/.travis-install-linux.sh
+  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./resources/scripts/.travis-install-osx.sh
+  ; fi

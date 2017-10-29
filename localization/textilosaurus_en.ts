@@ -12,137 +12,116 @@
     <name>DownloadItem</name>
     <message>
         <source>Ico</source>
-        <translation>Ico</translation>
+        <translation type="vanished">Ico</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation>Filename</translation>
+        <translation type="vanished">Filename</translation>
     </message>
     <message>
         <source>Error opening output file: %1</source>
-        <translation>Error opening output file: %1</translation>
+        <translation type="vanished">Error opening output file: %1</translation>
     </message>
     <message>
         <source>&amp;Try again</source>
-        <translation>&amp;Try again</translation>
+        <translation type="vanished">&amp;Try again</translation>
     </message>
     <message>
         <source>&amp;Stop</source>
-        <translation>&amp;Stop</translation>
+        <translation type="vanished">&amp;Stop</translation>
     </message>
     <message>
         <source>&amp;Open file</source>
-        <translation>&amp;Open file</translation>
+        <translation type="vanished">&amp;Open file</translation>
     </message>
     <message>
         <source>Select destination for downloaded file</source>
-        <translation>Select destination for downloaded file</translation>
+        <translation type="vanished">Select destination for downloaded file</translation>
     </message>
     <message>
         <source>Error: %1</source>
-        <translation>Error: %1</translation>
+        <translation type="vanished">Error: %1</translation>
     </message>
     <message>
         <source>Download directory couldn&apos;t be created</source>
-        <translation>Download directory couldn&apos;t be created</translation>
+        <translation type="vanished">Download directory couldn&apos;t be created</translation>
     </message>
     <message>
         <source>Error when saving file: %1</source>
-        <translation>Error when saving file: %1</translation>
+        <translation type="vanished">Error when saving file: %1</translation>
     </message>
     <message>
         <source>%1 of %2 (%3 per second) - %4</source>
-        <translation>%1 of %2 (%3 per second) - %4</translation>
+        <translation type="vanished">%1 of %2 (%3 per second) - %4</translation>
     </message>
     <message>
         <source>%1 of %2 - download completed</source>
-        <translation>%1 of %2 - download completed</translation>
+        <translation type="vanished">%1 of %2 - download completed</translation>
     </message>
     <message>
         <source>Open &amp;directory</source>
-        <translation>Open &amp;directory</translation>
+        <translation type="vanished">Open &amp;directory</translation>
     </message>
     <message>
         <source>Cannot open file</source>
-        <translation>Cannot open file</translation>
+        <translation type="vanished">Cannot open file</translation>
     </message>
     <message>
         <source>Cannot open output file. Open it manually.</source>
-        <translation>Cannot open output file. Open it manually.</translation>
+        <translation type="vanished">Cannot open output file. Open it manually.</translation>
     </message>
     <message>
         <source>Cannot open directory</source>
-        <translation>Cannot open directory</translation>
+        <translation type="vanished">Cannot open directory</translation>
     </message>
     <message>
         <source>Cannot open output directory. Open it manually.</source>
-        <translation>Cannot open output directory. Open it manually.</translation>
+        <translation type="vanished">Cannot open output directory. Open it manually.</translation>
     </message>
     <message>
         <source>Download finished</source>
-        <translation>Download finished</translation>
+        <translation type="vanished">Download finished</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; is downloaded.
 Click here to open parent directory.</source>
-        <translation>File &apos;%1&apos; is downloaded.
+        <translation type="vanished">File &apos;%1&apos; is downloaded.
 Click here to open parent directory.</translation>
     </message>
     <message>
         <source>URL: %1</source>
-        <translation>URL: %1</translation>
+        <translation type="vanished">URL: %1</translation>
     </message>
     <message>
         <source>Local file: %1</source>
-        <translation>Local file: %1</translation>
+        <translation type="vanished">Local file: %1</translation>
     </message>
     <message>
         <source>Selection of local file cancelled.</source>
-        <translation>Selection of local file cancelled.</translation>
+        <translation type="vanished">Selection of local file cancelled.</translation>
     </message>
 </context>
 <context>
     <name>DownloadManager</name>
     <message>
         <source>Clean up</source>
-        <translation>Clean up</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n minutes remaining</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>%n seconds remaining</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
+        <translation type="vanished">Clean up</translation>
     </message>
     <message>
         <source>bytes</source>
-        <translation>bytes</translation>
+        <translation type="vanished">bytes</translation>
     </message>
     <message>
         <source>kB</source>
-        <translation>kB</translation>
+        <translation type="vanished">kB</translation>
     </message>
     <message>
         <source>MB</source>
-        <translation>MB</translation>
+        <translation type="vanished">MB</translation>
     </message>
     <message>
         <source>GB</source>
-        <translation>GB</translation>
-    </message>
-    <message numerus="yes">
-        <source>Downloading %n file(s)...</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
+        <translation type="vanished">GB</translation>
     </message>
 </context>
 <context>
@@ -212,7 +191,7 @@ Click here to open parent directory.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and QScintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2011-%3 %4&lt;/body&gt;</source>
+        <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and QScintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -280,7 +259,7 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Hides or displays the main menu.</source>
-        <translation>Hides or displays the main menu.</translation>
+        <translation type="vanished">Hides or displays the main menu.</translation>
     </message>
     <message>
         <source>Check for &amp;updates</source>
@@ -288,11 +267,11 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Show/hide</source>
-        <translation>Show/hide</translation>
+        <translation type="vanished">Show/hide</translation>
     </message>
     <message>
         <source>&amp;Main menu</source>
-        <translation>&amp;Main menu</translation>
+        <translation type="vanished">&amp;Main menu</translation>
     </message>
     <message>
         <source>Switch visibility of main &amp;window</source>
@@ -312,11 +291,11 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>&amp;Downloads</source>
-        <translation>&amp;Downloads</translation>
+        <translation type="vanished">&amp;Downloads</translation>
     </message>
     <message>
         <source>Status bar</source>
-        <translation>Status bar</translation>
+        <translation type="vanished">Status bar</translation>
     </message>
     <message>
         <source>Report a &amp;bug...</source>
@@ -336,7 +315,7 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished">Tabs</translation>
+        <translation type="obsolete">Tabs</translation>
     </message>
     <message>
         <source>&amp;Restart</source>
@@ -351,19 +330,71 @@ Click here to open parent directory.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Switch visibility of toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>T</source>
+        <source>&amp;Donate...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Donate...</source>
+        <source>Save file with encoding...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file with encoding...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UI elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;statusbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save file as...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close all &amp;saved tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -841,42 +872,42 @@ File filter for external e-mail selection dialog.</extracomment>
     <name>SettingsDownloads</name>
     <message>
         <source>Open download manager when new download is started</source>
-        <translation type="unfinished">Open download manager when new download is started</translation>
+        <translation type="obsolete">Open download manager when new download is started</translation>
     </message>
     <message>
         <source>Target directory for downloaded files</source>
-        <translation type="unfinished">Target directory for downloaded files</translation>
+        <translation type="obsolete">Target directory for downloaded files</translation>
     </message>
     <message>
         <source>Ask for each individual downloaded file</source>
-        <translation type="unfinished">Ask for each individual downloaded file</translation>
+        <translation type="obsolete">Ask for each individual downloaded file</translation>
     </message>
     <message>
         <source>Save all downloaded files to</source>
-        <translation type="unfinished">Save all downloaded files to</translation>
+        <translation type="obsolete">Save all downloaded files to</translation>
     </message>
     <message>
         <source>Target directory where all downloaded files are saved</source>
-        <translation type="unfinished">Target directory where all downloaded files are saved</translation>
+        <translation type="obsolete">Target directory where all downloaded files are saved</translation>
     </message>
     <message>
         <source>&amp;Browse</source>
-        <translation type="unfinished">&amp;Browse</translation>
+        <translation type="obsolete">&amp;Browse</translation>
     </message>
     <message>
         <source>Select downloads target directory</source>
-        <translation type="unfinished">Select downloads target directory</translation>
+        <translation type="obsolete">Select downloads target directory</translation>
     </message>
     <message>
         <source>Downloads</source>
-        <translation type="unfinished">Downloads</translation>
+        <translation type="obsolete">Downloads</translation>
     </message>
 </context>
 <context>
     <name>SettingsGeneral</name>
     <message>
         <source>Launch %1 on operating system startup</source>
-        <translation type="unfinished">Launch %1 on operating system startup</translation>
+        <translation type="obsolete">Launch %1 on operating system startup</translation>
     </message>
     <message>
         <source>Check for updates on application startup</source>
@@ -888,7 +919,7 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source> (not supported on this platform)</source>
-        <translation type="unfinished"> (not supported on this platform)</translation>
+        <translation type="obsolete"> (not supported on this platform)</translation>
     </message>
     <message>
         <source>General</source>
@@ -923,7 +954,7 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Right mouse button double-click</source>
-        <translation type="unfinished">Right mouse button double-click</translation>
+        <translation type="obsolete">Right mouse button double-click</translation>
     </message>
     <message>
         <source>Middle mouse button single-click</source>
@@ -935,7 +966,7 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Statusbar</source>
-        <translation type="unfinished">Statusbar</translation>
+        <translation type="obsolete">Statusbar</translation>
     </message>
     <message>
         <source>Toolbar button style</source>
@@ -976,6 +1007,14 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left mouse button double-click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1020,23 +1059,23 @@ File filter for external e-mail selection dialog.</extracomment>
     <name>StatusBar</name>
     <message>
         <source>Feed update progress bar</source>
-        <translation>Feed update progress bar</translation>
+        <translation type="vanished">Feed update progress bar</translation>
     </message>
     <message>
         <source>Feed update label</source>
-        <translation>Feed update label</translation>
+        <translation type="vanished">Feed update label</translation>
     </message>
     <message>
         <source>File download progress bar</source>
-        <translation>File download progress bar</translation>
+        <translation type="vanished">File download progress bar</translation>
     </message>
     <message>
         <source>File download label</source>
-        <translation>File download label</translation>
+        <translation type="vanished">File download label</translation>
     </message>
     <message>
         <source>Toolbar spacer</source>
-        <translation>Toolbar spacer</translation>
+        <translation type="vanished">Toolbar spacer</translation>
     </message>
 </context>
 <context>
@@ -1065,15 +1104,77 @@ File filter for external e-mail selection dialog.</extracomment>
     <name>TabWidget</name>
     <message>
         <source>Displays main menu.</source>
-        <translation>Displays main menu.</translation>
+        <translation type="vanished">Displays main menu.</translation>
     </message>
     <message>
         <source>Main menu</source>
-        <translation>Main menu</translation>
+        <translation type="vanished">Main menu</translation>
     </message>
     <message>
         <source>Downloads</source>
-        <translation>Downloads</translation>
+        <translation type="vanished">Downloads</translation>
+    </message>
+</context>
+<context>
+    <name>TextApplication</name>
+    <message>
+        <source>Cannot open file</source>
+        <translation type="unfinished">Cannot open file</translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; does not exist and cannot be opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; cannot be opened for reading. Insufficient permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opening big file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You want to open big text file in encoding which is different from %1. This operation might take quite some time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to open the file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New text file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file with %1 encoding</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text files (*.txt);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextEditor</name>
+    <message>
+        <source>Save file as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This document has unsaved changed, do you want to save them?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1095,6 +1196,13 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <source> and </source>
         <translation> and </translation>
+    </message>
+</context>
+<context>
+    <name>ToolBar</name>
+    <message>
+        <source>Toolbar spacer</source>
+        <translation type="unfinished">Toolbar spacer</translation>
     </message>
 </context>
 <context>
@@ -1145,97 +1253,6 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Reset toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WebFactory</name>
-    <message>
-        <source>Web engine settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto-load images</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>JS enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>JS can open popup windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>JS can access clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hyperlinks can get focus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Local storage enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Local content can access remote URLs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>XSS auditing enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spatial navigation enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Local content can access local files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hyperlink auditing enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Animate scrolling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error pages enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Plugins enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fullscreen enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Screen capture enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WebGL enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accelerate 2D canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print element backgrounds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow running insecure content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow geolocation on insecure origins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
