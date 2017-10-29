@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     const QString str = QString::fromLocal8Bit(argv[i]);
 
     if (str == "-h") {
-      qDebug("Usage: scipio [OPTIONS]\n\n"
+      qDebug("Usage: textilosaurus [OPTIONS]\n\n"
              "Option\t\tMeaning\n"
              "-h\t\tDisplays this help.");
       return EXIT_SUCCESS;

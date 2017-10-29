@@ -3,8 +3,8 @@
         <file>text/CHANGELOG</file>
         <file>text/COPYING_GNU_GPL</file>
         <file>text/COPYING_GNU_GPL_HTML</file>
-        <file>graphics/scipio.ico</file>
-        <file>graphics/scipio.png</file>
+        <file>graphics/textilosaurus.ico</file>
+        <file>graphics/textilosaurus.png</file>
         <file>graphics/misc/flags/cs.png</file>
         <file>graphics/misc/flags/da.png</file>
         <file>graphics/misc/flags/de.png</file>
@@ -22,9 +22,9 @@
         <file>graphics/misc/flags/pt.png</file>
         <file>graphics/misc/flags/sv.png</file>
         <file>graphics/misc/flags/zh.png</file>
-        <file>desktop/com.github.scipio.desktop</file>
-        <file>localizations/scipio_en.qm</file>
-        <file>localizations/scipio_en_GB.qm</file>
+        <file>desktop/com.github.textilosaurus.desktop</file>
+        <file>localizations/textilosaurus_en.qm</file>
+        <file>localizations/textilosaurus_en_GB.qm</file>
         <file>localizations/qt_bg.qm</file>
         <file>localizations/qt_ca.qm</file>
         <file>localizations/qt_cs.qm</file>

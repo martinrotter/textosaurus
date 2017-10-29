@@ -11,7 +11,7 @@
 #define ARGUMENTS_LIST_SEPARATOR              "\n"
 #define IS_IN_ARRAY(offset, array)            ((offset >= 0) && (offset < array.count()))
 #define URI_SCHEME_HTTP                       "http://"
-#define RELEASES_LIST                         "https://api.github.com/repos/martinrotter/scipio/releases"
+#define RELEASES_LIST                         "https://api.github.com/repos/martinrotter/textilosaurus/releases"
 #define DEFAULT_LOCALE                        "en"
 #define URL_REGEXP "^(http|https|feed|ftp):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?$"
 #define ICON_SIZE_SETTINGS                    16
@@ -78,11 +78,11 @@
 // Paths.
 #define APP_THEME_PATH QSL(":/graphics")
 #define APP_INFO_PATH QSL(":/text")
-#define APP_ICON_PATH QSL(":/graphics/scipio.png")
+#define APP_ICON_PATH QSL(":/graphics/textilosaurus.png")
 #define APP_LANG_PATH QSL(":/localizations")
 
 #if defined(Q_OS_LINUX)
-#define APP_DESKTOP_ENTRY_FILE "com.github.scipio.desktop"
+#define APP_DESKTOP_ENTRY_FILE "com.github.textilosaurus.desktop"
 
 #define APP_DESKTOP_ENTRY_PATH QSL(":/desktop")
 #endif

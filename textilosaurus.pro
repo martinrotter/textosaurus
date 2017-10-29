@@ -3,18 +3,18 @@
 # For license of this file, see <project-root-folder>/LICENSE.md.
 #
 #
-# This is Scipio compilation script for qmake.
+# This is Textilosaurus compilation script for qmake.
 #
 # Usage:
 #   a) DEBUG build for testing. (out of source build type)
 #     cd ../build-dir
-#     qmake ../scipio-dir/scipio.pro -r CONFIG+=debug PREFIX=./usr
+#     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=debug PREFIX=./usr
 #     make
 #     make install
 #
 #   b) RELEASE build for production use. (out of source build type)
 #     cd ../build-dir
-#     qmake ../scipio-dir/scipio.pro -r CONFIG+=release PREFIX=./usr
+#     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=release PREFIX=./usr
 #     make
 #     make install
 #
@@ -35,34 +35,33 @@
 #################################################################
 
 TEMPLATE    = app
-TARGET      = scipio
+TARGET      = textilosaurus
 DEFINES	    *= QT_USE_QSTRINGBUILDER
 
-message(scipio: Welcome Scipio qmake script.)
+message(textilosaurus: Welcome Textilosaurus qmake script.)
 
 lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 5) {
-  error(scipio: At least Qt \"5.5.0\" is required!!!)
+  error(textilosaurus: At least Qt \"5.5.0\" is required!!!)
 }
 
-APP_NAME                      = "Scipio"
-APP_LOW_NAME                  = "scipio"
-APP_REVERSE_NAME              = "com.github.scipio"
-APP_LOW_H_NAME                = ".scipio"
+APP_NAME                      = "Textilosaurus"
+APP_LOW_NAME                  = "textilosaurus"
+APP_REVERSE_NAME              = "com.github.textilosaurus"
 APP_AUTHOR                    = "Martin Rotter"
 APP_COPYRIGHT                 = "(C) 2017 $$APP_AUTHOR"
 APP_VERSION                   = "0.0.1"
 APP_LONG_NAME                 = "$$APP_NAME $$APP_VERSION"
 APP_EMAIL                     = "rotter.martinos@gmail.com"
-APP_URL                       = "https://github.com/martinrotter/scipio"
-APP_URL_ISSUES                = "https://github.com/martinrotter/scipio/issues"
-APP_URL_ISSUES_NEW            = "https://github.com/martinrotter/scipio/issues/new"
-APP_URL_WIKI                  = "https://github.com/martinrotter/scipio/wiki"
-APP_USERAGENT                 = "Scipio/$$APP_VERSION (github.com/martinrotter/scipio)"
+APP_URL                       = "https://github.com/martinrotter/textilosaurus"
+APP_URL_ISSUES                = "https://github.com/martinrotter/textilosaurus/issues"
+APP_URL_ISSUES_NEW            = "https://github.com/martinrotter/textilosaurus/issues/new"
+APP_URL_WIKI                  = "https://github.com/martinrotter/textilosaurus/wiki"
+APP_USERAGENT                 = "Textilosaurus/$$APP_VERSION (github.com/martinrotter/textilosaurus)"
 APP_DONATE_URL                = "https://www.patreon.com/martinrotter"
 APP_WIN_ARCH                  = "win64"
 
 isEmpty(PREFIX) {
-  message(scipio: PREFIX variable is not set. This might indicate error.)
+  message(textilosaurus: PREFIX variable is not set. This might indicate error.)
 
   win32 {
     PREFIX = $$OUT_PWD/app
@@ -81,18 +80,17 @@ isEmpty(PREFIX) {
   }
 }
 
-message(scipio: Shadow copy build directory \"$$OUT_PWD\".)
+message(textilosaurus: Shadow copy build directory \"$$OUT_PWD\".)
 
 isEmpty(LRELEASE_EXECUTABLE) {
   LRELEASE_EXECUTABLE = lrelease
-  message(scipio: LRELEASE_EXECUTABLE variable is not set.)
+  message(textilosaurus: LRELEASE_EXECUTABLE variable is not set.)
 }
 
 # Custom definitions.
 DEFINES += APP_VERSION='"\\\"$$APP_VERSION\\\""'
 DEFINES += APP_NAME='"\\\"$$APP_NAME\\\""'
 DEFINES += APP_LOW_NAME='"\\\"$$APP_LOW_NAME\\\""'
-DEFINES += APP_LOW_H_NAME='"\\\"$$APP_LOW_H_NAME\\\""'
 DEFINES += APP_LONG_NAME='"\\\"$$APP_LONG_NAME\\\""'
 DEFINES += APP_AUTHOR='"\\\"$$APP_AUTHOR\\\""'
 DEFINES += APP_EMAIL='"\\\"$$APP_EMAIL\\\""'
@@ -118,12 +116,12 @@ isEmpty(APP_REVISION) {
 
 DEFINES += APP_REVISION='"\\\"$$APP_REVISION\\\""'
 
-message(scipio: Scipio version is: \"$$APP_VERSION\".)
-message(scipio: Detected Qt version: \"$$QT_VERSION\".)
-message(scipio: Build destination directory: \"$$DESTDIR\".)
-message(scipio: Prefix directory: \"$$PREFIX\".)
-message(scipio: Build revision: \"$$APP_REVISION\".)
-message(scipio: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
+message(textilosaurus: Textilosaurus version is: \"$$APP_VERSION\".)
+message(textilosaurus: Detected Qt version: \"$$QT_VERSION\".)
+message(textilosaurus: Build destination directory: \"$$DESTDIR\".)
+message(textilosaurus: Prefix directory: \"$$PREFIX\".)
+message(textilosaurus: Build revision: \"$$APP_REVISION\".)
+message(textilosaurus: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
 QT *= core gui widgets network xml printsupport
 
@@ -137,11 +135,11 @@ DEFINES += QSCINTILLA_DLL
 win32 {
   # Add QScintilla from fixed path.
   CONFIG(release, debug|release) {
-    message(scipio: Linking with release QScintilla library.)
+    message(textilosaurus: Linking with release QScintilla library.)
     LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5
   }
   else {
-    message(scipio: Linking with debug QScintilla library.)
+    message(textilosaurus: Linking with debug QScintilla library.)
     LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5d
   }
 
@@ -156,10 +154,10 @@ else {
 win32 {
   # Makes sure we use correct subsystem on Windows.
   !contains(QMAKE_TARGET.arch, x86_64) {
-    message(scipio: Compilling x86 variant.)
+    message(textilosaurus: Compilling x86 variant.)
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
   } else {
-    message(scipio: Compilling x86_64 variant.)
+    message(textilosaurus: Compilling x86_64 variant.)
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
   }
 }
@@ -176,7 +174,7 @@ mac {
 
 # Make needed tweaks for RC file getting generated on Windows.
 win32 {
-  RC_ICONS = resources/graphics/scipio.ico
+  RC_ICONS = resources/graphics/textilosaurus.ico
   QMAKE_TARGET_COMPANY = $$APP_AUTHOR
   QMAKE_TARGET_DESCRIPTION = $$APP_NAME
   QMAKE_TARGET_COPYRIGHT = $$APP_COPYRIGHT
@@ -185,7 +183,7 @@ win32 {
 
 CONFIG *= resources_big
 RESOURCES += resources/icons.qrc \
-             resources/scipio.qrc
+             resources/textilosaurus.qrc
 
 HEADERS +=  src/definitions/definitions.h \
             src/dynamic-shortcuts/dynamicshortcuts.h \
@@ -315,8 +313,8 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingsshortcuts.ui \
             src/gui/toolbareditor.ui
 
-TRANSLATIONS += $$PWD/localization/scipio_en_GB.ts \
-                $$PWD/localization/scipio_en.ts
+TRANSLATIONS += $$PWD/localization/textilosaurus_en_GB.ts \
+                $$PWD/localization/textilosaurus_en.ts
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
@@ -332,7 +330,7 @@ lrelease.CONFIG += no_link target_predeps
 
 # Create new "make lupdate" target.
 lupdate.target = lupdate
-lupdate.commands = lupdate $$shell_path($$PWD/scipio.pro)
+lupdate.commands = lupdate $$shell_path($$PWD/textilosaurus.pro)
 
 QMAKE_EXTRA_TARGETS += lupdate
 QMAKE_EXTRA_COMPILERS += lrelease
@@ -414,7 +412,7 @@ android {
 }
 
 mac {
-  IDENTIFIER = org.$${TARGET}.scipio
+  IDENTIFIER = org.$${TARGET}.textilosaurus
   CONFIG -= app_bundle
   ICON = resources/macosx/$${TARGET}.icns
   QMAKE_MAC_SDK = macosx10.12
