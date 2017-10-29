@@ -30,6 +30,16 @@ QList<TextEditor*> TextApplication::editors() const {
   return editors;
 }
 
+bool TextApplication::anyModifiedEditor() const {
+  foreach (const TextEditor* editor, editors()) {
+    if (editor->isModified()) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& encoding) {
   QFile file(file_path);
 
@@ -77,15 +87,24 @@ TextEditor* TextApplication::addEmptyTextEditor() {
 
   m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
-  connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoaded);
+  connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
+  connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSavedToFile);
 
   return editor;
 }
 
-void TextApplication::onEditorLoaded() {
+void TextApplication::onEditorSavedToFile() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   renameEditor(editor);
+  updateToolBarFromEditor(editor, true);
+}
+
+void TextApplication::onEditorLoadedFromFile() {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  renameEditor(editor);
+  updateToolBarFromEditor(editor, true);
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
@@ -95,6 +114,8 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
     m_tabWidget->tabBar()->setTabIcon(index, modified ?
                                       qApp->icons()->fromTheme(QSL("dialog-warning")) :
                                       qApp->icons()->fromTheme(QSL("text-plain")));
+
+    updateToolBarFromEditor(editor, true);
   }
 }
 
@@ -108,9 +129,12 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
   m_tabWidget = main_form->tabWidget();
 
-  connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::changeCurrentEditor);
+  connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
-  connect(m_mainForm->m_ui->m_actionFileNew, &QAction::triggered, this, &TextApplication::addEmptyTextEditor);
+  connect(m_mainForm->m_ui->m_actionFileNew, &QAction::triggered, this, [this]() {
+    TextEditor* editor = addEmptyTextEditor();
+    m_tabWidget->setCurrentWidget(editor);
+  });
   connect(m_mainForm->m_ui->m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
   });
@@ -129,7 +153,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
     }
   });
 
-  changeCurrentEditor();
+  onEditorTabSwitched();
 }
 
 void TextApplication::openTextFile(QAction* action) {
@@ -146,15 +170,30 @@ void TextApplication::openTextFile(QAction* action) {
   }
 }
 
-void TextApplication::changeCurrentEditor(int index) {
-  TextEditor* editor = m_tabWidget->textEditorAt(index);
+void TextApplication::onEditorTabSwitched(int index) {
+  updateToolBarFromEditor(m_tabWidget->textEditorAt(index), false);
+}
 
+void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
   if (editor != nullptr) {
-    m_mainForm->toolBar()->setEnabled(true);
+    if (!only_modified) {
+      // We change all stuff, document is totally changed.
+    }
+
+    // We update stuff related to document changes always.
+    m_mainForm->m_ui->m_actionFileSave->setEnabled(editor->isModified());
+    m_mainForm->m_ui->m_actionFileSaveAs->setEnabled(true);
+    m_mainForm->m_ui->m_menuFileSaveWIthEncoding->setEnabled(true);
   }
   else {
-    m_mainForm->toolBar()->setEnabled(false);
+    // No editor selected.
+    m_mainForm->m_ui->m_actionFileSave->setEnabled(false);
+    m_mainForm->m_ui->m_actionFileSaveAs->setEnabled(false);
+    m_mainForm->m_ui->m_menuFileSaveWIthEncoding->setEnabled(false);
   }
+
+  // Enable this if there is at least one unsaved editor.
+  m_mainForm->m_ui->m_actionFileSaveAll->setEnabled(anyModifiedEditor());
 
   // TODO: je vybranej novej editor, načíst detaily do status baru a jinam.
 }

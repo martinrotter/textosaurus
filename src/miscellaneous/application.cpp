@@ -178,13 +178,24 @@ Application* Application::instance() {
 void Application::onCommitData(QSessionManager& manager) {
   qDebug("OS asked application to commit its data.");
   manager.setRestartHint(QSessionManager::RestartNever);
-  manager.release();
+
+  // Now we need to ask user to save any unsaved documents.
+  if (manager.allowsInteraction()) {
+    bool ok;
+    emit dataSaveRequested(ok);
+
+    manager.release();
+
+    if (!ok) {
+      // Not all documents are saved.
+      manager.cancel();
+    }
+  }
 }
 
 void Application::onSaveState(QSessionManager& manager) {
   qDebug("OS asked application to save its state.");
   manager.setRestartHint(QSessionManager::RestartNever);
-  manager.release();
 }
 
 void Application::onAboutToQuit() {
@@ -207,8 +218,6 @@ void Application::onAboutToQuit() {
     finish();
     qDebug("Killing local peer connection to allow another instance to start.");
 
-    // TODO: Start RSS Guard with sleep before it cross-platform way if possible.
-    // sleep 5 && "<rssguard-start>".
     if (QProcess::startDetached(QString("\"") + QDir::toNativeSeparators(applicationFilePath()) + QString("\""))) {
       qDebug("New application instance was started.");
     }

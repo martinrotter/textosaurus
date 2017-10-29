@@ -88,6 +88,9 @@ class Application : public QtSingleApplication {
     // Processes incoming message from another RSS Guard instance.
     void processExecutionMessage(const QString& message);
 
+  signals:
+    void dataSaveRequested(bool& ok);
+
   private slots:
 
     // Last-minute reactors.

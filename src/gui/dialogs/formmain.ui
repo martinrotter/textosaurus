@@ -106,7 +106,7 @@
    </widget>
    <widget class="QMenu" name="m_menuWebBrowserTabs">
     <property name="title">
-     <string>Tabs</string>
+     <string>&amp;Tabs</string>
     </property>
     <addaction name="m_actionTabsCloseAll"/>
     <addaction name="m_actionTabsCloseAllExceptCurrent"/>
@@ -115,7 +115,19 @@
     <addaction name="m_actionTabsNext"/>
     <addaction name="m_actionTabsPrevious"/>
    </widget>
+   <widget class="QMenu" name="m_menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="m_menuSearch">
+    <property name="title">
+     <string>&amp;Search</string>
+    </property>
+   </widget>
    <addaction name="m_menuFile"/>
+   <addaction name="m_menuEdit"/>
+   <addaction name="m_menuSearch"/>
    <addaction name="m_menuView"/>
    <addaction name="m_menuWebBrowserTabs"/>
    <addaction name="m_menuTools"/>

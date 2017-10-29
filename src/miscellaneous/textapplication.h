@@ -20,6 +20,7 @@ class TextApplication : public QObject {
     explicit TextApplication(QObject* parent = nullptr);
 
     QList<TextEditor*> editors()  const;
+    bool anyModifiedEditor() const;
 
     void setMainForm(FormMain* main_form);
 
@@ -29,9 +30,11 @@ class TextApplication : public QObject {
     TextEditor* addEmptyTextEditor();
 
   private slots:
-    void onEditorLoaded();
+    void onEditorSavedToFile();
+    void onEditorLoadedFromFile();
     void onEditorTextChanged(bool modified);
-    void changeCurrentEditor(int index = -1);
+    void onEditorTabSwitched(int index = -1);
+    void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
 
   private:
     void renameEditor(TextEditor* editor);
