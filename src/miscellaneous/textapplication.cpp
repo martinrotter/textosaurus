@@ -180,6 +180,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
   connect(m_mainForm->m_ui.m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_mainForm->m_ui.m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
+  connect(m_mainForm->m_ui.m_actionFileSaveAll, &QAction::triggered, this, &TextApplication::saveAllEditors);
   connect(m_mainForm->m_ui.m_actionFileNew, &QAction::triggered, this, [this]() {
     TextEditor* editor = addEmptyTextEditor();
     m_tabWidget->setCurrentWidget(editor);
@@ -237,21 +238,25 @@ void TextApplication::onEditorTabSwitched(int index) {
 }
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
-  if (editor != nullptr) {
-    if (!only_modified) {
-      // We change all stuff, document is totally changed.
-    }
+  if (editor == currentEditor()) {
+    // Current editor is changed, tweak actions related to current editor.
 
-    // We update stuff related to document changes always.
-    m_mainForm->m_ui.m_actionFileSave->setEnabled(editor->isModified());
-    m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(true);
-    m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(true);
-  }
-  else {
-    // No editor selected.
-    m_mainForm->m_ui.m_actionFileSave->setEnabled(false);
-    m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(false);
-    m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(false);
+    if (editor != nullptr) {
+      if (!only_modified) {
+        // We change all stuff, document is totally changed.
+      }
+
+      // We update stuff related to document changes always.
+      m_mainForm->m_ui.m_actionFileSave->setEnabled(editor->isModified());
+      m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(true);
+      m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(true);
+    }
+    else {
+      // No editor selected.
+      m_mainForm->m_ui.m_actionFileSave->setEnabled(false);
+      m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(false);
+      m_mainForm->m_ui.m_menuFileSaveWIthEncoding->setEnabled(false);
+    }
   }
 
   // Enable this if there is at least one unsaved editor.
@@ -259,7 +264,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 }
 
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
-  if (editor != nullptr) {
+  if (editor != nullptr && editor == currentEditor()) {
     m_mainForm->statusBar()->setEncoding(editor->encoding());
   }
 }
