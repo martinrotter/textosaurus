@@ -10,7 +10,7 @@ Textilosaurus
 
 Welcome to Textilosaurus repository.
 
-![Textilosaurus](https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/graphics/textilosaurus.png "Textilousarus")
+<img src="https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/graphics/textilosaurus.png" alt="Textilousarus" height="100px" />
 
 Textilosaurus is simple cross-platform text editor based on Qt and QScintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
