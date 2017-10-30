@@ -167,8 +167,9 @@ void TextEditor::reloadSettings() {
   setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
   setWrapMode(m_textApp->settings().wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
 
-  setMarginLineNumbers(0, true);
-  setMarginWidth(0, 64);
+  setMarginLineNumbers(MARGIN_LINE_NUMBERS, true);
+  setMarginWidth(MARGIN_LINE_NUMBERS, 48);
+  setMarginWidth(MARGIN_FOLDING, 32);
 
   setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   setEolVisibility(true);
