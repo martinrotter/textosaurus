@@ -7,11 +7,13 @@
 
 #include "definitions/definitions.h"
 
+class TextApplication;
+
 class TextEditor : public QsciScintilla {
   Q_OBJECT
 
   public:
-    explicit TextEditor(QWidget* parent = nullptr);
+    explicit TextEditor(TextApplication* text_app, QWidget* parent = nullptr);
 
     QString filePath() const;
     QByteArray encoding() const;
@@ -42,6 +44,7 @@ class TextEditor : public QsciScintilla {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
+    TextApplication* m_textApp;
     QString m_filePath;
     QByteArray m_encoding;
 };

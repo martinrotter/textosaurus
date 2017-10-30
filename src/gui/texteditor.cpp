@@ -10,11 +10,11 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
-#include <Qsci/qscilexerpython.h>
 #include <QTextCodec>
 #include <QTextStream>
 
-TextEditor::TextEditor(QWidget* parent) : QsciScintilla(parent), m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
+TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
   reloadSettings();
 }
 
@@ -152,7 +152,6 @@ void TextEditor::reloadSettings() {
   setUtf8(true);
   setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   setEolVisibility(true);
-  setLexer(new QsciLexerPython(this));
   setAutoIndent(true);
 }
 

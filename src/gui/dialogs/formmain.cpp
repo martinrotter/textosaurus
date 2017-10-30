@@ -26,7 +26,7 @@
 #include <QScopedPointer>
 #include <QTimer>
 
-FormMain::FormMain(QWidget* parent) : QMainWindow(parent) {
+FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
   qApp->setMainForm(this);
 

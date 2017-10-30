@@ -90,7 +90,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
 }
 
 TextEditor* TextApplication::addEmptyTextEditor() {
-  TextEditor* editor = new TextEditor(m_tabWidget);
+  TextEditor* editor = new TextEditor(this, m_tabWidget);
 
   m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
