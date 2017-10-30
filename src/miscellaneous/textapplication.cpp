@@ -285,8 +285,13 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 }
 
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
-  if (editor != nullptr && editor == currentEditor()) {
-    m_mainForm->statusBar()->setEncoding(editor->encoding());
+  if (editor == currentEditor()) {
+    if (editor != nullptr) {
+      m_mainForm->statusBar()->setEncoding(editor->encoding());
+    }
+    else {
+      m_mainForm->statusBar()->setEncoding(QString());
+    }
   }
 }
 
