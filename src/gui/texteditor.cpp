@@ -45,6 +45,10 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   emit loadedFromFile(m_filePath);
 }
 
+void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
+  QsciScintilla::contextMenuEvent(event);
+}
+
 void TextEditor::closeEvent(QCloseEvent* event) {
   bool ok;
 

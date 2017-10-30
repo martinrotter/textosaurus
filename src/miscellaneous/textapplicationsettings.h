@@ -22,6 +22,10 @@ class TextApplicationSettings : public QObject {
 
   signals:
     void settingsChanged(bool reload_visible_editor, bool reload_all_editors);
+
+  private:
+
+    //QList<
 };
 
 #endif // TEXTAPPLICATIONSETTINGS_H

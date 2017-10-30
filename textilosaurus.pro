@@ -122,7 +122,7 @@ message(textilosaurus: Prefix directory: \"$$PREFIX\".)
 message(textilosaurus: Build revision: \"$$APP_REVISION\".)
 message(textilosaurus: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
-QT *= core gui widgets network xml printsupport
+QT *= core gui widgets network printsupport
 
 CONFIG *= c++11 warn_on
 DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE

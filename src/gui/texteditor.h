@@ -33,6 +33,7 @@ class TextEditor : public QsciScintilla {
     void loadFromFile(QFile& file, const QString& encoding);
 
   protected:
+    void contextMenuEvent(QContextMenuEvent* event);
     void closeEvent(QCloseEvent* event);
 
   signals:
