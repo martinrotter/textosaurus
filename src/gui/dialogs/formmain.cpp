@@ -191,8 +191,6 @@ void FormMain::setupIcons() {
   m_ui.m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionFullscreen->setIcon(icon_theme_factory->fromTheme(QSL("view-fullscreen")));
   m_ui.m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("dialog-information")));
-  m_ui.m_menuShowHide->setIcon(icon_theme_factory->fromTheme(QSL("view-restore")));
-  m_ui.m_menuEolMode->setIcon(icon_theme_factory->fromTheme(QSL("")));
 
   // Tabs & web browser.
   m_ui.m_actionTabsCloseAll->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
