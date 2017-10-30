@@ -31,6 +31,8 @@ class TextApplication : public QObject {
     TextApplicationSettings& settings();
 
   public slots:
+    void undo();
+    void redo();
     void newFile();
 
     // Loads initial state of text application, including session restoring,
@@ -81,6 +83,8 @@ class TextApplication : public QObject {
     QAction* m_actionEolMac;
     QAction* m_actionTabsCloseAllUnmodified;
     QAction* m_actionWordWrap;
+    QAction* m_actionEditBack;
+    QAction* m_actionEditForward;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuEolMode;

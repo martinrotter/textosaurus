@@ -203,6 +203,22 @@ TextApplicationSettings& TextApplication::settings() {
   return m_settings;
 }
 
+void TextApplication::undo() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    editor->undo();
+  }
+}
+
+void TextApplication::redo() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    editor->redo();
+  }
+}
+
 void TextApplication::newFile() {
   TextEditor* editor = addEmptyTextEditor();
 
@@ -233,6 +249,8 @@ void TextApplication::createConnections() {
     openTextFile();
   });
   connect(m_actionWordWrap, &QAction::toggled, &m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
+  connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
 
   // Menus.
   connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
@@ -265,6 +283,9 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, St
   m_actionEolMac = main_form->m_ui.m_actionEolMac;
   m_actionWordWrap = main_form->m_ui.m_actionWordWrap;
   m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
+  m_actionEditBack = main_form->m_ui.m_actionEditBack;
+  m_actionEditForward = main_form->m_ui.m_actionEditForward;
+
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
   m_menuEolMode = main_form->m_ui.m_menuEolMode;
@@ -282,6 +303,8 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, St
 void TextApplication::load() {
   // TODO: nacist ulozene sezeni (naposledy otevrene dokumenty etc.
 
+  m_actionEditBack->setEnabled(false);
+  m_actionEditForward->setEnabled(false);
   m_actionWordWrap->setChecked(m_settings.wordWrapEnabled());
 
   // Setup GUI of actions.
@@ -342,24 +365,26 @@ void TextApplication::onEditorTabSwitched(int index) {
 }
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
+  Q_UNUSED(only_modified)
+
   if (editor == currentEditor()) {
-    // Current editor is changed, tweak actions related to current editor.
+    // Current editor is changed or there is now editor at all.
 
     if (editor != nullptr) {
-      if (!only_modified) {
-        // We change all stuff, document is totally changed.
-      }
-
-      // We update stuff related to document changes always.
+      // Current editor is changed.
       m_actionFileSave->setEnabled(editor->isModified());
       m_actionFileSaveAs->setEnabled(true);
       m_menuFileSaveWithEncoding->setEnabled(true);
+      m_actionEditBack->setEnabled(editor->isUndoAvailable());
+      m_actionEditForward->setEnabled(editor->isRedoAvailable());
     }
     else {
       // No editor selected.
       m_actionFileSave->setEnabled(false);
       m_actionFileSaveAs->setEnabled(false);
       m_menuFileSaveWithEncoding->setEnabled(false);
+      m_actionEditBack->setEnabled(false);
+      m_actionEditForward->setEnabled(false);
     }
   }
 

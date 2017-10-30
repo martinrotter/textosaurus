@@ -83,6 +83,9 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionFullscreen;
 #endif
 
+  actions << m_ui.m_actionEditBack;
+  actions << m_ui.m_actionEditForward;
+
   actions << m_ui.m_actionAboutGuard;
   actions << m_ui.m_actionSwitchMainWindow;
   actions << m_ui.m_actionSwitchStatusBar;
@@ -179,6 +182,10 @@ void FormMain::setupIcons() {
   m_ui.m_actionFileSaveAs->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
   m_ui.m_actionFileSaveAll->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));
   m_ui.m_menuFileSaveWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
+
+  // Edit.
+  m_ui.m_actionEditBack->setIcon(icon_theme_factory->fromTheme(QSL("back")));
+  m_ui.m_actionEditForward->setIcon(icon_theme_factory->fromTheme(QSL("forward")));
 
   // View.
   m_ui.m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
