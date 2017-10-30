@@ -37,6 +37,10 @@ namespace Editor {
   KEY WordWrap;
 
   VALUE(bool) WordWrapDef;
+
+  KEY DefaultLoadSaveDirectory;
+
+  VALUE(QString) DefaultLoadSaveDirectoryDef;
 }
 
 // GUI.

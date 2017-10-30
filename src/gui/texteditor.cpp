@@ -18,9 +18,7 @@
 #include <Qsci/qscilexercpp.h>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
-  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
-  //reloadSettings();
-}
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {}
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   m_filePath = file.fileName();
@@ -104,10 +102,16 @@ void TextEditor::save(bool* ok) {
 
 void TextEditor::saveAs(bool* ok, const QString& encoding) {
   // We save this documents as new file.
-  QString file_path = QFileDialog::getSaveFileName(qApp->mainFormWidget(), tr("Save file as"),
-                                                   qApp->documentsFolder(), QSL("Text files (*.txt);;All files (*)"));
+  QString file_path = QFileDialog::getSaveFileName(qApp->mainFormWidget(),
+                                                   tr("Save file as"),
+                                                   m_filePath.isEmpty() ?
+                                                   m_textApp->settings().loadSaveDefaultDirectory() :
+                                                   QFileInfo(m_filePath).absolutePath(),
+                                                   QSL("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
+    m_textApp->settings().setLoadSaveDefaultDirectory(file_path);
+
     if (encoding.isEmpty()) {
       saveToFile(file_path, ok);
     }

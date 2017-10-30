@@ -71,13 +71,22 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
     return;
   }
 
-  if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) && file.size() > BIG_TEXT_FILE_SIZE) {
-    if (MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
+  if (file.size() > BIG_TEXT_FILE_SIZE) {
+    if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) &&
+        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
                          tr("You want to open big text file in encoding which is different from %1. This operation "
                             "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
                          tr("Do you really want to open the file?"),
                          file.fileName(), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
       return;
+    }
+    else {
+      // File is quite big, we turn some features off to make sure it loads faster.
+      QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
+                           tr("File '%1' is big. %2 will switch some features (for example 'Word wrap') off to "
+                              "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
+                                                                                       QSL(APP_NAME)));
+      m_actionWordWrap->setChecked(false);
     }
   }
 
@@ -301,8 +310,6 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, St
 }
 
 void TextApplication::load() {
-  // TODO: nacist ulozene sezeni (naposledy otevrene dokumenty etc.
-
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
   m_actionWordWrap->setChecked(m_settings.wordWrapEnabled());
@@ -345,10 +352,11 @@ void TextApplication::quit(bool* ok) {
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : DEFAULT_TEXT_FILE_ENCODING;
   QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file with %1 encoding").arg(encoding),
-                                                   qApp->documentsFolder(),
+                                                   m_settings.loadSaveDefaultDirectory(),
                                                    tr("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
+    m_settings.setLoadSaveDefaultDirectory(file_path);
     loadTextEditorFromFile(file_path, encoding);
   }
 }

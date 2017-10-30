@@ -15,17 +15,19 @@ class TextApplicationSettings : public QObject {
 
     QsciScintilla::EolMode eolMode() const;
     bool wordWrapEnabled() const;
+    QString loadSaveDefaultDirectory() const;
 
   public slots:
+    void setLoadSaveDefaultDirectory(const QString& directory);
     void setWordWrapEnabled(bool enabled);
     void setEolModeFromAction(QAction* act);
 
   signals:
+
+    // Emitted when there are settings changes which directly influence behavior of some editors.
     void settingsChanged(bool reload_visible_editor, bool reload_all_editors);
 
   private:
-
-    //QList<
 };
 
 #endif // TEXTAPPLICATIONSETTINGS_H

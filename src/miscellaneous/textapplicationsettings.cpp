@@ -6,6 +6,8 @@
 #include "miscellaneous/settings.h"
 
 #include <QAction>
+#include <QDir>
+#include <QFileInfo>
 
 TextApplicationSettings::TextApplicationSettings(QObject* parent) : QObject(parent) {}
 
@@ -15,6 +17,15 @@ QsciScintilla::EolMode TextApplicationSettings::eolMode() const {
 
 bool TextApplicationSettings::wordWrapEnabled() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::WordWrap)).toBool();
+}
+
+QString TextApplicationSettings::loadSaveDefaultDirectory() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::DefaultLoadSaveDirectory)).toString();
+}
+
+void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& directory) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::DefaultLoadSaveDirectory,
+                             QDir::toNativeSeparators(QFileInfo(directory).absolutePath()));
 }
 
 void TextApplicationSettings::setWordWrapEnabled(bool enabled) {

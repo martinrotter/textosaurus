@@ -25,6 +25,10 @@ DKEY Editor::WordWrap = "word_wrap";
 
 DVALUE(bool) Editor::WordWrapDef = true;
 
+DKEY Editor::DefaultLoadSaveDirectory = "load_save_directory";
+
+DVALUE(QString) Editor::DefaultLoadSaveDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation);
+
 // GUI.
 DKEY GUI::ID = "gui";
 DKEY GUI::ToolbarStyle = "toolbar_style";
