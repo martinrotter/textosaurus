@@ -17,11 +17,8 @@ DVALUE(Qt::ToolButtonStyle) GUI::ToolbarStyleDef = Qt::ToolButtonIconOnly;
 
 DKEY GUI::ToolbarActions = "toolbar";
 
-DVALUE(char*) GUI::ToolbarActionsDef = "m_actionFileNew,m_actionFileOpen";
-
-DKEY GUI::StatusbarActions = "status_bar";
-
-DVALUE(char*) GUI::StatusbarActionsDef = "m_actionFullscreen,m_actionQuit";
+DVALUE(char*) GUI::ToolbarActionsDef =
+  "m_actionFileNew,m_actionFileOpen,m_actionFileSave,spacer,m_actionTabsCloseAllUnmodified,m_actionQuit";
 
 DKEY GUI::MainWindowInitialSize = "window_size";
 DKEY GUI::MainWindowInitialPosition = "window_position";
@@ -64,10 +61,6 @@ DVALUE(bool) GUI::TabCloseDoubleClickDef = true;
 DKEY GUI::TabNewDoubleClick = "tab_new_double_button";
 
 DVALUE(bool) GUI::TabNewDoubleClickDef = true;
-
-DKEY GUI::HideTabBarIfOnlyOneTab = "hide_tabbar_one_tab";
-
-DVALUE(bool) GUI::HideTabBarIfOnlyOneTabDef = false;
 
 DKEY GUI::IconTheme = "icon_theme_name";
 
@@ -197,6 +190,7 @@ SettingsProperties Settings::determineProperties() {
 
   // DO NOT use portable settings for Linux, it is really not used on that platform.
   const bool will_we_use_portable_settings = false;
+
 #else
   const QString exe_path = qApp->applicationDirPath();
   const QString home_path_file = home_path + properties.m_settingsSuffix;

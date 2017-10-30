@@ -33,15 +33,9 @@ void Downloader::uploadFile(const QString& url, const QByteArray& data, int time
   manipulateData(url, QNetworkAccessManager::PostOperation, data, timeout, protected_contents, username, password);
 }
 
-void Downloader::manipulateData(const QString& url, QNetworkAccessManager::Operation operation, const QByteArray& data,
-                                int timeout, bool protected_contents, const QString& username, const QString& password) {
-  manipulateData(url, operation, data, nullptr, timeout, protected_contents, username, password);
-}
-
 void Downloader::manipulateData(const QString& url,
                                 QNetworkAccessManager::Operation operation,
                                 const QByteArray& data,
-                                QHttpMultiPart* multipart_data,
                                 int timeout,
                                 bool protected_contents,
                                 const QString& username,

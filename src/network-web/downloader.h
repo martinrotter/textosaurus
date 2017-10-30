@@ -53,18 +53,12 @@ class Downloader : public QObject {
     void completed(QNetworkReply::NetworkError status, QByteArray contents = QByteArray());
 
   private slots:
-
-    // Called when current reply is processed.
     void finished();
 
     // Called when progress of downloaded file changes.
     void progressInternal(qint64 bytes_received, qint64 bytes_total);
 
   private:
-    void manipulateData(const QString& url, QNetworkAccessManager::Operation operation,
-                        const QByteArray& data, QHttpMultiPart* multipart_data,
-                        int timeout = DOWNLOAD_TIMEOUT, bool protected_contents = false,
-                        const QString& username = QString(), const QString& password = QString());
     void runDeleteRequest(const QNetworkRequest& request);
     void runPutRequest(const QNetworkRequest& request, const QByteArray& data);
     void runPostRequest(const QNetworkRequest& request, const QByteArray& data);

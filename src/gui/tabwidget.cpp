@@ -17,7 +17,6 @@
 TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setTabBar(new TabBar(this));
   createConnections();
-  checkTabBarVisibility();
   setDocumentMode(true);
   setUsesScrollButtons(false);
 }
@@ -26,45 +25,13 @@ TabWidget::~TabWidget() {
   qDebug("Destroying TabWidget instance.");
 }
 
-void TabWidget::checkTabBarVisibility() {
-  const bool should_be_bar_visible = count() > 1 || !qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideTabBarIfOnlyOneTab)).toBool();
-
-  tabBar()->setVisible(should_be_bar_visible);
-}
-
-void TabWidget::tabInserted(int index) {
-  QTabWidget::tabInserted(index);
-  checkTabBarVisibility();
-}
-
-void TabWidget::tabRemoved(int index) {
-  QTabWidget::tabRemoved(index);
-  checkTabBarVisibility();
-}
-
 void TabWidget::createConnections() {
   connect(tabBar(), &TabBar::tabCloseRequested, this, &TabWidget::closeTab);
 }
 
-void TabWidget::setupIcons() {
-  // Iterate through all tabs and update icons
-  // accordingly.
-  for (int index = 0; index < count(); index++) {
-    // Index 0 usually contains widget which displays feeds & messages.
-    if (tabBar()->tabType(index) == TabBar::TextEditor) {
-      setTabIcon(index, qApp->icons()->fromTheme(QSL("application-text")));
-    }
-  }
-}
-
 bool TabWidget::closeTab(int index) {
-  if (tabBar()->tabType(index) == TabBar::TabType::TextEditor) {
-    removeTab(index, true);
-    return true;
-  }
-  else {
-    return false;
-  }
+  removeTab(index, true);
+  return true;
 }
 
 void TabWidget::closeAllTabsExceptCurrent() {
@@ -108,7 +75,7 @@ void TabWidget::gotoPreviousTab() {
 
 void TabWidget::indentTabText(int index) {
 #if defined (Q_OS_MACOS)
-  if (tabBar()->tabType(index) != TabBar::FeedReader && !tabIcon(index).isNull()) {
+  if (!tabIcon(index).isNull()) {
     // We have closable tab with some icon, fix the title.
     const QString text = tabText(index);
 

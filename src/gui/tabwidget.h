@@ -38,15 +38,7 @@ class TabWidget : public QTabWidget {
     // Returns tab bar.
     TabBar* tabBar() const;
 
-    // Sets up icons for this TabWidget.
-    void setupIcons();
-
   public slots:
-
-    // Called when number of tab pages changes.
-    void checkTabBarVisibility();
-
-    // Tab closing.
     bool closeTab(int index);
     void closeAllTabsExceptCurrent();
     void closeAllTabs();
@@ -55,13 +47,7 @@ class TabWidget : public QTabWidget {
     void gotoPreviousTab();
 
   protected:
-
-    // Creates necesary connections.
     void createConnections();
-
-    // Handlers of insertin/removing of tabs.
-    void tabInserted(int index);
-    void tabRemoved(int index);
 
   private slots:
 

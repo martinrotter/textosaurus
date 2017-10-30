@@ -112,7 +112,7 @@
           <item row="3" column="0" colspan="2">
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Note that &quot;%1&quot; (without quotation marks) is placeholder for URL of selected message.</string>
+             <string>Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -375,8 +375,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>m_txtProxyPassword</tabstop>
-  <tabstop>m_checkShowPassword</tabstop>
   <tabstop>m_tabBrowserProxy</tabstop>
   <tabstop>m_grpCustomExternalBrowser</tabstop>
   <tabstop>m_txtExternalBrowserExecutable</tabstop>
@@ -392,6 +390,8 @@
   <tabstop>m_txtProxyHost</tabstop>
   <tabstop>m_spinProxyPort</tabstop>
   <tabstop>m_txtProxyUsername</tabstop>
+  <tabstop>m_txtProxyPassword</tabstop>
+  <tabstop>m_checkShowPassword</tabstop>
  </tabstops>
  <resources/>
  <connections/>

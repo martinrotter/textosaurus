@@ -4,7 +4,7 @@
 
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
   setSizeGripEnabled(false);
-  setContentsMargins(2, 0, 2, 2);
+  setContentsMargins(0, 0, 5, 0);
 
   m_lblEncoding = new QLabel(this);
   m_lblFileType = new QLabel(this);

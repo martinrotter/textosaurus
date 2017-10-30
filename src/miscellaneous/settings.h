@@ -36,10 +36,6 @@ namespace GUI {
 
   VALUE(char*) ToolbarActionsDef;
 
-  KEY StatusbarActions;
-
-  VALUE(char*) StatusbarActionsDef;
-
   KEY MainWindowInitialSize;
   KEY MainWindowInitialPosition;
   KEY IsMainWindowMaximizedBeforeFullscreen;
@@ -81,10 +77,6 @@ namespace GUI {
   KEY TabNewDoubleClick;
 
   VALUE(bool) TabNewDoubleClickDef;
-
-  KEY HideTabBarIfOnlyOneTab;
-
-  VALUE(bool) HideTabBarIfOnlyOneTabDef;
 
   KEY IconTheme;
 

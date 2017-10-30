@@ -22,7 +22,6 @@ SettingsGui::SettingsGui(Settings* settings, QWidget* parent) : SettingsPanel(se
   connect(m_ui->m_cmbIconTheme, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SettingsGui::requireRestart);
   connect(m_ui->m_cmbIconTheme, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
           &SettingsGui::dirtifySettings);
-  connect(m_ui->m_checkHideTabBarIfOneTabVisible, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui->m_checkCloseTabsDoubleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui->m_checkCloseTabsMiddleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui->m_checkNewTabDoubleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
@@ -95,7 +94,6 @@ void SettingsGui::loadSettings() {
   m_ui->m_checkCloseTabsMiddleClick->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::TabCloseMiddleClick)).toBool());
   m_ui->m_checkCloseTabsDoubleClick->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool());
   m_ui->m_checkNewTabDoubleClick->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::TabNewDoubleClick)).toBool());
-  m_ui->m_checkHideTabBarIfOneTabVisible->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::HideTabBarIfOnlyOneTab)).toBool());
 
   // Load toolbar button style.
   m_ui->m_cmbToolbarButtonStyle->addItem(tr("Icon only"), Qt::ToolButtonIconOnly);
@@ -146,12 +144,9 @@ void SettingsGui::saveSettings() {
   settings()->setValue(GROUP(GUI), GUI::TabCloseMiddleClick, m_ui->m_checkCloseTabsMiddleClick->isChecked());
   settings()->setValue(GROUP(GUI), GUI::TabCloseDoubleClick, m_ui->m_checkCloseTabsDoubleClick->isChecked());
   settings()->setValue(GROUP(GUI), GUI::TabNewDoubleClick, m_ui->m_checkNewTabDoubleClick->isChecked());
-  settings()->setValue(GROUP(GUI), GUI::HideTabBarIfOnlyOneTab, m_ui->m_checkHideTabBarIfOneTabVisible->isChecked());
   m_ui->m_editorToolBar->saveToolBar();
 
   qApp->mainForm()->toolBar()->refreshVisualProperties();
-
-  qApp->mainForm()->tabWidget()->checkTabBarVisibility();
 
   onEndSaveSettings();
 }

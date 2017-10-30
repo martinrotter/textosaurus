@@ -75,6 +75,9 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionQuit;
   actions << m_ui.m_actionFileNew;
   actions << m_ui.m_actionFileOpen;
+  actions << m_ui.m_actionFileSave;
+  actions << m_ui.m_actionFileSaveAll;
+  actions << m_ui.m_actionFileSaveAs;
 
 #if !defined(Q_OS_MAC)
   actions << m_ui.m_actionFullscreen;
@@ -87,6 +90,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionTabsPrevious;
   actions << m_ui.m_actionTabsCloseAll;
   actions << m_ui.m_actionTabsCloseAllExceptCurrent;
+  actions << m_ui.m_actionTabsCloseAllUnmodified;
 
   return actions;
 }
@@ -179,9 +183,6 @@ void FormMain::setupIcons() {
   m_ui.m_actionTabsCloseAllUnmodified->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionTabsNext->setIcon(icon_theme_factory->fromTheme(QSL("go-next")));
   m_ui.m_actionTabsPrevious->setIcon(icon_theme_factory->fromTheme(QSL("go-previous")));
-
-  // Setup icons on TabWidget too.
-  m_ui.m_tabWidget->setupIcons();
 }
 
 void FormMain::loadSize() {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>552</width>
-    <height>148</height>
+    <width>486</width>
+    <height>141</height>
    </rect>
   </property>
   <layout class="QFormLayout" name="formLayout">
@@ -33,12 +33,16 @@
    <item row="1" column="0">
     <widget class="QCheckBox" name="m_checkRemoveTrolltechJunk">
      <property name="text">
-      <string>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits (Use at your own risk!)</string>
+      <string>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_checkForUpdatesOnStart</tabstop>
+  <tabstop>m_checkRemoveTrolltechJunk</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
