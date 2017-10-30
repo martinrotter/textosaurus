@@ -37,7 +37,7 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
-  qApp->textApplication()->setMainForm(this);
+  qApp->textApplication()->setMainForm(this, tabWidget(), statusBar());
 
   // Prepare main window and tabs.
   prepareMenus();
@@ -99,6 +99,15 @@ void FormMain::prepareMenus() {
 #if defined(Q_OS_MAC)
   m_ui.m_actionFullscreen->setVisible(false);
 #endif
+
+  QActionGroup* grp_eol = new QActionGroup(m_ui.m_menuEolMode);
+
+  grp_eol->addAction(m_ui.m_actionEolMac);
+  grp_eol->addAction(m_ui.m_actionEolUnix);
+  grp_eol->addAction(m_ui.m_actionEolWindows);
+  grp_eol->setExclusive(true);
+
+  //m_ui.m_menuEolMode->addAction(grp_eol);
 }
 
 void FormMain::switchFullscreenMode() {
@@ -176,6 +185,7 @@ void FormMain::setupIcons() {
   m_ui.m_actionFullscreen->setIcon(icon_theme_factory->fromTheme(QSL("view-fullscreen")));
   m_ui.m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("dialog-information")));
   m_ui.m_menuShowHide->setIcon(icon_theme_factory->fromTheme(QSL("view-restore")));
+  m_ui.m_menuEolMode->setIcon(icon_theme_factory->fromTheme(QSL("")));
 
   // Tabs & web browser.
   m_ui.m_actionTabsCloseAll->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));

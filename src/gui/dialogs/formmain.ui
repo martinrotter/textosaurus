@@ -42,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -88,7 +88,7 @@
     </property>
     <widget class="QMenu" name="m_menuShowHide">
      <property name="title">
-      <string>UI elements</string>
+      <string>&amp;UI elements</string>
      </property>
      <addaction name="m_actionFullscreen"/>
      <addaction name="m_actionSwitchToolBar"/>
@@ -96,7 +96,17 @@
      <addaction name="separator"/>
      <addaction name="m_actionSwitchMainWindow"/>
     </widget>
+    <widget class="QMenu" name="m_menuEolMode">
+     <property name="title">
+      <string>&amp;EOL mode (newly created documents only)</string>
+     </property>
+     <addaction name="m_actionEolMac"/>
+     <addaction name="m_actionEolUnix"/>
+     <addaction name="m_actionEolWindows"/>
+    </widget>
     <addaction name="m_menuShowHide"/>
+    <addaction name="m_menuEolMode"/>
+    <addaction name="m_actionWordWrap"/>
    </widget>
    <widget class="QMenu" name="m_menuTools">
     <property name="title">
@@ -342,6 +352,38 @@
    </property>
    <property name="toolTip">
     <string>Close all unmodified editors</string>
+   </property>
+  </action>
+  <action name="m_actionEolUnix">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Unix (LF)</string>
+   </property>
+  </action>
+  <action name="m_actionEolWindows">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Windows (CR+LF)</string>
+   </property>
+  </action>
+  <action name="m_actionEolMac">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mac (CR)</string>
+   </property>
+  </action>
+  <action name="m_actionWordWrap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Word wrap</string>
    </property>
   </action>
  </widget>

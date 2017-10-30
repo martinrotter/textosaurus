@@ -9,6 +9,8 @@
 
 #include "miscellaneous/settingsproperties.h"
 
+#include <Qsci/qsciscintilla.h>
+
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
@@ -24,6 +26,18 @@
 #define SETTING(x) x, x ## Def
 #define DEFAULT_VALUE(x) x ## Def
 #define GROUP(x) x::ID
+
+// Editor.
+namespace Editor {
+  KEY ID;
+  KEY EolMode;
+
+  VALUE(int) EolModeDef;
+
+  KEY WordWrap;
+
+  VALUE(bool) WordWrapDef;
+}
 
 // GUI.
 namespace GUI {

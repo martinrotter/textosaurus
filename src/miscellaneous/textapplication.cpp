@@ -51,13 +51,13 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   QFile file(file_path);
 
   if (!file.exists()) {
-    QMessageBox::critical(m_mainForm, tr("Cannot open file"),
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
                           tr("File '%1' does not exist and cannot be opened.").arg(QDir::toNativeSeparators(file_path)));
     return;
   }
 
   if (file.size() >= MAX_TEXT_FILE_SIZE) {
-    QMessageBox::critical(m_mainForm, tr("Cannot open file"),
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
                           tr("File '%1' too big. %2 can only open files smaller than %3 MB.").arg(QDir::toNativeSeparators(file_path),
                                                                                                   QSL(APP_NAME),
                                                                                                   QString::number(MAX_TEXT_FILE_SIZE /
@@ -66,13 +66,13 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   }
 
   if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    QMessageBox::critical(m_mainForm, tr("Cannot read file"),
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot read file"),
                           tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
     return;
   }
 
   if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) && file.size() > BIG_TEXT_FILE_SIZE) {
-    if (MessageBox::show(m_mainForm, QMessageBox::Question, tr("Opening big file"),
+    if (MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
                          tr("You want to open big text file in encoding which is different from %1. This operation "
                             "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
                          tr("Do you really want to open the file?"),
@@ -148,6 +148,21 @@ void TextApplication::closeAllUnmodifiedEditors() {
   }
 }
 
+void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
+  if (reload_all) {
+    foreach (TextEditor* editor, editors()) {
+      editor->reloadSettings();
+    }
+  }
+  else if (reload_visible) {
+    TextEditor* visible = currentEditor();
+
+    if (visible != nullptr) {
+      visible->reloadSettings();
+    }
+  }
+}
+
 void TextApplication::onEditorRequestVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
@@ -184,46 +199,108 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
   }
 }
 
+TextApplicationSettings& TextApplication::settings() {
+  return m_settings;
+}
+
+void TextApplication::newFile() {
+  TextEditor* editor = addEmptyTextEditor();
+
+  m_tabWidget->setCurrentWidget(editor);
+}
+
 void TextApplication::onEditorTextChanged(bool modified) {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   markEditorModified(editor, modified);
 }
 
-void TextApplication::setMainForm(FormMain* main_form) {
-  m_mainForm = main_form;
-  m_tabWidget = main_form->tabWidget();
+void TextApplication::createConnections() {
+  connect(&m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
-  connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
+  // Tab widget.
   connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
-  connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::addEmptyTextEditor);
-  connect(m_mainForm->m_ui.m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
-  connect(m_mainForm->m_ui.m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
-  connect(m_mainForm->m_ui.m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
-  connect(m_mainForm->m_ui.m_actionFileSaveAll, &QAction::triggered, this, &TextApplication::saveAllEditors);
-  connect(m_mainForm->m_ui.m_actionFileNew, &QAction::triggered, this, [this]() {
-    TextEditor* editor = addEmptyTextEditor();
-    m_tabWidget->setCurrentWidget(editor);
-  });
-  connect(m_mainForm->m_ui.m_actionFileOpen, &QAction::triggered, this, [this]() {
+  connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
+
+  // Actions.
+  connect(m_menuEolMode, &QMenu::triggered, &m_settings, &TextApplicationSettings::setEolModeFromAction);
+  connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
+  connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
+  connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
+  connect(m_actionFileSaveAll, &QAction::triggered, this, &TextApplication::saveAllEditors);
+  connect(m_actionFileNew, &QAction::triggered, this, &TextApplication::newFile);
+  connect(m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
   });
+  connect(m_actionWordWrap, &QAction::toggled, &m_settings, &TextApplicationSettings::setWordWrapEnabled);
 
-  // Setup menus.
-  connect(m_mainForm->m_ui.m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
-    if (m_mainForm->m_ui.m_menuFileOpenWithEncoding->isEmpty()) {
-      TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileOpenWithEncoding);
+  // Menus.
+  connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_menuFileOpenWithEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_menuFileOpenWithEncoding);
     }
   });
-  connect(m_mainForm->m_ui.m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
+  connect(m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
 
-  connect(m_mainForm->m_ui.m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
-    if (m_mainForm->m_ui.m_menuFileSaveWithEncoding->isEmpty()) {
-      TextFactory::initializeEncodingMenu(m_mainForm->m_ui.m_menuFileSaveWithEncoding);;
+  connect(m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_menuFileSaveWithEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);;
     }
   });
-  connect(m_mainForm->m_ui.m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
+  connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
+}
 
+void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar) {
+  m_tabWidget = tab_widget;
+  m_statusBar = status_bar;
+
+  // Get pointers to editor-related global actions/menus.
+  m_actionFileNew = main_form->m_ui.m_actionFileNew;
+  m_actionFileOpen = main_form->m_ui.m_actionFileOpen;
+  m_actionFileSave = main_form->m_ui.m_actionFileSave;
+  m_actionFileSaveAs = main_form->m_ui.m_actionFileSaveAs;
+  m_actionFileSaveAll = main_form->m_ui.m_actionFileSaveAll;
+  m_actionEolUnix = main_form->m_ui.m_actionEolUnix;
+  m_actionEolWindows = main_form->m_ui.m_actionEolWindows;
+  m_actionEolMac = main_form->m_ui.m_actionEolMac;
+  m_actionWordWrap = main_form->m_ui.m_actionWordWrap;
+  m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
+  m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
+  m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
+  m_menuEolMode = main_form->m_ui.m_menuEolMode;
+
+  m_actionEolMac->setData(int(QsciScintilla::EolMode::EolMac));
+  m_actionEolUnix->setData(int(QsciScintilla::EolMode::EolUnix));
+  m_actionEolWindows->setData(int(QsciScintilla::EolMode::EolWindows));
+
+  connect(main_form, &FormMain::closeRequested, this, &TextApplication::quit);
+
+  createConnections();
+  load();
+}
+
+void TextApplication::load() {
+  // TODO: nacist ulozene sezeni (naposledy otevrene dokumenty etc.
+
+  m_actionWordWrap->setChecked(m_settings.wordWrapEnabled());
+
+  // Setup GUI of actions.
+  switch (m_settings.eolMode()) {
+    case QsciScintilla::EolMode::EolMac:
+      m_actionEolMac->setChecked(true);
+      break;
+
+    case QsciScintilla::EolMode::EolWindows:
+      m_actionEolWindows->setChecked(true);
+      break;
+
+    case QsciScintilla::EolMode::EolUnix:
+    default:
+      m_actionEolUnix->setChecked(true);
+      break;
+  }
+
+  // Make sure that toolbar/statusbar is updated.
   onEditorTabSwitched();
 }
 
@@ -244,7 +321,7 @@ void TextApplication::quit(bool* ok) {
 
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : DEFAULT_TEXT_FILE_ENCODING;
-  QString file_path = QFileDialog::getOpenFileName(m_mainForm, tr("Open file with %1 encoding").arg(encoding),
+  QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file with %1 encoding").arg(encoding),
                                                    qApp->documentsFolder(),
                                                    tr("Text files (*.txt);;All files (*)"));
 
@@ -254,8 +331,14 @@ void TextApplication::openTextFile(QAction* action) {
 }
 
 void TextApplication::onEditorTabSwitched(int index) {
-  updateToolBarFromEditor(m_tabWidget->textEditorAt(index), false);
-  updateStatusBarFromEditor(m_tabWidget->textEditorAt(index));
+  TextEditor* editor = m_tabWidget->textEditorAt(index);
+
+  if (editor != nullptr) {
+    editor->reloadSettings();
+  }
+
+  updateToolBarFromEditor(editor, false);
+  updateStatusBarFromEditor(editor);
 }
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
@@ -268,29 +351,29 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       }
 
       // We update stuff related to document changes always.
-      m_mainForm->m_ui.m_actionFileSave->setEnabled(editor->isModified());
-      m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(true);
-      m_mainForm->m_ui.m_menuFileSaveWithEncoding->setEnabled(true);
+      m_actionFileSave->setEnabled(editor->isModified());
+      m_actionFileSaveAs->setEnabled(true);
+      m_menuFileSaveWithEncoding->setEnabled(true);
     }
     else {
       // No editor selected.
-      m_mainForm->m_ui.m_actionFileSave->setEnabled(false);
-      m_mainForm->m_ui.m_actionFileSaveAs->setEnabled(false);
-      m_mainForm->m_ui.m_menuFileSaveWithEncoding->setEnabled(false);
+      m_actionFileSave->setEnabled(false);
+      m_actionFileSaveAs->setEnabled(false);
+      m_menuFileSaveWithEncoding->setEnabled(false);
     }
   }
 
   // Enable this if there is at least one unsaved editor.
-  m_mainForm->m_ui.m_actionFileSaveAll->setEnabled(anyModifiedEditor());
+  m_actionFileSaveAll->setEnabled(anyModifiedEditor());
 }
 
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
   if (editor == currentEditor()) {
     if (editor != nullptr) {
-      m_mainForm->statusBar()->setEncoding(editor->encoding());
+      m_statusBar->setEncoding(editor->encoding());
     }
     else {
-      m_mainForm->statusBar()->setEncoding(QString());
+      m_statusBar->setEncoding(QString());
     }
   }
 }

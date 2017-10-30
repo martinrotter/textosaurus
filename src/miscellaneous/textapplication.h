@@ -7,10 +7,14 @@
 
 #include "definitions/definitions.h"
 
+#include "miscellaneous/textapplicationsettings.h"
+
 class TextEditor;
 class TabWidget;
 class FormMain;
+class StatusBar;
 class QAction;
+class QMenu;
 
 // Main class which ties text box functionality into GUI and gels all together.
 class TextApplication : public QObject {
@@ -23,13 +27,19 @@ class TextApplication : public QObject {
 
     QList<TextEditor*> editors()  const;
     bool anyModifiedEditor() const;
-
-    void setMainForm(FormMain* main_form);
+    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar);
+    TextApplicationSettings& settings();
 
   public slots:
+    void newFile();
+
+    // Loads initial state of text application, including session restoring,
+    // setup initial GUI state for actions/toolbar/statusbar etc.
+    void load();
 
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
+
     void openTextFile(QAction* action = nullptr);
     void loadTextEditorFromFile(const QString& file_path, const QString& encoding = QSL(DEFAULT_TEXT_FILE_ENCODING));
     TextEditor* addEmptyTextEditor();
@@ -41,6 +51,7 @@ class TextApplication : public QObject {
     void closeAllUnmodifiedEditors();
 
   private slots:
+    void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void onEditorRequestVisibility();
     void onEditorSavedToFile();
     void onEditorLoadedFromFile();
@@ -50,12 +61,29 @@ class TextApplication : public QObject {
     void updateStatusBarFromEditor(TextEditor* editor);
 
   private:
+    void createConnections();
     void renameEditor(TextEditor* editor);
     void markEditorModified(TextEditor* editor, bool modified);
 
   private:
+    TextApplicationSettings m_settings;
     TabWidget* m_tabWidget;
-    FormMain* m_mainForm;
+    StatusBar* m_statusBar;
+
+    // Pointers to important GUI elements outside of editors.
+    QAction* m_actionFileNew;
+    QAction* m_actionFileOpen;
+    QAction* m_actionFileSave;
+    QAction* m_actionFileSaveAs;
+    QAction* m_actionFileSaveAll;
+    QAction* m_actionEolUnix;
+    QAction* m_actionEolWindows;
+    QAction* m_actionEolMac;
+    QAction* m_actionTabsCloseAllUnmodified;
+    QAction* m_actionWordWrap;
+    QMenu* m_menuFileSaveWithEncoding;
+    QMenu* m_menuFileOpenWithEncoding;
+    QMenu* m_menuEolMode;
 };
 
 #endif // TEXTAPPLICATION_H

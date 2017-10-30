@@ -6,6 +6,8 @@
 #include "exceptions/ioexception.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
+#include "miscellaneous/textapplication.h"
+#include "miscellaneous/textapplicationsettings.h"
 
 #include <QDir>
 #include <QFileDialog>
@@ -13,9 +15,11 @@
 #include <QTextCodec>
 #include <QTextStream>
 
+#include <Qsci/qscilexercpp.h>
+
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
-  reloadSettings();
+  //reloadSettings();
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
@@ -35,6 +39,8 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   blockSignals(false);
 
   Application::restoreOverrideCursor();
+
+  setEolMode(QsciScintilla::EolMode::EolUnix);
 
   emit loadedFromFile(m_filePath);
 }
@@ -148,11 +154,22 @@ void TextEditor::closeEditor(bool* ok) {
 }
 
 void TextEditor::reloadSettings() {
-  // TODO: nacist font atd.
   setUtf8(true);
+  setEolMode(m_textApp->settings().eolMode());
+  setWrapMode(m_textApp->settings().wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
+
   setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   setEolVisibility(true);
   setAutoIndent(true);
+
+  setLexer(new QsciLexerCPP(this));
+  setFolding(QsciScintilla::BoxedTreeFoldStyle);
+  setMarginLineNumbers(1, true);
+
+  setAutoCompletionCaseSensitivity(false);
+  setAutoCompletionThreshold(0);
+  setAutoCompletionFillupsEnabled(true);
+  setAutoCompletionSource(QsciScintilla::AcsAll);
 }
 
 QString TextEditor::filePath() const {

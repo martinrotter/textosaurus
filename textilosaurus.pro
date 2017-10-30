@@ -252,7 +252,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/qtsingleapplication/qtsinglecoreapplication.h \
             src/gui/texteditor.h \
     src/miscellaneous/textapplication.h \
-    src/gui/toolbar.h
+    src/gui/toolbar.h \
+    src/miscellaneous/textapplicationsettings.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -308,7 +309,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/qtsingleapplication/qtsinglecoreapplication.cpp \
             src/gui/texteditor.cpp \
     src/miscellaneous/textapplication.cpp \
-    src/gui/toolbar.cpp
+    src/gui/toolbar.cpp \
+    src/miscellaneous/textapplicationsettings.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

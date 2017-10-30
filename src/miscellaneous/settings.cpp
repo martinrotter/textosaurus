@@ -9,6 +9,22 @@
 #include <QLocale>
 #include <QPointer>
 
+// Editor.
+DKEY Editor::ID = "editor";
+DKEY Editor::EolMode = "eol_mode";
+
+#if defined(Q_OS_WIN)
+DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolWindows);
+#elif defined(Q_OS_MAC)
+DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolMac);
+#else
+DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolUnix);
+#endif
+
+DKEY Editor::WordWrap = "word_wrap";
+
+DVALUE(bool) Editor::WordWrapDef = true;
+
 // GUI.
 DKEY GUI::ID = "gui";
 DKEY GUI::ToolbarStyle = "toolbar_style";
@@ -190,7 +206,6 @@ SettingsProperties Settings::determineProperties() {
 
   // DO NOT use portable settings for Linux, it is really not used on that platform.
   const bool will_we_use_portable_settings = false;
-
 #else
   const QString exe_path = qApp->applicationDirPath();
   const QString home_path_file = home_path + properties.m_settingsSuffix;
