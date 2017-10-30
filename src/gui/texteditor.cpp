@@ -160,7 +160,11 @@ void TextEditor::closeEditor(bool* ok) {
 void TextEditor::reloadSettings() {
   setUtf8(true);
   setEolMode(m_textApp->settings().eolMode());
+  setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
   setWrapMode(m_textApp->settings().wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
+
+  setMarginLineNumbers(0, true);
+  setMarginWidth(0, 64);
 
   setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   setEolVisibility(true);
@@ -168,7 +172,6 @@ void TextEditor::reloadSettings() {
 
   setLexer(new QsciLexerCPP(this));
   setFolding(QsciScintilla::BoxedTreeFoldStyle);
-  setMarginLineNumbers(1, true);
 
   setAutoCompletionCaseSensitivity(false);
   setAutoCompletionThreshold(0);
