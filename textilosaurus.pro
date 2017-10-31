@@ -202,6 +202,7 @@ HEADERS +=  src/definitions/definitions.h \
             src/dynamic-shortcuts/dynamicshortcuts.h \
             src/dynamic-shortcuts/dynamicshortcutswidget.h \
             src/dynamic-shortcuts/shortcutbutton.h \
+            src/gui/settings/settingsexternaltools.h \
             src/dynamic-shortcuts/shortcutcatcher.h \
             src/exceptions/applicationexception.h \
             src/exceptions/ioexception.h \
@@ -277,7 +278,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/nsUTF8Prober.h \
             src/uchardet/prmem.h \
             src/uchardet/uchardet.h \
-            src/external-tools/gui/externaltoolseditor.h \
             src/external-tools/externaltools.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
@@ -300,6 +300,7 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/messagebox.cpp \
             src/gui/plaintoolbutton.cpp \
             src/gui/settings/settingsbrowsermail.cpp \
+            src/gui/settings/settingsexternaltools.cpp \
             src/gui/settings/settingsgeneral.cpp \
             src/gui/settings/settingsgui.cpp \
             src/gui/settings/settingslocalization.cpp \
@@ -385,7 +386,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsUniversalDetector.cpp \
             src/uchardet/nsUTF8Prober.cpp \
             src/uchardet/uchardet.cpp \
-            src/external-tools/gui/externaltoolseditor.cpp \
             src/external-tools/externaltools.cpp
 
 mac {
@@ -399,18 +399,17 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingsbrowsermail.ui \
             src/gui/settings/settingsgeneral.ui \
             src/gui/settings/settingsgui.ui \
+            src/gui/settings/settingsexternaltools.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
-            src/gui/toolbareditor.ui \
-            src/external-tools/gui/externaltoolseditor.ui
+            src/gui/toolbareditor.ui
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
                 $$PWD/src/gui \
                 $$PWD/src/gui/dialogs \
                 $$PWD/src/dynamic-shortcuts \
-                $$PWD/src/external-tools \
-                $$PWD/src/external-tools/gui
+                $$PWD/src/external-tools
 
 TRANSLATIONS += $$PWD/localization/textilosaurus_en_GB.ts \
                 $$PWD/localization/textilosaurus_en.ts

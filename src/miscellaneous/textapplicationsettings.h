@@ -7,6 +7,8 @@
 
 #include <Qsci/qsciscintilla.h>
 
+#include "external-tools/externaltools.h"
+
 class TextApplicationSettings : public QObject {
   Q_OBJECT
 
@@ -28,6 +30,7 @@ class TextApplicationSettings : public QObject {
     void settingsChanged(bool reload_visible_editor, bool reload_all_editors);
 
   private:
+    ExternalTools* m_externalTools;
 };
 
 #endif // TEXTAPPLICATIONSETTINGS_H

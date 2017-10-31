@@ -5,6 +5,9 @@
 
 #include <QObject>
 
+class TextApplicationSettings;
+class TextEditor;
+
 // Top-level management class for external tools.
 class ExternalTools : public QObject {
   Q_OBJECT
