@@ -6,6 +6,7 @@
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 
+#include <QLayout>
 #include <QPlainTextEdit>
 #include <QScrollBar>
 
@@ -17,11 +18,18 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
 
   connect(btn_close, &PlainToolButton::clicked, this, &ToolBox::hide);
 
-  setCornerWidget(btn_close, Qt::BottomLeftCorner);
-  addTab(m_txtOutput, qApp->icons()->fromTheme(QSL("application-text")), tr("Output"));
   setTabPosition(QTabWidget::TabPosition::South);
+  setCornerWidget(btn_close, Qt::BottomLeftCorner);
 
-  setVisible(false);
+  //setVisible(false);
+  setContentsMargins(0, 0, 0, 0);
+
+  m_txtOutput->setPlaceholderText(tr("This window can display output of external tools..."));
+  m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+  m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
+  m_txtOutput->setReadOnly(true);
+  m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  addTab(m_txtOutput, qApp->icons()->fromTheme(QSL("application-text")), tr("Output"));
 }
 
 void ToolBox::displayOutput(const QString& source, const QString& message) {
