@@ -20,15 +20,15 @@ TextApplication::TextApplication(QObject* parent) : QObject(parent) {
 }
 
 TextEditor* TextApplication::currentEditor() const {
-  return m_tabWidget->textEditorAt(m_tabWidget->currentIndex());
+  return m_tabEditors->textEditorAt(m_tabEditors->currentIndex());
 }
 
 QList<TextEditor*> TextApplication::editors() const {
   QList<TextEditor*> editors;
 
-  if (m_tabWidget != nullptr) {
-    for (int i = 0; i < m_tabWidget->count(); i++) {
-      TextEditor* edit = m_tabWidget->textEditorAt(i);
+  if (m_tabEditors != nullptr) {
+    for (int i = 0; i < m_tabEditors->count(); i++) {
+      TextEditor* edit = m_tabEditors->textEditorAt(i);
 
       if (edit != nullptr) {
         editors.append(edit);
@@ -114,14 +114,14 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
 
   if (new_editor != nullptr) {
     new_editor->loadFromFile(file, encoding);
-    m_tabWidget->setCurrentWidget(new_editor);
+    m_tabEditors->setCurrentWidget(new_editor);
   }
 }
 
 TextEditor* TextApplication::addEmptyTextEditor() {
-  TextEditor* editor = new TextEditor(this, m_tabWidget);
+  TextEditor* editor = new TextEditor(this, m_tabEditors);
 
-  m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
+  m_tabEditors->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
 
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
@@ -173,7 +173,7 @@ void TextApplication::saveAllEditors() {
 void TextApplication::closeAllUnmodifiedEditors() {
   foreach (TextEditor* editor, editors()) {
     if (!editor->isModified()) {
-      m_tabWidget->closeTab(m_tabWidget->indexOf(editor));
+      m_tabEditors->closeTab(m_tabEditors->indexOf(editor));
     }
   }
 }
@@ -197,7 +197,7 @@ void TextApplication::onEditorRequestVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   if (editor != nullptr) {
-    m_tabWidget->setCurrentWidget(editor);
+    m_tabEditors->setCurrentWidget(editor);
   }
 }
 
@@ -218,10 +218,10 @@ void TextApplication::onEditorLoadedFromFile() {
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
-  int index = m_tabWidget->indexOf(editor);
+  int index = m_tabEditors->indexOf(editor);
 
   if (index >= 0) {
-    m_tabWidget->tabBar()->setTabIcon(index, modified ?
+    m_tabEditors->tabBar()->setTabIcon(index, modified ?
                                       qApp->icons()->fromTheme(QSL("dialog-warning")) :
                                       qApp->icons()->fromTheme(QSL("text-plain")));
 
@@ -252,7 +252,7 @@ void TextApplication::redo() {
 void TextApplication::newFile() {
   TextEditor* editor = addEmptyTextEditor();
 
-  m_tabWidget->setCurrentWidget(editor);
+  m_tabEditors->setCurrentWidget(editor);
 }
 
 void TextApplication::onEditorTextChanged(bool modified) {
@@ -265,8 +265,8 @@ void TextApplication::createConnections() {
   connect(&m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
   // Tab widget.
-  connect(m_tabWidget, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
-  connect(m_tabWidget->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
+  connect(m_tabEditors, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
+  connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
   // Actions.
   connect(m_menuEolMode, &QMenu::triggered, &m_settings, &TextApplicationSettings::setEolModeFromAction);
@@ -299,7 +299,7 @@ void TextApplication::createConnections() {
 }
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar) {
-  m_tabWidget = tab_widget;
+  m_tabEditors = tab_widget;
   m_statusBar = status_bar;
 
   // Get pointers to editor-related global actions/menus.
@@ -383,7 +383,7 @@ void TextApplication::openTextFile(QAction* action) {
 }
 
 void TextApplication::onEditorTabSwitched(int index) {
-  TextEditor* editor = m_tabWidget->textEditorAt(index);
+  TextEditor* editor = m_tabEditors->textEditorAt(index);
 
   if (editor != nullptr) {
     editor->reloadSettings();
@@ -433,11 +433,11 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {
-  int index = m_tabWidget->indexOf(editor);
+  int index = m_tabEditors->indexOf(editor);
 
   if (index >= 0) {
     if (!editor->filePath().isEmpty()) {
-      m_tabWidget->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
+      m_tabEditors->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
     }
   }
 }

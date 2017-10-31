@@ -55,7 +55,7 @@ FormMain::~FormMain() {
 }
 
 TabWidget* FormMain::tabWidget() const {
-  return m_ui.m_tabWidget;
+  return m_ui.m_tabEditors;
 }
 
 ToolBar* FormMain::toolBar() const {
@@ -289,10 +289,10 @@ void FormMain::createConnections() {
   connect(m_ui.m_actionDisplayWiki, &QAction::triggered, this, &FormMain::showWiki);
 
   // Tab widget connections.
-  connect(m_ui.m_actionTabsNext, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::gotoNextTab);
-  connect(m_ui.m_actionTabsPrevious, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::gotoPreviousTab);
-  connect(m_ui.m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::closeAllTabsExceptCurrent);
-  connect(m_ui.m_actionTabsCloseAll, &QAction::triggered, m_ui.m_tabWidget, &TabWidget::closeAllTabs);
+  connect(m_ui.m_actionTabsNext, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::gotoNextTab);
+  connect(m_ui.m_actionTabsPrevious, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::gotoPreviousTab);
+  connect(m_ui.m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::closeAllTabsExceptCurrent);
+  connect(m_ui.m_actionTabsCloseAll, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::closeAllTabs);
 }
 
 void FormMain::showWiki() {

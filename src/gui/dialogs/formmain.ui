@@ -11,7 +11,7 @@
    </rect>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -25,13 +25,19 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="TabWidget" name="m_tabWidget">
-      <property name="currentIndex">
-       <number>-1</number>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-      <property name="movable">
-       <bool>true</bool>
-      </property>
+      <widget class="TabWidget" name="m_tabEditors">
+       <property name="currentIndex">
+        <number>-1</number>
+       </property>
+       <property name="movable">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="ToolBox" name="m_toolBox"/>
      </widget>
     </item>
    </layout>
@@ -412,9 +418,15 @@
    <header>tabwidget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>ToolBox</class>
+   <extends>QTabWidget</extends>
+   <header>toolbox.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>m_tabWidget</tabstop>
+  <tabstop>m_tabEditors</tabstop>
  </tabstops>
  <resources/>
  <connections/>

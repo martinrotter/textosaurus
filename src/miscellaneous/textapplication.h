@@ -69,7 +69,7 @@ class TextApplication : public QObject {
 
   private:
     TextApplicationSettings m_settings;
-    TabWidget* m_tabWidget;
+    TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
 
     // Pointers to important GUI elements outside of editors.
