@@ -466,13 +466,26 @@ win32 {
 win32 {
   target.path = $$PREFIX
 
-  qt_dlls_root.files = resources/binaries/windows/qt5-msvc2015/*.*
+  qscintila_dll.files = resources/binaries/qscintilla/qscintilla2_qt5.dll
+  qscintila_dll.path = $$quote($$PREFIX/)
+
+  qt_dlls_root.files =  resources/binaries/qt/windows/qt5-msvc2015/libeay32.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/msvcp140.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/qt.conf \
+                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Core.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Widgets.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Network.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/ssleay32.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll
   qt_dlls_root.path = $$quote($$PREFIX/)
 
-  qt_dlls_plugins.files = resources/binaries/windows/qt5-msvc2015/*
+  qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-msvc2015/bearer \
+                            resources/binaries/qt/windows/qt5-msvc2015/iconengines \
+                            resources/binaries/qt/windows/qt5-msvc2015/imageformats \
+                            resources/binaries/qt/windows/qt5-msvc2015/platforms
   qt_dlls_plugins.path = $$quote($$PREFIX/)
 
-  INSTALLS += target qt_dlls_root qt_dlls_plugins
+  INSTALLS += target qscintila_dll qt_dlls_root qt_dlls_plugins
 }
 
 # Install all files on Linux.
