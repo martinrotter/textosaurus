@@ -252,31 +252,31 @@ HEADERS +=  src/definitions/definitions.h \
             src/qtsingleapplication/qtsingleapplication.h \
             src/qtsingleapplication/qtsinglecoreapplication.h \
             src/gui/texteditor.h \
-    src/miscellaneous/textapplication.h \
-    src/gui/toolbar.h \
-    src/miscellaneous/textapplicationsettings.h \
-    src/uchardet/CharDistribution.h \
-    src/uchardet/JpCntx.h \
-    src/uchardet/nsBig5Prober.h \
-    src/uchardet/nsCodingStateMachine.h \
-    src/uchardet/nscore.h \
-    src/uchardet/nsEscCharsetProber.h \
-    src/uchardet/nsEUCJPProber.h \
-    src/uchardet/nsEUCKRProber.h \
-    src/uchardet/nsEUCTWProber.h \
-    src/uchardet/nsGB2312Prober.h \
-    src/uchardet/nsHebrewProber.h \
-    src/uchardet/nsCharSetProber.h \
-    src/uchardet/nsLatin1Prober.h \
-    src/uchardet/nsMBCSGroupProber.h \
-    src/uchardet/nsPkgInt.h \
-    src/uchardet/nsSBCSGroupProber.h \
-    src/uchardet/nsSBCharSetProber.h \
-    src/uchardet/nsSJISProber.h \
-    src/uchardet/nsUniversalDetector.h \
-    src/uchardet/nsUTF8Prober.h \
-    src/uchardet/prmem.h \
-    src/uchardet/uchardet.h
+            src/miscellaneous/textapplication.h \
+            src/gui/toolbar.h \
+            src/miscellaneous/textapplicationsettings.h \
+            src/uchardet/CharDistribution.h \
+            src/uchardet/JpCntx.h \
+            src/uchardet/nsBig5Prober.h \
+            src/uchardet/nsCodingStateMachine.h \
+            src/uchardet/nscore.h \
+            src/uchardet/nsEscCharsetProber.h \
+            src/uchardet/nsEUCJPProber.h \
+            src/uchardet/nsEUCKRProber.h \
+            src/uchardet/nsEUCTWProber.h \
+            src/uchardet/nsGB2312Prober.h \
+            src/uchardet/nsHebrewProber.h \
+            src/uchardet/nsCharSetProber.h \
+            src/uchardet/nsLatin1Prober.h \
+            src/uchardet/nsMBCSGroupProber.h \
+            src/uchardet/nsPkgInt.h \
+            src/uchardet/nsSBCSGroupProber.h \
+            src/uchardet/nsSBCharSetProber.h \
+            src/uchardet/nsSJISProber.h \
+            src/uchardet/nsUniversalDetector.h \
+            src/uchardet/nsUTF8Prober.h \
+            src/uchardet/prmem.h \
+            src/uchardet/uchardet.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -331,58 +331,58 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/qtsingleapplication/qtsingleapplication.cpp \
             src/qtsingleapplication/qtsinglecoreapplication.cpp \
             src/gui/texteditor.cpp \
-    src/miscellaneous/textapplication.cpp \
-    src/gui/toolbar.cpp \
-    src/miscellaneous/textapplicationsettings.cpp \
-    src/uchardet/CharDistribution.cpp \
-    src/uchardet/JpCntx.cpp \
-    src/uchardet/LangArabicModel.cpp \
-    src/uchardet/LangBulgarianModel.cpp \
-    src/uchardet/LangCroatianModel.cpp \
-    src/uchardet/LangCzechModel.cpp \
-    src/uchardet/LangDanishModel.cpp \
-    src/uchardet/LangEsperantoModel.cpp \
-    src/uchardet/LangEstonianModel.cpp \
-    src/uchardet/LangFinnishModel.cpp \
-    src/uchardet/LangFrenchModel.cpp \
-    src/uchardet/LangGermanModel.cpp \
-    src/uchardet/LangGreekModel.cpp \
-    src/uchardet/LangHebrewModel.cpp \
-    src/uchardet/LangHungarianModel.cpp \
-    src/uchardet/LangIrishModel.cpp \
-    src/uchardet/LangItalianModel.cpp \
-    src/uchardet/LangLatvianModel.cpp \
-    src/uchardet/LangLithuanianModel.cpp \
-    src/uchardet/LangMalteseModel.cpp \
-    src/uchardet/LangPolishModel.cpp \
-    src/uchardet/LangPortugueseModel.cpp \
-    src/uchardet/LangRomanianModel.cpp \
-    src/uchardet/LangRussianModel.cpp \
-    src/uchardet/LangSlovakModel.cpp \
-    src/uchardet/LangSloveneModel.cpp \
-    src/uchardet/LangSpanishModel.cpp \
-    src/uchardet/LangSwedishModel.cpp \
-    src/uchardet/LangThaiModel.cpp \
-    src/uchardet/LangTurkishModel.cpp \
-    src/uchardet/LangVietnameseModel.cpp \
-    src/uchardet/nsBig5Prober.cpp \
-    src/uchardet/nsEscCharsetProber.cpp \
-    src/uchardet/nsEscSM.cpp \
-    src/uchardet/nsEUCJPProber.cpp \
-    src/uchardet/nsEUCKRProber.cpp \
-    src/uchardet/nsEUCTWProber.cpp \
-    src/uchardet/nsGB2312Prober.cpp \
-    src/uchardet/nsHebrewProber.cpp \
-    src/uchardet/nsCharSetProber.cpp \
-    src/uchardet/nsLatin1Prober.cpp \
-    src/uchardet/nsMBCSGroupProber.cpp \
-    src/uchardet/nsMBCSSM.cpp \
-    src/uchardet/nsSBCSGroupProber.cpp \
-    src/uchardet/nsSBCharSetProber.cpp \
-    src/uchardet/nsSJISProber.cpp \
-    src/uchardet/nsUniversalDetector.cpp \
-    src/uchardet/nsUTF8Prober.cpp \
-    src/uchardet/uchardet.cpp
+            src/miscellaneous/textapplication.cpp \
+            src/gui/toolbar.cpp \
+            src/miscellaneous/textapplicationsettings.cpp \
+            src/uchardet/CharDistribution.cpp \
+            src/uchardet/JpCntx.cpp \
+            src/uchardet/LangArabicModel.cpp \
+            src/uchardet/LangBulgarianModel.cpp \
+            src/uchardet/LangCroatianModel.cpp \
+            src/uchardet/LangCzechModel.cpp \
+            src/uchardet/LangDanishModel.cpp \
+            src/uchardet/LangEsperantoModel.cpp \
+            src/uchardet/LangEstonianModel.cpp \
+            src/uchardet/LangFinnishModel.cpp \
+            src/uchardet/LangFrenchModel.cpp \
+            src/uchardet/LangGermanModel.cpp \
+            src/uchardet/LangGreekModel.cpp \
+            src/uchardet/LangHebrewModel.cpp \
+            src/uchardet/LangHungarianModel.cpp \
+            src/uchardet/LangIrishModel.cpp \
+            src/uchardet/LangItalianModel.cpp \
+            src/uchardet/LangLatvianModel.cpp \
+            src/uchardet/LangLithuanianModel.cpp \
+            src/uchardet/LangMalteseModel.cpp \
+            src/uchardet/LangPolishModel.cpp \
+            src/uchardet/LangPortugueseModel.cpp \
+            src/uchardet/LangRomanianModel.cpp \
+            src/uchardet/LangRussianModel.cpp \
+            src/uchardet/LangSlovakModel.cpp \
+            src/uchardet/LangSloveneModel.cpp \
+            src/uchardet/LangSpanishModel.cpp \
+            src/uchardet/LangSwedishModel.cpp \
+            src/uchardet/LangThaiModel.cpp \
+            src/uchardet/LangTurkishModel.cpp \
+            src/uchardet/LangVietnameseModel.cpp \
+            src/uchardet/nsBig5Prober.cpp \
+            src/uchardet/nsEscCharsetProber.cpp \
+            src/uchardet/nsEscSM.cpp \
+            src/uchardet/nsEUCJPProber.cpp \
+            src/uchardet/nsEUCKRProber.cpp \
+            src/uchardet/nsEUCTWProber.cpp \
+            src/uchardet/nsGB2312Prober.cpp \
+            src/uchardet/nsHebrewProber.cpp \
+            src/uchardet/nsCharSetProber.cpp \
+            src/uchardet/nsLatin1Prober.cpp \
+            src/uchardet/nsMBCSGroupProber.cpp \
+            src/uchardet/nsMBCSSM.cpp \
+            src/uchardet/nsSBCSGroupProber.cpp \
+            src/uchardet/nsSBCharSetProber.cpp \
+            src/uchardet/nsSJISProber.cpp \
+            src/uchardet/nsUniversalDetector.cpp \
+            src/uchardet/nsUTF8Prober.cpp \
+            src/uchardet/uchardet.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
