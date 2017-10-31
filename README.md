@@ -7,9 +7,11 @@ Textilosaurus
 [![GitHub issues](https://img.shields.io/github/issues/martinrotter/textilosaurus.svg?maxAge=360)](https://github.com/martinrotter/textilosaurus/issues)
 [![License](https://img.shields.io/github/license/martinrotter/textilosaurus.svg?maxAge=360000)](https://github.com/martinrotter/textilosaurus/blob/master/LICENSE.md)
 
-<img align="left" src="https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/graphics/textilosaurus.png" alt="Textilousarus" height="100px" />
+<img align="left" src="https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/graphics/textilosaurus.png" alt="Textilosarus" height="100px" />
 
 Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and QScintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
+
+You can support author of Textilosaurus on [PATREON](https://www.patreon.com/martinrotter). Used Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
 
 Features
 --------
@@ -33,5 +35,3 @@ Features
     - depends only on Qt and QScintilla,
     - relatively lightweight,
     - always OSS.
-
-You can support me on [PATREON](https://www.patreon.com/martinrotter). Used Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
