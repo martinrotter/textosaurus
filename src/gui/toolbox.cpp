@@ -33,7 +33,8 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
 }
 
 void ToolBox::displayOutput(const QString& source, const QString& message) {
+  setCurrentWidget(m_txtOutput);
+  setVisible(true);
   m_txtOutput->appendPlainText(QString("%1: %2\n").arg(source, message));
   m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
-  setVisible(true);
 }
