@@ -1,6 +1,5 @@
 Textilosaurus
-=========
-
+=============
 [![AppVeyor](https://img.shields.io/appveyor/ci/martinrotter/textilosaurus.svg?maxAge=360)](https://ci.appveyor.com/project/martinrotter/textilosaurus)
 [![Travis CI](https://img.shields.io/travis/martinrotter/textilosaurus.svg?maxAge=360)](https://travis-ci.org/martinrotter/textilosaurus)
 [![Total downloads](https://img.shields.io/github/downloads/martinrotter/textilosaurus/total.svg?maxAge=360)](http://www.somsubhra.com/github-release-stats/?username=martinrotter&repository=textilosaurus)
@@ -12,7 +11,10 @@ Textilosaurus
 
 Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and QScintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
-Features:
+Features
+--------
+
+
 * User interface:
     - cross-platform look & feel,
     - **configurable toolbar**
