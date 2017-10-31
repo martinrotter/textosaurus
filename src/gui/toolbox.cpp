@@ -21,7 +21,7 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   setTabPosition(QTabWidget::TabPosition::South);
   setCornerWidget(btn_close, Qt::BottomLeftCorner);
 
-  //setVisible(false);
+  setVisible(false);
   setContentsMargins(0, 0, 0, 0);
 
   m_txtOutput->setPlaceholderText(tr("This window can display output of external tools..."));
