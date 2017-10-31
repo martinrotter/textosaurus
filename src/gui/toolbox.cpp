@@ -21,7 +21,7 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   addTab(m_txtOutput, qApp->icons()->fromTheme(QSL("application-text")), tr("Output"));
   setTabPosition(QTabWidget::TabPosition::South);
 
-  //setVisible(false);
+  setVisible(false);
 }
 
 void ToolBox::displayOutput(const QString& source, const QString& message) {

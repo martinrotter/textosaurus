@@ -26,6 +26,8 @@ Application::Application(const QString& id, int& argc, char** argv)
   connect(this, &Application::saveStateRequest, this, &Application::onSaveState);
 
   setQuitOnLastWindowClosed(true);
+  setStyleSheet(QSL("QStatusBar::item { border: none; } "
+                    "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
 }
 
 Application::~Application() {

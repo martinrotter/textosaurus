@@ -57,8 +57,6 @@ int main(int argc, char* argv[]) {
 
   qDebug("Instantiated Application class.");
 
-  application.setStyleSheet(QSL("QStatusBar::item { border: none; }"));
-
   // Check if another instance is running.
   if (application.sendMessage((QStringList() << APP_IS_RUNNING << application.arguments().mid(1)).join(ARGUMENTS_LIST_SEPARATOR))) {
     qWarning("Another instance of the application is already running. Notifying it.");
