@@ -16,7 +16,6 @@ You can support author of Textilosaurus on [PATREON](https://www.patreon.com/mar
 Features
 --------
 
-
 * User interface:
     - cross-platform look & feel,
     - **configurable toolbar**
