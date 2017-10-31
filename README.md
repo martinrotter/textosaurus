@@ -31,6 +31,7 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents.
 * Misc:
+    - all user data (settings, external tools definitions, ...) are fully portable (You can use the same user data shared via Dropbox on all supported platforms.),
     - depends only on Qt and QScintilla,
     - relatively lightweight,
     - always OSS.
