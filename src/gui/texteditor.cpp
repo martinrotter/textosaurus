@@ -167,16 +167,18 @@ void TextEditor::reloadSettings() {
   setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
   setWrapMode(m_textApp->settings().wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
 
-  setMarginLineNumbers(MARGIN_LINE_NUMBERS, true);
-  setMarginWidth(MARGIN_LINE_NUMBERS, 48);
-  setMarginWidth(MARGIN_FOLDING, 32);
+  setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
+  setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
 
-  setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   setEolVisibility(true);
   setAutoIndent(true);
 
-  setLexer(new QsciLexerCPP(this));
-  setFolding(QsciScintilla::BoxedTreeFoldStyle);
+  //setLexer(new QsciLexerCPP(this));
+  setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
+
+  //lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+
+  setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
 
   setAutoCompletionCaseSensitivity(false);
   setAutoCompletionThreshold(0);
