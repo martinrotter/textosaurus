@@ -27,6 +27,7 @@ class IOFactory {
 
     // Filters out shit characters from filename.
     static QString filterBadCharsFromFilename(const QString& name);
+    static QByteArray readFileRawChunk(const QString& file_path, int length);
 
     // Returns contents of a file.
     // Throws exception when no such file exists.

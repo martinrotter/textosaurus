@@ -9,6 +9,8 @@
 #include "miscellaneous/simplecrypt/simplecrypt.h"
 #include "miscellaneous/textapplication.h"
 
+#include "uchardet/uchardet.h"
+
 #include <QDir>
 #include <QLocale>
 #include <QMenu>
@@ -156,6 +158,22 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu) {
       act->setData(codec);
     }
   }
+}
+
+QByteArray TextFactory::detectEncoding(const QString& file_path) {
+  // We read first chunk of file and try to detect encoding.
+  QByteArray file_head_chunk = IOFactory::readFileRawChunk(file_path, FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION);
+  int len = file_head_chunk.length();
+  char* buf = file_head_chunk.data();
+  uchardet_t ud = uchardet_new();
+
+  uchardet_handle_data(ud, buf, len);
+  uchardet_data_end(ud);
+  const char* cs = uchardet_get_charset(ud);
+  QByteArray encoding_name = QByteArray(cs);
+
+  uchardet_delete(ud);
+  return encoding_name;
 }
 
 QDateTime TextFactory::parseDateTime(qint64 milis_from_epoch) {

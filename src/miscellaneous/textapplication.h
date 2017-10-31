@@ -43,7 +43,7 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
     void openTextFile(QAction* action = nullptr);
-    void loadTextEditorFromFile(const QString& file_path, const QString& encoding = QSL(DEFAULT_TEXT_FILE_ENCODING));
+    void loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding = QString());
     TextEditor* addEmptyTextEditor();
 
     void saveCurrentEditor();
@@ -63,7 +63,6 @@ class TextApplication : public QObject {
     void updateStatusBarFromEditor(TextEditor* editor);
 
   private:
-    int detectCodepage(char* buf, size_t len);
     void createConnections();
     void renameEditor(TextEditor* editor);
     void markEditorModified(TextEditor* editor, bool modified);

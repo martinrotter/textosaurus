@@ -44,10 +44,10 @@ void FormAbout::loadLicenseAndInformation() {
   }
 
   try {
-    m_ui.m_txtLicenseGnu->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_GNU_GPL_HTML")));
+    m_ui.m_txtLicenseMpl->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_MPL")));
   }
   catch (...) {
-    m_ui.m_txtLicenseGnu->setText(tr("License not found."));
+    m_ui.m_txtLicenseMpl->setText(tr("License not found."));
   }
 
   try {

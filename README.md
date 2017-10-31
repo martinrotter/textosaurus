@@ -12,4 +12,24 @@ Textilosaurus
 
 Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and QScintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
+Features:
+* User interface:
+    - cross-platform look & feel,
+    - **configurable toolbar**
+    - changeable icon themes and styles,
+    - main window remembers its location and size,
+    - hideable toolbar and statusbar,
+    - simple interface,
+    - tabbed interface.
+* Text editor component:
+    - **supports a lot of input encodings**,
+    - input file encoding detection (via bundled [uchardet](https://www.freedesktop.org/wiki/Software/uchardet/)),
+    - **uses full UTF-8 internally**,
+    - can load relatively big files (100 MB file should not be a problem),
+    - switchable EOL mode for new documents.
+* Misc:
+    - depends only on Qt and QScintilla,
+    - relatively lightweight,
+    - always OSS.
+
 You can support me on [PATREON](https://www.patreon.com/martinrotter). Used Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).

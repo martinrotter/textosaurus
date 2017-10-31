@@ -11,6 +11,7 @@
 #define MARGIN_WIDTH_NUMBERS  48
 #define MARGIN_WIDTH_FOLDING  22
 
+#define FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION 2048
 #define DEFAULT_TEXT_FILE_ENCODING            "UTF-8"
 #define BIG_TEXT_FILE_SIZE                    qint64(50000000)
 #define MAX_TEXT_FILE_SIZE                    qint64(INT_MAX)

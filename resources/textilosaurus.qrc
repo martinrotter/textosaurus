@@ -45,5 +45,6 @@
         <file>localizations/qt_ru.qm</file>
         <file>localizations/qt_sk.qm</file>
         <file>localizations/qt_uk.qm</file>
+        <file>text/COPYING_MPL</file>
     </qresource>
 </RCC>

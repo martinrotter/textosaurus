@@ -49,7 +49,25 @@ bool TextApplication::anyModifiedEditor() const {
   return false;
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& encoding) {
+void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding) {
+  QString encoding;
+
+  if (explicit_encoding.isEmpty()) {
+    qDebug("No explicit encoding for file '%s' openin. Try to detect one.", qPrintable(file_path));
+
+    if ((encoding = TextFactory::detectEncoding(file_path)).isEmpty()) {
+      // No encoding auto-detected.
+      encoding = QSL(DEFAULT_TEXT_FILE_ENCODING);
+      qWarning("Auto-detection of encoding failed, using default encoding.");
+    }
+    else {
+      qDebug("Auto-detected encoding is '%s'.", qPrintable(encoding));
+    }
+  }
+  else {
+    encoding = explicit_encoding;
+  }
+
   QFile file(file_path);
 
   if (!file.exists()) {
@@ -95,26 +113,9 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   TextEditor* new_editor = addEmptyTextEditor();
 
   if (new_editor != nullptr) {
-    QByteArray arr = "šščěš";
-    char* text = arr.data();
-
-    detectCodepage(text, 4);
-
     new_editor->loadFromFile(file, encoding);
     m_tabWidget->setCurrentWidget(new_editor);
   }
-}
-
-int TextApplication::detectCodepage(char* buf, size_t len) {
-  int codepage = -1;
-  uchardet_t ud = uchardet_new();
-
-  uchardet_handle_data(ud, buf, len);
-  uchardet_data_end(ud);
-  const char* cs = uchardet_get_charset(ud);
-
-  uchardet_delete(ud);
-  return 0;
 }
 
 TextEditor* TextApplication::addEmptyTextEditor() {
@@ -369,8 +370,8 @@ void TextApplication::quit(bool* ok) {
 }
 
 void TextApplication::openTextFile(QAction* action) {
-  QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : DEFAULT_TEXT_FILE_ENCODING;
-  QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file with %1 encoding").arg(encoding),
+  QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
+  QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
                                                    m_settings.loadSaveDefaultDirectory(),
                                                    tr("Text files (*.txt);;All files (*)"));
 

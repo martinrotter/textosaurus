@@ -336,12 +336,35 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
     src/miscellaneous/textapplicationsettings.cpp \
     src/uchardet/CharDistribution.cpp \
     src/uchardet/JpCntx.cpp \
+    src/uchardet/LangArabicModel.cpp \
     src/uchardet/LangBulgarianModel.cpp \
-    src/uchardet/LangCyrillicModel.cpp \
+    src/uchardet/LangCroatianModel.cpp \
+    src/uchardet/LangCzechModel.cpp \
+    src/uchardet/LangDanishModel.cpp \
+    src/uchardet/LangEsperantoModel.cpp \
+    src/uchardet/LangEstonianModel.cpp \
+    src/uchardet/LangFinnishModel.cpp \
+    src/uchardet/LangFrenchModel.cpp \
+    src/uchardet/LangGermanModel.cpp \
     src/uchardet/LangGreekModel.cpp \
     src/uchardet/LangHebrewModel.cpp \
     src/uchardet/LangHungarianModel.cpp \
+    src/uchardet/LangIrishModel.cpp \
+    src/uchardet/LangItalianModel.cpp \
+    src/uchardet/LangLatvianModel.cpp \
+    src/uchardet/LangLithuanianModel.cpp \
+    src/uchardet/LangMalteseModel.cpp \
+    src/uchardet/LangPolishModel.cpp \
+    src/uchardet/LangPortugueseModel.cpp \
+    src/uchardet/LangRomanianModel.cpp \
+    src/uchardet/LangRussianModel.cpp \
+    src/uchardet/LangSlovakModel.cpp \
+    src/uchardet/LangSloveneModel.cpp \
+    src/uchardet/LangSpanishModel.cpp \
+    src/uchardet/LangSwedishModel.cpp \
     src/uchardet/LangThaiModel.cpp \
+    src/uchardet/LangTurkishModel.cpp \
+    src/uchardet/LangVietnameseModel.cpp \
     src/uchardet/nsBig5Prober.cpp \
     src/uchardet/nsEscCharsetProber.cpp \
     src/uchardet/nsEscSM.cpp \

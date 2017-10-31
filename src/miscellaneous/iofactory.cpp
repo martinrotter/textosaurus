@@ -68,6 +68,21 @@ QString IOFactory::filterBadCharsFromFilename(const QString& name) {
   return value;
 }
 
+QByteArray IOFactory::readFileRawChunk(const QString& file_path, int length) {
+  QFile input_file(file_path);
+
+  if (input_file.open(QIODevice::ReadOnly)) {
+    QByteArray chunk = input_file.read(qint64(length));
+
+    input_file.close();
+
+    return chunk;
+  }
+  else {
+    return QByteArray();
+  }
+}
+
 QByteArray IOFactory::readFile(const QString& file_path) {
   QFile input_file(file_path);
   QByteArray input_data;

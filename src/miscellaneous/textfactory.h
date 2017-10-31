@@ -29,6 +29,7 @@ class TextFactory {
     // NOTE: This method tries to always return time in UTC+00:00.
     static QDateTime parseDateTime(const QString& date_time);
     static void initializeEncodingMenu(QMenu* const menu);
+    static QByteArray detectEncoding(const QString& file_path);
 
     // Converts 1970-epoch miliseconds to date/time.
     // NOTE: This apparently returns date/time in localtime.
