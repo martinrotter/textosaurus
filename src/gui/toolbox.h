@@ -13,6 +13,9 @@ class ToolBox : public QTabWidget {
   public:
     explicit ToolBox(QWidget* parent = nullptr);
 
+  public slots:
+    void displayOutput(const QString& source, const QString& message);
+
   private:
     QPlainTextEdit* m_txtOutput;
 };
