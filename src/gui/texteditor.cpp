@@ -22,14 +22,16 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintil
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   m_filePath = file.fileName();
+  m_encoding = encoding.toLocal8Bit();
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
-  QTextCodec* codec_for_encoding = QTextCodec::codecForName(encoding.toLocal8Bit());
+  QTextCodec* codec_for_encoding = QTextCodec::codecForName(m_encoding);
 
   if (codec_for_encoding == nullptr) {
     qCritical("We do not have codec for encoding '%s' when opening file, using defaults.", qPrintable(encoding));
     codec_for_encoding = QTextCodec::codecForName(QString(DEFAULT_TEXT_FILE_ENCODING).toLocal8Bit());
+    m_encoding = codec_for_encoding->name();
   }
 
   QTextStream str(&file); str.setCodec(codec_for_encoding);
