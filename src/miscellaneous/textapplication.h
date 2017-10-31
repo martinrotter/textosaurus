@@ -11,6 +11,7 @@
 
 class TextEditor;
 class TabWidget;
+class ToolBox;
 class FormMain;
 class StatusBar;
 class QAction;
@@ -27,7 +28,7 @@ class TextApplication : public QObject {
 
     QList<TextEditor*> editors()  const;
     bool anyModifiedEditor() const;
-    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar);
+    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, ToolBox* tool_box);
     TextApplicationSettings& settings();
 
   public slots:
@@ -71,6 +72,7 @@ class TextApplication : public QObject {
     TextApplicationSettings m_settings;
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
+    ToolBox* m_toolBox;
 
     // Pointers to important GUI elements outside of editors.
     QAction* m_actionFileNew;

@@ -8,6 +8,7 @@
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
 #include "gui/toolbar.h"
+#include "gui/toolbox.h"
 #include "miscellaneous/textfactory.h"
 
 #include "uchardet/uchardet.h"
@@ -222,8 +223,8 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
 
   if (index >= 0) {
     m_tabEditors->tabBar()->setTabIcon(index, modified ?
-                                      qApp->icons()->fromTheme(QSL("dialog-warning")) :
-                                      qApp->icons()->fromTheme(QSL("text-plain")));
+                                       qApp->icons()->fromTheme(QSL("dialog-warning")) :
+                                       qApp->icons()->fromTheme(QSL("text-plain")));
 
     updateToolBarFromEditor(editor, true);
   }
@@ -298,9 +299,11 @@ void TextApplication::createConnections() {
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
 }
 
-void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar) {
+void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
+                                  StatusBar* status_bar, ToolBox* tool_box) {
   m_tabEditors = tab_widget;
   m_statusBar = status_bar;
+  m_toolBox = tool_box;
 
   // Get pointers to editor-related global actions/menus.
   m_actionFileNew = main_form->m_ui.m_actionFileNew;
@@ -350,6 +353,8 @@ void TextApplication::load() {
       m_actionEolUnix->setChecked(true);
       break;
   }
+
+  m_toolBox->displayOutput(OutputSource::TextApplication, tr("Text component settings loaded."));
 
   // Make sure that toolbar/statusbar is updated.
   onEditorTabSwitched();

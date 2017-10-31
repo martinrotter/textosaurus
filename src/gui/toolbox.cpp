@@ -24,7 +24,7 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   setVisible(false);
   setContentsMargins(0, 0, 0, 0);
 
-  m_txtOutput->setPlaceholderText(tr("This window can display output of external tools..."));
+  m_txtOutput->setPlaceholderText(tr("This window can display output of external tools and some other critical information..."));
   m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
   m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
   m_txtOutput->setReadOnly(true);
@@ -32,9 +32,24 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   addTab(m_txtOutput, qApp->icons()->fromTheme(QSL("application-text")), tr("Output"));
 }
 
-void ToolBox::displayOutput(const QString& source, const QString& message) {
+void ToolBox::displayOutput(OutputSource source, const QString& message) {
   setCurrentWidget(m_txtOutput);
   setVisible(true);
-  m_txtOutput->appendPlainText(QString("%1: %2\n").arg(source, message));
+  m_txtOutput->appendPlainText(QString("[%3] %1: %2\n").arg(descriptionOfSource(source),
+                                                            message,
+                                                            QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
   m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
+}
+
+QString ToolBox::descriptionOfSource(OutputSource source) {
+  switch (source) {
+    case OutputSource::Application:
+      return tr("application");
+
+    case OutputSource::ExternalTool:
+      return tr("external tool");
+
+    case OutputSource::TextApplication:
+      return tr("editor");
+  }
 }

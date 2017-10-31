@@ -7,6 +7,12 @@
 
 class QPlainTextEdit;
 
+enum class OutputSource {
+  TextApplication,
+  ExternalTool,
+  Application
+};
+
 class ToolBox : public QTabWidget {
   Q_OBJECT
 
@@ -14,7 +20,10 @@ class ToolBox : public QTabWidget {
     explicit ToolBox(QWidget* parent = nullptr);
 
   public slots:
-    void displayOutput(const QString& source, const QString& message);
+    void displayOutput(OutputSource source, const QString& message);
+
+  private:
+    QString descriptionOfSource(OutputSource source);
 
   private:
     QPlainTextEdit* m_txtOutput;
