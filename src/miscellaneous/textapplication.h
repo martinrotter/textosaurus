@@ -63,6 +63,7 @@ class TextApplication : public QObject {
     void updateStatusBarFromEditor(TextEditor* editor);
 
   private:
+    int detectCodepage(char* buf, size_t len);
     void createConnections();
     void renameEditor(TextEditor* editor);
     void markEditorModified(TextEditor* editor, bool modified);

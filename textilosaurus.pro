@@ -174,7 +174,8 @@ win32 {
   }
 }
 
-DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
+DISTFILES += resources/scripts/uncrustify/uncrustify.cfg \
+    src/uchardet/README.TXT
 
 MOC_DIR = $$OUT_PWD/moc
 RCC_DIR = $$OUT_PWD/rcc
@@ -253,7 +254,29 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/texteditor.h \
     src/miscellaneous/textapplication.h \
     src/gui/toolbar.h \
-    src/miscellaneous/textapplicationsettings.h
+    src/miscellaneous/textapplicationsettings.h \
+    src/uchardet/CharDistribution.h \
+    src/uchardet/JpCntx.h \
+    src/uchardet/nsBig5Prober.h \
+    src/uchardet/nsCodingStateMachine.h \
+    src/uchardet/nscore.h \
+    src/uchardet/nsEscCharsetProber.h \
+    src/uchardet/nsEUCJPProber.h \
+    src/uchardet/nsEUCKRProber.h \
+    src/uchardet/nsEUCTWProber.h \
+    src/uchardet/nsGB2312Prober.h \
+    src/uchardet/nsHebrewProber.h \
+    src/uchardet/nsCharSetProber.h \
+    src/uchardet/nsLatin1Prober.h \
+    src/uchardet/nsMBCSGroupProber.h \
+    src/uchardet/nsPkgInt.h \
+    src/uchardet/nsSBCSGroupProber.h \
+    src/uchardet/nsSBCharSetProber.h \
+    src/uchardet/nsSJISProber.h \
+    src/uchardet/nsUniversalDetector.h \
+    src/uchardet/nsUTF8Prober.h \
+    src/uchardet/prmem.h \
+    src/uchardet/uchardet.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -310,7 +333,33 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/texteditor.cpp \
     src/miscellaneous/textapplication.cpp \
     src/gui/toolbar.cpp \
-    src/miscellaneous/textapplicationsettings.cpp
+    src/miscellaneous/textapplicationsettings.cpp \
+    src/uchardet/CharDistribution.cpp \
+    src/uchardet/JpCntx.cpp \
+    src/uchardet/LangBulgarianModel.cpp \
+    src/uchardet/LangCyrillicModel.cpp \
+    src/uchardet/LangGreekModel.cpp \
+    src/uchardet/LangHebrewModel.cpp \
+    src/uchardet/LangHungarianModel.cpp \
+    src/uchardet/LangThaiModel.cpp \
+    src/uchardet/nsBig5Prober.cpp \
+    src/uchardet/nsEscCharsetProber.cpp \
+    src/uchardet/nsEscSM.cpp \
+    src/uchardet/nsEUCJPProber.cpp \
+    src/uchardet/nsEUCKRProber.cpp \
+    src/uchardet/nsEUCTWProber.cpp \
+    src/uchardet/nsGB2312Prober.cpp \
+    src/uchardet/nsHebrewProber.cpp \
+    src/uchardet/nsCharSetProber.cpp \
+    src/uchardet/nsLatin1Prober.cpp \
+    src/uchardet/nsMBCSGroupProber.cpp \
+    src/uchardet/nsMBCSSM.cpp \
+    src/uchardet/nsSBCSGroupProber.cpp \
+    src/uchardet/nsSBCharSetProber.cpp \
+    src/uchardet/nsSJISProber.cpp \
+    src/uchardet/nsUniversalDetector.cpp \
+    src/uchardet/nsUTF8Prober.cpp \
+    src/uchardet/uchardet.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

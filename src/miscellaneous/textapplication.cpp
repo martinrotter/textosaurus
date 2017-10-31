@@ -10,6 +10,8 @@
 #include "gui/toolbar.h"
 #include "miscellaneous/textfactory.h"
 
+#include "uchardet/uchardet.h"
+
 #include <QFileDialog>
 #include <QTextCodec>
 
@@ -93,9 +95,26 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   TextEditor* new_editor = addEmptyTextEditor();
 
   if (new_editor != nullptr) {
+    QByteArray arr = "šščěš";
+    char* text = arr.data();
+
+    detectCodepage(text, 4);
+
     new_editor->loadFromFile(file, encoding);
     m_tabWidget->setCurrentWidget(new_editor);
   }
+}
+
+int TextApplication::detectCodepage(char* buf, size_t len) {
+  int codepage = -1;
+  uchardet_t ud = uchardet_new();
+
+  uchardet_handle_data(ud, buf, len);
+  uchardet_data_end(ud);
+  const char* cs = uchardet_get_charset(ud);
+
+  uchardet_delete(ud);
+  return 0;
 }
 
 TextEditor* TextApplication::addEmptyTextEditor() {
