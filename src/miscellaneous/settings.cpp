@@ -31,6 +31,10 @@ DVALUE(QString) Editor::DefaultLoadSaveDirectoryDef = IOFactory::getSystemFolder
 
 // GUI.
 DKEY GUI::ID = "gui";
+DKEY GUI::MainWindowSplitter = "splitter_state";
+
+DVALUE(QByteArray) GUI::MainWindowSplitterDef = QByteArray();
+
 DKEY GUI::ToolbarStyle = "toolbar_style";
 
 DVALUE(Qt::ToolButtonStyle) GUI::ToolbarStyleDef = Qt::ToolButtonIconOnly;

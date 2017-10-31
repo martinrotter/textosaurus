@@ -25,9 +25,12 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QSplitter" name="splitter">
+     <widget class="QSplitter" name="m_splitter">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
       </property>
       <widget class="TabWidget" name="m_tabEditors">
        <property name="currentIndex">
@@ -48,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
