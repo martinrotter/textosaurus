@@ -18,9 +18,8 @@ echo "Obtained URL: $url"
 
 $git_revision = git rev-parse --short HEAD
 $date = (Get-Date).ToUniversalTime().ToString("MM-dd-yyyy HH:mm:ss UTC")
-$webengine_type = if ($file -like '*nowebengine*') { echo "false" } else { echo "true" }
 
-echo "| $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (7z)]($url) | $webengine_type |  " | ac -Encoding "utf8" C:\textilosaurus-wiki\Windows-development-builds.md
+echo "| $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (7z)]($url) |  " | ac -Encoding "utf8" C:\textilosaurus-wiki\Windows-development-builds.md
 
 
 $file = (Get-ChildItem '*.exe').Name
@@ -30,9 +29,8 @@ echo "Obtained URL: $url"
 
 $git_revision = git rev-parse --short HEAD
 $date = (Get-Date).ToUniversalTime().ToString("MM-dd-yyyy HH:mm:ss UTC")
-$webengine_type = if ($file -like '*nowebengine*') { echo "false" } else { echo "true" }
 
-echo "| $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (exe)]($url) | $webengine_type |  " | ac -Encoding "utf8" C:\textilosaurus-wiki\Windows-development-builds.md
+echo "| $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (exe)]($url) |  " | ac -Encoding "utf8" C:\textilosaurus-wiki\Windows-development-builds.md
 
 
 cd C:\textilosaurus-wiki
