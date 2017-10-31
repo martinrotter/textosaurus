@@ -276,7 +276,9 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/nsUniversalDetector.h \
             src/uchardet/nsUTF8Prober.h \
             src/uchardet/prmem.h \
-            src/uchardet/uchardet.h
+            src/uchardet/uchardet.h \
+            src/external-tools/gui/externaltoolseditor.h \
+            src/external-tools/externaltools.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -382,7 +384,9 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsSJISProber.cpp \
             src/uchardet/nsUniversalDetector.cpp \
             src/uchardet/nsUTF8Prober.cpp \
-            src/uchardet/uchardet.cpp
+            src/uchardet/uchardet.cpp \
+            src/external-tools/gui/externaltoolseditor.cpp \
+            src/external-tools/externaltools.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -397,16 +401,19 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingsgui.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
-            src/gui/toolbareditor.ui
-
-TRANSLATIONS += $$PWD/localization/textilosaurus_en_GB.ts \
-                $$PWD/localization/textilosaurus_en.ts
+            src/gui/toolbareditor.ui \
+            src/external-tools/gui/externaltoolseditor.ui
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
                 $$PWD/src/gui \
                 $$PWD/src/gui/dialogs \
-                $$PWD/src/dynamic-shortcuts
+                $$PWD/src/dynamic-shortcuts \
+                $$PWD/src/external-tools \
+                $$PWD/src/external-tools/gui
+
+TRANSLATIONS += $$PWD/localization/textilosaurus_en_GB.ts \
+                $$PWD/localization/textilosaurus_en.ts
 
 # Make sure QM translations are gnerated.
 lrelease.input = TRANSLATIONS
