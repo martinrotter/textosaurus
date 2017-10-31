@@ -473,10 +473,14 @@ win32 {
                         resources/binaries/qt/windows/qt5-msvc2015/msvcp140.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/qt.conf \
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Core.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Gui.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Widgets.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Network.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/ssleay32.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll
+                        resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015-webengine/Qt5PrintSupport.dll.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015-webengine/printsupport
+
   qt_dlls_root.path = $$quote($$PREFIX/)
 
   qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-msvc2015/bearer \
