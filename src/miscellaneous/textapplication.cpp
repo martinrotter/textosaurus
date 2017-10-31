@@ -123,6 +123,7 @@ TextEditor* TextApplication::addEmptyTextEditor() {
 
   m_tabWidget->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
+
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
   connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSavedToFile);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);

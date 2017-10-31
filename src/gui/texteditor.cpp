@@ -25,7 +25,14 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
-  QTextStream str(&file); str.setCodec(m_encoding = encoding.toLatin1().constData());
+  QTextCodec* codec_for_encoding = QTextCodec::codecForName(encoding.toLocal8Bit());
+
+  if (codec_for_encoding == nullptr) {
+    qCritical("We do not have codec for encoding '%s' when opening file, using defaults.", qPrintable(encoding));
+    codec_for_encoding = QTextCodec::codecForName(QString(DEFAULT_TEXT_FILE_ENCODING).toLocal8Bit());
+  }
+
+  QTextStream str(&file); str.setCodec(codec_for_encoding);
   QString next_line;
 
   blockSignals(true);
@@ -35,11 +42,7 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   }
 
   blockSignals(false);
-
   Application::restoreOverrideCursor();
-
-  setEolMode(QsciScintilla::EolMode::EolUnix);
-
   emit loadedFromFile(m_filePath);
 }
 
