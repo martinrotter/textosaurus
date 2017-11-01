@@ -15,9 +15,8 @@ class ExternalTools : public QObject {
   public:
     explicit ExternalTools(QObject* parent = nullptr);
 
-  signals:
+  private:
 
-  public slots:
 };
 
 #endif // EXTERNALTOOLS_H
