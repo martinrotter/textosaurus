@@ -9,6 +9,7 @@
 #include <QLayout>
 #include <QPlainTextEdit>
 #include <QScrollBar>
+#include <QTabBar>
 
 ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTextEdit(this)) {
   PlainToolButton* btn_close = new PlainToolButton(this);
@@ -16,11 +17,13 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   btn_close->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
   btn_close->setToolTip("Hide toolbox");
 
+  btn_close->setMaximumSize(18, 18);
+  btn_close->setPadding(3, 1, 0, 0);
+
   connect(btn_close, &PlainToolButton::clicked, this, &ToolBox::hide);
 
   setTabPosition(QTabWidget::TabPosition::South);
   setCornerWidget(btn_close, Qt::BottomLeftCorner);
-
   setVisible(false);
   setContentsMargins(0, 0, 0, 0);
 
@@ -51,5 +54,8 @@ QString ToolBox::descriptionOfSource(OutputSource source) {
 
     case OutputSource::TextApplication:
       return tr("editor");
+
+    default:
+      return QString();
   }
 }

@@ -5,21 +5,24 @@
 #include <QAction>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QRect>
 #include <QStyle>
 #include <QStyleOption>
 #include <QToolButton>
 
-PlainToolButton::PlainToolButton(QWidget* parent) : QToolButton(parent), m_padding(0) {}
+PlainToolButton::PlainToolButton(QWidget* parent) : QToolButton(parent),
+  m_paddingBottom(0), m_paddingLeft(0), m_paddingRight(0), m_paddingTop(0) {}
 
 PlainToolButton::~PlainToolButton() {}
 
 void PlainToolButton::paintEvent(QPaintEvent* e) {
   Q_UNUSED(e)
   QPainter p(this);
-  QRect rect(QPoint(0, 0), size());
+  QSize siz = size();
+  QRect rect(m_paddingLeft, m_paddingTop, siz.width() - m_paddingLeft - m_paddingRight, siz.height() - m_paddingTop - m_paddingBottom);
 
   // Set padding.
-  rect.adjust(m_padding, m_padding, -m_padding, -m_padding);
+  //rect.adjust(m_padding, m_padding, -m_padding, -m_padding);
 
   if (isEnabled()) {
     if (underMouse() || isChecked()) {
@@ -33,12 +36,12 @@ void PlainToolButton::paintEvent(QPaintEvent* e) {
   icon().paint(&p, rect);
 }
 
-int PlainToolButton::padding() const {
-  return m_padding;
-}
+void PlainToolButton::setPadding(int left, int top, int right, int bottom) {
+  m_paddingLeft = left;
+  m_paddingTop = top;
+  m_paddingRight = right;
+  m_paddingBottom = bottom;
 
-void PlainToolButton::setPadding(int padding) {
-  m_padding = padding;
   repaint();
 }
 

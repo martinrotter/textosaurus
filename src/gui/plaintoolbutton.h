@@ -15,8 +15,7 @@ class PlainToolButton : public QToolButton {
     virtual ~PlainToolButton();
 
     // Padding changers.
-    int padding() const;
-    void setPadding(int padding);
+    void setPadding(int left, int top, int right, int bottom);
 
   public slots:
     void setChecked(bool checked);
@@ -29,7 +28,10 @@ class PlainToolButton : public QToolButton {
     void paintEvent(QPaintEvent* e);
 
   private:
-    int m_padding;
+    int m_paddingLeft;
+    int m_paddingTop;
+    int m_paddingRight;
+    int m_paddingBottom;
 };
 
 #endif // CLOSEBUTTON_H

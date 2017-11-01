@@ -77,6 +77,7 @@ int main(int argc, char* argv[]) {
   // and skin.
   qApp->icons()->setupSearchPaths();
   qApp->icons()->loadCurrentIconTheme();
+  qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
 
   // These settings needs to be set before any QSettings object.
   Application::setApplicationName(APP_NAME);
