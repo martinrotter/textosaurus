@@ -31,8 +31,8 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < argc; i++) {
     const QString str = QString::fromLocal8Bit(argv[i]);
 
-    if (str == "-h") {
-      qDebug("Usage: textilosaurus [OPTIONS]\n\n"
+    if (str == QL1S("-h")) {
+      qDebug("Usage: textilosaurus [OPTIONS] [FILE LIST]\n\n"
              "Option\t\tMeaning\n"
              "-h\t\tDisplays this help.");
       return EXIT_SUCCESS;
