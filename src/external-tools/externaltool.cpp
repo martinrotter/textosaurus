@@ -8,7 +8,23 @@ bool ExternalTool::isPredefined() const {
   return false;
 }
 
-void ExternalTool::runTool(const QString& application_path, const QString& file_path, const QString& selected_text) {}
+void ExternalTool::runTool(const QPointer<TextEditor>& editor) {}
+
+ToolOutput ExternalTool::output() const {
+  return m_output;
+}
+
+void ExternalTool::setOutput(const ToolOutput& output) {
+  m_output = output;
+}
+
+ToolInput ExternalTool::input() const {
+  return m_input;
+}
+
+void ExternalTool::setInput(const ToolInput& input) {
+  m_input = input;
+}
 
 QString ExternalTool::script() const {
   return m_script;
@@ -42,11 +58,13 @@ void ExternalTool::setName(const QString& name) {
   m_name = name;
 }
 
-PredefinedTool::PredefinedTool(std::function<QString (const QString&, const QString&, const QString&)> functor, QObject* parent)
-  : QObject(parent), m_functor(functor) {}
+PredefinedTool::PredefinedTool(std::function<QString(const QString&)> functor, QObject* parent)
+  : ExternalTool(parent), m_functor(functor) {}
 
-void PredefinedTool::runTool(const QString& application_path, const QString& file_path, const QString& selected_text) {
-  QString result = m_functor(application_path, file_path, selected_text);
+void PredefinedTool::runTool(const QPointer<TextEditor>& editor) {
+  QString result;
+
+  //m_functor(application_path, file_path, selected_text);
 }
 
 bool PredefinedTool::isPredefined() const {

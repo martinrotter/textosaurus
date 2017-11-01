@@ -180,6 +180,8 @@ void TextApplication::closeAllUnmodifiedEditors() {
   }
 }
 
+void TextApplication::prepareToolsMenu() {}
+
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   if (reload_all) {
     foreach (TextEditor* editor, editors()) {
@@ -308,6 +310,8 @@ void TextApplication::createConnections() {
     }
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
+
+  connect(m_menuTools, &QMenu::aboutToShow, this, &TextApplication::prepareToolsMenu);
 }
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
@@ -333,6 +337,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
   m_menuEolMode = main_form->m_ui.m_menuEolMode;
+  m_menuTools = main_form->m_ui.m_menuTools;
 
   m_actionEolMac->setData(int(QsciScintilla::EolMode::EolMac));
   m_actionEolUnix->setData(int(QsciScintilla::EolMode::EolUnix));

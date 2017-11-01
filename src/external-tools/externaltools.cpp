@@ -3,3 +3,5 @@
 #include "external-tools/externaltools.h"
 
 ExternalTools::ExternalTools(QObject* parent) : QObject(parent) {}
+
+void ExternalTools::prepareMenu(QMenu* menu) {}

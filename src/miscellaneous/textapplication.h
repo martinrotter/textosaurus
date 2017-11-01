@@ -27,9 +27,12 @@ class TextApplication : public QObject {
     TextEditor* currentEditor() const;
 
     QList<TextEditor*> editors()  const;
-    bool anyModifiedEditor() const;
-    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, ToolBox* tool_box);
+
     TextApplicationSettings& settings();
+
+    bool anyModifiedEditor() const;
+
+    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, ToolBox* tool_box);
 
   public slots:
     void loadFilesFromArgs(int argc, char* argv[]);
@@ -55,6 +58,7 @@ class TextApplication : public QObject {
     void closeAllUnmodifiedEditors();
 
   private slots:
+    void prepareToolsMenu();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void onEditorRequestVisibility();
     void onEditorSavedToFile();
@@ -91,6 +95,7 @@ class TextApplication : public QObject {
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuEolMode;
+    QMenu* m_menuTools;
 };
 
 #endif // TEXTAPPLICATION_H

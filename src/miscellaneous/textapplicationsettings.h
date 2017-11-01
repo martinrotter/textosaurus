@@ -19,6 +19,8 @@ class TextApplicationSettings : public QObject {
     bool wordWrapEnabled() const;
     QString loadSaveDefaultDirectory() const;
 
+    ExternalTools* externalTools() const;
+
   public slots:
     void setLoadSaveDefaultDirectory(const QString& directory);
     void setWordWrapEnabled(bool enabled);

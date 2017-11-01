@@ -39,3 +39,8 @@ void TextApplicationSettings::setEolModeFromAction(QAction* act) {
   qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, int(new_mode));
   emit settingsChanged(true, false);
 }
+
+ExternalTools *TextApplicationSettings::externalTools() const
+{
+    return m_externalTools;
+}
