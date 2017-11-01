@@ -4,12 +4,13 @@
 
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
+#include "miscellaneous/textapplication.h"
 
 #include <QAction>
 #include <QDir>
 #include <QFileInfo>
 
-TextApplicationSettings::TextApplicationSettings(QObject* parent) : QObject(parent) {}
+TextApplicationSettings::TextApplicationSettings(TextApplication* parent) : QObject(parent), m_textApplication(parent) {}
 
 QsciScintilla::EolMode TextApplicationSettings::eolMode() const {
   return static_cast<QsciScintilla::EolMode>(qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt());
@@ -40,7 +41,7 @@ void TextApplicationSettings::setEolModeFromAction(QAction* act) {
   emit settingsChanged(true, false);
 }
 
-ExternalTools *TextApplicationSettings::externalTools() const
+ExternalTools* TextApplicationSettings::externalTools() const
 {
-    return m_externalTools;
+  return m_externalTools;
 }

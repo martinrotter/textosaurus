@@ -28,11 +28,13 @@ class TextApplication : public QObject {
 
     QList<TextEditor*> editors()  const;
 
-    TextApplicationSettings& settings();
+    TextApplicationSettings* settings() const;
 
     bool anyModifiedEditor() const;
 
     void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, ToolBox* tool_box);
+
+    ToolBox* toolBox() const;
 
   public slots:
     void loadFilesFromArgs(int argc, char* argv[]);
@@ -60,9 +62,8 @@ class TextApplication : public QObject {
   private slots:
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void onEditorRequestVisibility();
-    void onEditorSavedToFile();
     void onEditorLoadedFromFile();
-    void onEditorTextChanged(bool modified);
+    void onEditorModifiedChanged(bool modified);
     void onEditorTabSwitched(int index = -1);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
@@ -73,7 +74,7 @@ class TextApplication : public QObject {
     void markEditorModified(TextEditor* editor, bool modified);
 
   private:
-    TextApplicationSettings m_settings;
+    TextApplicationSettings* m_settings;
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
     ToolBox* m_toolBox;

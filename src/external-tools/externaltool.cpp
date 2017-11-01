@@ -2,13 +2,25 @@
 
 #include "external-tools/externaltool.h"
 
+#include "gui/texteditor.h"
+#include "gui/toolbox.h"
+#include "miscellaneous/textapplication.h"
+#include "miscellaneous/textapplicationsettings.h"
+
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent) {}
 
 bool ExternalTool::isPredefined() const {
   return false;
 }
 
-void ExternalTool::runTool(const QPointer<TextEditor>& editor) {}
+void ExternalTool::runTool(const QPointer<TextEditor>& editor) {
+  if (!editor.isNull()) {
+    QMetaObject::invokeMethod(editor->textApplication()->toolBox(), SLOT(displayOutput(OutputSource,QString)),
+                              Qt::AutoConnection,
+                              Q_ARG(OutputSource, OutputSource::ExternalTool),
+                              Q_ARG(QString, "Running tool"));
+  }
+}
 
 ToolOutput ExternalTool::output() const {
   return m_output;
@@ -63,6 +75,13 @@ PredefinedTool::PredefinedTool(std::function<QString(const QString&)> functor, Q
 
 void PredefinedTool::runTool(const QPointer<TextEditor>& editor) {
   QString result;
+
+  if (!editor.isNull()) {
+    QMetaObject::invokeMethod(editor->textApplication()->toolBox(), SLOT(displayOutput(OutputSource,QString)),
+                              Qt::AutoConnection,
+                              Q_ARG(OutputSource, OutputSource::ExternalTool),
+                              Q_ARG(QString, "Running predefined tool"));
+  }
 
   //m_functor(application_path, file_path, selected_text);
 }

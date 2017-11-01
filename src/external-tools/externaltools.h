@@ -7,7 +7,8 @@
 
 class TextApplicationSettings;
 class TextEditor;
-class QMenu;
+class ExternalTool;
+class QAction;
 
 // Top-level management class for external tools.
 class ExternalTools : public QObject {
@@ -15,11 +16,19 @@ class ExternalTools : public QObject {
 
   public:
     explicit ExternalTools(QObject* parent = nullptr);
+    virtual ~ExternalTools();
 
-  public slots:
+    QList<QAction*> generateActions() const;
+
+    const QList<ExternalTool*> tools() const;
+
+  signals:
+
+    // Emitted when some of external tools is added/removed/edited.
+    void externalToolsChanged();
 
   private:
-
+    QList<ExternalTool*> m_tools;
 };
 
 #endif // EXTERNALTOOLS_H

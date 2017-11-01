@@ -81,13 +81,14 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
   str << text();
 
-  if (m_filePath != file_path) {
-    m_filePath = file_path;
-    emit savedToFile(m_filePath);
-  }
+  emit savedToFile(m_filePath);
 
   setModified(false);
   *ok = true;
+}
+
+TextApplication* TextEditor::textApplication() const {
+  return m_textApp;
 }
 
 QByteArray TextEditor::encoding() const {
@@ -110,12 +111,12 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
   QString file_path = QFileDialog::getSaveFileName(qApp->mainFormWidget(),
                                                    tr("Save file as"),
                                                    m_filePath.isEmpty() ?
-                                                   m_textApp->settings().loadSaveDefaultDirectory() :
+                                                   m_textApp->settings()->loadSaveDefaultDirectory() :
                                                    QFileInfo(m_filePath).absolutePath(),
                                                    QSL("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
-    m_textApp->settings().setLoadSaveDefaultDirectory(file_path);
+    m_textApp->settings()->setLoadSaveDefaultDirectory(file_path);
 
     if (encoding.isEmpty()) {
       saveToFile(file_path, ok);
@@ -168,9 +169,9 @@ void TextEditor::closeEditor(bool* ok) {
 
 void TextEditor::reloadSettings() {
   setUtf8(true);
-  setEolMode(m_textApp->settings().eolMode());
+  setEolMode(m_textApp->settings()->eolMode());
   setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
-  setWrapMode(m_textApp->settings().wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
+  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
 
   setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
   setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);

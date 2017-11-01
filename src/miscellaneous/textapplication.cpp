@@ -16,7 +16,7 @@
 #include <QFileDialog>
 #include <QTextCodec>
 
-TextApplication::TextApplication(QObject* parent) : QObject(parent) {
+TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
   connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
 }
 
@@ -115,7 +115,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
 
   if (new_editor != nullptr) {
     new_editor->loadFromFile(file, encoding);
-    m_settings.setLoadSaveDefaultDirectory(file_path);
+    m_settings->setLoadSaveDefaultDirectory(file_path);
     m_tabEditors->setCurrentWidget(new_editor);
   }
 }
@@ -124,10 +124,8 @@ TextEditor* TextApplication::addEmptyTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   m_tabEditors->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
-  connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorTextChanged);
-
+  connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorModifiedChanged);
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
-  connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSavedToFile);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
 
   return editor;
@@ -203,14 +201,6 @@ void TextApplication::onEditorRequestVisibility() {
   }
 }
 
-void TextApplication::onEditorSavedToFile() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
-
-  renameEditor(editor);
-  updateToolBarFromEditor(editor, true);
-  updateStatusBarFromEditor(editor);
-}
-
 void TextApplication::onEditorLoadedFromFile() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
@@ -227,11 +217,17 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
                                        qApp->icons()->fromTheme(QSL("dialog-warning")) :
                                        qApp->icons()->fromTheme(QSL("text-plain")));
 
+    renameEditor(editor);
     updateToolBarFromEditor(editor, true);
+    updateStatusBarFromEditor(editor);
   }
 }
 
-TextApplicationSettings& TextApplication::settings() {
+ToolBox* TextApplication::toolBox() const {
+  return m_toolBox;
+}
+
+TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
 }
 
@@ -267,21 +263,21 @@ void TextApplication::newFile() {
   m_tabEditors->setCurrentWidget(editor);
 }
 
-void TextApplication::onEditorTextChanged(bool modified) {
+void TextApplication::onEditorModifiedChanged(bool modified) {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   markEditorModified(editor, modified);
 }
 
 void TextApplication::createConnections() {
-  connect(&m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
+  connect(m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
   // Tab widget.
   connect(m_tabEditors, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
   // Actions.
-  connect(m_menuEolMode, &QMenu::triggered, &m_settings, &TextApplicationSettings::setEolModeFromAction);
+  connect(m_menuEolMode, &QMenu::triggered, m_settings, &TextApplicationSettings::setEolModeFromAction);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
@@ -290,7 +286,7 @@ void TextApplication::createConnections() {
   connect(m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
   });
-  connect(m_actionWordWrap, &QAction::toggled, &m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionWordWrap, &QAction::toggled, m_settings, &TextApplicationSettings::setWordWrapEnabled);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
 
@@ -307,7 +303,7 @@ void TextApplication::createConnections() {
       TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);;
     }
   });
-  connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
+  connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
 
   // TODO: přidat signal do ExternalTools ze se external tools zmenily
   // a po teto zmene vygenerovat sadu QAction a pridat do m_menuTools,
@@ -355,10 +351,10 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
 void TextApplication::loadState() {
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
-  m_actionWordWrap->setChecked(m_settings.wordWrapEnabled());
+  m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
 
   // Setup GUI of actions.
-  switch (m_settings.eolMode()) {
+  switch (m_settings->eolMode()) {
     case QsciScintilla::EolMode::EolMac:
       m_actionEolMac->setChecked(true);
       break;
@@ -397,7 +393,7 @@ void TextApplication::quit(bool* ok) {
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
   QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
-                                                   m_settings.loadSaveDefaultDirectory(),
+                                                   m_settings->loadSaveDefaultDirectory(),
                                                    tr("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {

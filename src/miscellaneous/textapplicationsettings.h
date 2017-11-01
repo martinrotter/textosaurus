@@ -9,11 +9,13 @@
 
 #include "external-tools/externaltools.h"
 
+class TextApplication;
+
 class TextApplicationSettings : public QObject {
   Q_OBJECT
 
   public:
-    explicit TextApplicationSettings(QObject* parent = nullptr);
+    explicit TextApplicationSettings(TextApplication* parent = nullptr);
 
     QsciScintilla::EolMode eolMode() const;
     bool wordWrapEnabled() const;
@@ -32,6 +34,7 @@ class TextApplicationSettings : public QObject {
     void settingsChanged(bool reload_visible_editor, bool reload_all_editors);
 
   private:
+    TextApplication* m_textApplication;
     ExternalTools* m_externalTools;
 };
 
