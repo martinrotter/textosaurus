@@ -180,7 +180,10 @@ void TextApplication::closeAllUnmodifiedEditors() {
   }
 }
 
-void TextApplication::prepareToolsMenu() {}
+void TextApplication::prepareToolsMenu() {
+  // TODO: předchystat m_menuTools aby obsahovalo jen vychozi
+  // polozky a pak zavolat asi m_settings.externalTools().prepareMenu(m_menuTools)
+}
 
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   if (reload_all) {
