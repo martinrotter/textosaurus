@@ -58,7 +58,6 @@ class TextApplication : public QObject {
     void closeAllUnmodifiedEditors();
 
   private slots:
-    void prepareToolsMenu();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void onEditorRequestVisibility();
     void onEditorSavedToFile();

@@ -18,9 +18,6 @@ class ExternalTools : public QObject {
 
   public slots:
 
-    // Gets empty menu, then adds submenus/actions for various tools.
-    void prepareMenu(QMenu* menu);
-
   private:
 
 };

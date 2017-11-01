@@ -180,11 +180,6 @@ void TextApplication::closeAllUnmodifiedEditors() {
   }
 }
 
-void TextApplication::prepareToolsMenu() {
-  // TODO: předchystat m_menuTools aby obsahovalo jen vychozi
-  // polozky a pak zavolat asi m_settings.externalTools().prepareMenu(m_menuTools)
-}
-
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   if (reload_all) {
     foreach (TextEditor* editor, editors()) {
@@ -314,7 +309,12 @@ void TextApplication::createConnections() {
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAs);
 
-  connect(m_menuTools, &QMenu::aboutToShow, this, &TextApplication::prepareToolsMenu);
+  // TODO: přidat signal do ExternalTools ze se external tools zmenily
+  // a po teto zmene vygenerovat sadu QAction a pridat do m_menuTools,
+  // pri dalsim signalu zmeny external tools opět přegenerovat
+  // nepoužívat lazy vytváření menu!! chci to menu tam mít natvrdo hned
+  // protože pak budou fungovat klavesove zkratky těch QAction
+  // když budou mít nastaveno Qt::ApplicationShortcut v QAction::setShortcutContext
 }
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
