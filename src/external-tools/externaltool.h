@@ -18,7 +18,10 @@ enum class ToolInput {
   CurrentLine,
 
   // Saved file path is given as tool input.
-  SavedFile
+  SavedFile,
+
+  // This tool does not take any sort of input.
+  NoInput
 };
 
 enum class ToolOutput {

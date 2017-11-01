@@ -74,16 +74,52 @@ PredefinedTool::PredefinedTool(std::function<QString(const QString&)> functor, Q
   : ExternalTool(parent), m_functor(functor) {}
 
 void PredefinedTool::runTool(const QPointer<TextEditor>& editor) {
-  QString result;
-
   if (!editor.isNull()) {
     QMetaObject::invokeMethod(editor->textApplication()->toolBox(), SLOT(displayOutput(OutputSource,QString)),
                               Qt::AutoConnection,
                               Q_ARG(OutputSource, OutputSource::ExternalTool),
-                              Q_ARG(QString, "Running predefined tool"));
+                              Q_ARG(QString, QString("Running '%1' tool").arg(name())));
   }
 
-  //m_functor(application_path, file_path, selected_text);
+  QString data;
+
+  switch (input()) {
+    case ToolInput::SelectionDocument:
+      if (!editor.isNull()) {
+        data = editor->hasSelectedText() ? editor->selectedText() : editor->text();
+      }
+
+      break;
+
+    case ToolInput::CurrentLine:
+      if (!editor.isNull()) {
+        int* line;
+        int* index;
+
+        editor->getCursorPosition(line, index);
+
+        data = editor->text(*line);
+      }
+
+      break;
+
+    case ToolInput::SavedFile:
+      if (!editor.isNull()) {
+        bool ok;
+
+        editor->save(&ok);
+        data = editor->filePath();
+      }
+
+      break;
+
+    case ToolInput::NoInput:
+    default:
+      break;
+  }
+
+  QString result = m_functor(data);
+  emit toolFinished(editor, result);
 }
 
 bool PredefinedTool::isPredefined() const {

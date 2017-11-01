@@ -18,6 +18,7 @@
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
   connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
+  connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
 }
 
 TextApplication::~TextApplication() {
@@ -336,6 +337,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
   m_actionEditBack = main_form->m_ui.m_actionEditBack;
   m_actionEditForward = main_form->m_ui.m_actionEditForward;
+  m_actionSettings = main_form->m_ui.m_actionSettings;
 
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
@@ -374,6 +376,8 @@ void TextApplication::loadState() {
   }
 
   m_toolBox->displayOutput(OutputSource::TextApplication, tr("Text component settings loaded."));
+
+  m_settings->externalTools()->reloadTools();
 
   // Make sure that toolbar/statusbar is updated.
   onEditorTabSwitched();
@@ -453,6 +457,15 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
       m_statusBar->setEncoding(QString());
     }
   }
+}
+
+void TextApplication::loadNewExternalTools(const QList<QAction*>& actions) {
+  // Make sure we reload external tools.
+  m_menuTools->clear();
+  m_menuTools->addAction(m_actionSettings);
+  m_menuTools->addSeparator();
+
+  m_menuTools->addActions(actions);
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {

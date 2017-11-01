@@ -68,6 +68,7 @@ class TextApplication : public QObject {
     void onEditorTabSwitched(int index = -1);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
+    void loadNewExternalTools(const QList<QAction*>& actions);
 
   private:
     void createConnections();
@@ -93,6 +94,7 @@ class TextApplication : public QObject {
     QAction* m_actionWordWrap;
     QAction* m_actionEditBack;
     QAction* m_actionEditForward;
+    QAction* m_actionSettings;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuEolMode;

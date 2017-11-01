@@ -5,7 +5,10 @@
 #include "external-tools/externaltool.h"
 #include "miscellaneous/textapplication.h"
 
+#include <functional>
+
 #include <QAction>
+#include <QDateTime>
 #include <QPointer>
 
 ExternalTools::ExternalTools(TextApplication* parent)
@@ -26,6 +29,8 @@ QList<QAction*> ExternalTools::generateActions() const {
 
     connect(act, &QAction::triggered, this, &ExternalTools::runTool);
     connect(tool, &ExternalTool::toolFinished, this, &ExternalTools::onToolFinished);
+
+    actions.append(act);
   }
 
   return actions;
@@ -33,6 +38,26 @@ QList<QAction*> ExternalTools::generateActions() const {
 
 const QList<ExternalTool*> ExternalTools::tools() const {
   return m_tools;
+}
+
+void ExternalTools::reloadTools() {
+  qDeleteAll(m_tools);
+  m_tools.clear();
+
+  std::function<QString(const QString&)> get_date = [](const QString& data) {
+                                                      return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
+                                                    };
+
+  PredefinedTool* predefined_inset_date_time = new PredefinedTool(get_date, this);
+
+  predefined_inset_date_time->setName(tr("Insert date/time"));
+  predefined_inset_date_time->setId(QSL("insert-date-time"));
+  predefined_inset_date_time->setInput(ToolInput::NoInput);
+  predefined_inset_date_time->setOutput(ToolOutput::InsertAtCursorPosition);
+
+  m_tools.append(predefined_inset_date_time);
+
+  emit externalToolsChanged(generateActions());
 }
 
 void ExternalTools::runTool() {
@@ -51,4 +76,18 @@ void ExternalTools::onToolFinished(QPointer<TextEditor> editor, const QString& o
   ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
 
   // TODO: we do something with the text.
+  switch (tool->output()) {
+    case ToolOutput::InsertAtCursorPosition:
+      editor->insert(output_text);
+      break;
+
+    case ToolOutput::DumpToOutputWindow:
+      break;
+
+    case ToolOutput::NewSavedFile:
+      break;
+
+    case ToolOutput::ReplaceSelectionDocument:
+      break;
+  }
 }

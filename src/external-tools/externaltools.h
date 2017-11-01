@@ -23,6 +23,9 @@ class ExternalTools : public QObject {
 
     const QList<ExternalTool*> tools() const;
 
+  public slots:
+    void reloadTools();
+
   private slots:
     void runTool();
     void onToolFinished(QPointer<TextEditor> editor, const QString& output_text);
@@ -30,7 +33,7 @@ class ExternalTools : public QObject {
   signals:
 
     // Emitted when some of external tools is added/removed/edited.
-    void externalToolsChanged();
+    void externalToolsChanged(QList<QAction*> actions);
 
   private:
     TextApplication* m_textApplication;
