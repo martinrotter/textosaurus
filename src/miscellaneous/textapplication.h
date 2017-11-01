@@ -23,6 +23,7 @@ class TextApplication : public QObject {
 
   public:
     explicit TextApplication(QObject* parent = nullptr);
+    virtual ~TextApplication();
 
     TextEditor* currentEditor() const;
 

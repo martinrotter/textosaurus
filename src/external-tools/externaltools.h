@@ -7,6 +7,7 @@
 
 class TextApplicationSettings;
 class TextEditor;
+class TextApplication;
 class ExternalTool;
 class QAction;
 
@@ -15,12 +16,16 @@ class ExternalTools : public QObject {
   Q_OBJECT
 
   public:
-    explicit ExternalTools(QObject* parent = nullptr);
+    explicit ExternalTools(TextApplication* parent = nullptr);
     virtual ~ExternalTools();
 
     QList<QAction*> generateActions() const;
 
     const QList<ExternalTool*> tools() const;
+
+  private slots:
+    void runTool();
+    void onToolFinished(QPointer<TextEditor> editor, const QString& output_text);
 
   signals:
 
@@ -28,6 +33,8 @@ class ExternalTools : public QObject {
     void externalToolsChanged();
 
   private:
+    TextApplication* m_textApplication;
+
     QList<ExternalTool*> m_tools;
 };
 

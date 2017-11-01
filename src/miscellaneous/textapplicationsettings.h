@@ -16,6 +16,7 @@ class TextApplicationSettings : public QObject {
 
   public:
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
+    virtual ~TextApplicationSettings();
 
     QsciScintilla::EolMode eolMode() const;
     bool wordWrapEnabled() const;

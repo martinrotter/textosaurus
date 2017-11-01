@@ -10,7 +10,12 @@
 #include <QDir>
 #include <QFileInfo>
 
-TextApplicationSettings::TextApplicationSettings(TextApplication* parent) : QObject(parent), m_textApplication(parent) {}
+TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
+  : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)) {}
+
+TextApplicationSettings::~TextApplicationSettings() {
+  qDebug("Destroying TextApplicationSettings");
+}
 
 QsciScintilla::EolMode TextApplicationSettings::eolMode() const {
   return static_cast<QsciScintilla::EolMode>(qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt());

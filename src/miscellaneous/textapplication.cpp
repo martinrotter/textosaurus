@@ -20,6 +20,10 @@ TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(
   connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
 }
 
+TextApplication::~TextApplication() {
+  qDebug("Destroying TextApplication");
+}
+
 TextEditor* TextApplication::currentEditor() const {
   return m_tabEditors->textEditorAt(m_tabEditors->currentIndex());
 }
