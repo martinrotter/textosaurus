@@ -239,7 +239,7 @@ void TextApplication::loadFilesFromArgs(int argc, char* argv[]) {
   for (int i = 1; i < argc; i++) {
     QString file_path = QString::fromUtf8(argv[i]);
 
-    QTimer::singleShot(1000, this, [this, file_path] {
+    QTimer::singleShot(100, this, [this, file_path] {
       loadTextEditorFromFile(file_path);
     });
   }
@@ -341,10 +341,10 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   connect(main_form, &FormMain::closeRequested, this, &TextApplication::quit);
 
   createConnections();
-  load();
+  loadState();
 }
 
-void TextApplication::load() {
+void TextApplication::loadState() {
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
   m_actionWordWrap->setChecked(m_settings.wordWrapEnabled());

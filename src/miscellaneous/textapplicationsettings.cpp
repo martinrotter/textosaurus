@@ -37,5 +37,5 @@ void TextApplicationSettings::setEolModeFromAction(QAction* act) {
   QsciScintilla::EolMode new_mode = static_cast<QsciScintilla::EolMode>(act->data().toInt());
 
   qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, int(new_mode));
-  emit settingsChanged(false, false);
+  emit settingsChanged(true, false);
 }

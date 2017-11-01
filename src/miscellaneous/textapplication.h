@@ -39,7 +39,7 @@ class TextApplication : public QObject {
 
     // Loads initial state of text application, including session restoring,
     // setup initial GUI state for actions/toolbar/statusbar etc.
-    void load();
+    void loadState();
 
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
