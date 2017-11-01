@@ -115,6 +115,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
 
   if (new_editor != nullptr) {
     new_editor->loadFromFile(file, encoding);
+    m_settings.setLoadSaveDefaultDirectory(file_path);
     m_tabEditors->setCurrentWidget(new_editor);
   }
 }
@@ -232,6 +233,16 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
 
 TextApplicationSettings& TextApplication::settings() {
   return m_settings;
+}
+
+void TextApplication::loadFilesFromArgs(int argc, char* argv[]) {
+  for (int i = 1; i < argc; i++) {
+    QString file_path = QString::fromUtf8(argv[i]);
+
+    QTimer::singleShot(1000, this, [this, file_path] {
+      loadTextEditorFromFile(file_path);
+    });
+  }
 }
 
 void TextApplication::undo() {
@@ -382,7 +393,6 @@ void TextApplication::openTextFile(QAction* action) {
                                                    tr("Text files (*.txt);;All files (*)"));
 
   if (!file_path.isEmpty()) {
-    m_settings.setLoadSaveDefaultDirectory(file_path);
     loadTextEditorFromFile(file_path, encoding);
   }
 }

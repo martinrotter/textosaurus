@@ -32,6 +32,7 @@ class TextApplication : public QObject {
     TextApplicationSettings& settings();
 
   public slots:
+    void loadFilesFromArgs(int argc, char* argv[]);
     void undo();
     void redo();
     void newFile();

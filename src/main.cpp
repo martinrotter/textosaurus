@@ -9,6 +9,7 @@
 #include "miscellaneous/application.h"
 #include "miscellaneous/debugging.h"
 #include "miscellaneous/iconfactory.h"
+#include "miscellaneous/textapplication.h"
 #include "network-web/silentnetworkaccessmanager.h"
 #include "network-web/webfactory.h"
 
@@ -129,6 +130,9 @@ int main(int argc, char* argv[]) {
     });
     qApp->system()->checkForUpdates();
   }
+
+  // We load any documents passed as parameters.
+  qApp->textApplication()->loadFilesFromArgs(argc, argv);
 
   // Enter global event loop.
   return Application::exec();
