@@ -249,7 +249,7 @@ void FormMain::saveSize() {
     is_maximized = true;
 
     // Window is maximized, we store that fact to settings and unmaximize.
-    qApp->settings()->setValue(GROUP(GUI), GUI::IsMainWindowMaximizedBeforeFullscreen, isMaximized());
+    qApp->settings()->setValue(GROUP(GUI), GUI::IsMainWindowMaximizedBeforeFullscreen, is_maximized);
     setWindowState((windowState() & ~Qt::WindowMaximized) | Qt::WindowActive);
 
     // We process events to really have window un-maximized.
@@ -267,7 +267,7 @@ void FormMain::saveSize() {
 
 void FormMain::createConnections() {
   // Menu "File" connections.
-  connect(m_ui.m_actionQuit, &QAction::triggered, this, &FormMain::close);
+  connect(m_ui.m_actionQuit, &QAction::triggered, qApp, &Application::quitApplication);
   connect(m_ui.m_actionRestart, &QAction::triggered, this, [this]() {
     if (close()) {
       qApp->restart();

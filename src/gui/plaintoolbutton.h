@@ -14,10 +14,8 @@ class PlainToolButton : public QToolButton {
     explicit PlainToolButton(QWidget* parent = nullptr);
     virtual ~PlainToolButton();
 
-    // Padding changers.
-    void setPadding(int left, int top, int right, int bottom);
-
   public slots:
+    void setPadding(int left, int top, int right, int bottom);
     void setChecked(bool checked);
     void reactOnActionChange(QAction* action);
     void reactOnSenderActionChange();
@@ -28,10 +26,10 @@ class PlainToolButton : public QToolButton {
     void paintEvent(QPaintEvent* e);
 
   private:
-    int m_paddingLeft;
-    int m_paddingTop;
-    int m_paddingRight;
-    int m_paddingBottom;
+    int m_paddingLeft = 0;
+    int m_paddingTop = 0;
+    int m_paddingRight = 0;
+    int m_paddingBottom = 0;
 };
 
 #endif // CLOSEBUTTON_H

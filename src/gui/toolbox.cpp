@@ -17,15 +17,21 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   btn_close->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
   btn_close->setToolTip("Hide toolbox");
 
-  btn_close->setMaximumSize(18, 18);
-  btn_close->setPadding(3, 1, 0, 0);
-
   connect(btn_close, &PlainToolButton::clicked, this, &ToolBox::hide);
 
   setTabPosition(QTabWidget::TabPosition::South);
   setCornerWidget(btn_close, Qt::BottomLeftCorner);
   setVisible(false);
   setContentsMargins(0, 0, 0, 0);
+
+  // Tweak corner button size/position.
+  int available_height = tabBar()->height();
+  QSize optimal_size = btn_close->sizeHint();
+  int btn_side = qMin(optimal_size.width(), available_height) - 4;
+  int ideal_side = qAbs(btn_side - available_height) / 2;
+
+  btn_close->setMaximumSize(btn_side, btn_side);
+  btn_close->setPadding(ideal_side, ideal_side - 1, 0, 0);
 
   m_txtOutput->setPlaceholderText(tr("This window can display output of external tools and some other critical information..."));
   m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);

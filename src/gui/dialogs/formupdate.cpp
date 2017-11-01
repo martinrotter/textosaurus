@@ -217,7 +217,7 @@ void FormUpdate::startUpdate() {
                            QMessageBox::Warning, this);
     }
     else {
-      qApp->quit();
+      qApp->quitApplication();
     }
 #endif
   }

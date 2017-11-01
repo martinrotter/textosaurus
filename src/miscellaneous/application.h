@@ -81,8 +81,7 @@ class Application : public QtSingleApplication {
     static Application* instance();
 
   public slots:
-
-    // Restarts the application.
+    void quitApplication();
     void restart();
 
     // Processes incoming message from another RSS Guard instance.

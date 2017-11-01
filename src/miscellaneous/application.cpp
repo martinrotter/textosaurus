@@ -148,7 +148,7 @@ void Application::processExecutionMessage(const QString& message) {
   const QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
 
   if (messages.contains(APP_QUIT_INSTANCE)) {
-    quit();
+    quitApplication();
   }
   else {
     foreach (const QString& msg, messages) {
@@ -175,6 +175,15 @@ void Application::showGuiMessage(const QString& title, const QString& message,
 
 Application* Application::instance() {
   return static_cast<Application*>(QCoreApplication::instance());
+}
+
+void Application::quitApplication() {
+  if (m_mainForm != nullptr) {
+    m_mainForm->close();
+  }
+  else {
+    Application::quit();
+  }
 }
 
 void Application::onCommitData(QSessionManager& manager) {
@@ -231,5 +240,6 @@ void Application::onAboutToQuit() {
 
 void Application::restart() {
   m_shouldRestart = true;
-  quit();
+
+  quitApplication();
 }
