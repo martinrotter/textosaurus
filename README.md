@@ -30,7 +30,7 @@ Features
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents,
-    - support for many text operations, which allow you to:
+    - support for **many text operations**, which allow you to:
         * upload selection/document to pastebin sites,
         * convert to/from Base64 and Base64Url,
         * insert current date/time.
