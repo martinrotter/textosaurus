@@ -505,7 +505,14 @@ void TextApplication::onToolFinished(ExternalTool* tool, QPointer<TextEditor> ed
       break;
 
     case ToolOutput::ReplaceSelectionDocument:
-      editor->replaceSelectedText(output_text);
+      if (editor->hasSelectedText()) {
+        editor->replaceSelectedText(output_text);
+      }
+      else {
+        editor->clear();
+        editor->setText(output_text);
+      }
+
       break;
 
     case ToolOutput::NoOutput:

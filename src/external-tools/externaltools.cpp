@@ -3,6 +3,7 @@
 #include "external-tools/externaltools.h"
 
 #include "external-tools/externaltool.h"
+#include "external-tools/predefinedtools.h"
 #include "gui/toolbox.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
@@ -164,6 +165,43 @@ void ExternalTools::loadPredefinedTools() {
   send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_tools.append(send_to_sprunge);
+
+  // 5. To/from base64(url).
+  PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
+
+  tobase64->setCategory(tr("MIME tools"));
+  tobase64->setName(tr("Text → Base64"));
+  tobase64->setInput(ToolInput::SelectionDocument);
+  tobase64->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(tobase64);
+
+  PredefinedTool* tobase64url = new PredefinedTool(&PredefinedTools::toBase64Url, this);
+
+  tobase64url->setCategory(tr("MIME tools"));
+  tobase64url->setName(tr("Text → Base64Url"));
+  tobase64url->setInput(ToolInput::SelectionDocument);
+  tobase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(tobase64url);
+
+  PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
+
+  frombase64->setCategory(tr("MIME tools"));
+  frombase64->setName(tr("Base64 → text"));
+  frombase64->setInput(ToolInput::SelectionDocument);
+  frombase64->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(frombase64);
+
+  PredefinedTool* frombase64url = new PredefinedTool(&PredefinedTools::fromBase64Url, this);
+
+  frombase64url->setCategory(tr("MIME tools"));
+  frombase64url->setName(tr("Base64Url → text"));
+  frombase64url->setInput(ToolInput::SelectionDocument);
+  frombase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(frombase64url);
 }
 
 void ExternalTools::loadCustomTools() {}

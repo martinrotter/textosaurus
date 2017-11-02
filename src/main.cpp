@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) {
   qDebug("Showing the main window when the application is starting.");
   main_window.show();
 
-  if (true || qApp->isFirstRun() || qApp->isFirstRun(APP_VERSION)) {
+  if (qApp->isFirstRun() || qApp->isFirstRun(APP_VERSION)) {
     qApp->showGuiMessage(QObject::tr("Welcome to %1. Please, check NEW stuff included in this "
                                      "version by going to Help → About application → Changelog.").arg(APP_LONG_NAME));
   }
