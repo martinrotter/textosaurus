@@ -24,7 +24,7 @@
 #define URL_REGEXP "^(http|https|feed|ftp):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?$"
 #define ICON_SIZE_SETTINGS                    16
 #define CLOSE_LOCK_TIMEOUT                    2000
-#define DOWNLOAD_TIMEOUT                      30000
+#define DOWNLOAD_TIMEOUT                      5000
 #define ELLIPSIS_LENGTH                       3
 #define CHANGE_EVENT_DELAY                    250
 #define FLAG_ICON_SUBFOLDER                   "flags"
@@ -32,6 +32,9 @@
 #define SEPARATOR_ACTION_NAME                 "separator"
 #define DOWNLOADER_ICON_SIZE                  48
 #define ENCRYPTION_FILE_NAME                  "key.private"
+
+#define PASTEBIN_CLBIN  "https://clbin.com"
+#define PASTEBIN_IXIO   "http://ix.io"
 
 #define HTTP_HEADERS_ACCEPT         "Accept"
 #define HTTP_HEADERS_CONTENT_TYPE   "Content-Type"

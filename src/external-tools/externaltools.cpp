@@ -4,7 +4,10 @@
 
 #include "external-tools/externaltool.h"
 #include "gui/toolbox.h"
+#include "miscellaneous/application.h"
+#include "miscellaneous/settings.h"
 #include "miscellaneous/textapplication.h"
+#include "network-web/networkfactory.h"
 
 #include <functional>
 
@@ -12,6 +15,7 @@
 #include <QDateTime>
 #include <QMenu>
 #include <QPointer>
+#include <QRegularExpression>
 
 ExternalTools::ExternalTools(QObject* parent) : QObject(parent), m_tools(QList<ExternalTool*>()) {}
 
@@ -59,19 +63,74 @@ const QList<ExternalTool*> ExternalTools::tools() const {
 }
 
 void ExternalTools::loadPredefinedTools() {
-  std::function<QString(const QString&)> get_date = [](const QString& data) {
-                                                      return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
-                                                    };
+  std::function<QString(const QString&)> get_date =
+    [](const QString& data) {
+      Q_UNUSED(data)
+      return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
+    };
 
-  PredefinedTool* predefined_inset_date_time = new PredefinedTool(get_date, this);
+  PredefinedTool* insert_date_time = new PredefinedTool(get_date, this);
 
-  predefined_inset_date_time->setShortcut(QSL("CTRL+SHIFT+K"));
-  predefined_inset_date_time->setCategory(tr("Insert..."));
-  predefined_inset_date_time->setName(tr("Insert date/time"));
-  predefined_inset_date_time->setInput(ToolInput::NoInput);
-  predefined_inset_date_time->setOutput(ToolOutput::InsertAtCursorPosition);
+  insert_date_time->setCategory(tr("Insert..."));
+  insert_date_time->setName(tr("Date/time"));
+  insert_date_time->setInput(ToolInput::NoInput);
+  insert_date_time->setOutput(ToolOutput::InsertAtCursorPosition);
 
-  m_tools.append(predefined_inset_date_time);
+  m_tools.append(insert_date_time);
+
+  std::function<QString(const QString&)> send_to_clbin_lambda =
+    [](const QString& data) {
+      QByteArray output;
+      QString content = QString("clbin=%1").arg(data);
+      NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_CLBIN),
+                                                                     DOWNLOAD_TIMEOUT,
+                                                                     content.toUtf8(),
+                                                                     output,
+                                                                     QNetworkAccessManager::Operation::PostOperation);
+
+      if (result.first == QNetworkReply::NetworkError::NoError) {
+        return QString(output).remove(QRegularExpression(QSL("\\s")));
+      }
+      else {
+        return QString();
+      }
+    };
+
+  PredefinedTool* send_to_clbin = new PredefinedTool(send_to_clbin_lambda, this);
+
+  send_to_clbin->setCategory(tr("Upload to..."));
+  send_to_clbin->setName(tr("Upload to clbin.com"));
+  send_to_clbin->setInput(ToolInput::SelectionDocument);
+  send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_clbin);
+
+  std::function<QString(const QString&)> send_to_ixio_lambda =
+    [](const QString& data) {
+      QByteArray output;
+      QString content = QString("f:1=%1").arg(data);
+      NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_IXIO),
+                                                                     DOWNLOAD_TIMEOUT,
+                                                                     content.toUtf8(),
+                                                                     output,
+                                                                     QNetworkAccessManager::Operation::PostOperation);
+
+      if (result.first == QNetworkReply::NetworkError::NoError) {
+        return QString(output).remove(QRegularExpression(QSL("\\s")));
+      }
+      else {
+        return QString();
+      }
+    };
+
+  PredefinedTool* send_to_ixio = new PredefinedTool(send_to_ixio_lambda, this);
+
+  send_to_ixio->setCategory(tr("Upload to..."));
+  send_to_ixio->setName(tr("Upload to ix.io"));
+  send_to_ixio->setInput(ToolInput::SelectionDocument);
+  send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_ixio);
 }
 
 void ExternalTools::loadCustomTools() {}

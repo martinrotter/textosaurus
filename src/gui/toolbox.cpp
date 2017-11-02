@@ -44,9 +44,9 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
 void ToolBox::displayOutput(OutputSource source, const QString& message) {
   setCurrentWidget(m_txtOutput);
   setVisible(true);
-  m_txtOutput->appendPlainText(QString("[%3] %1: %2\n").arg(descriptionOfSource(source),
-                                                            message,
-                                                            QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
+  m_txtOutput->appendPlainText(QString("[%3] %1: %2").arg(descriptionOfSource(source),
+                                                          message,
+                                                          QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
   m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
 }
 

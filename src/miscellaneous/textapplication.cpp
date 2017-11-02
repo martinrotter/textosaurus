@@ -239,7 +239,7 @@ void TextApplication::runTool() {
   if (editor != nullptr) {
     ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
 
-    m_toolBox->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool").arg(tool_to_run->name()));
+    m_toolBox->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool...").arg(tool_to_run->name()));
     m_settings->externalTools()->runTool(tool_to_run, editor);
   }
 }
@@ -487,7 +487,6 @@ void TextApplication::onToolFinished(ExternalTool* tool, QPointer<TextEditor> ed
     return;
   }
 
-  // TODO: we do something with the text.
   switch (tool->output()) {
     case ToolOutput::InsertAtCursorPosition:
       editor->insert(output_text);
@@ -498,9 +497,13 @@ void TextApplication::onToolFinished(ExternalTool* tool, QPointer<TextEditor> ed
       break;
 
     case ToolOutput::NewSavedFile:
+
+      // TODO: uložíme výstup do souboru v tempu
+      // a pak ten soubor otevřeme.
       break;
 
     case ToolOutput::ReplaceSelectionDocument:
+      editor->replaceSelectedText(output_text);
       break;
 
     case ToolOutput::NoOutput:
