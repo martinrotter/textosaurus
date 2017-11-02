@@ -8,6 +8,7 @@
 #include <QCheckBox>
 #include <QDialogButtonBox>
 #include <QDialogButtonBox>
+#include <QFileDialog>
 #include <QPushButton>
 #include <QStyle>
 #include <QtGlobal>
@@ -34,6 +35,29 @@ void MessageBox::setCheckBox(QMessageBox* msg_box, const QString& text, bool* da
     *data = checked;
   });
   msg_box->setCheckBox(check_box);
+}
+
+QString MessageBox::getSaveFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
+                                    const QString& preselected_file, const QStringList& filters, QString* selected_filter) {
+  QFileDialog dialog(parent, caption, initial_dir, filters.join(QSL(";;")));
+
+  dialog.setDefaultSuffix(QSL("txt"));
+  dialog.setFileMode(QFileDialog::FileMode::AnyFile);
+  dialog.selectFile(preselected_file);
+  dialog.setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
+  dialog.setOption(QFileDialog::Option::ShowDirsOnly, false);
+  dialog.setOption(QFileDialog::Option::DontConfirmOverwrite, false);
+
+  if (dialog.exec()) {
+    if (selected_filter != nullptr) {
+      *selected_filter = dialog.selectedNameFilter();
+    }
+
+    return dialog.selectedFiles().isEmpty() ? QString() : dialog.selectedFiles().at(0);
+  }
+  else {
+    return QString();
+  }
 }
 
 QIcon MessageBox::iconForStatus(QMessageBox::Icon status) {

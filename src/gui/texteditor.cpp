@@ -4,6 +4,7 @@
 
 #include "definitions/definitions.h"
 #include "exceptions/ioexception.h"
+#include "gui/messagebox.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
@@ -108,12 +109,15 @@ void TextEditor::save(bool* ok) {
 
 void TextEditor::saveAs(bool* ok, const QString& encoding) {
   // We save this documents as new file.
-  QString file_path = QFileDialog::getSaveFileName(qApp->mainFormWidget(),
-                                                   tr("Save file as"),
-                                                   m_filePath.isEmpty() ?
-                                                   m_textApp->settings()->loadSaveDefaultDirectory() :
-                                                   QFileInfo(m_filePath).absolutePath(),
-                                                   QSL("Text files (*.txt);;All files (*)"));
+  QStringList filters; filters << QSL("All files (*)") << QSL("Text files (*.txt)");
+  QString file_path = MessageBox::getSaveFileName(qApp->mainFormWidget(),
+                                                  tr("Save file as"),
+                                                  m_filePath.isEmpty() ?
+                                                  m_textApp->settings()->loadSaveDefaultDirectory() :
+                                                  QFileInfo(m_filePath).absolutePath(),
+                                                  QFileInfo(m_filePath).fileName(),
+                                                  filters,
+                                                  nullptr);
 
   if (!file_path.isEmpty()) {
     m_textApp->settings()->setLoadSaveDefaultDirectory(file_path);
@@ -169,6 +173,7 @@ void TextEditor::closeEditor(bool* ok) {
 
 void TextEditor::reloadSettings() {
   setUtf8(true);
+
   setEolMode(m_textApp->settings()->eolMode());
   setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
