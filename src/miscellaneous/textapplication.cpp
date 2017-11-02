@@ -252,7 +252,7 @@ void TextApplication::loadFilesFromArgs(int argc, char* argv[]) {
   for (int i = 1; i < argc; i++) {
     QString file_path = QString::fromUtf8(argv[i]);
 
-    QTimer::singleShot(100, this, [this, file_path] {
+    QTimer::singleShot(0, this, [this, file_path] {
       loadTextEditorFromFile(file_path);
     });
   }

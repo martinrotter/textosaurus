@@ -9,6 +9,8 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
   m_lblEncoding = new QLabel(this);
   m_lblFileType = new QLabel(this);
 
+  m_lblEncoding->setToolTip(tr("Output encoding"));
+
   addPermanentWidget(m_lblFileType);
   addPermanentWidget(m_lblEncoding);
 }
