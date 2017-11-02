@@ -509,8 +509,10 @@ void TextApplication::onToolFinished(ExternalTool* tool, QPointer<TextEditor> ed
         editor->replaceSelectedText(output_text);
       }
       else {
-        editor->clear();
-        editor->setText(output_text);
+        // We replace whole document contents
+        // because there is no selection.
+        editor->selectAll();
+        editor->replaceSelectedText(output_text);
       }
 
       break;
