@@ -212,9 +212,7 @@ void FormUpdate::startUpdate() {
 
     if (exec_result <= (HINSTANCE)32) {
       qDebug("External updater was not launched due to error.");
-      qApp->showGuiMessage(tr("Cannot update application"),
-                           tr("Cannot launch external updater. Update application manually."),
-                           QMessageBox::Warning, this);
+      QMessageBox::critical(this, tr("Cannot start installer"), tr("Cannot launch external updater. Update application manually."));
     }
     else {
       qApp->quitApplication();
@@ -230,10 +228,8 @@ void FormUpdate::startUpdate() {
   else {
     // Self-update and package are not available.
     if (!qApp->web()->openUrlInExternalBrowser(url_file)) {
-      qApp->showGuiMessage(tr("Cannot update application"),
-                           tr("Cannot navigate to installation file. Check new installation downloads manually on project website."),
-                           QMessageBox::Warning,
-                           this, true);
+      qApp->showGuiMessage(tr("Cannot navigate to installation file. Check new installation downloads manually on project website."),
+                           QMessageBox::Icon::Warning);
     }
   }
 }

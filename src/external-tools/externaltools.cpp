@@ -13,6 +13,8 @@
 
 #include <QAction>
 #include <QDateTime>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QMenu>
 #include <QPointer>
 #include <QRegularExpression>
@@ -63,6 +65,7 @@ const QList<ExternalTool*> ExternalTools::tools() const {
 }
 
 void ExternalTools::loadPredefinedTools() {
+  // 1. Insert date/time.
   std::function<QString(const QString&)> get_date =
     [](const QString& data) {
       Q_UNUSED(data)
@@ -78,6 +81,7 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(insert_date_time);
 
+  // 2. Send to clbin.
   std::function<QString(const QString&)> send_to_clbin_lambda =
     [](const QString& data) {
       QByteArray output;
@@ -105,6 +109,7 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(send_to_clbin);
 
+  // 3. Send to ix.io.
   std::function<QString(const QString&)> send_to_ixio_lambda =
     [](const QString& data) {
       QByteArray output;
@@ -131,6 +136,34 @@ void ExternalTools::loadPredefinedTools() {
   send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_tools.append(send_to_ixio);
+
+  // 4. Upload to sprunge.us.
+  std::function<QString(const QString&)> send_to_sprunge_lambda =
+    [](const QString& data) {
+      QByteArray output;
+      QString content = QString("sprunge=%1").arg(data);
+      NetworkResult result = NetworkFactory::performNetworkOperation(QSL("http://sprunge.us/"),
+                                                                     DOWNLOAD_TIMEOUT,
+                                                                     content.toUtf8(),
+                                                                     output,
+                                                                     QNetworkAccessManager::Operation::PostOperation);
+
+      if (result.first == QNetworkReply::NetworkError::NoError) {
+        return QString(output).remove(QRegularExpression(QSL("\\s")));
+      }
+      else {
+        return QString();
+      }
+    };
+
+  PredefinedTool* send_to_sprunge = new PredefinedTool(send_to_sprunge_lambda, this);
+
+  send_to_sprunge->setCategory(tr("Upload to..."));
+  send_to_sprunge->setName(tr("Upload to sprunge.us"));
+  send_to_sprunge->setInput(ToolInput::SelectionDocument);
+  send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_sprunge);
 }
 
 void ExternalTools::loadCustomTools() {}

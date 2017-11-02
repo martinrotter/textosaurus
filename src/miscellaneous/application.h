@@ -73,9 +73,7 @@ class Application : public QtSingleApplication {
 
     // Displays given simple message in tray icon bubble or OSD
     // or in message box if tray icon is disabled.
-    void showGuiMessage(const QString& title, const QString& message, QMessageBox::Icon message_type,
-                        QWidget* parent = nullptr, bool show_at_least_msgbox = false,
-                        std::function<void()> functor = nullptr);
+    void showGuiMessage(const QString& message, QMessageBox::Icon message_type = QMessageBox::Icon::NoIcon);
 
     // Returns pointer to "GOD" application singleton.
     static Application* instance();

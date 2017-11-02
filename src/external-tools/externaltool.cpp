@@ -15,6 +15,14 @@ bool ExternalTool::isPredefined() const {
 
 void ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {}
 
+QString ExternalTool::id() const {
+  return m_id;
+}
+
+void ExternalTool::setId(const QString& id) {
+  m_id = id;
+}
+
 QString ExternalTool::shortcut() const {
   return m_shortcut;
 }

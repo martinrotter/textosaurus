@@ -33,7 +33,6 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   // Add these actions to the list of actions of the main window.
   // This allows to use actions via shortcuts
   // even if main menu is not visible.
-  addActions(qApp->userActions());
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
@@ -305,24 +304,21 @@ void FormMain::createConnections() {
 
 void FormMain::showWiki() {
   if (!qApp->web()->openUrlInExternalBrowser(APP_URL_WIKI)) {
-    qApp->showGuiMessage(tr("Cannot open external browser"),
-                         tr("Cannot open external browser. Navigate to application website manually."),
-                         QMessageBox::Warning, this, true);
+    qApp->showGuiMessage(tr("Cannot open external browser. Navigate to application website manually."),
+                         QMessageBox::Warning);
   }
 }
 
 void FormMain::reportABug() {
   if (!qApp->web()->openUrlInExternalBrowser(QSL(APP_URL_ISSUES_NEW))) {
-    qApp->showGuiMessage(tr("Cannot open external browser"),
-                         tr("Cannot open external browser. Navigate to application website manually."),
-                         QMessageBox::Warning, this, true);
+    qApp->showGuiMessage(tr("Cannot open external browser. Navigate to application website manually."),
+                         QMessageBox::Warning);
   }
 }
 
 void FormMain::donate() {
   if (!qApp->web()->openUrlInExternalBrowser(QSL(APP_DONATE_URL))) {
-    qApp->showGuiMessage(tr("Cannot open external browser"),
-                         tr("Cannot open external browser. Navigate to application website manually."),
-                         QMessageBox::Warning, this, true);
+    qApp->showGuiMessage(tr("Cannot open external browser. Navigate to application website manually."),
+                         QMessageBox::Warning);
   }
 }

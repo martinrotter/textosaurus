@@ -11,7 +11,8 @@
 #include <QScrollBar>
 #include <QTabBar>
 
-ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTextEdit(this)) {
+ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
+  m_txtOutput(new QPlainTextEdit(this)) {
   PlainToolButton* btn_close = new PlainToolButton(this);
 
   btn_close->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
@@ -41,9 +42,19 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_txtOutput(new QPlainTe
   addTab(m_txtOutput, qApp->icons()->fromTheme(QSL("application-text")), tr("Output"));
 }
 
-void ToolBox::displayOutput(OutputSource source, const QString& message) {
+void ToolBox::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
   setCurrentWidget(m_txtOutput);
   setVisible(true);
+
+  if (level != m_currentLevel) {
+    QColor target_color = colorForLevel(level);
+    QTextCharFormat c = m_txtOutput->currentCharFormat();
+
+    c.setForeground(QBrush(target_color));
+    m_txtOutput->setCurrentCharFormat(c);
+    m_currentLevel = level;
+  }
+
   m_txtOutput->appendPlainText(QString("[%3] %1: %2").arg(descriptionOfSource(source),
                                                           message,
                                                           QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
@@ -63,5 +74,21 @@ QString ToolBox::descriptionOfSource(OutputSource source) {
 
     default:
       return QString();
+  }
+}
+
+QColor ToolBox::colorForLevel(QMessageBox::Icon level) {
+  switch (level) {
+    case QMessageBox::Icon::Information:
+      return Qt::GlobalColor::blue;
+
+    case QMessageBox::Icon::Warning:
+      return QColor(229, 83, 0);
+
+    case QMessageBox::Icon::Critical:
+      return Qt::GlobalColor::red;
+
+    default:
+      return Qt::GlobalColor::black;
   }
 }

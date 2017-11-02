@@ -153,24 +153,17 @@ void Application::processExecutionMessage(const QString& message) {
   else {
     foreach (const QString& msg, messages) {
       if (msg == APP_IS_RUNNING) {
-        showGuiMessage(APP_NAME, tr("Application is already running."), QMessageBox::Information);
+        showGuiMessage(tr("Application is already running, opening delegated files."), QMessageBox::Warning);
         mainForm()->display();
       }
     }
   }
 }
 
-void Application::showGuiMessage(const QString& title, const QString& message,
-                                 QMessageBox::Icon message_type, QWidget* parent,
-                                 bool show_at_least_msgbox, std::function<void()> functor) {
-  // TODO: Show OSD notifications.
-  if (show_at_least_msgbox) {
-    // Tray icon or OSD is not available, display simple text box.
-    MessageBox::show(parent, (QMessageBox::Icon) message_type, title, message);
-  }
-  else {
-    qDebug("Silencing GUI message: '%s'.", qPrintable(message));
-  }
+void Application::showGuiMessage(const QString& message, QMessageBox::Icon message_type) {
+  Q_UNUSED(message_type)
+
+  m_textApplication->toolBox()->displayOutput(OutputSource::Application, message, message_type);
 }
 
 Application* Application::instance() {

@@ -74,6 +74,9 @@ class ExternalTool : public QObject {
     QString shortcut() const;
     void setShortcut(const QString& shortcut);
 
+    QString id() const;
+    void setId(const QString& id);
+
   public slots:
 
     // Runs tool with given string data (which is depending on tool input mode
@@ -90,6 +93,7 @@ class ExternalTool : public QObject {
     QString m_shortcut;
     QString m_category;
     QString m_name;
+    QString m_id;
 
     // If this tool runs simple command, for example
     // "base64" then it is here.
