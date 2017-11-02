@@ -26,6 +26,7 @@ void DynamicShortcuts::load(const QList<QAction*>& actions) {
                                                   action->objectName(),
                                                   action->shortcut().toString(QKeySequence::PortableText)).toString();
 
+    action->setShortcutContext(Qt::ApplicationShortcut);
     action->setShortcut(QKeySequence::fromString(shortcut_for_action, QKeySequence::PortableText));
   }
 }

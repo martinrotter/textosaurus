@@ -2,6 +2,7 @@
 
 #include "miscellaneous/textapplication.h"
 
+#include "external-tools/externaltool.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
@@ -232,6 +233,17 @@ ToolBox* TextApplication::toolBox() const {
   return m_toolBox;
 }
 
+void TextApplication::runTool() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
+
+    m_toolBox->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool").arg(tool_to_run->name()));
+    m_settings->externalTools()->runTool(tool_to_run, editor);
+  }
+}
+
 TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
 }
@@ -275,6 +287,7 @@ void TextApplication::onEditorModifiedChanged(bool modified) {
 }
 
 void TextApplication::createConnections() {
+  connect(m_settings->externalTools(), &ExternalTools::toolFinished, this, &TextApplication::onToolFinished);
   connect(m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
   // Tab widget.
@@ -376,7 +389,6 @@ void TextApplication::loadState() {
   }
 
   m_toolBox->displayOutput(OutputSource::TextApplication, tr("Text component settings loaded."));
-
   m_settings->externalTools()->reloadTools();
 
   // Make sure that toolbar/statusbar is updated.
@@ -459,13 +471,42 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
   }
 }
 
-void TextApplication::loadNewExternalTools(const QList<QAction*>& actions) {
+void TextApplication::loadNewExternalTools() {
   // Make sure we reload external tools.
   m_menuTools->clear();
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
 
-  m_menuTools->addActions(actions);
+  m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools, this));
+}
+
+void TextApplication::onToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text) {
+  if (editor.isNull()) {
+    qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
+    m_toolBox->displayOutput(OutputSource::ExternalTool, output_text);
+    return;
+  }
+
+  // TODO: we do something with the text.
+  switch (tool->output()) {
+    case ToolOutput::InsertAtCursorPosition:
+      editor->insert(output_text);
+      break;
+
+    case ToolOutput::DumpToOutputWindow:
+      m_toolBox->displayOutput(OutputSource::ExternalTool, output_text);
+      break;
+
+    case ToolOutput::NewSavedFile:
+      break;
+
+    case ToolOutput::ReplaceSelectionDocument:
+      break;
+
+    case ToolOutput::NoOutput:
+    default:
+      break;
+  }
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {

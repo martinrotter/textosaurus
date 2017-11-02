@@ -38,6 +38,7 @@ class TextApplication : public QObject {
     ToolBox* toolBox() const;
 
   public slots:
+    void runTool();
     void loadFilesFromArgs(int argc, char* argv[]);
     void undo();
     void redo();
@@ -62,13 +63,17 @@ class TextApplication : public QObject {
 
   private slots:
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
+
     void onEditorRequestVisibility();
     void onEditorLoadedFromFile();
     void onEditorModifiedChanged(bool modified);
     void onEditorTabSwitched(int index = -1);
+
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
-    void loadNewExternalTools(const QList<QAction*>& actions);
+
+    void loadNewExternalTools();
+    void onToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text);
 
   private:
     void createConnections();

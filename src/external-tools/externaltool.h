@@ -38,7 +38,11 @@ enum class ToolOutput {
 
   // Output is saved to some file stored in TEMP
   // and is opened when tool finishes its work.
-  NewSavedFile
+  NewSavedFile,
+
+  // Tool has no output, therefore we do not have to wait for it to exit or handle it
+  // in any way.
+  NoOutput
 };
 
 class ExternalTool : public QObject {
@@ -52,9 +56,6 @@ class ExternalTool : public QObject {
     QString name() const;
     void setName(const QString& name);
 
-    QString id() const;
-    void setId(const QString& id);
-
     QString command() const;
     void setCommand(const QString& command);
 
@@ -67,15 +68,28 @@ class ExternalTool : public QObject {
     ToolOutput output() const;
     void setOutput(const ToolOutput& output);
 
+    QString category() const;
+    void setCategory(const QString& category);
+
+    QString shortcut() const;
+    void setShortcut(const QString& shortcut);
+
   public slots:
-    virtual void runTool(const QPointer<TextEditor>& editor);
+
+    // Runs tool with given string data (which is depending on tool input mode
+    // current line, current selection, current whole document text or saved
+    // document filename.
+    virtual void runTool(const QPointer<TextEditor>& editor, const QString& data);
 
   signals:
     void toolFinished(QPointer<TextEditor> editor, QString output_text);
 
   private:
+    ToolInput m_input;
+    ToolOutput m_output;
+    QString m_shortcut;
+    QString m_category;
     QString m_name;
-    QString m_id;
 
     // If this tool runs simple command, for example
     // "base64" then it is here.
@@ -86,8 +100,6 @@ class ExternalTool : public QObject {
     // #!/bin/bash
     //
     QString m_script;
-    ToolInput m_input;
-    ToolOutput m_output;
 };
 
 class PredefinedTool : public ExternalTool {
@@ -97,7 +109,7 @@ class PredefinedTool : public ExternalTool {
     explicit PredefinedTool(std::function<QString(const QString&)> functor, QObject* parent = nullptr);
 
   public slots:
-    virtual void runTool(const QPointer<TextEditor>& editor);
+    virtual void runTool(const QPointer<TextEditor>& editor, const QString& data);
 
     bool isPredefined() const;
 
