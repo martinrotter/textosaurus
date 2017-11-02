@@ -29,7 +29,11 @@ Features
     - input file encoding detection (via bundled [uchardet](https://www.freedesktop.org/wiki/Software/uchardet/)),
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
-    - switchable EOL mode for new documents.
+    - switchable EOL mode for new documents,
+    - support for many text operations, which allow you to:
+        * upload selection/document to pastebin sites,
+        * convert to/from Base64 and Base64Url,
+        * insert current date/time.
 * Misc:
     - all user data (settings, external tools definitions, ...) are fully portable (You can use the same user data shared via Dropbox on all supported platforms.),
     - depends only on Qt and QScintilla,
