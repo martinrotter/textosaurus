@@ -38,4 +38,5 @@ Features
     - all user data (settings, external tools definitions, ...) are fully portable (You can use the same user data shared via Dropbox on all supported platforms.),
     - depends only on Qt and QScintilla,
     - relatively lightweight,
+    - no JavaScript components, no bundled Chromium, no Electron, no web technologies inside,
     - always OSS.
