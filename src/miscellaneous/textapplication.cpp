@@ -130,9 +130,11 @@ TextEditor* TextApplication::addEmptyTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   m_tabEditors->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
+
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorModifiedChanged);
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
+  connect(editor, &TextEditor::textChanged, this, &TextApplication::onEditorTextChanged);
 
   return editor;
 }
@@ -233,7 +235,7 @@ ToolBox* TextApplication::toolBox() const {
   return m_toolBox;
 }
 
-void TextApplication::runTool() {
+void TextApplication::runSelectedExternalTool() {
   TextEditor* editor = currentEditor();
 
   if (editor != nullptr) {
@@ -287,7 +289,7 @@ void TextApplication::onEditorModifiedChanged(bool modified) {
 }
 
 void TextApplication::createConnections() {
-  connect(m_settings->externalTools(), &ExternalTools::toolFinished, this, &TextApplication::onToolFinished);
+  connect(m_settings->externalTools(), &ExternalTools::toolFinished, this, &TextApplication::onExternalToolFinished);
   connect(m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
   // Tab widget.
@@ -440,6 +442,14 @@ void TextApplication::onEditorTabSwitched(int index) {
   updateStatusBarFromEditor(editor);
 }
 
+void TextApplication::onEditorTextChanged() {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  if (editor != nullptr) {
+    markEditorModified(editor, editor->isModified());
+  }
+}
+
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
   Q_UNUSED(only_modified)
 
@@ -451,6 +461,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       m_actionFileSave->setEnabled(editor->isModified());
       m_actionFileSaveAs->setEnabled(true);
       m_menuFileSaveWithEncoding->setEnabled(true);
+
       m_actionEditBack->setEnabled(editor->isUndoAvailable());
       m_actionEditForward->setEnabled(editor->isRedoAvailable());
     }
@@ -459,6 +470,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       m_actionFileSave->setEnabled(false);
       m_actionFileSaveAs->setEnabled(false);
       m_menuFileSaveWithEncoding->setEnabled(false);
+
       m_actionEditBack->setEnabled(false);
       m_actionEditForward->setEnabled(false);
     }
@@ -515,7 +527,7 @@ void TextApplication::loadNewExternalTools() {
   m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools, this));
 }
 
-void TextApplication::onToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text) {
+void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text) {
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_toolBox->displayOutput(OutputSource::ExternalTool,

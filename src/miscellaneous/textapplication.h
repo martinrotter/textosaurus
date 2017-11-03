@@ -26,23 +26,33 @@ class TextApplication : public QObject {
     virtual ~TextApplication();
 
     TextEditor* currentEditor() const;
+    ToolBox* toolBox() const;
+    TextApplicationSettings* settings() const;
 
     QList<TextEditor*> editors()  const;
 
-    TextApplicationSettings* settings() const;
-
     bool anyModifiedEditor() const;
-
     void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, ToolBox* tool_box);
 
-    ToolBox* toolBox() const;
-
   public slots:
-    void runTool();
-    void loadFilesFromArgs(int argc, char* argv[]);
+    void runSelectedExternalTool();
+    void convertEols(QAction* action);
+
     void undo();
     void redo();
+
+    TextEditor* addEmptyTextEditor();
+
+    void openTextFile(QAction* action = nullptr);
+    void loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding = QString());
     void newFile();
+    void loadFilesFromArgs(int argc, char* argv[]);
+
+    void saveCurrentEditor();
+    void saveCurrentEditorAs();
+    void saveCurrentEditorAsWithEncoding(QAction* action);
+    void saveAllEditors();
+    void closeAllUnmodifiedEditors();
 
     // Loads initial state of text application, including session restoring,
     // setup initial GUI state for actions/toolbar/statusbar etc.
@@ -51,16 +61,6 @@ class TextApplication : public QObject {
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
 
-    void openTextFile(QAction* action = nullptr);
-    void loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding = QString());
-    TextEditor* addEmptyTextEditor();
-
-    void saveCurrentEditor();
-    void saveCurrentEditorAs();
-    void saveCurrentEditorAsWithEncoding(QAction* action);
-    void saveAllEditors();
-    void closeAllUnmodifiedEditors();
-
   private slots:
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
@@ -68,14 +68,12 @@ class TextApplication : public QObject {
     void onEditorLoadedFromFile();
     void onEditorModifiedChanged(bool modified);
     void onEditorTabSwitched(int index = -1);
+    void onEditorTextChanged();
 
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
-
-    void convertEols(QAction* action);
-
     void loadNewExternalTools();
-    void onToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text);
+    void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text);
 
   private:
     void createConnections();

@@ -13,7 +13,10 @@ bool ExternalTool::isPredefined() const {
   return false;
 }
 
-void ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {}
+void ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
+  Q_UNUSED(editor)
+  Q_UNUSED(data)
+}
 
 QString ExternalTool::id() const {
   return m_id;

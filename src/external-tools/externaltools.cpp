@@ -54,7 +54,7 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent, TextApplication*
     act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
     act->setShortcutContext(Qt::ApplicationShortcut);
 
-    connect(act, &QAction::triggered, app, &TextApplication::runTool);
+    connect(act, &QAction::triggered, app, &TextApplication::runSelectedExternalTool);
     connect(tool, &ExternalTool::toolFinished, this, &ExternalTools::onToolFinished);
   }
 
