@@ -181,7 +181,10 @@ void TextEditor::reloadSettings() {
   setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
   setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
 
-  setEolVisibility(true);
+  setEolVisibility(m_textApp->settings()->viewEols());
+  setWhitespaceVisibility(m_textApp->settings()->viewWhitespaces() ?
+                          QsciScintilla::WhitespaceVisibility::WsVisible :
+                          QsciScintilla::WhitespaceVisibility::WsInvisible);
   setAutoIndent(true);
 
   //setLexer(new QsciLexerCPP(this));

@@ -22,9 +22,14 @@ class TextApplicationSettings : public QObject {
     bool wordWrapEnabled() const;
     QString loadSaveDefaultDirectory() const;
 
+    bool viewWhitespaces() const;
+    bool viewEols() const;
+
     ExternalTools* externalTools() const;
 
   public slots:
+    void setViewWhitespaces(bool view);
+    void setViewEols(bool view);
     void setLoadSaveDefaultDirectory(const QString& directory);
     void setWordWrapEnabled(bool enabled);
     void setEolModeFromAction(QAction* act);

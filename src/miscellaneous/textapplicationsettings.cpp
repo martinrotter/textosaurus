@@ -29,6 +29,14 @@ QString TextApplicationSettings::loadSaveDefaultDirectory() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::DefaultLoadSaveDirectory)).toString();
 }
 
+bool TextApplicationSettings::viewWhitespaces() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ViewWhitespaces)).toBool();
+}
+
+bool TextApplicationSettings::viewEols() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ViewEols)).toBool();
+}
+
 void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& directory) {
   qApp->settings()->setValue(GROUP(Editor), Editor::DefaultLoadSaveDirectory,
                              QDir::toNativeSeparators(QFileInfo(directory).absolutePath()));
@@ -46,7 +54,16 @@ void TextApplicationSettings::setEolModeFromAction(QAction* act) {
   emit settingsChanged(true, false);
 }
 
-ExternalTools* TextApplicationSettings::externalTools() const
-{
+ExternalTools* TextApplicationSettings::externalTools() const {
   return m_externalTools;
+}
+
+void TextApplicationSettings::setViewWhitespaces(bool view) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::ViewWhitespaces, view);
+  emit settingsChanged(true, false);
+}
+
+void TextApplicationSettings::setViewEols(bool view) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::ViewEols, view);
+  emit settingsChanged(true, false);
 }

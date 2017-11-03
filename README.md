@@ -31,6 +31,7 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents,
     - conversion of existing EOLs,
+	- switchable visibility of EOL/whitespace characters,
     - support for **many text operations**, which allow you to:
         * upload selection/document to pastebin sites,
         * convert to/from Base64 and Base64Url,

@@ -103,6 +103,8 @@ class TextApplication : public QObject {
     QAction* m_actionEditBack;
     QAction* m_actionEditForward;
     QAction* m_actionSettings;
+    QAction* m_actionViewWhitespaces;
+    QAction* m_actionViewEols;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuEolMode;

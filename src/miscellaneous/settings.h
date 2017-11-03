@@ -38,6 +38,14 @@ namespace Editor {
 
   VALUE(bool) WordWrapDef;
 
+  KEY ViewEols;
+
+  VALUE(bool) ViewEolsDef;
+
+  KEY ViewWhitespaces;
+
+  VALUE(bool) ViewWhitespacesDef;
+
   KEY DefaultLoadSaveDirectory;
 
   VALUE(QString) DefaultLoadSaveDirectoryDef;

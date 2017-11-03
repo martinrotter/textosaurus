@@ -25,6 +25,14 @@ DKEY Editor::WordWrap = "word_wrap";
 
 DVALUE(bool) Editor::WordWrapDef = true;
 
+DKEY Editor::ViewEols = "view_eols";
+
+DVALUE(bool) Editor::ViewEolsDef = false;
+
+DKEY Editor::ViewWhitespaces = "view_whitespaces";
+
+DVALUE(bool) Editor::ViewWhitespacesDef = false;
+
 DKEY Editor::DefaultLoadSaveDirectory = "load_save_directory";
 
 DVALUE(QString) Editor::DefaultLoadSaveDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation);

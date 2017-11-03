@@ -116,7 +116,15 @@
      <addaction name="m_actionEolUnix"/>
      <addaction name="m_actionEolWindows"/>
     </widget>
+    <widget class="QMenu" name="m_menuViewInvisibles">
+     <property name="title">
+      <string>&amp;Invisible characters</string>
+     </property>
+     <addaction name="m_actionViewEols"/>
+     <addaction name="m_actionViewWhitespaces"/>
+    </widget>
     <addaction name="m_menuShowHide"/>
+    <addaction name="m_menuViewInvisibles"/>
     <addaction name="m_menuEolMode"/>
     <addaction name="m_actionWordWrap"/>
    </widget>
@@ -441,6 +449,22 @@
   <action name="m_actionEolConvertWindows">
    <property name="text">
     <string>&amp;Windows (CR+LF)</string>
+   </property>
+  </action>
+  <action name="m_actionViewEols">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;EOLs</string>
+   </property>
+  </action>
+  <action name="m_actionViewWhitespaces">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Whitespaces</string>
    </property>
   </action>
  </widget>

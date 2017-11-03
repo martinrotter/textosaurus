@@ -18,8 +18,9 @@
 #include <QTextCodec>
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
-  connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
+  // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
+  connect(m_settings->externalTools(), &ExternalTools::toolFinished, this, &TextApplication::onExternalToolFinished);
 }
 
 TextApplication::~TextApplication() {
@@ -289,14 +290,15 @@ void TextApplication::onEditorModifiedChanged(bool modified) {
 }
 
 void TextApplication::createConnections() {
-  connect(m_settings->externalTools(), &ExternalTools::toolFinished, this, &TextApplication::onExternalToolFinished);
+  // Misc connections.
+  connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
   connect(m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
   // Tab widget.
   connect(m_tabEditors, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
-  // Actions.
+  // Actions and menus.
   connect(m_menuEolMode, &QMenu::triggered, m_settings, &TextApplicationSettings::setEolModeFromAction);
   connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
@@ -308,10 +310,11 @@ void TextApplication::createConnections() {
     openTextFile();
   });
   connect(m_actionWordWrap, &QAction::toggled, m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionViewEols, &QAction::toggled, m_settings, &TextApplicationSettings::setViewEols);
+  connect(m_actionViewWhitespaces, &QAction::toggled, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
 
-  // Menus.
   connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileOpenWithEncoding->isEmpty()) {
       TextFactory::initializeEncodingMenu(m_menuFileOpenWithEncoding);
@@ -325,13 +328,6 @@ void TextApplication::createConnections() {
     }
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
-
-  // TODO: přidat signal do ExternalTools ze se external tools zmenily
-  // a po teto zmene vygenerovat sadu QAction a pridat do m_menuTools,
-  // pri dalsim signalu zmeny external tools opět přegenerovat
-  // nepoužívat lazy vytváření menu!! chci to menu tam mít natvrdo hned
-  // protože pak budou fungovat klavesove zkratky těch QAction
-  // když budou mít nastaveno Qt::ApplicationShortcut v QAction::setShortcutContext
 }
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
@@ -357,6 +353,8 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionEditBack = main_form->m_ui.m_actionEditBack;
   m_actionEditForward = main_form->m_ui.m_actionEditForward;
   m_actionSettings = main_form->m_ui.m_actionSettings;
+  m_actionViewWhitespaces = main_form->m_ui.m_actionViewWhitespaces;
+  m_actionViewEols = main_form->m_ui.m_actionViewEols;
 
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
@@ -373,14 +371,19 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
 
   connect(main_form, &FormMain::closeRequested, this, &TextApplication::quit);
 
-  createConnections();
   loadState();
+  createConnections();
+
+  // Make sure that toolbar/statusbar is updated.
+  onEditorTabSwitched();
 }
 
 void TextApplication::loadState() {
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
   m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
+  m_actionViewEols->setChecked(m_settings->viewEols());
+  m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 
   // Setup GUI of actions.
   switch (m_settings->eolMode()) {
@@ -398,11 +401,8 @@ void TextApplication::loadState() {
       break;
   }
 
-  m_toolBox->displayOutput(OutputSource::TextApplication, tr("Text component settings loaded."));
   m_settings->externalTools()->reloadTools();
-
-  // Make sure that toolbar/statusbar is updated.
-  onEditorTabSwitched();
+  m_toolBox->displayOutput(OutputSource::TextApplication, tr("Text component settings loaded."));
 }
 
 void TextApplication::quit(bool* ok) {
@@ -520,10 +520,12 @@ void TextApplication::convertEols(QAction* action) {
 
 void TextApplication::loadNewExternalTools() {
   // Make sure we reload external tools.
+  m_menuTools->removeAction(m_actionSettings);
+  qDeleteAll(m_menuTools->actions());
   m_menuTools->clear();
+
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
-
   m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools, this));
 }
 
