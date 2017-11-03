@@ -46,7 +46,7 @@ class TextApplication : public QObject {
     void openTextFile(QAction* action = nullptr);
     void loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding = QString());
     void newFile();
-    void loadFilesFromArgs(int argc, char* argv[]);
+    void loadFilesFromArgs(const QList<QString>& files);
 
     void saveCurrentEditor();
     void saveCurrentEditorAs();

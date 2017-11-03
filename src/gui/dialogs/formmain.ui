@@ -169,9 +169,15 @@
      <string>&amp;Search</string>
     </property>
    </widget>
+   <widget class="QMenu" name="m_menuLanguage">
+    <property name="title">
+     <string>&amp;Language</string>
+    </property>
+   </widget>
    <addaction name="m_menuFile"/>
    <addaction name="m_menuEdit"/>
    <addaction name="m_menuSearch"/>
+   <addaction name="m_menuLanguage"/>
    <addaction name="m_menuView"/>
    <addaction name="m_menuWebBrowserTabs"/>
    <addaction name="m_menuTools"/>

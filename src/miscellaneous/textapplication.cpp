@@ -251,10 +251,8 @@ TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
 }
 
-void TextApplication::loadFilesFromArgs(int argc, char* argv[]) {
-  for (int i = 1; i < argc; i++) {
-    QString file_path = QString::fromUtf8(argv[i]);
-
+void TextApplication::loadFilesFromArgs(const QList<QString>& files) {
+  foreach (const QString& file_path, files) {
     QTimer::singleShot(0, this, [this, file_path] {
       loadTextEditorFromFile(file_path);
     });

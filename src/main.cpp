@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
   DynamicShortcuts::load(qApp->userActions());
 
   // We load any documents passed as parameters.
-  qApp->textApplication()->loadFilesFromArgs(argc, argv);
+  qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
 
   // Enter global event loop.
   return Application::exec();
