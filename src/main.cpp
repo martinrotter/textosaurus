@@ -28,17 +28,6 @@ extern void disableWindowTabbing();
 #endif
 
 int main(int argc, char* argv[]) {
-  for (int i = 0; i < argc; i++) {
-    const QString str = QString::fromLocal8Bit(argv[i]);
-
-    if (str == QL1S("-h")) {
-      qDebug("Usage: textilosaurus [OPTIONS] [FILE LIST]\n\n"
-             "Option\t\tMeaning\n"
-             "-h\t\tDisplays this help.");
-      return EXIT_SUCCESS;
-    }
-  }
-
   //: Abbreviation of language, e.g. en.
   //: Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code.
   //: Examples: "cs", "en", "it", "cs_CZ", "en_GB", "en_US".
@@ -64,27 +53,22 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
-  // Load localization and setup locale before any widget is constructed.
-  qApp->localization()->loadActiveLanguage();
-  QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-#if defined (Q_OS_MAC)
-  QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
-  disableWindowTabbing();
-#endif
-
-  // Add an extra path for non-system icon themes and set current icon theme
-  // and skin.
-  qApp->icons()->setupSearchPaths();
-  qApp->icons()->loadCurrentIconTheme();
-  qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
-
-  // These settings needs to be set before any QSettings object.
+  Application::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  Application::setAttribute(Qt::AA_EnableHighDpiScaling);
   Application::setApplicationName(APP_NAME);
   Application::setApplicationVersion(APP_VERSION);
   Application::setOrganizationDomain(APP_URL);
   Application::setWindowIcon(QIcon(APP_ICON_PATH));
+
+#if defined (Q_OS_MAC)
+  Application::setAttribute(Qt::AA_DontShowIconsInMenus);
+  disableWindowTabbing();
+#endif
+
+  qApp->localization()->loadActiveLanguage();
+  qApp->icons()->setupSearchPaths();
+  qApp->icons()->loadCurrentIconTheme();
+  qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
 
   // Setup single-instance behavior.
   QObject::connect(&application, &Application::messageReceived, &application, &Application::processExecutionMessage);

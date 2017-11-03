@@ -393,7 +393,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Unix (LF)</string>
+    <string>Use &amp;Unix (LF)</string>
    </property>
   </action>
   <action name="m_actionEolWindows">
@@ -401,7 +401,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Windows (CR+LF)</string>
+    <string>Use &amp;Windows (CR+LF)</string>
    </property>
   </action>
   <action name="m_actionEolMac">
@@ -409,7 +409,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Mac (CR)</string>
+    <string>Use &amp;Mac (CR)</string>
    </property>
   </action>
   <action name="m_actionWordWrap">
@@ -438,17 +438,17 @@
   </action>
   <action name="m_actionEolConvertMac">
    <property name="text">
-    <string>&amp;Mac (CR)</string>
+    <string>Convert to &amp;Mac (CR)</string>
    </property>
   </action>
   <action name="m_actionEolConvertUnix">
    <property name="text">
-    <string>&amp;Unix (LF)</string>
+    <string>Convert to &amp;Unix (LF)</string>
    </property>
   </action>
   <action name="m_actionEolConvertWindows">
    <property name="text">
-    <string>&amp;Windows (CR+LF)</string>
+    <string>Convert to &amp;Windows (CR+LF)</string>
    </property>
   </action>
   <action name="m_actionViewEols">
@@ -456,7 +456,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;EOLs</string>
+    <string>Display &amp;EOLs</string>
    </property>
   </action>
   <action name="m_actionViewWhitespaces">
@@ -464,7 +464,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Whitespaces</string>
+    <string>Display &amp;whitespaces</string>
    </property>
   </action>
  </widget>

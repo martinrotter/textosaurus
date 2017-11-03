@@ -88,6 +88,15 @@ QList<QAction*> FormMain::allActions() const {
 
   actions << m_ui.m_actionEditBack;
   actions << m_ui.m_actionEditForward;
+  actions << m_ui.m_actionEolConvertMac;
+  actions << m_ui.m_actionEolConvertUnix;
+  actions << m_ui.m_actionEolConvertWindows;
+  actions << m_ui.m_actionEolMac;
+  actions << m_ui.m_actionEolUnix;
+  actions << m_ui.m_actionEolWindows;
+  actions << m_ui.m_actionWordWrap;
+  actions << m_ui.m_actionViewEols;
+  actions << m_ui.m_actionViewWhitespaces;
 
   actions << m_ui.m_actionAboutGuard;
   actions << m_ui.m_actionSwitchMainWindow;
