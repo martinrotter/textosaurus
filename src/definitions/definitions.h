@@ -33,8 +33,10 @@
 #define DOWNLOADER_ICON_SIZE                  48
 #define ENCRYPTION_FILE_NAME                  "key.private"
 
-#define PASTEBIN_CLBIN  "https://clbin.com"
-#define PASTEBIN_IXIO   "http://ix.io"
+#define PASTEBIN_GITHUB   "https://api.github.com/gists"
+#define PASTEBIN_SPRUNGE  "http://sprunge.us/"
+#define PASTEBIN_CLBIN    "https://clbin.com"
+#define PASTEBIN_IXIO     "http://ix.io"
 
 #define HTTP_HEADERS_ACCEPT         "Accept"
 #define HTTP_HEADERS_CONTENT_TYPE   "Content-Type"

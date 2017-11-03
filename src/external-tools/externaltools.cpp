@@ -66,14 +66,7 @@ const QList<ExternalTool*> ExternalTools::tools() const {
 }
 
 void ExternalTools::loadPredefinedTools() {
-  // 1. Insert date/time.
-  std::function<QString(const QString&)> get_date =
-    [](const QString& data) {
-      Q_UNUSED(data)
-      return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
-    };
-
-  PredefinedTool* insert_date_time = new PredefinedTool(get_date, this);
+  PredefinedTool* insert_date_time = new PredefinedTool(&PredefinedTools::currentDateTime, this);
 
   insert_date_time->setCategory(tr("Insert..."));
   insert_date_time->setName(tr("Date/time"));
@@ -82,91 +75,42 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(insert_date_time);
 
-  // 2. Send to clbin.
-  std::function<QString(const QString&)> send_to_clbin_lambda =
-    [](const QString& data) {
-      QByteArray output;
-      QString content = QString("clbin=%1").arg(data);
-      NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_CLBIN),
-                                                                     DOWNLOAD_TIMEOUT,
-                                                                     content.toUtf8(),
-                                                                     output,
-                                                                     QNetworkAccessManager::Operation::PostOperation);
-
-      if (result.first == QNetworkReply::NetworkError::NoError) {
-        return QString(output).remove(QRegularExpression(QSL("\\s")));
-      }
-      else {
-        return QString();
-      }
-    };
-
-  PredefinedTool* send_to_clbin = new PredefinedTool(send_to_clbin_lambda, this);
+  PredefinedTool* send_to_clbin = new PredefinedTool(&PredefinedTools::sendToClbin, this);
 
   send_to_clbin->setCategory(tr("Upload to..."));
-  send_to_clbin->setName(tr("Upload to clbin.com"));
+  send_to_clbin->setName(tr("clbin.com"));
   send_to_clbin->setInput(ToolInput::SelectionDocument);
   send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_tools.append(send_to_clbin);
 
-  // 3. Send to ix.io.
-  std::function<QString(const QString&)> send_to_ixio_lambda =
-    [](const QString& data) {
-      QByteArray output;
-      QString content = QString("f:1=%1").arg(data);
-      NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_IXIO),
-                                                                     DOWNLOAD_TIMEOUT,
-                                                                     content.toUtf8(),
-                                                                     output,
-                                                                     QNetworkAccessManager::Operation::PostOperation);
-
-      if (result.first == QNetworkReply::NetworkError::NoError) {
-        return QString(output).remove(QRegularExpression(QSL("\\s")));
-      }
-      else {
-        return QString();
-      }
-    };
-
-  PredefinedTool* send_to_ixio = new PredefinedTool(send_to_ixio_lambda, this);
+  PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
 
   send_to_ixio->setCategory(tr("Upload to..."));
-  send_to_ixio->setName(tr("Upload to ix.io"));
+  send_to_ixio->setName(tr("ix.io"));
   send_to_ixio->setInput(ToolInput::SelectionDocument);
   send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_tools.append(send_to_ixio);
 
-  // 4. Upload to sprunge.us.
-  std::function<QString(const QString&)> send_to_sprunge_lambda =
-    [](const QString& data) {
-      QByteArray output;
-      QString content = QString("sprunge=%1").arg(data);
-      NetworkResult result = NetworkFactory::performNetworkOperation(QSL("http://sprunge.us/"),
-                                                                     DOWNLOAD_TIMEOUT,
-                                                                     content.toUtf8(),
-                                                                     output,
-                                                                     QNetworkAccessManager::Operation::PostOperation);
-
-      if (result.first == QNetworkReply::NetworkError::NoError) {
-        return QString(output).remove(QRegularExpression(QSL("\\s")));
-      }
-      else {
-        return QString();
-      }
-    };
-
-  PredefinedTool* send_to_sprunge = new PredefinedTool(send_to_sprunge_lambda, this);
+  PredefinedTool* send_to_sprunge = new PredefinedTool(&PredefinedTools::sendToSprunge, this);
 
   send_to_sprunge->setCategory(tr("Upload to..."));
-  send_to_sprunge->setName(tr("Upload to sprunge.us"));
+  send_to_sprunge->setName(tr("sprunge.us"));
   send_to_sprunge->setInput(ToolInput::SelectionDocument);
   send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_tools.append(send_to_sprunge);
 
-  // 5. To/from base64(url).
+  PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
+
+  send_to_github->setCategory(tr("Upload to..."));
+  send_to_github->setName(tr("github.com"));
+  send_to_github->setInput(ToolInput::SelectionDocument);
+  send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_github);
+
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
   tobase64->setCategory(tr("MIME tools"));

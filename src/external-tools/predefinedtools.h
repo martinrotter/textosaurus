@@ -7,10 +7,21 @@
 
 class PredefinedTools {
   public:
-    static QString toBase64(QString data);
-    static QString fromBase64(QString data);
-    static QString toBase64Url(QString data);
-    static QString fromBase64Url(QString data);
+
+    // Uploading.
+    static QString sendToClbin(const QString& data);
+    static QString sendToIxio(const QString& data);
+    static QString sendToSprunge(const QString& data);
+    static QString sendToGithub(const QString& data);
+
+    // Inserting.
+    static QString currentDateTime(const QString& data);
+
+    // MIME tools.
+    static QString toBase64(const QString& data);
+    static QString fromBase64(const QString& data);
+    static QString toBase64Url(const QString& data);
+    static QString fromBase64Url(const QString& data);
 
   private:
     explicit PredefinedTools();
