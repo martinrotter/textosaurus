@@ -104,6 +104,9 @@ QString NetworkFactory::networkErrorText(QNetworkReply::NetworkError error_code)
       //: Network status.
       return tr("content not found");
 
+    case QNetworkReply::ProtocolInvalidOperationError:
+      return tr("invalid operation, maybe input is too big");
+
     default:
 
       //: Network status.

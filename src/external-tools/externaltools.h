@@ -28,10 +28,10 @@ class ExternalTools : public QObject {
     void reloadTools();
 
   private slots:
-    void onToolFinished(QPointer<TextEditor> editor, const QString& output_text);
+    void onToolFinished(QPointer<TextEditor> editor, const QString& output_text, bool success);
 
   signals:
-    void toolFinished(ExternalTool* tool, QPointer<TextEditor> editor, QString output_text);
+    void toolFinished(ExternalTool* tool, QPointer<TextEditor> editor, QString output_text, bool success);
 
     // Emitted when some of external tools is added/removed/edited.
     void externalToolsChanged();

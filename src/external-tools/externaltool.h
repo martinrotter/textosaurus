@@ -85,7 +85,7 @@ class ExternalTool : public QObject {
     virtual void runTool(const QPointer<TextEditor>& editor, const QString& data);
 
   signals:
-    void toolFinished(QPointer<TextEditor> editor, QString output_text);
+    void toolFinished(QPointer<TextEditor> editor, QString output_text, bool success);
 
   private:
     ToolInput m_input;
@@ -110,7 +110,7 @@ class PredefinedTool : public ExternalTool {
   Q_OBJECT
 
   public:
-    explicit PredefinedTool(std::function<QString(const QString&)> functor, QObject* parent = nullptr);
+    explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
 
   public slots:
     virtual void runTool(const QPointer<TextEditor>& editor, const QString& data);
@@ -121,7 +121,7 @@ class PredefinedTool : public ExternalTool {
 
     // This is reference to operation:
     // QString operation(const QString& input).
-    std::function<QString(const QString&)> m_functor;
+    std::function<QString(const QString&, bool*)> m_functor;
 };
 
 #endif // EXTERNALTOOL_H

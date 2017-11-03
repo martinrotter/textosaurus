@@ -73,7 +73,7 @@ class TextApplication : public QObject {
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
     void loadNewExternalTools();
-    void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text);
+    void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text, bool success);
 
   private:
     void createConnections();

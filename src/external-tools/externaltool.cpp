@@ -82,12 +82,13 @@ void ExternalTool::setName(const QString& name) {
   m_name = name;
 }
 
-PredefinedTool::PredefinedTool(std::function<QString(const QString&)> functor, QObject* parent)
+PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
   : ExternalTool(parent), m_functor(functor) {}
 
 void PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
-  QString result = m_functor(data);
-  emit toolFinished(editor, result);
+  bool ok;
+  QString result = m_functor(data, &ok);
+  emit toolFinished(editor, result, ok);
 }
 
 bool PredefinedTool::isPredefined() const {

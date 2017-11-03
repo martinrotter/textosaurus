@@ -527,11 +527,19 @@ void TextApplication::loadNewExternalTools() {
   m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools, this));
 }
 
-void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text) {
+void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor,
+                                             const QString& output_text, bool success) {
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_toolBox->displayOutput(OutputSource::ExternalTool,
                              tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
+                             QMessageBox::Icon::Critical);
+    return;
+  }
+
+  if (!success) {
+    m_toolBox->displayOutput(OutputSource::ExternalTool,
+                             tr("Tool '%1' reports error: %2.").arg(tool->name(), output_text),
                              QMessageBox::Icon::Critical);
     return;
   }

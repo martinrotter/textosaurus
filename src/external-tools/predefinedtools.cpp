@@ -12,7 +12,7 @@
 
 PredefinedTools::PredefinedTools() {}
 
-QString PredefinedTools::sendToClbin(const QString& data) {
+QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("clbin=%1").arg(data);
   NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_CLBIN),
@@ -22,14 +22,16 @@ QString PredefinedTools::sendToClbin(const QString& data) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
+    *ok = true;
     return QString(output).remove(QRegularExpression(QSL("\\s")));
   }
   else {
-    return QString();
+    *ok = false;
+    return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::sendToIxio(const QString& data) {
+QString PredefinedTools::sendToIxio(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("f:1=%1").arg(data);
   NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_IXIO),
@@ -39,14 +41,16 @@ QString PredefinedTools::sendToIxio(const QString& data) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
+    *ok = true;
     return QString(output).remove(QRegularExpression(QSL("\\s")));
   }
   else {
-    return QString();
+    *ok = false;
+    return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::sendToSprunge(const QString& data) {
+QString PredefinedTools::sendToSprunge(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("sprunge=%1").arg(data);
   NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_SPRUNGE),
@@ -56,14 +60,16 @@ QString PredefinedTools::sendToSprunge(const QString& data) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
+    *ok = true;
     return QString(output).remove(QRegularExpression(QSL("\\s")));
   }
   else {
-    return QString();
+    *ok = false;
+    return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::sendToGithub(const QString& data) {
+QString PredefinedTools::sendToGithub(const QString& data, bool* ok) {
   QByteArray output;
   QJsonDocument content_doc;
   QJsonObject files_obj;
@@ -87,30 +93,42 @@ QString PredefinedTools::sendToGithub(const QString& data) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
+    *ok = true;
     return QJsonDocument::fromJson(output).object()["html_url"].toString().remove(QRegularExpression(QSL("\\s")));
   }
   else {
-    return QString();
+    *ok = false;
+    return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::currentDateTime(const QString& data) {
+QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {
   Q_UNUSED(data)
+  Q_UNUSED(ok)
+
   return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
 }
 
-QString PredefinedTools::toBase64(const QString& data) {
+QString PredefinedTools::toBase64(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
   return data.toUtf8().toBase64();
 }
 
-QString PredefinedTools::fromBase64(const QString& data) {
+QString PredefinedTools::fromBase64(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
   return QByteArray::fromBase64(data.toUtf8());
 }
 
-QString PredefinedTools::toBase64Url(const QString& data) {
+QString PredefinedTools::toBase64Url(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
   return data.toUtf8().toBase64(QByteArray::Base64Option::Base64UrlEncoding);
 }
 
-QString PredefinedTools::fromBase64Url(const QString& data) {
+QString PredefinedTools::fromBase64Url(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
   return QByteArray::fromBase64(data.toUtf8(), QByteArray::Base64Option::Base64UrlEncoding);
 }
