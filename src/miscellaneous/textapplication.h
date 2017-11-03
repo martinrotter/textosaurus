@@ -72,6 +72,8 @@ class TextApplication : public QObject {
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
 
+    void convertEols(QAction* action);
+
     void loadNewExternalTools();
     void onToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text);
 
@@ -95,6 +97,9 @@ class TextApplication : public QObject {
     QAction* m_actionEolUnix;
     QAction* m_actionEolWindows;
     QAction* m_actionEolMac;
+    QAction* m_actionEolConvertUnix;
+    QAction* m_actionEolConvertWindows;
+    QAction* m_actionEolConvertMac;
     QAction* m_actionTabsCloseAllUnmodified;
     QAction* m_actionWordWrap;
     QAction* m_actionEditBack;
@@ -103,6 +108,7 @@ class TextApplication : public QObject {
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuEolMode;
+    QMenu* m_menuEolConversion;
     QMenu* m_menuTools;
 };
 

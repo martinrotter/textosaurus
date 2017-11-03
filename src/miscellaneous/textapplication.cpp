@@ -296,6 +296,7 @@ void TextApplication::createConnections() {
 
   // Actions.
   connect(m_menuEolMode, &QMenu::triggered, m_settings, &TextApplicationSettings::setEolModeFromAction);
+  connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
@@ -346,6 +347,9 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionEolUnix = main_form->m_ui.m_actionEolUnix;
   m_actionEolWindows = main_form->m_ui.m_actionEolWindows;
   m_actionEolMac = main_form->m_ui.m_actionEolMac;
+  m_actionEolConvertUnix = main_form->m_ui.m_actionEolConvertUnix;
+  m_actionEolConvertWindows = main_form->m_ui.m_actionEolConvertWindows;
+  m_actionEolConvertMac = main_form->m_ui.m_actionEolConvertMac;
   m_actionWordWrap = main_form->m_ui.m_actionWordWrap;
   m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
   m_actionEditBack = main_form->m_ui.m_actionEditBack;
@@ -355,11 +359,15 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
   m_menuEolMode = main_form->m_ui.m_menuEolMode;
+  m_menuEolConversion = main_form->m_ui.m_menuEolConversion;
   m_menuTools = main_form->m_ui.m_menuTools;
 
   m_actionEolMac->setData(int(QsciScintilla::EolMode::EolMac));
   m_actionEolUnix->setData(int(QsciScintilla::EolMode::EolUnix));
   m_actionEolWindows->setData(int(QsciScintilla::EolMode::EolWindows));
+  m_actionEolConvertMac->setData(int(QsciScintilla::EolMode::EolMac));
+  m_actionEolConvertUnix->setData(int(QsciScintilla::EolMode::EolUnix));
+  m_actionEolConvertWindows->setData(int(QsciScintilla::EolMode::EolWindows));
 
   connect(main_form, &FormMain::closeRequested, this, &TextApplication::quit);
 
@@ -467,6 +475,33 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
     }
     else {
       m_statusBar->setEncoding(QString());
+    }
+  }
+}
+
+void TextApplication::convertEols(QAction* action) {
+  QsciScintilla::EolMode new_mode = static_cast<QsciScintilla::EolMode>(action->data().toInt());
+  TextEditor* current_editor = currentEditor();
+
+  if (current_editor != nullptr) {
+    current_editor->convertEols(new_mode);
+
+    // We also switch EOL mode for new lines.
+    switch (new_mode) {
+      case QsciScintilla::EolMode::EolMac:
+        m_actionEolMac->trigger();
+        break;
+
+      case QsciScintilla::EolMode::EolUnix:
+        m_actionEolUnix->trigger();
+        break;
+
+      case QsciScintilla::EolMode::EolWindows:
+        m_actionEolWindows->trigger();
+        break;
+
+      default:
+        break;
     }
   }
 }
