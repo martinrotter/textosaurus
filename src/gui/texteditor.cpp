@@ -187,6 +187,10 @@ void TextEditor::reloadSettings() {
                           QsciScintilla::WhitespaceVisibility::WsInvisible);
   setAutoIndent(true);
 
+  setCaretLineBackgroundColor(QColor(230, 230, 230));
+  setCaretLineVisible(true);
+  setCaretWidth(2);
+
   //setLexer(new QsciLexerCPP(this));
   setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
 
