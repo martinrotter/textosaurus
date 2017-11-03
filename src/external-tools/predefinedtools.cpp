@@ -80,7 +80,6 @@ QString PredefinedTools::sendToGithub(const QString& data) {
      }}
   });
 
-  auto aa = content_doc.toJson(QJsonDocument::JsonFormat::Compact);
   NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_GITHUB),
                                                                  DOWNLOAD_TIMEOUT,
                                                                  content_doc.toJson(QJsonDocument::JsonFormat::Compact),

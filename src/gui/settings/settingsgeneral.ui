@@ -24,13 +24,6 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="m_checkForUpdatesOnStart">
-     <property name="text">
-      <string>Check for updates on application startup</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
     <widget class="QCheckBox" name="m_checkRemoveTrolltechJunk">
      <property name="text">
       <string>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</string>
@@ -40,7 +33,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>m_checkForUpdatesOnStart</tabstop>
   <tabstop>m_checkRemoveTrolltechJunk</tabstop>
  </tabstops>
  <resources/>

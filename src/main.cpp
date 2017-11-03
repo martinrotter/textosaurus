@@ -110,18 +110,6 @@ int main(int argc, char* argv[]) {
 
   DynamicShortcuts::load(qApp->userActions());
 
-  if (qApp->settings()->value(GROUP(General), SETTING(General::UpdateOnStartup)).toBool()) {
-    QObject::connect(qApp->system(), &SystemFactory::updatesChecked, [](QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> updates) {
-      QObject::disconnect(qApp->system(), &SystemFactory::updatesChecked, nullptr, nullptr);
-
-      if (!updates.first.isEmpty() && updates.second == QNetworkReply::NoError &&
-          SystemFactory::isVersionNewer(updates.first.at(0).m_availableVersion, APP_VERSION)) {
-        qApp->showGuiMessage(QObject::tr("There is a new version of %1 available").arg(APP_NAME), QMessageBox::Icon::Information);
-      }
-    });
-    qApp->system()->checkForUpdates();
-  }
-
   // We load any documents passed as parameters.
   qApp->textApplication()->loadFilesFromArgs(argc, argv);
 

@@ -5,11 +5,8 @@
 #include "miscellaneous/application.h"
 #include "miscellaneous/systemfactory.h"
 
-SettingsGeneral::SettingsGeneral(Settings* settings, QWidget* parent)
-  : SettingsPanel(settings, parent), m_ui(new Ui::SettingsGeneral) {
+SettingsGeneral::SettingsGeneral(Settings* settings, QWidget* parent) : SettingsPanel(settings, parent), m_ui(new Ui::SettingsGeneral) {
   m_ui->setupUi(this);
-
-  connect(m_ui->m_checkForUpdatesOnStart, &QCheckBox::stateChanged, this, &SettingsGeneral::dirtifySettings);
   connect(m_ui->m_checkRemoveTrolltechJunk, &QCheckBox::stateChanged, this, &SettingsGeneral::dirtifySettings);
 }
 
@@ -19,7 +16,6 @@ SettingsGeneral::~SettingsGeneral() {
 
 void SettingsGeneral::loadSettings() {
   onBeginLoadSettings();
-  m_ui->m_checkForUpdatesOnStart->setChecked(settings()->value(GROUP(General), SETTING(General::UpdateOnStartup)).toBool());
 
 #if defined(Q_OS_WIN)
   m_ui->m_checkRemoveTrolltechJunk->setVisible(true);
@@ -32,7 +28,6 @@ void SettingsGeneral::loadSettings() {
 
 void SettingsGeneral::saveSettings() {
   onBeginSaveSettings();
-  settings()->setValue(GROUP(General), General::UpdateOnStartup, m_ui->m_checkForUpdatesOnStart->isChecked());
   settings()->setValue(GROUP(General), General::RemoveTrolltechJunk, m_ui->m_checkRemoveTrolltechJunk->isChecked());
   onEndSaveSettings();
 }

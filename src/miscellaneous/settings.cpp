@@ -130,10 +130,6 @@ DVALUE(char*) Browser::CustomExternalEmailArgumentsDef = "";
 
 // General.
 DKEY General::ID = "main";
-DKEY General::UpdateOnStartup = "update_on_start";
-
-DVALUE(bool) General::UpdateOnStartupDef = true;
-
 DKEY General::RemoveTrolltechJunk = "remove_trolltech_junk";
 
 DVALUE(bool) General::RemoveTrolltechJunkDef = false;

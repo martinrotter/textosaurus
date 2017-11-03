@@ -147,10 +147,6 @@ namespace Browser {
 // General.
 namespace General {
   KEY ID;
-  KEY UpdateOnStartup;
-
-  VALUE(bool) UpdateOnStartupDef;
-
   KEY RemoveTrolltechJunk;
 
   VALUE(bool) RemoveTrolltechJunkDef;
@@ -206,26 +202,12 @@ class Settings : public QSettings {
       return m_initializationStatus;
     }
 
-    // Getters/setters for settings values.
-    inline QVariant value(const QString& section, const QString& key, const QVariant& default_value = QVariant()) const {
-      return QSettings::value(QString(QSL("%1/%2")).arg(section, key), default_value);
-    }
+    QVariant value(const QString& section, const QString& key, const QVariant& default_value = QVariant()) const;
 
-    inline void setValue(const QString& section, const QString& key, const QVariant& value) {
-      QSettings::setValue(QString(QSL("%1/%2")).arg(section, key), value);
-    }
-
-    inline void setValue(const QString& key, const QVariant& value) {
-      QSettings::setValue(key, value);
-    }
-
-    inline bool contains(const QString& section, const QString& key) const {
-      return QSettings::contains(QString(QSL("%1/%2")).arg(section, key));
-    }
-
-    inline void remove(const QString& section, const QString& key) {
-      QSettings::remove(QString(QSL("%1/%2")).arg(section, key));
-    }
+    void setValue(const QString& section, const QString& key, const QVariant& value);
+    void setValue(const QString& key, const QVariant& value);
+    bool contains(const QString& section, const QString& key) const;
+    void remove(const QString& section, const QString& key);
 
     // Returns the path which contains the settings.
     QString pathName() const;
@@ -246,5 +228,25 @@ class Settings : public QSettings {
 
     SettingsProperties::SettingsType m_initializationStatus;
 };
+
+inline QVariant Settings::value(const QString& section, const QString& key, const QVariant& default_value) const {
+  return QSettings::value(QString(QSL("%1/%2")).arg(section, key), default_value);
+}
+
+inline void Settings::setValue(const QString& section, const QString& key, const QVariant& value) {
+  QSettings::setValue(QString(QSL("%1/%2")).arg(section, key), value);
+}
+
+inline void Settings::setValue(const QString& key, const QVariant& value) {
+  QSettings::setValue(key, value);
+}
+
+inline bool Settings::contains(const QString& section, const QString& key) const {
+  return QSettings::contains(QString(QSL("%1/%2")).arg(section, key));
+}
+
+inline void Settings::remove(const QString& section, const QString& key) {
+  QSettings::remove(QString(QSL("%1/%2")).arg(section, key));
+}
 
 #endif // SETTINGS_H
