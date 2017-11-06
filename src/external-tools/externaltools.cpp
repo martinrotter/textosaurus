@@ -87,6 +87,15 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(send_to_clbin);
 
+  PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
+
+  send_to_github->setCategory(tr("Upload to..."));
+  send_to_github->setName(tr("github.com"));
+  send_to_github->setInput(ToolInput::SelectionDocument);
+  send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_github);
+
   PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
 
   send_to_ixio->setCategory(tr("Upload to..."));
@@ -104,15 +113,6 @@ void ExternalTools::loadPredefinedTools() {
   send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_tools.append(send_to_sprunge);
-
-  PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
-
-  send_to_github->setCategory(tr("Upload to..."));
-  send_to_github->setName(tr("github.com"));
-  send_to_github->setInput(ToolInput::SelectionDocument);
-  send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_tools.append(send_to_github);
 
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
@@ -193,7 +193,9 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
   }
 
   QFuture<QPair<QString, bool>> future = QtConcurrent::run([this, tool_to_run, ptr_editor, data]() {
-    return tool_to_run->runTool(ptr_editor, data);
+    QPair<QString, bool> result = tool_to_run->runTool(ptr_editor, data);
+
+    return result;
   });
   QFutureWatcher<QPair<QString, bool>>* watched = new QFutureWatcher<QPair<QString, bool>>();
 

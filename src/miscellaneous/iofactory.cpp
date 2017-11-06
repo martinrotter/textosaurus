@@ -4,6 +4,7 @@
 
 #include "definitions/definitions.h"
 #include "exceptions/ioexception.h"
+#include "miscellaneous/application.h"
 
 #include <QDataStream>
 #include <QDir>
@@ -106,6 +107,22 @@ void IOFactory::writeFile(const QString& file_path, const QByteArray& data) {
   }
   else {
     throw IOException(tr("Cannot open file '%1' for writting.").arg(QDir::toNativeSeparators(file_path)));
+  }
+}
+
+QString IOFactory::writeToTempFile(const QByteArray& data) {
+  QTemporaryFile tmp_file;
+
+  tmp_file.setAutoRemove(false);
+  tmp_file.setFileTemplate(qApp->tempFolder() + QDir::separator() + QSL("tool_output_XXXXXX.txt"));
+  if (tmp_file.open()) {
+    tmp_file.write(data);
+    tmp_file.close();
+
+    return tmp_file.fileName();
+  }
+  else {
+    throw IOException(tr("Cannot open temporary file for writting."));
   }
 }
 

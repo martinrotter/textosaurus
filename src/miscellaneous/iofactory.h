@@ -33,6 +33,7 @@ class IOFactory {
     // Throws exception when no such file exists.
     static QByteArray readFile(const QString& file_path);
     static void writeFile(const QString& file_path, const QByteArray& data);
+    static QString writeToTempFile(const QByteArray& data);
 
     // Copies file, overwrites destination.
     static bool copyFile(const QString& source, const QString& destination);

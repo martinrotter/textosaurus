@@ -15,6 +15,7 @@
 #include "uchardet/uchardet.h"
 
 #include <QFileDialog>
+#include <QTemporaryFile>
 #include <QTextCodec>
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
@@ -552,11 +553,14 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
       m_toolBox->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
       break;
 
-    case ToolOutput::NewSavedFile:
+    case ToolOutput::NewSavedFile: {
+      m_toolBox->displayOutput(OutputSource::ExternalTool,
+                               tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
+                               QMessageBox::Icon::Information);
 
-      // TODO: uložíme výstup do souboru v tempu
-      // a pak ten soubor otevřeme.
+      loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), "UTF-8");
       break;
+    }
 
     case ToolOutput::ReplaceSelectionDocument:
       if (editor->hasSelectedText()) {
