@@ -18,6 +18,8 @@ class PredefinedTools {
     static QString currentDateTime(const QString& data, bool* ok);
 
     // MIME tools.
+    static QString toUrlEncoded(const QString& data, bool* ok);
+    static QString fromUrlEncoded(const QString& data, bool* ok);
     static QString toBase64(const QString& data, bool* ok);
     static QString fromBase64(const QString& data, bool* ok);
     static QString toBase64Url(const QString& data, bool* ok);

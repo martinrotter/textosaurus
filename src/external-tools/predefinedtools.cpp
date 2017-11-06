@@ -109,6 +109,16 @@ QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {
   return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
 }
 
+QString PredefinedTools::toUrlEncoded(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+  return QUrl::toPercentEncoding(data);
+}
+
+QString PredefinedTools::fromUrlEncoded(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+  return QUrl::fromPercentEncoding(data.toUtf8());
+}
+
 QString PredefinedTools::toBase64(const QString& data, bool* ok) {
   Q_UNUSED(ok)
 

@@ -132,6 +132,15 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(tobase64url);
 
+  PredefinedTool* tourlencoded = new PredefinedTool(&PredefinedTools::toUrlEncoded, this);
+
+  tourlencoded->setCategory(tr("MIME tools"));
+  tourlencoded->setName(tr("Text → URL encoded"));
+  tourlencoded->setInput(ToolInput::SelectionDocument);
+  tourlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(tourlencoded);
+
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 
   frombase64->setCategory(tr("MIME tools"));
@@ -149,6 +158,15 @@ void ExternalTools::loadPredefinedTools() {
   frombase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
 
   m_tools.append(frombase64url);
+
+  PredefinedTool* fromurlencoded = new PredefinedTool(&PredefinedTools::fromUrlEncoded, this);
+
+  fromurlencoded->setCategory(tr("MIME tools"));
+  fromurlencoded->setName(tr("URL encoded → text"));
+  fromurlencoded->setInput(ToolInput::SelectionDocument);
+  fromurlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(fromurlencoded);
 }
 
 void ExternalTools::loadCustomTools() {}
