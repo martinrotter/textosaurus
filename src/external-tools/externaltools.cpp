@@ -14,11 +14,14 @@
 
 #include <QAction>
 #include <QDateTime>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMenu>
 #include <QPointer>
 #include <QRegularExpression>
+#include <QtConcurrent/QtConcurrentRun>
 
 ExternalTools::ExternalTools(QObject* parent) : QObject(parent), m_tools(QList<ExternalTool*>()) {}
 
@@ -189,7 +192,19 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
       break;
   }
 
-  tool_to_run->runTool(ptr_editor, data);
+  QFuture<QPair<QString, bool>> future = QtConcurrent::run([this, tool_to_run, ptr_editor, data]() {
+    return tool_to_run->runTool(ptr_editor, data);
+  });
+  QFutureWatcher<QPair<QString, bool>>* watched = new QFutureWatcher<QPair<QString, bool>>();
+
+  watched->setFuture(future);
+  connect(watched, &QFutureWatcher<QPair<QString, bool>>::finished, this, [this, tool_to_run, editor]() {
+    QFutureWatcher<QPair<QString, bool>>* sndr = static_cast<QFutureWatcher<QPair<QString, bool>>*>(sender());
+    QPair<QString, bool> result = sndr->result();
+
+    emit toolFinished(tool_to_run, editor, result.first, result.second);
+    sndr->deleteLater();
+  });
 }
 
 void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QString& output_text, bool success) {

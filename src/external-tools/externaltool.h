@@ -82,7 +82,7 @@ class ExternalTool : public QObject {
     // Runs tool with given string data (which is depending on tool input mode
     // current line, current selection, current whole document text or saved
     // document filename.
-    virtual void runTool(const QPointer<TextEditor>& editor, const QString& data);
+    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data);
 
   signals:
     void toolFinished(QPointer<TextEditor> editor, QString output_text, bool success);
@@ -113,7 +113,7 @@ class PredefinedTool : public ExternalTool {
     explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
 
   public slots:
-    virtual void runTool(const QPointer<TextEditor>& editor, const QString& data);
+    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data);
 
     bool isPredefined() const;
 
