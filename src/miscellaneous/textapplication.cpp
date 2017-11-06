@@ -80,8 +80,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   QFile file(file_path);
 
   if (!file.exists()) {
-    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
-                          tr("File '%1' does not exist and cannot be opened.").arg(QDir::toNativeSeparators(file_path)));
+    qWarning("File '%s' does not exist and cannot be opened.", qPrintable(file_path));
     return;
   }
 

@@ -151,11 +151,9 @@ void Application::processExecutionMessage(const QString& message) {
     quitApplication();
   }
   else {
-    foreach (const QString& msg, messages) {
-      if (msg == APP_IS_RUNNING) {
-        showGuiMessage(tr("Application is already running, opening delegated files."), QMessageBox::Warning);
-        mainForm()->display();
-      }
+    if (messages.contains(QSL(APP_IS_RUNNING))) {
+      qApp->textApplication()->loadFilesFromArgs(messages);
+      qApp->mainForm()->display();
     }
   }
 }
