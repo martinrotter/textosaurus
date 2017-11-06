@@ -146,10 +146,6 @@ win32 {
   DEPENDPATH += $$PWD/resources/binaries/qscintilla
 }
 
-mac {
-
-}
-
 unix:!mac {
   # Use system-wide QScintilla.
   equals(WITH_UBUNTU, true) {
@@ -174,8 +170,13 @@ win32 {
   }
 }
 
-DISTFILES += resources/scripts/uncrustify/uncrustify.cfg \
-    src/uchardet/README.TXT
+# Setup specific compiler options.
+CONFIG(release, debug|release) {
+  gcc:QMAKE_CXXFLAGS_RELEASE += -O3
+  clang:QMAKE_CXXFLAGS_RELEASE += -O3
+}
+
+DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
 
 MOC_DIR = $$OUT_PWD/moc
 RCC_DIR = $$OUT_PWD/rcc
