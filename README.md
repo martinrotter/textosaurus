@@ -35,6 +35,8 @@ Features
     - support for **many text operations**, which allow you to:
         * upload selection/document to pastebin sites,
         * convert to/from Base64 and Base64Url,
+	* convert to/from URL encoded text,
+	* convert to HTML escaped text, 
         * insert current date/time.
 * Misc:
     - all user data (settings, external tools definitions, ...) are fully portable (You can use the same user data shared via Dropbox on all supported platforms.),

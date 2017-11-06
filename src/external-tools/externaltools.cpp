@@ -132,6 +132,15 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(tobase64url);
 
+  PredefinedTool* tohtmlencoded = new PredefinedTool(&PredefinedTools::toHtmlEscaped, this);
+
+  tohtmlencoded->setCategory(tr("MIME tools"));
+  tohtmlencoded->setName(tr("Text → HTML escaped"));
+  tohtmlencoded->setInput(ToolInput::SelectionDocument);
+  tohtmlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(tohtmlencoded);
+
   PredefinedTool* tourlencoded = new PredefinedTool(&PredefinedTools::toUrlEncoded, this);
 
   tourlencoded->setCategory(tr("MIME tools"));
@@ -140,6 +149,24 @@ void ExternalTools::loadPredefinedTools() {
   tourlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
 
   m_tools.append(tourlencoded);
+
+  PredefinedTool* tolower = new PredefinedTool(&PredefinedTools::toLower, this);
+
+  tolower->setCategory(tr("Text conversion"));
+  tolower->setName(tr("to lower case"));
+  tolower->setInput(ToolInput::SelectionDocument);
+  tolower->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(tolower);
+
+  PredefinedTool* toupper = new PredefinedTool(&PredefinedTools::toUpper, this);
+
+  toupper->setCategory(tr("Text conversion"));
+  toupper->setName(tr("TO UPPER CASE"));
+  toupper->setInput(ToolInput::SelectionDocument);
+  toupper->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(toupper);
 
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 

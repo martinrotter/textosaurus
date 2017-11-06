@@ -24,6 +24,9 @@ class PredefinedTools {
     static QString fromBase64(const QString& data, bool* ok);
     static QString toBase64Url(const QString& data, bool* ok);
     static QString fromBase64Url(const QString& data, bool* ok);
+    static QString toLower(const QString& data, bool* ok);
+    static QString toUpper(const QString& data, bool* ok);
+    static QString toHtmlEscaped(const QString& data, bool* ok);
 
   private:
     explicit PredefinedTools();

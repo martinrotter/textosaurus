@@ -142,3 +142,18 @@ QString PredefinedTools::fromBase64Url(const QString& data, bool* ok) {
 
   return QByteArray::fromBase64(data.toUtf8(), QByteArray::Base64Option::Base64UrlEncoding);
 }
+
+QString PredefinedTools::toLower(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+  return data.toLower();
+}
+
+QString PredefinedTools::toUpper(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+  return data.toUpper();
+}
+
+QString PredefinedTools::toHtmlEscaped(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+  return data.toHtmlEscaped();
+}
