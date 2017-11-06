@@ -192,7 +192,7 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
   tool_to_run->runTool(ptr_editor, data);
 }
 
-void ExternalTools::onToolFinished(QPointer<TextEditor> editor, const QString& output_text, bool success) {
+void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QString& output_text, bool success) {
   ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
   emit toolFinished(tool, editor, output_text, success);
 }
