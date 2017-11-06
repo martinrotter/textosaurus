@@ -400,7 +400,6 @@ void TextApplication::loadState() {
   }
 
   m_settings->externalTools()->reloadTools();
-  m_toolBox->displayOutput(OutputSource::TextApplication, tr("Text component settings loaded."));
 }
 
 void TextApplication::quit(bool* ok) {

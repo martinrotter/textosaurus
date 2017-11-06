@@ -29,7 +29,7 @@
 #   - C++ 11 is required.
 #
 # Authors and contributors:
-#   - Martin Rotter (project leader),
+#   - Martin Rotter (project leader).
 #
 #################################################################
 
