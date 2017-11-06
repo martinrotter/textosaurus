@@ -18,6 +18,7 @@ class TextApplicationSettings : public QObject {
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
     virtual ~TextApplicationSettings();
 
+    QStringList recentFiles() const;
     QsciScintilla::EolMode eolMode() const;
     bool wordWrapEnabled() const;
     QString loadSaveDefaultDirectory() const;
@@ -28,6 +29,7 @@ class TextApplicationSettings : public QObject {
     ExternalTools* externalTools() const;
 
   public slots:
+    void setRecentFiles(const QStringList& recent_files);
     void setViewWhitespaces(bool view);
     void setViewEols(bool view);
     void setLoadSaveDefaultDirectory(const QString& directory);

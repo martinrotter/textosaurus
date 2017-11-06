@@ -25,6 +25,10 @@ DKEY Editor::WordWrap = "word_wrap";
 
 DVALUE(bool) Editor::WordWrapDef = true;
 
+DKEY Editor::RecentFiles = "recent_files";
+
+DVALUE(QStringList) Editor::RecentFilesDef = QStringList();
+
 DKEY Editor::ViewEols = "view_eols";
 
 DVALUE(bool) Editor::ViewEolsDef = false;

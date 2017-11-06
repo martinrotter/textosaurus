@@ -34,6 +34,10 @@ namespace Editor {
 
   VALUE(int) EolModeDef;
 
+  KEY RecentFiles;
+
+  VALUE(QStringList) RecentFilesDef;
+
   KEY WordWrap;
 
   VALUE(bool) WordWrapDef;

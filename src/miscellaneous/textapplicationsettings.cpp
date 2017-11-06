@@ -17,6 +17,14 @@ TextApplicationSettings::~TextApplicationSettings() {
   qDebug("Destroying TextApplicationSettings");
 }
 
+QStringList TextApplicationSettings::recentFiles() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::RecentFiles)).toStringList();
+}
+
+void TextApplicationSettings::setRecentFiles(const QStringList& recent_files) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::RecentFiles, recent_files);
+}
+
 QsciScintilla::EolMode TextApplicationSettings::eolMode() const {
   return static_cast<QsciScintilla::EolMode>(qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt());
 }
@@ -40,6 +48,17 @@ bool TextApplicationSettings::viewEols() const {
 void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& directory) {
   qApp->settings()->setValue(GROUP(Editor), Editor::DefaultLoadSaveDirectory,
                              QDir::toNativeSeparators(QFileInfo(directory).absolutePath()));
+
+  // Also, we remember this for "Recently opened files" feature.
+  QStringList recent_files = recentFiles();
+
+  if (recent_files.contains(directory)) {
+    recent_files.removeOne(directory);
+  }
+
+  recent_files.append(directory)
+
+  ;
 }
 
 void TextApplicationSettings::setWordWrapEnabled(bool enabled) {

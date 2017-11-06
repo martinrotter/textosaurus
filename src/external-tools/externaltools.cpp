@@ -78,42 +78,6 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(insert_date_time);
 
-  PredefinedTool* send_to_clbin = new PredefinedTool(&PredefinedTools::sendToClbin, this);
-
-  send_to_clbin->setCategory(tr("Upload to..."));
-  send_to_clbin->setName(tr("clbin.com"));
-  send_to_clbin->setInput(ToolInput::SelectionDocument);
-  send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_tools.append(send_to_clbin);
-
-  PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
-
-  send_to_github->setCategory(tr("Upload to..."));
-  send_to_github->setName(tr("github.com"));
-  send_to_github->setInput(ToolInput::SelectionDocument);
-  send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_tools.append(send_to_github);
-
-  PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
-
-  send_to_ixio->setCategory(tr("Upload to..."));
-  send_to_ixio->setName(tr("ix.io"));
-  send_to_ixio->setInput(ToolInput::SelectionDocument);
-  send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_tools.append(send_to_ixio);
-
-  PredefinedTool* send_to_sprunge = new PredefinedTool(&PredefinedTools::sendToSprunge, this);
-
-  send_to_sprunge->setCategory(tr("Upload to..."));
-  send_to_sprunge->setName(tr("sprunge.us"));
-  send_to_sprunge->setInput(ToolInput::SelectionDocument);
-  send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_tools.append(send_to_sprunge);
-
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
   tobase64->setCategory(tr("MIME tools"));
@@ -194,6 +158,42 @@ void ExternalTools::loadPredefinedTools() {
   fromurlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
 
   m_tools.append(fromurlencoded);
+
+  PredefinedTool* send_to_clbin = new PredefinedTool(&PredefinedTools::sendToClbin, this);
+
+  send_to_clbin->setCategory(tr("Upload to..."));
+  send_to_clbin->setName(tr("clbin.com"));
+  send_to_clbin->setInput(ToolInput::SelectionDocument);
+  send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_clbin);
+
+  PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
+
+  send_to_github->setCategory(tr("Upload to..."));
+  send_to_github->setName(tr("github.com"));
+  send_to_github->setInput(ToolInput::SelectionDocument);
+  send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_github);
+
+  PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
+
+  send_to_ixio->setCategory(tr("Upload to..."));
+  send_to_ixio->setName(tr("ix.io"));
+  send_to_ixio->setInput(ToolInput::SelectionDocument);
+  send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_ixio);
+
+  PredefinedTool* send_to_sprunge = new PredefinedTool(&PredefinedTools::sendToSprunge, this);
+
+  send_to_sprunge->setCategory(tr("Upload to..."));
+  send_to_sprunge->setName(tr("sprunge.us"));
+  send_to_sprunge->setInput(ToolInput::SelectionDocument);
+  send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(send_to_sprunge);
 }
 
 void ExternalTools::loadCustomTools() {}
