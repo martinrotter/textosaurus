@@ -140,8 +140,8 @@ void TextEditor::closeEditor(bool* ok) {
 
     // We need to save.
     QMessageBox::StandardButton response = QMessageBox::question(qApp->mainFormWidget(),
-                                                                 tr("Unsaved changed"),
-                                                                 tr("This document has unsaved changed, do you want to save them?"),
+                                                                 tr("Unsaved changes"),
+                                                                 tr("This document has unsaved changes, do you want to save them?"),
                                                                  QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
                                                                  QMessageBox::Save);
 
