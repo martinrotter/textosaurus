@@ -45,20 +45,22 @@ bool TextApplicationSettings::viewEols() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ViewEols)).toBool();
 }
 
-void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& directory) {
-  qApp->settings()->setValue(GROUP(Editor), Editor::DefaultLoadSaveDirectory,
-                             QDir::toNativeSeparators(QFileInfo(directory).absolutePath()));
+void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& file_path) {
+  const QString normalized_file_path = QDir::toNativeSeparators(file_path);
+  const QString normalized_folder = QDir::toNativeSeparators(QFileInfo(file_path).absolutePath());
+
+  qApp->settings()->setValue(GROUP(Editor), Editor::DefaultLoadSaveDirectory, normalized_folder);
 
   // Also, we remember this for "Recently opened files" feature.
   QStringList recent_files = recentFiles();
 
-  if (recent_files.contains(directory)) {
-    recent_files.removeOne(directory);
+  if (recent_files.contains(normalized_file_path)) {
+    recent_files.removeOne(normalized_file_path);
   }
 
-  recent_files.append(directory)
-
-  ;
+  // We move it to last position.
+  recent_files.append(normalized_file_path);
+  setRecentFiles(recent_files);
 }
 
 void TextApplicationSettings::setWordWrapEnabled(bool enabled) {

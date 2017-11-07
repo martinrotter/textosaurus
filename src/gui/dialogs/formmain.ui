@@ -68,10 +68,16 @@
       <string>&amp;Open file with encoding...</string>
      </property>
     </widget>
+    <widget class="QMenu" name="m_menuRecentFiles">
+     <property name="title">
+      <string>&amp;Recently opened files</string>
+     </property>
+    </widget>
     <addaction name="m_actionFileNew"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileOpen"/>
     <addaction name="m_menuFileOpenWithEncoding"/>
+    <addaction name="m_menuRecentFiles"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileSave"/>
     <addaction name="m_actionFileSaveAs"/>

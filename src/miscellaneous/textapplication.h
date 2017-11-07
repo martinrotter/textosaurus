@@ -62,6 +62,7 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
   private slots:
+    void fillRecentFiles();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
     void onEditorRequestVisibility();
@@ -72,6 +73,7 @@ class TextApplication : public QObject {
 
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
+
     void loadNewExternalTools();
     void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text, bool success);
 
@@ -110,6 +112,7 @@ class TextApplication : public QObject {
     QMenu* m_menuEolMode;
     QMenu* m_menuEolConversion;
     QMenu* m_menuTools;
+    QMenu* m_menuRecentFiles;
 };
 
 #endif // TEXTAPPLICATION_H

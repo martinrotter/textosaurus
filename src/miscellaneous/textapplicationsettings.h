@@ -32,7 +32,7 @@ class TextApplicationSettings : public QObject {
     void setRecentFiles(const QStringList& recent_files);
     void setViewWhitespaces(bool view);
     void setViewEols(bool view);
-    void setLoadSaveDefaultDirectory(const QString& directory);
+    void setLoadSaveDefaultDirectory(const QString& file_path);
     void setWordWrapEnabled(bool enabled);
     void setEolModeFromAction(QAction* act);
 

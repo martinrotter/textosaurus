@@ -326,6 +326,10 @@ void TextApplication::createConnections() {
     }
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
+  connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
+  connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
+    loadTextEditorFromFile(action->text());
+  });
 }
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
@@ -359,6 +363,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuEolMode = main_form->m_ui.m_menuEolMode;
   m_menuEolConversion = main_form->m_ui.m_menuEolConversion;
   m_menuTools = main_form->m_ui.m_menuTools;
+  m_menuRecentFiles = main_form->m_ui.m_menuRecentFiles;
 
   m_actionEolMac->setData(int(QsciScintilla::EolMode::EolMac));
   m_actionEolUnix->setData(int(QsciScintilla::EolMode::EolUnix));
@@ -415,6 +420,15 @@ void TextApplication::quit(bool* ok) {
   }
 
   *ok = true;
+}
+
+void TextApplication::fillRecentFiles() {
+  qDeleteAll(m_menuRecentFiles->actions());
+  m_menuRecentFiles->clear();
+
+  foreach (const QString& file_path, m_settings->recentFiles()) {
+    m_menuRecentFiles->addAction(file_path);
+  }
 }
 
 void TextApplication::openTextFile(QAction* action) {
