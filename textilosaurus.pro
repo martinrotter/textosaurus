@@ -8,12 +8,14 @@
 # Usage:
 #   a) DEBUG build for testing. (out of source build type)
 #     cd ../build-dir
+#     lrelease -compress ../textilosaurus-dir/textilosaurus.pro
 #     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=debug PREFIX=./usr
 #     make
 #     make install
 #
 #   b) RELEASE build for production use. (out of source build type)
 #     cd ../build-dir
+#     lrelease -compress ../textilosaurus-dir/textilosaurus.pro
 #     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=release PREFIX=./usr
 #     make
 #     make install
@@ -421,18 +423,11 @@ INCLUDEPATH +=  $$PWD/. \
 TRANSLATIONS += $$PWD/localization/textilosaurus_en_GB.ts \
                 $$PWD/localization/textilosaurus_en.ts
 
-# Make sure QM translations are gnerated.
-lrelease.input = TRANSLATIONS
-lrelease.output = $$PWD/resources/localizations/${QMAKE_FILE_BASE}.qm
-lrelease.commands = $$LRELEASE_EXECUTABLE -compress ${QMAKE_FILE_IN} -qm $$PWD/resources/localizations/${QMAKE_FILE_BASE}.qm
-lrelease.CONFIG += no_link target_predeps
-
 # Create new "make lupdate" target.
 lupdate.target = lupdate
 lupdate.commands = lupdate $$shell_path($$PWD/textilosaurus.pro)
 
 QMAKE_EXTRA_TARGETS += lupdate
-QMAKE_EXTRA_COMPILERS += lrelease
 
 # Create new "make 7zip" target and "make zip" target.
 win32 {
