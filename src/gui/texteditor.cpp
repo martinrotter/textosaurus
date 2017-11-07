@@ -19,7 +19,9 @@
 #include <Qsci/qscilexercpp.h>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
-  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {}
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
+  setUtf8(true);
+}
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
   m_filePath = file.fileName();
@@ -171,8 +173,6 @@ void TextEditor::closeEditor(bool* ok) {
 }
 
 void TextEditor::reloadSettings() {
-  setUtf8(true);
-
   setEolMode(m_textApp->settings()->eolMode());
   setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);

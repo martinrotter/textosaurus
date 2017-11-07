@@ -18,6 +18,10 @@ class TextApplicationSettings : public QObject {
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
     virtual ~TextApplicationSettings();
 
+    // Returns lexer suitable for syntax highlighting of given file and filter.
+    // NOTE: Caller takes ownership if the lexer.
+    QsciLexer* lexerForFile(const QString& file_name, const QString& file_filter);
+
     QStringList fileFilters();
 
     QStringList recentFiles() const;

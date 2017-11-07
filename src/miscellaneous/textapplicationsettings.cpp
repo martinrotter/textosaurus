@@ -17,6 +17,11 @@ TextApplicationSettings::~TextApplicationSettings() {
   qDebug("Destroying TextApplicationSettings");
 }
 
+QsciLexer* TextApplicationSettings::lexerForFile(const QString& file_name, const QString& file_filter) {
+
+  return nullptr;
+}
+
 QStringList TextApplicationSettings::fileFilters() {
   if (m_fileFilters.isEmpty()) {
     m_fileFilters << tr("All files (*)")
