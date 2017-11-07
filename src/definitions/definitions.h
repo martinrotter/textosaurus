@@ -92,7 +92,7 @@
 #define APP_THEME_PATH QSL(":/graphics")
 #define APP_INFO_PATH QSL(":/text")
 #define APP_ICON_PATH QSL(":/graphics/textilosaurus.png")
-#define APP_LANG_PATH QSL(":/localizations")
+#define APP_LANG_PATH QSL(":/localization")
 
 #if defined(Q_OS_LINUX)
 #define APP_DESKTOP_ENTRY_FILE "com.github.textilosaurus.desktop"

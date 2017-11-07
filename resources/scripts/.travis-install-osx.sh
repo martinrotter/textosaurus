@@ -2,9 +2,9 @@
 
 # Build application.
 mkdir textilosaurus-build && cd textilosaurus-build
-qmake ..
+lrelease -compress ../textilosaurus.pro
+qmake ../textilosaurus.pro
 make
-qmake ..
 make install
 
 # Make DMG image.

@@ -5,9 +5,9 @@ source /opt/qt59/bin/qt59-env.sh
 mkdir textilosaurus-build && cd textilosaurus-build
 
 # Build application.
+lrelease -compress ../textilosaurus.pro
 qmake ../textilosaurus.pro "WITH_UBUNTU=true"
 make
-qmake ../textilosaurus.pro "WITH_UBUNTU=true"
 make install
 
 # Obtain linuxdeployqt.

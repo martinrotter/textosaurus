@@ -26,6 +26,7 @@ build_script:
   - dir
   - mkdir textilosaurus-build
   - cd textilosaurus-build
+  - lrelease.exe -compress C:\textilosaurus\textilosaurus.pro
   - qmake.exe C:\textilosaurus\textilosaurus.pro
   - nmake
   - nmake windows_all
