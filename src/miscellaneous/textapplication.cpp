@@ -435,7 +435,7 @@ void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
   QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
                                                    m_settings->loadSaveDefaultDirectory(),
-                                                   tr("Text files (*.txt);;All files (*)"));
+                                                   m_settings->fileFilters().join(QSL(";;")));
 
   if (!file_path.isEmpty()) {
     loadTextEditorFromFile(file_path, encoding);

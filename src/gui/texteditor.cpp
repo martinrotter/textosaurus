@@ -109,14 +109,13 @@ void TextEditor::save(bool* ok) {
 
 void TextEditor::saveAs(bool* ok, const QString& encoding) {
   // We save this documents as new file.
-  QStringList filters; filters << QSL("All files (*)") << QSL("Text files (*.txt)");
   QString file_path = MessageBox::getSaveFileName(qApp->mainFormWidget(),
                                                   tr("Save file as"),
                                                   m_filePath.isEmpty() ?
                                                   m_textApp->settings()->loadSaveDefaultDirectory() :
                                                   QFileInfo(m_filePath).absolutePath(),
                                                   QFileInfo(m_filePath).fileName(),
-                                                  filters,
+                                                  textApplication()->settings()->fileFilters(),
                                                   nullptr);
 
   if (!file_path.isEmpty()) {
@@ -202,6 +201,8 @@ void TextEditor::reloadSettings() {
   setAutoCompletionThreshold(0);
   setAutoCompletionFillupsEnabled(true);
   setAutoCompletionSource(QsciScintilla::AcsAll);
+
+  SendScintilla(SCI_SETLEXER, SCLEX_CPP);
 }
 
 QString TextEditor::filePath() const {

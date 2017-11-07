@@ -18,6 +18,8 @@ class TextApplicationSettings : public QObject {
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
     virtual ~TextApplicationSettings();
 
+    QStringList fileFilters();
+
     QStringList recentFiles() const;
     QsciScintilla::EolMode eolMode() const;
     bool wordWrapEnabled() const;
@@ -44,6 +46,7 @@ class TextApplicationSettings : public QObject {
   private:
     TextApplication* m_textApplication;
     ExternalTools* m_externalTools;
+    QStringList m_fileFilters;
 };
 
 #endif // TEXTAPPLICATIONSETTINGS_H

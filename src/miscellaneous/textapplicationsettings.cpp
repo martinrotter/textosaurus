@@ -11,10 +11,19 @@
 #include <QFileInfo>
 
 TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
-  : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)) {}
+  : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)), m_fileFilters(QStringList()) {}
 
 TextApplicationSettings::~TextApplicationSettings() {
   qDebug("Destroying TextApplicationSettings");
+}
+
+QStringList TextApplicationSettings::fileFilters() {
+  if (m_fileFilters.isEmpty()) {
+    m_fileFilters << tr("All files (*.*)")
+                  << tr("Text files (*.txt)");
+  }
+
+  return m_fileFilters;
 }
 
 QStringList TextApplicationSettings::recentFiles() const {
