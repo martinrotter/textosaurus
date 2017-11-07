@@ -201,8 +201,6 @@ void TextEditor::reloadSettings() {
   setAutoCompletionThreshold(0);
   setAutoCompletionFillupsEnabled(true);
   setAutoCompletionSource(QsciScintilla::AcsAll);
-
-  SendScintilla(SCI_SETLEXER, SCLEX_CPP);
 }
 
 QString TextEditor::filePath() const {
