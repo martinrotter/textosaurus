@@ -48,6 +48,7 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
 
   // TODO: určitě půjde udělat lépe.
   setText(str.readAll().toUtf8().constData());
+  setSavePoint();
   blockSignals(false);
   Application::restoreOverrideCursor();
 
