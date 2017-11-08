@@ -20,6 +20,8 @@ class TextEditor : public QsciScintilla {
 
     TextApplication* textApplication() const;
 
+    //void setLexerWithName(QsciLexer* lexer = nullptr, const QString& lexer_name = QString());
+
   public slots:
     void save(bool* ok);
     void saveAs(bool* ok, const QString& encoding = QString());
@@ -35,6 +37,8 @@ class TextEditor : public QsciScintilla {
     void loadFromFile(QFile& file, const QString& encoding, QsciLexer* default_lexer);
 
   protected:
+
+    //void setLexer(QsciLexer* lexer = 0);
     void contextMenuEvent(QContextMenuEvent* event);
     void closeEvent(QCloseEvent* event);
 
@@ -50,6 +54,7 @@ class TextEditor : public QsciScintilla {
     TextApplication* m_textApp;
     QString m_filePath;
     QByteArray m_encoding;
+    QString m_lexerName;
 };
 
 #endif // TEXTEDITOR_H

@@ -134,7 +134,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
 }
 
 int TextApplication::addTextEditor(TextEditor* editor) {
-  return m_tabEditors->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
+  return m_tabEditors->addTab(editor, QIcon(), tr("New text file"), TabBar::TabType::TextEditor);
 }
 
 TextEditor* TextApplication::createTextEditor() {
@@ -232,7 +232,7 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
   if (index >= 0) {
     m_tabEditors->tabBar()->setTabIcon(index, modified ?
                                        qApp->icons()->fromTheme(QSL("dialog-warning")) :
-                                       qApp->icons()->fromTheme(QSL("text-plain")));
+                                       QIcon());
 
     renameEditor(editor);
     updateToolBarFromEditor(editor, true);
@@ -479,7 +479,8 @@ void TextApplication::onEditorTextChanged() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   if (editor != nullptr) {
-    markEditorModified(editor, editor->isModified());
+    // TODO: docasne vypnuto na zkousku esi je to fakt třeba
+    //markEditorModified(editor, editor->isModified());
   }
 }
 

@@ -87,7 +87,9 @@ PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> fun
   : ExternalTool(parent), m_functor(functor) {}
 
 QPair<QString, bool> PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
-  bool ok;
+  Q_UNUSED(editor)
+
+  bool ok = true;
   QString result = m_functor(data, &ok);
 
   return QPair<QString, bool>(result, ok);

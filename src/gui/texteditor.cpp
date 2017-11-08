@@ -28,11 +28,11 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, QsciLexer* d
   m_filePath = file.fileName();
   m_encoding = encoding.toLocal8Bit();
 
-  if (lexer() != nullptr) {
-    lexer()->deleteLater();
-  }
+  if (lexer() != default_lexer) {
+    if (lexer() != nullptr) {
+      lexer()->deleteLater();
+    }
 
-  if (default_lexer != nullptr) {
     setLexer(default_lexer);
   }
 
@@ -59,6 +59,10 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, QsciLexer* d
   Application::restoreOverrideCursor();
   emit loadedFromFile(m_filePath);
 }
+
+/*void TextEditor::setLexer(QsciLexer* lexer) {
+   QsciScintilla::setLexer(lexer);
+   }*/
 
 void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
   QsciScintilla::contextMenuEvent(event);
@@ -93,7 +97,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
   str << text();
 
-  emit savedToFile(m_filePath);
+  emit savedToFile((m_filePath = file_path));
 
   setModified(false);
   *ok = true;
@@ -102,6 +106,11 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 TextApplication* TextEditor::textApplication() const {
   return m_textApp;
 }
+
+/*void TextEditor::setLexerWithName(QsciLexer* lexer, const QString& lexer_name) {
+   setLexer(lexer);
+   m_lexerName = lexer_name;
+   }*/
 
 QByteArray TextEditor::encoding() const {
   return m_encoding;
