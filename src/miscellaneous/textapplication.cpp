@@ -327,6 +327,7 @@ void TextApplication::createConnections() {
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
   connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
+  connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::setCurrentLexer);
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
   });
@@ -364,6 +365,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuEolConversion = main_form->m_ui.m_menuEolConversion;
   m_menuTools = main_form->m_ui.m_menuTools;
   m_menuRecentFiles = main_form->m_ui.m_menuRecentFiles;
+  m_menuLanguage = main_form->m_ui.m_menuLanguage;
 
   m_actionEolMac->setData(int(QsciScintilla::EolMode::EolMac));
   m_actionEolUnix->setData(int(QsciScintilla::EolMode::EolUnix));
@@ -428,6 +430,16 @@ void TextApplication::fillRecentFiles() {
 
   foreach (const QString& file_path, m_settings->recentFiles()) {
     m_menuRecentFiles->addAction(file_path);
+  }
+}
+
+void TextApplication::setCurrentLexer() {
+  TextEditor* current_editor = currentEditor();
+
+  if (current_editor != nullptr) {
+    QsciLexer* lexer = current_editor->lexer();
+
+    // TODO: dodělat
   }
 }
 

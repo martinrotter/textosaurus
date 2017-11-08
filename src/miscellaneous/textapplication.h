@@ -63,6 +63,7 @@ class TextApplication : public QObject {
 
   private slots:
     void fillRecentFiles();
+    void setCurrentLexer();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
     void onEditorRequestVisibility();
@@ -113,6 +114,7 @@ class TextApplication : public QObject {
     QMenu* m_menuEolConversion;
     QMenu* m_menuTools;
     QMenu* m_menuRecentFiles;
+    QMenu* m_menuLanguage;
 };
 
 #endif // TEXTAPPLICATION_H
