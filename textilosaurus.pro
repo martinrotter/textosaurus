@@ -126,41 +126,9 @@ message(textilosaurus: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
 QT *= core gui widgets network printsupport
 
-CONFIG *= c++11 warn_on
+CONFIG *= c++14 warn_on
 DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
 VERSION = $$APP_VERSION
-
-# Add QScintilla stuff.
-DEFINES += QSCINTILLA_DLL
-
-win32 {
-  # Add QScintilla from fixed path.
-  CONFIG(release, debug|release) {
-    message(textilosaurus: Linking with release QScintilla library.)
-    LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5
-  }
-  else {
-    message(textilosaurus: Linking with debug QScintilla library.)
-    LIBS += -L$$PWD/resources/binaries/qscintilla/ -lqscintilla2_qt5d
-  }
-
-  INCLUDEPATH += $$PWD/resources/binaries/qscintilla
-  DEPENDPATH += $$PWD/resources/binaries/qscintilla
-}
-
-unix:!mac {
-  # Use system-wide QScintilla.
-  equals(WITH_UBUNTU, true) {
-    message(textilosaurus: Adding extra include path for Ubuntu.)
-    DEFINES *= WITH_UBUNTU
-    LIBS += -lqt5scintilla2
-    INCLUDEPATH += /usr/include/qt5
-    DEPENDPATH += /usr/include/qt5
-  }
-  else {
-    LIBS += -lqscintilla2_qt5
-  }
-}
 
 win32 {
   # Makes sure we use correct subsystem on Windows.
@@ -201,6 +169,73 @@ win32 {
   QMAKE_TARGET_DESCRIPTION = $$APP_NAME
   QMAKE_TARGET_COPYRIGHT = $$APP_COPYRIGHT
   QMAKE_TARGET_PRODUCT = $$APP_NAME
+}
+
+# Add Scintilla.
+win32 {
+        QMAKE_CXXFLAGS += -std:c++latest
+}
+
+SOURCES += \
+    src/scintilla/qt/ScintillaEdit/ScintillaEdit.cpp \
+    src/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp \
+    src/scintilla/qt/ScintillaEditBase/PlatQt.cpp \
+    src/scintilla/qt/ScintillaEditBase/ScintillaQt.cpp \
+    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp \
+    src/scintilla/src/XPM.cxx \
+    src/scintilla/src/ViewStyle.cxx \
+    src/scintilla/src/UniConversion.cxx \
+    src/scintilla/src/Style.cxx \
+    src/scintilla/src/Selection.cxx \
+    src/scintilla/src/ScintillaBase.cxx \
+    src/scintilla/src/RunStyles.cxx \
+    src/scintilla/src/RESearch.cxx \
+    src/scintilla/src/PositionCache.cxx \
+    src/scintilla/src/PerLine.cxx \
+    src/scintilla/src/MarginView.cxx \
+    src/scintilla/src/LineMarker.cxx \
+    src/scintilla/src/KeyMap.cxx \
+    src/scintilla/src/Indicator.cxx \
+    src/scintilla/src/ExternalLexer.cxx \
+    src/scintilla/src/EditView.cxx \
+    src/scintilla/src/Editor.cxx \
+    src/scintilla/src/EditModel.cxx \
+    src/scintilla/src/Document.cxx \
+    src/scintilla/src/Decoration.cxx \
+    src/scintilla/src/DBCS.cxx \
+    src/scintilla/src/ContractionState.cxx \
+    src/scintilla/src/CharClassify.cxx \
+    src/scintilla/src/CellBuffer.cxx \
+    src/scintilla/src/Catalogue.cxx \
+    src/scintilla/src/CaseFolder.cxx \
+    src/scintilla/src/CaseConvert.cxx \
+    src/scintilla/src/CallTip.cxx \
+    src/scintilla/src/AutoComplete.cxx \
+    src/scintilla/lexlib/WordList.cxx \
+    src/scintilla/lexlib/StyleContext.cxx \
+    src/scintilla/lexlib/PropSetSimple.cxx \
+    src/scintilla/lexlib/LexerSimple.cxx \
+    src/scintilla/lexlib/LexerNoExceptions.cxx \
+    src/scintilla/lexlib/LexerModule.cxx \
+    src/scintilla/lexlib/LexerBase.cxx \
+    src/scintilla/lexlib/DefaultLexer.cxx \
+    src/scintilla/lexlib/CharacterSet.cxx \
+    src/scintilla/lexlib/CharacterCategory.cxx \
+    src/scintilla/lexlib/Accessor.cxx \
+    $$files(src/scintilla/lexers/*.cxx, false)
+
+HEADERS  += \
+    src/scintilla/qt/ScintillaEdit/ScintillaEdit.h \
+    src/scintilla/qt/ScintillaEdit/ScintillaDocument.h \
+    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
+    src/scintilla/qt/ScintillaEditBase/ScintillaQt.h
+
+INCLUDEPATH += src/scintilla/qt/ScintillaEditBase src/scintilla/include src/scintilla/src src/scintilla/lexlib
+
+DEFINES *= SCINTILLA_QT=1 SCI_LEXER=1 _CRT_SECURE_NO_DEPRECATE=1
+
+CONFIG(release, debug|release) {
+  DEFINES *= NDEBUG=1
 }
 
 CONFIG *= resources_big
