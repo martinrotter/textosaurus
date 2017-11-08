@@ -65,7 +65,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   QsciLexer* default_lexer = nullptr;
 
   if (explicit_encoding.isEmpty()) {
-    qDebug("No explicit encoding for file '%s' openin. Try to detect one.", qPrintable(file_path));
+    qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
 
     if ((encoding = TextFactory::detectEncoding(file_path)).isEmpty()) {
       // No encoding auto-detected.

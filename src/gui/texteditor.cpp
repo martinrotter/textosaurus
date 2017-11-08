@@ -206,6 +206,9 @@ void TextEditor::reloadSettings() {
   if (lexer() != nullptr) {
     lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
+  else {
+    setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  }
 
   setAutoCompletionCaseSensitivity(false);
   setAutoCompletionThreshold(0);
