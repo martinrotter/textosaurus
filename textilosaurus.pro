@@ -177,6 +177,11 @@ CONFIG(release, debug|release) {
   gcc:QMAKE_CXXFLAGS_RELEASE += -O3
   clang:QMAKE_CXXFLAGS_RELEASE += -O3
 }
+else {
+  gcc:QMAKE_CXXFLAGS_DEBUG += -Wall
+  clang:QMAKE_CXXFLAGS_DEBUG += -Wall
+  msvc:QMAKE_CXXFLAGS_DEBUG += -Wall
+}
 
 DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
 
