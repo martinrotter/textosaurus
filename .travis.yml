@@ -5,19 +5,21 @@ os:
 - linux
 compiler:
 - gcc
+git:
+  submodules: false
+  depth: 10
+
 deploy:
   provider: releases
   file_glob: true
   skip_cleanup: true
   api_key:
-    secure: LSADKP8d6KftWZfe+Ll5NeSRLAt/jYPsbOUJu3L9g5a1NxUjuejpAg6WmTOvs991+waKmm8Oma+eTQK98hGueaq2CnTDcKCaR0g9le1V8wT5IH4gjxBK1NOtzeDZyD+HGVblpjDwt/kfRmdDCa+F5HFRcX9l3ZZp0fDPQGO25Mh+BZrqzek48nZk1a/9xW6eAo0jImv4sSJTztknUhBKX9cvxKzTD51t5bwR1mcNCjKL5rr8af2dwBhkc/s0BO/SFHfSN/HiRzDOoyQfiW1w5AJ2kWNQzBMD1m5N5CKi0+4tFLIonZ+4AHchXkAuWr6nNgHdAg7OM44wuc9TFQmOR2em+cK+Ou2t+9fXRrDbD5sFF6AAdK3J4V+u64yOFGzBZDN4OxVHVaoZUSaaZjbUB3CCJ/7MXB5c4ofZQ+KTdOD1yQwK0x4d6mTPbR/jLNXySjL/2ea+IhukJxyS4vFaSwBaoEesiHhgnzYkosdEXZaGEOvTGYKPDlM3rOWiRNe4MGnP9vz9k6MeKZCNYFPzhPsML3o3VcgGpoUl8BFyQaMbvAKpcPl6dmYOEoJElBJL7KDcwsuVQUrtGKgEwl72Os6tv6qzPARmXUpwLsk3aInFAfOD9P7xwXdNiDa0dc3tGNPP1eEZpBaf8I/YwSzWfp9hdnzVZmAba5Fo+KvNvRY=
+    secure: i+bdzcqqAoeaT6ipHjijO0UubXhPhSbArq+pZqAZNbq1MeOORxqZ0lS6RaDcrJVPvBjAcKt9BdYdeEaoUqI9o1LBsIw3ukSfgb811C8/4FfgaxbCKjtFjUsOQQFEpZDziuhpu3WzijHQhMmQxR3aEvyKMgRqWmVRa6YSCmLH57+hmv/IL8Kx2agTIenubndC6X2Nl+hcm/b4ZCz2Yf5ybQPG1pp2JkPksRHY8L/W6TjMZOswq2DJPvUtXHGnl8i8knwGbDI/oAdg7M+EYx52W8FR8wU05Je72FXpur0FErIU4KwVeSVY30lN9p0JllW9cc8KEIjTivCExoo8M/BZ2tMdHDcugx7iJGFuTXXywApQjkUThk+vSAfKj9Ws/gkBkvDIMw7rOeS2Cug0CwZlBa9Jp24UTdh09ceDukL94hMUK5O5JtwFvqKGiNr/xtBCaw4P+lcgBeqt+U9yv7wLmqjcSHOGEF4LTPt9Wr3zi8Mi80ylAhPXN96WanQBly8jVtYcswJssbsWGSAmoUed0tqs4edEv7NWsjzK0AK+cbD+Z/BHjVqnfCZ10zGHG/tdKm57q4OI6nxkau3fsTbyY6/Gq2QToDFlHAJ0t+69BV2etYDGIYTDU+f29uRACUGXtGBnIdceN+unSfnekXyBe3yJdXlfEbFoLK6JXWHMZJQ=
   file:
   - textilosaurus-build/textilosaurus*.AppImage
   on:
     tags: true
-git:
-  submodules: false
-  depth: 10
+  
 before_install: "./resources/scripts/.travis-before-install.sh"
 install: true
 script:
