@@ -92,14 +92,14 @@ QStringList SyntaxHighlighting::fileFilters() {
 Lexers SyntaxHighlighting::lexers() {
   if (m_lexers.isEmpty()) {
     // TODO: dodělat
+    m_lexers
+      << Lexer(tr("Plain text"), QStringList {
+      QSL("txt"), QString()
+    }, []() {
+      return nullptr;
+    });
 
     /*
-       m_lexers
-       << Lexer(tr("Plain text"), QStringList {
-       QSL("txt"), QString()
-       }, []() {
-       return nullptr;
-       })
      #if !defined(WITH_UBUNTU)
        << Lexer(QSL("AVS"), QStringList {
        QSL("avs")
