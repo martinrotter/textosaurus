@@ -152,6 +152,7 @@ unix:!mac {
   # Use system-wide QScintilla.
   equals(WITH_UBUNTU, true) {
     message(textilosaurus: Adding extra include path for Ubuntu.)
+    DEFINES *= WITH_UBUNTU
     LIBS += -lqt5scintilla2
     INCLUDEPATH += /usr/include/qt5
     DEPENDPATH += /usr/include/qt5
