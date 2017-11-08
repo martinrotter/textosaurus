@@ -41,9 +41,6 @@ class TextEditor : public ScintillaEdit {
     void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer);
 
   protected:
-
-    //void setLexer(QsciLexer* lexer = 0);
-    void contextMenuEvent(QContextMenuEvent* event);
     void closeEvent(QCloseEvent* event);
 
   signals:

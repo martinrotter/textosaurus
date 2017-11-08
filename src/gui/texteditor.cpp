@@ -11,6 +11,8 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
+#include "scintilla/include/SciLexer.h"
+
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
@@ -18,9 +20,9 @@
 #include <QTextStream>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEdit(parent), m_textApp(text_app),
-  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING), m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
-
-  setUtf8(true);
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
+  m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
+  setCodePage(SC_CP_UTF8);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
@@ -41,25 +43,15 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   }
 
   QTextStream str(&file); str.setCodec(codec_for_encoding);
-  QString next_line;
 
   blockSignals(true);
 
-  while (!(next_line = str.read(50000000)).isEmpty()) {
-    append(next_line);
-  }
-
+  // TODO: určitě půjde udělat lépe.
+  setText(str.readAll().toUtf8().constData());
   blockSignals(false);
   Application::restoreOverrideCursor();
+
   emit loadedFromFile(m_filePath);
-}
-
-/*void TextEditor::setLexer(QsciLexer* lexer) {
-   QsciScintilla::setLexer(lexer);
-   }*/
-
-void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
-  QsciScintilla::contextMenuEvent(event);
 }
 
 void TextEditor::closeEvent(QCloseEvent* event) {
@@ -71,26 +63,36 @@ void TextEditor::closeEvent(QCloseEvent* event) {
     event->ignore();
   }
   else {
-    QsciScintilla::closeEvent(event);
+    ScintillaEdit::closeEvent(event);
   }
 }
 
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
-  QsciLexer* old_lexer = QsciScintilla::lexer();
-  QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
+  clearDocumentStyle();
+  setLexer(SCLEX_CPP);
+  setProperty("fold", "1");
+  setProperty("fold.html", "1");
 
-  if (new_lexer != old_lexer) {
-    setLexer(new_lexer);
-    qDebug("Changing lexers from '%s' to '%s'.",
+  colourise(0, -1);
+
+  // TODO: dodělat korektně
+
+  /*
+     QsciLexer* old_lexer = QsciScintilla::lexer();
+     QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
+
+     if (new_lexer != old_lexer) {
+     setLexer(new_lexer);
+     qDebug("Changing lexers from '%s' to '%s'.",
            old_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(old_lexer->language()),
            new_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(new_lexer->language()));
 
-    if (old_lexer != nullptr) {
+     if (old_lexer != nullptr) {
       old_lexer->deleteLater();
-    }
-  }
+     }
+     }*/
 
   reloadFont();
 }
