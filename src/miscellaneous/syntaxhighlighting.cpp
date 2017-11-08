@@ -202,7 +202,7 @@ LexerSuffices SyntaxHighlighting::lexers() {
       QSL("xml"), QSL("xaml"), QSL("xsl"), QSL("xslt"), QSL("xml"),
       QSL("xsd"), QSL("xul"), QSL("kml"), QSL("svg"), QSL("mxml"), QSL("xsml"),
       QSL("wsdl"), QSL("xlf"), QSL("xliff"), QSL("xbl"), QSL("xml"), QSL("sxbl"),
-      QSL("sitemap"), QSL("gml"), QSL("gpx"), QSL("plist"), QSL("ts")
+      QSL("sitemap"), QSL("gml"), QSL("gpx"), QSL("plist"), QSL("ts"), QSL("vcxproj")
     }, LAMBDA_LEX_GEN(XML))
       << Lexer(QSL("YAML"), QStringList {
       QSL("yml"), QSL("yaml")
