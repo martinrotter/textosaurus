@@ -73,7 +73,7 @@ class TextApplication : public QObject {
 
     void onEditorRequestVisibility();
     void onEditorLoadedFromFile();
-    void onEditorModifiedChanged(bool modified);
+    void onEditorModified();
     void onEditorTabSwitched(int index = -1);
     void onEditorTextChanged();
 
