@@ -92,7 +92,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     }
   }
 
-  //reloadFont();
+  reloadFont();
 }
 
 void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
@@ -177,6 +177,10 @@ void TextEditor::reloadFont() {
   }
   else {
     setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+
+    // We clear all styles, this call will copy settings from STYLE_DEFAULT
+    // to all remaining styles.
+    SendScintilla(SCI_STYLECLEARALL);
   }
 }
 

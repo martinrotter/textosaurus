@@ -436,18 +436,6 @@ void TextApplication::quit(bool* ok) {
     }
   }
 
-  /*
-     foreach (TextEditor* edit, editors()) {
-     bool editor_ok;
-
-     edit->closeEditor(&editor_ok);
-
-     if (!editor_ok) {
-   * ok = false;
-      return;
-     }
-     }*/
-
   *ok = true;
 }
 
