@@ -3,7 +3,10 @@
 #include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"
 
+#if !defined(WITH_UBUNTU)
 #include <Qsci/qscilexeravs.h>
+#endif
+
 #include <Qsci/qscilexerbash.h>
 #include <Qsci/qscilexerbatch.h>
 #include <Qsci/qscilexercmake.h>
@@ -48,21 +51,10 @@ SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fil
   m_lexers(Lexers()) {}
 
 Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
-  //if (file_filter.isEmpty()) {
-  // We use file suffix.
   QRegularExpression reg("(?:\\.)(\\w+$)|($)");
   QString suffix = reg.match(file_name).captured(1);
 
   return lexerForSuffix(suffix);
-
-  /*}
-     else {
-     // We use filter.
-     QRegularExpression reg("(?:\\(\\*)(\\w+)");
-     QString suffix = reg.match(file_filter).captured(1);
-
-     return lexerForSuffix(suffix);
-     }*/
 }
 
 Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
