@@ -3,6 +3,7 @@
 #include "miscellaneous/textapplication.h"
 
 #include "external-tools/externaltool.h"
+#include "external-tools/externaltools.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
@@ -10,6 +11,7 @@
 #include "gui/texteditor.h"
 #include "gui/toolbar.h"
 #include "gui/toolbox.h"
+#include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textfactory.h"
 
 #include "uchardet/uchardet.h"
@@ -58,8 +60,9 @@ bool TextApplication::anyModifiedEditor() const {
   return false;
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding) {
+void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding, const QString& file_filter) {
   QString encoding;
+  QsciLexer* default_lexer = nullptr;
 
   if (explicit_encoding.isEmpty()) {
     qDebug("No explicit encoding for file '%s' openin. Try to detect one.", qPrintable(file_path));
@@ -117,20 +120,25 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
       m_actionWordWrap->setChecked(false);
     }
   }
-
-  TextEditor* new_editor = addEmptyTextEditor();
-
-  if (new_editor != nullptr) {
-    new_editor->loadFromFile(file, encoding);
-    m_settings->setLoadSaveDefaultDirectory(file_path);
-    m_tabEditors->setCurrentWidget(new_editor);
+  else {
+    // We try to detect default lexer.
+    default_lexer = m_settings->syntaxHighlighting()->lexerForFile(file_path, file_filter);
   }
+
+  TextEditor* new_editor = createTextEditor();
+
+  new_editor->loadFromFile(file, encoding, default_lexer);
+
+  m_settings->setLoadSaveDefaultDirectory(file_path);
+  m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
 }
 
-TextEditor* TextApplication::addEmptyTextEditor() {
-  TextEditor* editor = new TextEditor(this, m_tabEditors);
+int TextApplication::addTextEditor(TextEditor* editor) {
+  return m_tabEditors->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
+}
 
-  m_tabEditors->addTab(editor, qApp->icons()->fromTheme(QSL("text-plain")), tr("New text file"), TabBar::TabType::TextEditor);
+TextEditor* TextApplication::createTextEditor() {
+  TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorModifiedChanged);
   connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
@@ -276,9 +284,9 @@ void TextApplication::redo() {
 }
 
 void TextApplication::newFile() {
-  TextEditor* editor = addEmptyTextEditor();
+  TextEditor* editor = createTextEditor();
 
-  m_tabEditors->setCurrentWidget(editor);
+  m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }
 
 void TextApplication::onEditorModifiedChanged(bool modified) {
@@ -445,12 +453,14 @@ void TextApplication::setCurrentLexer() {
 
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
+  QString selected_filter;
   QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
                                                    m_settings->loadSaveDefaultDirectory(),
-                                                   m_settings->fileFilters().join(QSL(";;")));
+                                                   m_settings->syntaxHighlighting()->fileFilters().join(QSL(";;")),
+                                                   &selected_filter);
 
   if (!file_path.isEmpty()) {
-    loadTextEditorFromFile(file_path, encoding);
+    loadTextEditorFromFile(file_path, encoding, selected_filter);
   }
 }
 
@@ -583,7 +593,7 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
                                tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
                                QMessageBox::Icon::Information);
 
-      loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), "UTF-8");
+      loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
       break;
     }
 
@@ -594,6 +604,7 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
       else {
         // We replace whole document contents
         // because there is no selection.
+        // NOTE: Using setText() clears history.
         editor->selectAll();
         editor->replaceSelectedText(output_text);
       }

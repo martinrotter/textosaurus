@@ -14,6 +14,7 @@ class TabWidget;
 class ToolBox;
 class FormMain;
 class StatusBar;
+class ExternalTool;
 class QAction;
 class QMenu;
 
@@ -41,10 +42,13 @@ class TextApplication : public QObject {
     void undo();
     void redo();
 
-    TextEditor* addEmptyTextEditor();
+    int addTextEditor(TextEditor* editor);
+    TextEditor* createTextEditor();
 
     void openTextFile(QAction* action = nullptr);
-    void loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding = QString());
+    void loadTextEditorFromFile(const QString& file_path,
+                                const QString& explicit_encoding = QString(),
+                                const QString& file_filter = QString());
     void newFile();
     void loadFilesFromArgs(const QList<QString>& files);
 

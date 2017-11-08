@@ -30,6 +30,7 @@ Features
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents,
+    - **syntax highlighting** for many text formats,
     - conversion of existing EOLs,
 	- switchable visibility of EOL/whitespace characters,
     - support for **many text operations**, which allow you to:

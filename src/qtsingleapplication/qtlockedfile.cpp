@@ -80,6 +80,9 @@
 
     \sa QFile::QFile()
  */
+
+using namespace QtLP_Private;
+
 QtLockedFile::QtLockedFile()
   : QFile() {
 #ifdef Q_OS_WIN

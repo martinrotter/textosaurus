@@ -2,72 +2,23 @@
 
 #include "miscellaneous/textapplicationsettings.h"
 
+#include "external-tools/externaltools.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
+#include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
 
 #include <QAction>
 #include <QDir>
 #include <QFileInfo>
+#include <QRegularExpression>
 
 TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
-  : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)), m_fileFilters(QStringList()) {}
+  : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
+  m_syntaxHighlighting(new SyntaxHighlighting(this)) {}
 
 TextApplicationSettings::~TextApplicationSettings() {
   qDebug("Destroying TextApplicationSettings");
-}
-
-QsciLexer* TextApplicationSettings::lexerForFile(const QString& file_name, const QString& file_filter) {
-
-  return nullptr;
-}
-
-QStringList TextApplicationSettings::fileFilters() {
-  if (m_fileFilters.isEmpty()) {
-    m_fileFilters << tr("All files (*)")
-                  << tr("Text files (*.txt)")
-                  << tr("AVS files (*.avs)")
-                  << tr("Shell scripts (*.sh *.bash *.zsh *.ksh)")
-                  << tr("Batch scripts (*.bat *.cmd)")
-                  << tr("CMake scripts (*.txt *.cmake)")
-                  << tr("CoffeeScript files (*.litcoffee)")
-                  << tr("C++ files (*.h *.hpp *.cpp *.c *.cc *.cxx)")
-                  << tr("C# files (*.cs)")
-                  << tr("D files (*.d)")
-                  << tr("Diff files (*.diff)")
-                  << tr("Fortran files (*.for *.f90 *.f95 *.f2k *.f23)")
-                  << tr("Fortran77 files (*.f77)")
-                  << tr("HTML files (*.html *.htm *.shtml *.shtm *.xhtml *.xht *.hta)")
-                  << tr("IDL files (*.avs)")
-                  << tr("Java files (*.java)")
-                  << tr("JavaScript files (*.js)")
-                  << tr("JSON files (*.json)")
-                  << tr("Lua files (*.lua)")
-                  << tr("Make files (*.mak *makefile)")
-                  << tr("Markdown files (*.markdown)")
-
-                  << tr("Matlab files (*.m)")
-                  << tr("Octave files (*.m)")
-                  << tr("Pascal files (*.pas *.pp *.p *.inc *.lpr)")
-                  << tr("Perl files (*.pl *.pm *.plx)")
-                  << tr("PO files (*.po)")
-                  << tr("PostScript files (*.ps)")
-                  << tr("POV files (*.pov)")
-                  << tr("Properties files (*.properties)")
-                  << tr("Python files (*.py *.pyw)")
-                  << tr("Ruby files (*.rb *.rbw)")
-                  << tr("Spice files (*.scp *.out)")
-                  << tr("SQL files (*.sql)")
-                  << tr("TCL files (*.tcl)")
-                  << tr("TeX files (*.tex *.latex)")
-                  << tr("VeriLog files (*.v *.sv *.vh *.svh)")
-                  << tr("VHDL files (*.vhd *.vhdl)")
-                  << tr("XML files (*.xml *.xaml *.xsl *.xslt *.xsd *.xul *.kml *.svg *.mxml "
-          "*.xsml *.wsdl *.xlf *.xliff *.xbl *.sxbl *.sitemap *.gml *.gpx *.plist)")
-                  << tr("YAML files (*.yml *.yaml)");
-  }
-
-  return m_fileFilters;
 }
 
 QStringList TextApplicationSettings::recentFiles() const {
@@ -126,6 +77,11 @@ void TextApplicationSettings::setEolModeFromAction(QAction* act) {
 
   qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, int(new_mode));
   emit settingsChanged(true, false);
+}
+
+SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const
+{
+  return m_syntaxHighlighting;
 }
 
 ExternalTools* TextApplicationSettings::externalTools() const {

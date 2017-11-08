@@ -7,9 +7,9 @@
 
 #include <Qsci/qsciscintilla.h>
 
-#include "external-tools/externaltools.h"
-
 class TextApplication;
+class SyntaxHighlighting;
+class ExternalTools;
 
 class TextApplicationSettings : public QObject {
   Q_OBJECT
@@ -17,12 +17,6 @@ class TextApplicationSettings : public QObject {
   public:
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
     virtual ~TextApplicationSettings();
-
-    // Returns lexer suitable for syntax highlighting of given file and filter.
-    // NOTE: Caller takes ownership if the lexer.
-    QsciLexer* lexerForFile(const QString& file_name, const QString& file_filter);
-
-    QStringList fileFilters();
 
     QStringList recentFiles() const;
     QsciScintilla::EolMode eolMode() const;
@@ -33,6 +27,7 @@ class TextApplicationSettings : public QObject {
     bool viewEols() const;
 
     ExternalTools* externalTools() const;
+    SyntaxHighlighting* syntaxHighlighting() const;
 
   public slots:
     void setRecentFiles(const QStringList& recent_files);
@@ -50,7 +45,7 @@ class TextApplicationSettings : public QObject {
   private:
     TextApplication* m_textApplication;
     ExternalTools* m_externalTools;
-    QStringList m_fileFilters;
+    SyntaxHighlighting* m_syntaxHighlighting;
 };
 
 #endif // TEXTAPPLICATIONSETTINGS_H

@@ -50,7 +50,7 @@ APP_LOW_NAME                  = "textilosaurus"
 APP_REVERSE_NAME              = "com.github.textilosaurus"
 APP_AUTHOR                    = "Martin Rotter"
 APP_COPYRIGHT                 = "(C) 2017 $$APP_AUTHOR"
-APP_VERSION                   = "0.0.1"
+APP_VERSION                   = "0.0.2"
 APP_LONG_NAME                 = "$$APP_NAME $$APP_VERSION"
 APP_EMAIL                     = "rotter.martinos@gmail.com"
 APP_URL                       = "https://github.com/martinrotter/textilosaurus"
@@ -284,7 +284,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/external-tools/externaltools.h \
             src/gui/toolbox.h \
             src/external-tools/externaltool.h \
-            src/external-tools/predefinedtools.h
+            src/external-tools/predefinedtools.h \
+    src/miscellaneous/syntaxhighlighting.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -395,7 +396,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/external-tools/externaltools.cpp \
             src/gui/toolbox.cpp \
             src/external-tools/externaltool.cpp \
-            src/external-tools/predefinedtools.cpp
+            src/external-tools/predefinedtools.cpp \
+    src/miscellaneous/syntaxhighlighting.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

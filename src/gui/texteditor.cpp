@@ -7,6 +7,7 @@
 #include "gui/messagebox.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
+#include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
@@ -23,9 +24,17 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintil
   setUtf8(true);
 }
 
-void TextEditor::loadFromFile(QFile& file, const QString& encoding) {
+void TextEditor::loadFromFile(QFile& file, const QString& encoding, QsciLexer* default_lexer) {
   m_filePath = file.fileName();
   m_encoding = encoding.toLocal8Bit();
+
+  if (lexer() != nullptr) {
+    lexer()->deleteLater();
+  }
+
+  if (default_lexer != nullptr) {
+    setLexer(default_lexer);
+  }
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
@@ -56,7 +65,7 @@ void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
 }
 
 void TextEditor::closeEvent(QCloseEvent* event) {
-  bool ok;
+  bool ok = false;
 
   closeEditor(&ok);
 
@@ -117,7 +126,7 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
                                                   m_textApp->settings()->loadSaveDefaultDirectory() :
                                                   QFileInfo(m_filePath).absolutePath(),
                                                   QFileInfo(m_filePath).fileName(),
-                                                  textApplication()->settings()->fileFilters(),
+                                                  textApplication()->settings()->syntaxHighlighting()->fileFilters(),
                                                   nullptr);
 
   if (!file_path.isEmpty()) {
@@ -147,12 +156,13 @@ void TextEditor::closeEditor(bool* ok) {
                                                                  QMessageBox::Save);
 
     switch (response) {
-      case QMessageBox::StandardButton::Save:
-        bool ok_save;
+      case QMessageBox::StandardButton::Save: {
+        bool ok_save = false;
 
         save(&ok_save);
         *ok = ok_save;
         break;
+      }
 
       case QMessageBox::StandardButton::Discard:
         *ok = true;
@@ -193,9 +203,7 @@ void TextEditor::reloadSettings() {
   //setLexer(new QsciLexerCPP(this));
   setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
 
-  //lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
-
-  setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
 
   setAutoCompletionCaseSensitivity(false);
   setAutoCompletionThreshold(0);

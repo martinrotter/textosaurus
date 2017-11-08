@@ -32,7 +32,7 @@ class TextEditor : public QsciScintilla {
     void closeEditor(bool* ok);
 
     // Opens given file in this text editor, file is opened for reading.
-    void loadFromFile(QFile& file, const QString& encoding);
+    void loadFromFile(QFile& file, const QString& encoding, QsciLexer* default_lexer);
 
   protected:
     void contextMenuEvent(QContextMenuEvent* event);
