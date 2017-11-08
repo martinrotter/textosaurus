@@ -72,7 +72,8 @@ Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
     }
   }
 
-  return Lexer();
+  // We return first lexer, which is lexer for plain text files.
+  return m_lexers.first();
 }
 
 QStringList SyntaxHighlighting::fileFilters() {
@@ -212,7 +213,9 @@ Lexers SyntaxHighlighting::lexers() {
   return m_lexers;
 }
 
-Lexer::Lexer() {}
+Lexer::Lexer() : m_name(QString()), m_suffices(QStringList()), m_lexerGenerator([]() {
+  return nullptr;
+}) {}
 
 Lexer::Lexer(const QString& name, const QStringList& suffices, const std::function<QsciLexer*()>& lexer_generator)
   : m_name(name), m_suffices(suffices), m_lexerGenerator(lexer_generator) {}
