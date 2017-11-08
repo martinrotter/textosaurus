@@ -91,14 +91,13 @@ void TextApplicationSettings::setWordWrapEnabled(bool enabled) {
 }
 
 void TextApplicationSettings::setEolModeFromAction(QAction* act) {
-  QsciScintilla::EolMode new_mode = static_cast<QsciScintilla::EolMode>(act->data().toInt());
+  int new_mode = act->data().toInt();
 
-  qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, int(new_mode));
+  qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, new_mode);
   emit settingsChanged(true, false);
 }
 
-SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const
-{
+SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
 }
 

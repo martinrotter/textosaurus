@@ -54,7 +54,7 @@ QList<TextEditor*> TextApplication::editors() const {
 
 bool TextApplication::anyModifiedEditor() const {
   foreach (const TextEditor* editor, editors()) {
-    if (editor->isModified()) {
+    if (editor->modify()) {
       return true;
     }
   }
@@ -62,7 +62,9 @@ bool TextApplication::anyModifiedEditor() const {
   return false;
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding, const QString& file_filter) {
+void TextApplication::loadTextEditorFromFile(const QString& file_path,
+                                             const QString& explicit_encoding,
+                                             const QString& file_filter) {
   QString encoding;
   Lexer default_lexer;
 

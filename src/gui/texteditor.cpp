@@ -111,11 +111,11 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
   QTextStream str(&file); str.setCodec(m_encoding.constData());
 
-  str << text();
+  str << getText(length());
 
   emit savedToFile((m_filePath = file_path));
 
-  setModified(false);
+  setSavePoint();
   *ok = true;
 }
 
@@ -141,7 +141,7 @@ void TextEditor::save(bool* ok) {
     // Newly created document, save as.
     saveAs(ok);
   }
-  else if (isModified()) {
+  else if (modify()) {
     // We just save this modified document to same file.
     saveToFile(m_filePath, ok);
   }
@@ -174,20 +174,22 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 }
 
 void TextEditor::reloadFont() {
-  if (QsciScintilla::lexer() != nullptr) {
-    QsciScintilla::lexer()->setFont(textApplication()->settings()->mainFont());
-  }
-  else {
-    setFont(textApplication()->settings()->mainFont());
+  // TODO: dodělat
 
-    // We clear all styles, this call will copy settings from STYLE_DEFAULT
-    // to all remaining styles.
-    SendScintilla(SCI_STYLECLEARALL);
-  }
+  /*if (QsciScintilla::lexer() != nullptr) {
+     QsciScintilla::lexer()->setFont(textApplication()->settings()->mainFont());
+     }
+     else {
+     setFont(textApplication()->settings()->mainFont());
+
+     // We clear all styles, this call will copy settings from STYLE_DEFAULT
+     // to all remaining styles.
+     SendScintilla(SCI_STYLECLEARALL);
+     }*/
 }
 
 void TextEditor::closeEditor(bool* ok) {
-  if (isModified()) {
+  if (modify()) {
     emit requestVisibility();
 
     // We need to save.
@@ -225,32 +227,24 @@ void TextEditor::closeEditor(bool* ok) {
 }
 
 void TextEditor::reloadSettings() {
-  setEolMode(m_textApp->settings()->eolMode());
-  setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
-  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
+  setEOLMode(m_textApp->settings()->eolMode());
+  setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
+  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
 
-  setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
-  setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+  // TODO: dodělat
 
-  setEolVisibility(m_textApp->settings()->viewEols());
-  setWhitespaceVisibility(m_textApp->settings()->viewWhitespaces() ?
+  /*setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
+     setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+
+     setEolVisibility(m_textApp->settings()->viewEols());
+     setWhitespaceVisibility(m_textApp->settings()->viewWhitespaces() ?
                           QsciScintilla::WhitespaceVisibility::WsVisible :
                           QsciScintilla::WhitespaceVisibility::WsInvisible);
-
+   */
   reloadLexer(m_lexer);
 
-  setAutoIndent(true);
-
-  setCaretLineBackgroundColor(QColor(230, 230, 230));
   setCaretLineVisible(true);
   setCaretWidth(2);
-
-  //setLexer(new QsciLexerCPP(this));
-  setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
-  setAutoCompletionCaseSensitivity(false);
-  setAutoCompletionThreshold(0);
-  setAutoCompletionFillupsEnabled(true);
-  setAutoCompletionSource(QsciScintilla::AcsAll);
 }
 
 QString TextEditor::filePath() const {

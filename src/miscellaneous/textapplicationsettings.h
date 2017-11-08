@@ -8,6 +8,7 @@
 class TextApplication;
 class SyntaxHighlighting;
 class ExternalTools;
+class QAction;
 
 class TextApplicationSettings : public QObject {
   Q_OBJECT
