@@ -30,8 +30,8 @@ void TextApplicationSettings::setRecentFiles(const QStringList& recent_files) {
   qApp->settings()->setValue(GROUP(Editor), Editor::RecentFiles, recent_files);
 }
 
-QsciScintilla::EolMode TextApplicationSettings::eolMode() const {
-  return static_cast<QsciScintilla::EolMode>(qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt());
+int TextApplicationSettings::eolMode() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt();
 }
 
 bool TextApplicationSettings::wordWrapEnabled() const {

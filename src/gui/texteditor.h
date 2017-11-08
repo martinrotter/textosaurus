@@ -8,6 +8,8 @@
 #include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"
 
+#include <QFile>
+
 class TextApplication;
 
 class TextEditor : public ScintillaEdit {

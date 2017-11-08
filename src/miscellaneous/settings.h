@@ -9,8 +9,6 @@
 
 #include "miscellaneous/settingsproperties.h"
 
-#include <Qsci/qsciscintilla.h>
-
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
