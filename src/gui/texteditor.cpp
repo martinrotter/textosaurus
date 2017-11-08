@@ -17,10 +17,9 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-#include <Qsci/qscilexercpp.h>
-
-TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
+TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEdit(parent), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING), m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
+
   setUtf8(true);
 }
 

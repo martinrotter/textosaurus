@@ -3,14 +3,14 @@
 #ifndef TEXTEDITOR_H
 #define TEXTEDITOR_H
 
-#include <Qsci/qsciscintilla.h>
+#include <scintilla/qt/ScintillaEdit/ScintillaEdit.h>
 
 #include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"
 
 class TextApplication;
 
-class TextEditor : public QsciScintilla {
+class TextEditor : public ScintillaEdit {
   Q_OBJECT
 
   public:
