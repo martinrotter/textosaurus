@@ -293,7 +293,7 @@ void TextApplication::newFile() {
 
   // NOTE: Some properties will get loaded when switched to
   // editor. Load rest of those.
-  editor->reloadLexer(m_settings->syntaxHighlighting()->defaultLexer());
+  //editor->reloadLexer(m_settings->syntaxHighlighting()->defaultLexer());
 
   m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }

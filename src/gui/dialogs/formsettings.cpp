@@ -9,6 +9,7 @@
 #include "miscellaneous/settings.h"
 
 #include "gui/settings/settingsbrowsermail.h"
+#include "gui/settings/settingseditor.h"
 #include "gui/settings/settingsexternaltools.h"
 #include "gui/settings/settingsgeneral.h"
 #include "gui/settings/settingsgui.h"
@@ -34,6 +35,7 @@ FormSettings::FormSettings(QWidget& parent)
   addSettingsPanel(new SettingsLocalization(&m_settings, this));
   addSettingsPanel(new SettingsShortcuts(&m_settings, this));
   addSettingsPanel(new SettingsBrowserMail(&m_settings, this));
+  addSettingsPanel(new SettingsEditor(&m_settings, this));
   addSettingsPanel(new SettingsExternalTools(&m_settings, this));
   m_ui.m_listSettings->setCurrentRow(0);
 }

@@ -285,7 +285,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/toolbox.h \
             src/external-tools/externaltool.h \
             src/external-tools/predefinedtools.h \
-    src/miscellaneous/syntaxhighlighting.h
+    src/miscellaneous/syntaxhighlighting.h \
+    src/gui/settings/settingseditor.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -397,7 +398,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/toolbox.cpp \
             src/external-tools/externaltool.cpp \
             src/external-tools/predefinedtools.cpp \
-    src/miscellaneous/syntaxhighlighting.cpp
+    src/miscellaneous/syntaxhighlighting.cpp \
+    src/gui/settings/settingseditor.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -413,7 +415,8 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingsexternaltools.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
-            src/gui/toolbareditor.ui
+            src/gui/toolbareditor.ui \
+    src/gui/settings/settingseditor.ui
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \

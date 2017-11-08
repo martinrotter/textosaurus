@@ -26,6 +26,9 @@ class TextApplicationSettings : public QObject {
     bool viewWhitespaces() const;
     bool viewEols() const;
 
+    QFont mainFont() const;
+    void setMainFont(const QFont& fon);
+
     ExternalTools* externalTools() const;
     SyntaxHighlighting* syntaxHighlighting() const;
 

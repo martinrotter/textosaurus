@@ -18,12 +18,9 @@ class TextEditor : public QsciScintilla {
 
     QString filePath() const;
     QByteArray encoding() const;
+    Lexer lexer() const;
 
     TextApplication* textApplication() const;
-
-    //void setLexerWithName(QsciLexer* lexer = nullptr, const QString& lexer_name = QString());
-
-    Lexer lexer() const;
 
   public slots:
     void save(bool* ok);

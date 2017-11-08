@@ -15,5 +15,6 @@ void SettingsExternalTools::loadSettings() {
 
 void SettingsExternalTools::saveSettings() {
   onBeginSaveSettings();
+
   onEndSaveSettings();
 }

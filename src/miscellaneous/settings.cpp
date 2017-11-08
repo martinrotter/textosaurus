@@ -6,6 +6,7 @@
 #include "miscellaneous/iofactory.h"
 #include <QDebug>
 #include <QDir>
+#include <QFontDatabase>
 #include <QLocale>
 #include <QPointer>
 
@@ -21,6 +22,7 @@ DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolMac);
 DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolUnix);
 #endif
 
+DKEY Editor::FontMain = "main_font";
 DKEY Editor::WordWrap = "word_wrap";
 
 DVALUE(bool) Editor::WordWrapDef = true;

@@ -11,6 +11,7 @@
 #include <QAction>
 #include <QDir>
 #include <QFileInfo>
+#include <QFontDatabase>
 #include <QRegularExpression>
 
 TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
@@ -47,6 +48,23 @@ bool TextApplicationSettings::viewWhitespaces() const {
 
 bool TextApplicationSettings::viewEols() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ViewEols)).toBool();
+}
+
+QFont TextApplicationSettings::mainFont() const {
+  QFont def_font = QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont);
+  QFont fon;
+  QString saved_font = qApp->settings()->value(GROUP(Editor),
+                                               Editor::FontMain,
+                                               def_font.toString()).toString();
+
+  fon.fromString(saved_font);
+
+  return fon;
+}
+
+void TextApplicationSettings::setMainFont(const QFont& fon) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::FontMain, fon.toString());
+  emit settingsChanged(true, false);
 }
 
 void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& file_path) {

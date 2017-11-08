@@ -34,6 +34,7 @@ namespace Editor {
 
   VALUE(int) EolModeDef;
 
+  KEY FontMain;
   KEY RecentFiles;
 
   VALUE(QStringList) RecentFilesDef;

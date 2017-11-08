@@ -20,15 +20,16 @@
 #include <Qsci/qscilexercpp.h>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
-  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING) {
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING), m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
   setUtf8(true);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
   m_filePath = file.fileName();
   m_encoding = encoding.toLocal8Bit();
+  m_lexer = default_lexer;
 
-  reloadLexer(default_lexer);
+  //reloadLexer(default_lexer);
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
@@ -173,10 +174,10 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 
 void TextEditor::reloadFont() {
   if (QsciScintilla::lexer() != nullptr) {
-    QsciScintilla::lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+    QsciScintilla::lexer()->setFont(textApplication()->settings()->mainFont());
   }
   else {
-    setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+    setFont(textApplication()->settings()->mainFont());
 
     // We clear all styles, this call will copy settings from STYLE_DEFAULT
     // to all remaining styles.
@@ -234,6 +235,9 @@ void TextEditor::reloadSettings() {
   setWhitespaceVisibility(m_textApp->settings()->viewWhitespaces() ?
                           QsciScintilla::WhitespaceVisibility::WsVisible :
                           QsciScintilla::WhitespaceVisibility::WsInvisible);
+
+  reloadLexer(m_lexer);
+
   setAutoIndent(true);
 
   setCaretLineBackgroundColor(QColor(230, 230, 230));
