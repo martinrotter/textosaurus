@@ -47,7 +47,7 @@
 SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fileFilters(QStringList()),
   m_lexers(Lexers()) {}
 
-Lexer SyntaxHighlighting::lexerForFile(const QString& file_name, const QString& file_filter) {
+Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
   //if (file_filter.isEmpty()) {
   // We use file suffix.
   QRegularExpression reg("(?:\\.)(\\w+$)|($)");
@@ -105,9 +105,11 @@ Lexers SyntaxHighlighting::lexers() {
     }, []() {
       return nullptr;
     })
+#if !defined(WITH_UBUNTU)
       << Lexer(QSL("AVS"), QStringList {
       QSL("avs")
     }, LAMBDA_LEX_GEN(AVS))
+#endif
       << Lexer(QSL("Bash"), QStringList {
       QSL("bash"), QSL("sh"), QSL("zsh")
     }, LAMBDA_LEX_GEN(Bash))

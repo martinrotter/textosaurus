@@ -9,7 +9,7 @@
 
 #include <functional>
 
-#define LAMBDA_LEX_GEN(lex) []() { return new QsciLexer ##lex(); }
+#define LAMBDA_LEX_GEN(lex) []() { return new QsciLexer ## lex(); }
 
 struct Lexer {
   explicit Lexer();
@@ -40,7 +40,7 @@ class SyntaxHighlighting : public QObject {
 
     // Returns lexer suitable for syntax highlighting of given file and filter.
     // NOTE: Caller takes ownership if the lexer.
-    Lexer lexerForFile(const QString& file_name, const QString& file_filter);
+    Lexer lexerForFile(const QString& file_name);
     Lexer lexerForSuffix(const QString& suffix);
     Lexer lexerForName(const QString& name);
 

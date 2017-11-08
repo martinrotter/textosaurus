@@ -124,7 +124,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path, const QSt
   }
   else {
     // We try to detect default lexer.
-    default_lexer = m_settings->syntaxHighlighting()->lexerForFile(file_path, file_filter);
+    default_lexer = m_settings->syntaxHighlighting()->lexerForFile(file_path);
   }
 
   TextEditor* new_editor = createTextEditor();
