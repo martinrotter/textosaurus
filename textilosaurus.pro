@@ -173,7 +173,7 @@ win32 {
 
 # Add Scintilla.
 win32 {
-        QMAKE_CXXFLAGS += -std:c++latest
+  QMAKE_CXXFLAGS += -std:c++latest
 }
 
 SOURCES += \
@@ -326,8 +326,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/toolbox.h \
             src/external-tools/externaltool.h \
             src/external-tools/predefinedtools.h \
-    src/miscellaneous/syntaxhighlighting.h \
-    src/gui/settings/settingseditor.h
+            src/miscellaneous/syntaxhighlighting.h \
+            src/gui/settings/settingseditor.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -439,8 +439,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/toolbox.cpp \
             src/external-tools/externaltool.cpp \
             src/external-tools/predefinedtools.cpp \
-    src/miscellaneous/syntaxhighlighting.cpp \
-    src/gui/settings/settingseditor.cpp
+            src/miscellaneous/syntaxhighlighting.cpp \
+            src/gui/settings/settingseditor.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -457,7 +457,7 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
             src/gui/toolbareditor.ui \
-    src/gui/settings/settingseditor.ui
+            src/gui/settings/settingseditor.ui
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
@@ -520,9 +520,6 @@ win32 {
 win32 {
   target.path = $$PREFIX
 
-  qscintila_dll.files = resources/binaries/qscintilla/qscintilla2_qt5.dll
-  qscintila_dll.path = $$quote($$PREFIX/)
-
   qt_dlls_root.files =  resources/binaries/qt/windows/qt5-msvc2015/libeay32.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/msvcp140.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/qt.conf \
@@ -534,7 +531,6 @@ win32 {
                         resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll \
                         resources/binaries/qt/windows/qt5-msvc2015-webengine/Qt5PrintSupport.dll.dll \
                         resources/binaries/qt/windows/qt5-msvc2015-webengine/printsupport
-
   qt_dlls_root.path = $$quote($$PREFIX/)
 
   qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-msvc2015/bearer \
@@ -543,7 +539,7 @@ win32 {
                             resources/binaries/qt/windows/qt5-msvc2015/platforms
   qt_dlls_plugins.path = $$quote($$PREFIX/)
 
-  INSTALLS += target qscintila_dll qt_dlls_root qt_dlls_plugins
+  INSTALLS += target qt_dlls_root qt_dlls_plugins
 }
 
 # Install all files on Linux.
