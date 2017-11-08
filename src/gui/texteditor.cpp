@@ -203,7 +203,9 @@ void TextEditor::reloadSettings() {
   //setLexer(new QsciLexerCPP(this));
   setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
 
-  lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  if (lexer() != nullptr) {
+    lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  }
 
   setAutoCompletionCaseSensitivity(false);
   setAutoCompletionThreshold(0);
