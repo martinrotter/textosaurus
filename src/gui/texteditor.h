@@ -23,11 +23,15 @@ class TextEditor : public QsciScintilla {
 
     //void setLexerWithName(QsciLexer* lexer = nullptr, const QString& lexer_name = QString());
 
+    Lexer lexer() const;
+
   public slots:
     void save(bool* ok);
     void saveAs(bool* ok, const QString& encoding = QString());
 
+    void reloadFont();
     void reloadSettings();
+    void reloadLexer(const Lexer& default_lexer);
 
     // Closes the editor, user is asked to save unsaved text document.
     // Given parameter is used to indicate if closing was finished (true)
@@ -49,7 +53,6 @@ class TextEditor : public QsciScintilla {
     void savedToFile(QString m_destinationFilePath);
 
   private:
-    void reloadLexer();
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:

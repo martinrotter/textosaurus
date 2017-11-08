@@ -31,8 +31,7 @@ void TabWidget::createConnections() {
 }
 
 bool TabWidget::closeTab(int index) {
-  removeTab(index, true);
-  return true;
+  return removeTab(index, true);
 }
 
 void TabWidget::closeAllTabsExceptCurrent() {
@@ -89,7 +88,7 @@ void TabWidget::indentTabText(int index) {
 #endif
 }
 
-void TabWidget::removeTab(int index, bool clear_from_memory) {
+bool TabWidget::removeTab(int index, bool clear_from_memory) {
   bool closed = widget(index)->close();
 
   if (closed) {
@@ -99,6 +98,8 @@ void TabWidget::removeTab(int index, bool clear_from_memory) {
 
     QTabWidget::removeTab(index);
   }
+
+  return closed;
 }
 
 TextEditor* TabWidget::textEditorAt(int index) const {

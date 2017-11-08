@@ -66,6 +66,7 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
   private slots:
+    void changeLexer(QAction* act);
     void fillRecentFiles();
     void loadLexersMenu();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);

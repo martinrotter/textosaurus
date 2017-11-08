@@ -23,6 +23,8 @@ struct Lexer {
   std::function<QsciLexer*()> m_lexerGenerator;
 };
 
+Q_DECLARE_METATYPE(Lexer)
+
 typedef QList<Lexer> Lexers;
 
 class SyntaxHighlighting : public QObject {
@@ -34,10 +36,13 @@ class SyntaxHighlighting : public QObject {
     QStringList fileFilters();
     Lexers lexers();
 
+    Lexer defaultLexer();
+
     // Returns lexer suitable for syntax highlighting of given file and filter.
     // NOTE: Caller takes ownership if the lexer.
     Lexer lexerForFile(const QString& file_name, const QString& file_filter);
     Lexer lexerForSuffix(const QString& suffix);
+    Lexer lexerForName(const QString& name);
 
   private:
     QStringList m_fileFilters;

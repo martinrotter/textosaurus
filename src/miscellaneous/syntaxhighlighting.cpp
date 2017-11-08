@@ -76,6 +76,17 @@ Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
   return m_lexers.first();
 }
 
+Lexer SyntaxHighlighting::lexerForName(const QString& name) {
+  foreach (const Lexer& lex, lexers()) {
+    if (lex.m_name == name) {
+      return lex;
+    }
+  }
+
+  // We return first lexer, which is lexer for plain text files.
+  return m_lexers.first();
+}
+
 QStringList SyntaxHighlighting::fileFilters() {
   if (m_fileFilters.isEmpty()) {
     foreach (const Lexer& lex, lexers()) {
@@ -211,6 +222,10 @@ Lexers SyntaxHighlighting::lexers() {
   }
 
   return m_lexers;
+}
+
+Lexer SyntaxHighlighting::defaultLexer() {
+  return lexers().first();
 }
 
 Lexer::Lexer() : m_name(QString()), m_suffices(QStringList()), m_lexerGenerator([]() {

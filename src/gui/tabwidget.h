@@ -31,7 +31,7 @@ class TabWidget : public QTabWidget {
                   TabBar::TabType type = TabBar::TabType::TextEditor);
     int insertTab(int index, QWidget* widget, const QIcon& icon,
                   const QString& label, TabBar::TabType type = TabBar::TabType::TextEditor);
-    void removeTab(int index, bool clear_from_memory);
+    bool removeTab(int index, bool clear_from_memory);
 
     TextEditor* textEditorAt(int index) const;
 

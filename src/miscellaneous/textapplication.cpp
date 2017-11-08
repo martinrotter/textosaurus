@@ -291,6 +291,10 @@ void TextApplication::redo() {
 void TextApplication::newFile() {
   TextEditor* editor = createTextEditor();
 
+  // NOTE: Some properties will get loaded when switched to
+  // editor. Load rest of those.
+  editor->reloadLexer(m_settings->syntaxHighlighting()->defaultLexer());
+
   m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }
 
@@ -341,6 +345,7 @@ void TextApplication::createConnections() {
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
   connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
   connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::loadLexersMenu);
+  connect(m_menuLanguage, &QMenu::triggered, this, &TextApplication::changeLexer);
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
   });
@@ -423,18 +428,37 @@ void TextApplication::loadState() {
 }
 
 void TextApplication::quit(bool* ok) {
-  foreach (TextEditor* edit, editors()) {
-    bool editor_ok;
-
-    edit->closeEditor(&editor_ok);
-
-    if (!editor_ok) {
+  while (m_tabEditors->count() > 0) {
+    if (!m_tabEditors->closeTab(0)) {
+      // User aborted.
       *ok = false;
       return;
     }
   }
 
+  /*
+     foreach (TextEditor* edit, editors()) {
+     bool editor_ok;
+
+     edit->closeEditor(&editor_ok);
+
+     if (!editor_ok) {
+   * ok = false;
+      return;
+     }
+     }*/
+
   *ok = true;
+}
+
+void TextApplication::changeLexer(QAction* act) {
+  TextEditor* cur_editor = currentEditor();
+
+  if (cur_editor != nullptr) {
+    Lexer lexer_act = act->data().value<Lexer>();
+
+    cur_editor->reloadLexer(lexer_act);
+  }
 }
 
 void TextApplication::fillRecentFiles() {
@@ -447,14 +471,32 @@ void TextApplication::fillRecentFiles() {
 }
 
 void TextApplication::loadLexersMenu() {
+  if (m_menuLanguage->isEmpty()) {
+    // Fill the menu.
+    QActionGroup* grp = new QActionGroup(m_menuLanguage);
+
+    foreach (const Lexer& lex, m_settings->syntaxHighlighting()->lexers()) {
+      QAction* act = m_menuLanguage->addAction(QL1S("&") + lex.m_name);
+
+      act->setActionGroup(grp);
+      act->setCheckable(true);
+      act->setData(QVariant::fromValue<Lexer>(lex));
+    }
+  }
+
   TextEditor* current_editor = currentEditor();
 
   if (current_editor != nullptr) {
-    QsciLexer* lexer = current_editor->lexer();
+    Lexer lexer = current_editor->lexer();
 
-    // TODO: dodělat
-    auto lang = lexer->language();
-    auto a = 5;
+    foreach (QAction* act, m_menuLanguage->actions()) {
+      Lexer lexer_act = act->data().value<Lexer>();
+
+      if (lexer_act.m_name == lexer.m_name) {
+        act->setChecked(true);
+        break;
+      }
+    }
   }
 }
 

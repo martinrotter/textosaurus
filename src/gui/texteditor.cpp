@@ -27,9 +27,8 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintil
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
   m_filePath = file.fileName();
   m_encoding = encoding.toLocal8Bit();
-  m_lexer = default_lexer;
 
-  reloadLexer();
+  reloadLexer(default_lexer);
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
@@ -76,16 +75,24 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
 }
 
-void TextEditor::reloadLexer() {
-  if (lexer() != nullptr) {
-    lexer()->deleteLater();
-  }
+void TextEditor::reloadLexer(const Lexer& default_lexer) {
+  m_lexer = default_lexer;
 
+  QsciLexer* old_lexer = QsciScintilla::lexer();
   QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
 
-  if (new_lexer != nullptr) {
+  if (new_lexer != old_lexer) {
     setLexer(new_lexer);
+    qDebug("Changing lexers from '%s' to '%s'.",
+           old_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(old_lexer->language()),
+           new_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(new_lexer->language()));
+
+    if (old_lexer != nullptr) {
+      old_lexer->deleteLater();
+    }
   }
+
+  //reloadFont();
 }
 
 void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
@@ -108,6 +115,10 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
   setModified(false);
   *ok = true;
+}
+
+Lexer TextEditor::lexer() const {
+  return m_lexer;
 }
 
 TextApplication* TextEditor::textApplication() const {
@@ -157,6 +168,15 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
   }
   else {
     *ok = false;
+  }
+}
+
+void TextEditor::reloadFont() {
+  if (QsciScintilla::lexer() != nullptr) {
+    QsciScintilla::lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  }
+  else {
+    setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
 }
 
@@ -218,14 +238,6 @@ void TextEditor::reloadSettings() {
 
   //setLexer(new QsciLexerCPP(this));
   setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
-
-  if (lexer() != nullptr) {
-    lexer()->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
-  }
-  else {
-    setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
-  }
-
   setAutoCompletionCaseSensitivity(false);
   setAutoCompletionThreshold(0);
   setAutoCompletionFillupsEnabled(true);
