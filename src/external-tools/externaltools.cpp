@@ -214,15 +214,14 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
 
   switch (tool_to_run->input()) {
     case ToolInput::SelectionDocument:
-      data = ptr_editor->hasSelectedText() ? ptr_editor->selectedText() : ptr_editor->text();
+      data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length());
       break;
 
     case ToolInput::CurrentLine:
       int line;
       int index;
 
-      ptr_editor->getCursorPosition(&line, &index);
-      data = ptr_editor->text(line);
+      data = ptr_editor->getCurLine(-1);
       break;
 
     case ToolInput::SavedFile:
