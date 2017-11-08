@@ -9,10 +9,13 @@
 
 #include <functional>
 
-#define LAMBDA_LEX_GEN(lex) []() { return new QsciLexer##lex##(); }
+#define LAMBDA_LEX_GEN(lex) []() { return new QsciLexer ## lex ## (); }
 
 struct Lexer {
+  explicit Lexer();
   explicit Lexer(const QString& name, const QStringList& suffices, const std::function<QsciLexer*()>& lexer_generator);
+
+  bool isEmpty() const;
 
   QString m_name;
   QStringList m_suffices;
@@ -20,7 +23,7 @@ struct Lexer {
   std::function<QsciLexer*()> m_lexerGenerator;
 };
 
-typedef QList<Lexer> LexerSuffices;
+typedef QList<Lexer> Lexers;
 
 class SyntaxHighlighting : public QObject {
   Q_OBJECT
@@ -29,16 +32,16 @@ class SyntaxHighlighting : public QObject {
     explicit SyntaxHighlighting(QObject* parent = nullptr);
 
     QStringList fileFilters();
-    LexerSuffices lexers();
+    Lexers lexers();
 
     // Returns lexer suitable for syntax highlighting of given file and filter.
     // NOTE: Caller takes ownership if the lexer.
-    QsciLexer* lexerForFile(const QString& file_name, const QString& file_filter);
-    QsciLexer* lexerForSuffix(const QString& suffix);
+    Lexer lexerForFile(const QString& file_name, const QString& file_filter);
+    Lexer lexerForSuffix(const QString& suffix);
 
   private:
     QStringList m_fileFilters;
-    LexerSuffices m_lexers;
+    Lexers m_lexers;
 };
 
 #endif // SYNTAXHIGHLIGHTING_H

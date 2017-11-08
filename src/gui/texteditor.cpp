@@ -24,17 +24,12 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintil
   setUtf8(true);
 }
 
-void TextEditor::loadFromFile(QFile& file, const QString& encoding, QsciLexer* default_lexer) {
+void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
   m_filePath = file.fileName();
   m_encoding = encoding.toLocal8Bit();
+  m_lexer = default_lexer;
 
-  if (lexer() != default_lexer) {
-    if (lexer() != nullptr) {
-      lexer()->deleteLater();
-    }
-
-    setLexer(default_lexer);
-  }
+  reloadLexer();
 
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
@@ -78,6 +73,18 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
   else {
     QsciScintilla::closeEvent(event);
+  }
+}
+
+void TextEditor::reloadLexer() {
+  if (lexer() != nullptr) {
+    lexer()->deleteLater();
+  }
+
+  QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
+
+  if (new_lexer != nullptr) {
+    setLexer(new_lexer);
   }
 }
 

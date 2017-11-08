@@ -16,6 +16,8 @@
 
 #include "uchardet/uchardet.h"
 
+#include <Qsci/qscilexer.h>
+
 #include <QFileDialog>
 #include <QTemporaryFile>
 #include <QTextCodec>
@@ -62,7 +64,7 @@ bool TextApplication::anyModifiedEditor() const {
 
 void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding, const QString& file_filter) {
   QString encoding;
-  QsciLexer* default_lexer = nullptr;
+  Lexer default_lexer;
 
   if (explicit_encoding.isEmpty()) {
     qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
@@ -141,7 +143,10 @@ TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorModifiedChanged);
-  connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
+
+  // TODO: docasne zakazat asi neni potreba, protoze inicializace
+  // se provede po prepnuti indexu tabwidgetu - vcetne prejmenovani
+  //connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
   connect(editor, &TextEditor::textChanged, this, &TextApplication::onEditorTextChanged);
 
@@ -335,7 +340,7 @@ void TextApplication::createConnections() {
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
   connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
-  connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::setCurrentLexer);
+  connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::loadLexersMenu);
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
   });
@@ -441,13 +446,15 @@ void TextApplication::fillRecentFiles() {
   }
 }
 
-void TextApplication::setCurrentLexer() {
+void TextApplication::loadLexersMenu() {
   TextEditor* current_editor = currentEditor();
 
   if (current_editor != nullptr) {
     QsciLexer* lexer = current_editor->lexer();
 
     // TODO: dodělat
+    auto lang = lexer->language();
+    auto a = 5;
   }
 }
 
@@ -471,6 +478,7 @@ void TextApplication::onEditorTabSwitched(int index) {
     editor->reloadSettings();
   }
 
+  renameEditor(editor);
   updateToolBarFromEditor(editor, false);
   updateStatusBarFromEditor(editor);
 }

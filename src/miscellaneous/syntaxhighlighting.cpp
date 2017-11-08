@@ -45,9 +45,9 @@
 #include <QRegularExpression>
 
 SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fileFilters(QStringList()),
-  m_lexers(LexerSuffices()) {}
+  m_lexers(Lexers()) {}
 
-QsciLexer* SyntaxHighlighting::lexerForFile(const QString& file_name, const QString& file_filter) {
+Lexer SyntaxHighlighting::lexerForFile(const QString& file_name, const QString& file_filter) {
   //if (file_filter.isEmpty()) {
   // We use file suffix.
   QRegularExpression reg("(?:\\.)(\\w+$)|($)");
@@ -65,14 +65,14 @@ QsciLexer* SyntaxHighlighting::lexerForFile(const QString& file_name, const QStr
      }*/
 }
 
-QsciLexer* SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
+Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
   foreach (const Lexer& lex, lexers()) {
     if (lex.m_suffices.contains(suffix)) {
-      return lex.m_lexerGenerator();
+      return lex;
     }
   }
 
-  return nullptr;
+  return Lexer();
 }
 
 QStringList SyntaxHighlighting::fileFilters() {
@@ -85,7 +85,7 @@ QStringList SyntaxHighlighting::fileFilters() {
   return m_fileFilters;
 }
 
-LexerSuffices SyntaxHighlighting::lexers() {
+Lexers SyntaxHighlighting::lexers() {
   if (m_lexers.isEmpty()) {
     m_lexers
       << Lexer(tr("Plain text"), QStringList {
@@ -212,5 +212,11 @@ LexerSuffices SyntaxHighlighting::lexers() {
   return m_lexers;
 }
 
+Lexer::Lexer() {}
+
 Lexer::Lexer(const QString& name, const QStringList& suffices, const std::function<QsciLexer*()>& lexer_generator)
   : m_name(name), m_suffices(suffices), m_lexerGenerator(lexer_generator) {}
+
+bool Lexer::isEmpty() const {
+  return m_name.isEmpty() && m_suffices.isEmpty();
+}

@@ -6,6 +6,7 @@
 #include <Qsci/qsciscintilla.h>
 
 #include "definitions/definitions.h"
+#include "miscellaneous/syntaxhighlighting.h"
 
 class TextApplication;
 
@@ -34,7 +35,7 @@ class TextEditor : public QsciScintilla {
     void closeEditor(bool* ok);
 
     // Opens given file in this text editor, file is opened for reading.
-    void loadFromFile(QFile& file, const QString& encoding, QsciLexer* default_lexer);
+    void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer);
 
   protected:
 
@@ -48,13 +49,14 @@ class TextEditor : public QsciScintilla {
     void savedToFile(QString m_destinationFilePath);
 
   private:
+    void reloadLexer();
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
     TextApplication* m_textApp;
     QString m_filePath;
     QByteArray m_encoding;
-    QString m_lexerName;
+    Lexer m_lexer;
 };
 
 #endif // TEXTEDITOR_H

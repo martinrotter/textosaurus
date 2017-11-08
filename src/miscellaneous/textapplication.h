@@ -67,7 +67,7 @@ class TextApplication : public QObject {
 
   private slots:
     void fillRecentFiles();
-    void setCurrentLexer();
+    void loadLexersMenu();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
     void onEditorRequestVisibility();
