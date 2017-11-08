@@ -237,9 +237,8 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
       break;
   }
 
-  QFuture<QPair<QString, bool>> future = QtConcurrent::run([this, tool_to_run, ptr_editor, data]() {
+  QFuture<QPair<QString, bool>> future = QtConcurrent::run([tool_to_run, ptr_editor, data]() {
     QPair<QString, bool> result = tool_to_run->runTool(ptr_editor, data);
-
     return result;
   });
   QFutureWatcher<QPair<QString, bool>>* watched = new QFutureWatcher<QPair<QString, bool>>();
