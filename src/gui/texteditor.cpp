@@ -70,6 +70,16 @@ void TextEditor::closeEvent(QCloseEvent* event) {
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
+  clearDocumentStyle();
+
+  setLexerLanguage("cpp");
+
+  //setLexer(m_lexer.m_code);
+  //auto a = lexerLanguage();
+
+  changeLexerState(0, -1);
+  colourise(0, -1);
+
 /*
    clearDocumentStyle();
    setLexer(SCLEX_CPP);
@@ -178,18 +188,13 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 }
 
 void TextEditor::reloadFont() {
-  // TODO: dodělat
+  QFont new_font = textApplication()->settings()->mainFont();
 
-  /*if (QsciScintilla::lexer() != nullptr) {
-     QsciScintilla::lexer()->setFont(textApplication()->settings()->mainFont());
-     }
-     else {
-     setFont(textApplication()->settings()->mainFont());
-
-     // We clear all styles, this call will copy settings from STYLE_DEFAULT
-     // to all remaining styles.
-     SendScintilla(SCI_STYLECLEARALL);
-     }*/
+  if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() || styleSize(STYLE_DEFAULT) != new_font.pointSize()) {
+    styleSetFont(STYLE_DEFAULT, new_font.family().toUtf8().constData());
+    styleSetSize(STYLE_DEFAULT, new_font.pointSize());
+    styleClearAll();
+  }
 }
 
 void TextEditor::closeEditor(bool* ok) {

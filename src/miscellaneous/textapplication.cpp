@@ -305,7 +305,6 @@ void TextApplication::onEditorModified(int type, int position, int length, int l
   Q_UNUSED(foldPrev)
 
   if ((type & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)) > 0) {
-
     TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
     markEditorModified(editor, editor->modify());

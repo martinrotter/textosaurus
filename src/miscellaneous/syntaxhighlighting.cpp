@@ -55,7 +55,10 @@ Lexers SyntaxHighlighting::lexers() {
     m_lexers
       << Lexer(tr("Plain text"), QStringList {
       QSL("txt"), QString()
-    }, SCLEX_NULL);
+    }, SCLEX_NULL)
+      << Lexer(tr("C++"), QStringList {
+      QSL("cpp"), QString()
+    }, SCLEX_CPP);
 
     /*
      #if !defined(WITH_UBUNTU)
