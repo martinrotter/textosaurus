@@ -73,7 +73,8 @@ class TextApplication : public QObject {
 
     void onEditorRequestVisibility();
     void onEditorLoadedFromFile();
-    void onEditorModified();
+    void onEditorModified(int type, int position, int length, int linesAdded,
+                          const QByteArray& text, int line, int foldNow, int foldPrev);
     void onEditorTabSwitched(int index = -1);
     void onEditorTextChanged();
 

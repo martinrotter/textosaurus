@@ -301,12 +301,16 @@ void TextApplication::newFile() {
   m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }
 
-void TextApplication::onEditorModified() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+void TextApplication::onEditorModified(int type, int position, int length, int linesAdded, const QByteArray& text,
+                                       int line, int foldNow, int foldPrev) {
+  if ((type & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)) > 0) {
 
-  // TODO: tento slot je navazan na signal modified
-  // kterej ma nekolik parametru, mozna nema cenu reagovat na vsechny zmeny
-  markEditorModified(editor, editor->modify());
+    TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+    // TODO: tento slot je navazan na signal modified
+    // kterej ma nekolik parametru, mozna nema cenu reagovat na vsechny zmeny
+    markEditorModified(editor, editor->modify());
+  }
 }
 
 void TextApplication::createConnections() {

@@ -44,13 +44,11 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
 
   QTextStream str(&file); str.setCodec(codec_for_encoding);
 
-  //blockSignals(true);
-
-  // TODO: určitě půjde udělat lépe.
+  blockSignals(true);
   setText(str.readAll().toUtf8().constData());
-  setSavePoint();
+  emptyUndoBuffer();
+  blockSignals(false);
 
-  //blockSignals(false);
   Application::restoreOverrideCursor();
 
   emit loadedFromFile(m_filePath);
