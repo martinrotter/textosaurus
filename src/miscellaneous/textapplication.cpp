@@ -65,6 +65,8 @@ bool TextApplication::anyModifiedEditor() const {
 void TextApplication::loadTextEditorFromFile(const QString& file_path,
                                              const QString& explicit_encoding,
                                              const QString& file_filter) {
+  Q_UNUSED(file_filter)
+
   QString encoding;
   Lexer default_lexer;
 

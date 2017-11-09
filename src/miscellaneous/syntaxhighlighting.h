@@ -5,22 +5,19 @@
 
 #include <QObject>
 
-#include <Qsci/qscilexer.h>
-
 #include <functional>
 
 #define LAMBDA_LEX_GEN(lex) []() { return new QsciLexer ## lex(); }
 
 struct Lexer {
   explicit Lexer();
-  explicit Lexer(const QString& name, const QStringList& suffices, const std::function<QsciLexer*()>& lexer_generator);
+  explicit Lexer(const QString& name, const QStringList& suffices, int code);
 
   bool isEmpty() const;
 
   QString m_name;
+  int m_code;
   QStringList m_suffices;
-
-  std::function<QsciLexer*()> m_lexerGenerator;
 };
 
 Q_DECLARE_METATYPE(Lexer)

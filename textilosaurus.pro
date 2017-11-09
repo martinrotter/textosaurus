@@ -149,7 +149,6 @@ CONFIG(release, debug|release) {
 else {
   gcc:QMAKE_CXXFLAGS_DEBUG += -Wall
   clang:QMAKE_CXXFLAGS_DEBUG += -Wall
-  msvc:QMAKE_CXXFLAGS_DEBUG += -Wall
 }
 
 DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
@@ -169,73 +168,6 @@ win32 {
   QMAKE_TARGET_DESCRIPTION = $$APP_NAME
   QMAKE_TARGET_COPYRIGHT = $$APP_COPYRIGHT
   QMAKE_TARGET_PRODUCT = $$APP_NAME
-}
-
-# Add Scintilla.
-win32 {
-  QMAKE_CXXFLAGS += -std:c++latest
-}
-
-SOURCES += \
-    src/scintilla/qt/ScintillaEdit/ScintillaEdit.cpp \
-    src/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp \
-    src/scintilla/qt/ScintillaEditBase/PlatQt.cpp \
-    src/scintilla/qt/ScintillaEditBase/ScintillaQt.cpp \
-    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp \
-    src/scintilla/src/XPM.cxx \
-    src/scintilla/src/ViewStyle.cxx \
-    src/scintilla/src/UniConversion.cxx \
-    src/scintilla/src/Style.cxx \
-    src/scintilla/src/Selection.cxx \
-    src/scintilla/src/ScintillaBase.cxx \
-    src/scintilla/src/RunStyles.cxx \
-    src/scintilla/src/RESearch.cxx \
-    src/scintilla/src/PositionCache.cxx \
-    src/scintilla/src/PerLine.cxx \
-    src/scintilla/src/MarginView.cxx \
-    src/scintilla/src/LineMarker.cxx \
-    src/scintilla/src/KeyMap.cxx \
-    src/scintilla/src/Indicator.cxx \
-    src/scintilla/src/ExternalLexer.cxx \
-    src/scintilla/src/EditView.cxx \
-    src/scintilla/src/Editor.cxx \
-    src/scintilla/src/EditModel.cxx \
-    src/scintilla/src/Document.cxx \
-    src/scintilla/src/Decoration.cxx \
-    src/scintilla/src/DBCS.cxx \
-    src/scintilla/src/ContractionState.cxx \
-    src/scintilla/src/CharClassify.cxx \
-    src/scintilla/src/CellBuffer.cxx \
-    src/scintilla/src/Catalogue.cxx \
-    src/scintilla/src/CaseFolder.cxx \
-    src/scintilla/src/CaseConvert.cxx \
-    src/scintilla/src/CallTip.cxx \
-    src/scintilla/src/AutoComplete.cxx \
-    src/scintilla/lexlib/WordList.cxx \
-    src/scintilla/lexlib/StyleContext.cxx \
-    src/scintilla/lexlib/PropSetSimple.cxx \
-    src/scintilla/lexlib/LexerSimple.cxx \
-    src/scintilla/lexlib/LexerNoExceptions.cxx \
-    src/scintilla/lexlib/LexerModule.cxx \
-    src/scintilla/lexlib/LexerBase.cxx \
-    src/scintilla/lexlib/DefaultLexer.cxx \
-    src/scintilla/lexlib/CharacterSet.cxx \
-    src/scintilla/lexlib/CharacterCategory.cxx \
-    src/scintilla/lexlib/Accessor.cxx \
-    $$files(src/scintilla/lexers/*.cxx, false)
-
-HEADERS  += \
-    src/scintilla/qt/ScintillaEdit/ScintillaEdit.h \
-    src/scintilla/qt/ScintillaEdit/ScintillaDocument.h \
-    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
-    src/scintilla/qt/ScintillaEditBase/ScintillaQt.h
-
-INCLUDEPATH += src/scintilla/qt/ScintillaEditBase src/scintilla/include src/scintilla/src src/scintilla/lexlib
-
-DEFINES *= SCINTILLA_QT=1 SCI_LEXER=1 _CRT_SECURE_NO_DEPRECATE=1
-
-CONFIG(release, debug|release) {
-  DEFINES *= NDEBUG=1
 }
 
 CONFIG *= resources_big
@@ -458,6 +390,73 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingsshortcuts.ui \
             src/gui/toolbareditor.ui \
             src/gui/settings/settingseditor.ui
+
+# Add Scintilla.
+win32 {
+  QMAKE_CXXFLAGS += -std:c++latest
+}
+
+SOURCES += \
+    src/scintilla/qt/ScintillaEdit/ScintillaEdit.cpp \
+    src/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp \
+    src/scintilla/qt/ScintillaEditBase/PlatQt.cpp \
+    src/scintilla/qt/ScintillaEditBase/ScintillaQt.cpp \
+    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp \
+    src/scintilla/src/XPM.cxx \
+    src/scintilla/src/ViewStyle.cxx \
+    src/scintilla/src/UniConversion.cxx \
+    src/scintilla/src/Style.cxx \
+    src/scintilla/src/Selection.cxx \
+    src/scintilla/src/ScintillaBase.cxx \
+    src/scintilla/src/RunStyles.cxx \
+    src/scintilla/src/RESearch.cxx \
+    src/scintilla/src/PositionCache.cxx \
+    src/scintilla/src/PerLine.cxx \
+    src/scintilla/src/MarginView.cxx \
+    src/scintilla/src/LineMarker.cxx \
+    src/scintilla/src/KeyMap.cxx \
+    src/scintilla/src/Indicator.cxx \
+    src/scintilla/src/ExternalLexer.cxx \
+    src/scintilla/src/EditView.cxx \
+    src/scintilla/src/Editor.cxx \
+    src/scintilla/src/EditModel.cxx \
+    src/scintilla/src/Document.cxx \
+    src/scintilla/src/Decoration.cxx \
+    src/scintilla/src/DBCS.cxx \
+    src/scintilla/src/ContractionState.cxx \
+    src/scintilla/src/CharClassify.cxx \
+    src/scintilla/src/CellBuffer.cxx \
+    src/scintilla/src/Catalogue.cxx \
+    src/scintilla/src/CaseFolder.cxx \
+    src/scintilla/src/CaseConvert.cxx \
+    src/scintilla/src/CallTip.cxx \
+    src/scintilla/src/AutoComplete.cxx \
+    src/scintilla/lexlib/WordList.cxx \
+    src/scintilla/lexlib/StyleContext.cxx \
+    src/scintilla/lexlib/PropSetSimple.cxx \
+    src/scintilla/lexlib/LexerSimple.cxx \
+    src/scintilla/lexlib/LexerNoExceptions.cxx \
+    src/scintilla/lexlib/LexerModule.cxx \
+    src/scintilla/lexlib/LexerBase.cxx \
+    src/scintilla/lexlib/DefaultLexer.cxx \
+    src/scintilla/lexlib/CharacterSet.cxx \
+    src/scintilla/lexlib/CharacterCategory.cxx \
+    src/scintilla/lexlib/Accessor.cxx \
+    $$files(src/scintilla/lexers/*.cxx, false)
+
+HEADERS  += \
+    src/scintilla/qt/ScintillaEdit/ScintillaEdit.h \
+    src/scintilla/qt/ScintillaEdit/ScintillaDocument.h \
+    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
+    src/scintilla/qt/ScintillaEditBase/ScintillaQt.h
+
+INCLUDEPATH += src/scintilla/qt/ScintillaEditBase src/scintilla/include src/scintilla/src src/scintilla/lexlib
+
+DEFINES *= SCINTILLA_QT=1 SCI_LEXER=1 _CRT_SECURE_NO_DEPRECATE=1 EXPORT_IMPORT_API=
+
+CONFIG(release, debug|release) {
+  DEFINES *= NDEBUG=1
+}
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
