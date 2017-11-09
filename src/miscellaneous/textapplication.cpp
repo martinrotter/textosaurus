@@ -308,6 +308,8 @@ void TextApplication::onEditorModified(int type, int position, int length, int l
     TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
     markEditorModified(editor, editor->modify());
+
+    editor->colourise(0, -1);
   }
 }
 

@@ -67,13 +67,53 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
 }
 
+const char htmlKeyWords[] =
+  "a abbr acronym address applet area b base basefont "
+  "bdo big blockquote body br button caption center "
+  "cite code col colgroup dd del dfn dir div dl dt em "
+  "fieldset font form frame frameset h1 h2 h3 h4 h5 h6 "
+  "head hr html i iframe img input ins isindex kbd label "
+  "legend li link map menu meta noframes noscript "
+  "object ol optgroup option p param pre q s samp "
+  "script select small span strike strong style sub sup "
+  "table tbody td textarea tfoot th thead title tr tt u ul "
+  "var xmlns "
+  "abbr accept-charset accept accesskey action align alink "
+  "alt archive axis background bgcolor border "
+  "cellpadding cellspacing char charoff charset checked cite "
+  "class classid clear codebase codetype color cols colspan "
+  "compact content coords "
+  "data datafld dataformatas datapagesize datasrc datetime "
+  "declare defer dir disabled enctype "
+  "face for frame frameborder "
+  "headers height href hreflang hspace http-equiv "
+  "id ismap label lang language link longdesc "
+  "marginwidth marginheight maxlength media method multiple "
+  "name nohref noresize noshade nowrap "
+  "object onblur onchange onclick ondblclick onfocus "
+  "onkeydown onkeypress onkeyup onload onmousedown "
+  "onmousemove onmouseover onmouseout onmouseup "
+  "onreset onselect onsubmit onunload "
+  "profile prompt readonly rel rev rows rowspan rules "
+  "scheme scope shape size span src standby start style "
+  "summary tabindex target text title type usemap "
+  "valign value valuetype version vlink vspace width "
+  "text password checkbox radio submit reset "
+  "file hidden image "
+  "public !doctype xml";
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
-  setLexerLanguage("cpp");
-  clearDocumentStyle();
+  setLexerLanguage("html");
 
-  //colourise(0, -1);
+  setProperty("fold", "1");
+  setProperty("fold.html", "1");
+
+  setKeyWords(0, htmlKeyWords);
+  styleClearAll();
+  styleSetFore(SCE_H_ATTRIBUTE, 255);
+
+  colourise(0, -1);
 
 /*
    clearDocumentStyle();
