@@ -648,6 +648,7 @@ void TextApplication::renameEditor(TextEditor* editor) {
   if (index >= 0) {
     if (!editor->filePath().isEmpty()) {
       m_tabEditors->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
+      m_tabEditors->tabBar()->setTabToolTip(index, editor->filePath());
     }
   }
 }
