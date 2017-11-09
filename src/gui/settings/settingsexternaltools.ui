@@ -96,7 +96,11 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="m_txtFullScript"/>
+          <widget class="QPlainTextEdit" name="m_txtFullScript">
+           <property name="placeholderText">
+            <string>Full-blown script goes here</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -126,7 +130,11 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QLineEdit" name="m_txtSimpleCommand"/>
+          <widget class="QLineEdit" name="m_txtSimpleCommand">
+           <property name="placeholderText">
+            <string>Simple command goes here</string>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="verticalSpacer">
