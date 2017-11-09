@@ -36,6 +36,9 @@ enum class ToolOutput {
   // Tool output is dumped into output toolbox window.
   DumpToOutputWindow,
 
+  // Copies tool output to clipboard and displays in output window info.
+  CopyToClipboard,
+
   // Output is saved to some file stored in TEMP
   // and is opened when tool finishes its work.
   NewSavedFile,

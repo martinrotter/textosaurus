@@ -218,8 +218,6 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
       break;
 
     case ToolInput::CurrentLine:
-
-      // TODO: zkontrolovat
       data = ptr_editor->getCurLine(-1);
       break;
 

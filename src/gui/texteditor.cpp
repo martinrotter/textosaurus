@@ -44,12 +44,13 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
 
   QTextStream str(&file); str.setCodec(codec_for_encoding);
 
-  blockSignals(true);
+  //blockSignals(true);
 
   // TODO: určitě půjde udělat lépe.
   setText(str.readAll().toUtf8().constData());
   setSavePoint();
-  blockSignals(false);
+
+  //blockSignals(false);
   Application::restoreOverrideCursor();
 
   emit loadedFromFile(m_filePath);
@@ -71,12 +72,14 @@ void TextEditor::closeEvent(QCloseEvent* event) {
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
-  clearDocumentStyle();
-  setLexer(SCLEX_CPP);
-  setProperty("fold", "1");
-  setProperty("fold.html", "1");
+/*
+   clearDocumentStyle();
+   setLexer(SCLEX_CPP);
+   setProperty("fold", "1");
+   setProperty("fold.html", "1");
 
-  colourise(0, -1);
+   colourise(0, -1);
+ */
 
   // TODO: dodělat korektně
 

@@ -16,6 +16,7 @@
 
 #include "uchardet/uchardet.h"
 
+#include <QClipboard>
 #include <QFileDialog>
 #include <QPointer>
 #include <QTemporaryFile>
@@ -296,10 +297,6 @@ void TextApplication::redo() {
 
 void TextApplication::newFile() {
   TextEditor* editor = createTextEditor();
-
-  // NOTE: Some properties will get loaded when switched to
-  // editor. Load rest of those.
-  //editor->reloadLexer(m_settings->syntaxHighlighting()->defaultLexer());
 
   m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }
@@ -628,9 +625,14 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
 
   switch (tool->output()) {
     case ToolOutput::InsertAtCursorPosition:
-
-      // TODO: zkontrolovat
       editor->insertText(editor->currentPos(), output_text.toUtf8().constData());
+      break;
+
+    case ToolOutput::CopyToClipboard:
+      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
+      m_toolBox->displayOutput(OutputSource::ExternalTool,
+                               tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                               QMessageBox::Icon::Information);
       break;
 
     case ToolOutput::DumpToOutputWindow:
@@ -648,17 +650,10 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
 
     case ToolOutput::ReplaceSelectionDocument:
       if (!editor->selectionEmpty()) {
-        // TODO: ZKONTROLOVAT
         editor->replaceSel(output_text.toUtf8().constData());
       }
       else {
-        // We replace whole document contents
-        // because there is no selection.
-        // NOTE: Using setText() clears history.
-        editor->selectAll();
-
-        // TODO: ZKONTROLOVAT
-        editor->replaceSel(output_text.toUtf8().constData());
+        editor->setText(output_text.toUtf8().constData());
       }
 
       break;

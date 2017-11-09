@@ -33,12 +33,11 @@ class SettingsPanel : public QWidget {
     Settings* settings() const;
 
   protected slots:
+    void requireRestart();
 
     // Sets this settings panel as dirty (some settings are changed) and emits the signal.
     // NOTE: This will be probably called by subclasses when user changes some stuff.
     void dirtifySettings();
-
-    void requireRestart();
 
   signals:
     void settingsChanged();
