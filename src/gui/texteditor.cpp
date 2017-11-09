@@ -55,10 +55,6 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   emit loadedFromFile(m_filePath);
 }
 
-/*void TextEditor::setLexer(QsciLexer* lexer) {
-   QsciScintilla::setLexer(lexer);
-   }*/
-
 void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
   QsciScintilla::contextMenuEvent(event);
 }
