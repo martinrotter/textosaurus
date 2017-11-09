@@ -173,15 +173,25 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 }
 
 void TextEditor::reloadFont() {
+  QFont new_f = textApplication()->settings()->mainFont();
+
   if (QsciScintilla::lexer() != nullptr) {
-    QsciScintilla::lexer()->setFont(textApplication()->settings()->mainFont());
+    QFont old_f = QsciScintilla::lexer()->font(STYLE_DEFAULT);
+
+    if (old_f != new_f) {
+      QsciScintilla::lexer()->setFont(new_f);
+    }
   }
   else {
-    setFont(textApplication()->settings()->mainFont());
+    QFont old_f = font();
 
-    // We clear all styles, this call will copy settings from STYLE_DEFAULT
-    // to all remaining styles.
-    SendScintilla(SCI_STYLECLEARALL);
+    if (old_f != new_f) {
+      setFont(textApplication()->settings()->mainFont());
+
+      // We clear all styles, this call will copy settings from STYLE_DEFAULT
+      // to all remaining styles.
+      SendScintilla(SCI_STYLECLEARALL);
+    }
   }
 }
 
