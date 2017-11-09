@@ -26,7 +26,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
-  m_filePath = file.fileName();
+  m_filePath = QDir::toNativeSeparators(file.fileName());
   m_encoding = encoding.toLocal8Bit();
   m_lexer = default_lexer;
 
@@ -138,7 +138,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   file.close();
 
   setSavePoint();
-  emit savedToFile((m_filePath = file_path));
+  emit savedToFile((m_filePath = QDir::toNativeSeparators(file_path)));
 
   *ok = true;
 }
