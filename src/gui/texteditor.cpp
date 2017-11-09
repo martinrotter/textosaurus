@@ -114,10 +114,12 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   QTextStream str(&file); str.setCodec(m_encoding.constData());
 
   str << getText(length());
-
-  emit savedToFile((m_filePath = file_path));
+  str.flush();
+  file.close();
 
   setSavePoint();
+  emit savedToFile((m_filePath = file_path));
+
   *ok = true;
 }
 
