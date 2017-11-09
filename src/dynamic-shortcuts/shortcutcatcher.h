@@ -56,6 +56,7 @@ class ShortcutCatcher : public QWidget {
     void setShortcut(const QKeySequence& key);
 
   public slots:
+    void hideResetButton();
     void resetShortcut();
     void clearShortcut();
 

@@ -64,7 +64,7 @@
        <property name="currentIndex">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="page">
+       <widget class="QWidget" name="m_pageFullScript">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -74,7 +74,7 @@
          </rect>
         </property>
         <attribute name="label">
-         <string>Page 1</string>
+         <string>Full script</string>
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <property name="leftMargin">
@@ -90,11 +90,11 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEdit"/>
+          <widget class="QPlainTextEdit" name="m_txtFullScript"/>
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="page_2">
+       <widget class="QWidget" name="m_pageSimpleCommand">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -104,7 +104,7 @@
          </rect>
         </property>
         <attribute name="label">
-         <string>Page 2</string>
+         <string>Simple command</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout">
          <property name="leftMargin">
@@ -120,7 +120,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="m_txtSimpleCommand"/>
          </item>
          <item>
           <spacer name="verticalSpacer">
@@ -140,34 +140,34 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="m_lblShortcut">
        <property name="text">
         <string>Shortcut</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="ShortcutCatcher" name="widget" native="true"/>
+      <widget class="ShortcutCatcher" name="m_shortcut" native="true"/>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="m_lblInput">
        <property name="text">
         <string>Input</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="m_cmbInput"/>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="m_lblOutput">
        <property name="text">
         <string>Output</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QComboBox" name="comboBox_2"/>
+      <widget class="QComboBox" name="m_cmbOutput"/>
      </item>
     </layout>
    </item>
