@@ -18,6 +18,7 @@
 
 #include <Qsci/qscilexer.h>
 
+#include <QClipboard>
 #include <QFileDialog>
 #include <QTemporaryFile>
 #include <QTextCodec>
@@ -635,6 +636,13 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
       loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
       break;
     }
+
+    case ToolOutput::CopyToClipboard:
+      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
+      m_toolBox->displayOutput(OutputSource::ExternalTool,
+                               tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                               QMessageBox::Icon::Information);
+      break;
 
     case ToolOutput::ReplaceSelectionDocument:
       if (editor->hasSelectedText()) {
