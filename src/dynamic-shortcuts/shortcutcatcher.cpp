@@ -151,6 +151,10 @@ void ShortcutCatcher::setShortcut(const QKeySequence& key) {
   doneRecording();
 }
 
+void ShortcutCatcher::hideResetButton() {
+  m_btnReset->hide();
+}
+
 void ShortcutCatcher::resetShortcut() {
   setShortcut(m_defaultSequence);
 }
