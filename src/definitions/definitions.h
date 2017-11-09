@@ -6,10 +6,10 @@
 #include <QtGlobal>
 
 #define MARGIN_LINE_NUMBERS 0
-#define MARGIN_FOLDING      2
+#define MARGIN_FOLDING      1
 
-#define MARGIN_WIDTH_NUMBERS  48
-#define MARGIN_WIDTH_FOLDING  22
+#define MARGIN_WIDTH_NUMBERS  32
+#define MARGIN_WIDTH_FOLDING  16
 
 #define FORMAT_DATETIME_OUTPUT                      "yyyy-MM-dd HH:mm:ss"
 #define FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION    2048

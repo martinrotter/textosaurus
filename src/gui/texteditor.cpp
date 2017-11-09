@@ -235,18 +235,15 @@ void TextEditor::reloadSettings() {
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
 
-  // TODO: dodělat
+  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
 
-  /*setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
-     setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+  //setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+  setViewEOL(m_textApp->settings()->viewEols());
+  setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
 
-     setEolVisibility(m_textApp->settings()->viewEols());
-     setWhitespaceVisibility(m_textApp->settings()->viewWhitespaces() ?
-                          QsciScintilla::WhitespaceVisibility::WsVisible :
-                          QsciScintilla::WhitespaceVisibility::WsInvisible);
-   */
   reloadLexer(m_lexer);
 
+  setCaretLineBack(255);
   setCaretLineVisible(true);
   setCaretWidth(2);
 }

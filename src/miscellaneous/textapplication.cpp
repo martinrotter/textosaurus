@@ -148,14 +148,7 @@ TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
-
-  // TODO: docasne zakazat asi neni potreba, protoze inicializace
-  // se provede po prepnuti indexu tabwidgetu - vcetne prejmenovani
-  //connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
-
-  // TODO: mozna neni potreba, toto ted obstarava signal modified - viz vise
-  //connect(editor, &TextEditor::textChanged, this, &TextApplication::onEditorTextChanged);
 
   return editor;
 }
@@ -303,12 +296,18 @@ void TextApplication::newFile() {
 
 void TextApplication::onEditorModified(int type, int position, int length, int linesAdded, const QByteArray& text,
                                        int line, int foldNow, int foldPrev) {
+  Q_UNUSED(position)
+  Q_UNUSED(length)
+  Q_UNUSED(linesAdded)
+  Q_UNUSED(text)
+  Q_UNUSED(line)
+  Q_UNUSED(foldNow)
+  Q_UNUSED(foldPrev)
+
   if ((type & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)) > 0) {
 
     TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
-    // TODO: tento slot je navazan na signal modified
-    // kterej ma nekolik parametru, mozna nema cenu reagovat na vsechny zmeny
     markEditorModified(editor, editor->modify());
   }
 }
