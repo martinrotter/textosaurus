@@ -5,12 +5,15 @@
 
 #if !defined(WITH_UBUNTU)
 #include <Qsci/qscilexeravs.h>
+#include <Qsci/qscilexercoffeescript.h>
+#include <Qsci/qscilexerjson.h>
+#include <Qsci/qscilexermarkdown.h>
+#include <Qsci/qscilexerpo.h>
 #endif
 
 #include <Qsci/qscilexerbash.h>
 #include <Qsci/qscilexerbatch.h>
 #include <Qsci/qscilexercmake.h>
-#include <Qsci/qscilexercoffeescript.h>
 #include <Qsci/qscilexercpp.h>
 #include <Qsci/qscilexercsharp.h>
 #include <Qsci/qscilexercss.h>
@@ -22,15 +25,12 @@
 #include <Qsci/qscilexeridl.h>
 #include <Qsci/qscilexerjava.h>
 #include <Qsci/qscilexerjavascript.h>
-#include <Qsci/qscilexerjson.h>
 #include <Qsci/qscilexerlua.h>
 #include <Qsci/qscilexermakefile.h>
-#include <Qsci/qscilexermarkdown.h>
 #include <Qsci/qscilexermatlab.h>
 #include <Qsci/qscilexeroctave.h>
 #include <Qsci/qscilexerpascal.h>
 #include <Qsci/qscilexerperl.h>
-#include <Qsci/qscilexerpo.h>
 #include <Qsci/qscilexerpostscript.h>
 #include <Qsci/qscilexerpov.h>
 #include <Qsci/qscilexerproperties.h>
@@ -101,6 +101,18 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("AVS"), QStringList {
       QSL("avs")
     }, LAMBDA_LEX_GEN(AVS))
+      << Lexer(QSL("CoffeeScript"), QStringList {
+      QSL("litcoffee")
+    }, LAMBDA_LEX_GEN(CoffeeScript))
+      << Lexer(QSL("JSON"), QStringList {
+      QSL("json")
+    }, LAMBDA_LEX_GEN(JSON))
+      << Lexer(QSL("Markdown"), QStringList {
+      QSL("markdown")
+    }, LAMBDA_LEX_GEN(Markdown))
+      << Lexer(QSL("PO"), QStringList {
+      QSL("po")
+    }, LAMBDA_LEX_GEN(PO))
 #endif
       << Lexer(QSL("Bash"), QStringList {
       QSL("bash"), QSL("sh"), QSL("zsh")
@@ -111,9 +123,6 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("CMake"), QStringList {
       QSL("cmake"), QSL("txt")
     }, LAMBDA_LEX_GEN(CMake))
-      << Lexer(QSL("CoffeeScript"), QStringList {
-      QSL("litcoffee")
-    }, LAMBDA_LEX_GEN(CoffeeScript))
       << Lexer(QSL("C++"), QStringList {
       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
     }, LAMBDA_LEX_GEN(CPP))
@@ -144,18 +153,12 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("JavaScript"), QStringList {
       QSL("js")
     }, LAMBDA_LEX_GEN(JavaScript))
-      << Lexer(QSL("JSON"), QStringList {
-      QSL("json")
-    }, LAMBDA_LEX_GEN(JSON))
       << Lexer(QSL("Lua"), QStringList {
       QSL("lua")
     }, LAMBDA_LEX_GEN(Lua))
       << Lexer(QSL("Make"), QStringList {
       QSL("mak"), QSL("makefile")
     }, LAMBDA_LEX_GEN(Makefile))
-      << Lexer(QSL("Markdown"), QStringList {
-      QSL("markdown")
-    }, LAMBDA_LEX_GEN(Markdown))
       << Lexer(QSL("Matlab"), QStringList {
       QSL("m")
     }, LAMBDA_LEX_GEN(Matlab))
@@ -168,9 +171,6 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("Perl"), QStringList {
       QSL("pl"), QSL("pm"), QSL("plx")
     }, LAMBDA_LEX_GEN(Perl))
-      << Lexer(QSL("PO"), QStringList {
-      QSL("po")
-    }, LAMBDA_LEX_GEN(PO))
       << Lexer(QSL("PostScript"), QStringList {
       QSL("ps")
     }, LAMBDA_LEX_GEN(PostScript))
