@@ -82,7 +82,10 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   QsciLexer* old_lexer = QsciScintilla::lexer();
   QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
 
-  if (new_lexer != old_lexer) {
+  if (old_lexer != nullptr && new_lexer != nullptr && old_lexer->lexerId() == new_lexer->lexerId()) {
+    qDebug("Editor has the same lexer already set, there is not need of setting it again.");
+  }
+  else if (new_lexer != old_lexer) {
     setLexer(new_lexer);
     qDebug("Changing lexers from '%s' to '%s'.",
            old_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(old_lexer->language()),
