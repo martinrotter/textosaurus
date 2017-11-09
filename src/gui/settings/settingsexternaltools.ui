@@ -25,29 +25,6 @@
    </property>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" colspan="3">
-      <widget class="QListView" name="m_listTools"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="PlainToolButton" name="m_btnAdd">
-       <property name="toolTip">
-        <string>Add new external tool</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="PlainToolButton" name="m_btnDelete">
-       <property name="toolTip">
-        <string>Remove selected external tool</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="2">
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -60,6 +37,29 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="1" column="0">
+      <widget class="PlainToolButton" name="m_btnAdd">
+       <property name="toolTip">
+        <string>Add new external tool</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="3">
+      <widget class="QListView" name="m_listTools"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="PlainToolButton" name="m_btnDelete">
+       <property name="toolTip">
+        <string>Remove selected external tool</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -146,48 +146,65 @@
       </widget>
      </item>
      <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Title</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="text">
+        <string>Title of this external tool</string>
+       </property>
+       <property name="placeholderText">
+        <string>Optional category name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Category</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="placeholderText">
+        <string>Optional category name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
       <widget class="QLabel" name="m_lblShortcut">
        <property name="text">
         <string>Shortcut</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="3" column="1">
       <widget class="ShortcutCatcher" name="m_shortcut" native="true"/>
      </item>
-     <item row="2" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="m_lblInput">
        <property name="text">
         <string>Input</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="4" column="1">
       <widget class="QComboBox" name="m_cmbInput"/>
      </item>
-     <item row="3" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="m_lblOutput">
        <property name="text">
         <string>Output</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="5" column="1">
       <widget class="QComboBox" name="m_cmbOutput"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Category</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="placeholderText">
-        <string>Optional category name</string>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -213,7 +230,6 @@
   <tabstop>m_txtFullScript</tabstop>
   <tabstop>m_cmbInput</tabstop>
   <tabstop>m_cmbOutput</tabstop>
-  <tabstop>lineEdit</tabstop>
   <tabstop>m_txtSimpleCommand</tabstop>
  </tabstops>
  <resources/>
