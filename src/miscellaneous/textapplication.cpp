@@ -144,12 +144,7 @@ TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorModifiedChanged);
-
-  // TODO: docasne zakazat asi neni potreba, protoze inicializace
-  // se provede po prepnuti indexu tabwidgetu - vcetne prejmenovani
-  //connect(editor, &TextEditor::loadedFromFile, this, &TextApplication::onEditorLoadedFromFile);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
-  connect(editor, &TextEditor::textChanged, this, &TextApplication::onEditorTextChanged);
 
   return editor;
 }
@@ -222,14 +217,6 @@ void TextApplication::onEditorRequestVisibility() {
   if (editor != nullptr) {
     m_tabEditors->setCurrentWidget(editor);
   }
-}
-
-void TextApplication::onEditorLoadedFromFile() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
-
-  renameEditor(editor);
-  updateToolBarFromEditor(editor, true);
-  updateStatusBarFromEditor(editor);
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
@@ -512,15 +499,6 @@ void TextApplication::onEditorTabSwitched(int index) {
   renameEditor(editor);
   updateToolBarFromEditor(editor, false);
   updateStatusBarFromEditor(editor);
-}
-
-void TextApplication::onEditorTextChanged() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
-
-  if (editor != nullptr) {
-    // TODO: docasne vypnuto na zkousku esi je to fakt třeba
-    //markEditorModified(editor, editor->isModified());
-  }
 }
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {

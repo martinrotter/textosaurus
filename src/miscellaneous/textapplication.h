@@ -72,10 +72,8 @@ class TextApplication : public QObject {
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
     void onEditorRequestVisibility();
-    void onEditorLoadedFromFile();
     void onEditorModifiedChanged(bool modified);
     void onEditorTabSwitched(int index = -1);
-    void onEditorTextChanged();
 
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
