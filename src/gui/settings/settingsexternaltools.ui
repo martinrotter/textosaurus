@@ -30,6 +30,9 @@
      </item>
      <item row="1" column="0">
       <widget class="PlainToolButton" name="m_btnAdd">
+       <property name="toolTip">
+        <string>Add new external tool</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -37,6 +40,9 @@
      </item>
      <item row="1" column="1">
       <widget class="PlainToolButton" name="m_btnDelete">
+       <property name="toolTip">
+        <string>Remove selected external tool</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -169,6 +175,20 @@
      <item row="3" column="1">
       <widget class="QComboBox" name="m_cmbOutput"/>
      </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Category</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="placeholderText">
+        <string>Optional category name</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
@@ -186,6 +206,16 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_listTools</tabstop>
+  <tabstop>m_btnAdd</tabstop>
+  <tabstop>m_btnDelete</tabstop>
+  <tabstop>m_txtFullScript</tabstop>
+  <tabstop>m_cmbInput</tabstop>
+  <tabstop>m_cmbOutput</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>m_txtSimpleCommand</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
