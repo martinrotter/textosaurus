@@ -70,15 +70,10 @@ void TextEditor::closeEvent(QCloseEvent* event) {
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
+  setLexerLanguage("cpp");
   clearDocumentStyle();
 
-  setLexerLanguage("cpp");
-
-  //setLexer(m_lexer.m_code);
-  //auto a = lexerLanguage();
-
-  changeLexerState(0, -1);
-  colourise(0, -1);
+  //colourise(0, -1);
 
 /*
    clearDocumentStyle();
@@ -140,11 +135,6 @@ Lexer TextEditor::lexer() const {
 TextApplication* TextEditor::textApplication() const {
   return m_textApp;
 }
-
-/*void TextEditor::setLexerWithName(QsciLexer* lexer, const QString& lexer_name) {
-   setLexer(lexer);
-   m_lexerName = lexer_name;
-   }*/
 
 QByteArray TextEditor::encoding() const {
   return m_encoding;

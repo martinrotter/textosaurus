@@ -520,15 +520,6 @@ void TextApplication::onEditorTabSwitched(int index) {
   updateStatusBarFromEditor(editor);
 }
 
-void TextApplication::onEditorTextChanged() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
-
-  if (editor != nullptr) {
-    // TODO: docasne vypnuto na zkousku esi je to fakt třeba
-    //markEditorModified(editor, editor->isModified());
-  }
-}
-
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
   Q_UNUSED(only_modified)
 
