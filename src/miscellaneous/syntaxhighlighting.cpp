@@ -51,7 +51,6 @@ QStringList SyntaxHighlighting::fileFilters() {
 
 Lexers SyntaxHighlighting::lexers() {
   if (m_lexers.isEmpty()) {
-    // TODO: dodělat
     m_lexers
       << Lexer(tr("Plain text"), QStringList {
       QSL("txt"), QString()
@@ -146,9 +145,15 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("Python"), QStringList {
       QSL("py"), QSL("pyw")
     }, SCLEX_PYTHON)
+      << Lexer(QSL("Registry"), QStringList {
+      QSL("reg")
+    }, SCLEX_REGISTRY)
       << Lexer(QSL("Ruby"), QStringList {
       QSL("rb"), QSL("rbw")
     }, SCLEX_RUBY)
+      << Lexer(QSL("Rust"), QStringList {
+      QSL("rs")
+    }, SCLEX_RUST)
       << Lexer(QSL("Spice"), QStringList {
       QSL("scp"), QSL("out")
     }, SCLEX_SPICE)
