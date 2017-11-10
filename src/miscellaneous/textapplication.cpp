@@ -668,13 +668,6 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
       break;
     }
 
-    case ToolOutput::CopyToClipboard:
-      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
-      m_toolBox->displayOutput(OutputSource::ExternalTool,
-                               tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
-                               QMessageBox::Icon::Information);
-      break;
-
     case ToolOutput::ReplaceSelectionDocument:
       if (!editor->selectionEmpty()) {
         editor->replaceSel(output_text.toUtf8().constData());
