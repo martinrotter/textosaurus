@@ -11,6 +11,7 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
+#include "scintilla/include/ILoader.h"
 #include "scintilla/include/SciLexer.h"
 
 #include <QDir>
@@ -22,15 +23,22 @@
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEdit(parent), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
+
+  // Set constant settings.
   setCodePage(SC_CP_UTF8);
+  setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
+  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
+  setEndAtLastLine(false);
+
+  //setBufferedDraw(true);
+  //setTechnology(SC_TECHNOLOGY_DIRECTWRITEDC);
+  //setFontQuality(SC_EFF_QUALITY_LCD_OPTIMIZED);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
   m_filePath = QDir::toNativeSeparators(file.fileName());
   m_encoding = encoding.toLocal8Bit();
   m_lexer = default_lexer;
-
-  Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
   QTextCodec* codec_for_encoding = QTextCodec::codecForName(m_encoding);
 
@@ -46,8 +54,6 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   setText(str.readAll().toUtf8().constData());
   emptyUndoBuffer();
   blockSignals(false);
-
-  Application::restoreOverrideCursor();
 
   emit loadedFromFile(m_filePath);
 }
@@ -86,12 +92,9 @@ void TextEditor::reloadFont() {
 
 void TextEditor::reloadSettings() {
   setEOLMode(m_textApp->settings()->eolMode());
-  setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
   setViewEOL(m_textApp->settings()->viewEols());
   setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
-
-  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
 
   reloadLexer(m_lexer);
 }
