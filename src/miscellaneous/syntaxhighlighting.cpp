@@ -56,127 +56,117 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(tr("Plain text"), QStringList {
       QSL("txt"), QString()
     }, SCLEX_NULL)
-      << Lexer(tr("C++"), QStringList {
-      QSL("cpp"), QString()
-    }, SCLEX_CPP);
-
-    /*
-     #if !defined(WITH_UBUNTU)
-       << Lexer(QSL("AVS"), QStringList {
-       QSL("avs")
-       }, LAMBDA_LEX_GEN(AVS))
-     #endif
-       << Lexer(QSL("Bash"), QStringList {
-       QSL("bash"), QSL("sh"), QSL("zsh")
-       }, LAMBDA_LEX_GEN(Bash))
-       << Lexer(QSL("Batch"), QStringList {
-       QSL("bat"), QSL("cmd")
-       }, LAMBDA_LEX_GEN(Batch))
-       << Lexer(QSL("CMake"), QStringList {
-       QSL("cmake"), QSL("txt")
-       }, LAMBDA_LEX_GEN(CMake))
-       << Lexer(QSL("CoffeeScript"), QStringList {
-       QSL("litcoffee")
-       }, LAMBDA_LEX_GEN(CoffeeScript))
-       << Lexer(QSL("C++"), QStringList {
-       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
-       }, LAMBDA_LEX_GEN(CPP))
-       << Lexer(QSL("C#"), QStringList {
-       QSL("cs")
-       }, LAMBDA_LEX_GEN(CSharp))
-       << Lexer(QSL("D"), QStringList {
-       QSL("d")
-       }, LAMBDA_LEX_GEN(D))
-       << Lexer(QSL("Diff"), QStringList {
-       QSL("diff")
-       }, LAMBDA_LEX_GEN(Diff))
-       << Lexer(QSL("Fortran"), QStringList {
-       QSL("for"), QSL("f90"), QSL("f95"), QSL("f2k"), QSL("f23")
-       }, LAMBDA_LEX_GEN(Fortran))
-       << Lexer(QSL("Fortran77"), QStringList {
-       QSL("f77")
-       }, LAMBDA_LEX_GEN(Fortran77))
-       << Lexer(QSL("HTML"), QStringList {
-       QSL("html"), QSL("htm"), QSL("shtml"), QSL("shtm"), QSL("xhtml"), QSL("xht"), QSL("hta")
-       }, LAMBDA_LEX_GEN(HTML))
-       << Lexer(QSL("IDL"), QStringList {
-       QSL("idl")
-       }, LAMBDA_LEX_GEN(IDL))
-       << Lexer(QSL("Java"), QStringList {
-       QSL("java")
-       }, LAMBDA_LEX_GEN(Java))
-       << Lexer(QSL("JavaScript"), QStringList {
-       QSL("js")
-       }, LAMBDA_LEX_GEN(JavaScript))
-       << Lexer(QSL("JSON"), QStringList {
-       QSL("json")
-       }, LAMBDA_LEX_GEN(JSON))
-       << Lexer(QSL("Lua"), QStringList {
-       QSL("lua")
-       }, LAMBDA_LEX_GEN(Lua))
-       << Lexer(QSL("Make"), QStringList {
-       QSL("mak"), QSL("makefile")
-       }, LAMBDA_LEX_GEN(Makefile))
-       << Lexer(QSL("Markdown"), QStringList {
-       QSL("markdown")
-       }, LAMBDA_LEX_GEN(Markdown))
-       << Lexer(QSL("Matlab"), QStringList {
-       QSL("m")
-       }, LAMBDA_LEX_GEN(Matlab))
-       << Lexer(QSL("Octave"), QStringList {
-       QSL("m")
-       }, LAMBDA_LEX_GEN(Octave))
-       << Lexer(QSL("Pascal"), QStringList {
-       QSL("pas"), QSL("pp"), QSL("p"), QSL("inc")
-       }, LAMBDA_LEX_GEN(Pascal))
-       << Lexer(QSL("Perl"), QStringList {
-       QSL("pl"), QSL("pm"), QSL("plx")
-       }, LAMBDA_LEX_GEN(Perl))
-       << Lexer(QSL("PO"), QStringList {
-       QSL("po")
-       }, LAMBDA_LEX_GEN(PO))
-       << Lexer(QSL("PostScript"), QStringList {
-       QSL("ps")
-       }, LAMBDA_LEX_GEN(PostScript))
-       << Lexer(QSL("POV"), QStringList {
-       QSL("pov")
-       }, LAMBDA_LEX_GEN(POV))
-       << Lexer(QSL("Properties"), QStringList {
-       QSL("properties")
-       }, LAMBDA_LEX_GEN(Properties))
-       << Lexer(QSL("Python"), QStringList {
-       QSL("py"), QSL("pyw")
-       }, LAMBDA_LEX_GEN(Python))
-       << Lexer(QSL("Ruby"), QStringList {
-       QSL("rb"), QSL("rbw")
-       }, LAMBDA_LEX_GEN(Ruby))
-       << Lexer(QSL("Spice"), QStringList {
-       QSL("scp"), QSL("out")
-       }, LAMBDA_LEX_GEN(Spice))
-       << Lexer(QSL("SQL"), QStringList {
-       QSL("sql")
-       }, LAMBDA_LEX_GEN(SQL))
-       << Lexer(QSL("TCL"), QStringList {
-       QSL("tcl")
-       }, LAMBDA_LEX_GEN(TCL))
-       << Lexer(QSL("TeX"), QStringList {
-       QSL("tex"), QSL("latex"), QSL("sty"), QSL("cls")
-       }, LAMBDA_LEX_GEN(TeX))
-       << Lexer(QSL("VeriLog"), QStringList {
-       QSL("v"), QSL("sv"), QSL("vh"), QSL("svh")
-       }, LAMBDA_LEX_GEN(Verilog))
-       << Lexer(QSL("VHDL"), QStringList {
-       QSL("vhd"), QSL("vhdl")
-       }, LAMBDA_LEX_GEN(VHDL))
-       << Lexer(QSL("XML"), QStringList {
-       QSL("xml"), QSL("xaml"), QSL("xsl"), QSL("xslt"), QSL("xml"),
-       QSL("xsd"), QSL("xul"), QSL("kml"), QSL("svg"), QSL("mxml"), QSL("xsml"),
-       QSL("wsdl"), QSL("xlf"), QSL("xliff"), QSL("xbl"), QSL("xml"), QSL("sxbl"),
-       QSL("sitemap"), QSL("gml"), QSL("gpx"), QSL("plist"), QSL("ts"), QSL("vcxproj")
-       }, LAMBDA_LEX_GEN(XML))
-       << Lexer(QSL("YAML"), QStringList {
-       QSL("yml"), QSL("yaml")
-       }, LAMBDA_LEX_GEN(YAML));*/
+      << Lexer(QSL("AVS"), QStringList {
+      QSL("avs")
+    }, SCLEX_AVS)
+      << Lexer(QSL("Bash"), QStringList {
+      QSL("bash"), QSL("sh"), QSL("zsh")
+    }, SCLEX_BASH)
+      << Lexer(QSL("Batch"), QStringList {
+      QSL("bat"), QSL("cmd")
+    }, SCLEX_BATCH)
+      << Lexer(QSL("CMake"), QStringList {
+      QSL("cmake"), QSL("txt")
+    }, SCLEX_CMAKE)
+      << Lexer(QSL("CoffeeScript"), QStringList {
+      QSL("litcoffee")
+    }, SCLEX_COFFEESCRIPT)
+      << Lexer(QSL("C++"), QStringList {
+      QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
+    }, SCLEX_CPP)
+      << Lexer(QSL("C#"), QStringList {
+      QSL("cs")
+    }, SCLEX_CPP)
+      << Lexer(QSL("D"), QStringList {
+      QSL("d")
+    }, SCLEX_D)
+      << Lexer(QSL("Diff"), QStringList {
+      QSL("diff")
+    }, SCLEX_DIFF)
+      << Lexer(QSL("Fortran"), QStringList {
+      QSL("for"), QSL("f90"), QSL("f95"), QSL("f2k"), QSL("f23")
+    }, SCLEX_FORTRAN)
+      << Lexer(QSL("Fortran77"), QStringList {
+      QSL("f77")
+    }, SCLEX_F77)
+      << Lexer(QSL("HTML"), QStringList {
+      QSL("html"), QSL("htm"), QSL("shtml"), QSL("shtm"), QSL("xhtml"), QSL("xht"), QSL("hta")
+    }, SCLEX_HTML)
+      << Lexer(QSL("Java"), QStringList {
+      QSL("java")
+    }, SCLEX_CPP)
+      << Lexer(QSL("JavaScript"), QStringList {
+      QSL("js")
+    }, SCLEX_CPP)
+      << Lexer(QSL("JSON"), QStringList {
+      QSL("json")
+    }, SCLEX_JSON)
+      << Lexer(QSL("Lua"), QStringList {
+      QSL("lua")
+    }, SCLEX_LUA)
+      << Lexer(QSL("Make"), QStringList {
+      QSL("mak"), QSL("makefile")
+    }, SCLEX_MAKEFILE)
+      << Lexer(QSL("Markdown"), QStringList {
+      QSL("markdown")
+    }, SCLEX_MARKDOWN)
+      << Lexer(QSL("Matlab"), QStringList {
+      QSL("m")
+    }, SCLEX_MATLAB)
+      << Lexer(QSL("Octave"), QStringList {
+      QSL("m")
+    }, SCLEX_OCTAVE)
+      << Lexer(QSL("Pascal"), QStringList {
+      QSL("pas"), QSL("pp"), QSL("p"), QSL("inc")
+    }, SCLEX_PASCAL)
+      << Lexer(QSL("Perl"), QStringList {
+      QSL("pl"), QSL("pm"), QSL("plx")
+    }, SCLEX_PERL)
+      << Lexer(QSL("PO"), QStringList {
+      QSL("po")
+    }, SCLEX_PO)
+      << Lexer(QSL("PostScript"), QStringList {
+      QSL("ps")
+    }, SCLEX_PS)
+      << Lexer(QSL("POV"), QStringList {
+      QSL("pov")
+    }, SCLEX_POV)
+      << Lexer(QSL("Properties"), QStringList {
+      QSL("properties")
+    }, SCLEX_PROPERTIES)
+      << Lexer(QSL("Python"), QStringList {
+      QSL("py"), QSL("pyw")
+    }, SCLEX_PYTHON)
+      << Lexer(QSL("Ruby"), QStringList {
+      QSL("rb"), QSL("rbw")
+    }, SCLEX_RUBY)
+      << Lexer(QSL("Spice"), QStringList {
+      QSL("scp"), QSL("out")
+    }, SCLEX_SPICE)
+      << Lexer(QSL("SQL"), QStringList {
+      QSL("sql")
+    }, SCLEX_SQL)
+      << Lexer(QSL("TCL"), QStringList {
+      QSL("tcl")
+    }, SCLEX_TCL)
+      << Lexer(QSL("TeX"), QStringList {
+      QSL("tex"), QSL("latex"), QSL("sty"), QSL("cls")
+    }, SCLEX_TEX)
+      << Lexer(QSL("VeriLog"), QStringList {
+      QSL("v"), QSL("sv"), QSL("vh"), QSL("svh")
+    }, SCLEX_VERILOG)
+      << Lexer(QSL("VHDL"), QStringList {
+      QSL("vhd"), QSL("vhdl")
+    }, SCLEX_VHDL)
+      << Lexer(QSL("XML"), QStringList {
+      QSL("xml"), QSL("xaml"), QSL("xsl"), QSL("xslt"), QSL("xml"),
+      QSL("xsd"), QSL("xul"), QSL("kml"), QSL("svg"), QSL("mxml"), QSL("xsml"),
+      QSL("wsdl"), QSL("xlf"), QSL("xliff"), QSL("xbl"), QSL("xml"), QSL("sxbl"),
+      QSL("sitemap"), QSL("gml"), QSL("gpx"), QSL("plist"), QSL("ts"), QSL("qrc"), QSL("vcxproj")
+    }, SCLEX_XML)
+      << Lexer(QSL("YAML"), QStringList {
+      QSL("yml"), QSL("yaml")
+    }, SCLEX_YAML);
   }
 
   return m_lexers;
