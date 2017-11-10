@@ -30,8 +30,6 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   m_encoding = encoding.toLocal8Bit();
   m_lexer = default_lexer;
 
-  //reloadLexer(default_lexer);
-
   Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
   QTextCodec* codec_for_encoding = QTextCodec::codecForName(m_encoding);
@@ -67,81 +65,58 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
 }
 
-const char htmlKeyWords[] =
-  "a abbr acronym address applet area b base basefont "
-  "bdo big blockquote body br button caption center "
-  "cite code col colgroup dd del dfn dir div dl dt em "
-  "fieldset font form frame frameset h1 h2 h3 h4 h5 h6 "
-  "head hr html i iframe img input ins isindex kbd label "
-  "legend li link map menu meta noframes noscript "
-  "object ol optgroup option p param pre q s samp "
-  "script select small span strike strong style sub sup "
-  "table tbody td textarea tfoot th thead title tr tt u ul "
-  "var xmlns "
-  "abbr accept-charset accept accesskey action align alink "
-  "alt archive axis background bgcolor border "
-  "cellpadding cellspacing char charoff charset checked cite "
-  "class classid clear codebase codetype color cols colspan "
-  "compact content coords "
-  "data datafld dataformatas datapagesize datasrc datetime "
-  "declare defer dir disabled enctype "
-  "face for frame frameborder "
-  "headers height href hreflang hspace http-equiv "
-  "id ismap label lang language link longdesc "
-  "marginwidth marginheight maxlength media method multiple "
-  "name nohref noresize noshade nowrap "
-  "object onblur onchange onclick ondblclick onfocus "
-  "onkeydown onkeypress onkeyup onload onmousedown "
-  "onmousemove onmouseover onmouseout onmouseup "
-  "onreset onselect onsubmit onunload "
-  "profile prompt readonly rel rev rows rowspan rules "
-  "scheme scope shape size span src standby start style "
-  "summary tabindex target text title type usemap "
-  "valign value valuetype version vlink vspace width "
-  "text password checkbox radio submit reset "
-  "file hidden image "
-  "public !doctype xml";
+void TextEditor::reloadFont() {
+  QFont new_font = textApplication()->settings()->mainFont();
+
+  if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() ||
+      styleSize(STYLE_DEFAULT) != new_font.pointSize() ||
+      styleBold(STYLE_DEFAULT) != new_font.bold()) {
+    styleSetFont(STYLE_DEFAULT, new_font.family().toUtf8().constData());
+    styleSetSize(STYLE_DEFAULT, new_font.pointSize());
+    styleSetBold(STYLE_DEFAULT, new_font.bold());
+  }
+
+  styleClearAll();
+
+  // Now, we set some specific stuff.
+  styleSetBold(STYLE_LINENUMBER, false);
+  styleSetItalic(STYLE_LINENUMBER, false);
+  styleSetWeight(STYLE_LINENUMBER, 100);
+}
+
+void TextEditor::reloadSettings() {
+  setEOLMode(m_textApp->settings()->eolMode());
+  setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
+  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
+  setViewEOL(m_textApp->settings()->viewEols());
+  setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
+
+  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
+
+  reloadLexer(m_lexer);
+}
+
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
-  setLexerLanguage("html");
+  reloadFont();
+  setLexer(m_lexer.m_code);
 
-  setProperty("fold", "1");
-  setProperty("fold.html", "1");
-
-  setKeyWords(0, htmlKeyWords);
-  styleClearAll();
-  styleSetFore(SCE_H_ATTRIBUTE, 255);
+  if (m_lexer.m_code == SCLEX_NULL) {
+    // Reset all colors.
+    for (int i = 0; i < 128; ++i) {
+      styleSetFore(i, 0);
+    }
+  }
+  else {
+    // Load more specific colors = keywords, operators etc.
+    // TODO: dodělat lepší barvy
+    for (int i = 0; i < 128; ++i) {
+      styleSetFore(i, ((rand() % 200) << 16) | ((rand() % 200) << 8) | (rand() % 200));
+    }
+  }
 
   colourise(0, -1);
-
-/*
-   clearDocumentStyle();
-   setLexer(SCLEX_CPP);
-   setProperty("fold", "1");
-   setProperty("fold.html", "1");
-
-   colourise(0, -1);
- */
-
-  // TODO: dodělat korektně
-
-  /*
-     QsciLexer* old_lexer = QsciScintilla::lexer();
-     QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
-
-     if (new_lexer != old_lexer) {
-     setLexer(new_lexer);
-     qDebug("Changing lexers from '%s' to '%s'.",
-           old_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(old_lexer->language()),
-           new_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(new_lexer->language()));
-
-     if (old_lexer != nullptr) {
-      old_lexer->deleteLater();
-     }
-     }*/
-
-  reloadFont();
 }
 
 void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
@@ -217,16 +192,6 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
   }
 }
 
-void TextEditor::reloadFont() {
-  QFont new_font = textApplication()->settings()->mainFont();
-
-  if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() || styleSize(STYLE_DEFAULT) != new_font.pointSize()) {
-    styleSetFont(STYLE_DEFAULT, new_font.family().toUtf8().constData());
-    styleSetSize(STYLE_DEFAULT, new_font.pointSize());
-    styleClearAll();
-  }
-}
-
 void TextEditor::closeEditor(bool* ok) {
   if (modify()) {
     emit requestVisibility();
@@ -263,24 +228,6 @@ void TextEditor::closeEditor(bool* ok) {
   else {
     *ok = true;
   }
-}
-
-void TextEditor::reloadSettings() {
-  setEOLMode(m_textApp->settings()->eolMode());
-  setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
-  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
-
-  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
-
-  //setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
-  setViewEOL(m_textApp->settings()->viewEols());
-  setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
-
-  reloadLexer(m_lexer);
-
-  setCaretLineBack(255);
-  setCaretLineVisible(true);
-  setCaretWidth(2);
 }
 
 QString TextEditor::filePath() const {
