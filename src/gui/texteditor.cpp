@@ -140,7 +140,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
   QTextStream str(&file); str.setCodec(m_encoding.constData());
 
-  str << getText(length());
+  str << getText(length() + 1);
   str.flush();
   file.close();
 
