@@ -196,10 +196,10 @@ Lexer SyntaxHighlighting::defaultLexer() {
   return lexers().first();
 }
 
-Lexer::Lexer() : m_name(QString()), m_suffices(QStringList()), m_code(SCLEX_NULL) {}
+Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL), m_suffices(QStringList()) {}
 
 Lexer::Lexer(const QString& name, const QStringList& suffices, int code)
-  : m_name(name), m_suffices(suffices), m_code(code) {}
+  : m_name(name), m_code(code), m_suffices(suffices) {}
 
 bool Lexer::isEmpty() const {
   return m_name.isEmpty() && m_suffices.isEmpty();
