@@ -50,6 +50,12 @@ void Downloader::manipulateData(const QString& url,
     request.setRawHeader(i.key(), i.value());
   }
 
+  if (operation == QNetworkAccessManager::Operation::PostOperation &&
+      request.rawHeader(QString(HTTP_HEADERS_CONTENT_TYPE).toLocal8Bit()).isEmpty()) {
+    request.setRawHeader(QString(HTTP_HEADERS_CONTENT_TYPE).toLocal8Bit(),
+                         QString("application/x-www-form-urlencoded").toLocal8Bit());
+  }
+
   m_inputData = data;
 
   // Set url for this request and fire it up.

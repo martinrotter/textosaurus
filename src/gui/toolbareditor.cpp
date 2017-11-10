@@ -60,6 +60,8 @@ void ToolBarEditor::saveToolBar() {
 void ToolBarEditor::resetToolBar() {
   if (m_toolBar != nullptr) {
     loadEditor(m_toolBar->getSpecificActions(m_toolBar->defaultActions()), m_toolBar->availableActions());
+
+    emit setupChanged();
   }
 }
 
