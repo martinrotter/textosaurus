@@ -74,9 +74,9 @@ class ShortcutCatcher : public QWidget {
     QHBoxLayout* m_layout;
     QKeySequence m_currentSequence;
     QKeySequence m_defaultSequence;
-    bool m_isRecording;
-    int m_numKey;
-    uint m_modifierKeys;
+    bool m_isRecording = false;
+    int m_numKey = 0;
+    uint m_modifierKeys = 0;
 };
 
 #endif // KEYSEQUENCECATCHER_H

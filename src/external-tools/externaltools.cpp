@@ -35,7 +35,7 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent, TextApplication*
   QMap<QString, QMenu*> categories;
 
   foreach (ExternalTool* tool, m_tools) {
-    QAction* act = new QAction(tool->name());
+    QAction* act = new QAction(tool->name(), parent);
 
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {

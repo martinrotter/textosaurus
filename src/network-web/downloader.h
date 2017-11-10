@@ -75,8 +75,6 @@ class Downloader : public QObject {
     bool m_targetProtected;
     QString m_targetUsername;
     QString m_targetPassword;
-
-    // Response data.
     QByteArray m_lastOutputData;
 
     QNetworkReply::NetworkError m_lastOutputError;
