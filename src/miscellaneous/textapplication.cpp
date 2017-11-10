@@ -56,9 +56,13 @@ QList<TextEditor*> TextApplication::editors() const {
 }
 
 bool TextApplication::anyModifiedEditor() const {
-  foreach (const TextEditor* editor, editors()) {
-    if (editor->modify()) {
-      return true;
+  if (m_tabEditors != nullptr) {
+    for (int i = 0; i < m_tabEditors->count(); i++) {
+      TextEditor* edit = m_tabEditors->textEditorAt(i);
+
+      if (edit != nullptr && edit->modify()) {
+        return true;
+      }
     }
   }
 
