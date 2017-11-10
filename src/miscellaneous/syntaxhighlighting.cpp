@@ -65,12 +65,18 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("Batch"), QStringList {
       QSL("bat"), QSL("cmd")
     }, SCLEX_BATCH)
+      << Lexer(QSL("BibTeX"), QStringList {
+      QSL("bib")
+    }, SCLEX_BIBTEX)
       << Lexer(QSL("CMake"), QStringList {
       QSL("cmake"), QSL("txt")
     }, SCLEX_CMAKE)
       << Lexer(QSL("CoffeeScript"), QStringList {
       QSL("litcoffee")
     }, SCLEX_COFFEESCRIPT)
+      << Lexer(QSL("Config"), QStringList {
+      QSL("conf"), QSL("ini")
+    }, SCLEX_CONF)
       << Lexer(QSL("C++"), QStringList {
       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
     }, SCLEX_CPP)
@@ -108,11 +114,14 @@ Lexers SyntaxHighlighting::lexers() {
       QSL("mak"), QSL("makefile")
     }, SCLEX_MAKEFILE)
       << Lexer(QSL("Markdown"), QStringList {
-      QSL("markdown")
+      QSL("markdown"), QSL("md")
     }, SCLEX_MARKDOWN)
       << Lexer(QSL("Matlab"), QStringList {
       QSL("m")
     }, SCLEX_MATLAB)
+      << Lexer(QSL("NSIS"), QStringList {
+      QSL("nsis")
+    }, SCLEX_NSIS)
       << Lexer(QSL("Octave"), QStringList {
       QSL("m")
     }, SCLEX_OCTAVE)
