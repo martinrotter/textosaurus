@@ -17,16 +17,11 @@
 #define BIG_TEXT_FILE_SIZE                    qint64(50000000)
 #define MAX_TEXT_FILE_SIZE                    qint64(INT_MAX)
 #define ARGUMENTS_LIST_SEPARATOR              "\n"
-#define IS_IN_ARRAY(offset, array)            ((offset >= 0) && (offset < array.count()))
-#define URI_SCHEME_HTTP                       "http://"
 #define RELEASES_LIST                         "https://api.github.com/repos/martinrotter/textilosaurus/releases"
 #define DEFAULT_LOCALE                        "en"
-#define URL_REGEXP "^(http|https|feed|ftp):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?$"
 #define ICON_SIZE_SETTINGS                    16
-#define CLOSE_LOCK_TIMEOUT                    2000
-#define DOWNLOAD_TIMEOUT                      5000
+#define DOWNLOAD_TIMEOUT                      20000
 #define ELLIPSIS_LENGTH                       3
-#define CHANGE_EVENT_DELAY                    250
 #define FLAG_ICON_SUBFOLDER                   "flags"
 #define SPACER_ACTION_NAME                    "spacer"
 #define SEPARATOR_ACTION_NAME                 "separator"
