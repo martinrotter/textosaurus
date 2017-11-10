@@ -10,6 +10,8 @@
 
 #include <QFile>
 
+#define RGB_TO_INT(r, g, b) ((r) << 16) | ((g) << 8) | (b)
+
 class TextApplication;
 
 class TextEditor : public ScintillaEdit {
