@@ -101,23 +101,17 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
 
   reloadFont();
 
-  if (int(send(SCI_GETLEXER)) != m_lexer.m_code) {
-    // Lexer is changed.
-    setLexer(m_lexer.m_code);
+  setLexer(m_lexer.m_code);
 
-    // Load more specific colors = keywords, operators etc.
-    // TODO: dodělat lepší barvy
-    for (int i = 0; i <= STYLE_MAX; i++) {
-      // We set colors for all non-predefined styles.
-      if (m_lexer.m_code != SCLEX_NULL &&  (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED)) {
-        styleSetFore(i, ((rand() % 200) << 16) | ((rand() % 200) << 8) | (rand() % 200));
-      }
-      else {
-        styleSetFore(i, 0);
-      }
+  // Load more specific colors = keywords, operators etc.
+  for (int i = 0; i <= STYLE_MAX; i++) {
+    // We set colors for all non-predefined styles.
+    if (m_lexer.m_code != SCLEX_NULL &&  (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED)) {
+      styleSetFore(i, ((rand() % 160) << 16) | ((rand() % 160) << 8) | (rand() % 160));
     }
-
-    colourise(0, -1);
+    else {
+      styleSetFore(i, 0);
+    }
   }
 }
 
