@@ -16,12 +16,14 @@
 
 #include "uchardet/uchardet.h"
 
-#include <Qsci/qscilexer.h>
-
 #include <QClipboard>
 #include <QFileDialog>
+#include <QLineEdit>
+#include <QPointer>
 #include <QTemporaryFile>
 #include <QTextCodec>
+#include <QTimer>
+#include <QWidgetAction>
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
   // Hook ext. tools early.
@@ -54,16 +56,24 @@ QList<TextEditor*> TextApplication::editors() const {
 }
 
 bool TextApplication::anyModifiedEditor() const {
-  foreach (const TextEditor* editor, editors()) {
-    if (editor->isModified()) {
-      return true;
+  if (m_tabEditors != nullptr) {
+    for (int i = 0; i < m_tabEditors->count(); i++) {
+      TextEditor* edit = m_tabEditors->textEditorAt(i);
+
+      if (edit != nullptr && edit->modify()) {
+        return true;
+      }
     }
   }
 
   return false;
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path, const QString& explicit_encoding, const QString& file_filter) {
+void TextApplication::loadTextEditorFromFile(const QString& file_path,
+                                             const QString& explicit_encoding,
+                                             const QString& file_filter) {
+  Q_UNUSED(file_filter)
+
   QString encoding;
   Lexer default_lexer;
 
@@ -143,7 +153,8 @@ int TextApplication::addTextEditor(TextEditor* editor) {
 TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
-  connect(editor, &TextEditor::modificationChanged, this, &TextApplication::onEditorModifiedChanged);
+  connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
+  connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
 
   return editor;
@@ -190,7 +201,7 @@ void TextApplication::saveAllEditors() {
 
 void TextApplication::closeAllUnmodifiedEditors() {
   foreach (TextEditor* editor, editors()) {
-    if (!editor->isModified()) {
+    if (!editor->modify()) {
       m_tabEditors->closeTab(m_tabEditors->indexOf(editor));
     }
   }
@@ -279,17 +290,30 @@ void TextApplication::redo() {
 void TextApplication::newFile() {
   TextEditor* editor = createTextEditor();
 
-  // NOTE: Some properties will get loaded when switched to
-  // editor. Load rest of those.
-  //editor->reloadLexer(m_settings->syntaxHighlighting()->defaultLexer());
-
   m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }
 
-void TextApplication::onEditorModifiedChanged(bool modified) {
+void TextApplication::onEditorModified(int type, int position, int length, int linesAdded, const QByteArray& text,
+                                       int line, int foldNow, int foldPrev) {
+  Q_UNUSED(position)
+  Q_UNUSED(length)
+  Q_UNUSED(linesAdded)
+  Q_UNUSED(text)
+  Q_UNUSED(line)
+  Q_UNUSED(foldNow)
+  Q_UNUSED(foldPrev)
+
+  if ((type & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)) > 0) {
+    TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+    markEditorModified(editor, editor->modify());
+  }
+}
+
+void TextApplication::onSavePointChanged(bool dirty) {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
-  markEditorModified(editor, modified);
+  markEditorModified(editor, dirty);
 }
 
 void TextApplication::createConnections() {
@@ -373,12 +397,12 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuRecentFiles = main_form->m_ui.m_menuRecentFiles;
   m_menuLanguage = main_form->m_ui.m_menuLanguage;
 
-  m_actionEolMac->setData(int(QsciScintilla::EolMode::EolMac));
-  m_actionEolUnix->setData(int(QsciScintilla::EolMode::EolUnix));
-  m_actionEolWindows->setData(int(QsciScintilla::EolMode::EolWindows));
-  m_actionEolConvertMac->setData(int(QsciScintilla::EolMode::EolMac));
-  m_actionEolConvertUnix->setData(int(QsciScintilla::EolMode::EolUnix));
-  m_actionEolConvertWindows->setData(int(QsciScintilla::EolMode::EolWindows));
+  m_actionEolMac->setData(SC_EOL_CR);
+  m_actionEolUnix->setData(SC_EOL_LF);
+  m_actionEolWindows->setData(SC_EOL_CRLF);
+  m_actionEolConvertMac->setData(SC_EOL_CR);
+  m_actionEolConvertUnix->setData(SC_EOL_LF);
+  m_actionEolConvertWindows->setData(SC_EOL_CRLF);
 
   connect(main_form, &FormMain::closeRequested, this, &TextApplication::quit);
 
@@ -398,15 +422,15 @@ void TextApplication::loadState() {
 
   // Setup GUI of actions.
   switch (m_settings->eolMode()) {
-    case QsciScintilla::EolMode::EolMac:
+    case SC_EOL_CR:
       m_actionEolMac->setChecked(true);
       break;
 
-    case QsciScintilla::EolMode::EolWindows:
+    case SC_EOL_CRLF:
       m_actionEolWindows->setChecked(true);
       break;
 
-    case QsciScintilla::EolMode::EolUnix:
+    case SC_EOL_LF:
     default:
       m_actionEolUnix->setChecked(true);
       break;
@@ -446,8 +470,27 @@ void TextApplication::fillRecentFiles() {
   }
 }
 
+void TextApplication::filterLexersMenu(const QString& filter) {
+  foreach (QAction* act_lexer, m_menuLanguage->actions()) {
+    if (!act_lexer->text().isEmpty()) {
+      act_lexer->setVisible(filter.isEmpty() || act_lexer->text().contains(filter, Qt::CaseSensitivity::CaseInsensitive));
+    }
+  }
+}
+
 void TextApplication::loadLexersMenu() {
   if (m_menuLanguage->isEmpty()) {
+    // We add search box.
+    QWidgetAction* widget_search = new QWidgetAction(m_menuLanguage);
+
+    m_txtLexerFilter = new QLineEdit(m_menuLanguage);
+
+    m_txtLexerFilter->setPlaceholderText(tr("Filter highlighters"));
+    widget_search->setDefaultWidget(m_txtLexerFilter);
+    m_menuLanguage->addAction(widget_search);
+
+    connect(m_txtLexerFilter, &QLineEdit::textChanged, this, &TextApplication::filterLexersMenu);
+
     // Fill the menu.
     QActionGroup* grp = new QActionGroup(m_menuLanguage);
 
@@ -459,6 +502,9 @@ void TextApplication::loadLexersMenu() {
       act->setData(QVariant::fromValue<Lexer>(lex));
     }
   }
+
+  m_txtLexerFilter->setFocus();
+  m_txtLexerFilter->clear();
 
   TextEditor* current_editor = currentEditor();
 
@@ -509,12 +555,12 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 
     if (editor != nullptr) {
       // Current editor is changed.
-      m_actionFileSave->setEnabled(editor->isModified());
+      m_actionFileSave->setEnabled(editor->modify());
       m_actionFileSaveAs->setEnabled(true);
       m_menuFileSaveWithEncoding->setEnabled(true);
 
-      m_actionEditBack->setEnabled(editor->isUndoAvailable());
-      m_actionEditForward->setEnabled(editor->isRedoAvailable());
+      m_actionEditBack->setEnabled(editor->canUndo());
+      m_actionEditForward->setEnabled(editor->canRedo());
     }
     else {
       // No editor selected.
@@ -543,23 +589,23 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
 }
 
 void TextApplication::convertEols(QAction* action) {
-  QsciScintilla::EolMode new_mode = static_cast<QsciScintilla::EolMode>(action->data().toInt());
+  int new_mode = action->data().toInt();
   TextEditor* current_editor = currentEditor();
 
   if (current_editor != nullptr) {
-    current_editor->convertEols(new_mode);
+    current_editor->convertEOLs(new_mode);
 
     // We also switch EOL mode for new lines.
     switch (new_mode) {
-      case QsciScintilla::EolMode::EolMac:
+      case SC_EOL_CR:
         m_actionEolMac->trigger();
         break;
 
-      case QsciScintilla::EolMode::EolUnix:
+      case SC_EOL_LF:
         m_actionEolUnix->trigger();
         break;
 
-      case QsciScintilla::EolMode::EolWindows:
+      case SC_EOL_CRLF:
         m_actionEolWindows->trigger();
         break;
 
@@ -599,7 +645,14 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
 
   switch (tool->output()) {
     case ToolOutput::InsertAtCursorPosition:
-      editor->insert(output_text);
+      editor->insertText(editor->currentPos(), output_text.toUtf8().constData());
+      break;
+
+    case ToolOutput::CopyToClipboard:
+      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
+      m_toolBox->displayOutput(OutputSource::ExternalTool,
+                               tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                               QMessageBox::Icon::Information);
       break;
 
     case ToolOutput::DumpToOutputWindow:
@@ -623,15 +676,11 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
       break;
 
     case ToolOutput::ReplaceSelectionDocument:
-      if (editor->hasSelectedText()) {
-        editor->replaceSelectedText(output_text);
+      if (!editor->selectionEmpty()) {
+        editor->replaceSel(output_text.toUtf8().constData());
       }
       else {
-        // We replace whole document contents
-        // because there is no selection.
-        // NOTE: Using setText() clears history.
-        editor->selectAll();
-        editor->replaceSelectedText(output_text);
+        editor->setText(output_text.toUtf8().constData());
       }
 
       break;

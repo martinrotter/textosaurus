@@ -34,9 +34,11 @@ enum class ToolOutput {
   InsertAtCursorPosition,
 
   // Tool output is dumped into output toolbox window.
+  // WARNING: This is very bad idea if tool output is big.
   DumpToOutputWindow,
 
-  // Tool output is copied to clipboard.
+  // Copies tool output to clipboard and displays in output window info.
+  // WARNING: This is very bad idea if tool output is big.
   CopyToClipboard,
 
   // Output is saved to some file stored in TEMP

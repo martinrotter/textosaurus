@@ -93,8 +93,7 @@ void TabBar::mousePressEvent(QMouseEvent* event) {
   // Check if user clicked on some tab or on empty space.
   if (tab_index >= 0) {
     // Check if user clicked tab with middle button.
-    // NOTE: This needs to be done here because
-    // destination does not know the original event.
+    // NOTE: This needs to be done here because destination does not know the original event.
     if (event->button() & Qt::MiddleButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseMiddleClick)).toBool()) {
       if ((tabType(tab_index) & TabBar::TabType::TextEditor) > 0) {
         // This tab is closable, so we can close it.
@@ -111,8 +110,7 @@ void TabBar::mouseDoubleClickEvent(QMouseEvent* event) {
   // Check if user clicked on some tab or on empty space.
   if (tab_index >= 0) {
     // Check if user clicked tab with middle button.
-    // NOTE: This needs to be done here because
-    // destination does not know the original event.
+    // NOTE: This needs to be done here because destination does not know the original event.
     if (event->button() & Qt::LeftButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
       if ((tabType(tab_index) & TabBar::TabType::TextEditor) > 0) {
         // This tab is closable, so we can close it.

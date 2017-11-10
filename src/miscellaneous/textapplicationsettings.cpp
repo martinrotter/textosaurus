@@ -30,8 +30,8 @@ void TextApplicationSettings::setRecentFiles(const QStringList& recent_files) {
   qApp->settings()->setValue(GROUP(Editor), Editor::RecentFiles, recent_files);
 }
 
-QsciScintilla::EolMode TextApplicationSettings::eolMode() const {
-  return static_cast<QsciScintilla::EolMode>(qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt());
+int TextApplicationSettings::eolMode() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt();
 }
 
 bool TextApplicationSettings::wordWrapEnabled() const {
@@ -91,14 +91,13 @@ void TextApplicationSettings::setWordWrapEnabled(bool enabled) {
 }
 
 void TextApplicationSettings::setEolModeFromAction(QAction* act) {
-  QsciScintilla::EolMode new_mode = static_cast<QsciScintilla::EolMode>(act->data().toInt());
+  int new_mode = act->data().toInt();
 
-  qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, int(new_mode));
+  qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, new_mode);
   emit settingsChanged(true, false);
 }
 
-SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const
-{
+SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
 }
 

@@ -3,14 +3,18 @@
 #ifndef TEXTEDITOR_H
 #define TEXTEDITOR_H
 
-#include <Qsci/qsciscintilla.h>
+#include <scintilla/qt/ScintillaEdit/ScintillaEdit.h>
 
 #include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"
 
+#include <QFile>
+
+#define RGB_TO_INT(r, g, b) ((r) << 16) | ((g) << 8) | (b)
+
 class TextApplication;
 
-class TextEditor : public QsciScintilla {
+class TextEditor : public ScintillaEdit {
   Q_OBJECT
 
   public:
@@ -39,9 +43,6 @@ class TextEditor : public QsciScintilla {
     void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer);
 
   protected:
-
-    //void setLexer(QsciLexer* lexer = 0);
-    void contextMenuEvent(QContextMenuEvent* event);
     void closeEvent(QCloseEvent* event);
 
   signals:

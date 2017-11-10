@@ -4,6 +4,9 @@
 
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
+
+#include "scintilla/include/Scintilla.h"
+
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
@@ -15,11 +18,11 @@ DKEY Editor::ID = "editor";
 DKEY Editor::EolMode = "eol_mode";
 
 #if defined(Q_OS_WIN)
-DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolWindows);
+DVALUE(int) Editor::EolModeDef = SC_EOL_CRLF;
 #elif defined(Q_OS_MAC)
-DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolMac);
+DVALUE(int) Editor::EolModeDef = SC_EOL_CR;
 #else
-DVALUE(int) Editor::EolModeDef = int(QsciScintilla::EolMode::EolUnix);
+DVALUE(int) Editor::EolModeDef = SC_EOL_LF;
 #endif
 
 DKEY Editor::FontMain = "main_font";

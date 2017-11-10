@@ -51,7 +51,7 @@ void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
   qSort(actions.begin(), actions.end(), DynamicShortcutsWidget::lessThan);
   int row_id = 0;
 
-  // FIXME: Maybe separate actions into "categories". Each category will start with label.
+  // WARNING: Maybe separate actions into "categories". Each category will start with label.
   // I will assign each QAaction a property called "category" with some enum value.
   // Like:
   //  File, FeedsCategories, Messages, Tools, WebBrowser, Help

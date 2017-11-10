@@ -89,6 +89,7 @@ void SystemFactory::checkForUpdates() const {
     emit updatesChecked(result);
     downloader->deleteLater();
   });
+
   downloader->downloadFile(RELEASES_LIST);
 }
 

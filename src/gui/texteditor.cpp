@@ -11,27 +11,34 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
+#include "scintilla/include/ILoader.h"
+#include "scintilla/include/SciLexer.h"
+
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
 #include <QTextCodec>
 #include <QTextStream>
 
-#include <Qsci/qscilexercpp.h>
+TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEdit(parent), m_textApp(text_app),
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
+  m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
-TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : QsciScintilla(parent), m_textApp(text_app),
-  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING), m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
-  setUtf8(true);
+  // Set constant settings.
+  setCodePage(SC_CP_UTF8);
+  setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
+  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
+  setEndAtLastLine(false);
+
+  //setBufferedDraw(true);
+  //setTechnology(SC_TECHNOLOGY_DIRECTWRITEDC);
+  //setFontQuality(SC_EFF_QUALITY_LCD_OPTIMIZED);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
   m_filePath = QDir::toNativeSeparators(file.fileName());
   m_encoding = encoding.toLocal8Bit();
   m_lexer = default_lexer;
-
-  //reloadLexer(default_lexer);
-
-  Application::setOverrideCursor(Qt::CursorShape::WaitCursor);
 
   QTextCodec* codec_for_encoding = QTextCodec::codecForName(m_encoding);
 
@@ -42,21 +49,13 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   }
 
   QTextStream str(&file); str.setCodec(codec_for_encoding);
-  QString next_line;
 
   blockSignals(true);
-
-  while (!(next_line = str.read(50000000)).isEmpty()) {
-    append(next_line);
-  }
-
+  setText(str.readAll().toUtf8().constData());
+  emptyUndoBuffer();
   blockSignals(false);
-  Application::restoreOverrideCursor();
-  emit loadedFromFile(m_filePath);
-}
 
-void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
-  QsciScintilla::contextMenuEvent(event);
+  emit loadedFromFile(m_filePath);
 }
 
 void TextEditor::closeEvent(QCloseEvent* event) {
@@ -68,31 +67,63 @@ void TextEditor::closeEvent(QCloseEvent* event) {
     event->ignore();
   }
   else {
-    QsciScintilla::closeEvent(event);
+    ScintillaEdit::closeEvent(event);
   }
+}
+
+void TextEditor::reloadFont() {
+  QFont new_font = textApplication()->settings()->mainFont();
+
+  if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() ||
+      styleSize(STYLE_DEFAULT) != new_font.pointSize() ||
+      styleBold(STYLE_DEFAULT) != new_font.bold()) {
+    styleSetFont(STYLE_DEFAULT, new_font.family().toUtf8().constData());
+    styleSetSize(STYLE_DEFAULT, new_font.pointSize());
+    styleSetBold(STYLE_DEFAULT, new_font.bold());
+  }
+
+  styleClearAll();
+
+  // Now, we set some specific stuff.
+  styleSetBold(STYLE_LINENUMBER, false);
+  styleSetItalic(STYLE_LINENUMBER, false);
+  styleSetWeight(STYLE_LINENUMBER, 100);
+}
+
+void TextEditor::reloadSettings() {
+  setEOLMode(m_textApp->settings()->eolMode());
+  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
+  setViewEOL(m_textApp->settings()->viewEols());
+  setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
+
+  reloadLexer(m_lexer);
 }
 
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
 
-  QsciLexer* old_lexer = QsciScintilla::lexer();
-  QsciLexer* new_lexer = m_lexer.m_lexerGenerator();
+  reloadFont();
+  setLexer(m_lexer.m_code);
 
-  if (old_lexer != nullptr && new_lexer != nullptr && old_lexer->lexerId() == new_lexer->lexerId()) {
-    qDebug("Editor has the same lexer already set, there is not need of setting it again.");
-  }
-  else if (new_lexer != old_lexer) {
-    setLexer(new_lexer);
-    qDebug("Changing lexers from '%s' to '%s'.",
-           old_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(old_lexer->language()),
-           new_lexer == nullptr ? qPrintable(QSL("nothing")) : qPrintable(new_lexer->language()));
+  // Style with number 0 always black.
+  styleSetFore(0, 0);
 
-    if (old_lexer != nullptr) {
-      old_lexer->deleteLater();
+  // Gray whitespace characters.
+  setWhitespaceFore(true, RGB_TO_INT(200, 200, 200));
+  setWhitespaceSize(3);
+
+  // Load more specific colors = keywords, operators etc.
+  for (int i = 1; i <= STYLE_MAX; i++) {
+    // We set colors for all non-predefined styles.
+    if (m_lexer.m_code != SCLEX_NULL &&  (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED)) {
+      styleSetFore(i, RGB_TO_INT(rand() % 160, rand() % 160, rand() % 160));
+    }
+    else {
+      styleSetFore(i, 0);
     }
   }
 
-  reloadFont();
+  repaint();
 }
 
 void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
@@ -109,11 +140,13 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
   QTextStream str(&file); str.setCodec(m_encoding.constData());
 
-  str << text();
+  str << getText(length() + 1);
+  str.flush();
+  file.close();
 
+  setSavePoint();
   emit savedToFile((m_filePath = QDir::toNativeSeparators(file_path)));
 
-  setModified(false);
   *ok = true;
 }
 
@@ -125,11 +158,6 @@ TextApplication* TextEditor::textApplication() const {
   return m_textApp;
 }
 
-/*void TextEditor::setLexerWithName(QsciLexer* lexer, const QString& lexer_name) {
-   setLexer(lexer);
-   m_lexerName = lexer_name;
-   }*/
-
 QByteArray TextEditor::encoding() const {
   return m_encoding;
 }
@@ -139,7 +167,7 @@ void TextEditor::save(bool* ok) {
     // Newly created document, save as.
     saveAs(ok);
   }
-  else if (isModified()) {
+  else if (modify()) {
     // We just save this modified document to same file.
     saveToFile(m_filePath, ok);
   }
@@ -171,31 +199,8 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
   }
 }
 
-void TextEditor::reloadFont() {
-  QFont new_f = textApplication()->settings()->mainFont();
-
-  if (QsciScintilla::lexer() != nullptr) {
-    QFont old_f = QsciScintilla::lexer()->font(STYLE_DEFAULT);
-
-    if (old_f != new_f) {
-      QsciScintilla::lexer()->setFont(new_f);
-    }
-  }
-  else {
-    QFont old_f = font();
-
-    if (old_f != new_f) {
-      setFont(textApplication()->settings()->mainFont());
-
-      // We clear all styles, this call will copy settings from STYLE_DEFAULT
-      // to all remaining styles.
-      SendScintilla(SCI_STYLECLEARALL);
-    }
-  }
-}
-
 void TextEditor::closeEditor(bool* ok) {
-  if (isModified()) {
+  if (modify()) {
     emit requestVisibility();
 
     // We need to save.
@@ -230,35 +235,6 @@ void TextEditor::closeEditor(bool* ok) {
   else {
     *ok = true;
   }
-}
-
-void TextEditor::reloadSettings() {
-  setEolMode(m_textApp->settings()->eolMode());
-  setWrapVisualFlags(QsciScintilla::WrapVisualFlag::WrapFlagNone, QsciScintilla::WrapVisualFlag::WrapFlagInMargin);
-  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
-
-  setMarginWidth(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
-  setMarginWidth(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
-
-  setEolVisibility(m_textApp->settings()->viewEols());
-  setWhitespaceVisibility(m_textApp->settings()->viewWhitespaces() ?
-                          QsciScintilla::WhitespaceVisibility::WsVisible :
-                          QsciScintilla::WhitespaceVisibility::WsInvisible);
-
-  reloadLexer(m_lexer);
-
-  setAutoIndent(true);
-
-  setCaretLineBackgroundColor(QColor(230, 230, 230));
-  setCaretLineVisible(true);
-  setCaretWidth(2);
-
-  //setLexer(new QsciLexerCPP(this));
-  setFolding(QsciScintilla::FoldStyle::PlainFoldStyle);
-  setAutoCompletionCaseSensitivity(false);
-  setAutoCompletionThreshold(0);
-  setAutoCompletionFillupsEnabled(true);
-  setAutoCompletionSource(QsciScintilla::AcsAll);
 }
 
 QString TextEditor::filePath() const {

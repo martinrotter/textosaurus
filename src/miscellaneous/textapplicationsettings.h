@@ -5,11 +5,10 @@
 
 #include <QObject>
 
-#include <Qsci/qsciscintilla.h>
-
 class TextApplication;
 class SyntaxHighlighting;
 class ExternalTools;
+class QAction;
 
 class TextApplicationSettings : public QObject {
   Q_OBJECT
@@ -19,7 +18,7 @@ class TextApplicationSettings : public QObject {
     virtual ~TextApplicationSettings();
 
     QStringList recentFiles() const;
-    QsciScintilla::EolMode eolMode() const;
+    int eolMode() const;
     bool wordWrapEnabled() const;
     QString loadSaveDefaultDirectory() const;
 

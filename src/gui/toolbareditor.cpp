@@ -68,7 +68,9 @@ void ToolBarEditor::loadEditor(const QList<QAction*> activated_actions, const QL
   m_ui->m_listAvailableActions->clear();
 
   foreach (const QAction* action, activated_actions) {
-    QListWidgetItem* action_item = new QListWidgetItem(action->icon(), action->text().replace('&', ""), m_ui->m_listActivatedActions);
+    QListWidgetItem* action_item = new QListWidgetItem(action->icon(),
+                                                       action->text().replace('&', QString()),
+                                                       m_ui->m_listActivatedActions);
 
     if (action->isSeparator()) {
       action_item->setData(Qt::UserRole, SEPARATOR_ACTION_NAME);
@@ -89,7 +91,9 @@ void ToolBarEditor::loadEditor(const QList<QAction*> activated_actions, const QL
 
   foreach (QAction* action, available_actions) {
     if (!activated_actions.contains(action)) {
-      QListWidgetItem* action_item = new QListWidgetItem(action->icon(), action->text().replace('&', ""), m_ui->m_listAvailableActions);
+      QListWidgetItem* action_item = new QListWidgetItem(action->icon(),
+                                                         action->text().replace('&', QString()),
+                                                         m_ui->m_listAvailableActions);
 
       if (action->isSeparator()) {
         action_item->setData(Qt::UserRole, SEPARATOR_ACTION_NAME);
