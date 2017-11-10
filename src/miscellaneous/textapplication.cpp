@@ -149,6 +149,7 @@ int TextApplication::addTextEditor(TextEditor* editor) {
 TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
+  connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
 
@@ -310,9 +311,13 @@ void TextApplication::onEditorModified(int type, int position, int length, int l
     TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
     markEditorModified(editor, editor->modify());
-
-    editor->colourise(0, -1);
   }
+}
+
+void TextApplication::onSavePointChanged(bool dirty) {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  markEditorModified(editor, dirty);
 }
 
 void TextApplication::createConnections() {

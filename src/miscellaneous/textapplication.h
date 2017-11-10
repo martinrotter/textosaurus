@@ -67,6 +67,7 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
   private slots:
+    void onSavePointChanged(bool dirty);
     void changeLexer(QAction* act);
     void fillRecentFiles();
     void filterLexersMenu(const QString& filter);
