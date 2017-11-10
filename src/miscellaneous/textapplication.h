@@ -17,6 +17,7 @@ class StatusBar;
 class ExternalTool;
 class QAction;
 class QMenu;
+class QLineEdit;
 
 // Main class which ties text box functionality into GUI and gels all together.
 class TextApplication : public QObject {
@@ -68,6 +69,7 @@ class TextApplication : public QObject {
   private slots:
     void changeLexer(QAction* act);
     void fillRecentFiles();
+    void filterLexersMenu(const QString& filter);
     void loadLexersMenu();
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
@@ -93,6 +95,7 @@ class TextApplication : public QObject {
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
     ToolBox* m_toolBox;
+    QLineEdit* m_txtLexerFilter;
 
     // Pointers to important GUI elements outside of editors.
     QAction* m_actionFileNew;

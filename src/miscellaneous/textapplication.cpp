@@ -18,10 +18,12 @@
 
 #include <QClipboard>
 #include <QFileDialog>
+#include <QLineEdit>
 #include <QPointer>
 #include <QTemporaryFile>
 #include <QTextCodec>
 #include <QTimer>
+#include <QWidgetAction>
 
 TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
   // Hook ext. tools early.
@@ -467,8 +469,27 @@ void TextApplication::fillRecentFiles() {
   }
 }
 
+void TextApplication::filterLexersMenu(const QString& filter) {
+  foreach (QAction* act_lexer, m_menuLanguage->actions()) {
+    if (!act_lexer->text().isEmpty()) {
+      act_lexer->setVisible(filter.isEmpty() || act_lexer->text().contains(filter, Qt::CaseSensitivity::CaseInsensitive));
+    }
+  }
+}
+
 void TextApplication::loadLexersMenu() {
   if (m_menuLanguage->isEmpty()) {
+    // We add search box.
+    QWidgetAction* widget_search = new QWidgetAction(m_menuLanguage);
+
+    m_txtLexerFilter = new QLineEdit(m_menuLanguage);
+
+    m_txtLexerFilter->setPlaceholderText(tr("Filter highlighters"));
+    widget_search->setDefaultWidget(m_txtLexerFilter);
+    m_menuLanguage->addAction(widget_search);
+
+    connect(m_txtLexerFilter, &QLineEdit::textChanged, this, &TextApplication::filterLexersMenu);
+
     // Fill the menu.
     QActionGroup* grp = new QActionGroup(m_menuLanguage);
 
@@ -480,6 +501,9 @@ void TextApplication::loadLexersMenu() {
       act->setData(QVariant::fromValue<Lexer>(lex));
     }
   }
+
+  m_txtLexerFilter->setFocus();
+  m_txtLexerFilter->clear();
 
   TextEditor* current_editor = currentEditor();
 

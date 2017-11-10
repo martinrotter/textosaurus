@@ -9,9 +9,9 @@ Textilosaurus
 
 <img align="left" src="https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/graphics/textilosaurus.png" alt="Textilosarus" height="100px" />
 
-Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and QScintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
+Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
-You can support author of Textilosaurus on [PATREON](https://www.patreon.com/martinrotter). Used Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
+You can support author of Textilosaurus on [PATREON](https://www.patreon.com/martinrotter). Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
 
 Features
 --------
@@ -31,6 +31,7 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents,
     - **syntax highlighting** for many text formats,
+	- inituitive filtering for menu of available syntax highlighters,
     - conversion of existing EOLs,
 	- switchable visibility of EOL/whitespace characters,
     - support for **many text operations**, which allow you to:
