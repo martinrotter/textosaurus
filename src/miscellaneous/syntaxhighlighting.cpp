@@ -55,6 +55,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(tr("Plain text"), QStringList {
       QSL("txt"), QString()
     }, SCLEX_NULL)
+      << Lexer(QSL("Assembly"), QStringList {
+      QSL("asm"), QSL("nasm")
+    }, SCLEX_ASM)
       << Lexer(QSL("AVS"), QStringList {
       QSL("avs")
     }, SCLEX_AVS)
@@ -172,6 +175,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("VHDL"), QStringList {
       QSL("vhd"), QSL("vhdl")
     }, SCLEX_VHDL)
+      << Lexer(QSL("Visual Basic"), QStringList {
+      QSL("vb"),
+    }, SCLEX_VB)
       << Lexer(QSL("XML"), QStringList {
       QSL("xml"), QSL("xaml"), QSL("xsl"), QSL("xslt"), QSL("xml"),
       QSL("xsd"), QSL("xul"), QSL("kml"), QSL("svg"), QSL("mxml"), QSL("xsml"),
