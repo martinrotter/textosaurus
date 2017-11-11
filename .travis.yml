@@ -20,9 +20,24 @@ deploy:
   on:
     tags: true
   
+arch:
+  packages:
+    # pacman packages
+    - qt5-tools
+    - qt5-base
+  script:
+    - "mkdir textilousaurus-build && cd textilousaurus-build"
+    - "lrelease ../textilosaurus.pro"
+    - "qmake ../textilosaurus.pro"
+    - "make"
+
+script:
+  - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"  
+  
 before_install: "./resources/scripts/.travis-before-install.sh"
 install: true
 script:
+- "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./resources/scripts/.travis-install-linux.sh
   ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./resources/scripts/.travis-install-osx.sh
