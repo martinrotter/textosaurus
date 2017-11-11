@@ -28,6 +28,7 @@ arch:
   script:
     - "ls"
     - "mkdir textilousaurus-build && cd textilousaurus-build"
+    - "pwd"
     - "lrelease ../textilosaurus.pro"
     - "qmake ../textilosaurus.pro"
     - "make"
