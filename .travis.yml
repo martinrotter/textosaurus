@@ -8,7 +8,6 @@ compiler:
 git:
   submodules: false
   depth: 10
-
 deploy:
   provider: releases
   file_glob: true
@@ -19,7 +18,6 @@ deploy:
   - textilosaurus-build/textilosaurus*.AppImage
   on:
     tags: true
-  
 before_install: "./resources/scripts/.travis-before-install.sh"
 install: true
 script:
