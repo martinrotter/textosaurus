@@ -27,7 +27,9 @@ arch:
     - qt5-base
   script:
     - "ls"
-    - "mkdir textilousaurus-build && cd textilousaurus-build"
+    - "mkdir textilousaurus-build"
+    - "ls"
+    - "cd textilousaurus-build"
     - "pwd"
     - "lrelease ../textilosaurus.pro"
     - "qmake ../textilosaurus.pro"
