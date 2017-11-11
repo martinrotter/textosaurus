@@ -26,13 +26,8 @@ arch:
     - qt5-tools
     - qt5-base
   script:
-    - "ls"
-    - "mkdir textilousaurus-build"
-    - "ls"
-    - "cd textilousaurus-build"
-    - "pwd"
-    - "lrelease ../textilosaurus.pro"
-    - "qmake ../textilosaurus.pro"
+    - "lrelease textilosaurus.pro"
+    - "qmake textilosaurus.pro"
     - "make"
   
 before_install: "./resources/scripts/.travis-before-install.sh"
