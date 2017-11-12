@@ -33,9 +33,6 @@ int main(int argc, char* argv[]) {
   //: Examples: "cs", "en", "it", "cs_CZ", "en_GB", "en_US".
   QObject::tr("LANG_ABBREV");
 
-  //: Name of translator - optional.
-  QObject::tr("LANG_AUTHOR");
-
   // Ensure that ini format is used as application settings storage on Mac OS.
   QSettings::setDefaultFormat(QSettings::IniFormat);
 

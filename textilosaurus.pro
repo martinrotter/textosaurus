@@ -184,8 +184,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/exceptions/ioexception.h \
             src/gui/baselineedit.h \
             src/gui/basetoolbar.h \
-            src/gui/colorlabel.h \
-            src/gui/comboboxwithstatus.h \
             src/gui/dialogs/formabout.h \
             src/gui/dialogs/formmain.h \
             src/gui/dialogs/formsettings.h \
@@ -215,7 +213,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/miscellaneous/localization.h \
             src/miscellaneous/mutex.h \
             src/miscellaneous/settings.h \
-            src/miscellaneous/simplecrypt/simplecrypt.h \
             src/miscellaneous/systemfactory.h \
             src/miscellaneous/textfactory.h \
             src/miscellaneous/settingsproperties.h \
@@ -269,8 +266,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/exceptions/ioexception.cpp \
             src/gui/baselineedit.cpp \
             src/gui/basetoolbar.cpp \
-            src/gui/colorlabel.cpp \
-            src/gui/comboboxwithstatus.cpp \
             src/gui/dialogs/formabout.cpp \
             src/gui/dialogs/formmain.cpp \
             src/gui/dialogs/formsettings.cpp \
@@ -302,7 +297,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/miscellaneous/localization.cpp \
             src/miscellaneous/mutex.cpp \
             src/miscellaneous/settings.cpp \
-            src/miscellaneous/simplecrypt/simplecrypt.cpp \
             src/miscellaneous/systemfactory.cpp \
             src/miscellaneous/textfactory.cpp \
             src/network-web/basenetworkaccessmanager.cpp \

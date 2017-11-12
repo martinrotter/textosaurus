@@ -65,12 +65,18 @@ QList<Language> Localization::installedLanguages() const {
       Language new_language;
 
       new_language.m_code = translator.translate("QObject", "LANG_ABBREV");
-      new_language.m_author = translator.translate("QObject", "LANG_AUTHOR");
-      new_language.m_email = translator.translate("QObject", "LANG_EMAIL");
       new_language.m_name = QLocale(new_language.m_code).nativeLanguageName();
       languages << new_language;
     }
   }
 
   return languages;
+}
+
+QString Localization::loadedLanguage() const {
+  return m_loadedLanguage;
+}
+
+QLocale Localization::loadedLocale() const {
+  return m_loadedLocale;
 }

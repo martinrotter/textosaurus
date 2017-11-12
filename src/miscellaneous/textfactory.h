@@ -9,18 +9,12 @@
 #include <QFontMetrics>
 
 class QMenu;
-class TextApplication;
 
 class TextFactory {
   private:
-
-    // Constructors and destructors.
-    TextFactory();
+    explicit TextFactory();
 
   public:
-
-    // Returns true if lhs is smaller than rhs if case-insensitive string comparison is used.
-    static bool isCaseInsensitiveLessThan(const QString& lhs, const QString& rhs);
     static int stringHeight(const QString& string, const QFontMetrics& metrics);
     static int stringWidth(const QString& string, const QFontMetrics& metrics);
 
@@ -34,16 +28,9 @@ class TextFactory {
     // Converts 1970-epoch miliseconds to date/time.
     // NOTE: This apparently returns date/time in localtime.
     static QDateTime parseDateTime(qint64 milis_from_epoch);
-    static QString encrypt(const QString& text);
-    static QString decrypt(const QString& text);
 
     // Shortens input string according to given length limit.
     static QString shorten(const QString& input, int text_length_limit);
-
-  private:
-    static quint64 initializeSecretEncryptionKey();
-    static quint64 generateSecretEncryptionKey();
-    static quint64 s_encryptionKey;
 };
 
 #endif // TEXTFACTORY_H

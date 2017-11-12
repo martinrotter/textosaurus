@@ -196,8 +196,6 @@ class Settings : public QSettings {
   Q_OBJECT
 
   public:
-
-    // Destructor.
     virtual ~Settings();
 
     // Type of used settings.
@@ -225,8 +223,6 @@ class Settings : public QSettings {
     static SettingsProperties determineProperties();
 
   private:
-
-    // Constructor.
     explicit Settings(const QString& file_name, Format format, const SettingsProperties::SettingsType& type, QObject* parent = nullptr);
 
     SettingsProperties::SettingsType m_initializationStatus;

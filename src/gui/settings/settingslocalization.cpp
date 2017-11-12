@@ -10,17 +10,15 @@
 SettingsLocalization::SettingsLocalization(Settings* settings, QWidget* parent)
   : SettingsPanel(settings, parent), m_ui(new Ui::SettingsLocalization) {
   m_ui->setupUi(this);
-  m_ui->m_treeLanguages->setColumnCount(3);
+  m_ui->m_treeLanguages->setColumnCount(2);
   m_ui->m_treeLanguages->setHeaderHidden(false);
   m_ui->m_treeLanguages->setHeaderLabels(QStringList()
                                          << /*: Language column of language list. */ tr("Language")
-                                         << /*: Lang. code column of language list. */ tr("Code")
-                                         << tr("Author"));
+                                         << /*: Lang. code column of language list. */ tr("Code"));
 
   // Setup languages.
   m_ui->m_treeLanguages->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
   m_ui->m_treeLanguages->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
-  m_ui->m_treeLanguages->header()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
   connect(m_ui->m_treeLanguages, &QTreeWidget::currentItemChanged, this, &SettingsLocalization::requireRestart);
   connect(m_ui->m_treeLanguages, &QTreeWidget::currentItemChanged, this, &SettingsLocalization::dirtifySettings);
 }
@@ -37,7 +35,6 @@ void SettingsLocalization::loadSettings() {
 
     item->setText(0, language.m_name);
     item->setText(1, language.m_code);
-    item->setText(2, language.m_author);
     item->setIcon(0, qApp->icons()->miscIcon(QString(FLAG_ICON_SUBFOLDER) + QDir::separator() + language.m_code));
   }
 

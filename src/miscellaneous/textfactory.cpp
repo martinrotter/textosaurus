@@ -6,7 +6,6 @@
 #include "exceptions/applicationexception.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
-#include "miscellaneous/simplecrypt/simplecrypt.h"
 #include "miscellaneous/textapplication.h"
 
 #include "uchardet/uchardet.h"
@@ -19,13 +18,7 @@
 #include <QStringList>
 #include <QTextCodec>
 
-quint64 TextFactory::s_encryptionKey = 0x0;
-
 TextFactory::TextFactory() {}
-
-bool TextFactory::isCaseInsensitiveLessThan(const QString& lhs, const QString& rhs) {
-  return lhs.toLower() < rhs.toLower();
-}
 
 int TextFactory::stringHeight(const QString& string, const QFontMetrics& metrics) {
   const int count_lines = string.split(QL1C('\n')).size();
@@ -180,14 +173,6 @@ QDateTime TextFactory::parseDateTime(qint64 milis_from_epoch) {
   return QDateTime::fromMSecsSinceEpoch(milis_from_epoch);
 }
 
-QString TextFactory::encrypt(const QString& text) {
-  return SimpleCrypt(initializeSecretEncryptionKey()).encryptToString(text);
-}
-
-QString TextFactory::decrypt(const QString& text) {
-  return SimpleCrypt(initializeSecretEncryptionKey()).decryptToString(text);
-}
-
 QString TextFactory::shorten(const QString& input, int text_length_limit) {
   if (input.size() > text_length_limit) {
     return input.left(text_length_limit - ELLIPSIS_LENGTH) + QString(ELLIPSIS_LENGTH, QL1C('.'));
@@ -195,26 +180,4 @@ QString TextFactory::shorten(const QString& input, int text_length_limit) {
   else {
     return input;
   }
-}
-
-quint64 TextFactory::initializeSecretEncryptionKey() {
-  if (s_encryptionKey == 0x0) {
-    // Check if file with encryption key exists.
-    QString encryption_file_path = qApp->settings()->pathName() + QDir::separator() + ENCRYPTION_FILE_NAME;
-
-    try {
-      s_encryptionKey = (quint64) QString(IOFactory::readFile(encryption_file_path)).toLongLong();
-    }
-    catch (ApplicationException) {
-      // Well, key does not exist or is invalid, generate and save one.
-      s_encryptionKey = generateSecretEncryptionKey();
-      IOFactory::writeFile(encryption_file_path, QString::number(s_encryptionKey).toLocal8Bit());
-    }
-  }
-
-  return s_encryptionKey;
-}
-
-quint64 TextFactory::generateSecretEncryptionKey() {
-  return RAND_MAX * qrand() + qrand();
 }

@@ -38,7 +38,7 @@ void BaseNetworkAccessManager::loadSettings() {
     new_proxy.setHostName(settings->value(GROUP(Proxy), SETTING(Proxy::Host)).toString());
     new_proxy.setPort(settings->value(GROUP(Proxy), SETTING(Proxy::Port)).toInt());
     new_proxy.setUser(settings->value(GROUP(Proxy), SETTING(Proxy::Username)).toString());
-    new_proxy.setPassword(TextFactory::decrypt(settings->value(GROUP(Proxy), SETTING(Proxy::Password)).toString()));
+    new_proxy.setPassword(settings->value(GROUP(Proxy), SETTING(Proxy::Password)).toString());
     setProxy(new_proxy);
   }
 
