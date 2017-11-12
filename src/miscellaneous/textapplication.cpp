@@ -628,6 +628,7 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
   if (editor == currentEditor()) {
     if (editor != nullptr) {
       m_statusBar->setEncoding(editor->encoding());
+      m_statusBar->setFileType(editor->lexer().m_name);
     }
     else {
       m_statusBar->setEncoding(QString());
