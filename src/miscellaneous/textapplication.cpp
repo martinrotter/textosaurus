@@ -603,12 +603,13 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 
     if (editor != nullptr) {
       // Current editor is changed.
-      m_actionFileSave->setEnabled(editor->modify());
+      m_actionFileSave->setEnabled(true);
       m_actionFileSaveAs->setEnabled(true);
       m_menuFileSaveWithEncoding->setEnabled(true);
 
       m_actionEditBack->setEnabled(editor->canUndo());
       m_actionEditForward->setEnabled(editor->canRedo());
+      m_actionFileSaveAll->setEnabled(true);
     }
     else {
       // No editor selected.
@@ -618,11 +619,9 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 
       m_actionEditBack->setEnabled(false);
       m_actionEditForward->setEnabled(false);
+      m_actionFileSaveAll->setEnabled(false);
     }
   }
-
-  // Enable this if there is at least one unsaved editor.
-  m_actionFileSaveAll->setEnabled(anyModifiedEditor());
 }
 
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
