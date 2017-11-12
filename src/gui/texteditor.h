@@ -21,10 +21,12 @@ class TextEditor : public ScintillaEdit {
     explicit TextEditor(TextApplication* text_app, QWidget* parent = nullptr);
 
     QString filePath() const;
-    QByteArray encoding() const;
     Lexer lexer() const;
 
     TextApplication* textApplication() const;
+
+    QByteArray encoding() const;
+    void setEncoding(const QByteArray& encoding);
 
   public slots:
     void save(bool* ok);
@@ -46,6 +48,7 @@ class TextEditor : public ScintillaEdit {
     void closeEvent(QCloseEvent* event);
 
   signals:
+    void encodingChanged(QByteArray encoding_name);
     void requestVisibility();
     void loadedFromFile(QString m_sourceFilePath);
     void savedToFile(QString m_destinationFilePath);

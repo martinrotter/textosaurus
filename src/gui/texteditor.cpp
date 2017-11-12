@@ -150,6 +150,13 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   *ok = true;
 }
 
+void TextEditor::setEncoding(const QByteArray& encoding) {
+  if (m_encoding != encoding) {
+    m_encoding = encoding;
+    emit encodingChanged(m_encoding);
+  }
+}
+
 Lexer TextEditor::lexer() const {
   return m_lexer;
 }

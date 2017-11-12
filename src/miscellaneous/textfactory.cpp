@@ -100,7 +100,7 @@ QDateTime TextFactory::parseDateTime(const QString& date_time) {
   return QDateTime();
 }
 
-void TextFactory::initializeEncodingMenu(QMenu* const menu) {
+void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
   QList<int> mibs = QTextCodec::availableMibs();
   QStringList codecs; codecs.reserve(mibs.size());
 
@@ -132,6 +132,14 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu) {
   menu->addMenu(submenus["UTF"]);
   menu->addMenu(submenus["windows"]);
 
+  QActionGroup* grp_actions = checkable ? new QActionGroup(menu) : nullptr;
+
+  submenus["Big"]->menuAction()->setActionGroup(grp_actions);
+  submenus["IBM"]->menuAction()->setActionGroup(grp_actions);
+  submenus["ISO"]->menuAction()->setActionGroup(grp_actions);
+  submenus["UTF"]->menuAction()->setActionGroup(grp_actions);
+  submenus["windows"]->menuAction()->setActionGroup(grp_actions);
+
   foreach (const QString& codec, codecs) {
     auto match = predefined_group_regex.match(codec);
     QAction* act = nullptr;
@@ -149,6 +157,11 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu) {
 
     if (act != nullptr) {
       act->setData(codec);
+
+      if (checkable) {
+        act->setCheckable(true);
+        grp_actions->addAction(act);
+      }
     }
   }
 }
@@ -166,7 +179,13 @@ QByteArray TextFactory::detectEncoding(const QString& file_path) {
   QByteArray encoding_name = QByteArray(cs);
 
   uchardet_delete(ud);
-  return encoding_name;
+
+  if (encoding_name == QString("ASCII")) {
+    return DEFAULT_TEXT_FILE_ENCODING;
+  }
+  else {
+    return encoding_name;
+  }
 }
 
 QDateTime TextFactory::parseDateTime(qint64 milis_from_epoch) {

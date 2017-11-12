@@ -27,6 +27,7 @@ Features
 * Text editor component:
     - **supports a lot of input encodings**,
     - input file encoding detection (via bundled [uchardet](https://www.freedesktop.org/wiki/Software/uchardet/)),
+    - switchable encoding for each separate document,
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents,

@@ -154,6 +154,7 @@ TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
+  connect(editor, &TextEditor::encodingChanged, this, &TextApplication::onEditorEncodingChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
 
@@ -349,6 +350,9 @@ void TextApplication::createConnections() {
   });
   connect(m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
 
+  connect(m_menuEncoding, &QMenu::aboutToShow, this, &TextApplication::loadEncodingMenu);
+  connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::switchEncodingOfCurentEditor);
+
   connect(m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileSaveWithEncoding->isEmpty()) {
       TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);;
@@ -396,6 +400,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuTools = main_form->m_ui.m_menuTools;
   m_menuRecentFiles = main_form->m_ui.m_menuRecentFiles;
   m_menuLanguage = main_form->m_ui.m_menuLanguage;
+  m_menuEncoding = main_form->m_ui.m_menuEncoding;
 
   m_actionEolMac->setData(SC_EOL_CR);
   m_actionEolUnix->setData(SC_EOL_LF);
@@ -449,6 +454,16 @@ void TextApplication::quit(bool* ok) {
   }
 
   *ok = true;
+}
+
+void TextApplication::onEditorEncodingChanged(const QByteArray& encoding_name) {
+  Q_UNUSED(encoding_name)
+
+  auto sndr = qobject_cast<TextEditor*>(sender());
+
+  if (sndr == currentEditor()) {
+    updateStatusBarFromEditor(sndr);
+  }
 }
 
 void TextApplication::changeLexer(QAction* act) {
@@ -518,6 +533,39 @@ void TextApplication::loadLexersMenu() {
         act->setChecked(true);
         break;
       }
+    }
+  }
+}
+
+void TextApplication::loadEncodingMenu() {
+  if (m_menuEncoding->isEmpty()) {
+    TextFactory::initializeEncodingMenu(m_menuEncoding, true);
+  }
+
+  // Check current.
+  TextEditor* curr_editor = currentEditor();
+
+  if (curr_editor != nullptr) {
+    // There is some editor, load its encoding.
+    QList<QAction*> act_to_check = m_menuEncoding->actions();
+
+    while (!act_to_check.isEmpty()) {
+      QAction* act = act_to_check.takeFirst();
+
+      if (act->data().toString() == curr_editor->encoding()) {
+        act->setChecked(true);
+        break;
+      }
+      else if (act->menu() != nullptr) {
+        act_to_check.append(act->menu()->actions());
+      }
+    }
+  }
+  else {
+    QAction* checked_encoding_act = m_menuEncoding->actions().first()->actionGroup()->checkedAction();
+
+    if (checked_encoding_act != nullptr) {
+      checked_encoding_act->setChecked(false);
     }
   }
 }
@@ -692,5 +740,13 @@ void TextApplication::renameEditor(TextEditor* editor) {
       m_tabEditors->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
       m_tabEditors->tabBar()->setTabToolTip(index, editor->filePath());
     }
+  }
+}
+
+void TextApplication::switchEncodingOfCurentEditor(QAction* action_encoding) {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    editor->setEncoding(action_encoding->data().toString().toUtf8());
   }
 }
