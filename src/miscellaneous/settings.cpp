@@ -59,7 +59,7 @@ DVALUE(Qt::ToolButtonStyle) GUI::ToolbarStyleDef = Qt::ToolButtonIconOnly;
 DKEY GUI::ToolbarActions = "toolbar";
 
 DVALUE(char*) GUI::ToolbarActionsDef =
-  "m_actionFileNew,m_actionFileOpen,m_actionFileSave,separator,m_actionEditBack,m_actionEditForward,spacer,m_actionTabsCloseAllUnmodified,m_actionQuit";
+  "m_actionFileNew,m_actionFileOpen,m_actionFileSave,separator,m_actionEditBack,m_actionEditForward,separator,spacer,m_actionTabsCloseAllUnmodified";
 
 DKEY GUI::MainWindowInitialSize = "window_size";
 DKEY GUI::MainWindowInitialPosition = "window_position";

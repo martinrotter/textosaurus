@@ -473,6 +473,8 @@ void TextApplication::changeLexer(QAction* act) {
     Lexer lexer_act = act->data().value<Lexer>();
 
     cur_editor->reloadLexer(lexer_act);
+
+    updateStatusBarFromEditor(cur_editor);
   }
 }
 

@@ -2,13 +2,18 @@
 
 #include "gui/statusbar.h"
 
+#include "definitions/definitions.h"
+
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
   setSizeGripEnabled(false);
-  setContentsMargins(0, 0, 5, 0);
 
   m_lblEncoding = new QLabel(this);
   m_lblFileType = new QLabel(this);
 
+  m_lblEncoding->setStyleSheet(QSL("QLabel { margin-right: 16px; }"));
+  m_lblFileType->setStyleSheet(QSL("QLabel { margin-right: 16px; }"));
+
+  m_lblFileType->setToolTip(tr("Active syntax highlighter"));
   m_lblEncoding->setToolTip(tr("Output encoding"));
 
   addPermanentWidget(m_lblFileType);
