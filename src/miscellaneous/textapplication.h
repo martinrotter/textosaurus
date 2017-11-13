@@ -40,19 +40,21 @@ class TextApplication : public QObject {
     void runSelectedExternalTool();
     void convertEols(QAction* action);
 
+    // Redo/undo.
     void undo();
     void redo();
 
+    // New editors.
     int addTextEditor(TextEditor* editor);
     TextEditor* createTextEditor();
 
+    // Load/save/new files.
+    void newFile();
     void openTextFile(QAction* action = nullptr);
+    void loadFilesFromArgs(const QList<QString>& files);
     void loadTextEditorFromFile(const QString& file_path,
                                 const QString& explicit_encoding = QString(),
                                 const QString& file_filter = QString());
-    void newFile();
-    void loadFilesFromArgs(const QList<QString>& files);
-
     void saveCurrentEditor();
     void saveCurrentEditorAs();
     void saveCurrentEditorAsWithEncoding(QAction* action);
@@ -67,6 +69,8 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
   private slots:
+
+    // Menu stuff.
     void changeEncoding(QAction* act);
     void changeLexer(QAction* act);
     void fillRecentFiles();

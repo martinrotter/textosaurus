@@ -26,6 +26,7 @@
 #define SPACER_ACTION_NAME                    "spacer"
 #define SEPARATOR_ACTION_NAME                 "separator"
 #define DOWNLOADER_ICON_SIZE                  48
+#define MAX_RECENT_FILES                      15
 #define ENCRYPTION_FILE_NAME                  "key.private"
 
 #define PASTEBIN_GITHUB   "https://api.github.com/gists"

@@ -81,8 +81,14 @@ void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& file_pa
   }
 
   // We move it to last position.
-  recent_files.append(normalized_file_path);
-  setRecentFiles(recent_files);
+  recent_files.prepend(normalized_file_path);
+
+  if (recent_files.size() > MAX_RECENT_FILES) {
+    setRecentFiles(recent_files.mid(0, MAX_RECENT_FILES));
+  }
+  else {
+    setRecentFiles(recent_files);
+  }
 }
 
 void TextApplicationSettings::setWordWrapEnabled(bool enabled) {
