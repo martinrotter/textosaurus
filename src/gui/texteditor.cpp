@@ -173,7 +173,7 @@ void TextEditor::save(bool* ok) {
     // Newly created document, save as.
     saveAs(ok);
   }
-  else if (modify()) {
+  else {
     // We just save this modified document to same file.
     saveToFile(m_filePath, ok);
   }
