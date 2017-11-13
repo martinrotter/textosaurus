@@ -17,8 +17,6 @@ class ToolBarEditor : public QWidget {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit ToolBarEditor(QWidget* parent = nullptr);
     virtual ~ToolBarEditor();
 

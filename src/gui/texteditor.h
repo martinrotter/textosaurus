@@ -23,8 +23,6 @@ class TextEditor : public ScintillaEdit {
     QString filePath() const;
     Lexer lexer() const;
 
-    TextApplication* textApplication() const;
-
     QByteArray encoding() const;
     void setEncoding(const QByteArray& encoding);
 
@@ -38,7 +36,7 @@ class TextEditor : public ScintillaEdit {
 
     // Closes the editor, user is asked to save unsaved text document.
     // Given parameter is used to indicate if closing was finished (true)
-    // or user cancelled it (false.
+    // or user cancelled it (false).
     void closeEditor(bool* ok);
 
     // Opens given file in this text editor, file is opened for reading.
@@ -48,7 +46,7 @@ class TextEditor : public ScintillaEdit {
     void closeEvent(QCloseEvent* event);
 
   signals:
-    void requestVisibility();
+    void requestedVisibility();
     void loadedFromFile(QString m_sourceFilePath);
     void savedToFile(QString m_destinationFilePath);
 

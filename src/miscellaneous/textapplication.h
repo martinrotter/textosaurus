@@ -58,7 +58,6 @@ class TextApplication : public QObject {
     void saveCurrentEditorAsWithEncoding(QAction* action);
     void saveAllEditors();
     void closeAllUnmodifiedEditors();
-    void switchEncodingOfCurentEditor(QAction* action_encoding);
 
     // Loads initial state of text application, including session restoring,
     // setup initial GUI state for actions/toolbar/statusbar etc.
@@ -68,20 +67,20 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
   private slots:
-    void onEditorEncodingChanged(const QByteArray& encoding_name);
-    void onSavePointChanged(bool dirty);
+    void changeEncoding(QAction* act);
     void changeLexer(QAction* act);
     void fillRecentFiles();
     void filterLexersMenu(const QString& filter);
     void loadLexersMenu();
     void loadEncodingMenu();
-    void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
-    void onEditorRequestVisibility();
+    void onSavePointChanged(bool dirty);
+    void onEditorRequestedVisibility();
     void onEditorModified(int type, int position, int length, int linesAdded,
                           const QByteArray& text, int line, int foldNow, int foldPrev);
     void onEditorTabSwitched(int index = -1);
 
+    void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
 

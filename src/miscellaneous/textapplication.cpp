@@ -155,7 +155,7 @@ TextEditor* TextApplication::createTextEditor() {
 
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
-  connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
+  connect(editor, &TextEditor::requestedVisibility, this, &TextApplication::onEditorRequestedVisibility);
 
   return editor;
 }
@@ -222,7 +222,7 @@ void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, boo
   }
 }
 
-void TextApplication::onEditorRequestVisibility() {
+void TextApplication::onEditorRequestedVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   if (editor != nullptr) {
@@ -350,7 +350,7 @@ void TextApplication::createConnections() {
   connect(m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
 
   connect(m_menuEncoding, &QMenu::aboutToShow, this, &TextApplication::loadEncodingMenu);
-  connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::switchEncodingOfCurentEditor);
+  connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::changeEncoding);
 
   connect(m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileSaveWithEncoding->isEmpty()) {
@@ -453,16 +453,6 @@ void TextApplication::quit(bool* ok) {
   }
 
   *ok = true;
-}
-
-void TextApplication::onEditorEncodingChanged(const QByteArray& encoding_name) {
-  Q_UNUSED(encoding_name)
-
-  auto sndr = qobject_cast<TextEditor*>(sender());
-
-  if (sndr == currentEditor()) {
-    updateStatusBarFromEditor(sndr);
-  }
 }
 
 void TextApplication::changeLexer(QAction* act) {
@@ -743,11 +733,11 @@ void TextApplication::renameEditor(TextEditor* editor) {
   }
 }
 
-void TextApplication::switchEncodingOfCurentEditor(QAction* action_encoding) {
+void TextApplication::changeEncoding(QAction* act) {
   TextEditor* editor = currentEditor();
 
   if (editor != nullptr) {
-    editor->setEncoding(action_encoding->data().toString().toUtf8());
+    editor->setEncoding(act->data().toString().toUtf8());
     updateStatusBarFromEditor(editor);
   }
 }

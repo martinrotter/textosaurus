@@ -72,7 +72,7 @@ void TextEditor::closeEvent(QCloseEvent* event) {
 }
 
 void TextEditor::reloadFont() {
-  QFont new_font = textApplication()->settings()->mainFont();
+  QFont new_font = m_textApp->settings()->mainFont();
 
   if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() ||
       styleSize(STYLE_DEFAULT) != new_font.pointSize() ||
@@ -160,10 +160,6 @@ Lexer TextEditor::lexer() const {
   return m_lexer;
 }
 
-TextApplication* TextEditor::textApplication() const {
-  return m_textApp;
-}
-
 QByteArray TextEditor::encoding() const {
   return m_encoding;
 }
@@ -187,7 +183,7 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
                                                   m_textApp->settings()->loadSaveDefaultDirectory() :
                                                   QFileInfo(m_filePath).absolutePath(),
                                                   QFileInfo(m_filePath).fileName(),
-                                                  textApplication()->settings()->syntaxHighlighting()->fileFilters(),
+                                                  m_textApp->settings()->syntaxHighlighting()->fileFilters(),
                                                   nullptr);
 
   if (!file_path.isEmpty()) {
@@ -207,7 +203,7 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 
 void TextEditor::closeEditor(bool* ok) {
   if (modify()) {
-    emit requestVisibility();
+    emit requestedVisibility();
 
     // We need to save.
     QMessageBox::StandardButton response = QMessageBox::question(qApp->mainFormWidget(),
