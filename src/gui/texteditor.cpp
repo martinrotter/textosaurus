@@ -144,17 +144,16 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   str.flush();
   file.close();
 
+  m_filePath = QDir::toNativeSeparators(file_path);
+
   setSavePoint();
-  emit savedToFile((m_filePath = QDir::toNativeSeparators(file_path)));
+  emit savedToFile(m_filePath);
 
   *ok = true;
 }
 
 void TextEditor::setEncoding(const QByteArray& encoding) {
-  if (m_encoding != encoding) {
-    m_encoding = encoding;
-    emit encodingChanged(m_encoding);
-  }
+  m_encoding = encoding;
 }
 
 Lexer TextEditor::lexer() const {

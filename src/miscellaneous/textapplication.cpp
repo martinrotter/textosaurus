@@ -154,7 +154,6 @@ TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
-  connect(editor, &TextEditor::encodingChanged, this, &TextApplication::onEditorEncodingChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestVisibility, this, &TextApplication::onEditorRequestVisibility);
 
@@ -473,7 +472,6 @@ void TextApplication::changeLexer(QAction* act) {
     Lexer lexer_act = act->data().value<Lexer>();
 
     cur_editor->reloadLexer(lexer_act);
-
     updateStatusBarFromEditor(cur_editor);
   }
 }
@@ -750,5 +748,6 @@ void TextApplication::switchEncodingOfCurentEditor(QAction* action_encoding) {
 
   if (editor != nullptr) {
     editor->setEncoding(action_encoding->data().toString().toUtf8());
+    updateStatusBarFromEditor(editor);
   }
 }
