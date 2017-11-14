@@ -142,6 +142,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("POV"), QStringList {
       QSL("pov")
     }, SCLEX_POV)
+      << Lexer(QSL("PowerShell"), QStringList {
+      QSL("ps1")
+    }, SCLEX_POWERSHELL)
       << Lexer(QSL("Properties"), QStringList {
       QSL("properties")
     }, SCLEX_PROPERTIES)
