@@ -43,7 +43,13 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
 
   bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
   bash_process.setProcessChannelMode(QProcess::ProcessChannelMode::MergedChannels);
-  bash_process.start(QSL("c:\\cygwin\\bin\\bash.exe"), QStringList() << script_file);
+
+  bash_process.start(QSL("bash"), QStringList() << script_file);
+
+  if (!data.isEmpty()) {
+    bash_process.write(data.toUtf8());
+    bash_process.closeWriteChannel();
+  }
 
   if (bash_process.waitForFinished()) {
     QByteArray tool_output = bash_process.readAll();

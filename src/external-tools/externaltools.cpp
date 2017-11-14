@@ -199,10 +199,10 @@ void ExternalTools::loadPredefinedTools() {
 void ExternalTools::loadCustomTools() {
   ExternalTool* test = new ExternalTool(this);
 
-  test->setScript("echo 'abcd'");
+  test->setScript("base64");
   test->setCategory(QSL("testing"));
-  test->setInput(ToolInput::NoInput);
-  test->setOutput(ToolOutput::InsertAtCursorPosition);
+  test->setInput(ToolInput::SelectionDocument);
+  test->setOutput(ToolOutput::ReplaceSelectionDocument);
   test->setName("test");
   test->setShortcut("CTRL+T");
 
@@ -225,7 +225,7 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
 
   switch (tool_to_run->input()) {
     case ToolInput::SelectionDocument:
-      data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length());
+      data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length() + 1);
       break;
 
     case ToolInput::CurrentLine:
