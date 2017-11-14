@@ -43,18 +43,16 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
 
   bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
   bash_process.setProcessChannelMode(QProcess::ProcessChannelMode::MergedChannels);
-  bash_process.start(QSL("bash.exe"), QStringList() << script_file);
+  bash_process.start(QSL("c:\\cygwin\\bin\\bash.exe"), QStringList() << script_file);
 
   if (bash_process.waitForFinished()) {
     QByteArray tool_output = bash_process.readAll();
-    auto aa = 5;
+
+    return QPair<QString, bool>(QString::fromUtf8(tool_output), true);
   }
   else {
-    auto aa = bash_process.errorString();
-    auto ee = 5;
+    return QPair<QString, bool>(bash_process.errorString(), false);
   }
-
-  return QPair<QString, bool>(QString(), false);
 }
 
 QString ExternalTool::id() const {

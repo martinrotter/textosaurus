@@ -199,7 +199,7 @@ void ExternalTools::loadPredefinedTools() {
 void ExternalTools::loadCustomTools() {
   ExternalTool* test = new ExternalTool(this);
 
-  test->setScript("echo 'čččč'");
+  test->setScript("echo 'abcd'");
   test->setCategory(QSL("testing"));
   test->setInput(ToolInput::NoInput);
   test->setOutput(ToolOutput::InsertAtCursorPosition);
