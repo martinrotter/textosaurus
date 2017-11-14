@@ -190,7 +190,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/dialogs/formupdate.h \
             src/gui/guiutilities.h \
             src/gui/labelwithstatus.h \
-            src/gui/lineeditwithstatus.h \
             src/gui/messagebox.h \
             src/gui/plaintoolbutton.h \
             src/gui/settings/settingsbrowsermail.h \
@@ -272,7 +271,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/dialogs/formupdate.cpp \
             src/gui/guiutilities.cpp \
             src/gui/labelwithstatus.cpp \
-            src/gui/lineeditwithstatus.cpp \
             src/gui/messagebox.cpp \
             src/gui/plaintoolbutton.cpp \
             src/gui/settings/settingsbrowsermail.cpp \
