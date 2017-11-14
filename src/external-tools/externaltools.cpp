@@ -199,7 +199,7 @@ void ExternalTools::loadPredefinedTools() {
 void ExternalTools::loadCustomTools() {
   ExternalTool* test = new ExternalTool(this);
 
-  test->setScript("xmllinta --format -");
+  test->setScript("xmllint --format -");
   test->setCategory(QSL("testing"));
   test->setInput(ToolInput::SelectionDocument);
   test->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -207,6 +207,16 @@ void ExternalTools::loadCustomTools() {
   test->setShortcut("CTRL+T");
 
   m_tools.append(test);
+
+  ExternalTool* test2 = new ExternalTool(this);
+
+  test2->setScript("python -m json.tool");
+  test2->setCategory(QSL("testing"));
+  test2->setInput(ToolInput::SelectionDocument);
+  test2->setOutput(ToolOutput::ReplaceSelectionDocument);
+  test2->setName("json");
+
+  m_tools.append(test2);
 }
 
 void ExternalTools::reloadTools() {
