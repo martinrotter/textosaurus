@@ -34,11 +34,10 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
 
   // TODO: celkově dodělat efektivně.
 
-  // TODO: Save script to file and make it executable.
+  // Save script to file and make it executable.
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
 
-  // TODO: Run bash "script.sh".
-  // TODO: Get result.
+  // Run in bash.
   QProcess bash_process;
 
   bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
@@ -52,6 +51,7 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   }
 
   if (bash_process.waitForFinished()) {
+    // Get result.
     QByteArray tool_output = bash_process.readAll();
 
     return QPair<QString, bool>(QString::fromUtf8(tool_output), bash_process.exitCode() == 0);
