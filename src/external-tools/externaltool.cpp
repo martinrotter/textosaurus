@@ -7,7 +7,19 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
-ExternalTool::ExternalTool(QObject* parent) : QObject(parent) {}
+ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_input(ToolInput::SelectionDocument),
+  m_output(ToolOutput::ReplaceSelectionDocument), m_shortcut(QString()), m_script(QString()), m_category(QString()),
+  m_name(QString()) {}
+
+ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject(parent) {
+  setCategory(other.category());
+  setId(other.id());
+  setInput(other.input());
+  setOutput(other.output());
+  setName(other.name());
+  setScript(other.script());
+  setShortcut(other.shortcut());
+}
 
 bool ExternalTool::isPredefined() const {
   return false;
@@ -65,14 +77,6 @@ QString ExternalTool::script() const {
 
 void ExternalTool::setScript(const QString& script) {
   m_script = script;
-}
-
-QString ExternalTool::command() const {
-  return m_command;
-}
-
-void ExternalTool::setCommand(const QString& command) {
-  m_command = command;
 }
 
 QString ExternalTool::name() const {

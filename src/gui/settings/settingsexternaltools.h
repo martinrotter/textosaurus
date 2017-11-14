@@ -13,16 +13,24 @@ class SettingsExternalTools : public SettingsPanel {
   public:
     explicit SettingsExternalTools(Settings* settings, QWidget* parent = nullptr);
 
-    inline QString title() const {
-      return tr("External tools");
-    }
-
+    QString title() const;
     void loadSettings();
-
     void saveSettings();
+
+  private slots:
+    void addNewTool();
+    void removeSelectedTool();
+    void saveCurrentTool();
+    void updateToolListNames(const QString& name);
+    void saveToolChanges(QListWidgetItem* item);
+    void displayToolDetails(QListWidgetItem* current, QListWidgetItem* previous);
 
   private:
     Ui::SettingsExternalTools m_ui;
 };
+
+inline QString SettingsExternalTools::title() const {
+  return tr("External tools");
+}
 
 #endif // SETTINGSEXTERNALTOOLS_H

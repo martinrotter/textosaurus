@@ -55,14 +55,12 @@ class ExternalTool : public QObject {
 
   public:
     explicit ExternalTool(QObject* parent = nullptr);
+    explicit ExternalTool(const ExternalTool& other, QObject* parent = nullptr);
 
     virtual bool isPredefined() const;
 
     QString name() const;
     void setName(const QString& name);
-
-    QString command() const;
-    void setCommand(const QString& command);
 
     QString script() const;
     void setScript(const QString& script);
@@ -100,14 +98,10 @@ class ExternalTool : public QObject {
     QString m_name;
     QString m_id;
 
-    // If this tool runs simple command, for example
-    // "base64" then it is here.
-    QString m_command;
-
     // If this tool runs complex script, then its contents
     // are here, for example
     // #!/bin/bash
-    //
+    // base64
     QString m_script;
 };
 
