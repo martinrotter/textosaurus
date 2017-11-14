@@ -109,21 +109,21 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   styleSetFore(0, 0);
 
   // Gray whitespace characters.
-  setWhitespaceFore(true, RGB_TO_INT(200, 200, 200));
+  setWhitespaceFore(true, RGB_TO_SPRT(200, 200, 200));
   setWhitespaceSize(3);
 
   // Load more specific colors = keywords, operators etc.
   for (int i = 1; i <= STYLE_MAX; i++) {
     // We set colors for all non-predefined styles.
     if (m_lexer.m_code != SCLEX_NULL &&  (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED)) {
-      styleSetFore(i, RGB_TO_INT(rand() % 160, rand() % 160, rand() % 160));
+      styleSetFore(i, RGB_TO_SPRT(rand() % 160, rand() % 160, rand() % 160));
     }
     else {
       styleSetFore(i, 0);
     }
   }
 
-  repaint();
+  colourise(0, -1);
 }
 
 void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
