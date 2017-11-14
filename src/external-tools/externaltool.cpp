@@ -30,7 +30,6 @@ bool ExternalTool::isPredefined() const {
 
 QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
   Q_UNUSED(editor)
-  Q_UNUSED(data)
 
   // TODO: celkově dodělat efektivně.
 
