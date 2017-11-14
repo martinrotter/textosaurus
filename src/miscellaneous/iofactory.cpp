@@ -30,30 +30,6 @@ QString IOFactory::getSystemFolder(QStandardPaths::StandardLocation location) {
   return QStandardPaths::writableLocation(location);
 }
 
-QString IOFactory::ensureUniqueFilename(const QString& name, const QString& append_format) {
-  if (!QFile::exists(name)) {
-    return name;
-  }
-
-  QString tmp_filename = name;
-  int i = 1;
-
-  while (QFile::exists(tmp_filename)) {
-    tmp_filename = name;
-    const int index = tmp_filename.lastIndexOf(QL1C('.'));
-    const QString append_string = append_format.arg(i++);
-
-    if (index < 0) {
-      tmp_filename.append(append_string);
-    }
-    else {
-      tmp_filename = tmp_filename.left(index) + append_string + tmp_filename.mid(index);
-    }
-  }
-
-  return tmp_filename;
-}
-
 QString IOFactory::filterBadCharsFromFilename(const QString& name) {
   QString value = name;
 
@@ -115,6 +91,7 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
 
   tmp_file.setAutoRemove(false);
   tmp_file.setFileTemplate(qApp->tempFolder() + QDir::separator() + QSL("tool_output_XXXXXX.txt"));
+
   if (tmp_file.open()) {
     tmp_file.write(data);
     tmp_file.close();

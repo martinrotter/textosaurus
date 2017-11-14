@@ -196,7 +196,18 @@ void ExternalTools::loadPredefinedTools() {
   m_tools.append(send_to_sprunge);
 }
 
-void ExternalTools::loadCustomTools() {}
+void ExternalTools::loadCustomTools() {
+  ExternalTool* test = new ExternalTool(this);
+
+  test->setScript("echo 'čččč'");
+  test->setCategory(QSL("testing"));
+  test->setInput(ToolInput::NoInput);
+  test->setOutput(ToolOutput::InsertAtCursorPosition);
+  test->setName("test");
+  test->setShortcut("CTRL+T");
+
+  m_tools.append(test);
+}
 
 void ExternalTools::reloadTools() {
   qDeleteAll(m_tools);

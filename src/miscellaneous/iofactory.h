@@ -21,10 +21,6 @@ class IOFactory {
     // Returns system-wide folder according to type.
     static QString getSystemFolder(QStandardPaths::StandardLocation location);
 
-    // Checks given file if it exists and if it does, then generates non-existing new file
-    // according to format.
-    static QString ensureUniqueFilename(const QString& name, const QString& append_format = QSL("(%1)"));
-
     // Filters out shit characters from filename.
     static QString filterBadCharsFromFilename(const QString& name);
     static QByteArray readFileRawChunk(const QString& file_path, int length);

@@ -4,6 +4,7 @@
 
 #include "external-tools/externaltool.h"
 #include "external-tools/externaltools.h"
+#include "gui/guiutilities.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/textapplication.h"
@@ -51,6 +52,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
      connect(m_ui.m_shortcut, &ShortcutCatcher::shortcutChanged, this, &SettingsExternalTools::saveCurrentTool);
    */
 
+  GuiUtilities::setLabelAsNotice(*m_ui.m_lblInfo, true);
   displayToolDetails(nullptr, nullptr);
 }
 

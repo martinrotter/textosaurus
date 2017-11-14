@@ -4,8 +4,11 @@
 
 #include "gui/texteditor.h"
 #include "gui/toolbox.h"
+#include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
+
+#include <QProcess>
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_input(ToolInput::SelectionDocument),
   m_output(ToolOutput::ReplaceSelectionDocument), m_shortcut(QString()), m_script(QString()), m_category(QString()),
@@ -28,6 +31,29 @@ bool ExternalTool::isPredefined() const {
 QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
   Q_UNUSED(editor)
   Q_UNUSED(data)
+
+  // TODO: celkově dodělat efektivně.
+
+  // TODO: Save script to file and make it executable.
+  QString script_file = IOFactory::writeToTempFile(script().toUtf8());
+
+  // TODO: Run bash "script.sh".
+  // TODO: Get result.
+  QProcess bash_process;
+
+  bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+  bash_process.setProcessChannelMode(QProcess::ProcessChannelMode::MergedChannels);
+  bash_process.start(QSL("bash.exe"), QStringList() << script_file);
+
+  if (bash_process.waitForFinished()) {
+    QByteArray tool_output = bash_process.readAll();
+    auto aa = 5;
+  }
+  else {
+    auto aa = bash_process.errorString();
+    auto ee = 5;
+  }
+
   return QPair<QString, bool>(QString(), false);
 }
 
