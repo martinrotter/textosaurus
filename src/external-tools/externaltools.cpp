@@ -199,7 +199,7 @@ void ExternalTools::loadPredefinedTools() {
 void ExternalTools::loadCustomTools() {
   ExternalTool* test = new ExternalTool(this);
 
-  test->setScript("base64");
+  test->setScript("xmllinta --format -");
   test->setCategory(QSL("testing"));
   test->setInput(ToolInput::SelectionDocument);
   test->setOutput(ToolOutput::ReplaceSelectionDocument);

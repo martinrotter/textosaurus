@@ -11,8 +11,8 @@
 #include <QProcess>
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_input(ToolInput::SelectionDocument),
-  m_output(ToolOutput::ReplaceSelectionDocument), m_shortcut(QString()), m_script(QString()), m_category(QString()),
-  m_name(QString()) {}
+  m_output(ToolOutput::ReplaceSelectionDocument), m_shortcut(QString()), m_category(QString()),
+  m_name(QString()), m_script(QString()) {}
 
 ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject(parent) {
   setCategory(other.category());
@@ -44,7 +44,7 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
   bash_process.setProcessChannelMode(QProcess::ProcessChannelMode::MergedChannels);
 
-  bash_process.start(QSL("bash"), QStringList() << script_file);
+  bash_process.start(QSL(EXT_TOOL_INTERPRETER), QStringList() << script_file);
 
   if (!data.isEmpty()) {
     bash_process.write(data.toUtf8());
@@ -54,7 +54,7 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   if (bash_process.waitForFinished()) {
     QByteArray tool_output = bash_process.readAll();
 
-    return QPair<QString, bool>(QString::fromUtf8(tool_output), true);
+    return QPair<QString, bool>(QString::fromUtf8(tool_output), bash_process.exitCode() == 0);
   }
   else {
     return QPair<QString, bool>(bash_process.errorString(), false);
