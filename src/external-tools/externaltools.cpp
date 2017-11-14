@@ -217,6 +217,16 @@ void ExternalTools::loadCustomTools() {
   test2->setName("json");
 
   m_tools.append(test2);
+
+  ExternalTool* test3 = new ExternalTool(this);
+
+  test3->setScript("curl ipinfo.io/ip");
+  test3->setCategory(QSL("testing"));
+  test3->setInput(ToolInput::NoInput);
+  test3->setOutput(ToolOutput::InsertAtCursorPosition);
+  test3->setName("ip add");
+
+  m_tools.append(test3);
 }
 
 void ExternalTools::reloadTools() {
