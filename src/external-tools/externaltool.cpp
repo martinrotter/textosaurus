@@ -11,7 +11,7 @@
 #include <QProcess>
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_input(ToolInput::SelectionDocument),
-  m_output(ToolOutput::ReplaceSelectionDocument), m_shortcut(QString()), m_category(QString()),
+  m_output(ToolOutput::ReplaceSelectionDocument), m_prompt(QString()), m_shortcut(QString()), m_category(QString()),
   m_name(QString()), m_interpreter(EXT_TOOL_INTERPRETER), m_script(QString()) {}
 
 ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject(parent) {
@@ -22,6 +22,7 @@ ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject
   setInterpreter(other.interpreter());
   setScript(other.script());
   setShortcut(other.shortcut());
+  setPrompt(other.prompt());
 }
 
 bool ExternalTool::isPredefined() const {
@@ -67,6 +68,16 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
     bash_process.kill();
     return QPair<QString, bool>(bash_process.errorString(), false);
   }
+}
+
+QString ExternalTool::prompt() const
+{
+  return m_prompt;
+}
+
+void ExternalTool::setPrompt(const QString& prompt)
+{
+  m_prompt = prompt;
 }
 
 QString ExternalTool::interpreter() const {

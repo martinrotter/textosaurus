@@ -39,6 +39,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   connect(m_ui.m_txtFullScript, &QPlainTextEdit::textChanged, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtInterpreter, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_txtPrompt, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtCategory, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_cmbInput,
@@ -132,6 +133,7 @@ void SettingsExternalTools::saveToolChanges(QListWidgetItem* item) {
     ext_tool->setCategory(m_ui.m_txtCategory->text());
     ext_tool->setInput(ToolInput(m_ui.m_cmbInput->currentData().toInt()));
     ext_tool->setOutput(ToolOutput(m_ui.m_cmbOutput->currentData().toInt()));
+    ext_tool->setPrompt(m_ui.m_txtPrompt->text());
     ext_tool->setShortcut(m_ui.m_shortcut->shortcut().toString(QKeySequence::SequenceFormat::PortableText));
   }
 }
@@ -155,6 +157,7 @@ void SettingsExternalTools::displayToolDetails(QListWidgetItem* current, QListWi
     m_ui.m_txtInterpreter->setText(new_tool->interpreter());
     m_ui.m_txtTitle->setText(new_tool->name());
     m_ui.m_txtCategory->setText(new_tool->category());
+    m_ui.m_txtPrompt->setText(new_tool->prompt());
     m_ui.m_shortcut->setShortcut(QKeySequence::fromString(new_tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
     m_ui.m_cmbInput->setCurrentIndex(m_ui.m_cmbInput->findData(int(new_tool->input())));
     m_ui.m_cmbOutput->setCurrentIndex(m_ui.m_cmbOutput->findData(int(new_tool->output())));
@@ -166,6 +169,7 @@ void SettingsExternalTools::displayToolDetails(QListWidgetItem* current, QListWi
     m_ui.m_txtInterpreter->clear();
     m_ui.m_txtTitle->clear();
     m_ui.m_txtCategory->clear();
+    m_ui.m_txtPrompt->clear();
     m_ui.m_shortcut->clearShortcut();
     m_ui.m_cmbInput->setCurrentIndex(0);
     m_ui.m_cmbOutput->setCurrentIndex(0);

@@ -91,6 +91,7 @@ void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
     sett_ext_tools.setValue(QSL("output"), int(tool->output()));
     sett_ext_tools.setValue(QSL("category"), tool->category());
     sett_ext_tools.setValue(QSL("shortcut"), tool->shortcut());
+    sett_ext_tools.setValue(QSL("prompt"), tool->prompt());
 
     sett_ext_tools.endGroup();
   }
@@ -236,6 +237,7 @@ void ExternalTools::loadCustomTools() {
     tool->setInterpreter(sett_ext_tools.value(QSL("interpreter"), QSL(EXT_TOOL_INTERPRETER)).toString());
     tool->setName(sett_ext_tools.value(QSL("name")).toString());
     tool->setScript(sett_ext_tools.value(QSL("script")).toString());
+    tool->setPrompt(sett_ext_tools.value(QSL("prompt")).toString());
     tool->setInput(ToolInput(sett_ext_tools.value(QSL("input"), int(ToolInput::SelectionDocument)).toInt()));
     tool->setOutput(ToolOutput(sett_ext_tools.value(QSL("output"), int(ToolOutput::ReplaceSelectionDocument)).toInt()));
     tool->setCategory(sett_ext_tools.value(QSL("category")).toString());
@@ -296,6 +298,7 @@ void ExternalTools::loadCustomTools() {
 
     ext_bash_seq->setScript("IFS=' '\nread a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
     ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
+    ext_bash_seq->setPrompt(tr("Input sequence bounds (for example \"0 10\"):"));
     ext_bash_seq->setInput(ToolInput::AskForInput);
     ext_bash_seq->setOutput(ToolOutput::InsertAtCursorPosition);
     ext_bash_seq->setName(tr("Generate sequence"));
@@ -329,7 +332,7 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
       bool ok;
 
       data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
-                                   tr("Input"), QLineEdit::EchoMode::Normal, QString(), &ok);
+                                   tool_to_run->prompt(), QLineEdit::EchoMode::Normal, QString(), &ok);
 
       if (!ok) {
         return;
