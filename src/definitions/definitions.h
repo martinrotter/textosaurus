@@ -28,6 +28,8 @@
 #define DOWNLOADER_ICON_SIZE                  48
 #define MAX_RECENT_FILES                      15
 #define ENCRYPTION_FILE_NAME                  "key.private"
+
+#define EXT_TOOLS_CONFIG                      "external_tools.ini"
 #define EXT_TOOL_INTERPRETER                  "bash"
 
 #define PASTEBIN_GITHUB   "https://api.github.com/gists"

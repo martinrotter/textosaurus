@@ -35,6 +35,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::updateToolListNames);
 
   connect(m_ui.m_txtFullScript, &QPlainTextEdit::textChanged, this, &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_txtInterpreter, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
   connect(m_ui.m_txtCategory, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
@@ -65,6 +66,7 @@ void SettingsExternalTools::loadSettings() {
 
       work_item->setData(Qt::UserRole, QVariant::fromValue(work_tool));
       m_ui.m_listTools->addItem(work_item);
+
     }
   }
 
@@ -78,6 +80,20 @@ void SettingsExternalTools::saveSettings() {
   saveCurrentTool();
   m_isSwitchingSelectedTool = false;
 
+  // Now we save our custom tools.
+  QList<ExternalTool*> custom_tools;
+
+  for (int i = 0; i < m_ui.m_listTools->count(); i++) {
+    ExternalTool* tool = m_ui.m_listTools->item(i)->data(Qt::UserRole).value<ExternalTool*>();
+
+    if (!tool->isPredefined()) {
+      custom_tools.append(tool);
+    }
+  }
+
+  // We save/activate new custom tools.
+  qApp->textApplication()->settings()->externalTools()->saveExternalTools(custom_tools);
+
   onEndSaveSettings();
 }
 
@@ -85,7 +101,7 @@ void SettingsExternalTools::addNewTool() {
   QListWidgetItem* item = new QListWidgetItem(tr("New tool"), m_ui.m_listTools);
   ExternalTool* ext_tool = new ExternalTool(this);
 
-  ext_tool->setName(tr("New tool"));
+  ext_tool->setName(item->text());
   item->setData(Qt::UserRole, QVariant::fromValue(ext_tool));
 
   m_ui.m_listTools->addItem(item);
@@ -107,6 +123,7 @@ void SettingsExternalTools::saveToolChanges(QListWidgetItem* item) {
   if (item != nullptr) {
     ExternalTool* ext_tool = item->data(Qt::UserRole).value<ExternalTool*>();
 
+    ext_tool->setInterpreter(m_ui.m_txtInterpreter->text());
     ext_tool->setScript(m_ui.m_txtFullScript->toPlainText());
     ext_tool->setName(m_ui.m_txtTitle->text());
     ext_tool->setCategory(m_ui.m_txtCategory->text());
@@ -132,19 +149,24 @@ void SettingsExternalTools::displayToolDetails(QListWidgetItem* current, QListWi
     // We display new tool.
     ExternalTool* new_tool = current->data(Qt::UserRole).value<ExternalTool*>();
 
+    m_ui.m_txtInterpreter->setText(new_tool->interpreter());
     m_ui.m_txtTitle->setText(new_tool->name());
     m_ui.m_txtCategory->setText(new_tool->category());
-
-    m_ui.m_shortcut->blockSignals(true);
     m_ui.m_shortcut->setShortcut(QKeySequence::fromString(new_tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
-    m_ui.m_shortcut->blockSignals(false);
-
     m_ui.m_cmbInput->setCurrentIndex(m_ui.m_cmbInput->findData(int(new_tool->input())));
     m_ui.m_cmbOutput->setCurrentIndex(m_ui.m_cmbOutput->findData(int(new_tool->output())));
     m_ui.m_txtFullScript->setPlainText(new_tool->script());
   }
   else {
     m_ui.m_toolDetails->setEnabled(false);
+
+    m_ui.m_txtInterpreter->clear();
+    m_ui.m_txtTitle->clear();
+    m_ui.m_txtCategory->clear();
+    m_ui.m_shortcut->clearShortcut();
+    m_ui.m_cmbInput->setCurrentIndex(0);
+    m_ui.m_cmbOutput->setCurrentIndex(0);
+    m_ui.m_txtFullScript->clear();
   }
 
   m_isSwitchingSelectedTool = false;

@@ -77,15 +77,15 @@ class ExternalTool : public QObject {
     QString shortcut() const;
     void setShortcut(const QString& shortcut);
 
-    QString id() const;
-    void setId(const QString& id);
+    QString interpreter() const;
+    void setInterpreter(const QString& interpreter);
 
   public slots:
 
     // Runs tool with given string data (which is depending on tool input mode
     // current line, current selection, current whole document text or saved
     // document filename.
-    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data);
+    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data) const;
 
   signals:
     void toolFinished(QPointer<TextEditor> editor, QString output_text, bool success);
@@ -96,7 +96,7 @@ class ExternalTool : public QObject {
     QString m_shortcut;
     QString m_category;
     QString m_name;
-    QString m_id;
+    QString m_interpreter;
 
     // If this tool runs complex script, then its contents
     // are here, for example
@@ -112,7 +112,7 @@ class PredefinedTool : public ExternalTool {
     explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
 
   public slots:
-    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data);
+    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data) const;
 
     bool isPredefined() const;
 

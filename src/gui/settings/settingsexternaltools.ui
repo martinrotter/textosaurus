@@ -30,9 +30,12 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>150</width>
          <height>20</height>
         </size>
        </property>
@@ -78,14 +81,20 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="0" column="0" colspan="2">
+      <item row="2" column="0" colspan="2">
        <widget class="QPlainTextEdit" name="m_txtFullScript">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
         <property name="placeholderText">
          <string>Full-blown script goes here</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Title</string>
@@ -95,17 +104,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="3" column="1">
        <widget class="QLineEdit" name="m_txtTitle">
-        <property name="text">
-         <string>Title of this external tool</string>
-        </property>
         <property name="placeholderText">
-         <string>Optional category name</string>
+         <string>External tool title</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Category</string>
@@ -115,14 +121,14 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="4" column="1">
        <widget class="QLineEdit" name="m_txtCategory">
         <property name="placeholderText">
          <string>Optional category name</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="m_lblShortcut">
         <property name="text">
          <string>Shortcut</string>
@@ -132,10 +138,10 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="5" column="1">
        <widget class="ShortcutCatcher" name="m_shortcut" native="true"/>
       </item>
-      <item row="4" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="m_lblInput">
         <property name="text">
          <string>Input</string>
@@ -145,10 +151,10 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="6" column="1">
        <widget class="QComboBox" name="m_cmbInput"/>
       </item>
-      <item row="5" column="0">
+      <item row="7" column="0">
        <widget class="QLabel" name="m_lblOutput">
         <property name="text">
          <string>Output</string>
@@ -158,13 +164,33 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="7" column="1">
        <widget class="QComboBox" name="m_cmbOutput"/>
       </item>
-      <item row="6" column="0" colspan="2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Interpreter</string>
+        </property>
+        <property name="buddy">
+         <cstring>m_txtInterpreter</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="m_txtInterpreter">
+        <property name="placeholderText">
+         <string>Interpreter for the script</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
        <widget class="QLabel" name="m_lblInfo">
         <property name="text">
-         <string>These scripts are executed via Bash, so Bash executable must be available via your PATH environment variable.</string>
+         <string>It is generally better to have your interpreters available via your PATH environment variable, so simply typing in &quot;bash&quot; or &quot;python&quot; should work.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -193,6 +219,7 @@
   <tabstop>m_listTools</tabstop>
   <tabstop>m_btnAdd</tabstop>
   <tabstop>m_btnDelete</tabstop>
+  <tabstop>m_txtInterpreter</tabstop>
   <tabstop>m_txtFullScript</tabstop>
   <tabstop>m_txtTitle</tabstop>
   <tabstop>m_txtCategory</tabstop>

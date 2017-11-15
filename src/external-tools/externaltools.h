@@ -23,6 +23,8 @@ class ExternalTools : public QObject {
 
     const QList<ExternalTool*> tools() const;
 
+    void saveExternalTools(const QList<ExternalTool*>& ext_tools);
+
   public slots:
     void runTool(ExternalTool* tool_to_run, TextEditor* editor);
     void reloadTools();

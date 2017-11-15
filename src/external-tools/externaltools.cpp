@@ -11,6 +11,7 @@
 #include "network-web/networkfactory.h"
 
 #include <functional>
+#include <QDir>
 
 #include <QAction>
 #include <QDateTime>
@@ -66,6 +67,31 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent, TextApplication*
 
 const QList<ExternalTool*> ExternalTools::tools() const {
   return m_tools;
+}
+
+void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
+  // We persistently save custom tools.
+  QSettings sett_ext_tools(qApp->settings()->pathName() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
+
+  sett_ext_tools.clear();
+  int i = 0;
+
+  foreach (const ExternalTool* tool, ext_tools) {
+    sett_ext_tools.beginGroup(QString::number(i++));
+
+    sett_ext_tools.setValue(QSL("interpreter"), tool->interpreter());
+    sett_ext_tools.setValue(QSL("name"), tool->name());
+    sett_ext_tools.setValue(QSL("script"), tool->script().toUtf8());
+    sett_ext_tools.setValue(QSL("input"), int(tool->input()));
+    sett_ext_tools.setValue(QSL("output"), int(tool->output()));
+    sett_ext_tools.setValue(QSL("category"), tool->category());
+    sett_ext_tools.setValue(QSL("shortcut"), tool->shortcut());
+
+    sett_ext_tools.endGroup();
+  }
+
+  // We reload.
+  reloadTools();
 }
 
 void ExternalTools::loadPredefinedTools() {
@@ -197,36 +223,58 @@ void ExternalTools::loadPredefinedTools() {
 }
 
 void ExternalTools::loadCustomTools() {
-  ExternalTool* test = new ExternalTool(this);
+  QSettings sett_ext_tools(qApp->settings()->pathName() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
+  QStringList sections = sett_ext_tools.childGroups();
 
-  test->setScript("xmllint --format -");
-  test->setCategory(QSL("testing"));
-  test->setInput(ToolInput::SelectionDocument);
-  test->setOutput(ToolOutput::ReplaceSelectionDocument);
-  test->setName("test");
-  test->setShortcut("CTRL+T");
+  foreach (const QString& section, sections) {
+    sett_ext_tools.beginGroup(section);
 
-  m_tools.append(test);
+    ExternalTool* tool = new ExternalTool(this);
 
-  ExternalTool* test2 = new ExternalTool(this);
+    tool->setInterpreter(sett_ext_tools.value(QSL("interpreter"), QSL(EXT_TOOL_INTERPRETER)).toString());
+    tool->setName(sett_ext_tools.value(QSL("name")).toString());
+    tool->setScript(sett_ext_tools.value(QSL("script")).toString());
+    tool->setInput(ToolInput(sett_ext_tools.value(QSL("input"), int(ToolInput::SelectionDocument)).toInt()));
+    tool->setOutput(ToolOutput(sett_ext_tools.value(QSL("output"), int(ToolOutput::ReplaceSelectionDocument)).toInt()));
+    tool->setCategory(sett_ext_tools.value(QSL("category")).toString());
+    tool->setShortcut(sett_ext_tools.value(QSL("shortcut")).toString());
 
-  test2->setScript("python -m json.tool");
-  test2->setCategory(QSL("testing"));
-  test2->setInput(ToolInput::SelectionDocument);
-  test2->setOutput(ToolOutput::ReplaceSelectionDocument);
-  test2->setName("json");
+    m_tools.append(tool);
 
-  m_tools.append(test2);
+    sett_ext_tools.endGroup();
+  }
 
-  ExternalTool* test3 = new ExternalTool(this);
+  /*
+     ExternalTool* test = new ExternalTool(this);
 
-  test3->setScript("curl ipinfo.io/ip");
-  test3->setCategory(QSL("testing"));
-  test3->setInput(ToolInput::NoInput);
-  test3->setOutput(ToolOutput::InsertAtCursorPosition);
-  test3->setName("ip add");
+     test->setScript("xmllint --format -");
+     test->setCategory(QSL("testing"));
+     test->setInput(ToolInput::SelectionDocument);
+     test->setOutput(ToolOutput::ReplaceSelectionDocument);
+     test->setName("test");
+     test->setShortcut("CTRL+T");
 
-  m_tools.append(test3);
+     m_tools.append(test);
+
+     ExternalTool* test2 = new ExternalTool(this);
+
+     test2->setScript("python -m json.tool");
+     test2->setCategory(QSL("testing"));
+     test2->setInput(ToolInput::SelectionDocument);
+     test2->setOutput(ToolOutput::ReplaceSelectionDocument);
+     test2->setName("json");
+
+     m_tools.append(test2);
+
+     ExternalTool* test3 = new ExternalTool(this);
+
+     test3->setScript("import sys\ndata = sys.stdin.readlines()\nprint \"Counted\", len(data), \"lines.\"");
+     test3->setCategory(QSL("testing"));
+     test3->setInput(ToolInput::SelectionDocument);
+     test3->setOutput(ToolOutput::DumpToOutputWindow);
+     test3->setName("ip add");
+
+     m_tools.append(test3);*/
 }
 
 void ExternalTools::reloadTools() {

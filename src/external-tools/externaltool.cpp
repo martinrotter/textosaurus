@@ -12,14 +12,14 @@
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_input(ToolInput::SelectionDocument),
   m_output(ToolOutput::ReplaceSelectionDocument), m_shortcut(QString()), m_category(QString()),
-  m_name(QString()), m_script(QString()) {}
+  m_name(QString()), m_interpreter(EXT_TOOL_INTERPRETER), m_script(QString()) {}
 
 ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject(parent) {
   setCategory(other.category());
-  setId(other.id());
   setInput(other.input());
   setOutput(other.output());
   setName(other.name());
+  setInterpreter(other.interpreter());
   setScript(other.script());
   setShortcut(other.shortcut());
 }
@@ -28,7 +28,7 @@ bool ExternalTool::isPredefined() const {
   return false;
 }
 
-QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
+QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) const {
   Q_UNUSED(editor)
 
   // TODO: celkově dodělat efektivně.
@@ -42,7 +42,17 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
   bash_process.setProcessChannelMode(QProcess::ProcessChannelMode::MergedChannels);
 
-  bash_process.start(QSL(EXT_TOOL_INTERPRETER), QStringList() << script_file);
+#if defined (Q_OS_WIN)
+  QString intepr = interpreter();
+
+  if (!intepr.endsWith(QL1S(".exe"))) {
+    intepr += QSL(".exe");
+  }
+
+  bash_process.start(intepr, QStringList() << script_file);
+#else
+  bash_process.start(interpreter(), QStringList() << script_file);
+#endif
 
   if (!data.isEmpty()) {
     bash_process.write(data.toUtf8());
@@ -60,12 +70,12 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   }
 }
 
-QString ExternalTool::id() const {
-  return m_id;
+QString ExternalTool::interpreter() const {
+  return m_interpreter;
 }
 
-void ExternalTool::setId(const QString& id) {
-  m_id = id;
+void ExternalTool::setInterpreter(const QString& interpreter) {
+  m_interpreter = interpreter;
 }
 
 QString ExternalTool::shortcut() const {
@@ -119,7 +129,7 @@ void ExternalTool::setName(const QString& name) {
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
   : ExternalTool(parent), m_functor(functor) {}
 
-QPair<QString, bool> PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
+QPair<QString, bool> PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) const {
   Q_UNUSED(editor)
 
   bool ok = true;

@@ -40,10 +40,18 @@ Features
         * convert to/from Base64 and Base64Url,
         * convert to/from URL encoded text,
         * convert to HTML escaped text, 
-        * insert current date/time.
+        * insert current date/time,
+	- support for **external scripts**, which allow you to:
+	    * pass current selection/line/file/path to your script,
+		* run your script with custom interpreter (python, bash or arbitrary executable),
+		* get output of your script (as new file, replace selection/document, copy to clipboard),
+		* scripts run in worker threads (multithreaded environment),
+		* **settings of external tools is completely portable** (*),
 * Misc:
-    - all user data (settings, external tools definitions, ...) are fully portable (You can use the same user data shared via Dropbox on all supported platforms.),
+    - **all user data (settings, external tools definitions, ...) are fully portable** (You can use the same user data shared via Dropbox on all supported platforms.),
     - depends only on Qt and Scintilla,
     - relatively lightweight,
     - no JavaScript components, no bundled Chromium, no Electron, no web technologies inside,
-    - always OS
+    - always OSS.
+	
+\* All custom external tools are executed via Bash by default, so you must have Bash available in all environments where Textilosaurus is used. On Windows, Cygwin is probably the best way to use Bash.
