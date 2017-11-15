@@ -24,7 +24,7 @@
 #include <QRegularExpression>
 #include <QtConcurrent/QtConcurrentRun>
 
-ExternalTools::ExternalTools(QObject* parent) : QObject(parent), m_tools(QList<ExternalTool*>()) {}
+ExternalTools::ExternalTools(QObject* parent) : QObject(parent), m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {}
 
 ExternalTools::~ExternalTools() {
   qDeleteAll(m_tools);
@@ -77,6 +77,10 @@ void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
   int i = 0;
 
   foreach (const ExternalTool* tool, ext_tools) {
+    if (tool->isPredefined()) {
+      continue;
+    }
+
     sett_ext_tools.beginGroup(QString::number(i++));
 
     sett_ext_tools.setValue(QSL("interpreter"), tool->interpreter());
@@ -89,9 +93,6 @@ void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
 
     sett_ext_tools.endGroup();
   }
-
-  // We reload.
-  reloadTools();
 }
 
 void ExternalTools::loadPredefinedTools() {
@@ -244,37 +245,33 @@ void ExternalTools::loadCustomTools() {
     sett_ext_tools.endGroup();
   }
 
-  /*
-     ExternalTool* test = new ExternalTool(this);
+  // We add extra tools if this is the first time when app runs.
+  if (qApp->isFirstRun() && !m_sampleToolsAdded) {
+    m_sampleToolsAdded = true;
 
-     test->setScript("xmllint --format -");
-     test->setCategory(QSL("testing"));
-     test->setInput(ToolInput::SelectionDocument);
-     test->setOutput(ToolOutput::ReplaceSelectionDocument);
-     test->setName("test");
-     test->setShortcut("CTRL+T");
+    ExternalTool* ext_bash_xml = new ExternalTool(this);
 
-     m_tools.append(test);
+    ext_bash_xml->setScript("xmllint --format -");
+    ext_bash_xml->setCategory(tr("Bash (external tool examples)"));
+    ext_bash_xml->setInput(ToolInput::SelectionDocument);
+    ext_bash_xml->setOutput(ToolOutput::ReplaceSelectionDocument);
+    ext_bash_xml->setName("XML - beautify");
 
-     ExternalTool* test2 = new ExternalTool(this);
+    m_tools.append(ext_bash_xml);
 
-     test2->setScript("python -m json.tool");
-     test2->setCategory(QSL("testing"));
-     test2->setInput(ToolInput::SelectionDocument);
-     test2->setOutput(ToolOutput::ReplaceSelectionDocument);
-     test2->setName("json");
+    ExternalTool* ext_bash_json = new ExternalTool(this);
 
-     m_tools.append(test2);
+    ext_bash_json->setScript("import sys, json;\n\ndata = json.load(sys.stdin)\nprint(json.dumps(data, indent=2))");
+    ext_bash_json->setCategory(tr("Python (external tool examples)"));
+    ext_bash_json->setInterpreter(QSL("python2.7"));
+    ext_bash_json->setInput(ToolInput::SelectionDocument);
+    ext_bash_json->setOutput(ToolOutput::ReplaceSelectionDocument);
+    ext_bash_json->setName("JSON - beautify");
 
-     ExternalTool* test3 = new ExternalTool(this);
+    m_tools.append(ext_bash_json);
 
-     test3->setScript("import sys\ndata = sys.stdin.readlines()\nprint \"Counted\", len(data), \"lines.\"");
-     test3->setCategory(QSL("testing"));
-     test3->setInput(ToolInput::SelectionDocument);
-     test3->setOutput(ToolOutput::DumpToOutputWindow);
-     test3->setName("ip add");
-
-     m_tools.append(test3);*/
+    saveExternalTools(m_tools);
+  }
 }
 
 void ExternalTools::reloadTools() {

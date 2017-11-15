@@ -44,6 +44,7 @@ class ExternalTools : public QObject {
 
   private:
     QList<ExternalTool*> m_tools;
+    bool m_sampleToolsAdded;
 };
 
 #endif // EXTERNALTOOLS_H

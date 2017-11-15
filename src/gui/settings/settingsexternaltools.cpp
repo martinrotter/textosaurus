@@ -94,6 +94,7 @@ void SettingsExternalTools::saveSettings() {
 
   // We save/activate new custom tools.
   qApp->textApplication()->settings()->externalTools()->saveExternalTools(custom_tools);
+  qApp->textApplication()->settings()->externalTools()->reloadTools();
 
   onEndSaveSettings();
 }
