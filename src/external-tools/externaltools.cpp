@@ -294,7 +294,7 @@ void ExternalTools::loadCustomTools() {
 
     ExternalTool* ext_bash_seq = new ExternalTool(this);
 
-    ext_bash_seq->setScript("IFS=' '\nread a b\nfor i in $(seq $a $b); do printf \"$i \"; done");
+    ext_bash_seq->setScript("IFS=' '\nread a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
     ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
     ext_bash_seq->setInput(ToolInput::AskForInput);
     ext_bash_seq->setOutput(ToolOutput::InsertAtCursorPosition);
