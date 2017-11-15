@@ -12,6 +12,7 @@
 
 #include <functional>
 #include <QDir>
+#include <QInputDialog>
 
 #include <QAction>
 #include <QDateTime>
@@ -313,6 +314,18 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
     case ToolInput::SelectionDocument:
       data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length() + 1);
       break;
+
+    case ToolInput::AskForInput: {
+      bool ok;
+
+      data = QInputDialog::getText(qApp->mainFormWidget(), "aaa", "bbb", QLineEdit::EchoMode::Normal, QString(), &ok);
+
+      if (!ok) {
+        return;
+      }
+
+      break;
+    }
 
     case ToolInput::CurrentLine:
       data = ptr_editor->getCurLine(-1);

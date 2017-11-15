@@ -20,6 +20,9 @@ enum class ToolInput {
   // Saved file path is given as tool input.
   SavedFile,
 
+  // User is asked to enter textual input.
+  AskForInput,
+
   // This tool does not take any sort of input.
   NoInput
 };
