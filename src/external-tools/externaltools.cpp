@@ -292,6 +292,16 @@ void ExternalTools::loadCustomTools() {
 
     m_tools.append(ext_python_reverse);
 
+    ExternalTool* ext_bash_seq = new ExternalTool(this);
+
+    ext_bash_seq->setScript("IFS=' '\nread a b\nfor i in $(seq $a $b); do printf \"$i \"; done");
+    ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
+    ext_bash_seq->setInput(ToolInput::AskForInput);
+    ext_bash_seq->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_bash_seq->setName(tr("Generate sequence"));
+
+    m_tools.append(ext_bash_seq);
+
     saveExternalTools(m_tools);
   }
 }
