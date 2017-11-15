@@ -31,8 +31,6 @@ bool ExternalTool::isPredefined() const {
 QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) const {
   Q_UNUSED(editor)
 
-  // TODO: celkově dodělat efektivně.
-
   // Save script to file and make it executable.
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
 
