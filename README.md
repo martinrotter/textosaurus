@@ -42,8 +42,8 @@ Features
         * convert to HTML escaped text, 
         * insert current date/time,
 	- support for **external scripts**, which allow you to:
-	    * pass current selection/line/file/path to your script,
-		* run your script with custom interpreter (python, bash or arbitrary executable),
+	    * pass current selection/line/document/file to your script,
+		* run your script with arbitrary interpreter (Python, Bash or some other executable),
 		* get output of your script (as new file, replace selection/document, copy to clipboard),
 		* scripts run in worker threads (multithreaded environment),
 		* **settings of external tools is completely portable** (*),
