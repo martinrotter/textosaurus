@@ -270,6 +270,27 @@ void ExternalTools::loadCustomTools() {
 
     m_tools.append(ext_bash_json);
 
+    ExternalTool* ext_bash_sha256 = new ExternalTool(this);
+
+    ext_bash_sha256->setScript("sha256sum | head -c 64");
+    ext_bash_sha256->setCategory(tr("Bash (external tool examples)"));
+    ext_bash_sha256->setInput(ToolInput::SelectionDocument);
+    ext_bash_sha256->setOutput(ToolOutput::ReplaceSelectionDocument);
+    ext_bash_sha256->setName(tr("Get SHA256 sum of selected/all text"));
+
+    m_tools.append(ext_bash_sha256);
+
+    ExternalTool* ext_python_reverse = new ExternalTool(this);
+
+    ext_python_reverse->setScript("print raw_input().lower()[::-1]");
+    ext_python_reverse->setInterpreter(QSL("python2.7"));
+    ext_python_reverse->setCategory(tr("Python (external tool examples)"));
+    ext_python_reverse->setInput(ToolInput::CurrentLine);
+    ext_python_reverse->setOutput(ToolOutput::ReplaceCurrentLine);
+    ext_python_reverse->setName(tr("Reverse current line"));
+
+    m_tools.append(ext_python_reverse);
+
     saveExternalTools(m_tools);
   }
 }
