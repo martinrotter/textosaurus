@@ -20,6 +20,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   m_ui.m_cmbInput->addItem(tr("Current selection/document"), int(ToolInput::SelectionDocument));
   m_ui.m_cmbInput->addItem(tr("Current line"), int(ToolInput::CurrentLine));
   m_ui.m_cmbInput->addItem(tr("Saved file path"), int(ToolInput::SavedFile));
+  m_ui.m_cmbInput->addItem(tr("Ask user for input"), int(ToolInput::AskForInput));
   m_ui.m_cmbInput->addItem(tr("No input"), int(ToolInput::NoInput));
 
   m_ui.m_cmbOutput->addItem(tr("Replace current selection/document"), int(ToolOutput::ReplaceSelectionDocument));

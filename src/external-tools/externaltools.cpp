@@ -264,7 +264,7 @@ void ExternalTools::loadCustomTools() {
 
     ext_bash_json->setScript("import sys, json;\n\ndata = json.load(sys.stdin)\nprint(json.dumps(data, indent=2))");
     ext_bash_json->setCategory(tr("Python (external tool examples)"));
-    ext_bash_json->setInterpreter(QSL("python2.7"));
+    ext_bash_json->setInterpreter(QSL("python3.6"));
     ext_bash_json->setInput(ToolInput::SelectionDocument);
     ext_bash_json->setOutput(ToolOutput::ReplaceSelectionDocument);
     ext_bash_json->setName("JSON - beautify");
@@ -284,7 +284,7 @@ void ExternalTools::loadCustomTools() {
     ExternalTool* ext_python_reverse = new ExternalTool(this);
 
     ext_python_reverse->setScript("print raw_input().lower()[::-1]");
-    ext_python_reverse->setInterpreter(QSL("python2.7"));
+    ext_python_reverse->setInterpreter(QSL("python3.6"));
     ext_python_reverse->setCategory(tr("Python (external tool examples)"));
     ext_python_reverse->setInput(ToolInput::CurrentLine);
     ext_python_reverse->setOutput(ToolOutput::ReplaceCurrentLine);
@@ -318,7 +318,8 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
     case ToolInput::AskForInput: {
       bool ok;
 
-      data = QInputDialog::getText(qApp->mainFormWidget(), "aaa", "bbb", QLineEdit::EchoMode::Normal, QString(), &ok);
+      data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
+                                   tr("Input"), QLineEdit::EchoMode::Normal, QString(), &ok);
 
       if (!ok) {
         return;
