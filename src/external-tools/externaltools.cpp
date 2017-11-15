@@ -298,12 +298,23 @@ void ExternalTools::loadCustomTools() {
 
     ext_bash_seq->setScript("IFS=' '\nread a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
     ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
-    ext_bash_seq->setPrompt(tr("Input sequence bounds (for example \"0 10\"):"));
+    ext_bash_seq->setPrompt(tr("Enter sequence bounds (for example \"0 10\"):"));
     ext_bash_seq->setInput(ToolInput::AskForInput);
     ext_bash_seq->setOutput(ToolOutput::InsertAtCursorPosition);
     ext_bash_seq->setName(tr("Generate sequence"));
 
     m_tools.append(ext_bash_seq);
+
+    ExternalTool* ext_python_eval = new ExternalTool(this);
+
+    ext_python_eval->setScript("import sys\nimport math\n\nprint(eval(sys.stdin.read()))");
+    ext_python_eval->setCategory(tr("Python (external tool examples)"));
+    ext_python_eval->setPrompt(tr("Enter Python code:"));
+    ext_python_eval->setInput(ToolInput::AskForInput);
+    ext_python_eval->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_python_eval->setName(tr("Run Python code"));
+
+    m_tools.append(ext_python_eval);
 
     saveExternalTools(m_tools);
   }
