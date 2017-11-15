@@ -66,6 +66,7 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
     return QPair<QString, bool>(QString::fromUtf8(tool_output), bash_process.exitCode() == 0);
   }
   else {
+    bash_process.kill();
     return QPair<QString, bool>(bash_process.errorString(), false);
   }
 }

@@ -23,6 +23,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   m_ui.m_cmbInput->addItem(tr("No input"), int(ToolInput::NoInput));
 
   m_ui.m_cmbOutput->addItem(tr("Replace current selection/document"), int(ToolOutput::ReplaceSelectionDocument));
+  m_ui.m_cmbOutput->addItem(tr("Replace current line"), int(ToolOutput::ReplaceCurrentLine));
   m_ui.m_cmbOutput->addItem(tr("Insert at cursor position"), int(ToolOutput::InsertAtCursorPosition));
   m_ui.m_cmbOutput->addItem(tr("Dump to output window"), int(ToolOutput::DumpToOutputWindow));
   m_ui.m_cmbOutput->addItem(tr("Copy to clipboard"), int(ToolOutput::CopyToClipboard));

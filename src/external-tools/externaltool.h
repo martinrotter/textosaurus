@@ -29,6 +29,9 @@ enum class ToolOutput {
   // WARNING: This is very bad idea if current document/selection is big.
   ReplaceSelectionDocument,
 
+  // Line containing care is replaced.
+  ReplaceCurrentLine,
+
   // Tool output is inserted at cursor position.
   // WARNING: This is very bad idea if tool output is big.
   InsertAtCursorPosition,

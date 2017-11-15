@@ -682,9 +682,24 @@ void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEd
   }
 
   switch (tool->output()) {
-    case ToolOutput::InsertAtCursorPosition:
-      editor->insertText(editor->currentPos(), output_text.toUtf8().constData());
+    case ToolOutput::InsertAtCursorPosition: {
+      QByteArray output_utf = output_text.toUtf8();
+
+      editor->insertText(editor->currentPos(), output_utf.constData());
+      editor->gotoPos(editor->currentPos() + output_utf.size());
       break;
+    }
+
+    case ToolOutput::ReplaceCurrentLine: {
+      QByteArray output_utf = output_text.toUtf8();
+      auto line = editor->lineFromPosition(editor->currentPos());
+      auto start_line = editor->positionFromLine(line);
+      auto end_line = editor->lineEndPosition(line);
+
+      editor->setSel(start_line, end_line);
+      editor->replaceSel(output_utf);
+      break;
+    }
 
     case ToolOutput::CopyToClipboard:
       qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
