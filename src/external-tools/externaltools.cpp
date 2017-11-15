@@ -309,6 +309,7 @@ void ExternalTools::loadCustomTools() {
 
     ext_python_eval->setScript("import sys\nimport math\n\nprint(eval(sys.stdin.read()))");
     ext_python_eval->setCategory(tr("Python (external tool examples)"));
+    ext_python_eval->setInterpreter(QSL("python3.6"));
     ext_python_eval->setPrompt(tr("Enter Python code:"));
     ext_python_eval->setInput(ToolInput::AskForInput);
     ext_python_eval->setOutput(ToolOutput::InsertAtCursorPosition);
