@@ -37,7 +37,7 @@ class SettingsPanel : public QWidget {
 
     // Sets this settings panel as dirty (some settings are changed) and emits the signal.
     // NOTE: This will be probably called by subclasses when user changes some stuff.
-    void dirtifySettings();
+    virtual void dirtifySettings();
 
   signals:
     void settingsChanged();

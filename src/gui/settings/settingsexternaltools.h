@@ -17,6 +17,9 @@ class SettingsExternalTools : public SettingsPanel {
     void loadSettings();
     void saveSettings();
 
+  protected slots:
+    void dirtifySettings();
+
   private slots:
     void addNewTool();
     void removeSelectedTool();
@@ -27,6 +30,7 @@ class SettingsExternalTools : public SettingsPanel {
 
   private:
     Ui::SettingsExternalTools m_ui;
+    bool m_isSwitchingSelectedTool;
 };
 
 inline QString SettingsExternalTools::title() const {

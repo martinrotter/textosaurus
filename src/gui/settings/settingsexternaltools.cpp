@@ -11,7 +11,7 @@
 #include "miscellaneous/textapplicationsettings.h"
 
 SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent)
-  : SettingsPanel(settings, parent) {
+  : SettingsPanel(settings, parent), m_isSwitchingSelectedTool(false) {
   m_ui.setupUi(this);
   m_ui.m_shortcut->hideResetButton();
   m_ui.m_btnAdd->setIcon(qApp->icons()->fromTheme(QSL("list-add")));
@@ -34,23 +34,19 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   connect(m_ui.m_btnDelete, &PlainToolButton::clicked, this, &SettingsExternalTools::removeSelectedTool);
   connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::updateToolListNames);
 
-  /*
-     connect(m_ui.m_txtFullScript, &QPlainTextEdit::textChanged, this, &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_txtSimpleCommand, &QLineEdit::textEdited, this, &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::updateToolListNames);
-     connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_txtCategory, &QLineEdit::textEdited, this, &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_toolBoxScript, &QToolBox::currentChanged, this, &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_cmbInput,
+  connect(m_ui.m_txtFullScript, &QPlainTextEdit::textChanged, this, &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_txtTitle, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_txtCategory, &QLineEdit::textEdited, this, &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_cmbInput,
           static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this,
-          &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_cmbOutput,
+          &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_cmbOutput,
           static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this,
-          &SettingsExternalTools::saveCurrentTool);
-     connect(m_ui.m_shortcut, &ShortcutCatcher::shortcutChanged, this, &SettingsExternalTools::saveCurrentTool);
-   */
+          &SettingsExternalTools::dirtifySettings);
+  connect(m_ui.m_shortcut, &ShortcutCatcher::shortcutChanged, this, &SettingsExternalTools::dirtifySettings);
 
   GuiUtilities::setLabelAsNotice(*m_ui.m_lblInfo, true);
   displayToolDetails(nullptr, nullptr);
@@ -78,8 +74,9 @@ void SettingsExternalTools::loadSettings() {
 void SettingsExternalTools::saveSettings() {
   onBeginSaveSettings();
 
-  // For sure, save first.
+  m_isSwitchingSelectedTool = true;
   saveCurrentTool();
+  m_isSwitchingSelectedTool = false;
 
   onEndSaveSettings();
 }
@@ -122,6 +119,8 @@ void SettingsExternalTools::saveToolChanges(QListWidgetItem* item) {
 void SettingsExternalTools::displayToolDetails(QListWidgetItem* current, QListWidgetItem* previous) {
   m_ui.m_btnDelete->setEnabled(current != nullptr);
 
+  m_isSwitchingSelectedTool = true;
+
   // We save previous tool first.
   if (previous != nullptr) {
     saveToolChanges(previous);
@@ -146,5 +145,13 @@ void SettingsExternalTools::displayToolDetails(QListWidgetItem* current, QListWi
   }
   else {
     m_ui.m_toolDetails->setEnabled(false);
+  }
+
+  m_isSwitchingSelectedTool = false;
+}
+
+void SettingsExternalTools::dirtifySettings() {
+  if (!m_isSwitchingSelectedTool) {
+    SettingsPanel::dirtifySettings();
   }
 }
