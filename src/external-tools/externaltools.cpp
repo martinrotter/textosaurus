@@ -317,6 +317,18 @@ void ExternalTools::loadCustomTools() {
 
     m_tools.append(ext_python_eval);
 
+    ExternalTool* ext_bash_garbage = new ExternalTool(this);
+
+    ext_bash_garbage->setScript("read count\n\n"
+                                "tr -dc a-z1-4 </dev/urandom | tr 1-2 ' \n' | awk 'length==0 || length>50' | tr 3-4 ' ' | sed 's/^ *//' | cat -s | sed 's/ / /g' | fmt | head -n $count");
+    ext_bash_garbage->setCategory(tr("Bash (external tool examples)"));
+    ext_bash_garbage->setPrompt(tr("Enter number of lines:"));
+    ext_bash_garbage->setInput(ToolInput::AskForInput);
+    ext_bash_garbage->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_bash_garbage->setName(tr("Generate garbage text"));
+
+    m_tools.append(ext_bash_garbage);
+
     saveExternalTools(m_tools);
   }
 }
