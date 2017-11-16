@@ -3,6 +3,7 @@
 #include "gui/dialogs/formsettings.h"
 
 #include "definitions/definitions.h"
+#include "gui/guiutilities.h"
 #include "gui/messagebox.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
@@ -20,9 +21,8 @@ FormSettings::FormSettings(QWidget& parent)
   : QDialog(&parent), m_panels(QList<SettingsPanel*>()), m_settings(*qApp->settings()) {
   m_ui.setupUi(this);
 
-  // Set flags and attributes.
-  setWindowFlags(Qt::MSWindowsFixedSizeDialogHint | Qt::Dialog | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
-  setWindowIcon(qApp->icons()->fromTheme(QSL("emblem-system")));
+  GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("emblem-system")));
+
   m_btnApply = m_ui.m_buttonBox->button(QDialogButtonBox::Apply);
   m_btnApply->setEnabled(false);
 
@@ -30,6 +30,7 @@ FormSettings::FormSettings(QWidget& parent)
   connect(m_ui.m_buttonBox, &QDialogButtonBox::accepted, this, &FormSettings::saveSettings);
   connect(m_ui.m_buttonBox, &QDialogButtonBox::rejected, this, &FormSettings::cancelSettings);
   connect(m_btnApply, &QPushButton::clicked, this, &FormSettings::applySettings);
+
   addSettingsPanel(new SettingsGeneral(&m_settings, this));
   addSettingsPanel(new SettingsGui(&m_settings, this));
   addSettingsPanel(new SettingsLocalization(&m_settings, this));
@@ -37,6 +38,7 @@ FormSettings::FormSettings(QWidget& parent)
   addSettingsPanel(new SettingsBrowserMail(&m_settings, this));
   addSettingsPanel(new SettingsEditor(&m_settings, this));
   addSettingsPanel(new SettingsExternalTools(&m_settings, this));
+
   m_ui.m_listSettings->setCurrentRow(0);
 }
 

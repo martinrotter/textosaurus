@@ -14,6 +14,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   : SettingsPanel(settings, parent), m_isSwitchingSelectedTool(false) {
   m_ui.setupUi(this);
   m_ui.m_shortcut->hideResetButton();
+  m_ui.m_txtFullScript->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   m_ui.m_btnAdd->setIcon(qApp->icons()->fromTheme(QSL("list-add")));
   m_ui.m_btnDelete->setIcon(qApp->icons()->fromTheme(QSL("list-remove")));
 
