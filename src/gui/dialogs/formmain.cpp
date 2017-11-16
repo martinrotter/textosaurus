@@ -162,15 +162,11 @@ void FormMain::switchVisibility() {
 }
 
 void FormMain::display() {
-  // Display the window and make sure it is raised on top.
+  setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
   show();
   activateWindow();
   raise();
 
-  // Make sure window is not minimized.
-  setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-
-  // Raise alert event. Check the documentation for more info on this.
   Application::alert(this);
 }
 
