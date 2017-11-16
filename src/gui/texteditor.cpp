@@ -62,6 +62,10 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   emit loadedFromFile(m_filePath);
 }
 
+void TextEditor::loadFromString(const QString& contents) {
+  setText(contents.toUtf8().constData());
+}
+
 void TextEditor::closeEvent(QCloseEvent* event) {
   bool ok = false;
 

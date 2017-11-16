@@ -42,6 +42,8 @@ class TextEditor : public ScintillaEdit {
     // Opens given file in this text editor, file is opened for reading.
     void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer);
 
+    void loadFromString(const QString& contents);
+
   protected:
     void closeEvent(QCloseEvent* event);
 

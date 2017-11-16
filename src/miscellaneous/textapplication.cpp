@@ -69,6 +69,14 @@ bool TextApplication::anyModifiedEditor() const {
   return false;
 }
 
+void TextApplication::loadTextEditorFromString(const QString& contents) {
+  TextEditor* new_editor = createTextEditor();
+
+  m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
+
+  new_editor->loadFromString(contents);
+}
+
 void TextApplication::loadTextEditorFromFile(const QString& file_path,
                                              const QString& explicit_encoding,
                                              const QString& file_filter) {
@@ -465,21 +473,46 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   if (event->type() == QEvent::Type::Drop) {
     QDropEvent* drop_event = static_cast<QDropEvent*>(event);
 
-    if (drop_event->mimeData()->hasText()) {
-      if (!drop_event->mimeData()->hasUrls()) {
-        return false;
-      }
-      else {
-        // We do nothing and event is propagated.
-        drop_event->accept();
+    if (obj->metaObject()->className() == QSL("FormMain")) {
+      // We dropped something to some other widget, probably main window.
+      if (drop_event->mimeData()->hasText()) {
+        if (drop_event->mimeData()->hasUrls()) {
+          // We maybe dropped file.
+          drop_event->accept();
 
-        QString file_path = drop_event->mimeData()->urls().first().toLocalFile();
+          QString file_path = drop_event->mimeData()->urls().first().toLocalFile();
 
-        if (QFile::exists(file_path)) {
-          loadTextEditorFromFile(file_path);
+          if (QFile::exists(file_path)) {
+            loadTextEditorFromFile(file_path);
+          }
+
+          return true;
         }
+        else {
+          loadTextEditorFromString(drop_event->mimeData()->text());
+          return false;
+        }
+      }
+    }
+    else {
+      // We probably dropped something to text editor widget.
+      if (drop_event->mimeData()->hasText()) {
+        if (!drop_event->mimeData()->hasUrls()) {
+          // Text editor component will consume this, it will insert
+          // the dragged text.
+          return false;
+        }
+        else {
+          drop_event->accept();
 
-        return true;
+          QString file_path = drop_event->mimeData()->urls().first().toLocalFile();
+
+          if (QFile::exists(file_path)) {
+            loadTextEditorFromFile(file_path);
+          }
+
+          return true;
+        }
       }
     }
   }
@@ -606,6 +639,10 @@ void TextApplication::openTextFile(QAction* action) {
 }
 
 void TextApplication::onEditorTabSwitched(int index) {
+  if (index < 0) {
+    return;
+  }
+
   TextEditor* editor = m_tabEditors->textEditorAt(index);
 
   if (editor != nullptr) {
