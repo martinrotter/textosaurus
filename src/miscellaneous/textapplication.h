@@ -68,6 +68,9 @@ class TextApplication : public QObject {
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
 
+  protected:
+    bool eventFilter(QObject* obj, QEvent* event);
+
   private slots:
 
     // Menu stuff.

@@ -153,6 +153,8 @@ int TextApplication::addTextEditor(TextEditor* editor) {
 TextEditor* TextApplication::createTextEditor() {
   TextEditor* editor = new TextEditor(this, m_tabEditors);
 
+  editor->viewport()->installEventFilter(this);
+
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestedVisibility, this, &TextApplication::onEditorRequestedVisibility);
@@ -368,6 +370,8 @@ void TextApplication::createConnections() {
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
                                   StatusBar* status_bar, ToolBox* tool_box) {
+  main_form->installEventFilter(this);
+
   m_tabEditors = tab_widget;
   m_statusBar = status_bar;
   m_toolBox = tool_box;
@@ -453,6 +457,34 @@ void TextApplication::quit(bool* ok) {
   }
 
   *ok = true;
+}
+
+bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
+  Q_UNUSED(obj)
+
+  if (event->type() == QEvent::Type::Drop) {
+    QDropEvent* drop_event = static_cast<QDropEvent*>(event);
+
+    if (drop_event->mimeData()->hasText()) {
+      if (!drop_event->mimeData()->hasUrls()) {
+        return false;
+      }
+      else {
+        // We do nothing and event is propagated.
+        drop_event->accept();
+
+        QString file_path = drop_event->mimeData()->urls().first().toLocalFile();
+
+        if (QFile::exists(file_path)) {
+          loadTextEditorFromFile(file_path);
+        }
+
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 void TextApplication::changeLexer(QAction* act) {

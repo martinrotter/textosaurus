@@ -24,6 +24,10 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
+  /*connect(this, &TextEditor::uriDropped, this, [this](const QString& uri) {
+     auto aa = 5;
+     });*/
+
   // Set constant settings.
   setCodePage(SC_CP_UTF8);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);

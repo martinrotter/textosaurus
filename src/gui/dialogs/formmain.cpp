@@ -140,6 +140,14 @@ void FormMain::switchFullscreenMode() {
   }
 }
 
+void FormMain::dragEnterEvent(QDragEnterEvent* event) {
+  event->accept();
+}
+
+void FormMain::dropEvent(QDropEvent* event) {
+  auto test = 5;
+}
+
 void FormMain::closeEvent(QCloseEvent* event) {
   bool should_stop = true;
   emit closeRequested(&should_stop);
