@@ -14,12 +14,8 @@ class SettingsBrowserMail : public SettingsPanel {
     explicit SettingsBrowserMail(Settings* settings, QWidget* parent = nullptr);
     virtual ~SettingsBrowserMail();
 
-    inline QString title() const {
-      return tr("Web browser & e-mail & proxy");
-    }
-
+    QString title() const;
     void loadSettings();
-
     void saveSettings();
 
   private slots:
@@ -33,5 +29,9 @@ class SettingsBrowserMail : public SettingsPanel {
   private:
     Ui::SettingsBrowserMail* m_ui;
 };
+
+inline QString SettingsBrowserMail::title() const {
+  return tr("Proxy");
+}
 
 #endif // SETTINGSBROWSERMAIL_H

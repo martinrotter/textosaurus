@@ -14,9 +14,7 @@ class SettingsShortcuts : public SettingsPanel {
     explicit SettingsShortcuts(Settings* settings, QWidget* parent = nullptr);
     virtual ~SettingsShortcuts();
 
-    inline QString title() const {
-      return tr("Keyboard shortcuts");
-    }
+    QString title() const;
 
     void loadSettings();
 
@@ -25,5 +23,9 @@ class SettingsShortcuts : public SettingsPanel {
   private:
     Ui::SettingsShortcuts* m_ui;
 };
+
+inline QString SettingsShortcuts::title() const {
+  return tr("Keyboard shortcuts");
+}
 
 #endif // SETTINGSSHORTCUTS_H
