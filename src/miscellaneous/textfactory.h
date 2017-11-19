@@ -24,6 +24,7 @@ class TextFactory {
     static QDateTime parseDateTime(const QString& date_time);
     static void initializeEncodingMenu(QMenu* const menu, bool checkable = false);
     static QByteArray detectEncoding(const QString& file_path);
+    static int detectEol(const QString& file_path);
 
     // Converts 1970-epoch miliseconds to date/time.
     // NOTE: This apparently returns date/time in localtime.

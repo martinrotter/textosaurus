@@ -8,6 +8,7 @@
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
 
+#include "scintilla/include/Scintilla.h"
 #include "uchardet/uchardet.h"
 
 #include <QDir>
@@ -185,6 +186,23 @@ QByteArray TextFactory::detectEncoding(const QString& file_path) {
   }
   else {
     return encoding_name;
+  }
+}
+
+int TextFactory::detectEol(const QString& file_path) {
+  QByteArray file_head_chunk = IOFactory::readFileRawChunk(file_path, FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION);
+
+  if (file_head_chunk.contains(QString("\r\n").toLocal8Bit().constData())) {
+    return SC_EOL_CRLF;
+  }
+  else if (file_head_chunk.contains(QString("\n").toLocal8Bit().constData())) {
+    return SC_EOL_LF;
+  }
+  else if (file_head_chunk.contains(QString("\r").toLocal8Bit().constData())) {
+    return SC_EOL_CR;
+  }
+  else {
+    return Editor::EolModeDef;
   }
 }
 
