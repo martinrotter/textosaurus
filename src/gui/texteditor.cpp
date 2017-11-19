@@ -24,19 +24,26 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
-  /*connect(this, &TextEditor::uriDropped, this, [this](const QString& uri) {
-     auto aa = 5;
-     });*/
+  connect(this, &TextEditor::marginClicked, this, [this](int position, int modifiers, int margin) {
+    Q_UNUSED(modifiers)
+
+    const int line_number = lineFromPosition(position);
+
+    switch (margin) {
+      case MARGIN_FOLDING:
+        toggleFold(line_number);
+        break;
+
+      default:
+        break;
+    }
+  });
 
   // Set constant settings.
   setCodePage(SC_CP_UTF8);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
   setEndAtLastLine(false);
-
-  //setBufferedDraw(true);
-  //setTechnology(SC_TECHNOLOGY_DIRECTWRITEDC);
-  //setFontQuality(SC_EFF_QUALITY_LCD_OPTIMIZED);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
@@ -130,6 +137,28 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
       styleSetFore(i, 0);
     }
   }
+
+  // TODO: Setup folding, enable if some lexer is active, disable otherwise.
+  if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER) {
+    // We activate folding.
+    setProperty("fold", "1");
+    setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+  }
+  else {
+    setProperty("fold", "0");
+    setMarginWidthN(MARGIN_FOLDING, 0);
+  }
+
+  setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED);
+  setMarginSensitiveN(MARGIN_FOLDING, true);
+  setMarginMaskN(MARGIN_FOLDING, SC_MASK_FOLDERS);
+  markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
+  markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
+  markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
+  markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
+  markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
+  markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
+  markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
 
   colourise(0, -1);
 }
