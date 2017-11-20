@@ -289,7 +289,8 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
 
     renameEditor(editor);
     updateToolBarFromEditor(editor, true);
-    updateStatusBarFromEditor(editor);
+
+    //updateStatusBarFromEditor(editor);
   }
 }
 

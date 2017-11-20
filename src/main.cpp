@@ -24,7 +24,6 @@
 
 #if defined (Q_OS_MAC)
 extern void disableWindowTabbing();
-
 #endif
 
 int main(int argc, char* argv[]) {
