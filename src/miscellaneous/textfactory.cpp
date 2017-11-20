@@ -202,7 +202,7 @@ int TextFactory::detectEol(const QString& file_path) {
     return SC_EOL_CR;
   }
   else {
-    return Editor::EolModeDef;
+    return -1;
   }
 }
 

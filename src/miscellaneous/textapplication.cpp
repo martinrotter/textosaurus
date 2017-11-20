@@ -84,6 +84,15 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
 
   QString encoding;
   Lexer default_lexer;
+  int eol_mode = TextFactory::detectEol(file_path);
+
+  if (eol_mode < 0) {
+    qWarning("Auto-detection of EOL mode for file '%s' failed, using app default.", qPrintable(file_path));
+    eol_mode = settings()->eolMode();
+  }
+  else {
+    qDebug("Auto-detected EOL mode is '%d'.", eol_mode);
+  }
 
   if (explicit_encoding.isEmpty()) {
     qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
@@ -148,7 +157,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
 
   TextEditor* new_editor = createTextEditor();
 
-  new_editor->loadFromFile(file, encoding, default_lexer);
+  new_editor->loadFromFile(file, encoding, default_lexer, eol_mode);
 
   m_settings->setLoadSaveDefaultDirectory(file_path);
   m_tabEditors->setCurrentIndex(addTextEditor(new_editor));

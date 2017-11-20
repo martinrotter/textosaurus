@@ -47,10 +47,12 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   setEndAtLastLine(false);
 }
 
-void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer) {
+void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {
   m_filePath = QDir::toNativeSeparators(file.fileName());
   m_encoding = encoding.toLocal8Bit();
   m_lexer = default_lexer;
+
+  setEOLMode(initial_eol_mode);
 
   QTextCodec* codec_for_encoding = QTextCodec::codecForName(m_encoding);
 

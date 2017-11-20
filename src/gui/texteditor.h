@@ -40,7 +40,7 @@ class TextEditor : public ScintillaEdit {
     void closeEditor(bool* ok);
 
     // Opens given file in this text editor, file is opened for reading.
-    void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer);
+    void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode);
 
     void loadFromString(const QString& contents);
 

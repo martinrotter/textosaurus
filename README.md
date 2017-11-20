@@ -31,6 +31,7 @@ Features
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
     - switchable EOL mode for new documents,
+    - EOL mode auto-detection,
     - **syntax highlighting** for many text formats,
 	- inituitive filtering for menu of available syntax highlighters,
     - conversion of existing EOLs,

@@ -12,6 +12,7 @@
 #define MARGIN_WIDTH_FOLDING  18
 
 #define FORMAT_DATETIME_OUTPUT                      "yyyy-MM-dd HH:mm:ss"
+#define FILE_CHUNK_LENGTH_FOR_EOL_DETECTION         1024
 #define FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION    2048
 #define DEFAULT_TEXT_FILE_ENCODING            "UTF-8"
 #define BIG_TEXT_FILE_SIZE                    qint64(50000000)
@@ -26,7 +27,7 @@
 #define SPACER_ACTION_NAME                    "spacer"
 #define SEPARATOR_ACTION_NAME                 "separator"
 #define DOWNLOADER_ICON_SIZE                  48
-#define MAX_RECENT_FILES                      15
+#define MAX_RECENT_FILES                      25
 #define ENCRYPTION_FILE_NAME                  "key.private"
 
 #define EXT_TOOLS_CONFIG                      "external_tools.ini"
