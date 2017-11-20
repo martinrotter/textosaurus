@@ -96,11 +96,9 @@ void TextApplicationSettings::setWordWrapEnabled(bool enabled) {
   emit settingsChanged(true, false);
 }
 
-void TextApplicationSettings::setEolModeFromAction(QAction* act) {
-  int new_mode = act->data().toInt();
-
-  qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, new_mode);
-  emit settingsChanged(true, false);
+void TextApplicationSettings::setEolMode(int mode) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::EolMode, mode);
+  emit settingsChanged(false, false);
 }
 
 SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {

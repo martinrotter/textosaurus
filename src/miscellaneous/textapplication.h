@@ -62,10 +62,6 @@ class TextApplication : public QObject {
     void saveAllEditors();
     void closeAllUnmodifiedEditors();
 
-    // Loads initial state of text application, including session restoring,
-    // setup initial GUI state for actions/toolbar/statusbar etc.
-    void loadState();
-
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
 
@@ -73,8 +69,7 @@ class TextApplication : public QObject {
     bool eventFilter(QObject* obj, QEvent* event);
 
   private slots:
-
-    // Menu stuff.
+    void changeEolMode(QAction* act);
     void changeEncoding(QAction* act);
     void changeLexer(QAction* act);
     void fillRecentFiles();
@@ -89,6 +84,8 @@ class TextApplication : public QObject {
     void onEditorTabSwitched(int index = -1);
 
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
+    void setupEolMenu();
+    void updateEolMenu(int eol_mode);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
 
@@ -96,6 +93,11 @@ class TextApplication : public QObject {
     void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text, bool success);
 
   private:
+
+    // Loads initial state of text application, including session restoring,
+    // setup initial GUI state for actions/toolbar/statusbar etc.
+    void loadState();
+
     void createConnections();
     void renameEditor(TextEditor* editor);
     void markEditorModified(TextEditor* editor, bool modified);

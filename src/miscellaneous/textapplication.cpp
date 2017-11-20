@@ -232,6 +232,36 @@ void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, boo
   }
 }
 
+void TextApplication::setupEolMenu() {
+  TextEditor* editor = currentEditor();
+
+  if (currentEditor() != nullptr) {
+    updateEolMenu(editor->eOLMode());
+  }
+  else {
+    updateEolMenu(settings()->eolMode());
+  }
+}
+
+void TextApplication::updateEolMenu(int eol_mode) {
+  switch (eol_mode) {
+    case SC_EOL_CRLF:
+      m_actionEolWindows->setChecked(true);
+      break;
+
+    case SC_EOL_LF:
+      m_actionEolUnix->setChecked(true);
+      break;
+
+    case SC_EOL_CR:
+      m_actionEolMac->setChecked(true);
+      break;
+
+    default:
+      break;
+  }
+}
+
 void TextApplication::onEditorRequestedVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
@@ -336,7 +366,8 @@ void TextApplication::createConnections() {
   connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
   // Actions and menus.
-  connect(m_menuEolMode, &QMenu::triggered, m_settings, &TextApplicationSettings::setEolModeFromAction);
+  connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
+  connect(m_menuEolMode, &QMenu::aboutToShow, this, &TextApplication::setupEolMenu);
   connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
@@ -436,22 +467,6 @@ void TextApplication::loadState() {
   m_actionViewEols->setChecked(m_settings->viewEols());
   m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 
-  // Setup GUI of actions.
-  switch (m_settings->eolMode()) {
-    case SC_EOL_CR:
-      m_actionEolMac->setChecked(true);
-      break;
-
-    case SC_EOL_CRLF:
-      m_actionEolWindows->setChecked(true);
-      break;
-
-    case SC_EOL_LF:
-    default:
-      m_actionEolUnix->setChecked(true);
-      break;
-  }
-
   m_settings->externalTools()->reloadTools();
 }
 
@@ -518,6 +533,25 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   }
 
   return false;
+}
+
+void TextApplication::changeEolMode(QAction* act) {
+  TextEditor* editor = currentEditor();
+  int new_mode = act->data().toInt();
+
+  if (editor != nullptr) {
+    // We change EOL mode of existing editor.
+    editor->setEOLMode(new_mode);
+
+    if (!editor->filePath().isEmpty()) {
+      // If user has sime editor opened but it is not "saved file",
+      // then we make sure that global EOL mode is changed too.
+      return;
+    }
+  }
+
+  // We change default EOL mode for new documents.
+  settings()->setEolMode(new_mode);
 }
 
 void TextApplication::changeLexer(QAction* act) {
@@ -669,6 +703,9 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       m_actionEditBack->setEnabled(editor->canUndo());
       m_actionEditForward->setEnabled(editor->canRedo());
       m_actionFileSaveAll->setEnabled(true);
+
+      // We display editor default EOL mode.
+      updateEolMenu(editor->eOLMode());
     }
     else {
       // No editor selected.
@@ -679,6 +716,9 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       m_actionEditBack->setEnabled(false);
       m_actionEditForward->setEnabled(false);
       m_actionFileSaveAll->setEnabled(false);
+
+      // We display app default EOL mode.
+      updateEolMenu(settings()->eolMode());
     }
   }
 }

@@ -37,7 +37,7 @@ class TextApplicationSettings : public QObject {
     void setViewEols(bool view);
     void setLoadSaveDefaultDirectory(const QString& file_path);
     void setWordWrapEnabled(bool enabled);
-    void setEolModeFromAction(QAction* act);
+    void setEolMode(int mode);
 
   signals:
 

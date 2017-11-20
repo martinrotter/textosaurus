@@ -39,7 +39,8 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
     }
   });
 
-  // Set constant settings.
+  // Set initial settings.
+  setEOLMode(m_textApp->settings()->eolMode());
   setCodePage(SC_CP_UTF8);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
@@ -106,7 +107,6 @@ void TextEditor::reloadFont() {
 }
 
 void TextEditor::reloadSettings() {
-  setEOLMode(m_textApp->settings()->eolMode());
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
   setViewEOL(m_textApp->settings()->viewEols());
   setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
