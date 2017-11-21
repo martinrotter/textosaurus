@@ -14,6 +14,7 @@ class StatusBar : public QStatusBar {
     explicit StatusBar(QWidget* parent = nullptr);
     virtual ~StatusBar();
 
+    void setEol(int eol_type);
     void setEncoding(const QString& encoding);
     void setFileType(const QString& file_type);
 

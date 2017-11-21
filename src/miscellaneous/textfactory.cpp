@@ -206,6 +206,22 @@ int TextFactory::detectEol(const QString& file_path) {
   }
 }
 
+QString TextFactory::eolDescriptionFromCode(int eol_code) {
+  switch (eol_code) {
+    case SC_EOL_CRLF:
+      return QSL("CRLF");
+
+    case SC_EOL_CR:
+      return QSL("CR");
+
+    case SC_EOL_LF:
+      return QSL("LF");
+
+    default:
+      return QString();
+  }
+}
+
 QDateTime TextFactory::parseDateTime(qint64 milis_from_epoch) {
   return QDateTime::fromMSecsSinceEpoch(milis_from_epoch);
 }

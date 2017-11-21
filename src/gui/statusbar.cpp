@@ -3,6 +3,7 @@
 #include "gui/statusbar.h"
 
 #include "definitions/definitions.h"
+#include "miscellaneous/textfactory.h"
 
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), m_lblInfo(new QLabel(this)), m_infoEncoding(QString()),
   m_infoEol(QString()), m_infoLexer(QString()) {
@@ -15,6 +16,10 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), m_lblInfo(new QLabel
 
 StatusBar::~StatusBar() {
   qDebug("Destroying StatusBar instance.");
+}
+
+void StatusBar::setEol(int eol_type) {
+  m_infoEol = TextFactory::eolDescriptionFromCode(eol_type);
 }
 
 void StatusBar::setEncoding(const QString& encoding) {
