@@ -15,6 +15,7 @@
 #include <QInputDialog>
 
 #include <QAction>
+#include <QClipboard>
 #include <QDateTime>
 #include <QFuture>
 #include <QFutureWatcher>
@@ -25,14 +26,17 @@
 #include <QRegularExpression>
 #include <QtConcurrent/QtConcurrentRun>
 
-ExternalTools::ExternalTools(QObject* parent) : QObject(parent), m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {}
+ExternalTools::ExternalTools(TextApplication* parent) : QObject(parent), m_application(parent), m_tools(QList<ExternalTool*>()),
+  m_sampleToolsAdded(false) {
+  connect(this, &ExternalTools::toolFinished, this, &ExternalTools::onToolFinished);
+}
 
 ExternalTools::~ExternalTools() {
   qDeleteAll(m_tools);
   qDebug("Destroying ExternalTools.");
 }
 
-QList<QAction*> ExternalTools::generateActions(QWidget* parent, TextApplication* app) const {
+QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
   QList<QAction*> actions;
   QMap<QString, QMenu*> categories;
 
@@ -59,8 +63,7 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent, TextApplication*
     act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
     act->setShortcutContext(Qt::ApplicationShortcut);
 
-    connect(act, &QAction::triggered, app, &TextApplication::runSelectedExternalTool);
-    connect(tool, &ExternalTool::toolFinished, this, &ExternalTools::onToolFinished);
+    connect(act, &QAction::triggered, this, &ExternalTools::runSelectedExternalTool);
   }
 
   return actions;
@@ -94,6 +97,17 @@ void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
     sett_ext_tools.setValue(QSL("prompt"), tool->prompt());
 
     sett_ext_tools.endGroup();
+  }
+}
+
+void ExternalTools::runSelectedExternalTool() {
+  TextEditor* editor = m_application->currentEditor();
+
+  if (editor != nullptr) {
+    ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
+
+    m_application->toolBox()->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool...").arg(tool_to_run->name()));
+    runTool(tool_to_run, editor);
   }
 }
 
@@ -397,7 +411,74 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
   });
 }
 
-void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QString& output_text, bool success) {
-  ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
-  emit toolFinished(tool, editor, output_text, success);
+void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor>& editor, const QString& output_text, bool success) {
+  if (editor.isNull()) {
+    qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
+    m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
+                                            tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
+                                            QMessageBox::Icon::Critical);
+    return;
+  }
+
+  if (!success) {
+    m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
+                                            tr("Tool '%1' reports error: %2.").arg(tool->name(), output_text),
+                                            QMessageBox::Icon::Critical);
+    return;
+  }
+
+  switch (tool->output()) {
+    case ToolOutput::InsertAtCursorPosition: {
+      QByteArray output_utf = output_text.toUtf8();
+
+      editor->insertText(editor->currentPos(), output_utf.constData());
+      editor->gotoPos(editor->currentPos() + output_utf.size());
+      break;
+    }
+
+    case ToolOutput::ReplaceCurrentLine: {
+      QByteArray output_utf = output_text.toUtf8();
+      auto line = editor->lineFromPosition(editor->currentPos());
+      auto start_line = editor->positionFromLine(line);
+      auto end_line = editor->lineEndPosition(line);
+
+      editor->setSel(start_line, end_line);
+      editor->replaceSel(output_utf);
+      break;
+    }
+
+    case ToolOutput::CopyToClipboard:
+      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
+      m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
+                                              tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                                              QMessageBox::Icon::Information);
+      break;
+
+    case ToolOutput::DumpToOutputWindow:
+      m_application->toolBox()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
+      break;
+
+    case ToolOutput::NewSavedFile: {
+      m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
+                                              tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
+                                              QMessageBox::Icon::Information);
+
+      m_application->loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
+      break;
+    }
+
+    case ToolOutput::ReplaceSelectionDocument:
+      if (!editor->selectionEmpty()) {
+        editor->replaceSel(output_text.toUtf8().constData());
+      }
+      else {
+        editor->setText(output_text.toUtf8().constData());
+      }
+
+      break;
+
+    case ToolOutput::NoOutput:
+    default:
+      break;
+  }
 }

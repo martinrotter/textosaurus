@@ -16,21 +16,22 @@ class ExternalTools : public QObject {
   Q_OBJECT
 
   public:
-    explicit ExternalTools(QObject* parent = nullptr);
+    explicit ExternalTools(TextApplication* parent = nullptr);
     virtual ~ExternalTools();
 
-    QList<QAction*> generateActions(QWidget* parent, TextApplication* app) const;
+    QList<QAction*> generateActions(QWidget* parent) const;
 
     const QList<ExternalTool*> tools() const;
 
     void saveExternalTools(const QList<ExternalTool*>& ext_tools);
 
   public slots:
-    void runTool(ExternalTool* tool_to_run, TextEditor* editor);
     void reloadTools();
 
   private slots:
-    void onToolFinished(const QPointer<TextEditor>& editor, const QString& output_text, bool success);
+    void runSelectedExternalTool();
+    void runTool(ExternalTool* tool_to_run, TextEditor* editor);
+    void onToolFinished(ExternalTool* tool, const QPointer<TextEditor>& editor, const QString& output_text, bool success);
 
   signals:
     void toolFinished(ExternalTool* tool, QPointer<TextEditor> editor, QString output_text, bool success);
@@ -43,6 +44,8 @@ class ExternalTools : public QObject {
     void loadCustomTools();
 
   private:
+    TextApplication* m_application;
+
     QList<ExternalTool*> m_tools;
     bool m_sampleToolsAdded;
 };

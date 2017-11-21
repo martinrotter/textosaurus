@@ -28,7 +28,6 @@
 TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
-  connect(m_settings->externalTools(), &ExternalTools::toolFinished, this, &TextApplication::onExternalToolFinished);
 }
 
 TextApplication::~TextApplication() {
@@ -37,36 +36,6 @@ TextApplication::~TextApplication() {
 
 TextEditor* TextApplication::currentEditor() const {
   return m_tabEditors->textEditorAt(m_tabEditors->currentIndex());
-}
-
-QList<TextEditor*> TextApplication::editors() const {
-  QList<TextEditor*> editors;
-
-  if (m_tabEditors != nullptr) {
-    for (int i = 0; i < m_tabEditors->count(); i++) {
-      TextEditor* edit = m_tabEditors->textEditorAt(i);
-
-      if (edit != nullptr) {
-        editors.append(edit);
-      }
-    }
-  }
-
-  return editors;
-}
-
-bool TextApplication::anyModifiedEditor() const {
-  if (m_tabEditors != nullptr) {
-    for (int i = 0; i < m_tabEditors->count(); i++) {
-      TextEditor* edit = m_tabEditors->textEditorAt(i);
-
-      if (edit != nullptr && edit->modify()) {
-        return true;
-      }
-    }
-  }
-
-  return false;
 }
 
 void TextApplication::loadTextEditorFromString(const QString& contents) {
@@ -172,6 +141,7 @@ TextEditor* TextApplication::createTextEditor() {
 
   editor->viewport()->installEventFilter(this);
 
+  connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSaved);
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestedVisibility, this, &TextApplication::onEditorRequestedVisibility);
@@ -213,13 +183,13 @@ void TextApplication::saveCurrentEditorAsWithEncoding(QAction* action) {
 void TextApplication::saveAllEditors() {
   bool ok;
 
-  foreach (TextEditor* editor, editors()) {
+  foreach (TextEditor* editor, m_tabEditors->editors()) {
     editor->save(&ok);
   }
 }
 
 void TextApplication::closeAllUnmodifiedEditors() {
-  foreach (TextEditor* editor, editors()) {
+  foreach (TextEditor* editor, m_tabEditors->editors()) {
     if (!editor->modify()) {
       m_tabEditors->closeTab(m_tabEditors->indexOf(editor));
     }
@@ -228,7 +198,7 @@ void TextApplication::closeAllUnmodifiedEditors() {
 
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   if (reload_all) {
-    foreach (TextEditor* editor, editors()) {
+    foreach (TextEditor* editor, m_tabEditors->editors()) {
       editor->reloadSettings();
     }
   }
@@ -280,33 +250,15 @@ void TextApplication::onEditorRequestedVisibility() {
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
-  int index = m_tabEditors->indexOf(editor);
+  Q_UNUSED(modified)
 
-  if (index >= 0) {
-    m_tabEditors->tabBar()->setTabIcon(index, modified ?
-                                       qApp->icons()->fromTheme(QSL("dialog-warning")) :
-                                       QIcon());
-
-    renameEditor(editor);
+  if (m_tabEditors->indexOf(editor) >= 0) {
     updateToolBarFromEditor(editor, true);
-
-    //updateStatusBarFromEditor(editor);
   }
 }
 
 ToolBox* TextApplication::toolBox() const {
   return m_toolBox;
-}
-
-void TextApplication::runSelectedExternalTool() {
-  TextEditor* editor = currentEditor();
-
-  if (editor != nullptr) {
-    ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
-
-    m_toolBox->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool...").arg(tool_to_run->name()));
-    m_settings->externalTools()->runTool(tool_to_run, editor);
-  }
 }
 
 TextApplicationSettings* TextApplication::settings() const {
@@ -360,10 +312,16 @@ void TextApplication::onEditorModified(int type, int position, int length, int l
   }
 }
 
-void TextApplication::onSavePointChanged(bool dirty) {
+void TextApplication::onSavePointChanged() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
-  markEditorModified(editor, dirty);
+  renameEditor(editor);
+}
+
+void TextApplication::onEditorSaved() {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+
+  updateStatusBarFromEditor(editor);
 }
 
 void TextApplication::createConnections() {
@@ -683,10 +641,6 @@ void TextApplication::openTextFile(QAction* action) {
 }
 
 void TextApplication::onEditorTabSwitched(int index) {
-  if (index < 0) {
-    return;
-  }
-
   TextEditor* editor = m_tabEditors->textEditorAt(index);
 
   if (editor != nullptr) {
@@ -699,37 +653,38 @@ void TextApplication::onEditorTabSwitched(int index) {
 }
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
-  Q_UNUSED(only_modified)
-
-  if (editor == currentEditor()) {
-    // Current editor is changed or there is now editor at all.
-
-    if (editor != nullptr) {
-      // Current editor is changed.
-      m_actionFileSave->setEnabled(true);
-      m_actionFileSaveAs->setEnabled(true);
-      m_menuFileSaveWithEncoding->setEnabled(true);
-
+  if (editor != nullptr) {
+    if (editor == currentEditor()) {
+      // Current editor changed.
       m_actionEditBack->setEnabled(editor->canUndo());
       m_actionEditForward->setEnabled(editor->canRedo());
-      m_actionFileSaveAll->setEnabled(true);
 
-      // We display editor default EOL mode.
-      updateEolMenu(editor->eOLMode());
+      if (!only_modified) {
+        m_actionFileSave->setEnabled(true);
+        m_actionFileSaveAs->setEnabled(true);
+        m_menuFileSaveWithEncoding->setEnabled(true);
+        m_actionFileSaveAll->setEnabled(true);
+
+        // We display editor default EOL mode.
+        //updateEolMenu(editor->eOLMode());
+      }
     }
     else {
-      // No editor selected.
-      m_actionFileSave->setEnabled(false);
-      m_actionFileSaveAs->setEnabled(false);
-      m_menuFileSaveWithEncoding->setEnabled(false);
-
-      m_actionEditBack->setEnabled(false);
-      m_actionEditForward->setEnabled(false);
-      m_actionFileSaveAll->setEnabled(false);
-
-      // We display app default EOL mode.
-      updateEolMenu(settings()->eolMode());
+      // Some editor changed but it is not currently active one.
     }
+  }
+  else {
+    // There is no editor.
+    m_actionFileSave->setEnabled(false);
+    m_actionFileSaveAs->setEnabled(false);
+    m_menuFileSaveWithEncoding->setEnabled(false);
+
+    m_actionEditBack->setEnabled(false);
+    m_actionEditForward->setEnabled(false);
+    m_actionFileSaveAll->setEnabled(false);
+
+    // We display app default EOL mode.
+    //updateEolMenu(settings()->eolMode());
   }
 }
 
@@ -741,6 +696,7 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
     }
     else {
       m_statusBar->setEncoding(QString());
+      m_statusBar->setFileType(QString());
     }
   }
 }
@@ -780,86 +736,21 @@ void TextApplication::loadNewExternalTools() {
 
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
-  m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools, this));
+  m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools));
 }
 
-void TextApplication::onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor,
-                                             const QString& output_text, bool success) {
-  if (editor.isNull()) {
-    qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
-    m_toolBox->displayOutput(OutputSource::ExternalTool,
-                             tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
-                             QMessageBox::Icon::Critical);
-    return;
-  }
-
-  if (!success) {
-    m_toolBox->displayOutput(OutputSource::ExternalTool,
-                             tr("Tool '%1' reports error: %2.").arg(tool->name(), output_text),
-                             QMessageBox::Icon::Critical);
-    return;
-  }
-
-  switch (tool->output()) {
-    case ToolOutput::InsertAtCursorPosition: {
-      QByteArray output_utf = output_text.toUtf8();
-
-      editor->insertText(editor->currentPos(), output_utf.constData());
-      editor->gotoPos(editor->currentPos() + output_utf.size());
-      break;
-    }
-
-    case ToolOutput::ReplaceCurrentLine: {
-      QByteArray output_utf = output_text.toUtf8();
-      auto line = editor->lineFromPosition(editor->currentPos());
-      auto start_line = editor->positionFromLine(line);
-      auto end_line = editor->lineEndPosition(line);
-
-      editor->setSel(start_line, end_line);
-      editor->replaceSel(output_utf);
-      break;
-    }
-
-    case ToolOutput::CopyToClipboard:
-      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
-      m_toolBox->displayOutput(OutputSource::ExternalTool,
-                               tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
-                               QMessageBox::Icon::Information);
-      break;
-
-    case ToolOutput::DumpToOutputWindow:
-      m_toolBox->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
-      break;
-
-    case ToolOutput::NewSavedFile: {
-      m_toolBox->displayOutput(OutputSource::ExternalTool,
-                               tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
-                               QMessageBox::Icon::Information);
-
-      loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
-      break;
-    }
-
-    case ToolOutput::ReplaceSelectionDocument:
-      if (!editor->selectionEmpty()) {
-        editor->replaceSel(output_text.toUtf8().constData());
-      }
-      else {
-        editor->setText(output_text.toUtf8().constData());
-      }
-
-      break;
-
-    case ToolOutput::NoOutput:
-    default:
-      break;
-  }
+void TextApplication::updateEditorIcon(int index, bool modified) {
+  m_tabEditors->tabBar()->setTabIcon(index, modified ?
+                                     qApp->icons()->fromTheme(QSL("dialog-warning")) :
+                                     QIcon());
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {
   int index = m_tabEditors->indexOf(editor);
 
   if (index >= 0) {
+    updateEditorIcon(index, editor->modify());
+
     if (!editor->filePath().isEmpty()) {
       m_tabEditors->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
       m_tabEditors->tabBar()->setTabToolTip(index, editor->filePath());

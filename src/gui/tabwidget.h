@@ -35,6 +35,8 @@ class TabWidget : public QTabWidget {
 
     TextEditor* textEditorAt(int index) const;
 
+    QList<TextEditor*> editors()  const;
+
     // Returns tab bar.
     TabBar* tabBar() const;
 

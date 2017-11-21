@@ -103,7 +103,26 @@ bool TabWidget::removeTab(int index, bool clear_from_memory) {
 }
 
 TextEditor* TabWidget::textEditorAt(int index) const {
-  return qobject_cast<TextEditor*>(widget(index));
+  if (index < 0 || index >= count()) {
+    return nullptr;
+  }
+  else {
+    return qobject_cast<TextEditor*>(widget(index));
+  }
+}
+
+QList<TextEditor*> TabWidget::editors() const {
+  QList<TextEditor*> editors;
+
+  for (int i = 0; i < count(); i++) {
+    TextEditor* edit = textEditorAt(i);
+
+    if (edit != nullptr) {
+      editors.append(edit);
+    }
+  }
+
+  return editors;
 }
 
 int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, TabBar::TabType type) {

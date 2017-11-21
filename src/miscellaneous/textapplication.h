@@ -31,14 +31,9 @@ class TextApplication : public QObject {
     ToolBox* toolBox() const;
     TextApplicationSettings* settings() const;
 
-    QList<TextEditor*> editors()  const;
-
-    bool anyModifiedEditor() const;
     void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, ToolBox* tool_box);
 
   public slots:
-    void runSelectedExternalTool();
-    void convertEols(QAction* action);
 
     // Redo/undo.
     void undo();
@@ -69,28 +64,31 @@ class TextApplication : public QObject {
     bool eventFilter(QObject* obj, QEvent* event);
 
   private slots:
+
+    // EOL stuff.
+    void convertEols(QAction* action);
     void changeEolMode(QAction* act);
+    void setupEolMenu();
+
+    // Encoding & lexing & folding.
     void changeEncoding(QAction* act);
+    void loadEncodingMenu();
     void changeLexer(QAction* act);
-    void fillRecentFiles();
     void filterLexersMenu(const QString& filter);
     void loadLexersMenu();
-    void loadEncodingMenu();
+    void fillRecentFiles();
 
-    void onSavePointChanged(bool dirty);
+    void onSavePointChanged();
+    void onEditorSaved();
     void onEditorRequestedVisibility();
+
     void onEditorModified(int type, int position, int length, int linesAdded,
                           const QByteArray& text, int line, int foldNow, int foldPrev);
     void onEditorTabSwitched(int index = -1);
-
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
 
-    void setupEolMenu();
-    void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
-    void updateStatusBarFromEditor(TextEditor* editor);
-
+    // External tools.
     void loadNewExternalTools();
-    void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text, bool success);
 
   private:
     void updateEolMenu(int eol_mode);
@@ -101,7 +99,10 @@ class TextApplication : public QObject {
 
     void createConnections();
     void renameEditor(TextEditor* editor);
+    void updateEditorIcon(int index, bool modified);
     void markEditorModified(TextEditor* editor, bool modified);
+    void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
+    void updateStatusBarFromEditor(TextEditor* editor);
 
   private:
     TextApplicationSettings* m_settings;

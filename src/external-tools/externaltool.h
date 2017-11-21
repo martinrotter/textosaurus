@@ -96,9 +96,6 @@ class ExternalTool : public QObject {
     // document filename.
     virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data) const;
 
-  signals:
-    void toolFinished(QPointer<TextEditor> editor, QString output_text, bool success);
-
   private:
     ToolInput m_input;
     ToolOutput m_output;

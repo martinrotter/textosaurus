@@ -70,13 +70,11 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   }
 }
 
-QString ExternalTool::prompt() const
-{
+QString ExternalTool::prompt() const {
   return m_prompt;
 }
 
-void ExternalTool::setPrompt(const QString& prompt)
-{
+void ExternalTool::setPrompt(const QString& prompt) {
   m_prompt = prompt;
 }
 
