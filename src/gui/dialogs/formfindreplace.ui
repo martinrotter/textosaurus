@@ -1,7 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>FormFindReplace</class>
  <widget class="QDialog" name="FormFindReplace">
   <property name="geometry">
@@ -15,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="m_buttonBox">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -31,12 +29,60 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>64</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search for</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="m_txtSearchPhrase">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>10</y>
+     <width>113</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>251</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Case-sensitive search</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>110</y>
+     <width>251</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Regular expressions matching mode</string>
+   </property>
+  </widget>
  </widget>
- <pixmapfunction/>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>m_buttonBox</sender>
    <signal>accepted()</signal>
    <receiver>FormFindReplace</receiver>
    <slot>accept()</slot>
@@ -52,7 +98,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>m_buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>FormFindReplace</receiver>
    <slot>reject()</slot>
