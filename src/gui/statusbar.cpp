@@ -32,8 +32,6 @@ void StatusBar::setFileType(const QString& file_type) {
 void StatusBar::updateInfo() {
   QStringList lst; lst << m_infoEol << m_infoLexer << m_infoEncoding;
 
-  lst.removeDuplicates();
   lst.removeAll(QString());
-
   m_lblInfo->setText(lst.join(QSL(" • ")));
 }
