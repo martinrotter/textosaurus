@@ -511,6 +511,8 @@ void TextApplication::changeEolMode(QAction* act) {
     // We change EOL mode of existing editor.
     editor->setEOLMode(new_mode);
 
+    updateStatusBarFromEditor(editor);
+
     if (!editor->filePath().isEmpty()) {
       // If user has sime editor opened but it is not "saved file",
       // then we make sure that global EOL mode is changed too.
