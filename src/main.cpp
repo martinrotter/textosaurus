@@ -89,8 +89,6 @@ int main(int argc, char* argv[]) {
                                      "version by going to Help → About application → Changelog.").arg(APP_LONG_NAME));
   }
 
-  DynamicShortcuts::load(qApp->userActions());
-
   // We load any documents passed as parameters.
   if (application.arguments().size() > 2) {
     qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
