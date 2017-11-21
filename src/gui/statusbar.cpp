@@ -4,20 +4,13 @@
 
 #include "definitions/definitions.h"
 
-StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
+StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), m_lblInfo(new QLabel(this)), m_infoEncoding(QString()),
+  m_infoEol(QString()), m_infoLexer(QString()) {
   setSizeGripEnabled(false);
 
-  m_lblEncoding = new QLabel(this);
-  m_lblFileType = new QLabel(this);
+  m_lblInfo->setStyleSheet(QSL("QLabel { margin-right: 16px; }"));
 
-  m_lblEncoding->setStyleSheet(QSL("QLabel { margin-right: 16px; }"));
-  m_lblFileType->setStyleSheet(QSL("QLabel { margin-right: 16px; }"));
-
-  m_lblFileType->setToolTip(tr("Active syntax highlighter"));
-  m_lblEncoding->setToolTip(tr("Output encoding"));
-
-  addPermanentWidget(m_lblFileType);
-  addPermanentWidget(m_lblEncoding);
+  addPermanentWidget(m_lblInfo);
 }
 
 StatusBar::~StatusBar() {
@@ -25,18 +18,22 @@ StatusBar::~StatusBar() {
 }
 
 void StatusBar::setEncoding(const QString& encoding) {
-  m_lblEncoding->setText(encoding);
-  m_lblEncoding->setVisible(!encoding.isEmpty());
+  m_infoEncoding = encoding;
+
+  updateInfo();
 }
 
 void StatusBar::setFileType(const QString& file_type) {
-  m_lblFileType->setText(file_type);
-  m_lblFileType->setVisible(!file_type.isEmpty());
+  m_infoLexer = file_type;
+
+  updateInfo();
 }
 
-bool StatusBar::eventFilter(QObject* watched, QEvent* event) {
-  Q_UNUSED(watched)
-  Q_UNUSED(event)
+void StatusBar::updateInfo() {
+  QStringList lst; lst << m_infoEol << m_infoLexer << m_infoEncoding;
 
-  return false;
+  lst.removeDuplicates();
+  lst.removeAll(QString());
+
+  m_lblInfo->setText(lst.join(QSL(" • ")));
 }

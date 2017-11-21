@@ -17,12 +17,14 @@ class StatusBar : public QStatusBar {
     void setEncoding(const QString& encoding);
     void setFileType(const QString& file_type);
 
-  protected:
-    bool eventFilter(QObject* watched, QEvent* event);
+  private:
+    void updateInfo();
 
   private:
-    QLabel* m_lblEncoding;
-    QLabel* m_lblFileType;
+    QLabel* m_lblInfo;
+    QString m_infoEncoding;
+    QString m_infoEol;
+    QString m_infoLexer;
 };
 
 #endif // STATUSBAR_H
