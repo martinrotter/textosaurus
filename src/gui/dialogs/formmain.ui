@@ -177,6 +177,7 @@
     <property name="title">
      <string>&amp;Search</string>
     </property>
+    <addaction name="m_actionFindReplace"/>
    </widget>
    <widget class="QMenu" name="m_menuLanguage">
     <property name="title">
@@ -486,6 +487,11 @@
    </property>
    <property name="text">
     <string>Display &amp;whitespaces</string>
+   </property>
+  </action>
+  <action name="m_actionFindReplace">
+   <property name="text">
+    <string>&amp;Find and replace</string>
    </property>
   </action>
  </widget>
