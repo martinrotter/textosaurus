@@ -55,6 +55,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(tr("Plain text"), QStringList {
       QSL("txt"), QString()
     }, SCLEX_NULL)
+      << Lexer(QSL("A68k"), QStringList {
+      QSL("doxygen")
+    }, SCLEX_A68K)
       << Lexer(QSL("Assembly"), QStringList {
       QSL("asm"), QSL("nasm")
     }, SCLEX_ASM)
