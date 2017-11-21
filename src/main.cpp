@@ -24,6 +24,7 @@
 
 #if defined (Q_OS_MAC)
 extern void disableWindowTabbing();
+
 #endif
 
 int main(int argc, char* argv[]) {
@@ -91,7 +92,12 @@ int main(int argc, char* argv[]) {
   DynamicShortcuts::load(qApp->userActions());
 
   // We load any documents passed as parameters.
-  qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
+  if (application.arguments().size() > 2) {
+    qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
+  }
+  else {
+    qApp->textApplication()->newFile();
+  }
 
   // Enter global event loop.
   return Application::exec();
