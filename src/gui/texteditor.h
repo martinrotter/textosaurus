@@ -39,9 +39,7 @@ class TextEditor : public ScintillaEdit {
     // or user cancelled it (false).
     void closeEditor(bool* ok);
 
-    // Opens given file in this text editor, file is opened for reading.
     void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode);
-
     void loadFromString(const QString& contents);
 
   protected:
@@ -49,8 +47,8 @@ class TextEditor : public ScintillaEdit {
 
   signals:
     void requestedVisibility();
-    void loadedFromFile(QString m_sourceFilePath);
-    void savedToFile(QString m_destinationFilePath);
+    void loadedFromFile(QString source_file_path);
+    void savedToFile(QString destination_file_path);
 
   private:
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());

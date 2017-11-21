@@ -84,8 +84,8 @@ class TextApplication : public QObject {
     void onEditorTabSwitched(int index = -1);
 
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
+
     void setupEolMenu();
-    void updateEolMenu(int eol_mode);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);
 
@@ -93,6 +93,7 @@ class TextApplication : public QObject {
     void onExternalToolFinished(ExternalTool* tool, QPointer<TextEditor> editor, const QString& output_text, bool success);
 
   private:
+    void updateEolMenu(int eol_mode);
 
     // Loads initial state of text application, including session restoring,
     // setup initial GUI state for actions/toolbar/statusbar etc.
