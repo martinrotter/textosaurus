@@ -41,86 +41,14 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBox_3">
-        <property name="styleSheet">
-         <string notr="true">margin-left: 16px;</string>
-        </property>
-        <property name="text">
-         <string>Regular expressions matching mode</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
        <widget class="QRadioButton" name="m_rbModeRegex">
         <property name="text">
-         <string>Regular expression</string>
+         <string>Regular expression (C++ 11 &lt;regex&gt;)</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
-   </item>
-   <item row="0" column="2" rowspan="4">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
-     </property>
-     <item>
-      <widget class="QPushButton" name="m_btnFindNext">
-       <property name="text">
-        <string>&amp;Find next</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnFindNext_2">
-       <property name="text">
-        <string>Find &amp;previous</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnFindAll">
-       <property name="text">
-        <string>Find &amp;all</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnReplaceNext">
-       <property name="text">
-        <string>&amp;Replace next</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnReplaceAll">
-       <property name="text">
-        <string>R&amp;eplace all</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnClose">
-       <property name="text">
-        <string>&amp;Close</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
    </item>
    <item row="0" column="0" colspan="2">
     <layout class="QFormLayout" name="formLayout">
@@ -193,6 +121,75 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="m_lblResult">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="5">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <item>
+      <widget class="QPushButton" name="m_btnFindNext">
+       <property name="text">
+        <string>&amp;Find next</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnFindNext_2">
+       <property name="text">
+        <string>Find &amp;previous</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnFindAll">
+       <property name="text">
+        <string>Find &amp;all</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnReplaceNext">
+       <property name="text">
+        <string>&amp;Replace next</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnReplaceAll">
+       <property name="text">
+        <string>R&amp;eplace all</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnClose">
+       <property name="text">
+        <string>&amp;Close</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -207,7 +204,6 @@
   <tabstop>m_txtReplaceString</tabstop>
   <tabstop>m_checkMatchWholeWords</tabstop>
   <tabstop>m_rbModeNormal</tabstop>
-  <tabstop>checkBox_3</tabstop>
   <tabstop>m_checkCaseSensitiveSearch</tabstop>
   <tabstop>m_rbModeRegex</tabstop>
   <tabstop>m_btnFindNext</tabstop>
@@ -232,22 +228,6 @@
     <hint type="destinationlabel">
      <x>122</x>
      <y>161</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_rbModeNormal</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>checkBox_3</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>122</x>
-     <y>140</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>122</x>
-     <y>180</y>
     </hint>
    </hints>
   </connection>
