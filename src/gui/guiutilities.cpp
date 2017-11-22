@@ -22,7 +22,7 @@ void GuiUtilities::setLabelAsNotice(QLabel& label, bool is_warning) {
 }
 
 void GuiUtilities::applyDialogProperties(QWidget& widget, const QIcon& icon, const QString& title) {
-  widget.setWindowFlags(Qt::Dialog | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+  widget.setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
   widget.setWindowIcon(icon);
 
   if (!title.isEmpty()) {

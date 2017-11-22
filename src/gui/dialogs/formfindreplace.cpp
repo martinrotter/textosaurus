@@ -5,7 +5,7 @@
 FormFindReplace::FormFindReplace(QWidget* parent) : QDialog(parent) {
   m_ui.setupUi(this);
 
-  setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
   setWindowOpacity(0.8);
 }
 
