@@ -55,4 +55,4 @@ Features
     - no JavaScript components, no bundled Chromium, no Electron, no web technologies inside,
     - always OSS.
 	
-\* All custom external tools are executed via Bash by default, so you must have Bash available in all environments where Textilosaurus is used. On Windows, Cygwin is probably the best way to use Bash.
+\* Usually, custom external tools are executed via Bash or Python, so you must have used interpreter available in all environments where Textilosaurus is used. On Windows, Cygwin is probably the best way to use these.
