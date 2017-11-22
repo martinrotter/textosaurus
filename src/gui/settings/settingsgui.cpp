@@ -56,12 +56,11 @@ void SettingsGui::loadSettings() {
   onBeginLoadSettings();
 
   // Load settings of icon theme.
-  const QString current_theme = qApp->icons()->currentIconTheme();
+  const QString current_theme = settings()->value(GROUP(GUI), SETTING(GUI::IconTheme)).toString();
 
   foreach (const QString& icon_theme_name, qApp->icons()->installedIconThemes()) {
     if (icon_theme_name == APP_NO_THEME) {
       // Add just "no theme" on other systems.
-      //: Label for disabling icon theme.
       m_ui->m_cmbIconTheme->addItem(tr("no icon theme/system icon theme"), APP_NO_THEME);
     }
     else {
