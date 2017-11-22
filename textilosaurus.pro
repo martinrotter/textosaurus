@@ -171,8 +171,13 @@ win32 {
 }
 
 CONFIG *= resources_big
-RESOURCES += resources/icons.qrc \
-             resources/textilosaurus.qrc
+RESOURCES += resources/textilosaurus.qrc
+
+mac|win32|android {
+  RESOURCES += resources/icons.qrc
+
+  message(textilosaurus: Adding resources for default icon theme.)
+}
 
 HEADERS +=  src/definitions/definitions.h \
             src/dynamic-shortcuts/dynamicshortcuts.h \

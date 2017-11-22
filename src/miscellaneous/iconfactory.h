@@ -29,8 +29,6 @@ class IconFactory : public QObject {
     static QIcon fromByteArray(QByteArray array);
     static QByteArray toByteArray(const QIcon& icon);
 
-    QPixmap pixmap(const QString& name);
-
     // Returns icon from active theme or invalid icon if
     // "no icon theme" is set.
     QIcon fromTheme(const QString& name);

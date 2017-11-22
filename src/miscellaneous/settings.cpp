@@ -105,7 +105,11 @@ DVALUE(bool) GUI::TabNewDoubleClickDef = true;
 
 DKEY GUI::IconTheme = "icon_theme_name";
 
+#if defined(Q_OS_LINUX)
+DVALUE(char*) GUI::IconThemeDef = APP_NO_THEME;
+#else
 DVALUE(char*) GUI::IconThemeDef = APP_THEME_DEFAULT;
+#endif
 
 DKEY GUI::Style = "style";
 
