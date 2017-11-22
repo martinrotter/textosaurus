@@ -23,6 +23,9 @@ class FormFindReplace : public QDialog {
   public slots:
     void display();
 
+  private slots:
+    void searchNext();
+
   private:
     Ui::FormFindReplace m_ui;
     TextApplication* m_application;

@@ -95,6 +95,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionEolMac;
   actions << m_ui.m_actionEolUnix;
   actions << m_ui.m_actionEolWindows;
+  actions << m_ui.m_actionFindReplace;
   actions << m_ui.m_actionWordWrap;
   actions << m_ui.m_actionViewEols;
   actions << m_ui.m_actionViewWhitespaces;

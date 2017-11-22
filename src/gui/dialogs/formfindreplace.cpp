@@ -10,6 +10,9 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
 
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
   setWindowOpacity(0.8);
+
+  connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
+  connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::submitted, this, &FormFindReplace::searchNext);
 }
 
 FormFindReplace::~FormFindReplace() {}
@@ -19,3 +22,5 @@ void FormFindReplace::display() {
   activateWindow();
   raise();
 }
+
+void FormFindReplace::searchNext() {}
