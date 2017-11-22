@@ -4,6 +4,7 @@
 
 #include "external-tools/externaltool.h"
 #include "external-tools/externaltools.h"
+#include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
@@ -25,7 +26,8 @@
 #include <QTimer>
 #include <QWidgetAction>
 
-TextApplication::TextApplication(QObject* parent) : QObject(parent), m_settings(new TextApplicationSettings(this)) {
+TextApplication::TextApplication(QObject* parent)
+  : QObject(parent), m_settings(new TextApplicationSettings(this)), m_findReplaceDialog(nullptr) {
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
 }
@@ -337,6 +339,7 @@ void TextApplication::createConnections() {
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
   connect(m_menuEolMode, &QMenu::aboutToShow, this, &TextApplication::setupEolMenu);
   connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
+  connect(m_actionFindReplace, &QAction::triggered, this, &TextApplication::openFindReplaceDialog);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
@@ -395,6 +398,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionEolConvertUnix = main_form->m_ui.m_actionEolConvertUnix;
   m_actionEolConvertWindows = main_form->m_ui.m_actionEolConvertWindows;
   m_actionEolConvertMac = main_form->m_ui.m_actionEolConvertMac;
+  m_actionFindReplace = main_form->m_ui.m_actionFindReplace;
   m_actionWordWrap = main_form->m_ui.m_actionWordWrap;
   m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
   m_actionEditBack = main_form->m_ui.m_actionEditBack;
@@ -498,6 +502,14 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   }
 
   return false;
+}
+
+void TextApplication::openFindReplaceDialog() {
+  if (m_findReplaceDialog == nullptr) {
+    m_findReplaceDialog = new FormFindReplace(this, qApp->mainFormWidget());
+  }
+
+  m_findReplaceDialog->display();
 }
 
 void TextApplication::changeEolMode(QAction* act) {

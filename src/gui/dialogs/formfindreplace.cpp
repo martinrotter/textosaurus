@@ -2,7 +2,10 @@
 
 #include "gui/dialogs/formfindreplace.h"
 
-FormFindReplace::FormFindReplace(QWidget* parent) : QDialog(parent) {
+#include "gui/texteditor.h"
+#include "miscellaneous/textapplication.h"
+
+FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialog(parent), m_application(app) {
   m_ui.setupUi(this);
 
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
@@ -10,3 +13,9 @@ FormFindReplace::FormFindReplace(QWidget* parent) : QDialog(parent) {
 }
 
 FormFindReplace::~FormFindReplace() {}
+
+void FormFindReplace::display() {
+  show();
+  activateWindow();
+  raise();
+}

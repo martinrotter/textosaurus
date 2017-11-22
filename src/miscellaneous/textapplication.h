@@ -14,6 +14,7 @@ class TabWidget;
 class ToolBox;
 class FormMain;
 class StatusBar;
+class FormFindReplace;
 class ExternalTool;
 class QAction;
 class QMenu;
@@ -64,6 +65,7 @@ class TextApplication : public QObject {
     bool eventFilter(QObject* obj, QEvent* event);
 
   private slots:
+    void openFindReplaceDialog();
 
     // EOL stuff.
     void convertEols(QAction* action);
@@ -110,6 +112,7 @@ class TextApplication : public QObject {
     StatusBar* m_statusBar;
     ToolBox* m_toolBox;
     QLineEdit* m_txtLexerFilter;
+    FormFindReplace* m_findReplaceDialog;
 
     // Pointers to important GUI elements outside of editors.
     QAction* m_actionFileNew;
@@ -123,6 +126,7 @@ class TextApplication : public QObject {
     QAction* m_actionEolConvertUnix;
     QAction* m_actionEolConvertWindows;
     QAction* m_actionEolConvertMac;
+    QAction* m_actionFindReplace;
     QAction* m_actionTabsCloseAllUnmodified;
     QAction* m_actionWordWrap;
     QAction* m_actionEditBack;

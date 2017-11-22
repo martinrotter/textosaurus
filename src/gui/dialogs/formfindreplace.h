@@ -11,15 +11,21 @@ namespace Ui {
   class FormFindReplace;
 }
 
+class TextApplication;
+
 class FormFindReplace : public QDialog {
   Q_OBJECT
 
   public:
-    explicit FormFindReplace(QWidget* parent = nullptr);
+    explicit FormFindReplace(TextApplication* app, QWidget* parent = nullptr);
     virtual ~FormFindReplace();
+
+  public slots:
+    void display();
 
   private:
     Ui::FormFindReplace m_ui;
+    TextApplication* m_application;
 };
 
 #endif // FORMFINDREPLACE_H

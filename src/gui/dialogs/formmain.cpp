@@ -39,11 +39,6 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
 
   qApp->textApplication()->setMainForm(this, tabWidget(), statusBar(), toolBox());
 
-  connect(m_ui.m_actionFindReplace, &QAction::triggered, this, [this]() {
-    FormFindReplace* aaa = new FormFindReplace(this);
-    aaa->show();
-  });
-
   // Prepare main window and tabs.
   prepareMenus();
 
