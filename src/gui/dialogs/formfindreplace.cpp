@@ -1,14 +1,12 @@
-#include "formfindreplace.h"
-#include "ui_formfindreplace.h"
+// For license of this file, see <project-root-folder>/LICENSE.md.
 
-FormFindReplace::FormFindReplace(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::FormFindReplace)
-{
-    ui->setupUi(this);
+#include "gui/dialogs/formfindreplace.h"
+
+FormFindReplace::FormFindReplace(QWidget* parent) : QDialog(parent) {
+  m_ui.setupUi(this);
+
+  setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+  setWindowOpacity(0.8);
 }
 
-FormFindReplace::~FormFindReplace()
-{
-    delete ui;
-}
+FormFindReplace::~FormFindReplace() {}

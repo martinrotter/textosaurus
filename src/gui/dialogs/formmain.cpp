@@ -4,6 +4,7 @@
 
 #include "definitions/definitions.h"
 #include "gui/dialogs/formabout.h"
+#include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formsettings.h"
 #include "gui/dialogs/formupdate.h"
 #include "gui/messagebox.h"
@@ -37,6 +38,11 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
   qApp->textApplication()->setMainForm(this, tabWidget(), statusBar(), toolBox());
+
+  connect(m_ui.m_actionFindReplace, &QAction::triggered, this, [this]() {
+    FormFindReplace* aaa = new FormFindReplace(this);
+    aaa->show();
+  });
 
   // Prepare main window and tabs.
   prepareMenus();

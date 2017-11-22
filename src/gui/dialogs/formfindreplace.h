@@ -1,22 +1,25 @@
+// For license of this file, see <project-root-folder>/LICENSE.md.
+
 #ifndef FORMFINDREPLACE_H
 #define FORMFINDREPLACE_H
 
 #include <QDialog>
 
+#include "ui_formfindreplace.h"
+
 namespace Ui {
-class FormFindReplace;
+  class FormFindReplace;
 }
 
-class FormFindReplace : public QDialog
-{
-    Q_OBJECT
+class FormFindReplace : public QDialog {
+  Q_OBJECT
 
-public:
-    explicit FormFindReplace(QWidget *parent = 0);
-    ~FormFindReplace();
+  public:
+    explicit FormFindReplace(QWidget* parent = nullptr);
+    virtual ~FormFindReplace();
 
-private:
-    Ui::FormFindReplace *ui;
+  private:
+    Ui::FormFindReplace m_ui;
 };
 
 #endif // FORMFINDREPLACE_H

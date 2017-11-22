@@ -423,9 +423,6 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
 
   loadState();
   createConnections();
-
-  // Make sure that toolbar/statusbar is updated.
-  onEditorTabSwitched();
 }
 
 void TextApplication::loadState() {
