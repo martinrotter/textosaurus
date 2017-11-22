@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>457</width>
+    <width>505</width>
     <height>280</height>
    </rect>
   </property>
@@ -14,7 +14,53 @@
    <string>Find and replace</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="2" rowspan="5">
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Match mode</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="m_rbModeNormal">
+        <property name="text">
+         <string>Normal</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="m_checkCaseSensitiveSearch">
+        <property name="styleSheet">
+         <string notr="true">margin-left: 16px;</string>
+        </property>
+        <property name="text">
+         <string>Case-sensitive search</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBox_3">
+        <property name="styleSheet">
+         <string notr="true">margin-left: 16px;</string>
+        </property>
+        <property name="text">
+         <string>Regular expressions matching mode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QRadioButton" name="m_rbModeRegex">
+        <property name="text">
+         <string>Regular expression</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="4">
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="sizeConstraint">
       <enum>QLayout::SetFixedSize</enum>
@@ -23,6 +69,13 @@
       <widget class="QPushButton" name="m_btnFindNext">
        <property name="text">
         <string>&amp;Find next</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnFindNext_2">
+       <property name="text">
+        <string>Find &amp;previous</string>
        </property>
       </widget>
      </item>
@@ -69,79 +122,6 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="0">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Match mode</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QRadioButton" name="m_rbModeNormal">
-        <property name="text">
-         <string>Normal</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="m_checkCaseSensitiveSearch">
-        <property name="styleSheet">
-         <string notr="true">margin-left: 16px;</string>
-        </property>
-        <property name="text">
-         <string>Case-sensitive search</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBox_3">
-        <property name="styleSheet">
-         <string notr="true">margin-left: 16px;</string>
-        </property>
-        <property name="text">
-         <string>Regular expressions matching mode</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QRadioButton" name="m_rbModeRegex">
-        <property name="text">
-         <string>Regular expression</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>42</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="0">
-    <widget class="QCheckBox" name="m_checkSearchBackwards">
-     <property name="text">
-      <string>Search backwards</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QCheckBox" name="m_checkMatchWholeWords">
-     <property name="text">
-      <string>Match whole words only</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0" colspan="2">
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
@@ -180,7 +160,7 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="1" rowspan="2">
+   <item row="2" column="1" rowspan="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -192,6 +172,26 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="3" column="0">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>42</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="m_checkMatchWholeWords">
+     <property name="text">
+      <string>Match whole words only</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -205,13 +205,13 @@
  <tabstops>
   <tabstop>m_txtSearchPhrase</tabstop>
   <tabstop>m_txtReplaceString</tabstop>
-  <tabstop>m_checkSearchBackwards</tabstop>
   <tabstop>m_checkMatchWholeWords</tabstop>
   <tabstop>m_rbModeNormal</tabstop>
-  <tabstop>m_checkCaseSensitiveSearch</tabstop>
   <tabstop>checkBox_3</tabstop>
+  <tabstop>m_checkCaseSensitiveSearch</tabstop>
   <tabstop>m_rbModeRegex</tabstop>
   <tabstop>m_btnFindNext</tabstop>
+  <tabstop>m_btnFindNext_2</tabstop>
   <tabstop>m_btnFindAll</tabstop>
   <tabstop>m_btnReplaceNext</tabstop>
   <tabstop>m_btnReplaceAll</tabstop>
@@ -258,8 +258,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>409</x>
-     <y>137</y>
+     <x>497</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel">
      <x>228</x>
