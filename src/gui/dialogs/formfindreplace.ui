@@ -155,7 +155,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="m_txtSearchPhrase">
+      <widget class="BaseLineEdit" name="m_txtSearchPhrase">
        <property name="placeholderText">
         <string>Phrase to search for</string>
        </property>
@@ -195,6 +195,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BaseLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>baselineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>m_txtSearchPhrase</tabstop>
   <tabstop>m_txtReplaceString</tabstop>
