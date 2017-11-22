@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
   }
 
   // We load any documents passed as parameters.
-  if (application.arguments().size() > 2) {
+  if (application.arguments().size() > 1) {
     qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
   }
   else {
