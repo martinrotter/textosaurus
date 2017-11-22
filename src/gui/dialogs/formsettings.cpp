@@ -21,7 +21,7 @@ FormSettings::FormSettings(QWidget& parent)
   : QDialog(&parent), m_panels(QList<SettingsPanel*>()), m_settings(*qApp->settings()) {
   m_ui.setupUi(this);
 
-  GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("emblem-system")));
+  GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("document-properties")));
 
   m_btnApply = m_ui.m_buttonBox->button(QDialogButtonBox::Apply);
   m_btnApply->setEnabled(false);

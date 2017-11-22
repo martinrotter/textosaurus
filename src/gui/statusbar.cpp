@@ -38,5 +38,5 @@ void StatusBar::updateInfo() {
   QStringList lst; lst << m_infoEol << m_infoLexer << m_infoEncoding;
 
   lst.removeAll(QString());
-  m_lblInfo->setText(lst.join(QSL(" • ")));
+  m_lblInfo->setText(lst.join(QSL(" \u2022 ")));
 }
