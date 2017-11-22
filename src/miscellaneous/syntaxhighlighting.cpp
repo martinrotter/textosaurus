@@ -149,7 +149,7 @@ Lexers SyntaxHighlighting::lexers() {
       QSL("ps1")
     }, SCLEX_POWERSHELL)
       << Lexer(QSL("Properties"), QStringList {
-      QSL("properties")
+      QSL("properties"), QSL("ini"), QSL("conf"), QSL("theme")
     }, SCLEX_PROPERTIES)
       << Lexer(QSL("Python"), QStringList {
       QSL("py"), QSL("pyw")
