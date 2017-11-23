@@ -55,9 +55,8 @@ void ToolBox::displayOutput(OutputSource source, const QString& message, QMessag
     m_currentLevel = level;
   }
 
-  m_txtOutput->appendPlainText(QString("[%3] %1: %2").arg(descriptionOfSource(source),
-                                                          message,
-                                                          QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
+  m_txtOutput->appendPlainText(QString("[%2] %1").arg(message,
+                                                      QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
   m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
 }
 
