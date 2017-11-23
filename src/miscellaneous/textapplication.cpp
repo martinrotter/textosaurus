@@ -349,6 +349,7 @@ void TextApplication::createConnections() {
     openTextFile();
   });
   connect(m_actionWordWrap, &QAction::toggled, m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionLineNumbers, &QAction::toggled, m_settings, &TextApplicationSettings::setLineNumbersEnabled);
   connect(m_actionViewEols, &QAction::toggled, m_settings, &TextApplicationSettings::setViewEols);
   connect(m_actionViewWhitespaces, &QAction::toggled, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
@@ -400,6 +401,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionEolConvertMac = main_form->m_ui.m_actionEolConvertMac;
   m_actionFindReplace = main_form->m_ui.m_actionFindReplace;
   m_actionWordWrap = main_form->m_ui.m_actionWordWrap;
+  m_actionLineNumbers = main_form->m_ui.m_actionLineNumbers;
   m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
   m_actionEditBack = main_form->m_ui.m_actionEditBack;
   m_actionEditForward = main_form->m_ui.m_actionEditForward;
@@ -432,6 +434,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
 void TextApplication::loadState() {
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
+  m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
   m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
   m_actionViewEols->setChecked(m_settings->viewEols());
   m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());

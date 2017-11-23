@@ -133,6 +133,7 @@
     <addaction name="m_menuViewInvisibles"/>
     <addaction name="m_menuEolMode"/>
     <addaction name="m_actionWordWrap"/>
+    <addaction name="m_actionLineNumbers"/>
    </widget>
    <widget class="QMenu" name="m_menuTools">
     <property name="title">
@@ -492,6 +493,14 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+F</string>
+   </property>
+  </action>
+  <action name="m_actionLineNumbers">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Line numbers</string>
    </property>
   </action>
  </widget>

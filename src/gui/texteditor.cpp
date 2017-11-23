@@ -40,11 +40,11 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   });
 
   // Set initial settings.
-  setEOLMode(m_textApp->settings()->eolMode());
   setCodePage(SC_CP_UTF8);
+  setMarginWidthN(MARGIN_SYMBOLS, 0);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
-  setMarginWidthN(MARGIN_LINE_NUMBERS, MARGIN_WIDTH_NUMBERS);
   setEndAtLastLine(false);
+  setEOLMode(m_textApp->settings()->eolMode());
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {
@@ -109,6 +109,7 @@ void TextEditor::reloadFont() {
 }
 
 void TextEditor::reloadSettings() {
+  setMarginWidthN(MARGIN_LINE_NUMBERS, m_textApp->settings()->lineNumbersEnabled() ? MARGIN_WIDTH_NUMBERS : 0);
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
   setViewEOL(m_textApp->settings()->viewEols());
   setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
@@ -141,29 +142,30 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   }
 
   // TODO: Setup folding, enable if some lexer is active, disable otherwise.
-  if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER) {
-    // We activate folding.
-    setProperty("fold", "1");
-    setProperty("fold.compact", "1");
-    setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
-  }
-  else {
-    setProperty("fold", "0");
-    setProperty("fold.compact", "0");
-    setMarginWidthN(MARGIN_FOLDING, 0);
-  }
 
-  setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED);
-  setMarginSensitiveN(MARGIN_FOLDING, true);
-  setMarginMaskN(MARGIN_FOLDING, SC_MASK_FOLDERS);
-  markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
-  markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
-  markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
-  markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
-  markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
-  markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
-  markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
+  /*if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER) {
+     // We activate folding.
+     setProperty("fold", "1");
+     setProperty("fold.compact", "1");
+     setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+     }
+     else {
+     setProperty("fold", "0");
+     setProperty("fold.compact", "0");
+     setMarginWidthN(MARGIN_FOLDING, 0);
+     }
 
+     setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED);
+     setMarginSensitiveN(MARGIN_FOLDING, true);
+     setMarginMaskN(MARGIN_FOLDING, SC_MASK_FOLDERS);
+     markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
+     markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
+     markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
+     markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
+     markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
+     markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
+     markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
+   */
   colourise(0, -1);
 }
 

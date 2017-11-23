@@ -30,6 +30,10 @@ DKEY Editor::WordWrap = "word_wrap";
 
 DVALUE(bool) Editor::WordWrapDef = true;
 
+DKEY Editor::LineNumbers = "line_numbers";
+
+DVALUE(bool) Editor::LineNumbersDef = false;
+
 DKEY Editor::RecentFiles = "recent_files";
 
 DVALUE(QStringList) Editor::RecentFilesDef = QStringList();

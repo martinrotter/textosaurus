@@ -38,6 +38,10 @@ bool TextApplicationSettings::wordWrapEnabled() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::WordWrap)).toBool();
 }
 
+bool TextApplicationSettings::lineNumbersEnabled() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::LineNumbers)).toBool();
+}
+
 QString TextApplicationSettings::loadSaveDefaultDirectory() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::DefaultLoadSaveDirectory)).toString();
 }
@@ -93,6 +97,11 @@ void TextApplicationSettings::setLoadSaveDefaultDirectory(const QString& file_pa
 
 void TextApplicationSettings::setWordWrapEnabled(bool enabled) {
   qApp->settings()->setValue(GROUP(Editor), Editor::WordWrap, enabled);
+  emit settingsChanged(true, false);
+}
+
+void TextApplicationSettings::setLineNumbersEnabled(bool enabled) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::LineNumbers, enabled);
   emit settingsChanged(true, false);
 }
 

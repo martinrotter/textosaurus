@@ -41,6 +41,10 @@ namespace Editor {
 
   VALUE(bool) WordWrapDef;
 
+  KEY LineNumbers;
+
+  VALUE(bool) LineNumbersDef;
+
   KEY ViewEols;
 
   VALUE(bool) ViewEolsDef;

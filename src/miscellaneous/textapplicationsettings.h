@@ -20,6 +20,7 @@ class TextApplicationSettings : public QObject {
     QStringList recentFiles() const;
     int eolMode() const;
     bool wordWrapEnabled() const;
+    bool lineNumbersEnabled() const;
     QString loadSaveDefaultDirectory() const;
 
     bool viewWhitespaces() const;
@@ -37,6 +38,7 @@ class TextApplicationSettings : public QObject {
     void setViewEols(bool view);
     void setLoadSaveDefaultDirectory(const QString& file_path);
     void setWordWrapEnabled(bool enabled);
+    void setLineNumbersEnabled(bool enabled);
     void setEolMode(int mode);
 
   signals:

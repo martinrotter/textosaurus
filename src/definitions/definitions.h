@@ -6,6 +6,7 @@
 #include <QtGlobal>
 
 #define MARGIN_LINE_NUMBERS 0
+#define MARGIN_SYMBOLS      1
 #define MARGIN_FOLDING      2
 
 #define MARGIN_WIDTH_NUMBERS  48
