@@ -36,6 +36,7 @@ void TabBar::setTabType(int index, TabType type) {
       // Close underlying tab when button is clicked.
       connect(close_button, &PlainToolButton::clicked, this, &TabBar::closeTabViaButton);
       setTabButton(index, button_position, close_button);
+
       break;
     }
 

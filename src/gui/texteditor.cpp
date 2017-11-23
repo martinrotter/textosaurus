@@ -144,10 +144,12 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER) {
     // We activate folding.
     setProperty("fold", "1");
+    setProperty("fold.compact", "1");
     setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
   }
   else {
     setProperty("fold", "0");
+    setProperty("fold.compact", "0");
     setMarginWidthN(MARGIN_FOLDING, 0);
   }
 

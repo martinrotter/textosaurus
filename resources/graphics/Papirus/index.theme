@@ -1,13 +1,13 @@
 [Icon Theme]
 Name=Papirus
 
-DesktopDefault=48
-ToolbarDefault=16
-ToolbarSizes=16,22,32,48
-MainToolbarDefault=16
-MainToolbarSizes=16,22,32,48
-PanelDefault=22
-PanelSizes=16,22,32,48,64,128,256
+DesktopDefault=24
+ToolbarDefault=24
+ToolbarSizes=24
+MainToolbarDefault=24
+MainToolbarSizes=24
+PanelDefault=24
+PanelSizes=24
 FollowsColorScheme=true
 
 # Directory list

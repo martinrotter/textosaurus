@@ -36,9 +36,6 @@
        <bool>false</bool>
       </property>
       <widget class="TabWidget" name="m_tabEditors">
-       <property name="currentIndex">
-        <number>-1</number>
-       </property>
        <property name="movable">
         <bool>true</bool>
        </property>
