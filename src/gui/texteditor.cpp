@@ -44,6 +44,8 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   setMarginWidthN(MARGIN_SYMBOLS, 0);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setEndAtLastLine(false);
+  setMultiPaste(SC_MULTIPASTE_EACH);
+  setMultipleSelection(true);
   setEOLMode(m_textApp->settings()->eolMode());
 }
 
