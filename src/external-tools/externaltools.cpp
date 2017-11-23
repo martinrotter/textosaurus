@@ -310,7 +310,7 @@ void ExternalTools::loadCustomTools() {
 
     ExternalTool* ext_bash_seq = new ExternalTool(this);
 
-    ext_bash_seq->setScript("IFS=' '\nread a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
+    ext_bash_seq->setScript("IFS=' '\nread -r a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
     ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
     ext_bash_seq->setPrompt(tr("Enter sequence bounds (for example \"0 10\"):"));
     ext_bash_seq->setInput(ToolInput::AskForInput);
@@ -333,7 +333,7 @@ void ExternalTools::loadCustomTools() {
 
     ExternalTool* ext_bash_garbage = new ExternalTool(this);
 
-    ext_bash_garbage->setScript("read count\n\n"
+    ext_bash_garbage->setScript("read -r count\n\n"
                                 "tr -dc a-z1-4 </dev/urandom | tr 1-2 ' \n' | awk 'length==0 || length>50' | tr 3-4 ' ' | sed 's/^ *//' | cat -s | sed 's/ / /g' | fmt | head -n $count");
     ext_bash_garbage->setCategory(tr("Bash (external tool examples)"));
     ext_bash_garbage->setPrompt(tr("Enter number of lines:"));
