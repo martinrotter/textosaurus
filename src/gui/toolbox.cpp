@@ -60,22 +60,6 @@ void ToolBox::displayOutput(OutputSource source, const QString& message, QMessag
   m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
 }
 
-QString ToolBox::descriptionOfSource(OutputSource source) {
-  switch (source) {
-    case OutputSource::Application:
-      return tr("application");
-
-    case OutputSource::ExternalTool:
-      return tr("external tool");
-
-    case OutputSource::TextApplication:
-      return tr("editor");
-
-    default:
-      return QString();
-  }
-}
-
 QColor ToolBox::colorForLevel(QMessageBox::Icon level) {
   switch (level) {
     case QMessageBox::Icon::Information:

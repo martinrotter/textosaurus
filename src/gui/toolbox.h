@@ -25,9 +25,6 @@ class ToolBox : public QTabWidget {
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);
 
   private:
-    QString descriptionOfSource(OutputSource source);
-
-  private:
     QMessageBox::Icon m_currentLevel;
     QPlainTextEdit* m_txtOutput;
 
