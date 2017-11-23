@@ -387,7 +387,7 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
       bool ok;
 
       ptr_editor->save(&ok);
-      data = QString("\"%1\"").arg(ptr_editor->filePath());
+      data = ptr_editor->filePath();
       break;
 
     case ToolInput::NoInput:
