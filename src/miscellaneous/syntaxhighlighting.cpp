@@ -80,7 +80,7 @@ Lexers SyntaxHighlighting::lexers() {
       QSL("litcoffee")
     }, SCLEX_COFFEESCRIPT)
       << Lexer(QSL("Config"), QStringList {
-      QSL("conf"), QSL("ini")
+      QSL("conf")
     }, SCLEX_CONF)
       << Lexer(QSL("C++"), QStringList {
       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
@@ -148,7 +148,7 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("PowerShell"), QStringList {
       QSL("ps1")
     }, SCLEX_POWERSHELL)
-      << Lexer(QSL("Properties"), QStringList {
+      << Lexer(QSL("Properties/INI"), QStringList {
       QSL("properties"), QSL("ini"), QSL("conf"), QSL("theme")
     }, SCLEX_PROPERTIES)
       << Lexer(QSL("Python"), QStringList {
