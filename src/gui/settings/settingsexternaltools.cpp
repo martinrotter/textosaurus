@@ -65,12 +65,11 @@ void SettingsExternalTools::loadSettings() {
   foreach (const ExternalTool* tool, tools) {
     if (!tool->isPredefined()) {
       // We create clone of our tool.
+      QListWidgetItem* work_item = new QListWidgetItem(tool->name(), m_ui.m_listTools);
       ExternalTool* work_tool = new ExternalTool(*tool, this);
-      QListWidgetItem* work_item = new QListWidgetItem(work_tool->name(), m_ui.m_listTools);
 
       work_item->setData(Qt::UserRole, QVariant::fromValue(work_tool));
       m_ui.m_listTools->addItem(work_item);
-
     }
   }
 
@@ -110,9 +109,21 @@ void SettingsExternalTools::addNewTool() {
   item->setData(Qt::UserRole, QVariant::fromValue(ext_tool));
 
   m_ui.m_listTools->addItem(item);
+
+  dirtifySettings();
 }
 
-void SettingsExternalTools::removeSelectedTool() {}
+void SettingsExternalTools::removeSelectedTool() {
+  if (m_ui.m_listTools->currentItem() != nullptr) {
+    QListWidgetItem* item = m_ui.m_listTools->currentItem();
+    ExternalTool* ext_tool = item->data(Qt::UserRole).value<ExternalTool*>();
+
+    ext_tool->deleteLater();
+    delete m_ui.m_listTools->takeItem(m_ui.m_listTools->currentRow());
+
+    dirtifySettings();
+  }
+}
 
 void SettingsExternalTools::saveCurrentTool() {
   saveToolChanges(m_ui.m_listTools->currentItem());
