@@ -27,32 +27,32 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
   def_area.setHeight(height());
 
   // Get the page range.
-  int pgFrom, pgTo;
+  int pg_from, pg_to;
 
-  pgFrom = fromPage();
-  pgTo = toPage();
+  pg_from = fromPage();
+  pg_to = toPage();
 
   // Find the position range.
-  long startPos, endPos;
+  long start_pos, end_pos;
 
-  endPos = qsb->length();
-  startPos = from > 0 ? qsb->positionFromLine(from) : 0;
+  end_pos = qsb->length();
+  start_pos = from > 0 ? qsb->positionFromLine(from) : 0;
 
   if (to >= 0) {
-    long toPos = qsb->positionFromLine(to + 1);
+    long to_os = qsb->positionFromLine(to + 1);
 
-    if (endPos > toPos) {
-      endPos = toPos;
+    if (end_pos > to_os) {
+      end_pos = to_os;
     }
   }
 
-  if (startPos >= endPos) {
+  if (start_pos >= end_pos) {
     return false;
   }
 
   QPainter painter(this);
   bool reverse = pageOrder() == PageOrder::LastPageFirst;
-  bool needNewPage = false;
+  bool need_new_page = false;
 
   qsb->setPrintMagnification(m_zoom);
   qsb->setPrintWrapMode(m_wrapMode);
@@ -60,14 +60,14 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
   for (int i = 1; i <= numCopies(); ++i) {
     // If we are printing in reverse page order then remember the start
     // position of each page.
-    QStack<long> pageStarts;
+    QStack<long> page_starts;
 
-    int currPage = 1;
-    long pos = startPos;
+    int curr_page = 1;
+    long pos = start_pos;
 
-    while (pos < endPos) {
+    while (pos < end_pos) {
       // See if we have finished the requested page range.
-      if (pgTo > 0 && pgTo < currPage) {
+      if (pg_to > 0 && pg_to < curr_page) {
         break;
       }
 
@@ -75,29 +75,29 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
       // would fit onto it.
       bool render = false;
 
-      if (pgFrom == 0 || pgFrom <= currPage) {
+      if (pg_from == 0 || pg_from <= curr_page) {
         if (reverse) {
-          pageStarts.push(pos);
+          page_starts.push(pos);
         }
         else {
           render = true;
 
-          if (needNewPage) {
+          if (need_new_page) {
             if (!newPage()) {
               return false;
             }
           }
           else {
-            needNewPage = true;
+            need_new_page = true;
           }
         }
       }
 
       QRect area = def_area;
 
-      pos = qsb->formatRange(render, this, this, area, paperRect(), pos, endPos);
+      pos = qsb->formatRange(render, this, this, area, paperRect(), pos, end_pos);
 
-      ++currPage;
+      ++curr_page;
     }
 
     // All done if we are printing in normal page order.
@@ -106,27 +106,25 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
     }
 
     // Now go through each page on the stack and really print it.
-    while (!pageStarts.isEmpty()) {
-      --currPage;
+    while (!page_starts.isEmpty()) {
+      --curr_page;
 
-      long ePos = pos;
+      long e_pos = pos;
 
-      pos = pageStarts.pop();
+      pos = page_starts.pop();
 
-      if (needNewPage) {
+      if (need_new_page) {
         if (!newPage()) {
           return false;
         }
       }
       else {
-        needNewPage = true;
+        need_new_page = true;
       }
 
       QRect area = def_area;
 
-      qsb->formatRange(true, this, this, area, paperRect(), pos, ePos);
-
-      //qsb->SendScintilla(QsciScintillaBase::SCI_FORMATRANGE, true, &painter, area, pos, ePos);
+      qsb->formatRange(true, this, this, area, paperRect(), pos, e_pos);
     }
   }
 

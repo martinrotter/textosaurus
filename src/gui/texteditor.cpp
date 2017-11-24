@@ -206,6 +206,9 @@ void TextEditor::setEncoding(const QByteArray& encoding) {
 
 void TextEditor::print() {
   TextEditorPrinter printer;
+
+  printer.setZoom(-2);
+
   QPrintPreviewDialog dialog(&printer, qApp->mainFormWidget());
 
   connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this](QPrinter* prntr) {
