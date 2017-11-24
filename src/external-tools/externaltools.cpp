@@ -343,6 +343,19 @@ void ExternalTools::loadCustomTools() {
 
     m_tools.append(ext_bash_garbage);
 
+    ExternalTool* ext_bash_exec = new ExternalTool(this);
+
+    ext_bash_exec->setScript("IFS=''\n"
+                             "read -r fil\n"
+                             "eval $fil");
+    ext_bash_exec->setCategory(tr("Bash (external tool examples)"));
+    ext_bash_exec->setPrompt(tr("Enter Bash code:"));
+    ext_bash_exec->setInput(ToolInput::AskForInput);
+    ext_bash_exec->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_bash_exec->setName(tr("Run Bash code"));
+
+    m_tools.append(ext_bash_exec);
+
     saveExternalTools(m_tools);
   }
 }
