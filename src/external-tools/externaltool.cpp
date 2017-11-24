@@ -55,10 +55,8 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   bash_process.start(interpreter(), QStringList() << script_file);
 #endif
 
-  if (!data.isEmpty()) {
-    bash_process.write(data.toUtf8());
-    bash_process.closeWriteChannel();
-  }
+  bash_process.write(data.toUtf8());
+  bash_process.closeWriteChannel();
 
   if (bash_process.waitForFinished()) {
     m_isRunning = false;
