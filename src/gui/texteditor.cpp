@@ -5,6 +5,7 @@
 #include "definitions/definitions.h"
 #include "exceptions/ioexception.h"
 #include "gui/messagebox.h"
+#include "gui/texteditorprinter.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/syntaxhighlighting.h"
@@ -17,6 +18,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 #include <QTextCodec>
 #include <QTextStream>
 
@@ -199,6 +202,18 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
 void TextEditor::setEncoding(const QByteArray& encoding) {
   m_encoding = encoding;
+}
+
+void TextEditor::print() {
+  TextEditorPrinter printer;
+  QPrintPreviewDialog dialog(&printer, qApp->mainFormWidget());
+
+  connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this](QPrinter* prntr) {
+    TextEditorPrinter* sndr = static_cast<TextEditorPrinter*>(prntr);
+    sndr->printRange(this);
+  });
+
+  dialog.exec();
 }
 
 Lexer TextEditor::lexer() const {

@@ -43,6 +43,8 @@ ToolBox::ToolBox(QWidget* parent) : QTabWidget(parent), m_currentLevel(QMessageB
 }
 
 void ToolBox::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
+  Q_UNUSED(source)
+
   setCurrentWidget(m_txtOutput);
   setVisible(true);
 

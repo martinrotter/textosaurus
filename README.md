@@ -30,6 +30,7 @@ Features
     - switchable encoding for each separate document,
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
+    - can **print files including syntax highlighting** and printing to PDF,
     - hideable line numbers,
     - switchable EOL mode for new documents,
     - EOL mode auto-detection,

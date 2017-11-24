@@ -51,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -83,6 +83,7 @@
     <addaction name="m_actionFileSaveAs"/>
     <addaction name="m_menuFileSaveWithEncoding"/>
     <addaction name="m_actionFileSaveAll"/>
+    <addaction name="m_actionPrint"/>
     <addaction name="separator"/>
     <addaction name="m_actionRestart"/>
     <addaction name="m_actionQuit"/>
@@ -501,6 +502,11 @@
    </property>
    <property name="text">
     <string>&amp;Line numbers</string>
+   </property>
+  </action>
+  <action name="m_actionPrint">
+   <property name="text">
+    <string>&amp;Print</string>
    </property>
   </action>
  </widget>

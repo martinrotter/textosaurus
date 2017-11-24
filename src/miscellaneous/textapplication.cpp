@@ -336,6 +336,7 @@ void TextApplication::createConnections() {
   connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
   // Actions and menus.
+  connect(m_actionPrintCurrentEditor, &QAction::triggered, this, &TextApplication::printCurrentEditor);
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
   connect(m_menuEolMode, &QMenu::aboutToShow, this, &TextApplication::setupEolMenu);
   connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
@@ -408,6 +409,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionSettings = main_form->m_ui.m_actionSettings;
   m_actionViewWhitespaces = main_form->m_ui.m_actionViewWhitespaces;
   m_actionViewEols = main_form->m_ui.m_actionViewEols;
+  m_actionPrintCurrentEditor = main_form->m_ui.m_actionPrint;
 
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
@@ -505,6 +507,14 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   }
 
   return false;
+}
+
+void TextApplication::printCurrentEditor() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    editor->print();
+  }
 }
 
 void TextApplication::openFindReplaceDialog() {
