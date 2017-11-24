@@ -58,7 +58,7 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   bash_process.write(data.toUtf8());
   bash_process.closeWriteChannel();
 
-  if (bash_process.waitForFinished()) {
+  if (bash_process.waitForFinished(1000 * 120)) {
     m_isRunning = false;
 
     // Get result.

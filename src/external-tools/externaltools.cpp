@@ -427,9 +427,7 @@ void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor
   }
 
   if (!success) {
-    m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
-                                            tr("Tool '%1' reports error: %2.").arg(tool->name(), output_text),
-                                            QMessageBox::Icon::Critical);
+    m_application->toolBox()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Critical);
     return;
   }
 
