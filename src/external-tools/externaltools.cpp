@@ -358,6 +358,12 @@ void ExternalTools::reloadTools() {
 }
 
 void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
+  if (tool_to_run->isRunning()) {
+    emit toolFinished(tool_to_run, editor, tr("Tool '%1' is already running.").arg(tool_to_run->name()), false);
+
+    return;
+  }
+
   QPointer<TextEditor> ptr_editor = editor;
   QString data;
 

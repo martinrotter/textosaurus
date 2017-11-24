@@ -10,7 +10,7 @@
 
 #include <QProcess>
 
-ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_input(ToolInput::SelectionDocument),
+ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false), m_input(ToolInput::SelectionDocument),
   m_output(ToolOutput::ReplaceSelectionDocument), m_prompt(QString()), m_shortcut(QString()), m_category(QString()),
   m_name(QString()), m_interpreter(EXT_TOOL_INTERPRETER), m_script(QString()) {}
 
@@ -29,8 +29,10 @@ bool ExternalTool::isPredefined() const {
   return false;
 }
 
-QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) const {
+QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
   Q_UNUSED(editor)
+
+  m_isRunning = true;
 
   // Save script to file and make it executable.
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
@@ -59,15 +61,23 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   }
 
   if (bash_process.waitForFinished()) {
+    m_isRunning = false;
+
     // Get result.
     QByteArray tool_output = bash_process.readAll();
 
     return QPair<QString, bool>(QString::fromUtf8(tool_output), bash_process.exitCode() == 0);
   }
   else {
+    m_isRunning = false;
+
     bash_process.kill();
     return QPair<QString, bool>(bash_process.errorString(), false);
   }
+}
+
+bool ExternalTool::isRunning() const {
+  return m_isRunning;
 }
 
 QString ExternalTool::prompt() const {
@@ -137,7 +147,7 @@ void ExternalTool::setName(const QString& name) {
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
   : ExternalTool(parent), m_functor(functor) {}
 
-QPair<QString, bool> PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) const {
+QPair<QString, bool> PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
   Q_UNUSED(editor)
 
   bool ok = true;

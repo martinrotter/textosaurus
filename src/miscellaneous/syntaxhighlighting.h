@@ -36,7 +36,7 @@ class SyntaxHighlighting : public QObject {
     Lexer defaultLexer();
 
     // Returns lexer suitable for syntax highlighting of given file and filter.
-    // NOTE: Caller takes ownership if the lexer.
+    // NOTE: Caller takes ownership of the lexer.
     Lexer lexerForFile(const QString& file_name);
     Lexer lexerForSuffix(const QString& suffix);
     Lexer lexerForName(const QString& name);
