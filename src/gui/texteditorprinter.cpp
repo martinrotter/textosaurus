@@ -12,9 +12,9 @@ TextEditorPrinter::TextEditorPrinter() : QPrinter(), m_zoom(0), m_wrapMode(SC_WR
 
 TextEditorPrinter::~TextEditorPrinter() {}
 
-int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
+int TextEditorPrinter::printRange(TextEditor* editor, int from, int to) {
   // Sanity check.
-  if (qsb == nullptr) {
+  if (editor == nullptr) {
     return false;
   }
 
@@ -35,11 +35,11 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
   // Find the position range.
   long start_pos, end_pos;
 
-  end_pos = qsb->length();
-  start_pos = from > 0 ? qsb->positionFromLine(from) : 0;
+  end_pos = editor->length();
+  start_pos = from > 0 ? editor->positionFromLine(from) : 0;
 
   if (to >= 0) {
-    long to_os = qsb->positionFromLine(to + 1);
+    long to_os = editor->positionFromLine(to + 1);
 
     if (end_pos > to_os) {
       end_pos = to_os;
@@ -54,8 +54,8 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
   bool reverse = pageOrder() == PageOrder::LastPageFirst;
   bool need_new_page = false;
 
-  qsb->setPrintMagnification(m_zoom);
-  qsb->setPrintWrapMode(m_wrapMode);
+  editor->setPrintMagnification(m_zoom);
+  editor->setPrintWrapMode(m_wrapMode);
 
   for (int i = 1; i <= numCopies(); ++i) {
     // If we are printing in reverse page order then remember the start
@@ -95,7 +95,7 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
 
       QRect area = def_area;
 
-      pos = qsb->formatRange(render, this, this, area, paperRect(), pos, end_pos);
+      pos = editor->formatRange(render, this, this, area, paperRect(), pos, end_pos);
 
       ++curr_page;
     }
@@ -124,7 +124,7 @@ int TextEditorPrinter::printRange(TextEditor* qsb, int from, int to) {
 
       QRect area = def_area;
 
-      qsb->formatRange(true, this, this, area, paperRect(), pos, e_pos);
+      editor->formatRange(true, this, this, area, paperRect(), pos, e_pos);
     }
   }
 
