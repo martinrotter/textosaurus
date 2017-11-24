@@ -210,7 +210,7 @@ void TextEditor::print() {
 
   connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this](QPrinter* prntr) {
     TextEditorPrinter* sndr = static_cast<TextEditorPrinter*>(prntr);
-    sndr->printRange(this);
+    sndr->printEditor(this);
   });
 
   dialog.exec();

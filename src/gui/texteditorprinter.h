@@ -12,8 +12,7 @@ class TextEditorPrinter : public QPrinter {
     explicit TextEditorPrinter();
     virtual ~TextEditorPrinter();
 
-    virtual void formatPage(QPainter& painter, bool drawing, QRect& area, int pagenr);
-    virtual int printRange(TextEditor* qsb, int from = -1, int to = -1);
+    virtual int printEditor(TextEditor* editor, int from = -1, int to = -1);
 
     int zoom() const;
     void setZoom(int zoom);
