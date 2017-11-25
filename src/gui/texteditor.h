@@ -27,6 +27,7 @@ class TextEditor : public ScintillaEdit {
     void setEncoding(const QByteArray& encoding);
 
   public slots:
+    void printPreview();
     void print();
     void save(bool* ok);
     void saveAs(bool* ok, const QString& encoding = QString());

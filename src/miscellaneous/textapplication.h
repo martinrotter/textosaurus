@@ -65,6 +65,7 @@ class TextApplication : public QObject {
     bool eventFilter(QObject* obj, QEvent* event);
 
   private slots:
+    void printPreviewCurrentEditor();
     void printCurrentEditor();
     void openFindReplaceDialog();
 
@@ -137,6 +138,7 @@ class TextApplication : public QObject {
     QAction* m_actionViewWhitespaces;
     QAction* m_actionViewEols;
     QAction* m_actionPrintCurrentEditor;
+    QAction* m_actionPrintPreviewCurrentEditor;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuEolMode;

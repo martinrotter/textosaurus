@@ -204,7 +204,7 @@ void TextEditor::setEncoding(const QByteArray& encoding) {
   m_encoding = encoding;
 }
 
-void TextEditor::print() {
+void TextEditor::printPreview() {
   TextEditorPrinter printer;
 
   printer.setZoom(-2);
@@ -217,6 +217,18 @@ void TextEditor::print() {
   });
 
   dialog.exec();
+}
+
+void TextEditor::print() {
+  TextEditorPrinter printer;
+
+  printer.setZoom(-2);
+
+  QPrintDialog dialog(&printer, qApp->mainFormWidget());
+
+  if (dialog.exec() == QDialog::DialogCode::Accepted) {
+    printer.printRange(this);
+  }
 }
 
 Lexer TextEditor::lexer() const {

@@ -84,6 +84,7 @@
     <addaction name="m_menuFileSaveWithEncoding"/>
     <addaction name="m_actionFileSaveAll"/>
     <addaction name="m_actionPrint"/>
+    <addaction name="m_actionPrintPreview"/>
     <addaction name="separator"/>
     <addaction name="m_actionRestart"/>
     <addaction name="m_actionQuit"/>
@@ -506,7 +507,12 @@
   </action>
   <action name="m_actionPrint">
    <property name="text">
-    <string>&amp;Print</string>
+    <string>&amp;Print...</string>
+   </property>
+  </action>
+  <action name="m_actionPrintPreview">
+   <property name="text">
+    <string>&amp;Print pre&amp;view</string>
    </property>
   </action>
  </widget>
