@@ -700,9 +700,6 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
         m_actionFileSaveAll->setEnabled(true);
         m_actionPrintCurrentEditor->setEnabled(true);
         m_actionPrintPreviewCurrentEditor->setEnabled(true);
-
-        // We display editor default EOL mode.
-        //updateEolMenu(editor->eOLMode());
       }
     }
     else {
@@ -720,9 +717,6 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     m_actionFileSaveAll->setEnabled(false);
     m_actionPrintCurrentEditor->setEnabled(false);
     m_actionPrintPreviewCurrentEditor->setEnabled(false);
-
-    // We display app default EOL mode.
-    //updateEolMenu(settings()->eolMode());
   }
 }
 
