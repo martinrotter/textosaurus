@@ -23,4 +23,7 @@ void FormFindReplace::display() {
   raise();
 }
 
-void FormFindReplace::searchNext() {}
+void FormFindReplace::searchNext() {
+  // NOTE: informace scite
+  // https://github.com/LuaDist/scite/blob/fab4a6321c52c6ea8d1e1eab9c4fee86f7388697/src/SciTEBase.cxx#L1052
+}
