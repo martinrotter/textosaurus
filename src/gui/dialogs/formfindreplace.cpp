@@ -8,6 +8,8 @@
 FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialog(parent), m_application(app) {
   m_ui.setupUi(this);
 
+  m_ui.m_lblResult->setStyleSheet(QSL("color: red;"));
+
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
   setWindowOpacity(0.8);
 
@@ -30,6 +32,7 @@ void FormFindReplace::searchNext() {
   TextEditor* editor = m_application->currentEditor();
 
   if (editor == nullptr || editor->length() == 0 || m_ui.m_txtSearchPhrase->text().isEmpty()) {
+    m_ui.m_lblResult->clear();
     return;
   }
 }
