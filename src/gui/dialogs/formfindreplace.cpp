@@ -29,7 +29,7 @@ void FormFindReplace::searchNext() {
 
   TextEditor* editor = m_application->currentEditor();
 
-  if (editor == nullptr) {
+  if (editor == nullptr || editor->length() == 0 || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     return;
   }
 }
