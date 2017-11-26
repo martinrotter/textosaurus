@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>280</height>
+    <width>484</width>
+    <height>283</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <string>Match mode</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
+      <item row="1" column="0">
        <widget class="QRadioButton" name="m_rbModeNormal">
         <property name="text">
          <string>Normal</string>
@@ -30,20 +30,20 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="m_checkCaseSensitiveSearch">
-        <property name="styleSheet">
-         <string notr="true">margin-left: 16px;</string>
-        </property>
+      <item row="5" column="0">
+       <widget class="QRadioButton" name="m_rbModeRegex">
         <property name="text">
-         <string>Case-sensitive search</string>
+         <string>Regular expression (C++ 11 &lt;regex&gt;)</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QRadioButton" name="m_rbModeRegex">
+       <widget class="QCheckBox" name="m_checkMatchWholeWords">
+        <property name="styleSheet">
+         <string notr="true">margin-left: 16px;</string>
+        </property>
         <property name="text">
-         <string>Regular expression (C++ 11 &lt;regex&gt;)</string>
+         <string>Match whole words only</string>
         </property>
        </widget>
       </item>
@@ -114,13 +114,6 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="0">
-    <widget class="QCheckBox" name="m_checkMatchWholeWords">
-     <property name="text">
-      <string>Match whole words only</string>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="0">
     <widget class="QLabel" name="m_lblResult">
      <property name="text">
@@ -190,6 +183,16 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QCheckBox" name="m_checkCaseSensitiveSearch">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Case-sensitive search</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -202,9 +205,7 @@
  <tabstops>
   <tabstop>m_txtSearchPhrase</tabstop>
   <tabstop>m_txtReplaceString</tabstop>
-  <tabstop>m_checkMatchWholeWords</tabstop>
   <tabstop>m_rbModeNormal</tabstop>
-  <tabstop>m_checkCaseSensitiveSearch</tabstop>
   <tabstop>m_rbModeRegex</tabstop>
   <tabstop>m_btnFindNext</tabstop>
   <tabstop>m_btnFindNext_2</tabstop>
@@ -218,7 +219,7 @@
   <connection>
    <sender>m_rbModeNormal</sender>
    <signal>toggled(bool)</signal>
-   <receiver>m_checkCaseSensitiveSearch</receiver>
+   <receiver>m_checkMatchWholeWords</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -226,8 +227,8 @@
      <y>140</y>
     </hint>
     <hint type="destinationlabel">
-     <x>122</x>
-     <y>161</y>
+     <x>160</x>
+     <y>167</y>
     </hint>
    </hints>
   </connection>

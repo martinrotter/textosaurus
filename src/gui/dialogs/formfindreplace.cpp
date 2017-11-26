@@ -58,4 +58,7 @@ void FormFindReplace::searchNext() {
                                                  end_position);
 
   editor->setSelection(found_range.first, found_range.second);
+
+  auto aa = editor->replaceTargetRE(-1, "\\1");
+  auto bb = 5;
 }
