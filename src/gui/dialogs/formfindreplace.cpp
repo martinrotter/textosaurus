@@ -26,4 +26,10 @@ void FormFindReplace::display() {
 void FormFindReplace::searchNext() {
   // NOTE: informace scite
   // https://github.com/LuaDist/scite/blob/fab4a6321c52c6ea8d1e1eab9c4fee86f7388697/src/SciTEBase.cxx#L1052
+
+  TextEditor* editor = m_application->currentEditor();
+
+  if (editor == nullptr) {
+    return;
+  }
 }
