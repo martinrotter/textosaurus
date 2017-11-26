@@ -48,9 +48,9 @@ void FormFindReplace::searchNext() {
 
   int search_flags = 0;
 
-  search_flags |= m_ui.m_checkMatchWholeWords ? SCFIND_WHOLEWORD : 0;
-  search_flags |= m_ui.m_rbModeRegex ? SCFIND_CXX11REGEX | SCFIND_REGEXP : 0;
-  search_flags |= m_ui.m_checkCaseSensitiveSearch ? SCFIND_MATCHCASE : 0;
+  search_flags |= m_ui.m_checkMatchWholeWords->isChecked() ? SCFIND_WHOLEWORD : 0;
+  search_flags |= m_ui.m_rbModeRegex->isChecked() ? SCFIND_CXX11REGEX | SCFIND_REGEXP : 0;
+  search_flags |= m_ui.m_checkCaseSensitiveSearch->isChecked() ? SCFIND_MATCHCASE : 0;
 
   QPair<int, int> found_range = editor->findText(search_flags,
                                                  m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
