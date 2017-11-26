@@ -56,4 +56,6 @@ void FormFindReplace::searchNext() {
                                                  m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
                                                  start_position,
                                                  end_position);
+
+  editor->setSelection(found_range.first, found_range.second);
 }
