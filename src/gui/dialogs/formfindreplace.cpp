@@ -36,8 +36,8 @@ void FormFindReplace::searchNext() {
     return;
   }
 
-  sptr_t sel_start = editor->selectionStart();
-  sptr_t sel_end = editor->selectionEnd();
+  int sel_start = editor->selectionStart();
+  int sel_end = editor->selectionEnd();
   int start_position = static_cast<int>(sel_end);
   int end_position = editor->length();
 
@@ -46,10 +46,14 @@ void FormFindReplace::searchNext() {
     end_position = 0;
   }
 
-  sptr_t search_flags = 0;
+  int search_flags = 0;
 
   search_flags |= m_ui.m_checkMatchWholeWords ? SCFIND_WHOLEWORD : 0;
   search_flags |= m_ui.m_rbModeRegex ? SCFIND_CXX11REGEX | SCFIND_REGEXP : 0;
   search_flags |= m_ui.m_checkCaseSensitiveSearch ? SCFIND_MATCHCASE : 0;
 
+  QPair<int, int> found_range = editor->findText(search_flags,
+                                                 m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
+                                                 start_position,
+                                                 end_position);
 }
