@@ -14,40 +14,11 @@
    <string>Find and replace</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="2" column="0">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Match mode</string>
+   <item row="5" column="0" colspan="3">
+    <widget class="QLabel" name="m_lblResult">
+     <property name="text">
+      <string/>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <widget class="QRadioButton" name="m_rbModeNormal">
-        <property name="text">
-         <string>Normal</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QRadioButton" name="m_rbModeRegex">
-        <property name="text">
-         <string>Regular expression (C++ 11 &lt;regex&gt;)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="m_checkMatchWholeWords">
-        <property name="styleSheet">
-         <string notr="true">margin-left: 16px;</string>
-        </property>
-        <property name="text">
-         <string>Match whole words only</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item row="0" column="0" colspan="2">
@@ -88,20 +59,7 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="1" rowspan="2">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="0">
+   <item row="4" column="0">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -114,10 +72,26 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="m_lblResult">
+   <item row="3" column="1" rowspan="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QCheckBox" name="m_checkCaseSensitiveSearch">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
-      <string/>
+      <string>Case-sensitive search</string>
      </property>
     </widget>
    </item>
@@ -129,14 +103,7 @@
      <item>
       <widget class="QPushButton" name="m_btnFindNext">
        <property name="text">
-        <string>&amp;Find next</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnFindNext_2">
-       <property name="text">
-        <string>Find &amp;previous</string>
+        <string>&amp;Find</string>
        </property>
       </widget>
      </item>
@@ -148,9 +115,16 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="m_btnCount">
+       <property name="text">
+        <string>&amp;Count</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="m_btnReplaceNext">
        <property name="text">
-        <string>&amp;Replace next</string>
+        <string>&amp;Replace</string>
        </property>
       </widget>
      </item>
@@ -183,13 +157,46 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QCheckBox" name="m_checkCaseSensitiveSearch">
-     <property name="styleSheet">
-      <string notr="true"/>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Match mode</string>
      </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="m_rbModeNormal">
+        <property name="text">
+         <string>Normal</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QRadioButton" name="m_rbModeRegex">
+        <property name="text">
+         <string>Regular expression (C++ 11 &lt;regex&gt;)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="m_checkMatchWholeWords">
+        <property name="styleSheet">
+         <string notr="true">margin-left: 16px;</string>
+        </property>
+        <property name="text">
+         <string>Match whole words only</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="m_checkReverse">
      <property name="text">
-      <string>Case-sensitive search</string>
+      <string>Backward direction</string>
      </property>
     </widget>
    </item>
@@ -205,11 +212,14 @@
  <tabstops>
   <tabstop>m_txtSearchPhrase</tabstop>
   <tabstop>m_txtReplaceString</tabstop>
+  <tabstop>m_checkReverse</tabstop>
+  <tabstop>m_checkCaseSensitiveSearch</tabstop>
   <tabstop>m_rbModeNormal</tabstop>
+  <tabstop>m_checkMatchWholeWords</tabstop>
   <tabstop>m_rbModeRegex</tabstop>
   <tabstop>m_btnFindNext</tabstop>
-  <tabstop>m_btnFindNext_2</tabstop>
   <tabstop>m_btnFindAll</tabstop>
+  <tabstop>m_btnCount</tabstop>
   <tabstop>m_btnReplaceNext</tabstop>
   <tabstop>m_btnReplaceAll</tabstop>
   <tabstop>m_btnClose</tabstop>

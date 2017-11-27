@@ -29,21 +29,28 @@ void FormFindReplace::searchNext() {
   // NOTE: informace scite
   // https://github.com/LuaDist/scite/blob/fab4a6321c52c6ea8d1e1eab9c4fee86f7388697/src/SciTEBase.cxx#L1052
 
+  search(m_ui.m_checkReverse->isChecked());
+}
+
+void FormFindReplace::search(bool reverse) {
   TextEditor* editor = m_application->currentEditor();
 
-  if (editor == nullptr || editor->length() == 0 || m_ui.m_txtSearchPhrase->text().isEmpty()) {
+  if (editor == nullptr || editor->length() <= 0 || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     m_ui.m_lblResult->clear();
     return;
   }
 
   int sel_start = editor->selectionStart();
   int sel_end = editor->selectionEnd();
-  int start_position = static_cast<int>(sel_end);
-  int end_position = editor->length();
+  int start_position, end_position;
 
-  if (false /*reverseDirection*/) {
+  if (reverse) {
     start_position = sel_start;
     end_position = 0;
+  }
+  else {
+    start_position = static_cast<int>(sel_end);
+    end_position = editor->length();
   }
 
   int search_flags = 0;
@@ -57,10 +64,21 @@ void FormFindReplace::searchNext() {
                                                  start_position,
                                                  end_position);
 
-  editor->setTargetRange(found_range.first, found_range.second);
-  editor->setSelection(found_range.first, found_range.second);
+  if (found_range.first < 0) {
+    // Next occurrnce was not found.
+    m_ui.m_lblResult->setText(tr("Cannot find the text \"%1\".").arg(m_ui.m_txtSearchPhrase->text()));
+  }
+  else {
+    m_ui.m_lblResult->clear();
+    editor->setSelection(found_range.first, found_range.second);
+    editor->scrollCaret();
+  }
 
-  auto aa = editor->replaceTargetRE(-1, m_ui.m_txtReplaceString->text().toUtf8().constData());
+  /*
+     editor->setTargetRange(found_range.first, found_range.second);
+     editor->setSelection(found_range.first, found_range.second);
 
-  editor->setSelection(found_range.first, editor->targetEnd());
+     auto aa = editor->replaceTargetRE(-1, m_ui.m_txtReplaceString->text().toUtf8().constData());
+
+     editor->setSelection(found_range.first, editor->targetEnd());*/
 }
