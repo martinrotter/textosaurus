@@ -3,7 +3,9 @@
 #include "gui/dialogs/formfindreplace.h"
 
 #include "gui/texteditor.h"
+#include "miscellaneous/application.h"
 #include "miscellaneous/textapplication.h"
+#include "network-web/webfactory.h"
 
 FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialog(parent), m_application(app) {
   m_ui.setupUi(this);
@@ -14,6 +16,7 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   connect(m_ui.m_btnCount, &QPushButton::clicked, this, &FormFindReplace::displayCount);
   connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
   connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::submitted, this, &FormFindReplace::searchNext);
+  connect(m_ui.m_lblRegexInfo, &QLabel::linkActivated, qApp->web(), &WebFactory::openUrlInExternalBrowser);
 }
 
 FormFindReplace::~FormFindReplace() {}
