@@ -11,6 +11,7 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
 
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 
+  connect(m_ui.m_btnCount, &QPushButton::clicked, this, &FormFindReplace::displayCount);
   connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
   connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::submitted, this, &FormFindReplace::searchNext);
 }
@@ -25,11 +26,48 @@ void FormFindReplace::display() {
   m_ui.m_txtSearchPhrase->setFocus();
 }
 
+void FormFindReplace::displayCount() {
+  TextEditor* editor = m_application->currentEditor();
+
+  if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
+    m_ui.m_lblResult->setText("Either no input or no text editor active.");
+    return;
+  }
+
+  int search_flags = extractFlags();
+
+  QPair<int, int> found_range;
+  int start_position = 0;
+  int end_position = editor->length();
+  int count = 0;
+
+  do {
+    start_position = found_range.second;
+
+    found_range = editor->findText(search_flags,
+                                   m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
+                                   start_position,
+                                   end_position);
+  } while (found_range.first >= 0);
+
+  m_ui.m_lblResult->setText(tr("Count: %1 matches.").arg(count));
+}
+
 void FormFindReplace::searchNext() {
   // NOTE: informace scite
   // https://github.com/LuaDist/scite/blob/fab4a6321c52c6ea8d1e1eab9c4fee86f7388697/src/SciTEBase.cxx#L1052
 
   search(m_ui.m_checkReverse->isChecked());
+}
+
+int FormFindReplace::extractFlags() {
+  int search_flags = 0;
+
+  search_flags |= m_ui.m_checkMatchWholeWords->isChecked() ? SCFIND_WHOLEWORD : 0;
+  search_flags |= m_ui.m_rbModeRegex->isChecked() ? SCFIND_CXX11REGEX | SCFIND_REGEXP : 0;
+  search_flags |= m_ui.m_checkCaseSensitiveSearch->isChecked() ? SCFIND_MATCHCASE : 0;
+
+  return search_flags;
 }
 
 void FormFindReplace::search(bool reverse) {
@@ -51,11 +89,7 @@ void FormFindReplace::search(bool reverse) {
     end_position = editor->length();
   }
 
-  int search_flags = 0;
-
-  search_flags |= m_ui.m_checkMatchWholeWords->isChecked() ? SCFIND_WHOLEWORD : 0;
-  search_flags |= m_ui.m_rbModeRegex->isChecked() ? SCFIND_CXX11REGEX | SCFIND_REGEXP : 0;
-  search_flags |= m_ui.m_checkCaseSensitiveSearch->isChecked() ? SCFIND_MATCHCASE : 0;
+  int search_flags = extractFlags();
 
   QPair<int, int> found_range = editor->findText(search_flags,
                                                  m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
