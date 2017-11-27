@@ -41,14 +41,20 @@ void FormFindReplace::displayCount() {
   int end_position = editor->length();
   int count = 0;
 
-  do {
+  while (true) {
     start_position = found_range.second;
-
     found_range = editor->findText(search_flags,
                                    m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
-                                   start_position,
+                                   found_range.second,
                                    end_position);
-  } while (found_range.first >= 0);
+
+    if (found_range.first >= 0 && found_range.second > start_position) {
+      count++;
+    }
+    else {
+      break;
+    }
+  }
 
   m_ui.m_lblResult->setText(tr("Count: %1 matches.").arg(count));
 }
