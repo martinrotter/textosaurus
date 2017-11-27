@@ -8,3 +8,4 @@ Comment=Simple cross-platform text editor based on Qt and QScintilla
 Icon=textilosaurus
 Terminal=false
 Categories=Office;Development;
+MimeType=text/plain;text/xml;
