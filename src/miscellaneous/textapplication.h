@@ -144,6 +144,7 @@ class TextApplication : public QObject {
     QMenu* m_menuEolMode;
     QMenu* m_menuEolConversion;
     QMenu* m_menuTools;
+    QMenu* m_menuSearch;
     QMenu* m_menuRecentFiles;
     QMenu* m_menuLanguage;
     QMenu* m_menuEncoding;

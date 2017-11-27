@@ -7,11 +7,9 @@
 
 FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialog(parent), m_application(app) {
   m_ui.setupUi(this);
-
-  m_ui.m_lblResult->setStyleSheet(QSL("color: red;"));
+  m_ui.m_lblResult->setStyleSheet(QSL("color: red; position: relative; top: 4px;"));
 
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
-  setWindowOpacity(0.8);
 
   connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
   connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::submitted, this, &FormFindReplace::searchNext);
@@ -23,6 +21,8 @@ void FormFindReplace::display() {
   show();
   activateWindow();
   raise();
+
+  m_ui.m_txtSearchPhrase->setFocus();
 }
 
 void FormFindReplace::searchNext() {
@@ -35,21 +35,19 @@ void FormFindReplace::searchNext() {
 void FormFindReplace::search(bool reverse) {
   TextEditor* editor = m_application->currentEditor();
 
-  if (editor == nullptr || editor->length() <= 0 || m_ui.m_txtSearchPhrase->text().isEmpty()) {
-    m_ui.m_lblResult->clear();
+  if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
+    m_ui.m_lblResult->setText("Either no input or no text editor active.");
     return;
   }
 
-  int sel_start = editor->selectionStart();
-  int sel_end = editor->selectionEnd();
   int start_position, end_position;
 
   if (reverse) {
-    start_position = sel_start;
+    start_position = editor->selectionStart();
     end_position = 0;
   }
   else {
-    start_position = static_cast<int>(sel_end);
+    start_position = static_cast<int>(editor->selectionEnd());
     end_position = editor->length();
   }
 

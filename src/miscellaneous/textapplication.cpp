@@ -413,6 +413,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_actionPrintCurrentEditor = main_form->m_ui.m_actionPrint;
   m_actionPrintPreviewCurrentEditor = main_form->m_ui.m_actionPrintPreview;
 
+  m_menuSearch = main_form->m_ui.m_menuSearch;
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
   m_menuEolMode = main_form->m_ui.m_menuEolMode;
