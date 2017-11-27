@@ -65,7 +65,7 @@ void FormFindReplace::search(bool reverse) {
                                                  end_position);
 
   if (found_range.first < 0) {
-    // Next occurrnce was not found.
+    // Next occurrence was not found.
     m_ui.m_lblResult->setText(tr("Cannot find the text \"%1\".").arg(m_ui.m_txtSearchPhrase->text()));
   }
   else {
