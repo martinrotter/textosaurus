@@ -644,7 +644,7 @@ void TextApplication::loadEncodingMenu() {
     while (!act_to_check.isEmpty()) {
       QAction* act = act_to_check.takeFirst();
 
-      if (act->data().toString() == curr_editor->encoding()) {
+      if (act->data().toString().compare(curr_editor->encoding(), Qt::CaseInsensitive) == 0) {
         act->setChecked(true);
         break;
       }
