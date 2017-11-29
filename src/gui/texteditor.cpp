@@ -157,7 +157,7 @@ void TextEditor::reloadFont() {
   // Now, we set some specific stuff.
   styleSetBold(STYLE_LINENUMBER, false);
   styleSetItalic(STYLE_LINENUMBER, false);
-  styleSetWeight(STYLE_LINENUMBER, 100);
+  styleSetWeight(STYLE_LINENUMBER, 1);
 
   updateLineNumberMarginVisibility();
 }
