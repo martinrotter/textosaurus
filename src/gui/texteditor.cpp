@@ -11,6 +11,7 @@
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
+#include "miscellaneous/textfactory.h"
 
 #include "scintilla/include/ILoader.h"
 #include "scintilla/include/SciLexer.h"
@@ -27,20 +28,9 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
-  connect(this, &TextEditor::marginClicked, this, [this](int position, int modifiers, int margin) {
-    Q_UNUSED(modifiers)
-
-    const int line_number = lineFromPosition(position);
-
-    switch (margin) {
-      case MARGIN_FOLDING:
-        toggleFold(line_number);
-        break;
-
-      default:
-        break;
-    }
-  });
+  connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
+  connect(this, &ScintillaEditBase::zoom, this, &TextEditor::updateLineNumberMarginVisibility);
+  connect(this, &TextEditor::modified, this, &TextEditor::onModified);
 
   // Set initial settings.
   setCodePage(SC_CP_UTF8);
@@ -50,6 +40,16 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEd
   setMultiPaste(SC_MULTIPASTE_EACH);
   setMultipleSelection(true);
   setEOLMode(m_textApp->settings()->eolMode());
+}
+
+void TextEditor::updateLineNumberMarginWidth(int zoom, QFont font, int line_count) {
+  // Set point size and add some padding.
+  font.setPointSize(font.pointSize() + zoom);
+
+  QFontMetrics metr(font);
+  int width = TextFactory::stringWidth(QString::number(line_count), metr) + MARGIN_PADDING_LINE_NUMBERS;
+
+  setMarginWidthN(MARGIN_LINE_NUMBERS, width);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {
@@ -81,6 +81,21 @@ void TextEditor::loadFromString(const QString& contents) {
   setText(contents.toUtf8().constData());
 }
 
+void TextEditor::onModified(int type, int position, int length, int lines_added, const QByteArray& text,
+                            int line, int fold_now, int fold_prev) {
+  Q_UNUSED(position)
+  Q_UNUSED(length)
+  Q_UNUSED(type)
+  Q_UNUSED(text)
+  Q_UNUSED(line)
+  Q_UNUSED(fold_now)
+  Q_UNUSED(fold_prev)
+
+  if (lines_added != 0) {
+    updateLineNumberMarginVisibility();
+  }
+}
+
 void TextEditor::closeEvent(QCloseEvent* event) {
   bool ok = false;
 
@@ -92,6 +107,10 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   else {
     ScintillaEdit::closeEvent(event);
   }
+}
+
+bool TextEditor::isMarginVisible(int margin_number) const {
+  return marginWidthN(margin_number) > 0;
 }
 
 void TextEditor::reloadFont() {
@@ -114,7 +133,8 @@ void TextEditor::reloadFont() {
 }
 
 void TextEditor::reloadSettings() {
-  setMarginWidthN(MARGIN_LINE_NUMBERS, m_textApp->settings()->lineNumbersEnabled() ? MARGIN_WIDTH_NUMBERS : 0);
+  setZoom(0);
+
   setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
   setViewEOL(m_textApp->settings()->viewEols());
   setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
@@ -202,6 +222,38 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
 void TextEditor::setEncoding(const QByteArray& encoding) {
   m_encoding = encoding;
+}
+
+void TextEditor::updateLineNumberMarginVisibility() {
+  const int current_width = marginWidthN(MARGIN_LINE_NUMBERS);
+  const bool should_be_visible = m_textApp->settings()->lineNumbersEnabled();
+
+  if (current_width <= 0 && !should_be_visible) {
+    // We do not have to make anything.
+    return;
+  }
+
+  if (should_be_visible) {
+    updateLineNumberMarginWidth(zoom(), m_textApp->settings()->mainFont(), lineCount());
+  }
+  else {
+    setMarginWidthN(MARGIN_LINE_NUMBERS, 0);
+  }
+}
+
+void TextEditor::toggleFolding(int position, int modifiers, int margin) {
+  Q_UNUSED(modifiers)
+
+  const int line_number = lineFromPosition(position);
+
+  switch (margin) {
+    case MARGIN_FOLDING:
+      toggleFold(line_number);
+      break;
+
+    default:
+      break;
+  }
 }
 
 void TextEditor::printPreview() {

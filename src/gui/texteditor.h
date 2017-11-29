@@ -22,16 +22,19 @@ class TextEditor : public ScintillaEdit {
 
     QString filePath() const;
     Lexer lexer() const;
-
     QByteArray encoding() const;
     void setEncoding(const QByteArray& encoding);
 
   public slots:
+    void toggleFolding(int position, int modifiers, int margin);
     void printPreview();
     void print();
     void save(bool* ok);
     void saveAs(bool* ok, const QString& encoding = QString());
 
+    // Shows/hides line numbers margin and adjusts its size to
+    // current line count and zoom.
+    void updateLineNumberMarginVisibility();
     void reloadFont();
     void reloadSettings();
     void reloadLexer(const Lexer& default_lexer);
@@ -40,9 +43,12 @@ class TextEditor : public ScintillaEdit {
     // Given parameter is used to indicate if closing was finished (true)
     // or user cancelled it (false).
     void closeEditor(bool* ok);
-
     void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode);
     void loadFromString(const QString& contents);
+
+  private slots:
+    void onModified(int type, int position, int length, int lines_added, const QByteArray& text,
+                    int line, int fold_now, int fold_prev);
 
   protected:
     void closeEvent(QCloseEvent* event);
@@ -53,6 +59,8 @@ class TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
+    bool isMarginVisible(int margin_number) const;
+    void updateLineNumberMarginWidth(int zoom, QFont font, int line_count);
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:

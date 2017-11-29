@@ -8,8 +8,7 @@
 #define MARGIN_LINE_NUMBERS 0
 #define MARGIN_SYMBOLS      1
 #define MARGIN_FOLDING      2
-
-#define MARGIN_WIDTH_NUMBERS  48
+#define MARGIN_PADDING_LINE_NUMBERS 6
 #define MARGIN_WIDTH_FOLDING  18
 
 #define FORMAT_DATETIME_OUTPUT                      "yyyy-MM-dd HH:mm:ss"
