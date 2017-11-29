@@ -24,8 +24,8 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-TextEditor::TextEditor(TextApplication* text_app, QWidget* parent) : ScintillaEdit(parent), m_textApp(text_app),
-  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
+TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
+  : ScintillaEdit(parent), m_settingsDirty(true), m_textApp(text_app), m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
@@ -133,13 +133,18 @@ void TextEditor::reloadFont() {
 }
 
 void TextEditor::reloadSettings() {
-  setZoom(0);
+  if (m_settingsDirty) {
 
-  setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
-  setViewEOL(m_textApp->settings()->viewEols());
-  setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
+    setZoom(0);
 
-  reloadLexer(m_lexer);
+    setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
+    setViewEOL(m_textApp->settings()->viewEols());
+    setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
+
+    reloadLexer(m_lexer);
+
+    m_settingsDirty = false;
+  }
 }
 
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
@@ -218,6 +223,14 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   emit savedToFile(m_filePath);
 
   *ok = true;
+}
+
+bool TextEditor::settingsDirty() const {
+  return m_settingsDirty;
+}
+
+void TextEditor::setSettingsDirty(bool settings_dirty) {
+  m_settingsDirty = settings_dirty;
 }
 
 void TextEditor::setEncoding(const QByteArray& encoding) {

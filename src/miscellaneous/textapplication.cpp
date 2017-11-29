@@ -199,6 +199,10 @@ void TextApplication::closeAllUnmodifiedEditors() {
 }
 
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
+  foreach (TextEditor* editor, m_tabEditors->editors()) {
+    editor->setSettingsDirty(true);
+  }
+
   if (reload_all) {
     foreach (TextEditor* editor, m_tabEditors->editors()) {
       editor->reloadSettings();

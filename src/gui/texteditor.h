@@ -25,6 +25,9 @@ class TextEditor : public ScintillaEdit {
     QByteArray encoding() const;
     void setEncoding(const QByteArray& encoding);
 
+    bool settingsDirty() const;
+    void setSettingsDirty(bool settings_dirty);
+
   public slots:
     void toggleFolding(int position, int modifiers, int margin);
     void printPreview();
@@ -64,6 +67,7 @@ class TextEditor : public ScintillaEdit {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
+    bool m_settingsDirty;
     TextApplication* m_textApp;
     QString m_filePath;
     QByteArray m_encoding;
