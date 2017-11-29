@@ -32,6 +32,7 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - can **print files including syntax highlighting** and printing to PDF,
     - hideable line numbers,
+    - can display **ligatures* (tested with Fira Code on GNU/Linux and Windows),
     - simple find/replace functionality, which allows you to:
         * search forward/backward for plain string or regular expression (C++ <regexp>),
         * display number of occurrences of search phrase in a document.
