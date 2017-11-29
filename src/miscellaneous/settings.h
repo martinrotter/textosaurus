@@ -28,6 +28,10 @@
 // Editor.
 namespace Editor {
   KEY ID;
+  KEY Zoom;
+
+  VALUE(int) ZoomDef;
+
   KEY EolMode;
 
   VALUE(int) EolModeDef;

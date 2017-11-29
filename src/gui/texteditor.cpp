@@ -29,7 +29,6 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
-  connect(this, &ScintillaEditBase::zoom, this, &TextEditor::updateLineNumberMarginVisibility);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
 
   // Set initial settings.
@@ -96,6 +95,35 @@ void TextEditor::onModified(int type, int position, int length, int lines_added,
   }
 }
 
+void TextEditor::wheelEvent(QWheelEvent* event) {
+  if (event->orientation() == Qt::Horizontal) {
+    if (horizontalScrollBarPolicy() == Qt::ScrollBarAlwaysOff) {
+      event->ignore();
+    }
+    else {
+      QAbstractScrollArea::wheelEvent(event);
+    }
+  }
+  else {
+    if (QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
+      if (event->delta() > 0) {
+        m_textApp->settings()->increaseFontSize();
+      }
+      else {
+        m_textApp->settings()->decreaseFontSize();
+      }
+    }
+    else {
+      if (verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOff) {
+        event->ignore();
+      }
+      else {
+        QAbstractScrollArea::wheelEvent(event);
+      }
+    }
+  }
+}
+
 void TextEditor::closeEvent(QCloseEvent* event) {
   bool ok = false;
 
@@ -130,6 +158,8 @@ void TextEditor::reloadFont() {
   styleSetBold(STYLE_LINENUMBER, false);
   styleSetItalic(STYLE_LINENUMBER, false);
   styleSetWeight(STYLE_LINENUMBER, 100);
+
+  updateLineNumberMarginVisibility();
 }
 
 void TextEditor::reloadSettings() {
@@ -139,7 +169,6 @@ void TextEditor::reloadSettings() {
     setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
 
     reloadFont();
-    setZoom(zoom());
     reloadLexer(m_lexer);
 
     m_settingsDirty = false;

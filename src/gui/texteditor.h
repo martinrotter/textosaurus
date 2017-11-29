@@ -54,6 +54,7 @@ class TextEditor : public ScintillaEdit {
                     int line, int fold_now, int fold_prev);
 
   protected:
+    void wheelEvent(QWheelEvent* event);
     void closeEvent(QCloseEvent* event);
 
   signals:

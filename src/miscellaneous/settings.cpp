@@ -15,6 +15,10 @@
 
 // Editor.
 DKEY Editor::ID = "editor";
+DKEY Editor::Zoom = "zoom";
+
+DVALUE(int) Editor::ZoomDef = 0;
+
 DKEY Editor::EolMode = "eol_mode";
 
 #if defined(Q_OS_WIN)

@@ -33,6 +33,9 @@ class TextApplicationSettings : public QObject {
     SyntaxHighlighting* syntaxHighlighting() const;
 
   public slots:
+    void increaseFontSize();
+    void decreaseFontSize();
+
     void setRecentFiles(const QStringList& recent_files);
     void setViewWhitespaces(bool view);
     void setViewEols(bool view);

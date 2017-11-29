@@ -66,6 +66,20 @@ QFont TextApplicationSettings::mainFont() const {
   return fon;
 }
 
+void TextApplicationSettings::increaseFontSize() {
+  QFont font_old = mainFont();
+
+  font_old.setPointSize(font_old.pointSize() + 1);
+  setMainFont(font_old);
+}
+
+void TextApplicationSettings::decreaseFontSize() {
+  QFont font_old = mainFont();
+
+  font_old.setPointSize(font_old.pointSize() - 1);
+  setMainFont(font_old);
+}
+
 void TextApplicationSettings::setMainFont(const QFont& fon) {
   qApp->settings()->setValue(GROUP(Editor), Editor::FontMain, fon.toString());
   emit settingsChanged(true, false);
