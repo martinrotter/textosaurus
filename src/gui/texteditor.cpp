@@ -134,13 +134,12 @@ void TextEditor::reloadFont() {
 
 void TextEditor::reloadSettings() {
   if (m_settingsDirty) {
-
-    setZoom(0);
-
     setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
     setViewEOL(m_textApp->settings()->viewEols());
     setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);
 
+    reloadFont();
+    setZoom(zoom());
     reloadLexer(m_lexer);
 
     m_settingsDirty = false;
@@ -149,8 +148,6 @@ void TextEditor::reloadSettings() {
 
 void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
-
-  reloadFont();
   setLexer(m_lexer.m_code);
 
   // Style with number 0 always black.
