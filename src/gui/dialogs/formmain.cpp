@@ -238,16 +238,12 @@ void FormMain::loadSize() {
 
   m_ui.m_actionSwitchToolBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
   m_ui.m_actionSwitchStatusBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
-
-  m_ui.m_splitter->restoreState(settings->value(GROUP(GUI), GUI::MainWindowSplitter, m_ui.m_splitter->saveState()).toByteArray());
 }
 
 void FormMain::saveSize() {
   Settings* settings = qApp->settings();
   bool is_fullscreen = isFullScreen();
   bool is_maximized = false;
-
-  settings->setValue(GROUP(GUI), GUI::MainWindowSplitter, m_ui.m_splitter->saveState());
 
   if (is_fullscreen) {
     m_ui.m_actionFullscreen->setChecked(false);

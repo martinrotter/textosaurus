@@ -66,9 +66,6 @@ namespace Editor {
 namespace GUI {
   KEY ID;
   KEY ToolbarStyle;
-  KEY MainWindowSplitter;
-
-  VALUE(QByteArray) MainWindowSplitterDef;
 
   VALUE(Qt::ToolButtonStyle) ToolbarStyleDef;
 
