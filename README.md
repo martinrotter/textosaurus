@@ -35,7 +35,7 @@ Features
     - adjustable vertical line height,
     - can display **ligatures* (tested with Fira Code on GNU/Linux and Windows),
     - simple find/replace functionality, which allows you to:
-        * search forward/backward for plain string or regular expression (C++ <regexp>),
+        * search forward/backward for plain string or regular expression (ECMAScript),
         * display number of occurrences of search phrase in a document.
     - switchable EOL mode for new documents,
     - EOL mode auto-detection,
@@ -57,7 +57,7 @@ Features
 		* **settings of external tools is completely portable** (*),
 * Misc:
     - **all user data (settings, external tools definitions, ...) are fully portable** (You can use the same user data shared via Dropbox on all supported platforms.),
-    - depends only on Qt and Scintilla,
+    - depends only on Qt (Scintilla is bundled),
     - relatively lightweight,
     - no JavaScript components, no bundled Chromium, no Electron, no web technologies inside,
     - always OSS.
