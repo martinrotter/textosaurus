@@ -40,7 +40,6 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="ToolBox" name="m_toolBox"/>
      </widget>
     </item>
    </layout>
@@ -51,7 +50,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -204,6 +203,11 @@
    <addaction name="m_menuWebBrowserTabs"/>
    <addaction name="m_menuTools"/>
    <addaction name="m_menuHelp"/>
+  </widget>
+  <widget class="OutputWindow" name="m_dockOutput">
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
   </widget>
   <action name="m_actionQuit">
    <property name="text">
@@ -530,9 +534,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ToolBox</class>
-   <extends>QTabWidget</extends>
-   <header>toolbox.h</header>
+   <class>OutputWindow</class>
+   <extends>QDockWidget</extends>
+   <header>outputwindow.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

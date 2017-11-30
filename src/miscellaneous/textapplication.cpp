@@ -7,17 +7,18 @@
 #include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
+#include "gui/outputwindow.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
 #include "gui/toolbar.h"
-#include "gui/toolbox.h"
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textfactory.h"
 
 #include "uchardet/uchardet.h"
 
 #include <QClipboard>
+#include <QDockWidget>
 #include <QFileDialog>
 #include <QLineEdit>
 #include <QPointer>
@@ -263,8 +264,8 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
   }
 }
 
-ToolBox* TextApplication::toolBox() const {
-  return m_toolBox;
+OutputWindow* TextApplication::outputWindow() const {
+  return m_outputWindow;
 }
 
 TextApplicationSettings* TextApplication::settings() const {
@@ -392,13 +393,12 @@ void TextApplication::createConnections() {
   });
 }
 
-void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
-                                  StatusBar* status_bar, ToolBox* tool_box) {
+void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, OutputWindow* tool_box) {
   main_form->installEventFilter(this);
 
   m_tabEditors = tab_widget;
   m_statusBar = status_bar;
-  m_toolBox = tool_box;
+  m_outputWindow = tool_box;
 
   // Get pointers to editor-related global actions/menus.
   m_actionFileNew = main_form->m_ui.m_actionFileNew;

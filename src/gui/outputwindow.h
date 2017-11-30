@@ -3,7 +3,7 @@
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
 
-#include <QTabWidget>
+#include <QDockWidget>
 
 #include <QMessageBox>
 
@@ -15,11 +15,11 @@ enum class OutputSource {
   Application
 };
 
-class ToolBox : public QTabWidget {
+class OutputWindow : public QDockWidget {
   Q_OBJECT
 
   public:
-    explicit ToolBox(QWidget* parent = nullptr);
+    explicit OutputWindow(QWidget* parent = nullptr);
 
   public slots:
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);

@@ -4,7 +4,7 @@
 
 #include "external-tools/externaltool.h"
 #include "external-tools/predefinedtools.h"
-#include "gui/toolbox.h"
+#include "gui/outputwindow.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/textapplication.h"
@@ -106,7 +106,7 @@ void ExternalTools::runSelectedExternalTool() {
   if (editor != nullptr) {
     ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
 
-    m_application->toolBox()->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool...").arg(tool_to_run->name()));
+    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool...").arg(tool_to_run->name()));
     runTool(tool_to_run, editor);
   }
 }
@@ -433,14 +433,14 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
 void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor>& editor, const QString& output_text, bool success) {
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
-    m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
-                                            tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
-                                            QMessageBox::Icon::Critical);
+    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+                                                 tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
+                                                 QMessageBox::Icon::Critical);
     return;
   }
 
   if (!success) {
-    m_application->toolBox()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Critical);
+    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Critical);
     return;
   }
 
@@ -466,19 +466,19 @@ void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor
 
     case ToolOutput::CopyToClipboard:
       qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
-      m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
-                                              tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
-                                              QMessageBox::Icon::Information);
+      m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+                                                   tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                                                   QMessageBox::Icon::Information);
       break;
 
     case ToolOutput::DumpToOutputWindow:
-      m_application->toolBox()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
+      m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
       break;
 
     case ToolOutput::NewSavedFile: {
-      m_application->toolBox()->displayOutput(OutputSource::ExternalTool,
-                                              tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
-                                              QMessageBox::Icon::Information);
+      m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+                                                   tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
+                                                   QMessageBox::Icon::Information);
 
       m_application->loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
       break;

@@ -255,13 +255,13 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/prmem.h \
             src/uchardet/uchardet.h \
             src/external-tools/externaltools.h \
-            src/gui/toolbox.h \
             src/external-tools/externaltool.h \
             src/external-tools/predefinedtools.h \
             src/miscellaneous/syntaxhighlighting.h \
             src/gui/settings/settingseditor.h \
     src/gui/dialogs/formfindreplace.h \
-    src/gui/texteditorprinter.h
+    src/gui/texteditorprinter.h \
+    src/gui/outputwindow.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -365,13 +365,13 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsUTF8Prober.cpp \
             src/uchardet/uchardet.cpp \
             src/external-tools/externaltools.cpp \
-            src/gui/toolbox.cpp \
             src/external-tools/externaltool.cpp \
             src/external-tools/predefinedtools.cpp \
             src/miscellaneous/syntaxhighlighting.cpp \
             src/gui/settings/settingseditor.cpp \
     src/gui/dialogs/formfindreplace.cpp \
-    src/gui/texteditorprinter.cpp
+    src/gui/texteditorprinter.cpp \
+    src/gui/outputwindow.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

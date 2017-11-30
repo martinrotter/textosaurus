@@ -161,7 +161,7 @@ void Application::processExecutionMessage(const QString& message) {
 void Application::showGuiMessage(const QString& message, QMessageBox::Icon message_type) {
   Q_UNUSED(message_type)
 
-  m_textApplication->toolBox()->displayOutput(OutputSource::Application, message, message_type);
+  m_textApplication->outputWindow()->displayOutput(OutputSource::Application, message, message_type);
 }
 
 Application* Application::instance() {

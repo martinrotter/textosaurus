@@ -3,7 +3,7 @@
 #include "external-tools/externaltool.h"
 
 #include "gui/texteditor.h"
-#include "gui/toolbox.h"
+#include "gui/outputwindow.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
