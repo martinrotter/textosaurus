@@ -31,6 +31,9 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
 
+  setExtraAscent(-2);
+  setExtraDescent(-2);
+
   // Set initial settings.
   setCodePage(SC_CP_UTF8);
   setMarginWidthN(MARGIN_SYMBOLS, 0);
@@ -164,6 +167,11 @@ void TextEditor::reloadFont() {
 
 void TextEditor::reloadSettings() {
   if (m_settingsDirty) {
+    int line_spacing = m_textApp->settings()->lineSpacing();
+
+    setExtraAscent(line_spacing / 2);
+    setExtraDescent(line_spacing / 2);
+
     setWrapMode(m_textApp->settings()->wordWrapEnabled() ? SC_WRAP_WORD : SC_WRAP_NONE);
     setViewEOL(m_textApp->settings()->viewEols());
     setViewWS(m_textApp->settings()->viewWhitespaces() ? SCWS_VISIBLEALWAYS : SCWS_INVISIBLE);

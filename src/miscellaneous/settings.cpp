@@ -15,9 +15,9 @@
 
 // Editor.
 DKEY Editor::ID = "editor";
-DKEY Editor::Zoom = "zoom";
+DKEY Editor::LineSpacing = "line_spacing";
 
-DVALUE(int) Editor::ZoomDef = 0;
+DVALUE(int) Editor::LineSpacingDef = 0;
 
 DKEY Editor::EolMode = "eol_mode";
 

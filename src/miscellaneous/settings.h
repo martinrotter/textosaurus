@@ -28,9 +28,9 @@
 // Editor.
 namespace Editor {
   KEY ID;
-  KEY Zoom;
+  KEY LineSpacing;
 
-  VALUE(int) ZoomDef;
+  VALUE(int) LineSpacingDef;
 
   KEY EolMode;
 

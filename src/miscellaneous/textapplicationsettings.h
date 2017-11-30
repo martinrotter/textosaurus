@@ -25,6 +25,7 @@ class TextApplicationSettings : public QObject {
 
     bool viewWhitespaces() const;
     bool viewEols() const;
+    int lineSpacing() const;
 
     QFont mainFont() const;
     void setMainFont(const QFont& fon);
@@ -36,6 +37,7 @@ class TextApplicationSettings : public QObject {
     void increaseFontSize();
     void decreaseFontSize();
 
+    void setLineSpacing(int spacing);
     void setRecentFiles(const QStringList& recent_files);
     void setViewWhitespaces(bool view);
     void setViewEols(bool view);

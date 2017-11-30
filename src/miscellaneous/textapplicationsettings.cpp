@@ -54,6 +54,10 @@ bool TextApplicationSettings::viewEols() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ViewEols)).toBool();
 }
 
+int TextApplicationSettings::lineSpacing() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::LineSpacing)).toInt();
+}
+
 QFont TextApplicationSettings::mainFont() const {
   QFont def_font = QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont);
   QFont fon;
@@ -78,6 +82,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setLineSpacing(int spacing) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::LineSpacing, spacing);
+  emit settingsChanged(true, false);
 }
 
 void TextApplicationSettings::setMainFont(const QFont& fon) {
