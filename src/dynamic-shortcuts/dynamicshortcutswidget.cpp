@@ -3,7 +3,6 @@
 #include "dynamic-shortcuts/dynamicshortcutswidget.h"
 
 #include "definitions/definitions.h"
-#include "dynamic-shortcuts/shortcutbutton.h"
 #include "dynamic-shortcuts/shortcutcatcher.h"
 
 #include <QAction>

@@ -182,7 +182,6 @@ mac|win32|android {
 HEADERS +=  src/definitions/definitions.h \
             src/dynamic-shortcuts/dynamicshortcuts.h \
             src/dynamic-shortcuts/dynamicshortcutswidget.h \
-            src/dynamic-shortcuts/shortcutbutton.h \
             src/gui/settings/settingsexternaltools.h \
             src/dynamic-shortcuts/shortcutcatcher.h \
             src/exceptions/applicationexception.h \
@@ -266,7 +265,6 @@ HEADERS +=  src/definitions/definitions.h \
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
-            src/dynamic-shortcuts/shortcutbutton.cpp \
             src/dynamic-shortcuts/shortcutcatcher.cpp \
             src/exceptions/applicationexception.cpp \
             src/exceptions/ioexception.cpp \
