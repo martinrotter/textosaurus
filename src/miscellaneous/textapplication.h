@@ -46,6 +46,7 @@ class TextApplication : public QObject {
 
     // Load/save/new files.
     void newFile();
+    void reopenTextFile(QAction* action);
     void openTextFile(QAction* action = nullptr);
     void loadFilesFromArgs(const QList<QString>& files);
     void loadTextEditorFromString(const QString& contents);
@@ -141,6 +142,7 @@ class TextApplication : public QObject {
     QAction* m_actionPrintPreviewCurrentEditor;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
+    QMenu* m_menuFileReopenWithEncoding;
     QMenu* m_menuEolMode;
     QMenu* m_menuEolConversion;
     QMenu* m_menuTools;

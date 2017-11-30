@@ -51,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -73,10 +73,16 @@
       <string>&amp;Recently opened files</string>
      </property>
     </widget>
+    <widget class="QMenu" name="m_menuFileReopenWithEncoding">
+     <property name="title">
+      <string>&amp;Reopen file with encoding...</string>
+     </property>
+    </widget>
     <addaction name="m_actionFileNew"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileOpen"/>
     <addaction name="m_menuFileOpenWithEncoding"/>
+    <addaction name="m_menuFileReopenWithEncoding"/>
     <addaction name="m_menuRecentFiles"/>
     <addaction name="separator"/>
     <addaction name="m_actionFileSave"/>

@@ -192,6 +192,7 @@ void FormMain::setupIcons() {
   m_ui.m_actionFileNew->setIcon(icon_theme_factory->fromTheme(QSL("document-new")));
   m_ui.m_actionFileOpen->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
   m_ui.m_menuFileOpenWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
+  m_ui.m_menuFileReopenWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-open")));
   m_ui.m_actionFileSave->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));
   m_ui.m_actionFileSaveAs->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
   m_ui.m_actionFileSaveAll->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));

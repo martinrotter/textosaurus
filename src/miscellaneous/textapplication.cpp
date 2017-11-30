@@ -368,6 +368,13 @@ void TextApplication::createConnections() {
   });
   connect(m_menuFileOpenWithEncoding, &QMenu::triggered, this, &TextApplication::openTextFile);
 
+  connect(m_menuFileReopenWithEncoding, &QMenu::aboutToShow, this, [this]() {
+    if (m_menuFileReopenWithEncoding->isEmpty()) {
+      TextFactory::initializeEncodingMenu(m_menuFileReopenWithEncoding);
+    }
+  });
+  connect(m_menuFileReopenWithEncoding, &QMenu::triggered, this, &TextApplication::reopenTextFile);
+
   connect(m_menuEncoding, &QMenu::aboutToShow, this, &TextApplication::loadEncodingMenu);
   connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::changeEncoding);
 
@@ -420,6 +427,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget,
   m_menuSearch = main_form->m_ui.m_menuSearch;
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
+  m_menuFileReopenWithEncoding = main_form->m_ui.m_menuFileReopenWithEncoding;
   m_menuEolMode = main_form->m_ui.m_menuEolMode;
   m_menuEolConversion = main_form->m_ui.m_menuEolConversion;
   m_menuTools = main_form->m_ui.m_menuTools;
@@ -666,6 +674,23 @@ void TextApplication::loadEncodingMenu() {
   }
 }
 
+void TextApplication::reopenTextFile(QAction* action) {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr && !editor->modify()) {
+    const QString file_path = editor->filePath();
+
+    if (!file_path.isEmpty() && m_tabEditors->closeTab(m_tabEditors->indexOf(editor))) {
+      loadTextEditorFromFile(file_path, action->data().toString());
+    }
+  }
+  else {
+    QMessageBox::warning(qApp->mainForm(),
+                         tr("Unsaved text file"),
+                         tr("Save your file first, please"));
+  }
+}
+
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
   QString selected_filter;
@@ -702,6 +727,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
         m_actionFileSave->setEnabled(true);
         m_actionFileSaveAs->setEnabled(true);
         m_menuFileSaveWithEncoding->setEnabled(true);
+        m_menuFileReopenWithEncoding->setEnabled(true);
         m_actionFileSaveAll->setEnabled(true);
         m_actionPrintCurrentEditor->setEnabled(true);
         m_actionPrintPreviewCurrentEditor->setEnabled(true);
@@ -716,7 +742,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     m_actionFileSave->setEnabled(false);
     m_actionFileSaveAs->setEnabled(false);
     m_menuFileSaveWithEncoding->setEnabled(false);
-
+    m_menuFileReopenWithEncoding->setEnabled(false);
     m_actionEditBack->setEnabled(false);
     m_actionEditForward->setEnabled(false);
     m_actionFileSaveAll->setEnabled(false);
