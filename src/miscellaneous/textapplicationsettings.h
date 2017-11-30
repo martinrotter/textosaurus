@@ -34,6 +34,9 @@ class TextApplicationSettings : public QObject {
     SyntaxHighlighting* syntaxHighlighting() const;
 
   public slots:
+    void increaseLineSpacing();
+    void decreaseLineSpacing();
+
     void increaseFontSize();
     void decreaseFontSize();
 

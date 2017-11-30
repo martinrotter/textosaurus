@@ -85,8 +85,10 @@ void TextApplicationSettings::decreaseFontSize() {
 }
 
 void TextApplicationSettings::setLineSpacing(int spacing) {
-  qApp->settings()->setValue(GROUP(Editor), Editor::LineSpacing, spacing);
-  emit settingsChanged(true, false);
+  if (LINE_SPACING_MIN <= spacing && spacing <= LINE_SPACING_MAX) {
+    qApp->settings()->setValue(GROUP(Editor), Editor::LineSpacing, spacing);
+    emit settingsChanged(true, false);
+  }
 }
 
 void TextApplicationSettings::setMainFont(const QFont& fon) {
@@ -135,6 +137,14 @@ void TextApplicationSettings::setEolMode(int mode) {
 
 SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
+}
+
+void TextApplicationSettings::increaseLineSpacing() {
+  setLineSpacing(lineSpacing() + 1);
+}
+
+void TextApplicationSettings::decreaseLineSpacing() {
+  setLineSpacing(lineSpacing() - 1);
 }
 
 ExternalTools* TextApplicationSettings::externalTools() const {

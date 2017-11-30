@@ -116,6 +116,14 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
         m_textApp->settings()->decreaseFontSize();
       }
     }
+    else if (QGuiApplication::keyboardModifiers() & Qt::ShiftModifier) {
+      if (event->delta() > 0) {
+        m_textApp->settings()->increaseLineSpacing();
+      }
+      else {
+        m_textApp->settings()->decreaseLineSpacing();
+      }
+    }
     else {
       if (verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOff) {
         event->ignore();
