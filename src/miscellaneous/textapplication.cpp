@@ -6,6 +6,7 @@
 #include "external-tools/externaltools.h"
 #include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formmain.h"
+#include "gui/docks/dockwidget.h"
 #include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
@@ -396,48 +397,50 @@ void TextApplication::createConnections() {
 }
 
 void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, OutputWindow* tool_box) {
-  main_form->installEventFilter(this);
+  m_mainForm = main_form;
+
+  m_mainForm->installEventFilter(this);
 
   m_tabEditors = tab_widget;
   m_statusBar = status_bar;
   m_outputWindow = tool_box;
 
   // Get pointers to editor-related global actions/menus.
-  m_actionFileNew = main_form->m_ui.m_actionFileNew;
-  m_actionFileOpen = main_form->m_ui.m_actionFileOpen;
-  m_actionFileSave = main_form->m_ui.m_actionFileSave;
-  m_actionFileSaveAs = main_form->m_ui.m_actionFileSaveAs;
-  m_actionFileSaveAll = main_form->m_ui.m_actionFileSaveAll;
-  m_actionEolUnix = main_form->m_ui.m_actionEolUnix;
-  m_actionEolWindows = main_form->m_ui.m_actionEolWindows;
-  m_actionEolMac = main_form->m_ui.m_actionEolMac;
-  m_actionEolConvertUnix = main_form->m_ui.m_actionEolConvertUnix;
-  m_actionEolConvertWindows = main_form->m_ui.m_actionEolConvertWindows;
-  m_actionEolConvertMac = main_form->m_ui.m_actionEolConvertMac;
-  m_actionFindReplace = main_form->m_ui.m_actionFindReplace;
-  m_actionWordWrap = main_form->m_ui.m_actionWordWrap;
-  m_actionLineNumbers = main_form->m_ui.m_actionLineNumbers;
-  m_actionTabsCloseAllUnmodified = main_form->m_ui.m_actionTabsCloseAllUnmodified;
-  m_actionEditBack = main_form->m_ui.m_actionEditBack;
-  m_actionEditForward = main_form->m_ui.m_actionEditForward;
-  m_actionSettings = main_form->m_ui.m_actionSettings;
-  m_actionViewWhitespaces = main_form->m_ui.m_actionViewWhitespaces;
-  m_actionViewEols = main_form->m_ui.m_actionViewEols;
-  m_actionPrintCurrentEditor = main_form->m_ui.m_actionPrint;
-  m_actionPrintPreviewCurrentEditor = main_form->m_ui.m_actionPrintPreview;
-  m_actionDockShowOutput = main_form->m_ui.m_actionDockShowOutput;
+  m_actionFileNew = m_mainForm->m_ui.m_actionFileNew;
+  m_actionFileOpen = m_mainForm->m_ui.m_actionFileOpen;
+  m_actionFileSave = m_mainForm->m_ui.m_actionFileSave;
+  m_actionFileSaveAs = m_mainForm->m_ui.m_actionFileSaveAs;
+  m_actionFileSaveAll = m_mainForm->m_ui.m_actionFileSaveAll;
+  m_actionEolUnix = m_mainForm->m_ui.m_actionEolUnix;
+  m_actionEolWindows = m_mainForm->m_ui.m_actionEolWindows;
+  m_actionEolMac = m_mainForm->m_ui.m_actionEolMac;
+  m_actionEolConvertUnix = m_mainForm->m_ui.m_actionEolConvertUnix;
+  m_actionEolConvertWindows = m_mainForm->m_ui.m_actionEolConvertWindows;
+  m_actionEolConvertMac = m_mainForm->m_ui.m_actionEolConvertMac;
+  m_actionFindReplace = m_mainForm->m_ui.m_actionFindReplace;
+  m_actionWordWrap = m_mainForm->m_ui.m_actionWordWrap;
+  m_actionLineNumbers = m_mainForm->m_ui.m_actionLineNumbers;
+  m_actionTabsCloseAllUnmodified = m_mainForm->m_ui.m_actionTabsCloseAllUnmodified;
+  m_actionEditBack = m_mainForm->m_ui.m_actionEditBack;
+  m_actionEditForward = m_mainForm->m_ui.m_actionEditForward;
+  m_actionSettings = m_mainForm->m_ui.m_actionSettings;
+  m_actionViewWhitespaces = m_mainForm->m_ui.m_actionViewWhitespaces;
+  m_actionViewEols = m_mainForm->m_ui.m_actionViewEols;
+  m_actionPrintCurrentEditor = m_mainForm->m_ui.m_actionPrint;
+  m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
+  m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
 
-  m_menuDockWidgets = main_form->m_ui.m_menuDockWidgets;
-  m_menuSearch = main_form->m_ui.m_menuSearch;
-  m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
-  m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
-  m_menuFileReopenWithEncoding = main_form->m_ui.m_menuFileReopenWithEncoding;
-  m_menuEolMode = main_form->m_ui.m_menuEolMode;
-  m_menuEolConversion = main_form->m_ui.m_menuEolConversion;
-  m_menuTools = main_form->m_ui.m_menuTools;
-  m_menuRecentFiles = main_form->m_ui.m_menuRecentFiles;
-  m_menuLanguage = main_form->m_ui.m_menuLanguage;
-  m_menuEncoding = main_form->m_ui.m_menuEncoding;
+  m_menuDockWidgets = m_mainForm->m_ui.m_menuDockWidgets;
+  m_menuSearch = m_mainForm->m_ui.m_menuSearch;
+  m_menuFileSaveWithEncoding = m_mainForm->m_ui.m_menuFileSaveWithEncoding;
+  m_menuFileOpenWithEncoding = m_mainForm->m_ui.m_menuFileOpenWithEncoding;
+  m_menuFileReopenWithEncoding = m_mainForm->m_ui.m_menuFileReopenWithEncoding;
+  m_menuEolMode = m_mainForm->m_ui.m_menuEolMode;
+  m_menuEolConversion = m_mainForm->m_ui.m_menuEolConversion;
+  m_menuTools = m_mainForm->m_ui.m_menuTools;
+  m_menuRecentFiles = m_mainForm->m_ui.m_menuRecentFiles;
+  m_menuLanguage = m_mainForm->m_ui.m_menuLanguage;
+  m_menuEncoding = m_mainForm->m_ui.m_menuEncoding;
 
   m_actionEolMac->setData(SC_EOL_CR);
   m_actionEolUnix->setData(SC_EOL_LF);
@@ -446,7 +449,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, St
   m_actionEolConvertUnix->setData(SC_EOL_LF);
   m_actionEolConvertWindows->setData(SC_EOL_CRLF);
 
-  connect(main_form, &FormMain::closeRequested, this, &TextApplication::quit);
+  connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
 
   loadState();
   createConnections();
@@ -461,6 +464,9 @@ void TextApplication::loadState() {
   m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 
   m_settings->externalTools()->reloadTools();
+
+  // Load size/position/visibility of dock widgets.
+  //m_settings->loadDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow);
 }
 
 void TextApplication::quit(bool* ok) {

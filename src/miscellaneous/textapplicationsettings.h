@@ -8,7 +8,9 @@
 class TextApplication;
 class SyntaxHighlighting;
 class ExternalTools;
+class FormMain;
 class QAction;
+class DockWidget;
 
 class TextApplicationSettings : public QObject {
   Q_OBJECT
@@ -34,6 +36,8 @@ class TextApplicationSettings : public QObject {
     SyntaxHighlighting* syntaxHighlighting() const;
 
   public slots:
+    void loadDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const;
+
     void increaseLineSpacing();
     void decreaseLineSpacing();
 

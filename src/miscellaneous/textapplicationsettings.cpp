@@ -3,6 +3,8 @@
 #include "miscellaneous/textapplicationsettings.h"
 
 #include "external-tools/externaltools.h"
+#include "gui/dialogs/formmain.h"
+#include "gui/docks/dockwidget.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/syntaxhighlighting.h"
@@ -137,6 +139,27 @@ void TextApplicationSettings::setEolMode(int mode) {
 
 SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
+}
+
+void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
+  foreach (DockWidget* dock, dock_widgets) {
+    int size = qApp->settings()->value(GROUP(General), dock->objectName() + QSL("_width"), dock->initialWidth()).toInt();
+    bool visible = qApp->settings()->value(GROUP(General), dock->objectName() + QSL("_visible"), dock->initiallyVisible()).toBool();
+
+    Qt::DockWidgetArea area = qApp->settings()->value(GROUP(General),
+                                                      dock->objectName() + QSL("_area"),
+                                                      dock->initialArea()).value<Qt::DockWidgetArea>();
+
+    if (area == Qt::DockWidgetArea::NoDockWidgetArea) {
+      area = Qt::DockWidgetArea::BottomDockWidgetArea;
+    }
+
+    main_form->removeDockWidget(dock);
+    main_form->addDockWidget(area, dock);
+    main_form->resizeDocks(QList<QDockWidget*>() << dock, QList<int>() << size, Qt::Vertical);
+
+    dock->setVisible(visible);
+  }
 }
 
 void TextApplicationSettings::increaseLineSpacing() {

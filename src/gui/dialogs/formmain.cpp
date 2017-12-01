@@ -23,6 +23,7 @@
 #include <QCloseEvent>
 #include <QDesktopWidget>
 #include <QFileDialog>
+#include <QMetaObject>
 #include <QRect>
 #include <QScopedPointer>
 #include <QTimer>

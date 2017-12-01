@@ -3,7 +3,7 @@
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
 
-#include <QDockWidget>
+#include "gui/docks/dockwidget.h"
 
 #include <QMessageBox>
 
@@ -15,11 +15,15 @@ enum class OutputSource {
   Application
 };
 
-class OutputWindow : public QDockWidget {
+class OutputWindow : public DockWidget {
   Q_OBJECT
 
   public:
     explicit OutputWindow(QWidget* parent = nullptr);
+
+    Qt::DockWidgetArea initialArea() const;
+    bool initiallyVisible() const;
+    bool initialWidth() const;
 
   public slots:
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);

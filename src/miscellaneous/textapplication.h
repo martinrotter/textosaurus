@@ -118,6 +118,7 @@ class TextApplication : public QObject {
     OutputWindow* m_outputWindow;
     QLineEdit* m_txtLexerFilter;
     FormFindReplace* m_findReplaceDialog;
+    FormMain* m_mainForm;
 
     // Pointers to important GUI elements outside of editors.
     QAction* m_actionFileNew;

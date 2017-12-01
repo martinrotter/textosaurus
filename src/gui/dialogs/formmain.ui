@@ -542,7 +542,7 @@
   </customwidget>
   <customwidget>
    <class>OutputWindow</class>
-   <extends>QDockWidget</extends>
+   <extends>DockWidget</extends>
    <header>outputwindow.h</header>
    <container>1</container>
   </customwidget>

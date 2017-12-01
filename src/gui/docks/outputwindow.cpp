@@ -11,7 +11,7 @@
 #include <QScrollBar>
 #include <QTabBar>
 
-OutputWindow::OutputWindow(QWidget* parent) : QDockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
+OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
   m_txtOutput(new QPlainTextEdit(this)) {
   setVisible(false);
   setContentsMargins(0, 0, 0, 0);
@@ -29,6 +29,10 @@ OutputWindow::OutputWindow(QWidget* parent) : QDockWidget(parent), m_currentLeve
   m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
 
   setWidget(m_txtOutput);
+}
+
+Qt::DockWidgetArea OutputWindow::initialArea() const {
+  return Qt::DockWidgetArea::BottomDockWidgetArea;
 }
 
 void OutputWindow::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
@@ -62,4 +66,12 @@ QColor OutputWindow::colorForLevel(QMessageBox::Icon level) {
     default:
       return Qt::GlobalColor::black;
   }
+}
+
+bool OutputWindow::initiallyVisible() const {
+  return false;
+}
+
+bool OutputWindow::initialWidth() const {
+  return 100;
 }

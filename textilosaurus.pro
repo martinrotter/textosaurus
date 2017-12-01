@@ -261,7 +261,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/nsUniversalDetector.h \
             src/uchardet/nsUTF8Prober.h \
             src/uchardet/prmem.h \
-            src/uchardet/uchardet.h
+            src/uchardet/uchardet.h \
+    src/gui/docks/dockwidget.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -371,7 +372,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsSJISProber.cpp \
             src/uchardet/nsUniversalDetector.cpp \
             src/uchardet/nsUTF8Prober.cpp \
-            src/uchardet/uchardet.cpp
+            src/uchardet/uchardet.cpp \
+    src/gui/docks/dockwidget.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
