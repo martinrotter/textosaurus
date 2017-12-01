@@ -24,8 +24,13 @@ void FilesystemSidebar::initializeComponents() {
   fs_view->setModel(fs_model);
   fs_view->setRootIndex(fs_model->setRootPath(qApp->documentsFolder()));
 
-  connect(fs_view, &QListView::doubleClicked, this, [fs_view](const QModelIndex& idx) {
-    fs_view->setRootIndex(idx);
+  connect(fs_view, &QListView::doubleClicked, this, [fs_view, fs_model](const QModelIndex& idx) {
+    if (fs_model->isDir(idx)) {
+      fs_view->setRootIndex(idx);
+    }
+    else {
+      // TODO: otevřít soubor v editoru
+    }
   });
 
   // Initialize favorites.
