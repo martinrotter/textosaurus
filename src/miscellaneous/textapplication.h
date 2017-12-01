@@ -16,6 +16,7 @@ class FormMain;
 class StatusBar;
 class FormFindReplace;
 class ExternalTool;
+class FilesystemSidebar;
 class QAction;
 class QMenu;
 class QLineEdit;
@@ -32,7 +33,7 @@ class TextApplication : public QObject {
     OutputWindow* outputWindow() const;
     TextApplicationSettings* settings() const;
 
-    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, OutputWindow* tool_box);
+    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar);
 
   public slots:
 
@@ -116,6 +117,7 @@ class TextApplication : public QObject {
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
     OutputWindow* m_outputWindow;
+    FilesystemSidebar* m_filesystemSidebar;
     QLineEdit* m_txtLexerFilter;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;

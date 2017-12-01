@@ -2,4 +2,6 @@
 
 #include "src/gui/docks/dockwidget.h"
 
+#include <QMetaObject>
+
 DockWidget::DockWidget(QWidget* parent) : QDockWidget(parent) {}

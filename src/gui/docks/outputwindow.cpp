@@ -31,13 +31,10 @@ OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel
   setWidget(m_txtOutput);
 }
 
-Qt::DockWidgetArea OutputWindow::initialArea() const {
-  return Qt::DockWidgetArea::BottomDockWidgetArea;
-}
-
 void OutputWindow::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
   Q_UNUSED(source)
-  setVisible(true);
+  show();
+  raise();
 
   if (level != m_currentLevel) {
     QColor target_color = colorForLevel(level);
@@ -68,10 +65,14 @@ QColor OutputWindow::colorForLevel(QMessageBox::Icon level) {
   }
 }
 
-bool OutputWindow::initiallyVisible() const {
-  return false;
+Qt::DockWidgetArea OutputWindow::initialArea() const {
+  return Qt::DockWidgetArea::BottomDockWidgetArea;
 }
 
-bool OutputWindow::initialWidth() const {
-  return 100;
+bool OutputWindow::initiallyVisible() const {
+  return true;
+}
+
+int OutputWindow::initialWidth() const {
+  return 150;
 }

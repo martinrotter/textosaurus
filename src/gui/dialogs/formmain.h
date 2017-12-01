@@ -25,7 +25,6 @@ class FormMain : public QMainWindow {
     TabWidget* tabWidget() const;
     ToolBar* toolBar() const;
     StatusBar* statusBar() const;
-    OutputWindow* outputWindow() const;
 
     // Returns list of all globally available actions.
     // NOTE: This is used for setting dynamic shortcuts

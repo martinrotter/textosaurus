@@ -7,6 +7,7 @@
 #include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/docks/dockwidget.h"
+#include "gui/docks/filesystemsidebar.h"
 #include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
@@ -396,14 +397,19 @@ void TextApplication::createConnections() {
   });
 }
 
-void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar, OutputWindow* tool_box) {
+void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar) {
   m_mainForm = main_form;
 
   m_mainForm->installEventFilter(this);
 
   m_tabEditors = tab_widget;
   m_statusBar = status_bar;
-  m_outputWindow = tool_box;
+
+  m_outputWindow = new OutputWindow(m_mainForm);
+  m_outputWindow->setObjectName(QSL("m_outputWindow"));
+
+  m_filesystemSidebar = new FilesystemSidebar(m_mainForm);
+  m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
 
   // Get pointers to editor-related global actions/menus.
   m_actionFileNew = m_mainForm->m_ui.m_actionFileNew;
@@ -466,7 +472,9 @@ void TextApplication::loadState() {
   m_settings->externalTools()->reloadTools();
 
   // Load size/position/visibility of dock widgets.
-  //m_settings->loadDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow);
+  m_mainForm->setCorner(Qt::Corner::BottomLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
+  m_mainForm->setCorner(Qt::Corner::BottomRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
+  m_settings->loadDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
 }
 
 void TextApplication::quit(bool* ok) {

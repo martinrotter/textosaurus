@@ -156,7 +156,32 @@ void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<D
 
     main_form->removeDockWidget(dock);
     main_form->addDockWidget(area, dock);
-    main_form->resizeDocks(QList<QDockWidget*>() << dock, QList<int>() << size, Qt::Vertical);
+    main_form->resizeDocks(QList<QDockWidget*>() << dock,
+                           QList<int>() << size,
+                           (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
+                           Qt::Horizontal : Qt::Vertical);
+
+    dock->setVisible(visible);
+  }
+}
+
+void TextApplicationSettings::saveDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
+  foreach (DockWidget* dock, dock_widgets) {
+    Qt::DockWidgetArea area = main_form->dockWidgetArea(dock);
+
+    int size = qApp->settings()->value(GROUP(General),
+                                       dock->objectName() + QSL("_width"),
+                                       dock->width()).toInt();
+    bool visible = qApp->settings()->value(GROUP(General), dock->objectName() + QSL("_visible"), dock->isVisible()).toBool();
+
+    if (area == Qt::DockWidgetArea::NoDockWidgetArea) {
+      area = dock->initialArea();
+    }
+
+    main_form->resizeDocks(QList<QDockWidget*>() << dock,
+                           QList<int>() << size,
+                           (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
+                           Qt::Horizontal : Qt::Vertical);
 
     dock->setVisible(visible);
   }

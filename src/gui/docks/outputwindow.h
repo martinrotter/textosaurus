@@ -23,7 +23,7 @@ class OutputWindow : public DockWidget {
 
     Qt::DockWidgetArea initialArea() const;
     bool initiallyVisible() const;
-    bool initialWidth() const;
+    int initialWidth() const;
 
   public slots:
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);

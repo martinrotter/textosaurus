@@ -38,7 +38,7 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
-  qApp->textApplication()->setMainForm(this, tabWidget(), statusBar(), outputWindow());
+  qApp->textApplication()->setMainForm(this, tabWidget(), statusBar());
 
   // Prepare main window and tabs.
   prepareMenus();
@@ -65,10 +65,6 @@ ToolBar* FormMain::toolBar() const {
 
 StatusBar* FormMain::statusBar() const {
   return m_statusBar;
-}
-
-OutputWindow* FormMain::outputWindow() const {
-  return m_ui.m_dockOutput;
 }
 
 QList<QAction*> FormMain::allActions() const {

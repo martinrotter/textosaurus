@@ -203,11 +203,6 @@
    <addaction name="m_menuTools"/>
    <addaction name="m_menuHelp"/>
   </widget>
-  <widget class="OutputWindow" name="m_dockOutput">
-   <attribute name="dockWidgetArea">
-    <number>8</number>
-   </attribute>
-  </widget>
   <action name="m_actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
@@ -538,12 +533,6 @@
    <class>TabWidget</class>
    <extends>QTabWidget</extends>
    <header>tabwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>OutputWindow</class>
-   <extends>DockWidget</extends>
-   <header>outputwindow.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

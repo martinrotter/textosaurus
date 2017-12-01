@@ -4,6 +4,7 @@
 
 #include "exceptions/applicationexception.h"
 #include "gui/dialogs/formmain.h"
+#include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
 #include "miscellaneous/iconfactory.h"
