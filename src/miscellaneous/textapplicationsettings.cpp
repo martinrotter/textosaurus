@@ -142,6 +142,8 @@ SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
 }
 
 void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
+  QMap<Qt::DockWidgetArea, QList<QDockWidget*>> tabs;
+
   foreach (DockWidget* dock, dock_widgets) {
     int size = qApp->settings()->value(GROUP(General), dock->objectName() + QSL("_width"), dock->initialWidth()).toInt();
     bool visible = qApp->settings()->value(GROUP(General), dock->objectName() + QSL("_visible"), dock->initiallyVisible()).toBool();
@@ -154,6 +156,12 @@ void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<D
       area = Qt::DockWidgetArea::BottomDockWidgetArea;
     }
 
+    if (!tabs.contains(area)) {
+      tabs.insert(area, QList<QDockWidget*>());
+    }
+
+    tabs[area].append(dock);
+
     main_form->removeDockWidget(dock);
     main_form->addDockWidget(area, dock);
     main_form->resizeDocks(QList<QDockWidget*>() << dock,
@@ -163,27 +171,34 @@ void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<D
 
     dock->setVisible(visible);
   }
+
+  // We assemble all dock widgets into tabs, splitting is not (yet?) supported.
+  QMapIterator<Qt::DockWidgetArea, QList<QDockWidget*>> i(tabs);
+
+  while (i.hasNext()) {
+    i.next();
+
+    for (int j = 1; j < i.value().size(); j++) {
+      main_form->tabifyDockWidget(i.value().at(j - 1), i.value().at(j));
+    }
+  }
 }
 
 void TextApplicationSettings::saveDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
   foreach (DockWidget* dock, dock_widgets) {
     Qt::DockWidgetArea area = main_form->dockWidgetArea(dock);
-
-    int size = qApp->settings()->value(GROUP(General),
-                                       dock->objectName() + QSL("_width"),
-                                       dock->width()).toInt();
-    bool visible = qApp->settings()->value(GROUP(General), dock->objectName() + QSL("_visible"), dock->isVisible()).toBool();
+    int size = (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
+               dock->width() :
+               dock->height();
+    bool visible = dock->isVisible();
 
     if (area == Qt::DockWidgetArea::NoDockWidgetArea) {
       area = dock->initialArea();
     }
 
-    main_form->resizeDocks(QList<QDockWidget*>() << dock,
-                           QList<int>() << size,
-                           (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
-                           Qt::Horizontal : Qt::Vertical);
-
-    dock->setVisible(visible);
+    qApp->settings()->setValue(GROUP(General), dock->objectName() + QSL("_width"), size);
+    qApp->settings()->setValue(GROUP(General), dock->objectName() + QSL("_visible"), visible);
+    qApp->settings()->setValue(GROUP(General), dock->objectName() + QSL("_area"), area);
   }
 }
 

@@ -474,6 +474,8 @@ void TextApplication::loadState() {
   m_settings->externalTools()->reloadTools();
 
   // Load size/position/visibility of dock widgets.
+  m_mainForm->setDockOptions(QMainWindow::DockOption::AnimatedDocks | QMainWindow::DockOption::ForceTabbedDocks |
+                             QMainWindow::DockOption::AllowTabbedDocks | QMainWindow::DockOption::GroupedDragging);
   m_mainForm->setCorner(Qt::Corner::BottomLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
   m_mainForm->setCorner(Qt::Corner::BottomRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
   m_settings->loadDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
@@ -487,6 +489,8 @@ void TextApplication::quit(bool* ok) {
       return;
     }
   }
+
+  m_settings->saveDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
 
   *ok = true;
 }
