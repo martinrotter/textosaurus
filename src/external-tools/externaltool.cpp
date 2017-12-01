@@ -2,8 +2,8 @@
 
 #include "external-tools/externaltool.h"
 
+#include "gui/docks/outputwindow.h"
 #include "gui/texteditor.h"
-#include "gui/outputwindow.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"

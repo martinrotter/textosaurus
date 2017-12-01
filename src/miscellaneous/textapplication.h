@@ -95,6 +95,8 @@ class TextApplication : public QObject {
     // External tools.
     void loadNewExternalTools();
 
+    void initializeDockWidgetsMenu();
+
   private:
     void updateEolMenu(int eol_mode);
 
@@ -140,6 +142,8 @@ class TextApplication : public QObject {
     QAction* m_actionViewEols;
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
+    QAction* m_actionDockShowOutput;
+    QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
     QMenu* m_menuFileReopenWithEncoding;

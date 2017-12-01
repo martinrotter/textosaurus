@@ -361,6 +361,7 @@ void TextApplication::createConnections() {
   connect(m_actionViewWhitespaces, &QAction::toggled, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
+  connect(m_actionDockShowOutput, &QAction::toggled, m_outputWindow, &OutputWindow::setVisible);
 
   connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileOpenWithEncoding->isEmpty()) {
@@ -385,6 +386,7 @@ void TextApplication::createConnections() {
     }
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
+  connect(m_menuDockWidgets, &QMenu::aboutToShow, this, &TextApplication::initializeDockWidgetsMenu);
   connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
   connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::loadLexersMenu);
   connect(m_menuLanguage, &QMenu::triggered, this, &TextApplication::changeLexer);
@@ -423,7 +425,9 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, St
   m_actionViewEols = main_form->m_ui.m_actionViewEols;
   m_actionPrintCurrentEditor = main_form->m_ui.m_actionPrint;
   m_actionPrintPreviewCurrentEditor = main_form->m_ui.m_actionPrintPreview;
+  m_actionDockShowOutput = main_form->m_ui.m_actionDockShowOutput;
 
+  m_menuDockWidgets = main_form->m_ui.m_menuDockWidgets;
   m_menuSearch = main_form->m_ui.m_menuSearch;
   m_menuFileSaveWithEncoding = main_form->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = main_form->m_ui.m_menuFileOpenWithEncoding;
@@ -802,6 +806,10 @@ void TextApplication::loadNewExternalTools() {
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
   m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools));
+}
+
+void TextApplication::initializeDockWidgetsMenu() {
+  m_actionDockShowOutput->setChecked(m_outputWindow->isVisible());
 }
 
 void TextApplication::updateEditorIcon(int index, bool modified) {

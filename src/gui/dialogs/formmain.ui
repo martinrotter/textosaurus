@@ -132,6 +132,7 @@
      <property name="title">
       <string>&amp;Dock widgets</string>
      </property>
+     <addaction name="m_actionDockShowOutput"/>
     </widget>
     <addaction name="m_menuDockWidgets"/>
     <addaction name="m_menuShowHide"/>
@@ -521,6 +522,14 @@
   <action name="m_actionPrintPreview">
    <property name="text">
     <string>&amp;Print pre&amp;view</string>
+   </property>
+  </action>
+  <action name="m_actionDockShowOutput">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Output window</string>
    </property>
   </action>
  </widget>
