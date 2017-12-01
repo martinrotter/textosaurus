@@ -23,6 +23,7 @@ Features
     - main window remembers its location and size,
     - hideable toolbar and statusbar,
     - simple interface,
+    - movable dock sidebars ("Output", "Filesystem", "Character map" and more to come),
     - tabbed interface.
 * Text editor component:
     - **supports a lot of input encodings**,
@@ -37,7 +38,7 @@ Features
     - can display **ligatures** (tested with Fira Code on GNU/Linux and Windows),
     - simple find/replace functionality, which allows you to:
         * search forward/backward for plain string or regular expression (ECMAScript),
-        * display number of occurrences of search phrase in a document.
+        * display number of occurrences of search phrase in a document,
     - switchable EOL mode for new documents,
     - EOL mode auto-detection,
     - **syntax highlighting** for many text formats,
@@ -55,7 +56,7 @@ Features
 		* run your script with arbitrary interpreter (Python, Bash or some other executable),
 		* get output of your script (as new file, replace selection/document, copy to clipboard, ...),
 		* scripts run in worker threads (multithreaded environment),
-		* **settings of external tools is completely portable** (*),
+		* **settings of external tools is completely portable** (*).
 * Misc:
     - **all user data (settings, external tools definitions, ...) are fully portable** (You can use the same user data shared via Dropbox on all supported platforms.),
     - depends only on Qt (Scintilla is bundled),
