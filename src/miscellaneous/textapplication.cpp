@@ -363,6 +363,7 @@ void TextApplication::createConnections() {
   connect(m_actionViewWhitespaces, &QAction::toggled, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
+  connect(m_actionDockShowFilesystem, &QAction::toggled, m_filesystemSidebar, &FilesystemSidebar::setVisible);
   connect(m_actionDockShowOutput, &QAction::toggled, m_outputWindow, &OutputWindow::setVisible);
 
   connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
@@ -434,6 +435,7 @@ void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, St
   m_actionViewEols = m_mainForm->m_ui.m_actionViewEols;
   m_actionPrintCurrentEditor = m_mainForm->m_ui.m_actionPrint;
   m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
+  m_actionDockShowFilesystem = m_mainForm->m_ui.m_actionDockShowFilesystem;
   m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
 
   m_menuDockWidgets = m_mainForm->m_ui.m_menuDockWidgets;
@@ -824,6 +826,7 @@ void TextApplication::loadNewExternalTools() {
 
 void TextApplication::initializeDockWidgetsMenu() {
   m_actionDockShowOutput->setChecked(m_outputWindow->isVisible());
+  m_actionDockShowFilesystem->setChecked(m_filesystemSidebar->isVisible());
 }
 
 void TextApplication::updateEditorIcon(int index, bool modified) {

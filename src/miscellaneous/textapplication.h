@@ -146,6 +146,7 @@ class TextApplication : public QObject {
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
     QAction* m_actionDockShowOutput;
+    QAction* m_actionDockShowFilesystem;
     QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
