@@ -182,21 +182,27 @@ mac|win32|android {
 HEADERS +=  src/definitions/definitions.h \
             src/dynamic-shortcuts/dynamicshortcuts.h \
             src/dynamic-shortcuts/dynamicshortcutswidget.h \
-            src/gui/settings/settingsexternaltools.h \
             src/dynamic-shortcuts/shortcutcatcher.h \
             src/exceptions/applicationexception.h \
             src/exceptions/ioexception.h \
+            src/external-tools/externaltool.h \
+            src/external-tools/externaltools.h \
+            src/external-tools/predefinedtools.h \
             src/gui/baselineedit.h \
             src/gui/basetoolbar.h \
             src/gui/dialogs/formabout.h \
+            src/gui/dialogs/formfindreplace.h \
             src/gui/dialogs/formmain.h \
             src/gui/dialogs/formsettings.h \
             src/gui/dialogs/formupdate.h \
+            src/gui/docks/outputwindow.h \
             src/gui/guiutilities.h \
             src/gui/labelwithstatus.h \
             src/gui/messagebox.h \
             src/gui/plaintoolbutton.h \
             src/gui/settings/settingsbrowsermail.h \
+            src/gui/settings/settingseditor.h \
+            src/gui/settings/settingsexternaltools.h \
             src/gui/settings/settingsgeneral.h \
             src/gui/settings/settingsgui.h \
             src/gui/settings/settingslocalization.h \
@@ -205,7 +211,10 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/statusbar.h \
             src/gui/tabbar.h \
             src/gui/tabwidget.h \
+            src/gui/texteditor.h \
+            src/gui/texteditorprinter.h \
             src/gui/timespinbox.h \
+            src/gui/toolbar.h \
             src/gui/toolbareditor.h \
             src/gui/widgetwithstatus.h \
             src/miscellaneous/application.h \
@@ -216,9 +225,12 @@ HEADERS +=  src/definitions/definitions.h \
             src/miscellaneous/localization.h \
             src/miscellaneous/mutex.h \
             src/miscellaneous/settings.h \
-            src/miscellaneous/systemfactory.h \
-            src/miscellaneous/textfactory.h \
             src/miscellaneous/settingsproperties.h \
+            src/miscellaneous/syntaxhighlighting.h \
+            src/miscellaneous/systemfactory.h \
+            src/miscellaneous/textapplication.h \
+            src/miscellaneous/textapplicationsettings.h \
+            src/miscellaneous/textfactory.h \
             src/network-web/basenetworkaccessmanager.h \
             src/network-web/downloader.h \
             src/network-web/networkfactory.h \
@@ -228,10 +240,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/qtsingleapplication/qtlockedfile.h \
             src/qtsingleapplication/qtsingleapplication.h \
             src/qtsingleapplication/qtsinglecoreapplication.h \
-            src/gui/texteditor.h \
-            src/miscellaneous/textapplication.h \
-            src/gui/toolbar.h \
-            src/miscellaneous/textapplicationsettings.h \
             src/uchardet/CharDistribution.h \
             src/uchardet/JpCntx.h \
             src/uchardet/nsBig5Prober.h \
@@ -253,32 +261,30 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/nsUniversalDetector.h \
             src/uchardet/nsUTF8Prober.h \
             src/uchardet/prmem.h \
-            src/uchardet/uchardet.h \
-            src/external-tools/externaltools.h \
-            src/external-tools/externaltool.h \
-            src/external-tools/predefinedtools.h \
-            src/miscellaneous/syntaxhighlighting.h \
-            src/gui/settings/settingseditor.h \
-    src/gui/dialogs/formfindreplace.h \
-    src/gui/texteditorprinter.h \
-    src/gui/outputwindow.h
+            src/uchardet/uchardet.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
             src/dynamic-shortcuts/shortcutcatcher.cpp \
             src/exceptions/applicationexception.cpp \
             src/exceptions/ioexception.cpp \
+            src/external-tools/externaltool.cpp \
+            src/external-tools/externaltools.cpp \
+            src/external-tools/predefinedtools.cpp \
             src/gui/baselineedit.cpp \
             src/gui/basetoolbar.cpp \
             src/gui/dialogs/formabout.cpp \
+            src/gui/dialogs/formfindreplace.cpp \
             src/gui/dialogs/formmain.cpp \
             src/gui/dialogs/formsettings.cpp \
             src/gui/dialogs/formupdate.cpp \
+            src/gui/docks/outputwindow.cpp \
             src/gui/guiutilities.cpp \
             src/gui/labelwithstatus.cpp \
             src/gui/messagebox.cpp \
             src/gui/plaintoolbutton.cpp \
             src/gui/settings/settingsbrowsermail.cpp \
+            src/gui/settings/settingseditor.cpp \
             src/gui/settings/settingsexternaltools.cpp \
             src/gui/settings/settingsgeneral.cpp \
             src/gui/settings/settingsgui.cpp \
@@ -288,7 +294,10 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/statusbar.cpp \
             src/gui/tabbar.cpp \
             src/gui/tabwidget.cpp \
+            src/gui/texteditor.cpp \
+            src/gui/texteditorprinter.cpp \
             src/gui/timespinbox.cpp \
+            src/gui/toolbar.cpp \
             src/gui/toolbareditor.cpp \
             src/gui/widgetwithstatus.cpp \
             src/main.cpp \
@@ -300,7 +309,10 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/miscellaneous/localization.cpp \
             src/miscellaneous/mutex.cpp \
             src/miscellaneous/settings.cpp \
+            src/miscellaneous/syntaxhighlighting.cpp \
             src/miscellaneous/systemfactory.cpp \
+            src/miscellaneous/textapplication.cpp \
+            src/miscellaneous/textapplicationsettings.cpp \
             src/miscellaneous/textfactory.cpp \
             src/network-web/basenetworkaccessmanager.cpp \
             src/network-web/downloader.cpp \
@@ -311,10 +323,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/qtsingleapplication/qtlockedfile.cpp \
             src/qtsingleapplication/qtsingleapplication.cpp \
             src/qtsingleapplication/qtsinglecoreapplication.cpp \
-            src/gui/texteditor.cpp \
-            src/miscellaneous/textapplication.cpp \
-            src/gui/toolbar.cpp \
-            src/miscellaneous/textapplicationsettings.cpp \
             src/uchardet/CharDistribution.cpp \
             src/uchardet/JpCntx.cpp \
             src/uchardet/LangArabicModel.cpp \
@@ -363,15 +371,7 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsSJISProber.cpp \
             src/uchardet/nsUniversalDetector.cpp \
             src/uchardet/nsUTF8Prober.cpp \
-            src/uchardet/uchardet.cpp \
-            src/external-tools/externaltools.cpp \
-            src/external-tools/externaltool.cpp \
-            src/external-tools/predefinedtools.cpp \
-            src/miscellaneous/syntaxhighlighting.cpp \
-            src/gui/settings/settingseditor.cpp \
-    src/gui/dialogs/formfindreplace.cpp \
-    src/gui/texteditorprinter.cpp \
-    src/gui/outputwindow.cpp
+            src/uchardet/uchardet.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -381,6 +381,7 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/dialogs/formmain.ui \
             src/gui/dialogs/formsettings.ui \
             src/gui/dialogs/formupdate.ui \
+            src/gui/dialogs/formfindreplace.ui \
             src/gui/settings/settingsbrowsermail.ui \
             src/gui/settings/settingsgeneral.ui \
             src/gui/settings/settingsgui.ui \
@@ -388,8 +389,7 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
             src/gui/toolbareditor.ui \
-            src/gui/settings/settingseditor.ui \
-    src/gui/dialogs/formfindreplace.ui
+            src/gui/settings/settingseditor.ui
 
 # Add Scintilla.
 win32 {
@@ -462,6 +462,7 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
                 $$PWD/src/gui \
                 $$PWD/src/gui/dialogs \
+                $$PWD/src/gui/docks \
                 $$PWD/src/dynamic-shortcuts \
                 $$PWD/src/external-tools
 

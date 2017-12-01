@@ -42,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -128,6 +128,12 @@
      <addaction name="m_actionViewEols"/>
      <addaction name="m_actionViewWhitespaces"/>
     </widget>
+    <widget class="QMenu" name="m_menuDockWidgets">
+     <property name="title">
+      <string>&amp;Dock widgets</string>
+     </property>
+    </widget>
+    <addaction name="m_menuDockWidgets"/>
     <addaction name="m_menuShowHide"/>
     <addaction name="m_menuViewInvisibles"/>
     <addaction name="m_menuEolMode"/>
