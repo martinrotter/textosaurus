@@ -4,6 +4,11 @@
 
 FilesystemSidebar::FilesystemSidebar(QWidget* parent) : DockWidget(parent) {
   setWindowTitle(tr("Filesystem"));
+  setContentsMargins(0, 0, 0, 0);
+  setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
+  setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea |
+                  Qt::DockWidgetArea::RightDockWidgetArea |
+                  Qt::DockWidgetArea::BottomDockWidgetArea);
 }
 
 Qt::DockWidgetArea FilesystemSidebar::initialArea() const {
