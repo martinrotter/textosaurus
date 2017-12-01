@@ -14,7 +14,7 @@
 OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
   m_txtOutput(new QPlainTextEdit(this)) {
   setContentsMargins(0, 0, 0, 0);
-  setWindowTitle(tr("Output window"));
+  setWindowTitle(tr("Output"));
   setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
   setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea |
                   Qt::DockWidgetArea::RightDockWidgetArea |

@@ -133,6 +133,7 @@
       <string>&amp;Dock widgets</string>
      </property>
      <addaction name="m_actionDockShowOutput"/>
+     <addaction name="action_Filesystem"/>
     </widget>
     <addaction name="m_menuDockWidgets"/>
     <addaction name="m_menuShowHide"/>
@@ -524,7 +525,12 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Output window</string>
+    <string>&amp;Output</string>
+   </property>
+  </action>
+  <action name="action_Filesystem">
+   <property name="text">
+    <string>&amp;Filesystem</string>
    </property>
   </action>
  </widget>
