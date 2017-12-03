@@ -478,6 +478,8 @@ void TextApplication::loadState() {
                              QMainWindow::DockOption::AllowTabbedDocks | QMainWindow::DockOption::GroupedDragging);
   m_mainForm->setCorner(Qt::Corner::BottomLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
   m_mainForm->setCorner(Qt::Corner::BottomRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
+  m_mainForm->setCorner(Qt::Corner::TopLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
+  m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
   m_settings->loadDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
 }
 
