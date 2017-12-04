@@ -11,7 +11,7 @@ SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fil
   m_lexers(Lexers()) {}
 
 Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
-  QRegularExpression reg("(?:\\.)(\\w+$)|($)");
+  QRegularExpression reg(QSL("(?:\\.)(\\w+$)|($)"), QRegularExpression::PatternOption::CaseInsensitiveOption);
   QString suffix = reg.match(file_name).captured(1);
 
   return lexerForSuffix(suffix);
