@@ -23,7 +23,9 @@ Features
     - main window remembers its location and size,
     - hideable toolbar and statusbar,
     - simple interface,
-    - movable dock sidebars ("Output", "Filesystem", "Character map" and more to come),
+    - **movable dock sidebars**:
+        * "Output" sidebar - can display output of external tools and other information,
+        * "Filesystem" sidebar - allows to browse folder hierarchy and mark some files as favorites,
     - tabbed interface.
 * Text editor component:
     - **supports a lot of input encodings**,

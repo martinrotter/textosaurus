@@ -6,15 +6,26 @@
 #include "src/gui/docks/dockwidget.h"
 
 #include <QFileSystemModel>
-
-class QListView;
-class QListWidget;
+#include <QListWidget>
 
 class FileSystemSidebarModel : public QFileSystemModel {
   Q_OBJECT
 
   public:
     explicit FileSystemSidebarModel(QObject* parent = nullptr);
+};
+
+class FavoritesListWidget : public QListWidget {
+  Q_OBJECT
+
+  public:
+    explicit FavoritesListWidget(QWidget* parent = nullptr);
+
+  public slots:
+    void loadFileItem(const QString& file_path);
+
+  protected:
+    void keyPressEvent(QKeyEvent* event);
 };
 
 class FilesystemSidebar : public DockWidget {
@@ -31,6 +42,8 @@ class FilesystemSidebar : public DockWidget {
     void load();
 
   private slots:
+    void addFileToFavorites();
+    void openFavoriteFile(const QModelIndex& idx);
     void openFileFolder(const QModelIndex& idx);
     void goToParentFolder();
 
@@ -38,9 +51,12 @@ class FilesystemSidebar : public DockWidget {
     void openFileRequested(const QString& file_path);
 
   private:
+    void saveFavorites() const;
+
+  private:
     FileSystemSidebarModel* m_fsModel;
     QListView* m_fsView;
-    QListWidget* m_lvFavorites;
+    FavoritesListWidget* m_lvFavorites;
 };
 
 #endif // FILESYSTEMSIDEBAR_H

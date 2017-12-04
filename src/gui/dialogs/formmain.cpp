@@ -142,7 +142,7 @@ void FormMain::switchFullscreenMode() {
 }
 
 void FormMain::dragEnterEvent(QDragEnterEvent* event) {
-  event->accept();
+  //event->accept();
 }
 
 void FormMain::closeEvent(QCloseEvent* event) {
