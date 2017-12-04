@@ -32,34 +32,34 @@ void FilesystemSidebar::load() {
     QWidget* widget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(widget);
 
-    layout->setMargin(0);
-
     m_fsModel = new FileSystemSidebarModel(widget);
+    m_fsView = new QListView(widget);
+    m_lvFavorites = new QListWidget(widget);
+
+    layout->setMargin(0);
     widget->setLayout(layout);
 
     // Initialize toolbar.
     QHBoxLayout* layout_toolbar = new QHBoxLayout(widget);
-
-    layout_toolbar->setMargin(0);
     PlainToolButton* btn_parent = new PlainToolButton(widget);
 
+    connect(btn_parent, &PlainToolButton::clicked, this, &FilesystemSidebar::goToParentFolder);
+
     btn_parent->setIcon(qApp->icons()->fromTheme(QSL("go-parent-folder")));
+    btn_parent->setToolTip(tr("Go to parent folder"));
     layout_toolbar->addWidget(btn_parent);
     layout_toolbar->addStretch();
+    layout_toolbar->setMargin(0);
 
     // Initialize FS browser
-    m_fsView = new QListView(widget);
-
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
     m_fsModel->setRootPath(QString());
     m_fsView->setRootIndex(m_fsModel->index(qApp->documentsFolder()));
 
-    connect(btn_parent, &PlainToolButton::clicked, this, &FilesystemSidebar::goToParentFolder);
     connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
 
     // Initialize favorites.
-    m_lvFavorites = new QListWidget(widget);
 
     layout->addLayout(layout_toolbar, 0);
     layout->addWidget(m_fsView, 1);
