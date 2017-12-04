@@ -10,7 +10,7 @@
 #include <QStyle>
 
 TabBar::TabBar(QWidget* parent) : QTabBar(parent) {
-  setDocumentMode(false);
+  setDocumentMode(true);
   setUsesScrollButtons(true);
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
@@ -106,20 +106,21 @@ void TabBar::mousePressEvent(QMouseEvent* event) {
 
 void TabBar::mouseDoubleClickEvent(QMouseEvent* event) {
   QTabBar::mouseDoubleClickEvent(event);
+
   const int tab_index = tabAt(event->pos());
 
   // Check if user clicked on some tab or on empty space.
   if (tab_index >= 0) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
-    if (event->button() & Qt::LeftButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
+    if (event->button() & Qt::MouseButton::LeftButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
       if ((tabType(tab_index) & TabBar::TabType::TextEditor) > 0) {
         // This tab is closable, so we can close it.
         emit tabCloseRequested(tab_index);
       }
     }
   }
-  else {
+  else if (event->button() == Qt::MouseButton::LeftButton) {
     emit emptySpaceDoubleClicked();
   }
 }

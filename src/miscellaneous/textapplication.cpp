@@ -366,6 +366,11 @@ void TextApplication::createConnections() {
   connect(m_actionDockShowFilesystem, &QAction::toggled, m_filesystemSidebar, &FilesystemSidebar::setVisible);
   connect(m_actionDockShowOutput, &QAction::toggled, m_outputWindow, &OutputWindow::setVisible);
 
+  // Hook FS sidebar.
+  connect(m_filesystemSidebar, &FilesystemSidebar::openFileRequested, this, [this](const QString& file_path) {
+    loadTextEditorFromFile(file_path);
+  });
+
   connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileOpenWithEncoding->isEmpty()) {
       TextFactory::initializeEncodingMenu(m_menuFileOpenWithEncoding);

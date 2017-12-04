@@ -16,7 +16,6 @@
 
 TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setTabBar(new TabBar(this));
-  setDocumentMode(false);
   setUsesScrollButtons(true);
 
   createConnections();

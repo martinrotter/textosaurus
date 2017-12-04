@@ -5,7 +5,16 @@
 
 #include "src/gui/docks/dockwidget.h"
 
-class QFileSystemModel;
+#include <QFileSystemModel>
+
+class QSpacerItem;
+
+class FileSystemSidebarModel : public QFileSystemModel {
+  Q_OBJECT
+
+  public:
+    explicit FileSystemSidebarModel(QObject* parent = nullptr);
+};
 
 class FilesystemSidebar : public DockWidget {
   Q_OBJECT
@@ -20,8 +29,11 @@ class FilesystemSidebar : public DockWidget {
   public slots:
     void load();
 
+  signals:
+    void openFileRequested(const QString& file_path);
+
   private:
-    QFileSystemModel* m_fsModel;
+    FileSystemSidebarModel* m_fsModel;
 };
 
 #endif // FILESYSTEMSIDEBAR_H
