@@ -11,15 +11,7 @@
 #include <QScrollBar>
 #include <QTabBar>
 
-OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
-  m_txtOutput(new QPlainTextEdit(this)) {
-  setContentsMargins(0, 0, 0, 0);
-  setWindowTitle(tr("Output"));
-  setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
-  setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea |
-                  Qt::DockWidgetArea::RightDockWidgetArea |
-                  Qt::DockWidgetArea::BottomDockWidgetArea);
-
+void OutputWindow::initializeComponents() {
   m_txtOutput->setPlaceholderText(tr("This window can display output of external tools and some other critical information..."));
   m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
   m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
@@ -28,6 +20,13 @@ OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel
   m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
 
   setWidget(m_txtOutput);
+}
+
+OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
+  m_txtOutput(new QPlainTextEdit(this)) {
+  setWindowTitle(tr("Output"));
+
+  initializeComponents();
 }
 
 void OutputWindow::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {

@@ -33,6 +33,7 @@ class OutputWindow : public DockWidget {
     QPlainTextEdit* m_txtOutput;
 
     QColor colorForLevel(QMessageBox::Icon level);
+    void initializeComponents();
 };
 
 #endif // TOOLBOX_H

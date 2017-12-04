@@ -16,7 +16,7 @@ void FilesystemSidebar::initializeComponents() {
   widget->setLayout(layout);
 
   QListView* fs_view = new QListView(widget);
-  QGroupBox* gb_favorites = new QGroupBox(widget);
+  QListView* lv_favorites = new QListView(widget);
 
   // Initialize FS browser.
   QFileSystemModel* fs_model = new QFileSystemModel(fs_view);
@@ -34,20 +34,14 @@ void FilesystemSidebar::initializeComponents() {
   });
 
   // Initialize favorites.
-  gb_favorites->setTitle(tr("Favorites"));
-
-  layout->addWidget(fs_view, 2);
-  layout->addWidget(gb_favorites, 1);
+  layout->addWidget(fs_view, 1);
+  layout->addWidget(lv_favorites, 1);
 
   setWidget(widget);
 }
 
 FilesystemSidebar::FilesystemSidebar(QWidget* parent) : DockWidget(parent) {
   setWindowTitle(tr("Filesystem"));
-  setContentsMargins(0, 0, 0, 0);
-  setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
-  setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea | Qt::DockWidgetArea::RightDockWidgetArea);
-
   initializeComponents();
 }
 

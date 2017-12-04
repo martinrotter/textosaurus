@@ -162,7 +162,7 @@ void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<D
 
     tabs[area].append(dock);
 
-    main_form->removeDockWidget(dock);
+    //main_form->removeDockWidget(dock);
     main_form->addDockWidget(area, dock);
     main_form->resizeDocks(QList<QDockWidget*>() << dock,
                            QList<int>() << size,
@@ -187,10 +187,14 @@ void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<D
 void TextApplicationSettings::saveDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
   foreach (DockWidget* dock, dock_widgets) {
     Qt::DockWidgetArea area = main_form->dockWidgetArea(dock);
+    bool visible = dock->isVisible();
+
+    dock->show();
+    dock->raise();
+
     int size = (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
                dock->width() :
                dock->height();
-    bool visible = dock->isVisible();
 
     if (area == Qt::DockWidgetArea::NoDockWidgetArea) {
       area = dock->initialArea();
