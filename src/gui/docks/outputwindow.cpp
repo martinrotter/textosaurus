@@ -12,7 +12,9 @@
 #include <QTabBar>
 
 OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
-  m_txtOutput(nullptr) {}
+  m_txtOutput(nullptr) {
+  setWindowTitle(tr("Output"));
+}
 
 void OutputWindow::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
   Q_UNUSED(source)
@@ -71,6 +73,5 @@ void OutputWindow::load() {
     m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
 
     setWidget(m_txtOutput);
-    setWindowTitle(tr("Output"));
   }
 }

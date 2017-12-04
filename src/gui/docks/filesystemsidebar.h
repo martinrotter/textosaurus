@@ -5,6 +5,8 @@
 
 #include "src/gui/docks/dockwidget.h"
 
+class QFileSystemModel;
+
 class FilesystemSidebar : public DockWidget {
   Q_OBJECT
 
@@ -19,7 +21,7 @@ class FilesystemSidebar : public DockWidget {
     void load();
 
   private:
-    void initializeComponents();
+    QFileSystemModel* m_fsModel;
 };
 
 #endif // FILESYSTEMSIDEBAR_H
