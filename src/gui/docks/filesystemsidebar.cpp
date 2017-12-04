@@ -8,7 +8,7 @@
 
 #include <QFileSystemModel>
 #include <QGroupBox>
-#include <QListView>
+#include <QListWidget>
 #include <QVBoxLayout>
 
 FilesystemSidebar::FilesystemSidebar(QWidget* parent) : DockWidget(parent), m_fsModel(nullptr) {
@@ -48,40 +48,44 @@ void FilesystemSidebar::load() {
     layout_toolbar->addStretch();
 
     // Initialize FS browser
-    QListView* fs_view = new QListView(widget);
+    m_fsView = new QListView(widget);
 
-    fs_view->setIconSize(QSize(12, 12));
-    fs_view->setModel(m_fsModel);
+    m_fsView->setIconSize(QSize(12, 12));
+    m_fsView->setModel(m_fsModel);
     m_fsModel->setRootPath(QString());
-    fs_view->setRootIndex(m_fsModel->index(qApp->documentsFolder()));
+    m_fsView->setRootIndex(m_fsModel->index(qApp->documentsFolder()));
 
-    connect(btn_parent, &PlainToolButton::clicked, this, [fs_view, this] {
-      QModelIndex prnt = fs_view->rootIndex().parent();
-
-      if (prnt.isValid()) {
-        fs_view->setRootIndex(prnt);
-      }
-      else {
-        fs_view->setRootIndex(m_fsModel->index(QString()));
-      }
-    });
-    connect(fs_view, &QListView::doubleClicked, this, [fs_view, this](const QModelIndex& idx) {
-      if (m_fsModel->isDir(idx)) {
-        fs_view->setRootIndex(idx);
-      }
-      else {
-        emit openFileRequested(QDir::toNativeSeparators(m_fsModel->filePath(idx)));
-      }
-    });
+    connect(btn_parent, &PlainToolButton::clicked, this, &FilesystemSidebar::goToParentFolder);
+    connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
 
     // Initialize favorites.
-    QListView* lv_favorites = new QListView(widget);
+    m_lvFavorites = new QListWidget(widget);
 
     layout->addLayout(layout_toolbar, 0);
-    layout->addWidget(fs_view, 1);
-    layout->addWidget(lv_favorites, 1);
+    layout->addWidget(m_fsView, 1);
+    layout->addWidget(m_lvFavorites, 1);
 
     setWidget(widget);
+  }
+}
+
+void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
+  if (m_fsModel->isDir(idx)) {
+    m_fsView->setRootIndex(idx);
+  }
+  else {
+    emit openFileRequested(QDir::toNativeSeparators(m_fsModel->filePath(idx)));
+  }
+}
+
+void FilesystemSidebar::goToParentFolder() {
+  QModelIndex prnt = m_fsView->rootIndex().parent();
+
+  if (prnt.isValid()) {
+    m_fsView->setRootIndex(prnt);
+  }
+  else {
+    m_fsView->setRootIndex(m_fsModel->index(QString()));
   }
 }
 

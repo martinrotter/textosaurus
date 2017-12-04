@@ -7,7 +7,8 @@
 
 #include <QFileSystemModel>
 
-class QSpacerItem;
+class QListView;
+class QListWidget;
 
 class FileSystemSidebarModel : public QFileSystemModel {
   Q_OBJECT
@@ -29,11 +30,17 @@ class FilesystemSidebar : public DockWidget {
   public slots:
     void load();
 
+  private slots:
+    void openFileFolder(const QModelIndex& idx);
+    void goToParentFolder();
+
   signals:
     void openFileRequested(const QString& file_path);
 
   private:
     FileSystemSidebarModel* m_fsModel;
+    QListView* m_fsView;
+    QListWidget* m_lvFavorites;
 };
 
 #endif // FILESYSTEMSIDEBAR_H
