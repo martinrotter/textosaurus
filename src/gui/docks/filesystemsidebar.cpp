@@ -56,3 +56,5 @@ bool FilesystemSidebar::initiallyVisible() const {
 int FilesystemSidebar::initialWidth() const {
   return 150;
 }
+
+void FilesystemSidebar::load() {}

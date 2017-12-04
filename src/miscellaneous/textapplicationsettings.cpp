@@ -188,10 +188,6 @@ void TextApplicationSettings::saveDocksStates(FormMain* main_form, const QList<D
   foreach (DockWidget* dock, dock_widgets) {
     Qt::DockWidgetArea area = main_form->dockWidgetArea(dock);
     bool visible = dock->isVisible();
-
-    dock->show();
-    dock->raise();
-
     int size = (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
                dock->width() :
                dock->height();

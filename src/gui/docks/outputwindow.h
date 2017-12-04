@@ -26,6 +26,7 @@ class OutputWindow : public DockWidget {
     int initialWidth() const;
 
   public slots:
+    void load();
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);
 
   private:
@@ -33,7 +34,6 @@ class OutputWindow : public DockWidget {
     QPlainTextEdit* m_txtOutput;
 
     QColor colorForLevel(QMessageBox::Icon level);
-    void initializeComponents();
 };
 
 #endif // TOOLBOX_H

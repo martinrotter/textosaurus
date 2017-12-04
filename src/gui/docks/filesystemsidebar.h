@@ -15,6 +15,9 @@ class FilesystemSidebar : public DockWidget {
     bool initiallyVisible() const;
     int initialWidth() const;
 
+  public slots:
+    void load();
+
   private:
     void initializeComponents();
 };

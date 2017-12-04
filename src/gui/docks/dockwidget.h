@@ -14,6 +14,12 @@ class DockWidget : public QDockWidget {
     virtual Qt::DockWidgetArea initialArea() const = 0;
     virtual bool initiallyVisible() const = 0;
     virtual int initialWidth() const = 0;
+
+  public slots:
+    virtual void load() = 0;
+
+  protected:
+    void showEvent(QShowEvent* event);
 };
 
 #endif // DOCKWIDGET_H

@@ -11,23 +11,8 @@
 #include <QScrollBar>
 #include <QTabBar>
 
-void OutputWindow::initializeComponents() {
-  m_txtOutput->setPlaceholderText(tr("This window can display output of external tools and some other critical information..."));
-  m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-  m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
-  m_txtOutput->setReadOnly(true);
-  m_txtOutput->setObjectName(QSL("m_txtOutput"));
-  m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
-
-  setWidget(m_txtOutput);
-}
-
 OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
-  m_txtOutput(new QPlainTextEdit(this)) {
-  setWindowTitle(tr("Output"));
-
-  initializeComponents();
-}
+  m_txtOutput(nullptr) {}
 
 void OutputWindow::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
   Q_UNUSED(source)
@@ -38,7 +23,7 @@ void OutputWindow::displayOutput(OutputSource source, const QString& message, QM
     QColor target_color = colorForLevel(level);
     QTextCharFormat c = m_txtOutput->currentCharFormat();
 
-    c.setForeground(QBrush(target_color));
+    c.setForeground(target_color);
     m_txtOutput->setCurrentCharFormat(c);
     m_currentLevel = level;
   }
@@ -73,4 +58,19 @@ bool OutputWindow::initiallyVisible() const {
 
 int OutputWindow::initialWidth() const {
   return 150;
+}
+
+void OutputWindow::load() {
+  if (m_txtOutput == nullptr) {
+    m_txtOutput = new QPlainTextEdit(this);
+    m_txtOutput->setPlaceholderText(tr("This window can display output of external tools and some other critical information..."));
+    m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+    m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
+    m_txtOutput->setReadOnly(true);
+    m_txtOutput->setObjectName(QSL("m_txtOutput"));
+    m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+
+    setWidget(m_txtOutput);
+    setWindowTitle(tr("Output"));
+  }
 }
