@@ -11,6 +11,7 @@
 #include "gui/plaintoolbutton.h"
 #include "gui/statusbar.h"
 #include "gui/tabbar.h"
+#include "gui/tabwidget.h"
 #include "gui/toolbar.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
@@ -31,6 +32,8 @@
 FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
   qApp->setMainForm(this);
+
+  setCentralWidget(m_tabEditors = new TabWidget(this));
 
   // Add these actions to the list of actions of the main window.
   // This allows to use actions via shortcuts
@@ -56,7 +59,7 @@ FormMain::~FormMain() {
 }
 
 TabWidget* FormMain::tabWidget() const {
-  return m_ui.m_tabEditors;
+  return m_tabEditors;
 }
 
 ToolBar* FormMain::toolBar() const {
@@ -98,6 +101,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionViewEols;
   actions << m_ui.m_actionViewWhitespaces;
   actions << m_ui.m_actionDockShowOutput;
+  actions << m_ui.m_actionDockShowFilesystem;
 
   actions << m_ui.m_actionAboutGuard;
   actions << m_ui.m_actionSwitchMainWindow;
@@ -142,7 +146,7 @@ void FormMain::switchFullscreenMode() {
 }
 
 void FormMain::dragEnterEvent(QDragEnterEvent* event) {
-  //event->accept();
+  event->accept();
 }
 
 void FormMain::closeEvent(QCloseEvent* event) {
@@ -303,10 +307,10 @@ void FormMain::createConnections() {
   connect(m_ui.m_actionDisplayWiki, &QAction::triggered, this, &FormMain::showWiki);
 
   // Tab widget connections.
-  connect(m_ui.m_actionTabsNext, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::gotoNextTab);
-  connect(m_ui.m_actionTabsPrevious, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::gotoPreviousTab);
-  connect(m_ui.m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::closeAllTabsExceptCurrent);
-  connect(m_ui.m_actionTabsCloseAll, &QAction::triggered, m_ui.m_tabEditors, &TabWidget::closeAllTabs);
+  connect(m_ui.m_actionTabsNext, &QAction::triggered, m_tabEditors, &TabWidget::gotoNextTab);
+  connect(m_ui.m_actionTabsPrevious, &QAction::triggered, m_tabEditors, &TabWidget::gotoPreviousTab);
+  connect(m_ui.m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_tabEditors, &TabWidget::closeAllTabsExceptCurrent);
+  connect(m_ui.m_actionTabsCloseAll, &QAction::triggered, m_tabEditors, &TabWidget::closeAllTabs);
 }
 
 void FormMain::showWiki() {

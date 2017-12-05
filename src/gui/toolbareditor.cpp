@@ -3,7 +3,8 @@
 #include "gui/toolbareditor.h"
 
 #include "gui/basetoolbar.h"
-#include "gui/dialogs/formmain.h"
+#include "miscellaneous/application.h"
+#include "miscellaneous/iconfactory.h"
 
 #include <QKeyEvent>
 

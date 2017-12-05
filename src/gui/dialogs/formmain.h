@@ -9,6 +9,7 @@
 
 class StatusBar;
 class ToolBar;
+class TabWidget;
 
 class FormMain : public QMainWindow {
   Q_OBJECT
@@ -64,6 +65,7 @@ class FormMain : public QMainWindow {
     void setupIcons();
 
     Ui::FormMain m_ui;
+    TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
     ToolBar* m_toolBar;
 };
