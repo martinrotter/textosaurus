@@ -15,6 +15,12 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
   m_ui.setupUi(this);
   m_ui.m_spinLineSpacing->setSuffix(QString(QL1C(' ')) + tr("pixels"));
 
+  m_ui.m_cmbIndentMode->addItem(tr("Spaces"), false);
+  m_ui.m_cmbIndentMode->addItem(tr("Tabs"), true);
+
+  connect(m_ui.m_cmbIndentMode, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
+  connect(m_ui.m_spinIndentSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
+  connect(m_ui.m_spinTabSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinLineSpacing, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_btnFontMainChange, &QPushButton::clicked, this, &SettingsEditor::changeMainFont);
 }
@@ -22,6 +28,9 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
 void SettingsEditor::loadSettings() {
   onBeginLoadSettings();
 
+  m_ui.m_cmbIndentMode->setCurrentIndex(m_ui.m_cmbIndentMode->findData(qApp->textApplication()->settings()->indentWithTabs()));
+  m_ui.m_spinIndentSize->setValue(qApp->textApplication()->settings()->indentSize());
+  m_ui.m_spinTabSize->setValue(qApp->textApplication()->settings()->tabSize());
   m_ui.m_lblFontMain->setFont(qApp->textApplication()->settings()->mainFont());
   m_ui.m_spinLineSpacing->setValue(qApp->textApplication()->settings()->lineSpacing());
 
@@ -32,6 +41,9 @@ void SettingsEditor::saveSettings() {
   onBeginSaveSettings();
 
   qApp->textApplication()->settings()->blockSignals(true);
+  qApp->textApplication()->settings()->setIndentSize(m_ui.m_spinIndentSize->value());
+  qApp->textApplication()->settings()->setTabSize(m_ui.m_spinTabSize->value());
+  qApp->textApplication()->settings()->setIndentWithTabs(m_ui.m_cmbIndentMode->currentData().toBool());
   qApp->textApplication()->settings()->setMainFont(m_ui.m_lblFontMain->font());
   qApp->textApplication()->settings()->blockSignals(false);
 

@@ -72,6 +72,18 @@ QFont TextApplicationSettings::mainFont() const {
   return fon;
 }
 
+int TextApplicationSettings::tabSize() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::TabSize)).toInt();
+}
+
+int TextApplicationSettings::indentSize() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::IndentSize)).toInt();
+}
+
+bool TextApplicationSettings::indentWithTabs() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::IndentWithTabs)).toBool();
+}
+
 void TextApplicationSettings::increaseFontSize() {
   QFont font_old = mainFont();
 
@@ -84,6 +96,21 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setTabSize(int size) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::TabSize, size);
+  emit settingsChanged(true, false);
+}
+
+void TextApplicationSettings::setIndentSize(int size) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::IndentSize, size);
+  emit settingsChanged(true, false);
+}
+
+void TextApplicationSettings::setIndentWithTabs(bool use_tabs) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::IndentWithTabs, use_tabs);
+  emit settingsChanged(true, false);
 }
 
 void TextApplicationSettings::setLineSpacing(int spacing) {

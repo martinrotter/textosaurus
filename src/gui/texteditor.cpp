@@ -31,8 +31,12 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
 
-  setExtraAscent(-2);
-  setExtraDescent(-2);
+  setTabWidth(4);
+  setIndent(2);
+  setUseTabs(false);
+
+  // TODO: idenntační linky
+  //setIndentationGuides(SC_IV_REAL);
 
   // Set initial settings.
   setCodePage(SC_CP_UTF8);
@@ -176,6 +180,10 @@ void TextEditor::reloadFont() {
 void TextEditor::reloadSettings() {
   if (m_settingsDirty) {
     int line_spacing = m_textApp->settings()->lineSpacing();
+
+    setIndent(m_textApp->settings()->indentSize());
+    setTabWidth(m_textApp->settings()->tabSize());
+    setUseTabs(m_textApp->settings()->indentWithTabs());
 
     setExtraAscent(line_spacing / 2);
     setExtraDescent(line_spacing / 2);

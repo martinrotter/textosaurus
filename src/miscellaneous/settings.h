@@ -28,6 +28,18 @@
 // Editor.
 namespace Editor {
   KEY ID;
+  KEY TabSize;
+
+  VALUE(int) TabSizeDef;
+
+  KEY IndentSize;
+
+  VALUE(int) IndentSizeDef;
+
+  KEY IndentWithTabs;
+
+  VALUE(bool) IndentWithTabsDef;
+
   KEY LineSpacing;
 
   VALUE(int) LineSpacingDef;

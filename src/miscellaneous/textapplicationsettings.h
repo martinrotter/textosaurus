@@ -24,13 +24,14 @@ class TextApplicationSettings : public QObject {
     bool wordWrapEnabled() const;
     bool lineNumbersEnabled() const;
     QString loadSaveDefaultDirectory() const;
-
     bool viewWhitespaces() const;
     bool viewEols() const;
     int lineSpacing() const;
-
     QFont mainFont() const;
-    void setMainFont(const QFont& fon);
+
+    int tabSize() const;
+    int indentSize() const;
+    bool indentWithTabs() const;
 
     ExternalTools* externalTools() const;
     SyntaxHighlighting* syntaxHighlighting() const;
@@ -45,6 +46,10 @@ class TextApplicationSettings : public QObject {
     void increaseFontSize();
     void decreaseFontSize();
 
+    void setTabSize(int size);
+    void setIndentSize(int size);
+    void setIndentWithTabs(bool use_tabs);
+    void setMainFont(const QFont& fon);
     void setLineSpacing(int spacing);
     void setRecentFiles(const QStringList& recent_files);
     void setViewWhitespaces(bool view);

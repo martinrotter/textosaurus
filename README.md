@@ -35,6 +35,8 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - can **print files including syntax highlighting** and printing to PDF,
     - hideable line numbers,
+    - switchable indent characters (spaces/tabs),
+    - adjustable tab/indent width,
     - adjustable vertical line height (responds to `SHIFT+WHEEL UP/DOWN` shortcut too),
     - adjustable editor font (size can be changed also via `CTRL+WHEEL UP/DOWN` shortcut),
     - can display **ligatures** (tested with Fira Code on GNU/Linux and Windows),

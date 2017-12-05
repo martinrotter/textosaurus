@@ -15,6 +15,18 @@
 
 // Editor.
 DKEY Editor::ID = "editor";
+DKEY Editor::TabSize = "tab_size";
+
+DVALUE(int) Editor::TabSizeDef = 2;
+
+DKEY Editor::IndentSize = "indent_size";
+
+DVALUE(int) Editor::IndentSizeDef = 2;
+
+DKEY Editor::IndentWithTabs = "indent_with_tabs";
+
+DVALUE(bool) Editor::IndentWithTabsDef = false;
+
 DKEY Editor::LineSpacing = "line_spacing";
 
 DVALUE(int) Editor::LineSpacingDef = 0;
