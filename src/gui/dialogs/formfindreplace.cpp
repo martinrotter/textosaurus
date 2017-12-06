@@ -11,6 +11,10 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   m_ui.setupUi(this);
   m_ui.m_lblResult->setStyleSheet(QSL("color: red;"));
 
+  m_ui.m_btnFindAll->setVisible(false);
+  m_ui.m_btnReplaceNext->setVisible(false);
+  m_ui.m_btnReplaceAll->setVisible(false);
+
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 
   connect(m_ui.m_btnCount, &QPushButton::clicked, this, &FormFindReplace::displayCount);
