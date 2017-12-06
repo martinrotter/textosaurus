@@ -41,8 +41,8 @@ DEFINES	    *= QT_USE_QSTRINGBUILDER
 
 message(textilosaurus: Welcome Textilosaurus qmake script.)
 
-lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 5) {
-  error(textilosaurus: At least Qt \"5.5.0\" is required!!!)
+lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 6) {
+  error(textilosaurus: At least Qt \"5.6.0\" is required!!!)
 }
 
 APP_NAME                      = "Textilosaurus"
@@ -50,7 +50,7 @@ APP_LOW_NAME                  = "textilosaurus"
 APP_REVERSE_NAME              = "com.github.textilosaurus"
 APP_AUTHOR                    = "Martin Rotter"
 APP_COPYRIGHT                 = "(C) 2017 $$APP_AUTHOR"
-APP_VERSION                   = "0.0.2"
+APP_VERSION                   = "2017.12.06"
 APP_LONG_NAME                 = "$$APP_NAME $$APP_VERSION"
 APP_EMAIL                     = "rotter.martinos@gmail.com"
 APP_URL                       = "https://github.com/martinrotter/textilosaurus"

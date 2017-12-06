@@ -58,14 +58,17 @@ void FormAbout::loadLicenseAndInformation() {
   }
 
   // Set other informative texts.
-  m_ui.m_lblDesc->setText(tr("<b>%8</b><br>" "<b>Version:</b> %1 (built on %2/%3)<br>" "<b>Revision:</b> %4<br>" "<b>Build date:</b> %5<br>"
-                                                                                                                 "<b>Qt:</b> %6 (compiled against %7)<br>").arg(
+  m_ui.m_lblDesc->setText(tr("<b>%8</b><br/>"
+                             "<b>Version:</b> %1 (built on %2/%3)<br/>"
+                             "<b>Revision:</b> %4<br/>"
+                             "<b>Build date:</b> %5<br/>"
+                             "<b>Qt:</b> %6 (compiled against %7)").arg(
                             qApp->applicationVersion(), APP_SYSTEM_NAME, APP_SYSTEM_VERSION, APP_REVISION,
                             TextFactory::parseDateTime(QString("%1 %2").arg(__DATE__,
                                                                             __TIME__)).toString(Qt::DefaultLocaleShortDate),
                             qVersion(), QT_VERSION_STR,
                             APP_NAME));
-  m_ui.m_txtInfo->setText(tr("<body>%5 is simple cross-platform text editor based on Qt and QScintilla."
+  m_ui.m_txtInfo->setText(tr("<body>%5 is simple cross-platform text editor based on Qt and Scintilla."
                              "<br><br>This software is distributed under the terms of GNU General Public License, version 3."
                              "<br><br>Contacts:"
                              "<ul><li><a href=\"mailto://%1\">%1</a> ~e-mail</li>"
