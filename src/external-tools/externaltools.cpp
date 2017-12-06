@@ -121,6 +121,24 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(insert_date_time);
 
+  PredefinedTool* json_beautify = new PredefinedTool(&PredefinedTools::jsonBeautify, this);
+
+  json_beautify->setCategory(tr("JSON"));
+  json_beautify->setName(tr("Beautify"));
+  json_beautify->setInput(ToolInput::SelectionDocument);
+  json_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(json_beautify);
+
+  PredefinedTool* json_minify = new PredefinedTool(&PredefinedTools::jsonMinify, this);
+
+  json_minify->setCategory(tr("JSON"));
+  json_minify->setName(tr("Minify"));
+  json_minify->setInput(ToolInput::SelectionDocument);
+  json_minify->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(json_minify);
+
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
   tobase64->setCategory(tr("MIME tools"));

@@ -102,6 +102,32 @@ QString PredefinedTools::sendToGithub(const QString& data, bool* ok) {
   }
 }
 
+QString PredefinedTools::jsonBeautify(const QString& data, bool* ok) {
+  QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
+
+  if (doc.isNull()) {
+    *ok = false;
+    return QObject::tr("Parsing of JSON document failed.");
+  }
+  else {
+    *ok = true;
+    return doc.toJson(QJsonDocument::JsonFormat::Indented);
+  }
+}
+
+QString PredefinedTools::jsonMinify(const QString& data, bool* ok) {
+  QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
+
+  if (doc.isNull()) {
+    *ok = false;
+    return QObject::tr("Parsing of JSON document failed.");
+  }
+  else {
+    *ok = true;
+    return doc.toJson(QJsonDocument::JsonFormat::Compact);
+  }
+}
+
 QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
