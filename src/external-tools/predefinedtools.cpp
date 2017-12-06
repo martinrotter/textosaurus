@@ -9,6 +9,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QRegularExpression>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 PredefinedTools::PredefinedTools() {}
 
@@ -126,6 +128,22 @@ QString PredefinedTools::jsonMinify(const QString& data, bool* ok) {
     *ok = true;
     return doc.toJson(QJsonDocument::JsonFormat::Compact);
   }
+}
+
+QString PredefinedTools::xmlCheck(const QString& data, bool* ok) {
+  QXmlStreamReader reader(data.toUtf8());
+
+  while (!reader.atEnd()) {
+    if (reader.hasError()) {
+      break;
+    }
+    else {
+      reader.readNext();
+    }
+  }
+
+  *ok = !reader.hasError();
+  return *ok ? QObject::tr("XML is well-formed.") : reader.errorString();
 }
 
 QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {

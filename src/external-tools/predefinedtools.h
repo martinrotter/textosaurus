@@ -18,6 +18,9 @@ class PredefinedTools {
     static QString jsonBeautify(const QString& data, bool* ok);
     static QString jsonMinify(const QString& data, bool* ok);
 
+    // XML.
+    static QString xmlCheck(const QString& data, bool* ok);
+
     // Inserting.
     static QString currentDateTime(const QString& data, bool* ok);
 

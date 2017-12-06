@@ -139,6 +139,15 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(json_minify);
 
+  PredefinedTool* xml_check = new PredefinedTool(&PredefinedTools::xmlCheck, this);
+
+  xml_check->setCategory(tr("XML"));
+  xml_check->setName(tr("Check XML syntax"));
+  xml_check->setInput(ToolInput::SelectionDocument);
+  xml_check->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_tools.append(xml_check);
+
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
   tobase64->setCategory(tr("MIME tools"));
