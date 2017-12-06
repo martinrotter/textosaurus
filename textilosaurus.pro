@@ -533,7 +533,7 @@ win32 {
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Network.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/ssleay32.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015-webengine/Qt5PrintSupport.dll.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015-webengine/Qt5PrintSupport.dll \
                         resources/binaries/qt/windows/qt5-msvc2015-webengine/printsupport
   qt_dlls_root.path = $$quote($$PREFIX/)
 
