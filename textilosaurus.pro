@@ -124,7 +124,7 @@ message(textilosaurus: Prefix directory: \"$$PREFIX\".)
 message(textilosaurus: Build revision: \"$$APP_REVISION\".)
 message(textilosaurus: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
-QT *= core gui widgets network printsupport
+QT *= core gui widgets network printsupport svg
 
 CONFIG *= c++14 warn_on
 DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
@@ -531,6 +531,7 @@ win32 {
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Gui.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Widgets.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/Qt5Network.dll \
+                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Svg.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/ssleay32.dll \
                         resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll \
                         resources/binaries/qt/windows/qt5-msvc2015-webengine/Qt5PrintSupport.dll \

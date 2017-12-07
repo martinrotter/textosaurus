@@ -1,8 +1,11 @@
-2017.12.XX
+2017.12.15
 ——————————
 
 Added:
 ▪ Some extra built-in tools (JSON).
+
+Fixed:
+▪ Some DLLs were missing (Svg and PrintSupport modules).
 
 2017.12.06
 ——————————
