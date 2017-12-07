@@ -146,6 +146,61 @@ QString PredefinedTools::xmlCheck(const QString& data, bool* ok) {
   return *ok ? QObject::tr("XML is well-formed.") : reader.errorString();
 }
 
+QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
+  QByteArray input = data.toUtf8();
+  QXmlStreamReader reader(input);
+  QByteArray output;
+  QXmlStreamWriter writer(&output);
+
+  while (!reader.atEnd()) {
+    QXmlStreamReader::TokenType next_token = reader.readNext();
+
+    if (reader.hasError()) {
+      *ok = false;
+      return reader.errorString();
+    }
+    else {
+      switch (next_token) {
+        case QXmlStreamReader::TokenType::StartDocument:
+          writer.writeStartDocument();
+          break;
+
+        case QXmlStreamReader::TokenType::EndDocument:
+          writer.writeEndDocument();
+          break;
+
+        case QXmlStreamReader::TokenType::StartElement:
+          break;
+
+        case QXmlStreamReader::TokenType::EndElement:
+          break;
+
+        case QXmlStreamReader::TokenType::Characters:
+          break;
+
+        case QXmlStreamReader::TokenType::Comment:
+          break;
+
+        case QXmlStreamReader::TokenType::DTD:
+          break;
+
+        case QXmlStreamReader::TokenType::EntityReference:
+          break;
+
+        case QXmlStreamReader::TokenType::ProcessingInstruction:
+          break;
+
+        case QXmlStreamReader::TokenType::NoToken:
+          break;
+
+        case QXmlStreamReader::TokenType::Invalid:
+        default:
+          break;
+      }
+    }
+  }
+}
+
 QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)

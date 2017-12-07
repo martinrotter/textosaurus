@@ -20,6 +20,7 @@ class PredefinedTools {
 
     // XML.
     static QString xmlCheck(const QString& data, bool* ok);
+    static QString xmlBeautify(const QString& data, bool* ok);
 
     // Inserting.
     static QString currentDateTime(const QString& data, bool* ok);
