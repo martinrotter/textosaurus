@@ -112,6 +112,8 @@ void TextEditor::mouseMoveEvent(QMouseEvent* event) {
   sptr_t text_pos = positionFromPointClose(mouse_pos.x, mouse_pos.y);
 
   if (text_pos > m_indicatorStart || text_pos < m_indicatorStop) {
+    // Current mouse position is outside of previous matched URL.
+
     // We remove previous URL indicator.
     indicatorClearRange(m_indicatorStart, m_indicatorStop);
     m_indicatorStart = m_indicatorStop = -1;
@@ -158,6 +160,10 @@ void TextEditor::mouseMoveEvent(QMouseEvent* event) {
         indicSetHoverStyle(0, INDIC_ROUNDBOX);
         setIndicatorCurrent(0);
         indicatorFillRange(m_indicatorStart, m_indicatorStop - m_indicatorStart);
+      }
+      else {
+        m_indicatorStart = start;
+        m_indicatorStop = end;
       }
     }
   }
