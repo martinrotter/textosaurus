@@ -35,6 +35,7 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - can **print files including syntax highlighting** and printing to PDF,
     - hideable line numbers,
+    - URL highlights on mouse hover (`CTRL+LBUTTON CLICK` opens URL in default browser),
     - switchable indent characters (spaces/tabs),
     - adjustable tab/indent width,
     - adjustable vertical line height (responds to `SHIFT+WHEEL UP/DOWN` shortcut too),
@@ -67,5 +68,5 @@ Features
     - relatively lightweight,
     - no JavaScript components, no bundled Chromium, no Electron, no web technologies inside,
     - always OSS.
-	
+
 \* Usually, custom external tools are executed via Bash or Python, so you must have used interpreter available in all environments where Textilosaurus is used. On Windows, Cygwin is probably the best way to use these.
