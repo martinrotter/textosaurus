@@ -146,20 +146,18 @@ void TextEditor::mouseMoveEvent(QMouseEvent* event) {
         }
       }
 
-      if (m_indicatorStart == start && m_indicatorStop == end) {
-        return;
-      }
-
-      m_indicatorStart = start;
-      m_indicatorStop = end;
-
       QByteArray ranged_text = textRange(start, end);
+      QRegularExpressionMatch match = QRegularExpression(QSL("(https?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                                             "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#\\[\\]@!$&'()*+,;=`.]+"))
+                                      .match(ranged_text);
 
-      if (QRegularExpression(QSL("(http[s]?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                 "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#\\[\\]@!$&'()*+,;=`.]+")).match(ranged_text).hasMatch()) {
+      if (match.hasMatch()) {
+        m_indicatorStart = start + match.capturedStart();
+        m_indicatorStop = end - ranged_text.size() + match.capturedEnd();
+
         indicSetHoverStyle(0, INDIC_ROUNDBOX);
         setIndicatorCurrent(0);
-        indicatorFillRange(start, end - start);
+        indicatorFillRange(m_indicatorStart, m_indicatorStop - m_indicatorStart);
       }
     }
   }
