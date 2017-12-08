@@ -43,7 +43,7 @@ int TextFactory::stringWidth(const QString& string, const QFontMetrics& metrics)
 }
 
 bool TextFactory::isCharUrlValid(char chr) {
-  return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;=`.").contains(chr);
+  return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#@!$&'*+,;=`.").contains(chr);
 }
 
 QDateTime TextFactory::parseDateTime(const QString& date_time) {

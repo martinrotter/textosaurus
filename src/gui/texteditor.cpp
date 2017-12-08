@@ -150,7 +150,7 @@ void TextEditor::mouseMoveEvent(QMouseEvent* event) {
 
       QByteArray ranged_text = textRange(start, end);
       QRegularExpressionMatch match = QRegularExpression(QSL("(https?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                             "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#\\[\\]@!$&'()*+,;=`.]+"))
+                                                             "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#@!$&'*+,;=`.]+"))
                                       .match(ranged_text);
 
       if (match.hasMatch()) {
