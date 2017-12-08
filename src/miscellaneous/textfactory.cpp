@@ -42,6 +42,10 @@ int TextFactory::stringWidth(const QString& string, const QFontMetrics& metrics)
   return width;
 }
 
+bool TextFactory::isCharUrlValid(char chr) {
+  return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;=`.").contains(chr);
+}
+
 QDateTime TextFactory::parseDateTime(const QString& date_time) {
   const QString input_date = date_time.simplified();
   QDateTime dt;

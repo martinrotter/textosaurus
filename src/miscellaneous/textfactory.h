@@ -17,6 +17,7 @@ class TextFactory {
   public:
     static int stringHeight(const QString& string, const QFontMetrics& metrics);
     static int stringWidth(const QString& string, const QFontMetrics& metrics);
+    static bool isCharUrlValid(char chr);
 
     // Tries to parse input textual date/time representation.
     // Returns invalid date/time if processing fails.

@@ -12,15 +12,19 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 #include "miscellaneous/textfactory.h"
+#include "network-web/webfactory.h"
 
 #include "scintilla/include/ILoader.h"
+#include "scintilla/include/Platform.h"
 #include "scintilla/include/SciLexer.h"
+#include "scintilla/qt/ScintillaEditBase/PlatQt.h"
 
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
+#include <QRegularExpression>
 #include <QTextCodec>
 #include <QTextStream>
 
@@ -30,10 +34,11 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
 
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
-
-  setTabWidth(4);
-  setIndent(2);
-  setUseTabs(false);
+  connect(this, &TextEditor::notify, this, [this](SCNotification* pscn) {
+    if (pscn->nmhdr.code == SCN_INDICATORCLICK && pscn->modifiers == SCMOD_CTRL) {
+      qApp->web()->openUrlInExternalBrowser(textRange(m_indicatorStart, m_indicatorStop));
+    }
+  });
 
   // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
@@ -100,6 +105,66 @@ void TextEditor::onModified(int type, int position, int length, int lines_added,
   if (lines_added != 0) {
     updateLineNumberMarginVisibility();
   }
+}
+
+void TextEditor::mouseMoveEvent(QMouseEvent* event) {
+  Scintilla::Point mouse_pos = Scintilla::PointFromQPoint(event->pos());
+  sptr_t text_pos = positionFromPointClose(mouse_pos.x, mouse_pos.y);
+
+  if (text_pos > m_indicatorStart || text_pos < m_indicatorStop) {
+    // We remove previous URL indicator.
+    indicatorClearRange(m_indicatorStart, m_indicatorStop);
+    m_indicatorStart = m_indicatorStop = -1;
+
+    if (text_pos >= 0) {
+      // We find word separator on the left and on the right.
+      sptr_t start = text_pos;
+      sptr_t end = text_pos;
+      int chr;
+
+      while (true) {
+        chr = charAt(start);
+
+        if (!TextFactory::isCharUrlValid(chr)) {
+          break;
+        }
+        else {
+          start--;
+        }
+      }
+
+      start++;
+
+      while (true) {
+        chr = charAt(end);
+
+        if (!TextFactory::isCharUrlValid(chr)) {
+          break;
+        }
+        else {
+          end++;
+        }
+      }
+
+      if (m_indicatorStart == start && m_indicatorStop == end) {
+        return;
+      }
+
+      m_indicatorStart = start;
+      m_indicatorStop = end;
+
+      QByteArray ranged_text = textRange(start, end);
+
+      if (QRegularExpression(QSL("(http[s]?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                 "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#\\[\\]@!$&'()*+,;=`.]+")).match(ranged_text).hasMatch()) {
+        indicSetHoverStyle(0, INDIC_ROUNDBOX);
+        setIndicatorCurrent(0);
+        indicatorFillRange(start, end - start);
+      }
+    }
+  }
+
+  ScintillaEdit::mouseMoveEvent(event);
 }
 
 void TextEditor::wheelEvent(QWheelEvent* event) {

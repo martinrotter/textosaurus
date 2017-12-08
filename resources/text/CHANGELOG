@@ -2,6 +2,7 @@
 ----------
 
 Added:
+* Highlighting of URLs when hovered on with mouse. CTRL+click opens link.
 * Some extra built-in tools (XML).
 
 2017.12.07

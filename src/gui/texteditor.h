@@ -54,6 +54,7 @@ class TextEditor : public ScintillaEdit {
                     int line, int fold_now, int fold_prev);
 
   protected:
+    void mouseMoveEvent(QMouseEvent* event);
     void wheelEvent(QWheelEvent* event);
     void closeEvent(QCloseEvent* event);
 
@@ -68,6 +69,7 @@ class TextEditor : public ScintillaEdit {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
+    int m_indicatorStart, m_indicatorStop;
     bool m_settingsDirty;
     TextApplication* m_textApp;
     QString m_filePath;
