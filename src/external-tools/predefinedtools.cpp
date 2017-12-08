@@ -148,56 +148,52 @@ QString PredefinedTools::xmlCheck(const QString& data, bool* ok) {
 
 QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
   QByteArray input = data.toUtf8();
+  QString xml_out;
   QXmlStreamReader reader(input);
-  QByteArray output;
-  QXmlStreamWriter writer(&output);
+  QXmlStreamWriter writer(&xml_out);
+
+  writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
 
   while (!reader.atEnd()) {
-    QXmlStreamReader::TokenType next_token = reader.readNext();
-
-    if (reader.hasError()) {
-      *ok = false;
-      return reader.errorString();
+    reader.readNext();
+    if (!reader.isWhitespace()) {
+      writer.writeCurrentToken(reader);
     }
-    else {
-      switch (next_token) {
-        case QXmlStreamReader::TokenType::StartDocument:
-          writer.writeStartDocument();
-          break;
+  }
 
-        case QXmlStreamReader::TokenType::EndDocument:
-          writer.writeEndDocument();
-          break;
+  if (reader.hasError()) {
+    *ok = false;
+    return reader.errorString();
+  }
+  else {
+    *ok = true;
+    return xml_out;
+  }
+}
 
-        case QXmlStreamReader::TokenType::StartElement:
-          break;
+QString PredefinedTools::xmlLinearize(const QString& data, bool* ok) {
+  QByteArray input = data.toUtf8();
+  QString xml_out;
+  QXmlStreamReader reader(input);
+  QXmlStreamWriter writer(&xml_out);
 
-        case QXmlStreamReader::TokenType::EndElement:
-          break;
+  writer.setAutoFormatting(false);
 
-        case QXmlStreamReader::TokenType::Characters:
-          break;
-
-        case QXmlStreamReader::TokenType::Comment:
-          break;
-
-        case QXmlStreamReader::TokenType::DTD:
-          break;
-
-        case QXmlStreamReader::TokenType::EntityReference:
-          break;
-
-        case QXmlStreamReader::TokenType::ProcessingInstruction:
-          break;
-
-        case QXmlStreamReader::TokenType::NoToken:
-          break;
-
-        case QXmlStreamReader::TokenType::Invalid:
-        default:
-          break;
-      }
+  while (!reader.atEnd()) {
+    reader.readNext();
+    if (!reader.isWhitespace()) {
+      writer.writeCurrentToken(reader);
     }
+  }
+
+  if (reader.hasError()) {
+    *ok = false;
+    return reader.errorString();
+  }
+  else {
+    *ok = true;
+    return xml_out;
   }
 }
 

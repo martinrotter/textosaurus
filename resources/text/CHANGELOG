@@ -1,15 +1,21 @@
-2017.12.07
-——————————
+2017.12.XX
+----------
 
 Added:
-▪ Some extra built-in tools (JSON).
+* Some extra built-in tools (XML).
+
+2017.12.07
+----------
+
+Added:
+* Some extra built-in tools (JSON).
 
 Fixed:
-▪ Some DLLs were missing (Svg and PrintSupport modules).
+* Some DLLs were missing (Svg and PrintSupport modules).
 
 2017.12.06
-——————————
+----------
 
 Added:
-▪ Project starts.
-▪ See README.md for more information on initial set of features.
+* Project starts.
+* See README.md for more information on initial set of features.

@@ -148,6 +148,24 @@ void ExternalTools::loadPredefinedTools() {
 
   m_tools.append(xml_check);
 
+  PredefinedTool* xml_beautify = new PredefinedTool(&PredefinedTools::xmlBeautify, this);
+
+  xml_beautify->setCategory(tr("XML"));
+  xml_beautify->setName(tr("Beautify"));
+  xml_beautify->setInput(ToolInput::SelectionDocument);
+  xml_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(xml_beautify);
+
+  PredefinedTool* xml_linearize = new PredefinedTool(&PredefinedTools::xmlLinearize, this);
+
+  xml_linearize->setCategory(tr("XML"));
+  xml_linearize->setName(tr("Linearize/Minfy"));
+  xml_linearize->setInput(ToolInput::SelectionDocument);
+  xml_linearize->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(xml_linearize);
+
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
   tobase64->setCategory(tr("MIME tools"));
