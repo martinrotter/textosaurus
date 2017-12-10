@@ -388,6 +388,13 @@ void TextApplication::createConnections() {
   connect(m_menuEncoding, &QMenu::aboutToShow, this, &TextApplication::loadEncodingMenu);
   connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::changeEncoding);
 
+  connect(m_menuEolMode, &QMenu::aboutToShow, this, [this]() {
+    QActionGroup* grp_eol = new QActionGroup(m_menuEolMode);
+
+    grp_eol->addAction(m_actionEolMac);
+    grp_eol->addAction(m_actionEolUnix);
+    grp_eol->addAction(m_actionEolWindows);
+  });
   connect(m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileSaveWithEncoding->isEmpty()) {
       TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);;
