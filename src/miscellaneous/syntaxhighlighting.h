@@ -32,7 +32,6 @@ class SyntaxHighlighting : public QObject {
 
     QStringList fileFilters();
     Lexers lexers();
-
     Lexer defaultLexer();
 
     // Returns lexer suitable for syntax highlighting of given file and filter.

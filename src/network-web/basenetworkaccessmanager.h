@@ -16,9 +16,6 @@ class BaseNetworkAccessManager : public QNetworkAccessManager {
     virtual ~BaseNetworkAccessManager();
 
   public slots:
-
-    // Loads network settings for this instance.
-    // NOTE: This sets up proxy settings.
     virtual void loadSettings();
 
   protected slots:
