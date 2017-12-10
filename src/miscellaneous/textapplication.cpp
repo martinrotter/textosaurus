@@ -403,13 +403,13 @@ void TextApplication::createConnections() {
   });
 }
 
-void TextApplication::setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar) {
+void TextApplication::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
 
   m_mainForm->installEventFilter(this);
 
-  m_tabEditors = tab_widget;
-  m_statusBar = status_bar;
+  m_tabEditors = main_form->tabWidget();
+  m_statusBar = main_form->statusBar();
 
   m_outputWindow = new OutputWindow(m_mainForm);
   m_outputWindow->setObjectName(QSL("m_outputWindow"));

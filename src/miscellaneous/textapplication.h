@@ -33,7 +33,7 @@ class TextApplication : public QObject {
     OutputWindow* outputWindow() const;
     TextApplicationSettings* settings() const;
 
-    void setMainForm(FormMain* main_form, TabWidget* tab_widget, StatusBar* status_bar);
+    void setMainForm(FormMain* main_form);
 
   public slots:
 

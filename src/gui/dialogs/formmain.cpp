@@ -31,17 +31,12 @@
 
 FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
-  qApp->setMainForm(this);
 
   setCentralWidget(m_tabEditors = new TabWidget(this));
-
-  // Add these actions to the list of actions of the main window.
-  // This allows to use actions via shortcuts
-  // even if main menu is not visible.
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
-  qApp->textApplication()->setMainForm(this, tabWidget(), statusBar());
+  qApp->setMainForm(this);
 
   // Prepare main window and tabs.
   prepareMenus();
