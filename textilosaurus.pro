@@ -264,7 +264,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/uchardet.h \
             src/gui/docks/dockwidget.h \
             src/gui/docks/filesystemsidebar.h \
-            src/gui/languageselector.h
+            src/gui/languageselector.h \
+    src/gui/menuwithdefaultfocus.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \

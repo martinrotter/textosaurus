@@ -44,6 +44,8 @@ void LanguageSelector::filterLexersMenu() {
   foreach (QRadioButton* btn, m_rbButtons) {
     btn->setVisible(filter.isEmpty() || btn->text().contains(filter, Qt::CaseSensitivity::CaseInsensitive));
   }
+
+  m_scrollArea->verticalScrollBar()->setValue(0);
 }
 
 void LanguageSelector::lexerActivated() {
@@ -74,7 +76,7 @@ void LanguageSelector::loadLexers(const Lexers& lexers) {
     layout_rb->addWidget(rb_lexer);
     m_rbButtons.append(rb_lexer);
 
-    connect(rb_lexer, &QRadioButton::toggled, this, &LanguageSelector::lexerActivated);
+    connect(rb_lexer, &QRadioButton::pressed, this, &LanguageSelector::lexerActivated);
   }
 
   layout_rb->addStretch();

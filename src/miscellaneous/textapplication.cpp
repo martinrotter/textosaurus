@@ -609,8 +609,6 @@ void TextApplication::changeEolMode(QAction* act) {
 }
 
 void TextApplication::changeLexer(const Lexer& lexer) {
-  m_menuLanguage->close();
-
   TextEditor* cur_editor = currentEditor();
 
   if (cur_editor != nullptr) {
