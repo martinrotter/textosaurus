@@ -31,12 +31,11 @@
 
 FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
-
+  qApp->setMainForm(this);
   setCentralWidget(m_tabEditors = new TabWidget(this));
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
-
-  qApp->setMainForm(this);
+  qApp->textApplication()->setMainForm(this);
 
   // Prepare main window and tabs.
   prepareMenus();
