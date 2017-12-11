@@ -9,6 +9,7 @@
 #include "gui/docks/dockwidget.h"
 #include "gui/docks/filesystemsidebar.h"
 #include "gui/docks/outputwindow.h"
+#include "gui/languageselector.h"
 #include "gui/messagebox.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
@@ -24,6 +25,7 @@
 #include <QFileDialog>
 #include <QLineEdit>
 #include <QPointer>
+#include <QScrollArea>
 #include <QTemporaryFile>
 #include <QTextCodec>
 #include <QTimer>
@@ -404,7 +406,6 @@ void TextApplication::createConnections() {
   connect(m_menuDockWidgets, &QMenu::aboutToShow, this, &TextApplication::initializeDockWidgetsMenu);
   connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
   connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::loadLexersMenu);
-  connect(m_menuLanguage, &QMenu::triggered, this, &TextApplication::changeLexer);
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
   });
@@ -607,13 +608,13 @@ void TextApplication::changeEolMode(QAction* act) {
   settings()->setEolMode(new_mode);
 }
 
-void TextApplication::changeLexer(QAction* act) {
+void TextApplication::changeLexer(const Lexer& lexer) {
+  m_menuLanguage->close();
+
   TextEditor* cur_editor = currentEditor();
 
   if (cur_editor != nullptr) {
-    Lexer lexer_act = act->data().value<Lexer>();
-
-    cur_editor->reloadLexer(lexer_act);
+    cur_editor->reloadLexer(lexer);
     updateStatusBarFromEditor(cur_editor);
   }
 }
@@ -627,55 +628,27 @@ void TextApplication::fillRecentFiles() {
   }
 }
 
-void TextApplication::filterLexersMenu(const QString& filter) {
-  foreach (QAction* act_lexer, m_menuLanguage->actions()) {
-    if (!act_lexer->text().isEmpty()) {
-      act_lexer->setVisible(filter.isEmpty() || act_lexer->text().contains(filter, Qt::CaseSensitivity::CaseInsensitive));
-    }
-  }
-}
-
 void TextApplication::loadLexersMenu() {
   if (m_menuLanguage->isEmpty()) {
     // We add search box.
-    QWidgetAction* widget_search = new QWidgetAction(m_menuLanguage);
+    QWidgetAction* act_selector = new QWidgetAction(m_menuLanguage);
 
-    m_txtLexerFilter = new QLineEdit(m_menuLanguage);
+    m_lexerSelector = new LanguageSelector(m_settings->syntaxHighlighting()->lexers(), m_menuLanguage);
+    act_selector->setDefaultWidget(m_lexerSelector);
+    m_menuLanguage->addAction(act_selector);
 
-    m_txtLexerFilter->setPlaceholderText(tr("Filter highlighters"));
-    widget_search->setDefaultWidget(m_txtLexerFilter);
-    m_menuLanguage->addAction(widget_search);
-
-    connect(m_txtLexerFilter, &QLineEdit::textChanged, this, &TextApplication::filterLexersMenu);
-
-    // Fill the menu.
-    QActionGroup* grp = new QActionGroup(m_menuLanguage);
-
-    foreach (const Lexer& lex, m_settings->syntaxHighlighting()->lexers()) {
-      QAction* act = m_menuLanguage->addAction(QL1S("&") + lex.m_name);
-
-      act->setActionGroup(grp);
-      act->setCheckable(true);
-      act->setData(QVariant::fromValue<Lexer>(lex));
-    }
+    connect(m_lexerSelector, &LanguageSelector::languageChanged, this, &TextApplication::changeLexer);
   }
-
-  m_txtLexerFilter->setFocus();
-  m_txtLexerFilter->clear();
 
   TextEditor* current_editor = currentEditor();
 
   if (current_editor != nullptr) {
     Lexer lexer = current_editor->lexer();
 
-    foreach (QAction* act, m_menuLanguage->actions()) {
-      Lexer lexer_act = act->data().value<Lexer>();
-
-      if (lexer_act.m_name == lexer.m_name) {
-        act->setChecked(true);
-        break;
-      }
-    }
+    m_lexerSelector->setActiveLexer(lexer);
+  }
+  else {
+    m_lexerSelector->clearActiveLexer();
   }
 }
 
