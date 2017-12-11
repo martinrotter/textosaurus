@@ -21,7 +21,8 @@ void LanguageSelector::setActiveLexer(const Lexer& lexer) {
   foreach (QRadioButton* btn, m_rbButtons) {
     if (btn->text().contains(lexer.m_name, Qt::CaseSensitivity::CaseInsensitive)) {
       btn->setChecked(true);
-      m_scrollArea->verticalScrollBar()->setValue(btn->pos().y() - btn->height() * 3);
+      m_scrollArea->ensureWidgetVisible(btn);
+      m_scrollArea->horizontalScrollBar()->setValue(0);
       return;
     }
   }
@@ -51,6 +52,8 @@ void LanguageSelector::filterLexersMenu() {
 void LanguageSelector::lexerActivated() {
   QRadioButton* btn_sender = qobject_cast<QRadioButton*>(sender());
   emit languageChanged(btn_sender->property("lexer").value<Lexer>());
+
+  m_scrollArea->ensureWidgetVisible(btn_sender);
 }
 
 void LanguageSelector::loadLexers(const Lexers& lexers) {
@@ -66,7 +69,7 @@ void LanguageSelector::loadLexers(const Lexers& lexers) {
 
   m_scrollArea = new QScrollArea(this);
   m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  m_scrollArea->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContentsOnFirstShow);
+  m_scrollArea->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
   foreach (const Lexer& lex, lexers) {
     QString lexer_name = QL1S("&") + lex.m_name;
@@ -92,4 +95,5 @@ void LanguageSelector::loadLexers(const Lexers& lexers) {
   m_scrollArea->setWidget(widget);
 
   setLayout(layout_this);
+  ensurePolished();
 }
