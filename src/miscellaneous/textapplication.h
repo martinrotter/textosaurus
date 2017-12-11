@@ -4,11 +4,9 @@
 #define TEXTAPPLICATION_H
 
 #include <QObject>
-#include <QWidgetAction>
 
 #include "definitions/definitions.h"
 
-#include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplicationsettings.h"
 
 class TextEditor;
@@ -19,7 +17,6 @@ class StatusBar;
 class FormFindReplace;
 class ExternalTool;
 class FilesystemSidebar;
-class LanguageSelector;
 class QAction;
 class QMenu;
 class QLineEdit;
@@ -82,7 +79,7 @@ class TextApplication : public QObject {
     // Encoding & lexing & folding.
     void changeEncoding(QAction* act);
     void loadEncodingMenu();
-    void changeLexer(const Lexer& lexer);
+    void changeLexer(QAction* act);
     void loadLexersMenu();
     void fillRecentFiles();
 
@@ -122,7 +119,8 @@ class TextApplication : public QObject {
     FilesystemSidebar* m_filesystemSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;
-    LanguageSelector* m_lexerSelector;
+
+    QList<QAction*> m_lexerActions;
 
     // Pointers to important GUI elements outside of editors.
     QAction* m_actionFileNew;

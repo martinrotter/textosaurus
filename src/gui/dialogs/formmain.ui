@@ -180,7 +180,7 @@
     </property>
     <addaction name="m_actionFindReplace"/>
    </widget>
-   <widget class="MenuWithDefaultFocus" name="m_menuLanguage">
+   <widget class="QMenu" name="m_menuLanguage">
     <property name="title">
      <string>&amp;Language</string>
     </property>
@@ -533,13 +533,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MenuWithDefaultFocus</class>
-   <extends>QMenu</extends>
-   <header>menuwithdefaultfocus.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

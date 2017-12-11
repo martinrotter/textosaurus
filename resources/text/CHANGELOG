@@ -2,7 +2,7 @@
 ----------
 
 Added:
-* "Languages" menu is vertically smaller, uses scroll area.
+* List of syntax highlighters is not categories with accelerator keys. Filter is removed.
 
 2017.12.11
 ----------
