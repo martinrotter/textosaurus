@@ -165,7 +165,7 @@ QList<UpdateInfo> SystemFactory::parseUpdatesFile(const QByteArray& updates_file
     updates.append(update);
   }
 
-  qSort(updates.begin(), updates.end(), [](const UpdateInfo& a, const UpdateInfo& b) -> bool {
+  std::sort(updates.begin(), updates.end(), [](const UpdateInfo& a, const UpdateInfo& b) -> bool {
     return a.m_date > b.m_date;
   });
   return updates;

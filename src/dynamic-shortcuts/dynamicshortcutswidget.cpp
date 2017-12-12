@@ -47,15 +47,8 @@ void DynamicShortcutsWidget::updateShortcuts() {
 
 void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
   m_actionBindings.clear();
-  qSort(actions.begin(), actions.end(), DynamicShortcutsWidget::lessThan);
+  std::sort(actions.begin(), actions.end(), DynamicShortcutsWidget::lessThan);
   int row_id = 0;
-
-  // WARNING: Maybe separate actions into "categories". Each category will start with label.
-  // I will assign each QAaction a property called "category" with some enum value.
-  // Like:
-  //  File, FeedsCategories, Messages, Tools, WebBrowser, Help
-  // This will be setup in FormMain::allActions().
-  // Then here I will process actions into categories.
 
   foreach (QAction* action, actions) {
     // Create shortcut catcher for this action and set default shortcut.
