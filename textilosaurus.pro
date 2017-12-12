@@ -58,7 +58,7 @@ APP_URL_ISSUES                = "https://github.com/martinrotter/textilosaurus/i
 APP_URL_ISSUES_NEW            = "https://github.com/martinrotter/textilosaurus/issues/new"
 APP_URL_WIKI                  = "https://github.com/martinrotter/textilosaurus/wiki"
 APP_USERAGENT                 = "Textilosaurus/$$APP_VERSION (github.com/martinrotter/textilosaurus)"
-APP_DONATE_URL                = "https://www.patreon.com/martinrotter"
+APP_DONATE_URL                = "https://liberapay.com/martinrotter"
 APP_WIN_ARCH                  = "win64"
 
 isEmpty(PREFIX) {
