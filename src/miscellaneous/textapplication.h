@@ -80,6 +80,8 @@ class TextApplication : public QObject {
     void loadEncodingMenu();
     void changeLexer(QAction* act);
     void loadLexersMenu();
+    void loadViewMenu();
+    void loadInvisiblesMenu();
     void fillRecentFiles();
 
     void onSavePointChanged();
@@ -154,6 +156,7 @@ class TextApplication : public QObject {
     QMenu* m_menuEolMode;
     QMenu* m_menuEolConversion;
     QMenu* m_menuView;
+    QMenu* m_menuViewInvisibles;
     QMenu* m_menuTools;
     QMenu* m_menuSearch;
     QMenu* m_menuRecentFiles;

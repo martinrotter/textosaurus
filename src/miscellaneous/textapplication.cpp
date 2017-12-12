@@ -123,7 +123,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                               "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
                                                                                        QSL(APP_NAME)));
 
-      m_actionWordWrap->setChecked(false);
+      settings()->setWordWrapEnabled(false);
     }
   }
   else {
@@ -363,12 +363,9 @@ void TextApplication::createConnections() {
   connect(m_tabEditors, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
   connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
-  // Actions and menus.
+  // Actions.
   connect(m_actionPrintCurrentEditor, &QAction::triggered, this, &TextApplication::printCurrentEditor);
   connect(m_actionPrintPreviewCurrentEditor, &QAction::triggered, this, &TextApplication::printPreviewCurrentEditor);
-  connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
-  connect(m_menuEolMode, &QMenu::aboutToShow, this, &TextApplication::setupEolMenu);
-  connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
   connect(m_actionFindReplace, &QAction::triggered, this, &TextApplication::openFindReplaceDialog);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
@@ -378,20 +375,19 @@ void TextApplication::createConnections() {
   connect(m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
   });
-  connect(m_actionWordWrap, &QAction::toggled, m_settings, &TextApplicationSettings::setWordWrapEnabled);
-  connect(m_actionLineNumbers, &QAction::toggled, m_settings, &TextApplicationSettings::setLineNumbersEnabled);
-  connect(m_actionViewEols, &QAction::toggled, m_settings, &TextApplicationSettings::setViewEols);
-  connect(m_actionViewWhitespaces, &QAction::toggled, m_settings, &TextApplicationSettings::setViewWhitespaces);
+  connect(m_actionWordWrap, &QAction::triggered, m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionLineNumbers, &QAction::triggered, m_settings, &TextApplicationSettings::setLineNumbersEnabled);
+  connect(m_actionViewEols, &QAction::triggered, m_settings, &TextApplicationSettings::setViewEols);
+  connect(m_actionViewWhitespaces, &QAction::triggered, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
-  connect(m_actionDockShowFilesystem, &QAction::toggled, m_filesystemSidebar, &FilesystemSidebar::setVisible);
-  connect(m_actionDockShowOutput, &QAction::toggled, m_outputWindow, &OutputWindow::setVisible);
+  connect(m_actionDockShowFilesystem, &QAction::triggered, m_filesystemSidebar, &FilesystemSidebar::setVisible);
+  connect(m_actionDockShowOutput, &QAction::triggered, m_outputWindow, &OutputWindow::setVisible);
 
-  // Hook FS sidebar.
-  connect(m_filesystemSidebar, &FilesystemSidebar::openFileRequested, this, [this](const QString& file_path) {
-    loadTextEditorFromFile(file_path);
-  });
-
+  // Menus.
+  connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
+  connect(m_menuEolMode, &QMenu::aboutToShow, this, &TextApplication::setupEolMenu);
+  connect(m_menuEolConversion, &QMenu::triggered, this, &TextApplication::convertEols);
   connect(m_menuFileOpenWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileOpenWithEncoding->isEmpty()) {
       TextFactory::initializeEncodingMenu(m_menuFileOpenWithEncoding);
@@ -420,6 +416,13 @@ void TextApplication::createConnections() {
   connect(m_menuLanguage, &QMenu::triggered, this, &TextApplication::changeLexer);
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
+  });
+  connect(m_menuView, &QMenu::aboutToShow, this, &TextApplication::loadViewMenu);
+  connect(m_menuViewInvisibles, &QMenu::aboutToShow, this, &TextApplication::loadInvisiblesMenu);
+
+  // Hook FS sidebar.
+  connect(m_filesystemSidebar, &FilesystemSidebar::openFileRequested, this, [this](const QString& file_path) {
+    loadTextEditorFromFile(file_path);
   });
 }
 
@@ -463,6 +466,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
+  m_menuViewInvisibles = m_mainForm->m_ui.m_menuViewInvisibles;
   m_menuDockWidgets = m_mainForm->m_ui.m_menuDockWidgets;
   m_menuSearch = m_mainForm->m_ui.m_menuSearch;
   m_menuFileSaveWithEncoding = m_mainForm->m_ui.m_menuFileSaveWithEncoding;
@@ -491,11 +495,6 @@ void TextApplication::setMainForm(FormMain* main_form) {
 void TextApplication::loadState() {
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
-  m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
-  m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
-  m_actionViewEols->setChecked(m_settings->viewEols());
-  m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
-
   m_settings->externalTools()->reloadTools();
 
   // Load size/position/visibility of dock widgets.
@@ -518,7 +517,6 @@ void TextApplication::quit(bool* ok) {
   }
 
   m_settings->saveDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
-
   *ok = true;
 }
 
@@ -691,6 +689,16 @@ void TextApplication::loadLexersMenu() {
       }
     }
   }
+}
+
+void TextApplication::loadViewMenu() {
+  m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
+  m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
+}
+
+void TextApplication::loadInvisiblesMenu() {
+  m_actionViewEols->setChecked(m_settings->viewEols());
+  m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 }
 
 void TextApplication::loadEncodingMenu() {
