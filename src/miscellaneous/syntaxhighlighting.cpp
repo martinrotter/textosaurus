@@ -58,6 +58,12 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("A68k"), QStringList {
       QSL("doxygen")
     }, SCLEX_A68K)
+      << Lexer(QSL("Ada"), QStringList {
+      QSL("ada")
+    }, SCLEX_ADA)
+      << Lexer(QSL("ASN.1"), QStringList {
+      QSL("asn1"), QSL("asn")
+    }, SCLEX_ASN1)
       << Lexer(QSL("Assembly"), QStringList {
       QSL("asm"), QSL("nasm")
     }, SCLEX_ASM)
@@ -85,6 +91,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("C++"), QStringList {
       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
     }, SCLEX_CPP)
+      << Lexer(QSL("CSS"), QStringList {
+      QSL("css")
+    }, SCLEX_CSS)
       << Lexer(QSL("C#"), QStringList {
       QSL("cs")
     }, SCLEX_CPP)
@@ -103,6 +112,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("HTML"), QStringList {
       QSL("html"), QSL("htm"), QSL("shtml"), QSL("shtm"), QSL("xhtml"), QSL("xht"), QSL("hta")
     }, SCLEX_HTML)
+      << Lexer(QSL("Inno Setup"), QStringList {
+      QSL("inno")
+    }, SCLEX_INNOSETUP)
       << Lexer(QSL("Java"), QStringList {
       QSL("java")
     }, SCLEX_CPP)
@@ -112,6 +124,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("JSON"), QStringList {
       QSL("json")
     }, SCLEX_JSON)
+      << Lexer(QSL("Lisp"), QStringList {
+      QSL("lisp"), QSL("cl")
+    }, SCLEX_LISP)
       << Lexer(QSL("Lua"), QStringList {
       QSL("lua")
     }, SCLEX_LUA)
@@ -154,6 +169,9 @@ Lexers SyntaxHighlighting::lexers() {
       << Lexer(QSL("Python"), QStringList {
       QSL("py"), QSL("pyw")
     }, SCLEX_PYTHON)
+      << Lexer(QSL("R"), QStringList {
+      QSL("r")
+    }, SCLEX_R)
       << Lexer(QSL("Registry"), QStringList {
       QSL("reg")
     }, SCLEX_REGISTRY)
