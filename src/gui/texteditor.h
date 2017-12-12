@@ -59,6 +59,7 @@ class TextEditor : public ScintillaEdit {
     void closeEvent(QCloseEvent* event);
 
   signals:
+    void editorReloaded();
     void requestedVisibility();
     void loadedFromFile(QString source_file_path);
     void savedToFile(QString destination_file_path);

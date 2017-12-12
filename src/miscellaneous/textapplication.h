@@ -36,8 +36,6 @@ class TextApplication : public QObject {
     void setMainForm(FormMain* main_form);
 
   public slots:
-
-    // Redo/undo.
     void undo();
     void redo();
 
@@ -50,10 +48,11 @@ class TextApplication : public QObject {
     void reopenTextFile(QAction* action);
     void openTextFile(QAction* action = nullptr);
     void loadFilesFromArgs(const QList<QString>& files);
-    void loadTextEditorFromString(const QString& contents);
-    void loadTextEditorFromFile(const QString& file_path,
-                                const QString& explicit_encoding = QString(),
-                                const QString& file_filter = QString());
+    TextEditor* loadTextEditorFromString(const QString& contents);
+    TextEditor* loadTextEditorFromFile(const QString& file_path,
+                                       const QString& explicit_encoding = QString(),
+                                       const QString& file_filter = QString());
+
     void saveCurrentEditor();
     void saveCurrentEditorAs();
     void saveCurrentEditorAsWithEncoding(QAction* action);
@@ -85,6 +84,7 @@ class TextApplication : public QObject {
 
     void onSavePointChanged();
     void onEditorSaved();
+    void onEditorReloaded();
     void onEditorRequestedVisibility();
 
     void onEditorModified(int type, int position, int length, int linesAdded,
@@ -153,6 +153,7 @@ class TextApplication : public QObject {
     QMenu* m_menuFileReopenWithEncoding;
     QMenu* m_menuEolMode;
     QMenu* m_menuEolConversion;
+    QMenu* m_menuView;
     QMenu* m_menuTools;
     QMenu* m_menuSearch;
     QMenu* m_menuRecentFiles;

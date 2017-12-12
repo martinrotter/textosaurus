@@ -43,18 +43,41 @@ TextEditor* TextApplication::currentEditor() const {
   return m_tabEditors->textEditorAt(m_tabEditors->currentIndex());
 }
 
-void TextApplication::loadTextEditorFromString(const QString& contents) {
+TextEditor* TextApplication::loadTextEditorFromString(const QString& contents) {
   TextEditor* new_editor = createTextEditor();
 
   m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
-
   new_editor->loadFromString(contents);
+
+  return new_editor;
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path,
-                                             const QString& explicit_encoding,
-                                             const QString& file_filter) {
+TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
+                                                    const QString& explicit_encoding,
+                                                    const QString& file_filter) {
   Q_UNUSED(file_filter)
+
+  QFile file(file_path);
+
+  if (!file.exists()) {
+    qWarning("File '%s' does not exist and cannot be opened.", qPrintable(file_path));
+    return nullptr;
+  }
+
+  if (file.size() >= MAX_TEXT_FILE_SIZE) {
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
+                          tr("File '%1' too big. %2 can only open files smaller than %3 MB.").arg(QDir::toNativeSeparators(file_path),
+                                                                                                  QSL(APP_NAME),
+                                                                                                  QString::number(MAX_TEXT_FILE_SIZE /
+                                                                                                                  1000000.0)));
+    return nullptr;
+  }
+
+  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot read file"),
+                          tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
+    return nullptr;
+  }
 
   QString encoding;
   Lexer default_lexer;
@@ -84,28 +107,6 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
     encoding = explicit_encoding;
   }
 
-  QFile file(file_path);
-
-  if (!file.exists()) {
-    qWarning("File '%s' does not exist and cannot be opened.", qPrintable(file_path));
-    return;
-  }
-
-  if (file.size() >= MAX_TEXT_FILE_SIZE) {
-    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
-                          tr("File '%1' too big. %2 can only open files smaller than %3 MB.").arg(QDir::toNativeSeparators(file_path),
-                                                                                                  QSL(APP_NAME),
-                                                                                                  QString::number(MAX_TEXT_FILE_SIZE /
-                                                                                                                  1000000.0)));
-    return;
-  }
-
-  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot read file"),
-                          tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
-    return;
-  }
-
   if (file.size() > BIG_TEXT_FILE_SIZE) {
     if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) &&
         MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
@@ -113,7 +114,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
                             "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
                          tr("Do you really want to open the file?"),
                          file.fileName(), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
-      return;
+      return nullptr;
     }
     else {
       // File is quite big, we turn some features off to make sure it loads faster.
@@ -121,6 +122,7 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
                            tr("File '%1' is big. %2 will switch some features (for example 'Word wrap') off to "
                               "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
                                                                                        QSL(APP_NAME)));
+
       m_actionWordWrap->setChecked(false);
     }
   }
@@ -135,6 +137,8 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
 
   m_settings->setLoadSaveDefaultDirectory(file_path);
   m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
+
+  return new_editor;
 }
 
 int TextApplication::addTextEditor(TextEditor* editor) {
@@ -146,6 +150,7 @@ TextEditor* TextApplication::createTextEditor() {
 
   editor->viewport()->installEventFilter(this);
 
+  connect(editor, &TextEditor::editorReloaded, this, &TextApplication::onEditorReloaded);
   connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSaved);
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
@@ -232,6 +237,14 @@ void TextApplication::setupEolMenu() {
 }
 
 void TextApplication::updateEolMenu(int eol_mode) {
+  if (m_actionEolMac->actionGroup() == nullptr) {
+    QActionGroup* grp_eol = new QActionGroup(m_menuEolMode);
+
+    grp_eol->addAction(m_actionEolMac);
+    grp_eol->addAction(m_actionEolUnix);
+    grp_eol->addAction(m_actionEolWindows);
+  }
+
   switch (eol_mode) {
     case SC_EOL_CRLF:
       m_actionEolWindows->setChecked(true);
@@ -333,6 +346,14 @@ void TextApplication::onEditorSaved() {
   updateStatusBarFromEditor(editor);
 }
 
+void TextApplication::onEditorReloaded() {
+  TextEditor* sndr = qobject_cast<TextEditor*>(sender());
+
+  if (sndr == currentEditor()) {
+    onEditorTabSwitched(m_tabEditors->indexOf(sndr));
+  }
+}
+
 void TextApplication::createConnections() {
   // Misc connections.
   connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
@@ -387,14 +408,6 @@ void TextApplication::createConnections() {
 
   connect(m_menuEncoding, &QMenu::aboutToShow, this, &TextApplication::loadEncodingMenu);
   connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::changeEncoding);
-
-  connect(m_menuEolMode, &QMenu::aboutToShow, this, [this]() {
-    QActionGroup* grp_eol = new QActionGroup(m_menuEolMode);
-
-    grp_eol->addAction(m_actionEolMac);
-    grp_eol->addAction(m_actionEolUnix);
-    grp_eol->addAction(m_actionEolWindows);
-  });
   connect(m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileSaveWithEncoding->isEmpty()) {
       TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);;
@@ -412,7 +425,6 @@ void TextApplication::createConnections() {
 
 void TextApplication::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
-
   m_mainForm->installEventFilter(this);
 
   m_tabEditors = main_form->tabWidget();
@@ -450,6 +462,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionDockShowFilesystem = m_mainForm->m_ui.m_actionDockShowFilesystem;
   m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
 
+  m_menuView = m_mainForm->m_ui.m_menuView;
   m_menuDockWidgets = m_mainForm->m_ui.m_menuDockWidgets;
   m_menuSearch = m_mainForm->m_ui.m_menuSearch;
   m_menuFileSaveWithEncoding = m_mainForm->m_ui.m_menuFileSaveWithEncoding;
