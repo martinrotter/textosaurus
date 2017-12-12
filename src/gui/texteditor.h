@@ -28,6 +28,8 @@ class TextEditor : public ScintillaEdit {
     bool settingsDirty() const;
     void setSettingsDirty(bool settings_dirty);
 
+    static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
+
   public slots:
     void toggleFolding(int position, int modifiers, int margin);
     void printPreview();

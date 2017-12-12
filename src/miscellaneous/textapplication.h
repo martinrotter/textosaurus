@@ -41,17 +41,17 @@ class TextApplication : public QObject {
 
     // New editors.
     int addTextEditor(TextEditor* editor);
-    TextEditor* createTextEditor();
+    TextEditor* attachTextEditor(TextEditor* editor);
 
     // Load/save/new files.
     void newFile();
     void reopenTextFile(QAction* action);
     void openTextFile(QAction* action = nullptr);
     void loadFilesFromArgs(const QList<QString>& files);
-    TextEditor* loadTextEditorFromString(const QString& contents);
-    TextEditor* loadTextEditorFromFile(const QString& file_path,
-                                       const QString& explicit_encoding = QString(),
-                                       const QString& file_filter = QString());
+    void loadTextEditorFromString(const QString& contents);
+    void loadTextEditorFromFile(const QString& file_path,
+                                const QString& explicit_encoding = QString(),
+                                const QString& file_filter = QString());
 
     void saveCurrentEditor();
     void saveCurrentEditorAs();

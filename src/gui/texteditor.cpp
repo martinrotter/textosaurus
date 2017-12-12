@@ -352,6 +352,87 @@ void TextEditor::setSettingsDirty(bool settings_dirty) {
   m_settingsDirty = settings_dirty;
 }
 
+TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding) {
+  QFile file(file_path);
+
+  if (!file.exists()) {
+    qWarning("File '%s' does not exist and cannot be opened.", qPrintable(file_path));
+    return nullptr;
+  }
+
+  if (file.size() >= MAX_TEXT_FILE_SIZE) {
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
+                          tr("File '%1' too big. %2 can only open files smaller than %3 MB.").arg(QDir::toNativeSeparators(file_path),
+                                                                                                  QSL(APP_NAME),
+                                                                                                  QString::number(MAX_TEXT_FILE_SIZE /
+                                                                                                                  1000000.0)));
+    return nullptr;
+  }
+
+  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot read file"),
+                          tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
+    return nullptr;
+  }
+
+  QString encoding;
+  Lexer default_lexer;
+  int eol_mode = TextFactory::detectEol(file_path);
+
+  if (eol_mode < 0) {
+    qWarning("Auto-detection of EOL mode for file '%s' failed, using app default.", qPrintable(file_path));
+    eol_mode = app->settings()->eolMode();
+  }
+  else {
+    qDebug("Auto-detected EOL mode is '%d'.", eol_mode);
+  }
+
+  if (explicit_encoding.isEmpty()) {
+    qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
+
+    if ((encoding = TextFactory::detectEncoding(file_path)).isEmpty()) {
+      // No encoding auto-detected.
+      encoding = QSL(DEFAULT_TEXT_FILE_ENCODING);
+      qWarning("Auto-detection of encoding failed, using default encoding.");
+    }
+    else {
+      qDebug("Auto-detected encoding is '%s'.", qPrintable(encoding));
+    }
+  }
+  else {
+    encoding = explicit_encoding;
+  }
+
+  if (file.size() > BIG_TEXT_FILE_SIZE) {
+    if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) &&
+        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
+                         tr("You want to open big text file in encoding which is different from %1. This operation "
+                            "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
+                         tr("Do you really want to open the file?"),
+                         QDir::toNativeSeparators(file_path), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
+      return nullptr;
+    }
+    else {
+      // File is quite big, we turn some features off to make sure it loads faster.
+      QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
+                           tr("File '%1' is big. %2 will switch some features (for example 'Word wrap') off to "
+                              "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
+                                                                                       QSL(APP_NAME)));
+
+      app->settings()->setWordWrapEnabled(false);
+    }
+  }
+  else {
+    // We try to detect default lexer.
+    default_lexer = app->settings()->syntaxHighlighting()->lexerForFile(file_path);
+  }
+
+  TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
+
+  new_editor->loadFromFile(file, encoding, default_lexer, eol_mode);
+  return new_editor;
+}
+
 void TextEditor::setEncoding(const QByteArray& encoding) {
   m_encoding = encoding;
 }
