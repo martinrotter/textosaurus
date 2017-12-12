@@ -342,8 +342,6 @@ void TextApplication::createConnections() {
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
   });
-  connect(m_menuView, &QMenu::aboutToShow, this, &TextApplication::loadViewMenu);
-  connect(m_menuViewInvisibles, &QMenu::aboutToShow, this, &TextApplication::loadInvisiblesMenu);
 
   // Hook FS sidebar.
   connect(m_filesystemSidebar, &FilesystemSidebar::openFileRequested, this, [this](const QString& file_path) {
@@ -418,6 +416,11 @@ void TextApplication::setMainForm(FormMain* main_form) {
 }
 
 void TextApplication::loadState() {
+  m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
+  m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
+  m_actionViewEols->setChecked(m_settings->viewEols());
+  m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
+
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
   m_settings->externalTools()->reloadTools();
@@ -533,7 +536,7 @@ void TextApplication::changeEolMode(QAction* act) {
     updateStatusBarFromEditor(editor);
 
     if (!editor->filePath().isEmpty()) {
-      // If user has sime editor opened but it is not "saved file",
+      // If user has some editor opened but it is not "saved file",
       // then we make sure that global EOL mode is changed too.
       return;
     }
@@ -614,16 +617,6 @@ void TextApplication::loadLexersMenu() {
       }
     }
   }
-}
-
-void TextApplication::loadViewMenu() {
-  m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
-  m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
-}
-
-void TextApplication::loadInvisiblesMenu() {
-  m_actionViewEols->setChecked(m_settings->viewEols());
-  m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 }
 
 void TextApplication::loadEncodingMenu() {

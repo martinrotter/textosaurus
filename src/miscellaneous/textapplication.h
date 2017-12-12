@@ -80,8 +80,6 @@ class TextApplication : public QObject {
     void loadEncodingMenu();
     void changeLexer(QAction* act);
     void loadLexersMenu();
-    void loadViewMenu();
-    void loadInvisiblesMenu();
     void fillRecentFiles();
 
     void onSavePointChanged();
