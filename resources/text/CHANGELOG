@@ -1,19 +1,19 @@
 2017.12.XX
 ----------
-
 Added:
 * List of syntax highlighters is not categories with accelerator keys. Filter is removed.
 
+Changed:
+* Optimized behavior of "Encoding" menu. Items are now correctly sorted.
+
 2017.12.11
 ----------
-
 Added:
 * Highlighting of URLs when hovered on with mouse. CTRL+click opens link.
 * Some extra built-in tools (XML).
 
 2017.12.07
 ----------
-
 Added:
 * Some extra built-in tools (JSON).
 
@@ -22,7 +22,6 @@ Fixed:
 
 2017.12.06
 ----------
-
 Added:
 * Project starts.
 * See README.md for more information on initial set of features.

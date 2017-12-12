@@ -111,11 +111,11 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
 
   QMap<QString, QMenu*> submenus;
 
-  submenus["Big"] = new QMenu(QSL("Big"), menu);
-  submenus["IBM"] = new QMenu(QSL("IBM"), menu);
-  submenus["ISO"] = new QMenu(QSL("ISO"), menu);
-  submenus["UTF"] = new QMenu(QSL("UTF"), menu);
-  submenus["windows"] = new QMenu(QSL("windows"), menu);
+  submenus["Big"] = new QMenu(QSL("&Big"), menu);
+  submenus["IBM"] = new QMenu(QSL("&IBM"), menu);
+  submenus["ISO"] = new QMenu(QSL("&ISO"), menu);
+  submenus["UTF"] = new QMenu(QSL("&UTF"), menu);
+  submenus["windows"] = new QMenu(QSL("&windows"), menu);
 
   for (int mib : mibs) {
     QString name = QTextCodec::codecForMib(mib)->name();
@@ -125,7 +125,10 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
     }
   }
 
-  qSort(codecs);
+  std::sort(codecs.begin(), codecs.end(), [](const QString& arg1, const QString& arg2) {
+    return arg1.compare(arg2, Qt::CaseSensitivity::CaseInsensitive) < 0;
+  });
+
   QString predefined_group = QString("^(") + submenus.keys().join(QL1C('|')) + QString(")\\S+");
   QRegularExpression predefined_group_regex(predefined_group);
 
