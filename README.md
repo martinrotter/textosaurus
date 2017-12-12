@@ -11,7 +11,7 @@ Textilosaurus
 
 Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
-You can support author of Textilosaurus on [PATREON](https://www.patreon.com/martinrotter). Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
+You can support author of Textilosaurus on [Liberapay](https://liberapay.com/martinrotter). Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
 
 Features
 --------
