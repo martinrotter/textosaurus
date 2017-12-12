@@ -433,6 +433,12 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
   return new_editor;
 }
 
+void TextEditor::reloadFromDisk() {
+  if (!filePath().isEmpty() && !modify()) {
+    // TODO: pokračovat
+  }
+}
+
 void TextEditor::setEncoding(const QByteArray& encoding) {
   m_encoding = encoding;
 }
