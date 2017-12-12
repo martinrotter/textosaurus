@@ -31,6 +31,7 @@ class TextEditor : public ScintillaEdit {
     static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
 
   public slots:
+    void reloadFromDisk();
     void toggleFolding(int position, int modifiers, int margin);
     void printPreview();
     void print();
