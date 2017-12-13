@@ -313,10 +313,13 @@ void ExternalTools::loadCustomTools() {
 
     ExternalTool* ext_bash_xml = new ExternalTool(this);
 
-    ext_bash_xml->setScript("xmllint --format -");
+    ext_bash_xml->setScript("IFS=''"
+                            "read -r fil"
+                            "xmllint --format \"$fil\" > \"${fil}.out\" 2> /dev/null"
+                            "mv \"${fil}.out\" \"$fil\"");
     ext_bash_xml->setCategory(tr("Bash (external tool examples)"));
-    ext_bash_xml->setInput(ToolInput::SelectionDocument);
-    ext_bash_xml->setOutput(ToolOutput::ReplaceSelectionDocument);
+    ext_bash_xml->setInput(ToolInput::SavedFile);
+    ext_bash_xml->setOutput(ToolOutput::ReloadFile);
     ext_bash_xml->setName("XML - beautify");
 
     m_tools.append(ext_bash_xml);
@@ -528,6 +531,10 @@ void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor
       m_application->loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
       break;
     }
+
+    case ToolOutput::ReloadFile:
+      editor->reloadFromDisk();
+      break;
 
     case ToolOutput::ReplaceSelectionDocument:
       if (!editor->selectionEmpty()) {

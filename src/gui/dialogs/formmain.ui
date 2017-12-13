@@ -76,6 +76,7 @@
     <addaction name="m_actionFileSaveAs"/>
     <addaction name="m_menuFileSaveWithEncoding"/>
     <addaction name="m_actionFileSaveAll"/>
+    <addaction name="m_actionFileReload"/>
     <addaction name="m_actionPrint"/>
     <addaction name="m_actionPrintPreview"/>
     <addaction name="separator"/>
@@ -530,6 +531,14 @@
    </property>
    <property name="text">
     <string>&amp;Filesystem</string>
+   </property>
+  </action>
+  <action name="m_actionFileReload">
+   <property name="text">
+    <string>&amp;Reload from disk</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+R</string>
    </property>
   </action>
  </widget>

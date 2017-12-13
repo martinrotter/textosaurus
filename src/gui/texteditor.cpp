@@ -434,8 +434,95 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
 }
 
 void TextEditor::reloadFromDisk() {
-  if (!filePath().isEmpty() && !modify()) {
-    // TODO: pokračovat
+  if (!filePath().isEmpty()) {
+    if (modify()) {
+      int answer = QMessageBox::question(qApp->mainFormWidget(), tr("Unsaved changes"),
+                                         tr("File '%1' was externally changed, do you want to reload "
+                                            "it from disk and discard any unsaved changes?"),
+                                         QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
+                                         QMessageBox::StandardButton::Yes);
+
+      if (answer != QMessageBox::StandardButton::Yes) {
+        return;
+      }
+    }
+
+    // We reload now.
+    // When we reload, we automatically detect EOL and encoding
+    // and show no warnings, makes no sense in this use-case.
+    QFile file(filePath());
+
+    if (!file.exists()) {
+      qWarning("File '%s' does not exist and cannot be opened.", qPrintable(filePath()));
+      return;
+    }
+
+    if (file.size() >= MAX_TEXT_FILE_SIZE) {
+      QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot open file"),
+                            tr("File '%1' too big. %2 can only open files smaller than %3 MB.").arg(QDir::toNativeSeparators(filePath()),
+                                                                                                    QSL(APP_NAME),
+                                                                                                    QString::number(MAX_TEXT_FILE_SIZE /
+                                                                                                                    1000000.0)));
+      return;
+    }
+
+    if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+      QMessageBox::critical(qApp->mainFormWidget(),
+                            tr("Cannot read file"),
+                            tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(
+                                                                                                          filePath())));
+      return;
+    }
+
+    QString encoding;
+    Lexer default_lexer;
+    int eol_mode = TextFactory::detectEol(filePath());
+
+    if (eol_mode < 0) {
+      qWarning("Auto-detection of EOL mode for file '%s' failed, using app default.", qPrintable(filePath()));
+      eol_mode = m_textApp->settings()->eolMode();
+    }
+    else {
+      qDebug("Auto-detected EOL mode is '%d'.", eol_mode);
+    }
+
+    qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(filePath()));
+
+    if ((encoding = TextFactory::detectEncoding(filePath())).isEmpty()) {
+      // No encoding auto-detected.
+      encoding = QSL(DEFAULT_TEXT_FILE_ENCODING);
+      qWarning("Auto-detection of encoding failed, using default encoding.");
+    }
+    else {
+      qDebug("Auto-detected encoding is '%s'.", qPrintable(encoding));
+    }
+
+    if (file.size() > BIG_TEXT_FILE_SIZE) {
+      if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) &&
+          MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
+                           tr("You want to open big text file in encoding which is different from %1. This operation "
+                              "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
+                           tr("Do you really want to open the file?"),
+                           QDir::toNativeSeparators(filePath()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
+        return;
+      }
+      else {
+        // File is quite big, we turn some features off to make sure it loads faster.
+        QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
+                             tr("File '%1' is big. %2 will switch some features (for example 'Word wrap') off to "
+                                "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(filePath()),
+                                                                                         QSL(APP_NAME)));
+
+        m_textApp->settings()->setWordWrapEnabled(false);
+      }
+    }
+    else {
+      // We try to detect default lexer.
+      default_lexer = m_textApp->settings()->syntaxHighlighting()->lexerForFile(filePath());
+    }
+
+    loadFromFile(file, encoding, default_lexer, eol_mode);
+    emit editorReloaded();
   }
 }
 

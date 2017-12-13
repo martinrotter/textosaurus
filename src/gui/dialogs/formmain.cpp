@@ -76,6 +76,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionFileSave;
   actions << m_ui.m_actionFileSaveAll;
   actions << m_ui.m_actionFileSaveAs;
+  actions << m_ui.m_actionFileReload;
 
 #if !defined(Q_OS_MAC)
   actions << m_ui.m_actionFullscreen;

@@ -58,6 +58,7 @@ class TextApplication : public QObject {
     void saveCurrentEditorAsWithEncoding(QAction* action);
     void saveAllEditors();
     void closeAllUnmodifiedEditors();
+    void reloadCurrentEditor();
 
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
@@ -128,6 +129,7 @@ class TextApplication : public QObject {
     QAction* m_actionFileSave;
     QAction* m_actionFileSaveAs;
     QAction* m_actionFileSaveAll;
+    QAction* m_actionFileReload;
     QAction* m_actionEolUnix;
     QAction* m_actionEolWindows;
     QAction* m_actionEolMac;

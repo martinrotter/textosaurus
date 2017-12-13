@@ -129,6 +129,14 @@ void TextApplication::closeAllUnmodifiedEditors() {
   }
 }
 
+void TextApplication::reloadCurrentEditor() {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    editor->reloadFromDisk();
+  }
+}
+
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   foreach (TextEditor* editor, m_tabEditors->editors()) {
     editor->setSettingsDirty(true);
@@ -296,6 +304,7 @@ void TextApplication::createConnections() {
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
   connect(m_actionFileSaveAll, &QAction::triggered, this, &TextApplication::saveAllEditors);
+  connect(m_actionFileReload, &QAction::triggered, this, &TextApplication::reloadCurrentEditor);
   connect(m_actionFileNew, &QAction::triggered, this, &TextApplication::newFile);
   connect(m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
@@ -368,6 +377,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionFileSave = m_mainForm->m_ui.m_actionFileSave;
   m_actionFileSaveAs = m_mainForm->m_ui.m_actionFileSaveAs;
   m_actionFileSaveAll = m_mainForm->m_ui.m_actionFileSaveAll;
+  m_actionFileReload = m_mainForm->m_ui.m_actionFileReload;
   m_actionEolUnix = m_mainForm->m_ui.m_actionEolUnix;
   m_actionEolWindows = m_mainForm->m_ui.m_actionEolWindows;
   m_actionEolMac = m_mainForm->m_ui.m_actionEolMac;
@@ -704,6 +714,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       if (!only_modified) {
         m_actionFileSave->setEnabled(true);
         m_actionFileSaveAs->setEnabled(true);
+        m_actionFileReload->setEnabled(true);
         m_menuFileSaveWithEncoding->setEnabled(true);
         m_menuFileReopenWithEncoding->setEnabled(true);
         m_actionFileSaveAll->setEnabled(true);
@@ -719,6 +730,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     // There is no editor.
     m_actionFileSave->setEnabled(false);
     m_actionFileSaveAs->setEnabled(false);
+    m_actionFileReload->setEnabled(false);
     m_menuFileSaveWithEncoding->setEnabled(false);
     m_menuFileReopenWithEncoding->setEnabled(false);
     m_actionEditBack->setEnabled(false);

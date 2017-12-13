@@ -30,6 +30,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   m_ui.m_cmbOutput->addItem(tr("Dump to output window"), int(ToolOutput::DumpToOutputWindow));
   m_ui.m_cmbOutput->addItem(tr("Copy to clipboard"), int(ToolOutput::CopyToClipboard));
   m_ui.m_cmbOutput->addItem(tr("New file"), int(ToolOutput::NewSavedFile));
+  m_ui.m_cmbOutput->addItem(tr("Reload file"), int(ToolOutput::ReloadFile));
   m_ui.m_cmbOutput->addItem(tr("No output"), int(ToolOutput::NoOutput));
 
   connect(m_ui.m_listTools, &QListWidget::currentItemChanged, this, &SettingsExternalTools::displayToolDetails);

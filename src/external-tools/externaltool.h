@@ -51,6 +51,9 @@ enum class ToolOutput {
   // and is opened when tool finishes its work.
   NewSavedFile,
 
+  // File opened in editor is reloaded.
+  ReloadFile,
+
   // Tool has no output, therefore we do not have to wait for it to exit or handle it
   // in any way.
   NoOutput
