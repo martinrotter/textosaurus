@@ -26,6 +26,9 @@ git config --global user.name "martinrotter"
 git clone https://martinrotter:${GH_TOKEN}@github.com/martinrotter/textilosaurus.wiki.git ./build-wiki
 
 set -- T*.AppImage
+
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
 imagename="$1"
 git_revision=$(git rev-parse --short HEAD)
 imagenamenospace="textilosaurus-${git_revision}-linux64.AppImage"
@@ -37,9 +40,18 @@ echo "File to upload: $imagename"
 echo "URL ending: $imagenamenospace"
 
 url=$(curl --upload-file "./$imagename" "https://transfer.sh/$imagenamenospace" --silent)
-echo "$url"
 
-echo "| $(date +'%m-%d-%Y %T') | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh]($url) |  "$'\r' >> ./build-wiki/Linux-development-builds.md
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
+wikiline="| Linux | $(date +'%m-%d-%Y %T') | [$git_revision](https\://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh]($url) |  "
+wikifile="./build-wiki/Development-builds.md"
+wikifilenew="./build-wiki/Development-builds.md.new"
+
+echo "Line to add: $wikiline"
+cat "$wikifile" | sed -e "s@| Linux | .\+$USE_WEBENGINE |  @$wikiline@g" > "$wikifilenew"
+
+cat "$wikifilenew"
+mv "$wikifilenew" "$wikifile"
 
 cd ./build-wiki
 git commit -a -m "New files."

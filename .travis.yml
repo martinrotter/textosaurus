@@ -9,7 +9,7 @@ compiler:
 - gcc
 git:
   submodules: false
-  depth: 10
+  depth: 1
 deploy:
   provider: releases
   file_glob: true
@@ -24,6 +24,4 @@ before_install: "./resources/scripts/.travis-before-install.sh"
 install: true
 script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./resources/scripts/.travis-install-linux.sh
-  ; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./resources/scripts/.travis-install-osx.sh
   ; fi
