@@ -9,7 +9,7 @@
 ; Basic values definitions.
 
 ; Name and file.
-Name "${APP_NAME} portable"
+Name "${APP_NAME}"
 OutFile "${OUTPUT_FILE}"
 
 ; Set custom branding text.
@@ -19,20 +19,20 @@ BrandingText "${APP_NAME}"
 SetCompressor /SOLID /FINAL lzma
 
 ; Default installation folder.
-InstallDir "$PROGRAMFILES\${APP_NAME}"
+InstallDir "$PROGRAMFILES64\${APP_NAME}"
 InstallDirRegKey HKCU "Software\${APP_NAME}" "Install Directory"
 
 ; Require administrator access.
 RequestExecutionLevel admin
 
 ;--------------------------------
-; Interface Settings
+; Interface Settings.
 
 ; Show "are you sure" dialog when cancelling installation.
 !define MUI_ABORTWARNING
 
 ;--------------------------------
-; Pages
+; Pages.
 
 ; Pages for installator.
 !insertmacro MUI_PAGE_WELCOME
