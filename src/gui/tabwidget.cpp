@@ -18,6 +18,7 @@ TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setTabBar(new TabBar(this));
   setUsesScrollButtons(true);
   setMovable(true);
+  setIconSize(QSize(12, 12));
 
   createConnections();
 }
@@ -149,10 +150,6 @@ int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QS
   tabBar()->setTabType(tab_index, type);
   indentTabText(index);
 
-  /*if (count() == 1) {
-     emit currentChanged(index);
-     }*/
-
   return tab_index;
 }
 
@@ -161,10 +158,6 @@ int TabWidget::insertTab(int index, QWidget* widget, const QString& label, TabBa
 
   tabBar()->setTabType(tab_index, type);
   indentTabText(index);
-
-  /*if (count() == 1) {
-     emit currentChanged(index);
-     }*/
 
   return tab_index;
 }
