@@ -10,28 +10,29 @@ Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-
 git config --global user.email "rotter.martinos@gmail.com"
 git config --global user.name "martinrotter"
 
+$git_revision = git rev-parse --short HEAD
+$date = (Get-Date).ToUniversalTime().ToString("MM-dd-yyyy HH:mm:ss")
+$wikifile = 'C:\textilosaurus-wiki\Development-builds.md'
 
 $file = (Get-ChildItem '*.7z').Name
 echo "File to upload: $file"
 $url = curl.exe --upload-file "$file" "https://transfer.sh/$file" --silent
 echo "Obtained URL: $url"
 
-$git_revision = git rev-parse --short HEAD
-$date = (Get-Date).ToUniversalTime().ToString("MM-dd-yyyy HH:mm:ss UTC")
+$regex = "\| Windows \|.+transfer\.sh \(7z\).+\|  "
+$wikiline = "| Windows | $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (7z)]($url) |  "
 
-echo "| $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (7z)]($url) |  " | ac -Encoding "utf8" C:\textilosaurus-wiki\Windows-development-builds.md
-
+(Get-Content $wikifile) -replace $regex, $wikiline | Set-Content -Encoding "utf8" $wikifile
 
 $file = (Get-ChildItem '*.exe').Name
 echo "File to upload: $file"
 $url = curl.exe --upload-file "$file" "https://transfer.sh/$file" --silent
 echo "Obtained URL: $url"
 
-$git_revision = git rev-parse --short HEAD
-$date = (Get-Date).ToUniversalTime().ToString("MM-dd-yyyy HH:mm:ss UTC")
+$regex = "\| Windows \|.+transfer\.sh \(exe\).+\|  "
+$wikiline = "| Windows | $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (exe)]($url) |  "
 
-echo "| $date | [$git_revision](https://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh (exe)]($url) |  " | ac -Encoding "utf8" C:\textilosaurus-wiki\Windows-development-builds.md
-
+(Get-Content $wikifile) -replace $regex, $wikiline | Set-Content -Encoding "utf8" $wikifile
 
 cd C:\textilosaurus-wiki
 git add *.*

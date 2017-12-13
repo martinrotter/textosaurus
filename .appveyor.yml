@@ -19,7 +19,7 @@ artifacts:
     name: textilosaurus7z
 
 deploy:
-  description: 'release by appveyor'
+  description: 'New Textilosaurus release.'
   provider: GitHub
   auth_token:
     secure: XCWdr9wPgK4gm6289WXCg2vtMA02eBSnj6eKHC+ps6Z5lgw0jsK09UQ5y9E9ZFwS # your encrypted token from GitHub
@@ -27,7 +27,7 @@ deploy:
   draft: false
   prerelease: false
   on:
-    appveyor_repo_tag: true        # deploy on tag push only
+    appveyor_repo_tag: true
     
 build_script:
   - git submodule update --init --recursive

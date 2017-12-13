@@ -17,6 +17,7 @@
 TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setTabBar(new TabBar(this));
   setUsesScrollButtons(true);
+  setMovable(true);
 
   createConnections();
 }
