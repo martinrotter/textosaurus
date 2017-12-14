@@ -474,6 +474,8 @@ void ExternalTools::onToolPartialOutputObtained(const QString& output) {
 
 void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QString& output_text,
                                    const QString& error_text, bool success) {
+  Q_UNUSED(success)
+
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
@@ -484,50 +486,62 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
   ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
 
-  if (!success) {
+  if (!error_text.isEmpty()) {
     m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, error_text, QMessageBox::Icon::Critical);
-
-    // TODO: tady to oddělat, pokud máme i chybový text i vystupni text
-    return;
   }
 
   switch (tool->output()) {
     case ToolOutput::InsertAtCursorPosition: {
-      QByteArray output_utf = output_text.toUtf8();
+      if (!output_text.isEmpty()) {
+        QByteArray output_utf = output_text.toUtf8();
 
-      editor->insertText(editor->currentPos(), output_utf.constData());
-      editor->gotoPos(editor->currentPos() + output_utf.size());
+        editor->insertText(editor->currentPos(), output_utf.constData());
+        editor->gotoPos(editor->currentPos() + output_utf.size());
+      }
+
       break;
     }
 
     case ToolOutput::ReplaceCurrentLine: {
-      QByteArray output_utf = output_text.toUtf8();
-      auto line = editor->lineFromPosition(editor->currentPos());
-      auto start_line = editor->positionFromLine(line);
-      auto end_line = editor->lineEndPosition(line);
+      if (!output_text.isEmpty()) {
+        QByteArray output_utf = output_text.toUtf8();
+        auto line = editor->lineFromPosition(editor->currentPos());
+        auto start_line = editor->positionFromLine(line);
+        auto end_line = editor->lineEndPosition(line);
 
-      editor->setSel(start_line, end_line);
-      editor->replaceSel(output_utf);
+        editor->setSel(start_line, end_line);
+        editor->replaceSel(output_utf);
+      }
+
       break;
     }
 
     case ToolOutput::CopyToClipboard:
-      qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
-      m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
-                                                   tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
-                                                   QMessageBox::Icon::Information);
+      if (!output_text.isEmpty()) {
+        qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
+        m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+                                                     tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                                                     QMessageBox::Icon::Information);
+      }
+
       break;
 
     case ToolOutput::DumpToOutputWindow:
-      m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
+      if (!output_text.isEmpty()) {
+        m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
+      }
+
       break;
 
     case ToolOutput::NewSavedFile: {
-      m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
-                                                   tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
-                                                   QMessageBox::Icon::Information);
+      if (!output_text.isEmpty()) {
+        m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+                                                     tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
+                                                     QMessageBox::Icon::Information);
 
-      m_application->loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
+        m_application->loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
+      }
+
       break;
     }
 
@@ -536,11 +550,13 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
       break;
 
     case ToolOutput::ReplaceSelectionDocument:
-      if (!editor->selectionEmpty()) {
-        editor->replaceSel(output_text.toUtf8().constData());
-      }
-      else {
-        editor->setText(output_text.toUtf8().constData());
+      if (!output_text.isEmpty()) {
+        if (!editor->selectionEmpty()) {
+          editor->replaceSel(output_text.toUtf8().constData());
+        }
+        else {
+          editor->setText(output_text.toUtf8().constData());
+        }
       }
 
       break;
