@@ -8,6 +8,7 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
+#include <QPointer>
 #include <QProcess>
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false), m_input(ToolInput::SelectionDocument),
@@ -29,7 +30,7 @@ bool ExternalTool::isPredefined() const {
   return false;
 }
 
-QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
+void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)
 
   m_isRunning = true;
@@ -38,10 +39,19 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
 
   // Run in bash.
-  QProcess bash_process;
+  QProcess* bash_process = new QProcess(this);
 
-  bash_process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
-  bash_process.setProcessChannelMode(QProcess::ProcessChannelMode::MergedChannels);
+  bash_process->setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+
+  connect(bash_process, &QProcess::readyReadStandardOutput, this, [this, bash_process]() {
+    if (m_output == ToolOutput::DumpToOutputWindow) {
+      QString available_output = QString::fromUtf8(bash_process->readAllStandardOutput());
+
+      if (!available_output.isEmpty()) {
+        emit partialOutputObtained(available_output);
+      }
+    }
+  });
 
 #if defined (Q_OS_WIN)
   QString intepr = interpreter();
@@ -50,28 +60,34 @@ QPair<QString, bool> ExternalTool::runTool(const QPointer<TextEditor>& editor, c
     intepr += QSL(".exe");
   }
 
-  bash_process.start(intepr, QStringList() << script_file);
+  bash_process->start(intepr, QStringList() << script_file);
 #else
-  bash_process.start(interpreter(), QStringList() << script_file);
+  bash_process->start(interpreter(), QStringList() << script_file);
 #endif
 
-  bash_process.write(data.toUtf8());
-  bash_process.closeWriteChannel();
+  bash_process->write(data.toUtf8());
+  bash_process->closeWriteChannel();
 
-  if (bash_process.waitForFinished(1000 * 120)) {
-    m_isRunning = false;
+  connect(bash_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
+          this, [editor, this](int exit_code, QProcess::ExitStatus exit_status) {
+    onProcessFinished(editor, exit_code, exit_status);
+  });
+}
 
-    // Get result.
-    QByteArray tool_output = bash_process.readAll();
+void ExternalTool::onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status) {
+  QProcess* bash_process = qobject_cast<QProcess*>(sender());
 
-    return QPair<QString, bool>(QString::fromUtf8(tool_output), bash_process.exitCode() == 0);
+  if (exit_status == QProcess::ExitStatus::NormalExit) {
+    QByteArray tool_output = bash_process->readAllStandardOutput();
+    QByteArray tool_error = bash_process->readAllStandardError();
+    emit toolFinished(editor, QString::fromUtf8(tool_output), QString::fromUtf8(tool_error), exit_code == 0);
   }
   else {
-    m_isRunning = false;
-
-    bash_process.kill();
-    return QPair<QString, bool>(bash_process.errorString(), false);
+    emit toolFinished(editor, QString(), bash_process->errorString(), false);
   }
+
+  m_isRunning = false;
+  bash_process->deleteLater();
 }
 
 bool ExternalTool::isRunning() const {
@@ -145,13 +161,12 @@ void ExternalTool::setName(const QString& name) {
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
   : ExternalTool(parent), m_functor(functor) {}
 
-QPair<QString, bool> PredefinedTool::runTool(const QPointer<TextEditor>& editor, const QString& data) {
+void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)
 
   bool ok = true;
   QString result = m_functor(data, &ok);
-
-  return QPair<QString, bool>(result, ok);
+  emit toolFinished(editor, ok ? result : QString(), ok ? QString() : result, ok);
 }
 
 bool PredefinedTool::isPredefined() const {

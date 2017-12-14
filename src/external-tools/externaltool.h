@@ -7,6 +7,8 @@
 
 #include "gui/texteditor.h"
 
+#include <QProcess>
+
 #include <functional>
 
 enum class ToolInput {
@@ -99,7 +101,14 @@ class ExternalTool : public QObject {
     // Runs tool with given string data (which is depending on tool input mode
     // current line, current selection, current whole document text or saved
     // document filename.
-    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data);
+    virtual void runTool(QPointer<TextEditor> editor, const QString& data);
+
+  private slots:
+    void onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status);
+
+  signals:
+    void partialOutputObtained(QString output);
+    void toolFinished(QPointer<TextEditor>& editor, QString standard_output, QString error_output, bool);
 
   private:
     bool m_isRunning;
@@ -125,7 +134,7 @@ class PredefinedTool : public ExternalTool {
     explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
 
   public slots:
-    virtual QPair<QString, bool> runTool(const QPointer<TextEditor>& editor, const QString& data);
+    virtual void runTool(QPointer<TextEditor> editor, const QString& data);
 
     bool isPredefined() const;
 

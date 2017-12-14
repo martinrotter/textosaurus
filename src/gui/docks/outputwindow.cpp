@@ -30,7 +30,13 @@ void OutputWindow::displayOutput(OutputSource source, const QString& message, QM
     m_currentLevel = level;
   }
 
-  m_txtOutput->appendPlainText(QString("[%2] %1").arg(message, QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
+  if (source == OutputSource::ExternalTool) {
+    m_txtOutput->appendPlainText(QString("%1").arg(message));
+  }
+  else {
+    m_txtOutput->appendPlainText(QString("[%2] %1").arg(message, QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
+  }
+
   m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
 }
 

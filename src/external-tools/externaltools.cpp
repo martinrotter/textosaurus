@@ -26,10 +26,8 @@
 #include <QRegularExpression>
 #include <QtConcurrent/QtConcurrentRun>
 
-ExternalTools::ExternalTools(TextApplication* parent) : QObject(parent), m_application(parent), m_tools(QList<ExternalTool*>()),
-  m_sampleToolsAdded(false) {
-  connect(this, &ExternalTools::toolFinished, this, &ExternalTools::onToolFinished);
-}
+ExternalTools::ExternalTools(TextApplication* parent)
+  : QObject(parent), m_application(parent), m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {}
 
 ExternalTools::~ExternalTools() {
   qDeleteAll(m_tools);
@@ -106,7 +104,12 @@ void ExternalTools::runSelectedExternalTool() {
   if (editor != nullptr) {
     ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
 
-    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, QString("Running '%1' tool...").arg(tool_to_run->name()));
+    connect(tool_to_run, &ExternalTool::toolFinished, this, &ExternalTools::onToolFinished,
+            Qt::ConnectionType(Qt::ConnectionType::AutoConnection | Qt::ConnectionType::UniqueConnection));
+    connect(tool_to_run, &ExternalTool::partialOutputObtained, this, &ExternalTools::onToolPartialOutputObtained,
+            Qt::ConnectionType(Qt::ConnectionType::AutoConnection | Qt::ConnectionType::UniqueConnection));
+
+    // We run the tool.
     runTool(tool_to_run, editor);
   }
 }
@@ -420,65 +423,60 @@ void ExternalTools::reloadTools() {
 
 void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
   if (tool_to_run->isRunning()) {
-    emit toolFinished(tool_to_run, editor, tr("Tool '%1' is already running.").arg(tool_to_run->name()), false);
-
-    return;
+    m_application->outputWindow()->displayOutput(OutputSource::Application,
+                                                 tr("Tool '%1' is already running.").arg(tool_to_run->name()),
+                                                 QMessageBox::Icon::Warning);
   }
+  else {
 
-  QPointer<TextEditor> ptr_editor = editor;
-  QString data;
+    QPointer<TextEditor> ptr_editor = editor;
+    QString data;
 
-  switch (tool_to_run->input()) {
-    case ToolInput::SelectionDocument:
-      data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length() + 1);
-      break;
+    switch (tool_to_run->input()) {
+      case ToolInput::SelectionDocument:
+        data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length() + 1);
+        break;
 
-    case ToolInput::AskForInput: {
-      bool ok;
+      case ToolInput::AskForInput: {
+        bool ok;
 
-      data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
-                                   tool_to_run->prompt(), QLineEdit::EchoMode::Normal, QString(), &ok);
+        data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
+                                     tool_to_run->prompt(), QLineEdit::EchoMode::Normal, QString(), &ok);
 
-      if (!ok) {
-        return;
+        if (!ok) {
+          return;
+        }
+
+        break;
       }
 
-      break;
+      case ToolInput::CurrentLine:
+        data = ptr_editor->getCurLine(-1);
+        break;
+
+      case ToolInput::SavedFile:
+        bool ok;
+
+        ptr_editor->save(&ok);
+        data = ptr_editor->filePath();
+        break;
+
+      case ToolInput::NoInput:
+      default:
+        break;
     }
 
-    case ToolInput::CurrentLine:
-      data = ptr_editor->getCurLine(-1);
-      break;
-
-    case ToolInput::SavedFile:
-      bool ok;
-
-      ptr_editor->save(&ok);
-      data = ptr_editor->filePath();
-      break;
-
-    case ToolInput::NoInput:
-    default:
-      break;
+    m_application->outputWindow()->displayOutput(OutputSource::Application, QString("Running '%1' tool...").arg(tool_to_run->name()));
+    tool_to_run->runTool(ptr_editor, data);
   }
-
-  QFuture<QPair<QString, bool>> future = QtConcurrent::run([tool_to_run, ptr_editor, data]() {
-    QPair<QString, bool> result = tool_to_run->runTool(ptr_editor, data);
-    return result;
-  });
-  QFutureWatcher<QPair<QString, bool>>* watched = new QFutureWatcher<QPair<QString, bool>>();
-
-  watched->setFuture(future);
-  connect(watched, &QFutureWatcher<QPair<QString, bool>>::finished, this, [this, tool_to_run, editor]() {
-    QFutureWatcher<QPair<QString, bool>>* sndr = static_cast<QFutureWatcher<QPair<QString, bool>>*>(sender());
-    QPair<QString, bool> result = sndr->result();
-
-    emit toolFinished(tool_to_run, editor, result.first, result.second);
-    sndr->deleteLater();
-  });
 }
 
-void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor>& editor, const QString& output_text, bool success) {
+void ExternalTools::onToolPartialOutputObtained(const QString& output) {
+  m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, output, QMessageBox::Icon::Information);
+}
+
+void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QString& output_text,
+                                   const QString& error_text, bool success) {
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
@@ -487,8 +485,12 @@ void ExternalTools::onToolFinished(ExternalTool* tool, const QPointer<TextEditor
     return;
   }
 
+  ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
+
   if (!success) {
-    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Critical);
+    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, error_text, QMessageBox::Icon::Critical);
+
+    // TODO: tady to oddělat, pokud máme i chybový text i vystupni text
     return;
   }
 

@@ -4,6 +4,11 @@ Added:
 * Tabs are movable.
 * Documents can be manually reloaded from disk.
 
+Changed:
+* External tools now use separate standard/error output channels.
+* External tools are now run via asynchronous QProcess API and no extra useless thread is created, this is faster, and safer.
+* External tools now can send immediate standard output, this is useful for long-running tools like some compilation scripts etc.
+
 2017.12.12
 ----------
 Added:
