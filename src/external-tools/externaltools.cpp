@@ -17,14 +17,11 @@
 #include <QAction>
 #include <QClipboard>
 #include <QDateTime>
-#include <QFuture>
-#include <QFutureWatcher>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMenu>
 #include <QPointer>
 #include <QRegularExpression>
-#include <QtConcurrent/QtConcurrentRun>
 
 ExternalTools::ExternalTools(TextApplication* parent)
   : QObject(parent), m_application(parent), m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {}
