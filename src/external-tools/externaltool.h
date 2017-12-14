@@ -104,6 +104,7 @@ class ExternalTool : public QObject {
     virtual void runTool(QPointer<TextEditor> editor, const QString& data);
 
   private slots:
+    void onProcessError(QPointer<TextEditor> editor);
     void onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status);
 
   signals:

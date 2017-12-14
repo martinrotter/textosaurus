@@ -36,8 +36,6 @@ void OutputWindow::displayOutput(OutputSource source, const QString& message, QM
   else {
     m_txtOutput->appendPlainText(QString("[%2] %1").arg(message, QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
   }
-
-  m_txtOutput->verticalScrollBar()->setValue(m_txtOutput->verticalScrollBar()->maximum());
 }
 
 QColor OutputWindow::colorForLevel(QMessageBox::Icon level) {

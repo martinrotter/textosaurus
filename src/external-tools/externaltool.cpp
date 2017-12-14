@@ -53,6 +53,20 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
     }
   });
 
+  connect(bash_process, &QProcess::started, this, [data, bash_process] {
+    bash_process->write(data.toUtf8());
+    bash_process->closeWriteChannel();
+  });
+
+  connect(bash_process, &QProcess::errorOccurred, this, [editor, this] {
+    onProcessError(editor);
+  });
+
+  connect(bash_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
+          this, [editor, this](int exit_code, QProcess::ExitStatus exit_status) {
+    onProcessFinished(editor, exit_code, exit_status);
+  });
+
 #if defined (Q_OS_WIN)
   QString intepr = interpreter();
 
@@ -64,14 +78,14 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 #else
   bash_process->start(interpreter(), QStringList() << script_file);
 #endif
+}
 
-  bash_process->write(data.toUtf8());
-  bash_process->closeWriteChannel();
+void ExternalTool::onProcessError(QPointer<TextEditor> editor) {
+  QProcess* bash_process = qobject_cast<QProcess*>(sender());
+  emit toolFinished(editor, QString(), bash_process->errorString(), false);
 
-  connect(bash_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-          this, [editor, this](int exit_code, QProcess::ExitStatus exit_status) {
-    onProcessFinished(editor, exit_code, exit_status);
-  });
+  m_isRunning = false;
+  bash_process->deleteLater();
 }
 
 void ExternalTool::onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status) {
