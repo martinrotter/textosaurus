@@ -15,7 +15,6 @@
 #include "gui/toolbar.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
-#include "miscellaneous/mutex.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/systemfactory.h"
 #include "miscellaneous/textapplication.h"
