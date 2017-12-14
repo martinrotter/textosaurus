@@ -29,7 +29,6 @@
 #define FLAG_ICON_SUBFOLDER                   "flags"
 #define SPACER_ACTION_NAME                    "spacer"
 #define SEPARATOR_ACTION_NAME                 "separator"
-#define DOWNLOADER_ICON_SIZE                  48
 #define MAX_RECENT_FILES                      25
 #define ENCRYPTION_FILE_NAME                  "key.private"
 
@@ -41,9 +40,7 @@
 #define PASTEBIN_CLBIN    "https://clbin.com"
 #define PASTEBIN_IXIO     "http://ix.io"
 
-#define HTTP_HEADERS_ACCEPT         "Accept"
 #define HTTP_HEADERS_CONTENT_TYPE   "Content-Type"
-#define HTTP_HEADERS_AUTHORIZATION  "Authorization"
 #define HTTP_HEADERS_USER_AGENT     "User-Agent"
 
 #define APP_CFG_PATH        "config"

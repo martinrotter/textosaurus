@@ -213,7 +213,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/tabwidget.h \
             src/gui/texteditor.h \
             src/gui/texteditorprinter.h \
-            src/gui/timespinbox.h \
             src/gui/toolbar.h \
             src/gui/toolbareditor.h \
             src/gui/widgetwithstatus.h \
@@ -223,7 +222,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/miscellaneous/iconfactory.h \
             src/miscellaneous/iofactory.h \
             src/miscellaneous/localization.h \
-            src/miscellaneous/mutex.h \
             src/miscellaneous/settings.h \
             src/miscellaneous/settingsproperties.h \
             src/miscellaneous/syntaxhighlighting.h \
@@ -298,7 +296,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/tabwidget.cpp \
             src/gui/texteditor.cpp \
             src/gui/texteditorprinter.cpp \
-            src/gui/timespinbox.cpp \
             src/gui/toolbar.cpp \
             src/gui/toolbareditor.cpp \
             src/gui/widgetwithstatus.cpp \
@@ -309,7 +306,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/miscellaneous/iconfactory.cpp \
             src/miscellaneous/iofactory.cpp \
             src/miscellaneous/localization.cpp \
-            src/miscellaneous/mutex.cpp \
             src/miscellaneous/settings.cpp \
             src/miscellaneous/syntaxhighlighting.cpp \
             src/miscellaneous/systemfactory.cpp \
