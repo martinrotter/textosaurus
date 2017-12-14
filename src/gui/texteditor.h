@@ -73,7 +73,7 @@ class TextEditor : public ScintillaEdit {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
-    int m_indicatorStart, m_indicatorStop;
+    int m_currentUrlStart, m_currentUrlEnd;
     bool m_settingsDirty;
     TextApplication* m_textApp;
     QString m_filePath;

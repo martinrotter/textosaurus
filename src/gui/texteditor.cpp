@@ -4,6 +4,7 @@
 
 #include "definitions/definitions.h"
 #include "exceptions/ioexception.h"
+#include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
 #include "gui/texteditorprinter.h"
 #include "miscellaneous/application.h"
@@ -36,7 +37,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
   connect(this, &TextEditor::notify, this, [this](SCNotification* pscn) {
     if (pscn->nmhdr.code == SCN_INDICATORCLICK && pscn->modifiers == SCMOD_CTRL) {
-      qApp->web()->openUrlInExternalBrowser(textRange(m_indicatorStart, m_indicatorStop));
+      qApp->web()->openUrlInExternalBrowser(textRange(m_currentUrlStart, m_currentUrlEnd));
     }
   });
 
@@ -111,14 +112,16 @@ void TextEditor::mouseMoveEvent(QMouseEvent* event) {
   Scintilla::Point mouse_pos = Scintilla::PointFromQPoint(event->pos());
   sptr_t text_pos = positionFromPointClose(mouse_pos.x, mouse_pos.y);
 
-  if (text_pos > m_indicatorStart || text_pos < m_indicatorStop) {
-    // Current mouse position is outside of previous matched URL.
-
-    // We remove previous URL indicator.
-    indicatorClearRange(m_indicatorStart, m_indicatorStop);
-    m_indicatorStart = m_indicatorStop = -1;
+  if (text_pos == -1 || text_pos < m_currentUrlStart || text_pos > m_currentUrlEnd) {
+    // We moved mouse pointer outside of existing URL indicator.
+    // Thus, we remove current indicator
+    if (m_currentUrlStart >= 0) {
+      indicatorClearRange(m_currentUrlStart, m_currentUrlEnd);
+      m_currentUrlStart = m_currentUrlEnd = -1;
+    }
 
     if (text_pos >= 0) {
+
       // We find word separator on the left and on the right.
       sptr_t start = text_pos;
       sptr_t end = text_pos;
@@ -154,16 +157,18 @@ void TextEditor::mouseMoveEvent(QMouseEvent* event) {
                                       .match(ranged_text);
 
       if (match.hasMatch()) {
-        m_indicatorStart = start + match.capturedStart();
-        m_indicatorStop = end - ranged_text.size() + match.capturedEnd();
+        // We found correct URL in hovered range.
+        start = start + match.capturedStart();
+        end = end - ranged_text.size() + match.capturedEnd();
 
-        indicSetHoverStyle(0, INDIC_ROUNDBOX);
-        setIndicatorCurrent(0);
-        indicatorFillRange(m_indicatorStart, m_indicatorStop - m_indicatorStart);
-      }
-      else {
-        m_indicatorStart = start;
-        m_indicatorStop = end;
+        if (start != m_currentUrlStart || end != m_currentUrlEnd) {
+          m_currentUrlStart = start;
+          m_currentUrlEnd = end;
+
+          setIndicatorCurrent(0);
+          indicSetHoverStyle(0, INDIC_ROUNDBOX);
+          indicatorFillRange(m_currentUrlStart, m_currentUrlEnd - m_currentUrlStart);
+        }
       }
     }
   }
