@@ -37,7 +37,6 @@
 
 TEMPLATE    = app
 TARGET      = textilosaurus
-DEFINES	    *= QT_USE_QSTRINGBUILDER
 
 message(textilosaurus: Welcome Textilosaurus qmake script.)
 

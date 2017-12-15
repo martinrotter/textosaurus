@@ -248,6 +248,58 @@ QString PredefinedTools::toUpper(const QString& data, bool* ok) {
   return data.toUpper();
 }
 
+QString PredefinedTools::toTitleCase(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
+  if (data.isEmpty()) {
+    return data;
+  }
+  else {
+    QString result = data;
+    QRegularExpression regexp(QSL("(\\s|^)([^\\s\\d])"));
+    QRegularExpressionMatchIterator match_iter = regexp.globalMatch(result);
+
+    while (match_iter.hasNext()) {
+      QRegularExpressionMatch next_match = match_iter.next();
+      QString capt = next_match.captured(2);
+
+      result[next_match.capturedStart(2)] = capt.at(0).toUpper();
+    }
+
+    return result;
+  }
+}
+
+QString PredefinedTools::toSentenceCase(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
+  if (data.isEmpty()) {
+    return data;
+  }
+  else {
+    return data.at(0).toUpper() + data.mid(1);
+  }
+}
+
+QString PredefinedTools::invertCase(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
+  if (data.isEmpty()) {
+    return data;
+  }
+  else {
+    QString result;
+
+    for (int i = 0; i < data.size(); i++) {
+      QChar chr = data[i];
+
+      result += chr.isUpper() ? chr.toLower() : chr.toUpper();
+    }
+
+    return result;
+  }
+}
+
 QString PredefinedTools::toHtmlEscaped(const QString& data, bool* ok) {
   Q_UNUSED(ok)
   return data.toHtmlEscaped();

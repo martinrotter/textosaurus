@@ -1,6 +1,7 @@
-2017.12.XX
+2017.12.15
 ----------
 Added:
+* Enahnced "Text case conversion" tools group. (#10)
 * Tabs are movable.
 * Documents can be manually reloaded from disk.
 

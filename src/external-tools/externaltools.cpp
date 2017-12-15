@@ -204,7 +204,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tolower = new PredefinedTool(&PredefinedTools::toLower, this);
 
-  tolower->setCategory(tr("Text conversion"));
+  tolower->setCategory(tr("Text case conversion"));
   tolower->setName(tr("to lower case"));
   tolower->setInput(ToolInput::SelectionDocument);
   tolower->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -213,12 +213,39 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* toupper = new PredefinedTool(&PredefinedTools::toUpper, this);
 
-  toupper->setCategory(tr("Text conversion"));
+  toupper->setCategory(tr("Text case conversion"));
   toupper->setName(tr("TO UPPER CASE"));
   toupper->setInput(ToolInput::SelectionDocument);
   toupper->setOutput(ToolOutput::ReplaceSelectionDocument);
 
   m_tools.append(toupper);
+
+  PredefinedTool* tosentence = new PredefinedTool(&PredefinedTools::toSentenceCase, this);
+
+  tosentence->setCategory(tr("Text case conversion"));
+  tosentence->setName(tr("To sentence case"));
+  tosentence->setInput(ToolInput::SelectionDocument);
+  tosentence->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(tosentence);
+
+  PredefinedTool* totitle = new PredefinedTool(&PredefinedTools::toTitleCase, this);
+
+  totitle->setCategory(tr("Text case conversion"));
+  totitle->setName(tr("To Title Case"));
+  totitle->setInput(ToolInput::SelectionDocument);
+  totitle->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(totitle);
+
+  PredefinedTool* toinvert = new PredefinedTool(&PredefinedTools::invertCase, this);
+
+  toinvert->setCategory(tr("Text case conversion"));
+  toinvert->setName(tr("Invert case"));
+  toinvert->setInput(ToolInput::SelectionDocument);
+  toinvert->setOutput(ToolOutput::ReplaceSelectionDocument);
+
+  m_tools.append(toinvert);
 
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 
