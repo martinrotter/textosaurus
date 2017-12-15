@@ -65,7 +65,7 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
     connect(act, &QAction::triggered, this, &ExternalTools::runSelectedExternalTool);
   }
 
-  // We add already existing actions for
+  // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
   foreach (PredefinedTool* tool, m_predefinedTools) {
     if (!tool->category().isEmpty()) {
@@ -73,7 +73,6 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
         QMenu* category_menu = new QMenu(parent);
 
         category_menu->setTitle(tool->category());
-
         actions.append(category_menu->menuAction());
         categories.insert(tool->category(), category_menu);
       }
