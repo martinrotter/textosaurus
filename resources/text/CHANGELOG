@@ -1,3 +1,12 @@
+2017.12.XX
+----------
+Added:
+* Build-int tools now can be assigned to keyboard shortcuts and added to toolbar.
+
+Changed:
+* Changed icon size in toolbar to 20x20 pixels.
+* Fixed appearance of some icons in toolbar editor.
+
 2017.12.15
 ----------
 Added:
