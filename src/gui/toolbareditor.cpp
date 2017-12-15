@@ -25,12 +25,14 @@ ToolBarEditor::ToolBarEditor(QWidget* parent)
   connect(m_ui->m_listActivatedActions, &QListWidget::itemSelectionChanged, this, &ToolBarEditor::updateActionsAvailability);
   connect(m_ui->m_listActivatedActions, &QListWidget::itemDoubleClicked, this, &ToolBarEditor::deleteSelectedAction);
   connect(m_ui->m_listAvailableActions, &QListWidget::itemDoubleClicked, this, &ToolBarEditor::addSelectedAction);
+
   m_ui->m_listActivatedActions->installEventFilter(this);
+
   m_ui->m_btnInsertSeparator->setIcon(qApp->icons()->fromTheme(QSL("insert-object")));
   m_ui->m_btnInsertSpacer->setIcon(qApp->icons()->fromTheme(QSL("go-jump")));
-  m_ui->m_btnAddSelectedAction->setIcon(qApp->icons()->fromTheme(QSL("back")));
+  m_ui->m_btnAddSelectedAction->setIcon(qApp->icons()->fromTheme(QSL("go-left")));
   m_ui->m_btnDeleteAllActions->setIcon(qApp->icons()->fromTheme(QSL("application-exit")));
-  m_ui->m_btnDeleteSelectedAction->setIcon(qApp->icons()->fromTheme(QSL("forward")));
+  m_ui->m_btnDeleteSelectedAction->setIcon(qApp->icons()->fromTheme(QSL("go-right")));
   m_ui->m_btnMoveActionDown->setIcon(qApp->icons()->fromTheme(QSL("down")));
   m_ui->m_btnMoveActionUp->setIcon(qApp->icons()->fromTheme(QSL("up")));
   m_ui->m_btnReset->setIcon(qApp->icons()->fromTheme(QSL("reload")));
