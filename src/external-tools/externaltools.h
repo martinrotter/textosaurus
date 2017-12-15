@@ -50,7 +50,6 @@ class ExternalTools : public QObject {
 
     QList<PredefinedTool*> m_predefinedTools;
     QList<ExternalTool*> m_tools;
-    bool m_sampleToolsAdded;
 };
 
 #endif // EXTERNALTOOLS_H

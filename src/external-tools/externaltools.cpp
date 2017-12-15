@@ -25,7 +25,7 @@
 
 ExternalTools::ExternalTools(TextApplication* parent)
   : QObject(parent), m_application(parent), m_predefinedTools(QList<PredefinedTool*>()),
-  m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {
+  m_tools(QList<ExternalTool*>()) {
   loadPredefinedTools();
 }
 
@@ -148,6 +148,7 @@ void ExternalTools::runSelectedExternalTool() {
 void ExternalTools::loadPredefinedTools() {
   PredefinedTool* insert_date_time = new PredefinedTool(&PredefinedTools::currentDateTime, this);
 
+  insert_date_time->setActionObjectName(QSL("m_actionPredefCurrDateTime"));
   insert_date_time->setCategory(tr("Insert..."));
   insert_date_time->setName(tr("Date/time"));
   insert_date_time->setInput(ToolInput::NoInput);
@@ -157,6 +158,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* json_beautify = new PredefinedTool(&PredefinedTools::jsonBeautify, this);
 
+  json_beautify->setActionObjectName(QSL("m_actionPredefJsonBeautify"));
   json_beautify->setCategory(tr("JSON"));
   json_beautify->setName(tr("Beautify"));
   json_beautify->setInput(ToolInput::SelectionDocument);
@@ -166,6 +168,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* json_minify = new PredefinedTool(&PredefinedTools::jsonMinify, this);
 
+  json_minify->setActionObjectName(QSL("m_actionPredefMinify"));
   json_minify->setCategory(tr("JSON"));
   json_minify->setName(tr("Minify"));
   json_minify->setInput(ToolInput::SelectionDocument);
@@ -175,6 +178,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* xml_check = new PredefinedTool(&PredefinedTools::xmlCheck, this);
 
+  xml_check->setActionObjectName(QSL("m_actionPredefXmlCheck"));
   xml_check->setCategory(tr("XML"));
   xml_check->setName(tr("Check XML syntax"));
   xml_check->setInput(ToolInput::SelectionDocument);
@@ -184,6 +188,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* xml_beautify = new PredefinedTool(&PredefinedTools::xmlBeautify, this);
 
+  xml_beautify->setActionObjectName(QSL("m_actionPredefXmlBeautify"));
   xml_beautify->setCategory(tr("XML"));
   xml_beautify->setName(tr("Beautify"));
   xml_beautify->setInput(ToolInput::SelectionDocument);
@@ -193,6 +198,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* xml_linearize = new PredefinedTool(&PredefinedTools::xmlLinearize, this);
 
+  xml_linearize->setActionObjectName(QSL("m_actionPredefMinify"));
   xml_linearize->setCategory(tr("XML"));
   xml_linearize->setName(tr("Linearize/Minfy"));
   xml_linearize->setInput(ToolInput::SelectionDocument);
@@ -202,6 +208,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
+  tobase64->setActionObjectName(QSL("m_actionPredefToBase64"));
   tobase64->setCategory(tr("MIME tools"));
   tobase64->setName(tr("Text → Base64"));
   tobase64->setInput(ToolInput::SelectionDocument);
@@ -211,6 +218,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tobase64url = new PredefinedTool(&PredefinedTools::toBase64Url, this);
 
+  tobase64url->setActionObjectName(QSL("m_actionPredefToBase64Url"));
   tobase64url->setCategory(tr("MIME tools"));
   tobase64url->setName(tr("Text → Base64Url"));
   tobase64url->setInput(ToolInput::SelectionDocument);
@@ -220,6 +228,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tohtmlencoded = new PredefinedTool(&PredefinedTools::toHtmlEscaped, this);
 
+  tohtmlencoded->setActionObjectName(QSL("m_actionPredefToHtmlEscaped"));
   tohtmlencoded->setCategory(tr("MIME tools"));
   tohtmlencoded->setName(tr("Text → HTML escaped"));
   tohtmlencoded->setInput(ToolInput::SelectionDocument);
@@ -229,6 +238,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tourlencoded = new PredefinedTool(&PredefinedTools::toUrlEncoded, this);
 
+  tourlencoded->setActionObjectName(QSL("m_actionPredefToUrlEncoded"));
   tourlencoded->setCategory(tr("MIME tools"));
   tourlencoded->setName(tr("Text → URL encoded"));
   tourlencoded->setInput(ToolInput::SelectionDocument);
@@ -238,6 +248,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tolower = new PredefinedTool(&PredefinedTools::toLower, this);
 
+  tolower->setActionObjectName(QSL("m_actionPredefToLower"));
   tolower->setCategory(tr("Text case conversion"));
   tolower->setName(tr("to lower case"));
   tolower->setInput(ToolInput::SelectionDocument);
@@ -247,6 +258,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* toupper = new PredefinedTool(&PredefinedTools::toUpper, this);
 
+  toupper->setActionObjectName(QSL("m_actionPredefToUpper"));
   toupper->setCategory(tr("Text case conversion"));
   toupper->setName(tr("TO UPPER CASE"));
   toupper->setInput(ToolInput::SelectionDocument);
@@ -256,6 +268,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* tosentence = new PredefinedTool(&PredefinedTools::toSentenceCase, this);
 
+  tosentence->setActionObjectName(QSL("m_actionPredefToSentence"));
   tosentence->setCategory(tr("Text case conversion"));
   tosentence->setName(tr("To sentence case"));
   tosentence->setInput(ToolInput::SelectionDocument);
@@ -265,6 +278,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* totitle = new PredefinedTool(&PredefinedTools::toTitleCase, this);
 
+  totitle->setActionObjectName(QSL("m_actionPredefToTitle"));
   totitle->setCategory(tr("Text case conversion"));
   totitle->setName(tr("To Title Case"));
   totitle->setInput(ToolInput::SelectionDocument);
@@ -274,6 +288,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* toinvert = new PredefinedTool(&PredefinedTools::invertCase, this);
 
+  toinvert->setActionObjectName(QSL("m_actionPredefInvertCase"));
   toinvert->setCategory(tr("Text case conversion"));
   toinvert->setName(tr("Invert case"));
   toinvert->setInput(ToolInput::SelectionDocument);
@@ -283,6 +298,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 
+  frombase64->setActionObjectName(QSL("m_actionPredefFromBase64"));
   frombase64->setCategory(tr("MIME tools"));
   frombase64->setName(tr("Base64 → text"));
   frombase64->setInput(ToolInput::SelectionDocument);
@@ -292,6 +308,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* frombase64url = new PredefinedTool(&PredefinedTools::fromBase64Url, this);
 
+  frombase64url->setActionObjectName(QSL("m_actionPredefFromBase64Url"));
   frombase64url->setCategory(tr("MIME tools"));
   frombase64url->setName(tr("Base64Url → text"));
   frombase64url->setInput(ToolInput::SelectionDocument);
@@ -301,6 +318,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* fromurlencoded = new PredefinedTool(&PredefinedTools::fromUrlEncoded, this);
 
+  fromurlencoded->setActionObjectName(QSL("m_actionPredefFromUrlEncoded"));
   fromurlencoded->setCategory(tr("MIME tools"));
   fromurlencoded->setName(tr("URL encoded → text"));
   fromurlencoded->setInput(ToolInput::SelectionDocument);
@@ -310,6 +328,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* send_to_clbin = new PredefinedTool(&PredefinedTools::sendToClbin, this);
 
+  send_to_clbin->setActionObjectName(QSL("m_actionPredefSendClbin"));
   send_to_clbin->setCategory(tr("Upload to..."));
   send_to_clbin->setName(tr("clbin.com"));
   send_to_clbin->setInput(ToolInput::SelectionDocument);
@@ -319,6 +338,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
 
+  send_to_github->setActionObjectName(QSL("m_actionPredefSendGithub"));
   send_to_github->setCategory(tr("Upload to..."));
   send_to_github->setName(tr("github.com"));
   send_to_github->setInput(ToolInput::SelectionDocument);
@@ -328,6 +348,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
 
+  send_to_ixio->setActionObjectName(QSL("m_actionPredefSendIxio"));
   send_to_ixio->setCategory(tr("Upload to..."));
   send_to_ixio->setName(tr("ix.io"));
   send_to_ixio->setInput(ToolInput::SelectionDocument);
@@ -337,6 +358,7 @@ void ExternalTools::loadPredefinedTools() {
 
   PredefinedTool* send_to_sprunge = new PredefinedTool(&PredefinedTools::sendToSprunge, this);
 
+  send_to_sprunge->setActionObjectName(QSL("m_actionPredefSendSprunge"));
   send_to_sprunge->setCategory(tr("Upload to..."));
   send_to_sprunge->setName(tr("sprunge.us"));
   send_to_sprunge->setInput(ToolInput::SelectionDocument);
@@ -348,7 +370,7 @@ void ExternalTools::loadPredefinedTools() {
   foreach (PredefinedTool* tool, m_predefinedTools) {
     QAction* act = new QAction(tool->name(), tool);
 
-    act->setObjectName(QSL("m_action") + tool->name());
+    act->setObjectName(tool->actionObjectName());
     act->setData(QVariant::fromValue(tool));
     act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
     act->setShortcutContext(Qt::ApplicationShortcut);
@@ -386,9 +408,7 @@ void ExternalTools::loadCustomTools() {
   }
 
   // We add extra tools if this is the first time when app runs.
-  if (qApp->isFirstRun() && !m_sampleToolsAdded) {
-    m_sampleToolsAdded = true;
-
+  if (m_tools.isEmpty()) {
     ExternalTool* ext_bash_xml = new ExternalTool(this);
 
     ext_bash_xml->setScript("IFS=''"
@@ -481,8 +501,6 @@ void ExternalTools::loadCustomTools() {
     ext_bash_exec->setName(tr("Run Bash code"));
 
     m_tools.append(ext_bash_exec);
-
-    saveExternalTools(m_tools);
   }
 }
 

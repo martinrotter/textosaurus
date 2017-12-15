@@ -138,6 +138,10 @@ class PredefinedTool : public ExternalTool {
 
     void setAction(QAction* action);
 
+    void setActionObjectName(const QString& action_obj_name);
+
+    QString actionObjectName() const;
+
   public slots:
     virtual void runTool(QPointer<TextEditor> editor, const QString& data);
 
@@ -145,6 +149,7 @@ class PredefinedTool : public ExternalTool {
 
   private:
     QAction* m_action;
+    QString m_actionObjectName;
 
     // This is reference to operation:
     // QString operation(const QString& input).

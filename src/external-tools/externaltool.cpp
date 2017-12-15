@@ -188,6 +188,14 @@ bool PredefinedTool::isPredefined() const {
   return true;
 }
 
+QString PredefinedTool::actionObjectName() const {
+  return m_actionObjectName;
+}
+
+void PredefinedTool::setActionObjectName(const QString& action_obj_name) {
+  m_actionObjectName = action_obj_name;
+}
+
 QAction* PredefinedTool::action() const {
   return m_action;
 }
