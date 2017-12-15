@@ -8,6 +8,7 @@
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
+#include <QAction>
 #include <QPointer>
 #include <QProcess>
 
@@ -173,7 +174,7 @@ void ExternalTool::setName(const QString& name) {
 }
 
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
-  : ExternalTool(parent), m_functor(functor) {}
+  : ExternalTool(parent), m_action(nullptr), m_functor(functor) {}
 
 void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)
@@ -185,4 +186,12 @@ void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
 bool PredefinedTool::isPredefined() const {
   return true;
+}
+
+QAction* PredefinedTool::action() const {
+  return m_action;
+}
+
+void PredefinedTool::setAction(QAction* action) {
+  m_action = action;
 }

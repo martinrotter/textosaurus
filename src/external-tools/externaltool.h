@@ -134,12 +134,17 @@ class PredefinedTool : public ExternalTool {
   public:
     explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
 
+    QAction* action() const;
+
+    void setAction(QAction* action);
+
   public slots:
     virtual void runTool(QPointer<TextEditor> editor, const QString& data);
 
     bool isPredefined() const;
 
   private:
+    QAction* m_action;
 
     // This is reference to operation:
     // QString operation(const QString& input).

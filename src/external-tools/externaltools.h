@@ -9,6 +9,7 @@ class TextApplicationSettings;
 class TextEditor;
 class TextApplication;
 class ExternalTool;
+class PredefinedTool;
 class QAction;
 
 // Top-level management class for external tools.
@@ -21,7 +22,8 @@ class ExternalTools : public QObject {
 
     QList<QAction*> generateActions(QWidget* parent) const;
 
-    const QList<ExternalTool*> tools() const;
+    QList<ExternalTool*> tools() const;
+    QList<QAction*> predefinedToolsActions() const;
 
     void saveExternalTools(const QList<ExternalTool*>& ext_tools);
 
@@ -46,6 +48,7 @@ class ExternalTools : public QObject {
   private:
     TextApplication* m_application;
 
+    QList<PredefinedTool*> m_predefinedTools;
     QList<ExternalTool*> m_tools;
     bool m_sampleToolsAdded;
 };

@@ -3,6 +3,7 @@
 #include "miscellaneous/application.h"
 
 #include "exceptions/applicationexception.h"
+#include "external-tools/externaltools.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
@@ -38,6 +39,7 @@ Application::~Application() {
 QList<QAction*> Application::userActions() {
   if (m_mainForm != nullptr && m_userActions.isEmpty()) {
     m_userActions = m_mainForm->allActions();
+    m_userActions.append(m_textApplication->settings()->externalTools()->predefinedToolsActions());
   }
 
   return m_userActions;

@@ -23,6 +23,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFontDatabase>
+#include <QMouseEvent>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QRegularExpression>

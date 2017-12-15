@@ -157,7 +157,14 @@ QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
 
   while (!reader.atEnd()) {
     reader.readNext();
-    if (!reader.isWhitespace()) {
+
+    if (reader.error() != QXmlStreamReader::Error::NoError) {
+      break;
+    }
+
+    if (!reader.isWhitespace() &&
+        reader.tokenType() != QXmlStreamReader::TokenType::Invalid &&
+        reader.tokenType() != QXmlStreamReader::TokenType::NoToken) {
       writer.writeCurrentToken(reader);
     }
   }
@@ -182,7 +189,14 @@ QString PredefinedTools::xmlLinearize(const QString& data, bool* ok) {
 
   while (!reader.atEnd()) {
     reader.readNext();
-    if (!reader.isWhitespace()) {
+
+    if (reader.error() != QXmlStreamReader::Error::NoError) {
+      break;
+    }
+
+    if (!reader.isWhitespace() &&
+        reader.tokenType() != QXmlStreamReader::TokenType::Invalid &&
+        reader.tokenType() != QXmlStreamReader::TokenType::NoToken) {
       writer.writeCurrentToken(reader);
     }
   }

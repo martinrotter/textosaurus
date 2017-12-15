@@ -24,10 +24,14 @@
 #include <QRegularExpression>
 
 ExternalTools::ExternalTools(TextApplication* parent)
-  : QObject(parent), m_application(parent), m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {}
+  : QObject(parent), m_application(parent), m_predefinedTools(QList<PredefinedTool*>()),
+  m_tools(QList<ExternalTool*>()), m_sampleToolsAdded(false) {
+  loadPredefinedTools();
+}
 
 ExternalTools::~ExternalTools() {
   qDeleteAll(m_tools);
+  qDeleteAll(m_predefinedTools);
   qDebug("Destroying ExternalTools.");
 }
 
@@ -61,11 +65,41 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
     connect(act, &QAction::triggered, this, &ExternalTools::runSelectedExternalTool);
   }
 
+  // We add already existing actions for
+  // built-in tools to the "Tools" menu too.
+  foreach (PredefinedTool* tool, m_predefinedTools) {
+    if (!tool->category().isEmpty()) {
+      if (!categories.contains(tool->category())) {
+        QMenu* category_menu = new QMenu(parent);
+
+        category_menu->setTitle(tool->category());
+
+        actions.append(category_menu->menuAction());
+        categories.insert(tool->category(), category_menu);
+      }
+
+      categories[tool->category()]->addAction(tool->action());
+    }
+    else {
+      actions.append(tool->action());
+    }
+  }
+
   return actions;
 }
 
-const QList<ExternalTool*> ExternalTools::tools() const {
+QList<ExternalTool*> ExternalTools::tools() const {
   return m_tools;
+}
+
+QList<QAction*> ExternalTools::predefinedToolsActions() const {
+  QList<QAction*> act;
+
+  foreach (PredefinedTool* tool, m_predefinedTools) {
+    act.append(tool->action());
+  }
+
+  return act;
 }
 
 void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
@@ -119,7 +153,7 @@ void ExternalTools::loadPredefinedTools() {
   insert_date_time->setInput(ToolInput::NoInput);
   insert_date_time->setOutput(ToolOutput::InsertAtCursorPosition);
 
-  m_tools.append(insert_date_time);
+  m_predefinedTools.append(insert_date_time);
 
   PredefinedTool* json_beautify = new PredefinedTool(&PredefinedTools::jsonBeautify, this);
 
@@ -128,7 +162,7 @@ void ExternalTools::loadPredefinedTools() {
   json_beautify->setInput(ToolInput::SelectionDocument);
   json_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(json_beautify);
+  m_predefinedTools.append(json_beautify);
 
   PredefinedTool* json_minify = new PredefinedTool(&PredefinedTools::jsonMinify, this);
 
@@ -137,7 +171,7 @@ void ExternalTools::loadPredefinedTools() {
   json_minify->setInput(ToolInput::SelectionDocument);
   json_minify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(json_minify);
+  m_predefinedTools.append(json_minify);
 
   PredefinedTool* xml_check = new PredefinedTool(&PredefinedTools::xmlCheck, this);
 
@@ -146,7 +180,7 @@ void ExternalTools::loadPredefinedTools() {
   xml_check->setInput(ToolInput::SelectionDocument);
   xml_check->setOutput(ToolOutput::DumpToOutputWindow);
 
-  m_tools.append(xml_check);
+  m_predefinedTools.append(xml_check);
 
   PredefinedTool* xml_beautify = new PredefinedTool(&PredefinedTools::xmlBeautify, this);
 
@@ -155,7 +189,7 @@ void ExternalTools::loadPredefinedTools() {
   xml_beautify->setInput(ToolInput::SelectionDocument);
   xml_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(xml_beautify);
+  m_predefinedTools.append(xml_beautify);
 
   PredefinedTool* xml_linearize = new PredefinedTool(&PredefinedTools::xmlLinearize, this);
 
@@ -164,7 +198,7 @@ void ExternalTools::loadPredefinedTools() {
   xml_linearize->setInput(ToolInput::SelectionDocument);
   xml_linearize->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(xml_linearize);
+  m_predefinedTools.append(xml_linearize);
 
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
@@ -173,7 +207,7 @@ void ExternalTools::loadPredefinedTools() {
   tobase64->setInput(ToolInput::SelectionDocument);
   tobase64->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(tobase64);
+  m_predefinedTools.append(tobase64);
 
   PredefinedTool* tobase64url = new PredefinedTool(&PredefinedTools::toBase64Url, this);
 
@@ -182,7 +216,7 @@ void ExternalTools::loadPredefinedTools() {
   tobase64url->setInput(ToolInput::SelectionDocument);
   tobase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(tobase64url);
+  m_predefinedTools.append(tobase64url);
 
   PredefinedTool* tohtmlencoded = new PredefinedTool(&PredefinedTools::toHtmlEscaped, this);
 
@@ -191,7 +225,7 @@ void ExternalTools::loadPredefinedTools() {
   tohtmlencoded->setInput(ToolInput::SelectionDocument);
   tohtmlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(tohtmlencoded);
+  m_predefinedTools.append(tohtmlencoded);
 
   PredefinedTool* tourlencoded = new PredefinedTool(&PredefinedTools::toUrlEncoded, this);
 
@@ -200,7 +234,7 @@ void ExternalTools::loadPredefinedTools() {
   tourlencoded->setInput(ToolInput::SelectionDocument);
   tourlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(tourlencoded);
+  m_predefinedTools.append(tourlencoded);
 
   PredefinedTool* tolower = new PredefinedTool(&PredefinedTools::toLower, this);
 
@@ -209,7 +243,7 @@ void ExternalTools::loadPredefinedTools() {
   tolower->setInput(ToolInput::SelectionDocument);
   tolower->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(tolower);
+  m_predefinedTools.append(tolower);
 
   PredefinedTool* toupper = new PredefinedTool(&PredefinedTools::toUpper, this);
 
@@ -218,7 +252,7 @@ void ExternalTools::loadPredefinedTools() {
   toupper->setInput(ToolInput::SelectionDocument);
   toupper->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(toupper);
+  m_predefinedTools.append(toupper);
 
   PredefinedTool* tosentence = new PredefinedTool(&PredefinedTools::toSentenceCase, this);
 
@@ -227,7 +261,7 @@ void ExternalTools::loadPredefinedTools() {
   tosentence->setInput(ToolInput::SelectionDocument);
   tosentence->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(tosentence);
+  m_predefinedTools.append(tosentence);
 
   PredefinedTool* totitle = new PredefinedTool(&PredefinedTools::toTitleCase, this);
 
@@ -236,7 +270,7 @@ void ExternalTools::loadPredefinedTools() {
   totitle->setInput(ToolInput::SelectionDocument);
   totitle->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(totitle);
+  m_predefinedTools.append(totitle);
 
   PredefinedTool* toinvert = new PredefinedTool(&PredefinedTools::invertCase, this);
 
@@ -245,7 +279,7 @@ void ExternalTools::loadPredefinedTools() {
   toinvert->setInput(ToolInput::SelectionDocument);
   toinvert->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(toinvert);
+  m_predefinedTools.append(toinvert);
 
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 
@@ -254,7 +288,7 @@ void ExternalTools::loadPredefinedTools() {
   frombase64->setInput(ToolInput::SelectionDocument);
   frombase64->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(frombase64);
+  m_predefinedTools.append(frombase64);
 
   PredefinedTool* frombase64url = new PredefinedTool(&PredefinedTools::fromBase64Url, this);
 
@@ -263,7 +297,7 @@ void ExternalTools::loadPredefinedTools() {
   frombase64url->setInput(ToolInput::SelectionDocument);
   frombase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(frombase64url);
+  m_predefinedTools.append(frombase64url);
 
   PredefinedTool* fromurlencoded = new PredefinedTool(&PredefinedTools::fromUrlEncoded, this);
 
@@ -272,7 +306,7 @@ void ExternalTools::loadPredefinedTools() {
   fromurlencoded->setInput(ToolInput::SelectionDocument);
   fromurlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
 
-  m_tools.append(fromurlencoded);
+  m_predefinedTools.append(fromurlencoded);
 
   PredefinedTool* send_to_clbin = new PredefinedTool(&PredefinedTools::sendToClbin, this);
 
@@ -281,7 +315,7 @@ void ExternalTools::loadPredefinedTools() {
   send_to_clbin->setInput(ToolInput::SelectionDocument);
   send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
 
-  m_tools.append(send_to_clbin);
+  m_predefinedTools.append(send_to_clbin);
 
   PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
 
@@ -290,7 +324,7 @@ void ExternalTools::loadPredefinedTools() {
   send_to_github->setInput(ToolInput::SelectionDocument);
   send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
 
-  m_tools.append(send_to_github);
+  m_predefinedTools.append(send_to_github);
 
   PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
 
@@ -299,7 +333,7 @@ void ExternalTools::loadPredefinedTools() {
   send_to_ixio->setInput(ToolInput::SelectionDocument);
   send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
 
-  m_tools.append(send_to_ixio);
+  m_predefinedTools.append(send_to_ixio);
 
   PredefinedTool* send_to_sprunge = new PredefinedTool(&PredefinedTools::sendToSprunge, this);
 
@@ -308,10 +342,26 @@ void ExternalTools::loadPredefinedTools() {
   send_to_sprunge->setInput(ToolInput::SelectionDocument);
   send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
 
-  m_tools.append(send_to_sprunge);
+  m_predefinedTools.append(send_to_sprunge);
+
+  // We pre-generate actions for built-in tools.
+  foreach (PredefinedTool* tool, m_predefinedTools) {
+    QAction* act = new QAction(tool->name(), tool);
+
+    act->setData(QVariant::fromValue(tool));
+    act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
+    act->setShortcutContext(Qt::ApplicationShortcut);
+
+    tool->setAction(act);
+
+    connect(act, &QAction::triggered, this, &ExternalTools::runSelectedExternalTool);
+  }
 }
 
 void ExternalTools::loadCustomTools() {
+  qDeleteAll(m_tools);
+  m_tools.clear();
+
   QSettings sett_ext_tools(qApp->settings()->pathName() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
   QStringList sections = sett_ext_tools.childGroups();
 
@@ -436,12 +486,7 @@ void ExternalTools::loadCustomTools() {
 }
 
 void ExternalTools::reloadTools() {
-  qDeleteAll(m_tools);
-  m_tools.clear();
-
-  loadPredefinedTools();
   loadCustomTools();
-
   emit externalToolsChanged();
 }
 
