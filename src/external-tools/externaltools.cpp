@@ -348,6 +348,7 @@ void ExternalTools::loadPredefinedTools() {
   foreach (PredefinedTool* tool, m_predefinedTools) {
     QAction* act = new QAction(tool->name(), tool);
 
+    act->setObjectName(QSL("m_action") + tool->name());
     act->setData(QVariant::fromValue(tool));
     act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
     act->setShortcutContext(Qt::ApplicationShortcut);
