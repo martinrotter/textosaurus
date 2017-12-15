@@ -60,7 +60,6 @@ Features
 	    * pass current selection/line/document/file to your script,
 		* run your script with arbitrary interpreter (Python, Bash or some other executable),
 		* get output of your script (as new file, replace selection/document, copy to clipboard, ...),
-		* scripts run in worker threads (multithreaded environment),
 		* **settings of external tools is completely portable** (*).
 * Misc:
     - **all user data (settings, external tools definitions, ...) are fully portable** (You can use the same user data shared via Dropbox on all supported platforms.),
