@@ -9,9 +9,7 @@
 #include <QWidgetAction>
 
 BaseToolBar::BaseToolBar(const QString& title, QWidget* parent) : QToolBar(title, parent) {
-  QMargins margins = contentsMargins();
-
-  setContentsMargins(margins);
+  setIconSize(QSize(20, 20));
 }
 
 BaseToolBar::~BaseToolBar() {
