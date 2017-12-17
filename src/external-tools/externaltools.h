@@ -53,7 +53,7 @@ class ExternalTools : public QObject {
     TextApplication* m_application;
 
     QList<PredefinedTool*> m_predefinedTools;
-    QList<ExternalTool*> m_tools;
+    QList<ExternalTool*> m_customTools;
 };
 
 #endif // EXTERNALTOOLS_H

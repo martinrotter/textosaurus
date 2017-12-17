@@ -25,12 +25,12 @@
 
 ExternalTools::ExternalTools(TextApplication* parent)
   : QObject(parent), m_application(parent), m_predefinedTools(QList<PredefinedTool*>()),
-  m_tools(QList<ExternalTool*>()) {
+  m_customTools(QList<ExternalTool*>()) {
   loadPredefinedTools();
 }
 
 ExternalTools::~ExternalTools() {
-  qDeleteAll(m_tools);
+  qDeleteAll(m_customTools);
   qDeleteAll(m_predefinedTools);
   qDebug("Destroying ExternalTools.");
 }
@@ -39,7 +39,7 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
   QList<QAction*> actions;
   QMap<QString, QMenu*> categories;
 
-  foreach (ExternalTool* tool, m_tools) {
+  foreach (ExternalTool* tool, m_customTools) {
     QAction* act = new QAction(tool->name(), parent);
 
     if (!tool->category().isEmpty()) {
@@ -114,7 +114,7 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
 }
 
 QList<ExternalTool*> ExternalTools::tools() const {
-  return m_tools;
+  return m_customTools;
 }
 
 QList<QAction*> ExternalTools::predefinedToolsActions() const {
@@ -436,8 +436,8 @@ void ExternalTools::loadPredefinedTools() {
 }
 
 void ExternalTools::loadCustomTools() {
-  qDeleteAll(m_tools);
-  m_tools.clear();
+  qDeleteAll(m_customTools);
+  m_customTools.clear();
 
   QSettings sett_ext_tools(qApp->settings()->pathName() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
   QStringList sections = sett_ext_tools.childGroups();
@@ -456,13 +456,13 @@ void ExternalTools::loadCustomTools() {
     tool->setCategory(sett_ext_tools.value(QSL("category")).toString());
     tool->setShortcut(sett_ext_tools.value(QSL("shortcut")).toString());
 
-    m_tools.append(tool);
+    m_customTools.append(tool);
 
     sett_ext_tools.endGroup();
   }
 
   // We add extra tools if this is the first time when app runs.
-  if (m_tools.isEmpty()) {
+  if (m_customTools.isEmpty()) {
     ExternalTool* ext_bash_xml = new ExternalTool(this);
 
     ext_bash_xml->setScript("IFS=''"
@@ -474,7 +474,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_xml->setOutput(ToolOutput::ReloadFile);
     ext_bash_xml->setName("XML - beautify");
 
-    m_tools.append(ext_bash_xml);
+    m_customTools.append(ext_bash_xml);
 
     ExternalTool* ext_bash_json = new ExternalTool(this);
 
@@ -485,7 +485,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_json->setOutput(ToolOutput::ReplaceSelectionDocument);
     ext_bash_json->setName("JSON - beautify");
 
-    m_tools.append(ext_bash_json);
+    m_customTools.append(ext_bash_json);
 
     ExternalTool* ext_bash_sha256 = new ExternalTool(this);
 
@@ -495,7 +495,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_sha256->setOutput(ToolOutput::ReplaceSelectionDocument);
     ext_bash_sha256->setName(tr("Get SHA256 sum of selected/all text"));
 
-    m_tools.append(ext_bash_sha256);
+    m_customTools.append(ext_bash_sha256);
 
     ExternalTool* ext_python_reverse = new ExternalTool(this);
 
@@ -506,7 +506,7 @@ void ExternalTools::loadCustomTools() {
     ext_python_reverse->setOutput(ToolOutput::ReplaceCurrentLine);
     ext_python_reverse->setName(tr("Reverse current line"));
 
-    m_tools.append(ext_python_reverse);
+    m_customTools.append(ext_python_reverse);
 
     ExternalTool* ext_bash_seq = new ExternalTool(this);
 
@@ -517,7 +517,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_seq->setOutput(ToolOutput::InsertAtCursorPosition);
     ext_bash_seq->setName(tr("Generate sequence"));
 
-    m_tools.append(ext_bash_seq);
+    m_customTools.append(ext_bash_seq);
 
     ExternalTool* ext_python_eval = new ExternalTool(this);
 
@@ -529,7 +529,7 @@ void ExternalTools::loadCustomTools() {
     ext_python_eval->setOutput(ToolOutput::InsertAtCursorPosition);
     ext_python_eval->setName(tr("Run Python code"));
 
-    m_tools.append(ext_python_eval);
+    m_customTools.append(ext_python_eval);
 
     ExternalTool* ext_bash_garbage = new ExternalTool(this);
 
@@ -541,7 +541,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_garbage->setOutput(ToolOutput::InsertAtCursorPosition);
     ext_bash_garbage->setName(tr("Generate garbage text"));
 
-    m_tools.append(ext_bash_garbage);
+    m_customTools.append(ext_bash_garbage);
 
     ExternalTool* ext_bash_exec = new ExternalTool(this);
 
@@ -554,7 +554,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_exec->setOutput(ToolOutput::InsertAtCursorPosition);
     ext_bash_exec->setName(tr("Run Bash code"));
 
-    m_tools.append(ext_bash_exec);
+    m_customTools.append(ext_bash_exec);
   }
 }
 
