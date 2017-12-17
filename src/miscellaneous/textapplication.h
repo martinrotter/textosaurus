@@ -155,6 +155,7 @@ class TextApplication : public QObject {
     QMenu* m_menuFileReopenWithEncoding;
     QMenu* m_menuEolMode;
     QMenu* m_menuEolConversion;
+    QMenu* m_menuEdit;
     QMenu* m_menuView;
     QMenu* m_menuViewInvisibles;
     QMenu* m_menuTools;

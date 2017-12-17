@@ -399,6 +399,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
+  m_menuEdit = m_mainForm->m_ui.m_menuEdit;
   m_menuViewInvisibles = m_mainForm->m_ui.m_menuViewInvisibles;
   m_menuDockWidgets = m_mainForm->m_ui.m_menuDockWidgets;
   m_menuSearch = m_mainForm->m_ui.m_menuSearch;
@@ -792,6 +793,9 @@ void TextApplication::loadNewExternalTools() {
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
   m_menuTools->addActions(m_settings->externalTools()->generateToolsMenuTools(m_menuTools));
+
+  // Load also edit menu.
+  // TODO: nacist edit menu.
 }
 
 void TextApplication::initializeDockWidgetsMenu() {
