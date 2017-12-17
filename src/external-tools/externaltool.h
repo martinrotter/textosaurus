@@ -67,6 +67,7 @@ class ExternalTool : public QObject {
   public:
     explicit ExternalTool(QObject* parent = nullptr);
     explicit ExternalTool(const ExternalTool& other, QObject* parent = nullptr);
+    virtual ~ExternalTool() = default;
 
     virtual bool isPredefined() const;
 
@@ -146,6 +147,7 @@ class PredefinedTool : public ExternalTool {
 
   public:
     explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
+    virtual ~PredefinedTool() = default;
 
   public slots:
     virtual void runTool(QPointer<TextEditor> editor, const QString& data);
