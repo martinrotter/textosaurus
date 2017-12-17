@@ -24,15 +24,13 @@
 #include <QRegularExpression>
 
 ExternalTools::ExternalTools(TextApplication* parent)
-  : QObject(parent), m_application(parent), m_predefinedTools(QList<PredefinedTool*>()),
-  m_customTools(QList<ExternalTool*>()) {
+  : QObject(parent), m_application(parent), m_predefinedTools(QList<PredefinedTool*>()), m_customTools(QList<ExternalTool*>()) {
   loadPredefinedTools();
 }
 
 ExternalTools::~ExternalTools() {
   qDeleteAll(m_customTools);
   qDeleteAll(m_predefinedTools);
-  qDebug("Destroying ExternalTools.");
 }
 
 QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
@@ -40,8 +38,6 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
   QMap<QString, QMenu*> categories;
 
   foreach (ExternalTool* tool, m_customTools) {
-    QAction* act = new QAction(tool->name(), parent);
-
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
         QMenu* category_menu = new QMenu(parent);
@@ -52,17 +48,11 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
         categories.insert(tool->category(), category_menu);
       }
 
-      categories[tool->category()]->addAction(act);
+      categories[tool->category()]->addAction(tool->action());
     }
     else {
-      actions.append(act);
+      actions.append(tool->action());
     }
-
-    act->setData(QVariant::fromValue(tool));
-    act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
-    act->setShortcutContext(Qt::ApplicationShortcut);
-
-    connect(act, &QAction::triggered, this, &ExternalTools::runSelectedExternalTool);
   }
 
   // We add already existing persistent actions for
@@ -539,6 +529,18 @@ void ExternalTools::loadCustomTools() {
     ext_bash_exec->setName(tr("Run Bash code"));
 
     m_customTools.append(ext_bash_exec);
+  }
+
+  foreach (ExternalTool* tool, m_customTools) {
+    QAction* act = new QAction(tool->name(), tool);
+
+    act->setData(QVariant::fromValue(tool));
+    act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
+    act->setShortcutContext(Qt::ApplicationShortcut);
+
+    tool->setAction(act);
+
+    connect(act, &QAction::triggered, this, &ExternalTools::runSelectedExternalTool);
   }
 }
 

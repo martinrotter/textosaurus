@@ -786,10 +786,7 @@ void TextApplication::convertEols(QAction* action) {
 
 void TextApplication::loadNewExternalTools() {
   // Make sure we reload external tools.
-  m_menuTools->removeAction(m_actionSettings);
-  qDeleteAll(m_menuTools->actions());
   m_menuTools->clear();
-
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
   m_menuTools->addActions(m_settings->externalTools()->generateToolsMenuTools(m_menuTools));
