@@ -43,9 +43,6 @@ class ExternalTools : public QObject {
     void externalToolsChanged();
 
   private:
-    QList<PredefinedTool*> predefinedEditMenuTools() const;
-    QList<PredefinedTool*> predefinedToolsMenuTools() const;
-
     void loadPredefinedTools();
     void loadCustomTools();
 

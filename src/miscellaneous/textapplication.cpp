@@ -797,12 +797,12 @@ void TextApplication::loadNewExternalTools() {
   // Load also edit menu.
   // TODO: nacist edit menu.
 
-  /*m_menuEdit->clear();
-     m_menuEdit->addAction(m_actionEditBack);
-     m_menuEdit->addAction(m_actionEditForward);
-     m_menuEdit->addMenu(m_menuEolConversion);
-     m_menuEdit->addSeparator();
-     m_menuTools->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));*/
+  m_menuEdit->clear();
+  m_menuEdit->addAction(m_actionEditBack);
+  m_menuEdit->addAction(m_actionEditForward);
+  m_menuEdit->addMenu(m_menuEolConversion);
+  m_menuEdit->addSeparator();
+  m_menuTools->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
 }
 
 void TextApplication::initializeDockWidgetsMenu() {

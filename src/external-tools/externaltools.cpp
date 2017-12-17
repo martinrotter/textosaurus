@@ -67,7 +67,11 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, predefinedToolsMenuTools()) {
+  foreach (PredefinedTool* tool, m_predefinedTools()) {
+    if (tool->addToEditMenu()) {
+      continue;
+    }
+
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
         QMenu* category_menu = new QMenu(parent);
@@ -93,7 +97,11 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, predefinedEditMenuTools()) {
+  foreach (PredefinedTool* tool, m_predefinedTools()) {
+    if (!tool->addToEditMenu()) {
+      continue;
+    }
+
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
         QMenu* category_menu = new QMenu(parent);
@@ -122,30 +130,6 @@ QList<QAction*> ExternalTools::predefinedToolsActions() const {
 
   foreach (PredefinedTool* tool, m_predefinedTools) {
     act.append(tool->action());
-  }
-
-  return act;
-}
-
-QList<PredefinedTool*> ExternalTools::predefinedEditMenuTools() const {
-  QList<PredefinedTool*> act;
-
-  foreach (PredefinedTool* tool, m_predefinedTools) {
-    if (tool->addToEditMenu()) {
-      act.append(tool);
-    }
-  }
-
-  return act;
-}
-
-QList<PredefinedTool*> ExternalTools::predefinedToolsMenuTools() const {
-  QList<PredefinedTool*> act;
-
-  foreach (PredefinedTool* tool, m_predefinedTools) {
-    if (!tool->addToEditMenu()) {
-      act.append(tool);
-    }
   }
 
   return act;
