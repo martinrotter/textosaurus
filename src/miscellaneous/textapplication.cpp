@@ -802,7 +802,7 @@ void TextApplication::loadNewExternalTools() {
   m_menuEdit->addAction(m_actionEditForward);
   m_menuEdit->addMenu(m_menuEolConversion);
   m_menuEdit->addSeparator();
-  m_menuTools->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
+  m_menuEdit->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
 }
 
 void TextApplication::initializeDockWidgetsMenu() {
