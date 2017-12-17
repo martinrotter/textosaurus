@@ -26,7 +26,7 @@ class ShortcutCatcher : public QWidget {
     void clearShortcut();
 
   signals:
-    void shortcutChanged(const QKeySequence& seguence);
+    void shortcutChanged(QKeySequence seguence);
 
   private:
     QToolButton* m_btnReset;
