@@ -791,7 +791,7 @@ void TextApplication::loadNewExternalTools() {
 
   m_menuTools->addAction(m_actionSettings);
   m_menuTools->addSeparator();
-  m_menuTools->addActions(m_settings->externalTools()->generateActions(m_menuTools));
+  m_menuTools->addActions(m_settings->externalTools()->generateToolsMenuTools(m_menuTools));
 }
 
 void TextApplication::initializeDockWidgetsMenu() {

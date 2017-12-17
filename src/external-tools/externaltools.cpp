@@ -35,7 +35,7 @@ ExternalTools::~ExternalTools() {
   qDebug("Destroying ExternalTools.");
 }
 
-QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
+QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
   QList<QAction*> actions;
   QMap<QString, QMenu*> categories;
 
@@ -68,6 +68,32 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
   foreach (PredefinedTool* tool, predefinedToolsMenuTools()) {
+    if (!tool->category().isEmpty()) {
+      if (!categories.contains(tool->category())) {
+        QMenu* category_menu = new QMenu(parent);
+
+        category_menu->setTitle(tool->category());
+        actions.append(category_menu->menuAction());
+        categories.insert(tool->category(), category_menu);
+      }
+
+      categories[tool->category()]->addAction(tool->action());
+    }
+    else {
+      actions.append(tool->action());
+    }
+  }
+
+  return actions;
+}
+
+QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
+  QList<QAction*> actions;
+  QMap<QString, QMenu*> categories;
+
+  // We add already existing persistent actions for
+  // built-in tools to the "Tools" menu too.
+  foreach (PredefinedTool* tool, predefinedEditMenuTools()) {
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
         QMenu* category_menu = new QMenu(parent);
