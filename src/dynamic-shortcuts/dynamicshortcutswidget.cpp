@@ -6,25 +6,19 @@
 #include "dynamic-shortcuts/shortcutcatcher.h"
 
 #include <QAction>
-#include <QGridLayout>
 #include <QLabel>
 
-DynamicShortcutsWidget::DynamicShortcutsWidget(QWidget* parent) : QWidget(parent) {
+DynamicShortcutsWidget::DynamicShortcutsWidget(QWidget* parent) : QWidget(parent), m_layout(new QGridLayout(this)) {
   // Create layout for this control and set is as active.
-  m_layout = new QGridLayout(this);
   m_layout->setMargin(0);
-  setLayout(m_layout);
-}
-
-DynamicShortcutsWidget::~DynamicShortcutsWidget() {
-  delete m_layout;
+  setLayout(m_layout.data());
 }
 
 bool DynamicShortcutsWidget::areShortcutsUnique() const {
   QList<QKeySequence> all_shortcuts;
 
   // Obtain all shortcuts.
-  foreach (const ActionBinding& binding, m_actionBindings) {
+  for (const ActionBinding& binding : m_actionBindings) {
     const QKeySequence new_shortcut = binding.second->shortcut();
 
     if (!new_shortcut.isEmpty() && all_shortcuts.contains(new_shortcut)) {
@@ -40,7 +34,7 @@ bool DynamicShortcutsWidget::areShortcutsUnique() const {
 }
 
 void DynamicShortcutsWidget::updateShortcuts() {
-  foreach (const ActionBinding& binding, m_actionBindings) {
+  for (const ActionBinding& binding : m_actionBindings) {
     binding.first->setShortcut(binding.second->shortcut());
   }
 }
@@ -58,7 +52,8 @@ void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
 
     // Store information for re-initialization of shortcuts
     // of actions when widget gets "confirmed".
-    QPair<QAction*, ShortcutCatcher*> new_binding;
+    ActionBinding new_binding;
+
     new_binding.first = action;
     new_binding.second = catcher;
     m_actionBindings << new_binding;
@@ -69,15 +64,19 @@ void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
     action_label->setText(action->text().remove(QSL("&")));
     action_label->setToolTip(action->toolTip());
     action_label->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+
     QLabel* action_icon = new QLabel(this);
 
     action_icon->setPixmap(action->icon().pixmap(ICON_SIZE_SETTINGS, ICON_SIZE_SETTINGS));
     action_icon->setToolTip(action->toolTip());
+
     m_layout->addWidget(action_icon, row_id, 0);
     m_layout->addWidget(action_label, row_id, 1);
     m_layout->addWidget(catcher, row_id, 2);
-    row_id++;
+
     connect(catcher, &ShortcutCatcher::shortcutChanged, this, &DynamicShortcutsWidget::setupChanged);
+
+    row_id++;
   }
 
   // Make sure that "spacer" is added.
@@ -85,6 +84,6 @@ void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
   m_layout->setColumnStretch(1, 1);
 }
 
-bool DynamicShortcutsWidget::lessThan(QAction* lhs, QAction* rhs) {
+bool DynamicShortcutsWidget::lessThan(const QAction* lhs, const QAction* rhs) {
   return QString::localeAwareCompare(lhs->text().replace(QL1S("&"), QString()), rhs->text().replace(QL1S("&"), QString())) < 0;
 }

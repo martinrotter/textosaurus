@@ -5,7 +5,8 @@
 
 #include <QWidget>
 
-class QGridLayout;
+#include <QGridLayout>
+
 class ShortcutCatcher;
 
 using ActionBinding = QPair<QAction*, ShortcutCatcher*>;
@@ -15,7 +16,7 @@ class DynamicShortcutsWidget : public QWidget {
 
   public:
     explicit DynamicShortcutsWidget(QWidget* parent = nullptr);
-    virtual ~DynamicShortcutsWidget();
+    virtual ~DynamicShortcutsWidget() = default;
 
     // Updates shortcuts of all actions according to changes.
     // NOTE: No access to settings is done here.
@@ -37,10 +38,10 @@ class DynamicShortcutsWidget : public QWidget {
     void setupChanged();
 
   private:
-    static bool lessThan(QAction* lhs, QAction* rhs);
+    static bool lessThan(const QAction* lhs, const QAction* rhs);
 
   private:
-    QGridLayout* m_layout;
+    QScopedPointer<QGridLayout> m_layout;
 
     QList<ActionBinding> m_actionBindings;
 };

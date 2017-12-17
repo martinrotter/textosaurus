@@ -42,13 +42,6 @@ ShortcutCatcher::ShortcutCatcher(QWidget* parent) : QWidget(parent) {
   connect(m_btnChange, &QKeySequenceEdit::keySequenceChanged, this, &ShortcutCatcher::shortcutChanged);
 }
 
-ShortcutCatcher::~ShortcutCatcher() {
-  delete m_btnReset;
-  delete m_btnChange;
-  delete m_btnClear;
-  delete m_layout;
-}
-
 QKeySequence ShortcutCatcher::shortcut() const {
   return m_btnChange->keySequence();
 }

@@ -14,7 +14,7 @@ class ShortcutCatcher : public QWidget {
 
   public:
     explicit ShortcutCatcher(QWidget* parent = nullptr);
-    virtual ~ShortcutCatcher();
+    virtual ~ShortcutCatcher() = default;
 
     QKeySequence shortcut() const;
     void setDefaultShortcut(const QKeySequence& key);
