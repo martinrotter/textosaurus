@@ -23,7 +23,7 @@ class ExternalTools : public QObject {
     QList<QAction*> generateToolsMenuTools(QWidget* parent) const;
     QList<QAction*> generateEditMenuTools(QWidget* parent) const;
 
-    QList<ExternalTool*> tools() const;
+    QList<ExternalTool*> customTools() const;
     QList<QAction*> predefinedToolsActions() const;
 
     void saveExternalTools(const QList<ExternalTool*>& ext_tools);
@@ -49,7 +49,7 @@ class ExternalTools : public QObject {
   private:
     TextApplication* m_application;
 
-    QList<PredefinedTool*> m_predefinedTools;
+    QList<ExternalTool*> m_predefinedTools;
     QList<ExternalTool*> m_customTools;
 };
 

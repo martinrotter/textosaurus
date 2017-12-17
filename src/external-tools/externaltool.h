@@ -98,6 +98,12 @@ class ExternalTool : public QObject {
 
     void setAction(QAction* action);
 
+    void setActionObjectName(const QString& action_obj_name);
+    QString actionObjectName() const;
+
+    bool addToEditMenu() const;
+    void setAddToEditMenu(bool add_to_edit_menu);
+
     bool isRunning() const;
 
   public slots:
@@ -117,6 +123,8 @@ class ExternalTool : public QObject {
 
   private:
     bool m_isRunning;
+    bool m_addToEditMenu;
+    QString m_actionObjectName;
     QAction* m_action;
     ToolInput m_input;
     ToolOutput m_output;
@@ -139,20 +147,12 @@ class PredefinedTool : public ExternalTool {
   public:
     explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
 
-    void setActionObjectName(const QString& action_obj_name);
-    QString actionObjectName() const;
-
-    bool addToEditMenu() const;
-    void setAddToEditMenu(bool add_to_edit_menu);
-
   public slots:
     virtual void runTool(QPointer<TextEditor> editor, const QString& data);
 
     bool isPredefined() const;
 
   private:
-    bool m_addToEditMenu;
-    QString m_actionObjectName;
 
     // This is reference to operation:
     // QString operation(const QString& input).

@@ -12,7 +12,8 @@
 #include <QPointer>
 #include <QProcess>
 
-ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false), m_action(nullptr), m_input(ToolInput::SelectionDocument),
+ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false), m_addToEditMenu(false),
+  m_actionObjectName(QString()), m_action(nullptr), m_input(ToolInput::SelectionDocument),
   m_output(ToolOutput::ReplaceSelectionDocument), m_prompt(QString()), m_shortcut(QString()), m_category(QString()),
   m_name(QString()), m_interpreter(EXT_TOOL_INTERPRETER), m_script(QString()) {}
 
@@ -25,6 +26,8 @@ ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject
   setScript(other.script());
   setShortcut(other.shortcut());
   setPrompt(other.prompt());
+  setAddToEditMenu(other.addToEditMenu());
+  setActionObjectName(other.actionObjectName());
 }
 
 bool ExternalTool::isPredefined() const {
@@ -181,8 +184,24 @@ void ExternalTool::setName(const QString& name) {
   m_name = name;
 }
 
+bool ExternalTool::addToEditMenu() const {
+  return m_addToEditMenu;
+}
+
+void ExternalTool::setAddToEditMenu(bool add_to_edit_menu) {
+  m_addToEditMenu = add_to_edit_menu;
+}
+
+QString ExternalTool::actionObjectName() const {
+  return m_actionObjectName;
+}
+
+void ExternalTool::setActionObjectName(const QString& action_obj_name) {
+  m_actionObjectName = action_obj_name;
+}
+
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
-  : ExternalTool(parent), m_addToEditMenu(false), m_functor(functor) {}
+  : ExternalTool(parent), m_functor(functor) {}
 
 void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)
@@ -194,20 +213,4 @@ void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
 bool PredefinedTool::isPredefined() const {
   return true;
-}
-
-bool PredefinedTool::addToEditMenu() const {
-  return m_addToEditMenu;
-}
-
-void PredefinedTool::setAddToEditMenu(bool add_to_edit_menu) {
-  m_addToEditMenu = add_to_edit_menu;
-}
-
-QString PredefinedTool::actionObjectName() const {
-  return m_actionObjectName;
-}
-
-void PredefinedTool::setActionObjectName(const QString& action_obj_name) {
-  m_actionObjectName = action_obj_name;
 }

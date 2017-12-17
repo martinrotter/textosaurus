@@ -24,7 +24,7 @@
 #include <QRegularExpression>
 
 ExternalTools::ExternalTools(TextApplication* parent)
-  : QObject(parent), m_application(parent), m_predefinedTools(QList<PredefinedTool*>()), m_customTools(QList<ExternalTool*>()) {
+  : QObject(parent), m_application(parent), m_predefinedTools(QList<ExternalTool*>()), m_customTools(QList<ExternalTool*>()) {
   loadPredefinedTools();
 }
 
@@ -57,7 +57,7 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, m_predefinedTools) {
+  foreach (ExternalTool* tool, m_predefinedTools) {
     if (tool->addToEditMenu()) {
       continue;
     }
@@ -87,7 +87,7 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, m_predefinedTools) {
+  foreach (ExternalTool* tool, m_predefinedTools) {
     if (!tool->addToEditMenu()) {
       continue;
     }
@@ -111,14 +111,14 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
   return actions;
 }
 
-QList<ExternalTool*> ExternalTools::tools() const {
+QList<ExternalTool*> ExternalTools::customTools() const {
   return m_customTools;
 }
 
 QList<QAction*> ExternalTools::predefinedToolsActions() const {
   QList<QAction*> act;
 
-  foreach (PredefinedTool* tool, m_predefinedTools) {
+  foreach (ExternalTool* tool, m_predefinedTools) {
     act.append(tool->action());
   }
 
@@ -395,7 +395,7 @@ void ExternalTools::loadPredefinedTools() {
   m_predefinedTools.append(send_to_sprunge);
 
   // We pre-generate actions for built-in tools.
-  foreach (PredefinedTool* tool, m_predefinedTools) {
+  foreach (ExternalTool* tool, m_predefinedTools) {
     QAction* act = new QAction(tool->name(), tool);
 
     act->setObjectName(tool->actionObjectName());

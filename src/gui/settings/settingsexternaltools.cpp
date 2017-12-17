@@ -61,7 +61,7 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
 void SettingsExternalTools::loadSettings() {
   onBeginLoadSettings();
 
-  const QList<ExternalTool*> tools = qApp->textApplication()->settings()->externalTools()->tools();
+  auto tools = qApp->textApplication()->settings()->externalTools()->customTools();
 
   foreach (const ExternalTool* tool, tools) {
     if (!tool->isPredefined()) {
