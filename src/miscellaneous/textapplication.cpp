@@ -795,8 +795,6 @@ void TextApplication::loadNewExternalTools() {
   m_menuTools->addActions(m_settings->externalTools()->generateToolsMenuTools(m_menuTools));
 
   // Load also edit menu.
-  // TODO: nacist edit menu.
-
   m_menuEdit->clear();
   m_menuEdit->addAction(m_actionEditBack);
   m_menuEdit->addAction(m_actionEditForward);
