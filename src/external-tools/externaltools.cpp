@@ -67,7 +67,7 @@ QList<QAction*> ExternalTools::generateActions(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, m_predefinedTools) {
+  foreach (PredefinedTool* tool, predefinedToolsMenuTools()) {
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
         QMenu* category_menu = new QMenu(parent);
@@ -96,6 +96,30 @@ QList<QAction*> ExternalTools::predefinedToolsActions() const {
 
   foreach (PredefinedTool* tool, m_predefinedTools) {
     act.append(tool->action());
+  }
+
+  return act;
+}
+
+QList<PredefinedTool*> ExternalTools::predefinedEditMenuTools() const {
+  QList<PredefinedTool*> act;
+
+  foreach (PredefinedTool* tool, m_predefinedTools) {
+    if (tool->addToEditMenu()) {
+      act.append(tool);
+    }
+  }
+
+  return act;
+}
+
+QList<PredefinedTool*> ExternalTools::predefinedToolsMenuTools() const {
+  QList<PredefinedTool*> act;
+
+  foreach (PredefinedTool* tool, m_predefinedTools) {
+    if (!tool->addToEditMenu()) {
+      act.append(tool);
+    }
   }
 
   return act;
@@ -252,6 +276,7 @@ void ExternalTools::loadPredefinedTools() {
   tolower->setName(tr("to lower case"));
   tolower->setInput(ToolInput::SelectionDocument);
   tolower->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tolower->setAddToEditMenu(true);
 
   m_predefinedTools.append(tolower);
 
@@ -262,6 +287,7 @@ void ExternalTools::loadPredefinedTools() {
   toupper->setName(tr("TO UPPER CASE"));
   toupper->setInput(ToolInput::SelectionDocument);
   toupper->setOutput(ToolOutput::ReplaceSelectionDocument);
+  toupper->setAddToEditMenu(true);
 
   m_predefinedTools.append(toupper);
 
@@ -272,6 +298,7 @@ void ExternalTools::loadPredefinedTools() {
   tosentence->setName(tr("To sentence case"));
   tosentence->setInput(ToolInput::SelectionDocument);
   tosentence->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tosentence->setAddToEditMenu(true);
 
   m_predefinedTools.append(tosentence);
 
@@ -282,6 +309,7 @@ void ExternalTools::loadPredefinedTools() {
   totitle->setName(tr("To Title Case"));
   totitle->setInput(ToolInput::SelectionDocument);
   totitle->setOutput(ToolOutput::ReplaceSelectionDocument);
+  totitle->setAddToEditMenu(true);
 
   m_predefinedTools.append(totitle);
 
@@ -292,6 +320,7 @@ void ExternalTools::loadPredefinedTools() {
   toinvert->setName(tr("Invert case"));
   toinvert->setInput(ToolInput::SelectionDocument);
   toinvert->setOutput(ToolOutput::ReplaceSelectionDocument);
+  toinvert->setAddToEditMenu(true);
 
   m_predefinedTools.append(toinvert);
 

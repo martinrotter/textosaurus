@@ -24,6 +24,8 @@ class ExternalTools : public QObject {
 
     QList<ExternalTool*> tools() const;
     QList<QAction*> predefinedToolsActions() const;
+    QList<PredefinedTool*> predefinedEditMenuTools() const;
+    QList<PredefinedTool*> predefinedToolsMenuTools() const;
 
     void saveExternalTools(const QList<ExternalTool*>& ext_tools);
 

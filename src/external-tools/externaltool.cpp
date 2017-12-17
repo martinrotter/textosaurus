@@ -174,7 +174,7 @@ void ExternalTool::setName(const QString& name) {
 }
 
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
-  : ExternalTool(parent), m_action(nullptr), m_functor(functor) {}
+  : ExternalTool(parent), m_addToEditMenu(false), m_action(nullptr), m_functor(functor) {}
 
 void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)
@@ -186,6 +186,14 @@ void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
 bool PredefinedTool::isPredefined() const {
   return true;
+}
+
+bool PredefinedTool::addToEditMenu() const {
+  return m_addToEditMenu;
+}
+
+void PredefinedTool::setAddToEditMenu(bool add_to_edit_menu) {
+  m_addToEditMenu = add_to_edit_menu;
 }
 
 QString PredefinedTool::actionObjectName() const {

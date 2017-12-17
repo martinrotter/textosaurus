@@ -139,8 +139,10 @@ class PredefinedTool : public ExternalTool {
     void setAction(QAction* action);
 
     void setActionObjectName(const QString& action_obj_name);
-
     QString actionObjectName() const;
+
+    bool addToEditMenu() const;
+    void setAddToEditMenu(bool add_to_edit_menu);
 
   public slots:
     virtual void runTool(QPointer<TextEditor> editor, const QString& data);
@@ -148,6 +150,7 @@ class PredefinedTool : public ExternalTool {
     bool isPredefined() const;
 
   private:
+    bool m_addToEditMenu;
     QAction* m_action;
     QString m_actionObjectName;
 
