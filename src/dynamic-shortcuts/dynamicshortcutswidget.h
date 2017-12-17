@@ -8,7 +8,7 @@
 class QGridLayout;
 class ShortcutCatcher;
 
-typedef QPair<QAction*, ShortcutCatcher*> ActionBinding;
+using ActionBinding = QPair<QAction*, ShortcutCatcher*>;
 
 class DynamicShortcutsWidget : public QWidget {
   Q_OBJECT

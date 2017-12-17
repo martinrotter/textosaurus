@@ -8,7 +8,7 @@
 #include <QRegularExpression>
 
 SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fileFilters(QStringList()),
-  m_lexers(Lexers()) {}
+  m_lexers(QList<Lexer>()) {}
 
 Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
   QRegularExpression reg(QSL("(?:\\.)(\\w+$)|($)"), QRegularExpression::PatternOption::CaseInsensitiveOption);
@@ -49,7 +49,7 @@ QStringList SyntaxHighlighting::fileFilters() {
   return m_fileFilters;
 }
 
-Lexers SyntaxHighlighting::lexers() {
+QList<Lexer> SyntaxHighlighting::lexers() {
   if (m_lexers.isEmpty()) {
     m_lexers
       << Lexer(tr("Plain text"), QStringList {

@@ -8,7 +8,7 @@
 #include <QPair>
 #include <QVariant>
 
-typedef QPair<QNetworkReply::NetworkError, QVariant> NetworkResult;
+using NetworkResult = QPair<QNetworkReply::NetworkError, QVariant>;
 
 class Downloader;
 

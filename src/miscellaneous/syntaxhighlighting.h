@@ -22,8 +22,6 @@ struct Lexer {
 
 Q_DECLARE_METATYPE(Lexer)
 
-typedef QList<Lexer> Lexers;
-
 class SyntaxHighlighting : public QObject {
   Q_OBJECT
 
@@ -31,7 +29,7 @@ class SyntaxHighlighting : public QObject {
     explicit SyntaxHighlighting(QObject* parent = nullptr);
 
     QStringList fileFilters();
-    Lexers lexers();
+    QList<Lexer> lexers();
     Lexer defaultLexer();
 
     // Returns lexer suitable for syntax highlighting of given file and filter.
@@ -42,7 +40,8 @@ class SyntaxHighlighting : public QObject {
 
   private:
     QStringList m_fileFilters;
-    Lexers m_lexers;
+
+    QList<Lexer> m_lexers;
 };
 
 #endif // SYNTAXHIGHLIGHTING_H

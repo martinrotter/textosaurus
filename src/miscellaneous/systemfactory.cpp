@@ -23,7 +23,7 @@
 #include <QRegularExpression>
 #include <QString>
 
-typedef QPair<UpdateInfo, QNetworkReply::NetworkError> UpdateCheck;
+using UpdateCheck = QPair<UpdateInfo, QNetworkReply::NetworkError>;
 
 SystemFactory::SystemFactory(QObject* parent) : QObject(parent) {}
 
