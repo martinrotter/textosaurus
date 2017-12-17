@@ -28,6 +28,8 @@ ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject
   setPrompt(other.prompt());
   setAddToEditMenu(other.addToEditMenu());
   setActionObjectName(other.actionObjectName());
+
+  // NOTE: Not copying m_action.
 }
 
 bool ExternalTool::isPredefined() const {
