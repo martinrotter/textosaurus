@@ -34,7 +34,7 @@ void OutputWindow::displayOutput(OutputSource source, const QString& message, QM
     m_txtOutput->appendPlainText(QString("%1").arg(message));
   }
   else {
-    m_txtOutput->appendPlainText(QString("[%2] %1").arg(message, QDateTime::currentDateTime().toString(QSL(FORMAT_DATETIME_OUTPUT))));
+    m_txtOutput->appendPlainText(QString("[%2] %1").arg(message, QDateTime::currentDateTime().toString(FORMAT_DATETIME_OUTPUT)));
   }
 }
 

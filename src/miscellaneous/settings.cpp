@@ -237,7 +237,7 @@ Settings* Settings::setupSettings(QObject* parent) {
 SettingsProperties Settings::determineProperties() {
   SettingsProperties properties;
 
-  properties.m_settingsSuffix = QDir::separator() + QSL(APP_CFG_PATH) + QDir::separator() + QSL(APP_CFG_FILE);
+  properties.m_settingsSuffix = QDir::separator() + APP_CFG_PATH + QDir::separator() + APP_CFG_FILE;
   const QString app_path = qApp->userDataAppFolder();
   const QString home_path = qApp->userDataHomeFolder();
 

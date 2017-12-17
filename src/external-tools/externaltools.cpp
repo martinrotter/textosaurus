@@ -421,7 +421,7 @@ void ExternalTools::loadCustomTools() {
 
     ExternalTool* tool = new ExternalTool(this);
 
-    tool->setInterpreter(sett_ext_tools.value(QSL("interpreter"), QSL(EXT_TOOL_INTERPRETER)).toString());
+    tool->setInterpreter(sett_ext_tools.value(QSL("interpreter"), EXT_TOOL_INTERPRETER).toString());
     tool->setName(sett_ext_tools.value(QSL("name")).toString());
     tool->setScript(sett_ext_tools.value(QSL("script")).toString());
     tool->setPrompt(sett_ext_tools.value(QSL("prompt")).toString());
@@ -609,7 +609,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
-    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+    m_application->outputWindow()->displayOutput(OutputSource::Application,
                                                  tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
                                                  QMessageBox::Icon::Critical);
     return;
@@ -650,7 +650,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
     case ToolOutput::CopyToClipboard:
       if (!output_text.isEmpty()) {
         qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
-        m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+        m_application->outputWindow()->displayOutput(OutputSource::Application,
                                                      tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
                                                      QMessageBox::Icon::Information);
       }
@@ -666,7 +666,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
     case ToolOutput::NewSavedFile: {
       if (!output_text.isEmpty()) {
-        m_application->outputWindow()->displayOutput(OutputSource::ExternalTool,
+        m_application->outputWindow()->displayOutput(OutputSource::Application,
                                                      tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
                                                      QMessageBox::Icon::Information);
 

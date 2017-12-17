@@ -69,7 +69,7 @@ void SettingsGui::loadSettings() {
   }
 
   // Mark active theme.
-  if (current_theme == QSL(APP_NO_THEME)) {
+  if (current_theme == APP_NO_THEME) {
     // Because "no icon theme" lies at the index 0.
     m_ui->m_cmbIconTheme->setCurrentIndex(0);
   }

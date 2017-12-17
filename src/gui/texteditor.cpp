@@ -398,7 +398,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
 
     if ((encoding = TextFactory::detectEncoding(file_path)).isEmpty()) {
       // No encoding auto-detected.
-      encoding = QSL(DEFAULT_TEXT_FILE_ENCODING);
+      encoding = DEFAULT_TEXT_FILE_ENCODING;
       qWarning("Auto-detection of encoding failed, using default encoding.");
     }
     else {
@@ -410,10 +410,10 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
   }
 
   if (file.size() > BIG_TEXT_FILE_SIZE) {
-    if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) &&
+    if (encoding != DEFAULT_TEXT_FILE_ENCODING &&
         MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
                          tr("You want to open big text file in encoding which is different from %1. This operation "
-                            "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
+                            "might take quite some time.").arg(DEFAULT_TEXT_FILE_ENCODING),
                          tr("Do you really want to open the file?"),
                          QDir::toNativeSeparators(file_path), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
       return nullptr;
@@ -496,7 +496,7 @@ void TextEditor::reloadFromDisk() {
 
     if ((encoding = TextFactory::detectEncoding(filePath())).isEmpty()) {
       // No encoding auto-detected.
-      encoding = QSL(DEFAULT_TEXT_FILE_ENCODING);
+      encoding = DEFAULT_TEXT_FILE_ENCODING;
       qWarning("Auto-detection of encoding failed, using default encoding.");
     }
     else {
@@ -504,10 +504,10 @@ void TextEditor::reloadFromDisk() {
     }
 
     if (file.size() > BIG_TEXT_FILE_SIZE) {
-      if (encoding != QSL(DEFAULT_TEXT_FILE_ENCODING) &&
+      if (encoding != DEFAULT_TEXT_FILE_ENCODING &&
           MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
                            tr("You want to open big text file in encoding which is different from %1. This operation "
-                              "might take quite some time.").arg(QSL(DEFAULT_TEXT_FILE_ENCODING)),
+                              "might take quite some time.").arg(DEFAULT_TEXT_FILE_ENCODING),
                            tr("Do you really want to open the file?"),
                            QDir::toNativeSeparators(filePath()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
         return;

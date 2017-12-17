@@ -5,53 +5,46 @@
 
 #include <QtGlobal>
 
-#define MARGIN_LINE_NUMBERS 0
-#define MARGIN_SYMBOLS      1
-#define MARGIN_FOLDING      2
-#define MARGIN_PADDING_LINE_NUMBERS 6
-#define MARGIN_WIDTH_FOLDING  18
-
-#define LINE_SPACING_MIN -10
-#define LINE_SPACING_MAX 50
-
-#define FORMAT_DATETIME_OUTPUT                      "yyyy-MM-dd HH:mm:ss"
-#define FILE_CHUNK_LENGTH_FOR_EOL_DETECTION         1024
-#define FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION    2048
-#define DEFAULT_TEXT_FILE_ENCODING            "UTF-8"
-#define BIG_TEXT_FILE_SIZE                    qint64(50000000)
-#define MAX_TEXT_FILE_SIZE                    qint64(INT_MAX)
-#define ARGUMENTS_LIST_SEPARATOR              "\n"
-#define RELEASES_LIST                         "https://api.github.com/repos/martinrotter/textilosaurus/releases"
-#define DEFAULT_LOCALE                        "en"
-#define ICON_SIZE_SETTINGS                    16
-#define DOWNLOAD_TIMEOUT                      20000
-#define ELLIPSIS_LENGTH                       3
-#define FLAG_ICON_SUBFOLDER                   "flags"
-#define SPACER_ACTION_NAME                    "spacer"
-#define SEPARATOR_ACTION_NAME                 "separator"
-#define MAX_RECENT_FILES                      25
-#define ENCRYPTION_FILE_NAME                  "key.private"
-
-#define EXT_TOOLS_CONFIG                      "external_tools.ini"
-#define EXT_TOOL_INTERPRETER                  "bash"
-
-#define PASTEBIN_GITHUB   "https://api.github.com/gists"
-#define PASTEBIN_SPRUNGE  "http://sprunge.us/"
-#define PASTEBIN_CLBIN    "https://clbin.com"
-#define PASTEBIN_IXIO     "http://ix.io"
-
-#define HTTP_HEADERS_CONTENT_TYPE   "Content-Type"
-#define HTTP_HEADERS_USER_AGENT     "User-Agent"
-
-#define APP_CFG_PATH        "config"
-#define APP_CFG_FILE        "config.ini"
-
-#define APP_QUIT_INSTANCE   "-q"
-#define APP_IS_RUNNING      "app_is_running"
-#define APP_STYLE_DEFAULT   "Fusion"
-#define APP_THEME_DEFAULT   "Papirus"
-#define APP_NO_THEME        ""
-#define APP_THEME_SUFFIX    ".png"
+constexpr auto MARGIN_LINE_NUMBERS = 0;
+constexpr auto MARGIN_SYMBOLS = 1;
+constexpr auto MARGIN_FOLDING = 2;
+constexpr auto MARGIN_PADDING_LINE_NUMBERS = 6;
+constexpr auto MARGIN_WIDTH_FOLDING = 18;
+constexpr auto LINE_SPACING_MIN = -10;
+constexpr auto LINE_SPACING_MAX = 50;
+constexpr auto FORMAT_DATETIME_OUTPUT = "yyyy-MM-dd HH:mm:ss";
+constexpr auto FILE_CHUNK_LENGTH_FOR_EOL_DETECTION = 1024;
+constexpr auto FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION = 2048;
+constexpr auto DEFAULT_TEXT_FILE_ENCODING = "UTF-8";
+constexpr auto BIG_TEXT_FILE_SIZE = qint64(50000000);
+constexpr auto MAX_TEXT_FILE_SIZE = qint64(std::numeric_limits<int>::max());
+constexpr auto ARGUMENTS_LIST_SEPARATOR = "\n";
+constexpr auto RELEASES_LIST = "https://api.github.com/repos/martinrotter/textilosaurus/releases";
+constexpr auto DEFAULT_LOCALE = "en";
+constexpr auto ICON_SIZE_SETTINGS = 16;
+constexpr auto DOWNLOAD_TIMEOUT = 20000;
+constexpr auto ELLIPSIS_LENGTH = 3;
+constexpr auto FLAG_ICON_SUBFOLDER = "flags";
+constexpr auto SPACER_ACTION_NAME = "spacer";
+constexpr auto SEPARATOR_ACTION_NAME = "separator";
+constexpr auto MAX_RECENT_FILES = 25;
+constexpr auto ENCRYPTION_FILE_NAME = "key.private";
+constexpr auto EXT_TOOLS_CONFIG = "external_tools.ini";
+constexpr auto EXT_TOOL_INTERPRETER = "bash";
+constexpr auto PASTEBIN_GITHUB = "https://api.github.com/gists";
+constexpr auto PASTEBIN_SPRUNGE = "http://sprunge.us/";
+constexpr auto PASTEBIN_CLBIN = "https://clbin.com";
+constexpr auto PASTEBIN_IXIO = "http://ix.io";
+constexpr auto HTTP_HEADERS_CONTENT_TYPE = "Content-Type";
+constexpr auto HTTP_HEADERS_USER_AGENT = "User-Agent";
+constexpr auto APP_CFG_PATH = "config";
+constexpr auto APP_CFG_FILE = "config.ini";
+constexpr auto APP_QUIT_INSTANCE = "-q";
+constexpr auto APP_IS_RUNNING = "app_is_running";
+constexpr auto APP_STYLE_DEFAULT = "Fusion";
+constexpr auto APP_THEME_DEFAULT = "Papirus";
+constexpr auto APP_NO_THEME = "";
+constexpr auto APP_THEME_SUFFIX = ".png";
 
 #ifndef QSL
 
@@ -77,27 +70,28 @@
 #endif
 
 #if defined(Q_OS_LINUX)
-#define OS_ID   "Linux"
+constexpr auto OS_ID = "Linux";
+constexpr auto APP_DESKTOP_ENTRY_FILE = "com.github.textilosaurus.desktop";
+constexpr auto APP_DESKTOP_ENTRY_PATH = ":/desktop";
+
 #elif defined(Q_OS_OSX)
-#define OS_ID   "Mac OS X"
+constexpr auto OS_ID = "Mac OS X";
+
 #elif defined(Q_OS_WIN)
-#define OS_ID   "Windows"
+constexpr auto OS_ID = "Windows";
+
 #elif defined(Q_OS_ANDROID)
-#define OS_ID   "Android"
+constexpr auto OS_ID = "Android";
+
 #else
-#define OS_ID   ""
+constexpr auto OS_ID = "";
+
 #endif
 
 // Paths.
-#define APP_THEME_PATH QSL(":/graphics")
-#define APP_INFO_PATH QSL(":/text")
-#define APP_ICON_PATH QSL(":/graphics/textilosaurus.png")
-#define APP_LANG_PATH QSL(":/localization")
-
-#if defined(Q_OS_LINUX)
-#define APP_DESKTOP_ENTRY_FILE "com.github.textilosaurus.desktop"
-
-#define APP_DESKTOP_ENTRY_PATH QSL(":/desktop")
-#endif
+constexpr auto APP_THEME_PATH = ":/graphics";
+constexpr auto APP_INFO_PATH = ":/text";
+constexpr auto APP_ICON_PATH = ":/graphics/textilosaurus.png";
+constexpr auto APP_LANG_PATH = ":/localization";
 
 #endif // DEFINITIONS_H

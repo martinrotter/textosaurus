@@ -154,7 +154,7 @@ void Application::processExecutionMessage(const QString& message) {
     quitApplication();
   }
   else {
-    if (messages.contains(QSL(APP_IS_RUNNING))) {
+    if (messages.contains(APP_IS_RUNNING)) {
       qApp->textApplication()->loadFilesFromArgs(messages);
       qApp->mainForm()->display();
     }

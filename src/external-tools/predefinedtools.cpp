@@ -17,7 +17,7 @@ PredefinedTools::PredefinedTools() {}
 QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("clbin=%1").arg(data);
-  NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_CLBIN),
+  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_CLBIN,
                                                                  DOWNLOAD_TIMEOUT,
                                                                  content.toUtf8(),
                                                                  output,
@@ -36,7 +36,7 @@ QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
 QString PredefinedTools::sendToIxio(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("f:1=%1").arg(data);
-  NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_IXIO),
+  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_IXIO,
                                                                  DOWNLOAD_TIMEOUT,
                                                                  content.toUtf8(),
                                                                  output,
@@ -55,7 +55,7 @@ QString PredefinedTools::sendToIxio(const QString& data, bool* ok) {
 QString PredefinedTools::sendToSprunge(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("sprunge=%1").arg(data);
-  NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_SPRUNGE),
+  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_SPRUNGE,
                                                                  DOWNLOAD_TIMEOUT,
                                                                  content.toUtf8(),
                                                                  output,
@@ -88,7 +88,7 @@ QString PredefinedTools::sendToGithub(const QString& data, bool* ok) {
      }}
   });
 
-  NetworkResult result = NetworkFactory::performNetworkOperation(QSL(PASTEBIN_GITHUB),
+  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_GITHUB,
                                                                  DOWNLOAD_TIMEOUT,
                                                                  content_doc.toJson(QJsonDocument::JsonFormat::Compact),
                                                                  output,
