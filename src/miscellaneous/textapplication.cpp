@@ -798,8 +798,8 @@ void TextApplication::loadNewExternalTools() {
   m_menuEdit->clear();
   m_menuEdit->addAction(m_actionEditBack);
   m_menuEdit->addAction(m_actionEditForward);
-  m_menuEdit->addMenu(m_menuEolConversion);
   m_menuEdit->addSeparator();
+  m_menuEdit->addMenu(m_menuEolConversion);
   m_menuEdit->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
 }
 

@@ -38,7 +38,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -173,6 +173,7 @@
     </widget>
     <addaction name="m_actionEditBack"/>
     <addaction name="m_actionEditForward"/>
+    <addaction name="separator"/>
     <addaction name="m_menuEolConversion"/>
    </widget>
    <widget class="QMenu" name="m_menuSearch">
