@@ -67,7 +67,7 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, m_predefinedTools()) {
+  foreach (PredefinedTool* tool, m_predefinedTools) {
     if (tool->addToEditMenu()) {
       continue;
     }
@@ -97,7 +97,7 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
 
   // We add already existing persistent actions for
   // built-in tools to the "Tools" menu too.
-  foreach (PredefinedTool* tool, m_predefinedTools()) {
+  foreach (PredefinedTool* tool, m_predefinedTools) {
     if (!tool->addToEditMenu()) {
       continue;
     }
