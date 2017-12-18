@@ -13,7 +13,7 @@ class WidgetWithStatus : public QWidget {
   Q_OBJECT
 
   public:
-    enum StatusType {
+    enum class StatusType {
       Information,
       Warning,
       Error,
@@ -23,14 +23,11 @@ class WidgetWithStatus : public QWidget {
 
     // Constructors and destructors.
     explicit WidgetWithStatus(QWidget* parent);
-    virtual ~WidgetWithStatus();
+    virtual ~WidgetWithStatus() = default;
 
     // Sets custom status for this control.
     void setStatus(StatusType status, const QString& tooltip_text);
-
-    inline StatusType status() const {
-      return m_status;
-    }
+    StatusType status() const;
 
   protected:
     StatusType m_status;
@@ -43,5 +40,9 @@ class WidgetWithStatus : public QWidget {
     QIcon m_iconError;
     QIcon m_iconOk;
 };
+
+inline WidgetWithStatus::StatusType WidgetWithStatus::status() const {
+  return m_status;
+}
 
 #endif // WIDGETWITHSTATUS_H

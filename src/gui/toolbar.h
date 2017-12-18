@@ -9,20 +9,16 @@ class ToolBar : public BaseToolBar {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit ToolBar(const QString& title, QWidget* parent = nullptr);
-    virtual ~ToolBar();
+    virtual ~ToolBar() = default;
 
-    QList<QAction*> availableActions() const;
-    QList<QAction*> changeableActions() const;
-    void saveChangeableActions(const QStringList& actions);
-
-    QList<QAction*> getSpecificActions(const QStringList& actions);
-    void loadSpecificActions(const QList<QAction*>& actions);
-
-    QStringList defaultActions() const;
-    QStringList savedActions() const;
+    virtual QList<QAction*> availableActions() const override;
+    virtual QList<QAction*> changeableActions() const override;
+    virtual void saveChangeableActions(const QStringList& actions) override;
+    virtual QList<QAction*> getSpecificActions(const QStringList& actions) override;
+    virtual void loadSpecificActions(const QList<QAction*>& actions) override;
+    virtual QStringList defaultActions() const override;
+    virtual QStringList savedActions() const override;
 
     void refreshVisualProperties();
 };

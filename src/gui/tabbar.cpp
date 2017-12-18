@@ -15,17 +15,13 @@ TabBar::TabBar(QWidget* parent) : QTabBar(parent) {
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
-TabBar::~TabBar() {
-  qDebug("Destroying TabBar instance.");
-}
-
 void TabBar::setTabType(int index, TabType type) {
   const QTabBar::ButtonPosition button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
                                                                                                  0,
                                                                                                  this));
 
   switch (type) {
-    case TabBar::TextEditor: {
+    case TabType::TextEditor: {
       PlainToolButton* close_button = new PlainToolButton(this);
 
       close_button->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
@@ -45,7 +41,7 @@ void TabBar::setTabType(int index, TabType type) {
       break;
   }
 
-  setTabData(index, QVariant(type));
+  setTabData(index, QVariant::fromValue(type));
 }
 
 void TabBar::closeTabViaButton() {
@@ -96,7 +92,7 @@ void TabBar::mousePressEvent(QMouseEvent* event) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
     if (event->button() & Qt::MiddleButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseMiddleClick)).toBool()) {
-      if ((tabType(tab_index) & TabBar::TabType::TextEditor) > 0) {
+      if (tabType(tab_index) == TabType::TextEditor) {
         // This tab is closable, so we can close it.
         emit tabCloseRequested(tab_index);
       }
@@ -114,7 +110,7 @@ void TabBar::mouseDoubleClickEvent(QMouseEvent* event) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
     if (event->button() & Qt::MouseButton::LeftButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
-      if ((tabType(tab_index) & TabBar::TabType::TextEditor) > 0) {
+      if (tabType(tab_index) == TabType::TextEditor) {
         // This tab is closable, so we can close it.
         emit tabCloseRequested(tab_index);
       }

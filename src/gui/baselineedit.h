@@ -9,16 +9,14 @@ class BaseLineEdit : public QLineEdit {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit BaseLineEdit(QWidget* parent = nullptr);
-    virtual ~BaseLineEdit();
+    virtual ~BaseLineEdit() = default;
 
   public slots:
     void submit(const QString& text);
 
   protected:
-    void keyPressEvent(QKeyEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event) override;
 
   signals:
 

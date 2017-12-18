@@ -19,6 +19,7 @@ class TextEditor : public ScintillaEdit {
 
   public:
     explicit TextEditor(TextApplication* text_app, QWidget* parent = nullptr);
+    virtual ~TextEditor() = default;
 
     QString filePath() const;
     Lexer lexer() const;
@@ -57,9 +58,9 @@ class TextEditor : public ScintillaEdit {
                     int line, int fold_now, int fold_prev);
 
   protected:
-    void mouseMoveEvent(QMouseEvent* event);
-    void wheelEvent(QWheelEvent* event);
-    void closeEvent(QCloseEvent* event);
+    virtual void mouseMoveEvent(QMouseEvent* event) override;
+    virtual void wheelEvent(QWheelEvent* event) override;
+    virtual void closeEvent(QCloseEvent* event) override;
 
   signals:
     void editorReloaded();

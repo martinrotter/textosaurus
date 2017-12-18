@@ -10,8 +10,6 @@
 
 TextEditorPrinter::TextEditorPrinter() : QPrinter(), m_zoom(0), m_wrapMode(SC_WRAP_WORD) {}
 
-TextEditorPrinter::~TextEditorPrinter() {}
-
 int TextEditorPrinter::printRange(TextEditor* editor, int from, int to) {
   // Sanity check.
   if (editor == nullptr) {

@@ -12,8 +12,6 @@
 Localization::Localization(QObject* parent)
   : QObject(parent) {}
 
-Localization::~Localization() {}
-
 QString Localization::desiredLanguage() const {
   return qApp->settings()->value(GROUP(General), SETTING(General::Language)).toString();
 }

@@ -17,20 +17,18 @@ class TabWidget : public QTabWidget {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit TabWidget(QWidget* parent = nullptr);
-    virtual ~TabWidget();
+    virtual ~TabWidget() = default;
 
     // Manimulators for tabs.
     int addTab(QWidget* widget, const QString&,
-               TabBar::TabType type = TabBar::TabType::TextEditor);
+               TabType type = TabType::TextEditor);
     int addTab(QWidget* widget, const QIcon& icon,
-               const QString& label, TabBar::TabType type = TabBar::TabType::TextEditor);
+               const QString& label, TabType type = TabType::TextEditor);
     int insertTab(int index, QWidget* widget, const QString& label,
-                  TabBar::TabType type = TabBar::TabType::TextEditor);
+                  TabType type = TabType::TextEditor);
     int insertTab(int index, QWidget* widget, const QIcon& icon,
-                  const QString& label, TabBar::TabType type = TabBar::TabType::TextEditor);
+                  const QString& label, TabType type = TabType::TextEditor);
     bool removeTab(int index, bool clear_from_memory);
 
     TextEditor* textEditorAt(int index) const;

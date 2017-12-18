@@ -23,10 +23,6 @@ TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   createConnections();
 }
 
-TabWidget::~TabWidget() {
-  qDebug("Destroying TabWidget instance.");
-}
-
 void TabWidget::createConnections() {
   connect(tabBar(), &TabBar::tabCloseRequested, this, &TabWidget::closeTab);
 }
@@ -126,7 +122,7 @@ QList<TextEditor*> TabWidget::editors() const {
   return editors;
 }
 
-int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, TabBar::TabType type) {
+int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, TabType type) {
   const int index = QTabWidget::addTab(widget, icon, label);
 
   tabBar()->setTabType(index, type);
@@ -135,7 +131,7 @@ int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, 
   return index;
 }
 
-int TabWidget::addTab(QWidget* widget, const QString& label, TabBar::TabType type) {
+int TabWidget::addTab(QWidget* widget, const QString& label, TabType type) {
   const int index = QTabWidget::addTab(widget, label);
 
   tabBar()->setTabType(index, type);
@@ -144,7 +140,7 @@ int TabWidget::addTab(QWidget* widget, const QString& label, TabBar::TabType typ
   return index;
 }
 
-int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QString& label, TabBar::TabType type) {
+int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QString& label, TabType type) {
   const int tab_index = QTabWidget::insertTab(index, widget, icon, label);
 
   tabBar()->setTabType(tab_index, type);
@@ -153,7 +149,7 @@ int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QS
   return tab_index;
 }
 
-int TabWidget::insertTab(int index, QWidget* widget, const QString& label, TabBar::TabType type) {
+int TabWidget::insertTab(int index, QWidget* widget, const QString& label, TabType type) {
   const int tab_index = QTabWidget::insertTab(index, widget, label);
 
   tabBar()->setTabType(tab_index, type);

@@ -8,10 +8,6 @@
 
 IconFactory::IconFactory(QObject* parent) : QObject(parent) {}
 
-IconFactory::~IconFactory() {
-  qDebug("Destroying IconFactory instance.");
-}
-
 QIcon IconFactory::fromByteArray(QByteArray array) {
   array = QByteArray::fromBase64(array);
   QIcon icon;

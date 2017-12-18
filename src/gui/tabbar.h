@@ -8,22 +8,20 @@
 #include <QTabBar>
 #include <QVariant>
 
+enum class TabType {
+  TextEditor = 1
+};
+
 class TabBar : public QTabBar {
   Q_OBJECT
 
   public:
-    enum TabType {
-      TextEditor = 1
-    };
-
-    // Constructors.
     explicit TabBar(QWidget* parent = nullptr);
-    virtual ~TabBar();
+    virtual ~TabBar() = default;
 
     // Getter/setter for tab type.
-    void setTabType(int index, TabBar::TabType type = TabType::TextEditor);
-
-    TabBar::TabType tabType(int index) const;
+    void setTabType(int index, TabType type = TabType::TextEditor);
+    TabType tabType(int index) const;
 
   private slots:
 
@@ -43,8 +41,10 @@ class TabBar : public QTabBar {
     void emptySpaceDoubleClicked();
 };
 
-inline TabBar::TabType TabBar::tabType(int index) const {
-  return static_cast<TabBar::TabType>(tabData(index).value<int>());
+inline TabType TabBar::tabType(int index) const {
+  return static_cast<TabType>(tabData(index).value<int>());
 }
+
+Q_DECLARE_METATYPE(TabType)
 
 #endif // TABBAR_H

@@ -12,7 +12,7 @@ class StatusBar : public QStatusBar {
 
   public:
     explicit StatusBar(QWidget* parent = nullptr);
-    virtual ~StatusBar();
+    virtual ~StatusBar() = default;
 
     void setEol(int eol_type);
     void setEncoding(const QString& encoding);

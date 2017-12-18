@@ -32,10 +32,6 @@ Application::Application(const QString& id, int& argc, char** argv)
                     "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
 }
 
-Application::~Application() {
-  qDebug("Destroying Application instance.");
-}
-
 QList<QAction*> Application::userActions() {
   if (m_mainForm != nullptr && m_userActions.isEmpty()) {
     m_userActions = m_mainForm->allActions();
@@ -114,7 +110,7 @@ QString Application::userDataAppFolder() {
 }
 
 QString Application::userDataFolder() {
-  if (settings()->type() == SettingsProperties::Portable) {
+  if (settings()->type() == SettingsType::Portable) {
     return userDataAppFolder();
   }
   else {

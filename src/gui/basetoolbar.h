@@ -36,10 +36,8 @@ class BaseToolBar : public QToolBar, public BaseBar {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit BaseToolBar(const QString& title, QWidget* parent = nullptr);
-    virtual ~BaseToolBar();
+    virtual ~BaseToolBar() = default;
 };
 
 #endif // TOOLBAR_H

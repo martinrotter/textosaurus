@@ -138,87 +138,60 @@ namespace GUI {
 
 // Web browser.
 namespace Browser {
-  KEY ID;
-  KEY CustomExternalBrowserEnabled;
-
-  VALUE(bool) CustomExternalBrowserEnabledDef;
-
-  KEY CustomExternalBrowserExecutable;
-
-  VALUE(QString) CustomExternalBrowserExecutableDef;
-
-  KEY CustomExternalBrowserArguments;
-
-  VALUE(char*) CustomExternalBrowserArgumentsDef;
-
-  KEY CustomExternalEmailEnabled;
-
-  VALUE(bool) CustomExternalEmailEnabledDef;
-
-  KEY CustomExternalEmailExecutable;
-
-  VALUE(QString) CustomExternalEmailExecutableDef;
-
-  KEY CustomExternalEmailArguments;
-
-  VALUE(char*) CustomExternalEmailArgumentsDef;
+  constexpr auto ID = "browser";
+  constexpr auto CustomExternalBrowserEnabled = "custom_external_browser";
+  constexpr auto CustomExternalBrowserEnabledDef = false;
+  constexpr auto CustomExternalBrowserExecutable = "external_browser_executable";
+  const QString CustomExternalBrowserExecutableDef = QString();
+  constexpr auto CustomExternalBrowserArguments = "external_browser_arguments";
+  const QString CustomExternalBrowserArgumentsDef = "%1";
+  constexpr auto CustomExternalEmailEnabled = "custom_external_email";
+  constexpr auto CustomExternalEmailEnabledDef = false;
+  constexpr auto CustomExternalEmailExecutable = "external_email_executable";
+  const QString CustomExternalEmailExecutableDef = QString();
+  constexpr auto CustomExternalEmailArguments = "external_email_arguments";
+  const QString CustomExternalEmailArgumentsDef = QString();
 }
 
 // General.
 namespace General {
-  KEY ID;
-  KEY RemoveTrolltechJunk;
-
-  VALUE(bool) RemoveTrolltechJunkDef;
-
-  KEY FirstRun;
-
-  VALUE(bool) FirstRunDef;
-
-  KEY Language;
-
-  VALUE(QString) LanguageDef;
+  constexpr auto ID = "main";
+  constexpr auto RemoveTrolltechJunk = "remove_trolltech_junk";
+  constexpr auto RemoveTrolltechJunkDef = false;
+  constexpr auto FirstRun = "first_run";
+  constexpr auto FirstRunDef = true;
+  constexpr auto Language = "language";
+  const auto LanguageDef = QLocale::system().name();
 }
 
 // Proxy.
 namespace Proxy {
-  KEY ID;
-  KEY Type;
-
-  VALUE(QNetworkProxy::ProxyType) TypeDef;
-
-  KEY Host;
-
-  VALUE(QString) HostDef;
-
-  KEY Username;
-
-  VALUE(QString) UsernameDef;
-
-  KEY Password;
-
-  VALUE(QString) PasswordDef;
-
-  KEY Port;
-
-  VALUE(int) PortDef;
+  constexpr auto ID = "proxy";
+  constexpr auto Type = "proxy_type";
+  constexpr QNetworkProxy::ProxyType TypeDef = QNetworkProxy::NoProxy;
+  constexpr auto Host = "host";
+  constexpr auto HostDef = "";
+  constexpr auto Username = "username";
+  constexpr auto UsernameDef = "";
+  constexpr auto Password = "password";
+  constexpr auto PasswordDef = "";
+  constexpr auto Port = "port";
+  constexpr auto PortDef = 80;
 }
 
 // Keyboard.
 namespace Keyboard {
-  KEY ID;
+  constexpr auto ID = "keyboard";
 }
 
 class Settings : public QSettings {
   Q_OBJECT
 
   public:
-    virtual ~Settings();
+    virtual ~Settings() = default;
 
     // Type of used settings.
-    inline SettingsProperties::SettingsType type() const {
-      return m_initializationStatus;
-    }
+    SettingsType type() const;
 
     QVariant value(const QString& section, const QString& key, const QVariant& default_value = QVariant()) const;
 
@@ -240,10 +213,14 @@ class Settings : public QSettings {
     static SettingsProperties determineProperties();
 
   private:
-    explicit Settings(const QString& file_name, Format format, const SettingsProperties::SettingsType& type, QObject* parent = nullptr);
+    explicit Settings(const QString& file_name, Format format, SettingsType type, QObject* parent = nullptr);
 
-    SettingsProperties::SettingsType m_initializationStatus;
+    SettingsType m_initializationStatus;
 };
+
+inline SettingsType Settings::type() const {
+  return m_initializationStatus;
+}
 
 inline QVariant Settings::value(const QString& section, const QString& key, const QVariant& default_value) const {
   return QSettings::value(QString(QSL("%1/%2")).arg(section, key), default_value);

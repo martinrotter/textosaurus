@@ -10,10 +10,8 @@ class MessageBox : public QMessageBox {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit MessageBox(QWidget* parent = nullptr);
-    virtual ~MessageBox();
+    virtual ~MessageBox() = default;
 
     // Custom icon setting.
     void setIcon(Icon icon);

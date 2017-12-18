@@ -12,10 +12,10 @@
 class IOFactory {
   Q_DECLARE_TR_FUNCTIONS(IOFactory)
 
-  private:
-    IOFactory();
-
   public:
+    IOFactory() = delete;
+    ~IOFactory() = delete;
+
     static bool isFolderWritable(const QString& folder);
 
     // Returns system-wide folder according to type.

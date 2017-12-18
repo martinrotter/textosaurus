@@ -33,10 +33,8 @@ class Application : public QtSingleApplication {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit Application(const QString& id, int& argc, char** argv);
-    virtual ~Application();
+    virtual ~Application() = default;
 
     // Globally accessible actions.
     QList<QAction*> userActions();
@@ -89,8 +87,6 @@ class Application : public QtSingleApplication {
     void dataSaveRequested(bool* ok);
 
   private slots:
-
-    // Last-minute reactors.
     void onCommitData(QSessionManager& manager);
     void onSaveState(QSessionManager& manager);
     void onAboutToQuit();

@@ -131,75 +131,8 @@ DKEY GUI::Style = "style";
 
 DVALUE(char*) GUI::StyleDef = APP_STYLE_DEFAULT;
 
-// Web browser.
-DKEY Browser::ID = "browser";
-DKEY Browser::CustomExternalBrowserEnabled = "custom_external_browser";
-
-DVALUE(bool) Browser::CustomExternalBrowserEnabledDef = false;
-
-DKEY Browser::CustomExternalBrowserExecutable = "external_browser_executable";
-
-DVALUE(QString) Browser::CustomExternalBrowserExecutableDef = QString();
-
-DKEY Browser::CustomExternalBrowserArguments = "external_browser_arguments";
-
-DVALUE(char*) Browser::CustomExternalBrowserArgumentsDef = "%1";
-
-DKEY Browser::CustomExternalEmailEnabled = "custom_external_email";
-
-DVALUE(bool) Browser::CustomExternalEmailEnabledDef = false;
-
-DKEY Browser::CustomExternalEmailExecutable = "external_email_executable";
-
-DVALUE(QString) Browser::CustomExternalEmailExecutableDef = QString();
-
-DKEY Browser::CustomExternalEmailArguments = "external_email_arguments";
-
-DVALUE(char*) Browser::CustomExternalEmailArgumentsDef = "";
-
-// General.
-DKEY General::ID = "main";
-DKEY General::RemoveTrolltechJunk = "remove_trolltech_junk";
-
-DVALUE(bool) General::RemoveTrolltechJunkDef = false;
-
-DKEY General::FirstRun = "first_run";
-
-DVALUE(bool) General::FirstRunDef = true;
-
-DKEY General::Language = "language";
-
-DVALUE(QString) General::LanguageDef = QLocale::system().name();
-
-// Proxy.
-DKEY Proxy::ID = "proxy";
-DKEY Proxy::Type = "proxy_type";
-
-DVALUE(QNetworkProxy::ProxyType) Proxy::TypeDef = QNetworkProxy::NoProxy;
-
-DKEY Proxy::Host = "host";
-
-DVALUE(QString) Proxy::HostDef = QString();
-
-DKEY Proxy::Username = "username";
-
-DVALUE(QString) Proxy::UsernameDef = QString();
-
-DKEY Proxy::Password = "password";
-
-DVALUE(QString) Proxy::PasswordDef = QString();
-
-DKEY Proxy::Port = "port";
-
-DVALUE(int) Proxy::PortDef = 80;
-
-// Keyboard.
-DKEY Keyboard::ID = "keyboard";
-
-Settings::Settings(const QString& file_name, Format format, const SettingsProperties::SettingsType& status, QObject* parent)
+Settings::Settings(const QString& file_name, Format format, SettingsType status, QObject* parent)
   : QSettings(file_name, format, parent), m_initializationStatus(status) {}
-
-Settings::~Settings() {}
 
 QString Settings::pathName() const {
   return QFileInfo(fileName()).absolutePath();
@@ -223,7 +156,7 @@ Settings* Settings::setupSettings(QObject* parent) {
   new_settings = new Settings(properties.m_absoluteSettingsFileName, QSettings::IniFormat, properties.m_type, parent);
 
   // Check if portable settings are available.
-  if (properties.m_type == SettingsProperties::Portable) {
+  if (properties.m_type == SettingsType::Portable) {
     qDebug("Initializing settings in '%s' (portable way).", qPrintable(QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)));
   }
   else {
@@ -256,11 +189,11 @@ SettingsProperties Settings::determineProperties() {
 #endif
 
   if (will_we_use_portable_settings) {
-    properties.m_type = SettingsProperties::Portable;
+    properties.m_type = SettingsType::Portable;
     properties.m_baseDirectory = app_path;
   }
   else {
-    properties.m_type = SettingsProperties::NonPortable;
+    properties.m_type = SettingsType::NonPortable;
     properties.m_baseDirectory = home_path;
   }
 

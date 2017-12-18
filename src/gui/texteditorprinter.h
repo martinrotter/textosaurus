@@ -10,9 +10,9 @@ class TextEditor;
 class TextEditorPrinter : public QPrinter {
   public:
     explicit TextEditorPrinter();
-    virtual ~TextEditorPrinter();
+    virtual ~TextEditorPrinter() = default;
 
-    virtual int printRange(TextEditor* editor, int from = -1, int to = -1);
+    int printRange(TextEditor* editor, int from = -1, int to = -1);
 
     int zoom() const;
     void setZoom(int zoom);

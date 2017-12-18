@@ -11,8 +11,6 @@
 #include <cstdlib>
 #include <ctime>
 
-Debugging::Debugging() {}
-
 void Debugging::performLog(const char* message, QtMsgType type, const char* file, const char* function, int line) {
   const char* type_string = typeToString(type);
 

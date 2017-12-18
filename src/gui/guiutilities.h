@@ -9,14 +9,12 @@
 
 class GuiUtilities {
   public:
+    GuiUtilities() = delete;
+    ~GuiUtilities() = delete;
+
     static void setLabelAsNotice(QLabel& label, bool is_warning);
     static void applyDialogProperties(QWidget& widget, const QIcon& icon = QIcon(), const QString& title = QString());
     static void applyResponsiveDialogResize(QWidget& widget, double factor = 0.6);
-
-  private:
-    explicit GuiUtilities();
 };
-
-inline GuiUtilities::GuiUtilities() {}
 
 #endif // GUIUTILITIES_H

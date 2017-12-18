@@ -216,7 +216,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/toolbareditor.h \
             src/gui/widgetwithstatus.h \
             src/miscellaneous/application.h \
-            src/miscellaneous/autosaver.h \
             src/miscellaneous/debugging.h \
             src/miscellaneous/iconfactory.h \
             src/miscellaneous/iofactory.h \
@@ -300,7 +299,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/widgetwithstatus.cpp \
             src/main.cpp \
             src/miscellaneous/application.cpp \
-            src/miscellaneous/autosaver.cpp \
             src/miscellaneous/debugging.cpp \
             src/miscellaneous/iconfactory.cpp \
             src/miscellaneous/iofactory.cpp \

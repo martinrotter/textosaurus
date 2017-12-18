@@ -15,8 +15,6 @@ ToolBar::ToolBar(const QString& title, QWidget* parent) : BaseToolBar(title, par
   loadSavedActions();
 }
 
-ToolBar::~ToolBar() {}
-
 QList<QAction*> ToolBar::availableActions() const {
   return qApp->userActions();
 }

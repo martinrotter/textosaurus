@@ -14,10 +14,6 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), m_lblInfo(new QLabel
   addPermanentWidget(m_lblInfo);
 }
 
-StatusBar::~StatusBar() {
-  qDebug("Destroying StatusBar instance.");
-}
-
 void StatusBar::setEol(int eol_type) {
   m_infoEol = TextFactory::eolDescriptionFromCode(eol_type);
 }

@@ -20,22 +20,15 @@ class ToolBarEditor : public QWidget {
     explicit ToolBarEditor(QWidget* parent = nullptr);
     virtual ~ToolBarEditor();
 
-    // Toolbar operations.
     void loadFromToolBar(BaseBar* tool_bar);
     void saveToolBar();
 
-    inline QListWidget* activeItemsWidget() const {
-      return m_ui->m_listActivatedActions;
-    }
-
-    inline QListWidget* availableItemsWidget() const {
-      return m_ui->m_listAvailableActions;
-    }
-
+    QListWidget* activeItemsWidget() const;
+    QListWidget* availableItemsWidget() const;
     BaseBar* toolBar() const;
 
   protected:
-    bool eventFilter(QObject* object, QEvent* event);
+    virtual bool eventFilter(QObject* object, QEvent* event) override;
 
   private slots:
     void updateActionsAvailability();
@@ -62,5 +55,13 @@ class ToolBarEditor : public QWidget {
     QScopedPointer<Ui::ToolBarEditor> m_ui;
     BaseBar* m_toolBar;
 };
+
+inline QListWidget* ToolBarEditor::activeItemsWidget() const {
+  return m_ui->m_listActivatedActions;
+}
+
+inline QListWidget* ToolBarEditor::availableItemsWidget() const {
+  return m_ui->m_listAvailableActions;
+}
 
 #endif // TOOLBAREDITOR_H

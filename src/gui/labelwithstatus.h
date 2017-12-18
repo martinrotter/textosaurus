@@ -14,15 +14,16 @@ class LabelWithStatus : public WidgetWithStatus {
 
     // Constructors and destructors.
     explicit LabelWithStatus(QWidget* parent = nullptr);
-    virtual ~LabelWithStatus();
+    virtual ~LabelWithStatus() = default;
 
     void setStatus(StatusType status, const QString& label_text, const QString& status_text);
 
     // Access to label.
-    inline QLabel* label() const {
-      return static_cast<QLabel*>(m_wdgInput);
-    }
-
+    QLabel* label() const;
 };
+
+inline QLabel* LabelWithStatus::label() const {
+  return qobject_cast<QLabel*>(m_wdgInput);
+}
 
 #endif // LABELWITHSTATUS_H

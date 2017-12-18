@@ -17,12 +17,8 @@ class IconFactory : public QObject {
   Q_OBJECT
 
   public:
-
-    // Constructor.
     explicit IconFactory(QObject* parent = nullptr);
-
-    // Destructor.
-    virtual ~IconFactory();
+    virtual ~IconFactory() = default;
 
     // Used to store/retrieve QIcons from/to Base64-encoded
     // byte array.
@@ -48,12 +44,14 @@ class IconFactory : public QObject {
     void loadCurrentIconTheme();
 
     // Returns name of currently activated theme for the application.
-    inline QString currentIconTheme() const {
-      return QIcon::themeName();
-    }
+    QString currentIconTheme() const;
 
     // Sets icon theme with given name as the active one and loads it.
     void setCurrentIconTheme(const QString& theme_name);
 };
+
+inline QString IconFactory::currentIconTheme() const {
+  return QIcon::themeName();
+}
 
 #endif // ICONFACTORY_H

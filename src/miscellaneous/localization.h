@@ -18,7 +18,7 @@ class Localization : public QObject {
 
   public:
     explicit Localization(QObject* parent = nullptr);
-    virtual ~Localization();
+    virtual ~Localization() = default;
 
     // Returns code of language that should
     // be loaded according to settings.

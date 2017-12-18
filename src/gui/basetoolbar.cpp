@@ -12,10 +12,6 @@ BaseToolBar::BaseToolBar(const QString& title, QWidget* parent) : QToolBar(title
   setIconSize(QSize(20, 20));
 }
 
-BaseToolBar::~BaseToolBar() {
-  qDebug("Destroying BaseToolBar instance.");
-}
-
 void BaseBar::loadSavedActions() {
   loadSpecificActions(getSpecificActions(savedActions()));
 }

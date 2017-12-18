@@ -11,7 +11,7 @@ LabelWithStatus::LabelWithStatus(QWidget* parent)
   m_wdgInput = new QLabel(this);
 
   // Set correct size for the tool button.
-  int label_height = m_wdgInput->sizeHint().height();
+  auto label_height = m_wdgInput->sizeHint().height();
 
   m_btnStatus->setFixedSize(label_height, label_height);
 
@@ -19,8 +19,6 @@ LabelWithStatus::LabelWithStatus(QWidget* parent)
   m_layout->addWidget(m_wdgInput);
   m_layout->addWidget(m_btnStatus);
 }
-
-LabelWithStatus::~LabelWithStatus() {}
 
 void LabelWithStatus::setStatus(WidgetWithStatus::StatusType status,
                                 const QString& label_text,

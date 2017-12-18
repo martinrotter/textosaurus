@@ -63,7 +63,7 @@ void FormUpdate::checkForUpdates() {
       //: Unknown release.
       m_ui.m_lblAvailableRelease->setText(tr("unknown"));
       m_ui.m_txtChanges->clear();
-      m_ui.m_lblStatus->setStatus(WidgetWithStatus::Error,
+      m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Error,
                                   tr("Error: '%1'.").arg(NetworkFactory::networkErrorText(update.second)),
                                   tr("List with updates was not\ndownloaded successfully."));
     }
@@ -79,7 +79,7 @@ void FormUpdate::checkForUpdates() {
 
       if (SystemFactory::isVersionNewer(m_updateInfo.m_availableVersion, APP_VERSION)) {
         m_btnUpdate->setVisible(true);
-        m_ui.m_lblStatus->setStatus(WidgetWithStatus::Ok,
+        m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Ok,
                                     tr("New release available."),
                                     tr("This is new version which can be\ndownloaded."));
 
@@ -88,7 +88,7 @@ void FormUpdate::checkForUpdates() {
         }
       }
       else {
-        m_ui.m_lblStatus->setStatus(WidgetWithStatus::Warning,
+        m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Warning,
                                     tr("No new release available."),
                                     tr("This release is not newer than\ncurrently installed one."));
       }
@@ -99,7 +99,7 @@ void FormUpdate::checkForUpdates() {
 
 void FormUpdate::updateProgress(qint64 bytes_received, qint64 bytes_total) {
   if (bytes_received - m_lastDownloadedBytes > 500000 || m_lastDownloadedBytes == 0) {
-    m_ui.m_lblStatus->setStatus(WidgetWithStatus::Information,
+    m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Information,
                                 tr("Downloaded %1% (update size is %2 kB).").arg(QString::number(bytes_total ==
                                                                                                  0 ? 0 : (bytes_received * 100.0) /
                                                                                                  bytes_total,
@@ -172,14 +172,15 @@ void FormUpdate::updateCompleted(QNetworkReply::NetworkError status, QByteArray 
   switch (status) {
     case QNetworkReply::NoError:
       saveUpdateFile(contents);
-      m_ui.m_lblStatus->setStatus(WidgetWithStatus::Ok, tr("Downloaded successfully"),
+      m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Ok, tr("Downloaded successfully"),
                                   tr("Package was downloaded successfully.\nYou can install it now."));
       m_btnUpdate->setText(tr("Install"));
       m_btnUpdate->setEnabled(true);
       break;
 
     default:
-      m_ui.m_lblStatus->setStatus(WidgetWithStatus::Error, tr("Error occured"), tr("Error occured during downloading of the package."));
+      m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Error, tr("Error occured"),
+                                  tr("Error occured during downloading of the package."));
       m_btnUpdate->setText(tr("Error occured"));
       break;
   }

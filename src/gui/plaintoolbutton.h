@@ -9,10 +9,8 @@ class PlainToolButton : public QToolButton {
   Q_OBJECT
 
   public:
-
-    // Contructors and destructors.
     explicit PlainToolButton(QWidget* parent = nullptr);
-    virtual ~PlainToolButton();
+    virtual ~PlainToolButton() = default;
 
   public slots:
     void setPadding(int left, int top, int right, int bottom);
@@ -21,9 +19,7 @@ class PlainToolButton : public QToolButton {
     void reactOnSenderActionChange();
 
   protected:
-
-    // Custom look.
-    void paintEvent(QPaintEvent* e);
+    virtual void paintEvent(QPaintEvent* e) override;
 
   private:
     int m_paddingLeft = 0;

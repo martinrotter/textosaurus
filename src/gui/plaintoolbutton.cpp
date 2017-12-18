@@ -11,16 +11,11 @@
 
 PlainToolButton::PlainToolButton(QWidget* parent) : QToolButton(parent) {}
 
-PlainToolButton::~PlainToolButton() {}
-
 void PlainToolButton::paintEvent(QPaintEvent* e) {
   Q_UNUSED(e)
   QPainter p(this);
   QRect rect(m_paddingLeft, m_paddingTop,
              size().width() - m_paddingLeft - m_paddingRight, size().height() - m_paddingTop - m_paddingBottom);
-
-  // Set padding.
-  //rect.adjust(m_padding, m_padding, -m_padding, -m_padding);
 
   if (isEnabled()) {
     if (underMouse() || isChecked()) {
@@ -39,6 +34,7 @@ void PlainToolButton::setPadding(int left, int top, int right, int bottom) {
   m_paddingTop = top;
   m_paddingRight = right;
   m_paddingBottom = bottom;
+
   repaint();
 }
 
