@@ -76,64 +76,44 @@ namespace Editor {
 
 // GUI.
 namespace GUI {
-  KEY ID;
-  KEY ToolbarStyle;
+  constexpr auto ID = "gui";
+  constexpr auto ToolbarStyle = "toolbar_style";
+  constexpr Qt::ToolButtonStyle ToolbarStyleDef = Qt::ToolButtonIconOnly;
+  constexpr auto ToolbarActions = "toolbar";
+  constexpr auto ToolbarActionsDef = "m_actionFileNew,m_actionFileOpen,m_actionFileSave,separator,"
+                                     "m_actionEditBack,m_actionEditForward,separator,spacer,m_actionTabsCloseAllUnmodified";
+  constexpr auto MainWindowInitialSize = "window_size";
+  constexpr auto MainWindowInitialPosition = "window_position";
+  constexpr auto IsMainWindowMaximizedBeforeFullscreen = "is_window_maximized_before_fullscreen";
+  constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
+  constexpr auto MainWindowStartsFullscreen = "start_in_fullscreen";
+  constexpr auto MainWindowStartsFullscreenDef = false;
+  constexpr auto MainWindowStartsMaximized = "window_is_maximized";
+  constexpr auto MainWindowStartsMaximizedDef = false;
+  constexpr auto MainMenuVisible = "main_menu_visible";
+  constexpr auto MainMenuVisibleDef = true;
+  constexpr auto ToolbarsVisible = "enable_toolbars";
+  constexpr auto ToolbarsVisibleDef = true;
+  constexpr auto StatusBarVisible = "enable_status_bar";
+  constexpr auto StatusBarVisibleDef = true;
+  constexpr auto EnableNotifications = "enable_notifications";
+  constexpr auto EnableNotificationsDef = true;
+  constexpr auto TabCloseMiddleClick = "tab_close_mid_button";
+  constexpr auto TabCloseMiddleClickDef = true;
+  constexpr auto TabCloseDoubleClick = "tab_close_double_button";
+  constexpr auto TabCloseDoubleClickDef = true;
+  constexpr auto TabNewDoubleClick = "tab_new_double_button";
+  constexpr auto TabNewDoubleClickDef = true;
+  constexpr auto IconTheme = "icon_theme_name";
 
-  VALUE(Qt::ToolButtonStyle) ToolbarStyleDef;
+#if defined(Q_OS_LINUX)
+  constexpr auto IconThemeDef = APP_NO_THEME;
+#else
+  constexpr auto IconThemeDef = APP_THEME_DEFAULT;
+#endif
 
-  KEY ToolbarActions;
-
-  VALUE(char*) ToolbarActionsDef;
-
-  KEY MainWindowInitialSize;
-  KEY MainWindowInitialPosition;
-  KEY IsMainWindowMaximizedBeforeFullscreen;
-
-  VALUE(bool) IsMainWindowMaximizedBeforeFullscreenDef;
-
-  KEY MainWindowStartsFullscreen;
-
-  VALUE(bool) MainWindowStartsFullscreenDef;
-
-  KEY MainWindowStartsMaximized;
-
-  VALUE(bool) MainWindowStartsMaximizedDef;
-
-  KEY MainMenuVisible;
-
-  VALUE(bool) MainMenuVisibleDef;
-
-  KEY ToolbarsVisible;
-
-  VALUE(bool) ToolbarsVisibleDef;
-
-  KEY StatusBarVisible;
-
-  VALUE(bool) StatusBarVisibleDef;
-
-  KEY EnableNotifications;
-
-  VALUE(bool) EnableNotificationsDef;
-
-  KEY TabCloseMiddleClick;
-
-  VALUE(bool) TabCloseMiddleClickDef;
-
-  KEY TabCloseDoubleClick;
-
-  VALUE(bool) TabCloseDoubleClickDef;
-
-  KEY TabNewDoubleClick;
-
-  VALUE(bool) TabNewDoubleClickDef;
-
-  KEY IconTheme;
-
-  VALUE(char*) IconThemeDef;
-
-  KEY Style;
-
-  VALUE(char*) StyleDef;
+  constexpr auto Style = "style";
+  constexpr auto StyleDef = APP_STYLE_DEFAULT;
 }
 
 // Web browser.
