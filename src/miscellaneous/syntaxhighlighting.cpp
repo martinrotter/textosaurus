@@ -11,14 +11,14 @@ SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fil
   m_lexers(QList<Lexer>()) {}
 
 Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
-  QRegularExpression reg(QSL("(?:\\.)(\\w+$)|($)"), QRegularExpression::PatternOption::CaseInsensitiveOption);
+  QRegularExpression reg(QSL("(?:\\.?)(\\w+$)|($)"), QRegularExpression::PatternOption::CaseInsensitiveOption);
   QString suffix = reg.match(file_name).captured(1);
 
   return lexerForSuffix(suffix);
 }
 
 Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
-  foreach (const Lexer& lex, lexers()) {
+  for (const Lexer& lex : lexers()) {
     if (lex.m_suffices.contains(suffix)) {
       return lex;
     }
@@ -29,7 +29,7 @@ Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
 }
 
 Lexer SyntaxHighlighting::lexerForName(const QString& name) {
-  foreach (const Lexer& lex, lexers()) {
+  for (const Lexer& lex : lexers()) {
     if (lex.m_name == name) {
       return lex;
     }
@@ -41,7 +41,7 @@ Lexer SyntaxHighlighting::lexerForName(const QString& name) {
 
 QStringList SyntaxHighlighting::fileFilters() {
   if (m_fileFilters.isEmpty()) {
-    foreach (const Lexer& lex, lexers()) {
+    for (const Lexer& lex : lexers()) {
       m_fileFilters << lex.m_name + tr(" files (*") + lex.m_suffices.join(QL1S(" *")) + QL1C(')');
     }
   }
@@ -131,7 +131,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       QSL("lua")
     }, SCLEX_LUA)
       << Lexer(QSL("Make"), QStringList {
-      QSL("mak"), QSL("makefile")
+      QSL("mak"), QSL("Makefile")
     }, SCLEX_MAKEFILE)
       << Lexer(QSL("Markdown"), QStringList {
       QSL("markdown"), QSL("md")

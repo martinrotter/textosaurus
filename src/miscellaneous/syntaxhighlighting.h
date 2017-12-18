@@ -12,6 +12,7 @@
 struct Lexer {
   explicit Lexer();
   explicit Lexer(const QString& name, const QStringList& suffices, int code);
+  virtual ~Lexer() = default;
 
   bool isEmpty() const;
 
@@ -27,6 +28,7 @@ class SyntaxHighlighting : public QObject {
 
   public:
     explicit SyntaxHighlighting(QObject* parent = nullptr);
+    virtual ~SyntaxHighlighting() = default;
 
     QStringList fileFilters();
     QList<Lexer> lexers();

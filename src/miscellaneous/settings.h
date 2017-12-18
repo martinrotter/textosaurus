@@ -19,17 +19,6 @@
 #include <QStandardPaths>
 #include <QStringList>
 
-/*
- *
- #define KEY extern const char*
- #define constexpr auto const char*
- #define VALUE(x) extern const x
- #define NON_CONST_VALUE(x) extern x
- #define DVALUE(x) const x
- #define NON_CONST_DVALUE(x) x
-
- */
-
 #define GROUP(x) x::ID
 #define SETTING(x) x, x ## Def
 #define DEFAULT_VALUE(x) x ## Def
