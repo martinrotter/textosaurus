@@ -12,11 +12,11 @@ class SettingsBrowserMail : public SettingsPanel {
 
   public:
     explicit SettingsBrowserMail(Settings* settings, QWidget* parent = nullptr);
-    virtual ~SettingsBrowserMail();
+    virtual ~SettingsBrowserMail() = default;
 
-    QString title() const;
-    void loadSettings();
-    void saveSettings();
+    virtual QString title() const override;
+    virtual void loadSettings() override;
+    virtual void saveSettings() override;
 
   private slots:
     void changeDefaultBrowserArguments(int index);
@@ -27,7 +27,7 @@ class SettingsBrowserMail : public SettingsPanel {
     void onProxyTypeChanged(int index);
 
   private:
-    Ui::SettingsBrowserMail* m_ui;
+    Ui::SettingsBrowserMail m_ui;
 };
 
 inline QString SettingsBrowserMail::title() const {

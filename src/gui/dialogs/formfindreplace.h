@@ -18,7 +18,7 @@ class FormFindReplace : public QDialog {
 
   public:
     explicit FormFindReplace(TextApplication* app, QWidget* parent = nullptr);
-    virtual ~FormFindReplace();
+    virtual ~FormFindReplace() = default;
 
   public slots:
     void display();

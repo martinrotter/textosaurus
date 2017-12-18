@@ -21,7 +21,7 @@ class FormMain : public QMainWindow {
 
     // Constructors and destructors.
     explicit FormMain(QWidget* parent = nullptr);
-    virtual ~FormMain();
+    virtual ~FormMain() = default;
 
     TabWidget* tabWidget() const;
     ToolBar* toolBar() const;
@@ -48,8 +48,8 @@ class FormMain : public QMainWindow {
     void switchFullscreenMode();
 
   protected:
-    void dragEnterEvent(QDragEnterEvent* event);
-    void closeEvent(QCloseEvent* event);
+    virtual void dragEnterEvent(QDragEnterEvent* event) override;
+    virtual void closeEvent(QCloseEvent* event) override;
 
   signals:
     void closeRequested(bool* should_stop);

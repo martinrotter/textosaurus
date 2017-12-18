@@ -7,6 +7,8 @@
 
 class PredefinedTools {
   public:
+    PredefinedTools() = delete;
+    ~PredefinedTools() = delete;
 
     // Uploading.
     static QString sendToClbin(const QString& data, bool* ok);
@@ -41,9 +43,6 @@ class PredefinedTools {
     static QString toBase64Url(const QString& data, bool* ok);
     static QString fromBase64Url(const QString& data, bool* ok);
     static QString toHtmlEscaped(const QString& data, bool* ok);
-
-  private:
-    explicit PredefinedTools();
 };
 
 #endif // PREDEFINEDTOOLS_H

@@ -10,6 +10,7 @@ class QAction;
 class DynamicShortcuts {
   public:
     DynamicShortcuts() = delete;
+    ~DynamicShortcuts() = delete;
 
     // Checks the application settings and then initializes shortcut of
     // each action from actions from the settings.

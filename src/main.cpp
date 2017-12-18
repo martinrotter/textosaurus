@@ -77,9 +77,6 @@ int main(int argc, char* argv[]) {
   // Set correct information for main window.
   main_window.setWindowTitle(APP_LONG_NAME);
 
-  // Now is a good time to initialize dynamic keyboard shortcuts.
-  DynamicShortcuts::load(qApp->userActions());
-
   // Display main window.
   qDebug("Showing the main window when the application is starting.");
   main_window.show();
@@ -96,6 +93,9 @@ int main(int argc, char* argv[]) {
   else {
     qApp->textApplication()->newFile();
   }
+
+  // Now is a good time to initialize dynamic keyboard shortcuts.
+  DynamicShortcuts::load(qApp->userActions());
 
   // Enter global event loop.
   return Application::exec();

@@ -12,7 +12,7 @@ class FormAbout : public QDialog {
 
   public:
     explicit FormAbout(QWidget* parent);
-    virtual ~FormAbout();
+    virtual ~FormAbout() = default;
 
   private:
     void loadLicenseAndInformation();

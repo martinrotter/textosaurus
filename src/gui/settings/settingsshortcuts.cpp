@@ -6,24 +6,20 @@
 #include "miscellaneous/application.h"
 
 SettingsShortcuts::SettingsShortcuts(Settings* settings, QWidget* parent)
-  : SettingsPanel(settings, parent), m_ui(new Ui::SettingsShortcuts) {
-  m_ui->setupUi(this);
-  connect(m_ui->m_shortcuts, &DynamicShortcutsWidget::setupChanged, this, &SettingsShortcuts::dirtifySettings);
-}
-
-SettingsShortcuts::~SettingsShortcuts() {
-  delete m_ui;
+  : SettingsPanel(settings, parent) {
+  m_ui.setupUi(this);
+  connect(m_ui.m_shortcuts, &DynamicShortcutsWidget::setupChanged, this, &SettingsShortcuts::dirtifySettings);
 }
 
 void SettingsShortcuts::loadSettings() {
   onBeginLoadSettings();
-  m_ui->m_shortcuts->populate(qApp->userActions());
+  m_ui.m_shortcuts->populate(qApp->userActions());
   onEndLoadSettings();
 }
 
 void SettingsShortcuts::saveSettings() {
   onBeginSaveSettings();
-  m_ui->m_shortcuts->updateShortcuts();
+  m_ui.m_shortcuts->updateShortcuts();
   DynamicShortcuts::save(qApp->userActions());
   onEndSaveSettings();
 }

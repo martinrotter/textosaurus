@@ -150,9 +150,8 @@ class PredefinedTool : public ExternalTool {
     virtual ~PredefinedTool() = default;
 
   public slots:
-    virtual void runTool(QPointer<TextEditor> editor, const QString& data);
-
-    bool isPredefined() const;
+    virtual void runTool(QPointer<TextEditor> editor, const QString& data) override;
+    virtual bool isPredefined() const override;
 
   private:
 

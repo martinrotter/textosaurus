@@ -12,10 +12,11 @@ class SettingsEditor : public SettingsPanel {
 
   public:
     explicit SettingsEditor(Settings* settings, QWidget* parent = nullptr);
+    virtual ~SettingsEditor() = default;
 
-    QString title() const;
-    void loadSettings();
-    void saveSettings();
+    virtual QString title() const override;
+    virtual void loadSettings() override;
+    virtual void saveSettings() override;
 
   private slots:
     void changeMainFont();

@@ -10,6 +10,7 @@ class DockWidget : public QDockWidget {
 
   public:
     explicit DockWidget(QWidget* parent = nullptr);
+    virtual ~DockWidget() = default;
 
     virtual Qt::DockWidgetArea initialArea() const = 0;
     virtual bool initiallyVisible() const = 0;
@@ -19,7 +20,7 @@ class DockWidget : public QDockWidget {
     virtual void load() = 0;
 
   protected:
-    void showEvent(QShowEvent* event);
+    virtual void showEvent(QShowEvent* event) override;
 };
 
 #endif // DOCKWIDGET_H

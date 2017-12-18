@@ -42,10 +42,6 @@ FormSettings::FormSettings(QWidget& parent)
   m_ui.m_listSettings->setCurrentRow(0);
 }
 
-FormSettings::~FormSettings() {
-  qDebug("Destroying FormSettings distance.");
-}
-
 void FormSettings::saveSettings() {
   applySettings();
   accept();

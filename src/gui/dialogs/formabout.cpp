@@ -20,10 +20,6 @@ FormAbout::FormAbout(QWidget* parent) : QDialog(parent) {
   loadSettingsAndPaths();
 }
 
-FormAbout::~FormAbout() {
-  qDebug("Destroying FormAbout instance.");
-}
-
 void FormAbout::loadSettingsAndPaths() {
   if (qApp->settings()->type() == SettingsProperties::Portable) {
     m_ui.m_txtPathsSettingsType->setText(tr("FULLY portable"));

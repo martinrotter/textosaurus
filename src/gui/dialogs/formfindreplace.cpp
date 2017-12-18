@@ -23,8 +23,6 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   connect(m_ui.m_lblRegexInfo, &QLabel::linkActivated, qApp->web(), &WebFactory::openUrlInExternalBrowser);
 }
 
-FormFindReplace::~FormFindReplace() {}
-
 void FormFindReplace::display() {
   show();
   activateWindow();

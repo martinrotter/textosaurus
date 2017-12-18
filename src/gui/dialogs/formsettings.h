@@ -14,10 +14,8 @@ class FormSettings : public QDialog {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit FormSettings(QWidget& parent);
-    virtual ~FormSettings();
+    virtual ~FormSettings() = default;
 
   private slots:
 

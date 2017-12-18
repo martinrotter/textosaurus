@@ -20,20 +20,23 @@ class OutputWindow : public DockWidget {
 
   public:
     explicit OutputWindow(QWidget* parent = nullptr);
+    virtual ~OutputWindow() = default;
 
-    Qt::DockWidgetArea initialArea() const;
-    bool initiallyVisible() const;
-    int initialWidth() const;
+    virtual Qt::DockWidgetArea initialArea() const override;
+    virtual bool initiallyVisible() const override;
+    virtual int initialWidth() const override;
 
   public slots:
-    void load();
+    virtual void load() override;
+
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);
+
+  private:
+    QColor colorForLevel(QMessageBox::Icon level);
 
   private:
     QMessageBox::Icon m_currentLevel;
     QPlainTextEdit* m_txtOutput;
-
-    QColor colorForLevel(QMessageBox::Icon level);
 };
 
 #endif // TOOLBOX_H

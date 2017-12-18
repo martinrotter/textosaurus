@@ -12,8 +12,6 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-PredefinedTools::PredefinedTools() {}
-
 QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("clbin=%1").arg(data);

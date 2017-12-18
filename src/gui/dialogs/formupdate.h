@@ -17,14 +17,12 @@ class FormUpdate : public QDialog {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit FormUpdate(QWidget* parent);
-    virtual ~FormUpdate();
+    virtual ~FormUpdate() = default;
 
     // Returns true if application can self-update
     // on current platform.
-    bool isSelfUpdateSupported() const;
+    constexpr bool isSelfUpdateSupported() const;
 
   private slots:
 

@@ -49,10 +49,6 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   loadSize();
 }
 
-FormMain::~FormMain() {
-  qDebug("Destroying FormMain instance.");
-}
-
 TabWidget* FormMain::tabWidget() const {
   return m_tabEditors;
 }

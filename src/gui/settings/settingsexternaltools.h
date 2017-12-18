@@ -12,13 +12,14 @@ class SettingsExternalTools : public SettingsPanel {
 
   public:
     explicit SettingsExternalTools(Settings* settings, QWidget* parent = nullptr);
+    virtual ~SettingsExternalTools() = default;
 
-    QString title() const;
-    void loadSettings();
-    void saveSettings();
+    virtual QString title() const override;
+    virtual void loadSettings() override;
+    virtual void saveSettings() override;
 
   protected slots:
-    void dirtifySettings();
+    virtual void dirtifySettings() override;
 
   private slots:
     void addNewTool();

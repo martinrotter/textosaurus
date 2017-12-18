@@ -12,16 +12,14 @@ class SettingsLocalization : public SettingsPanel {
 
   public:
     explicit SettingsLocalization(Settings* settings, QWidget* parent = nullptr);
-    virtual ~SettingsLocalization();
+    virtual ~SettingsLocalization() = default;
 
-    QString title() const;
-
-    void loadSettings();
-
-    void saveSettings();
+    virtual QString title() const override;
+    virtual void loadSettings() override;
+    virtual void saveSettings() override;
 
   private:
-    Ui::SettingsLocalization* m_ui;
+    Ui::SettingsLocalization m_ui;
 };
 
 inline QString SettingsLocalization::title() const {

@@ -13,6 +13,7 @@ class FileSystemSidebarModel : public QFileSystemModel {
 
   public:
     explicit FileSystemSidebarModel(QObject* parent = nullptr);
+    virtual ~FileSystemSidebarModel() = default;
 };
 
 class FavoritesListWidget : public QListWidget {
@@ -20,12 +21,13 @@ class FavoritesListWidget : public QListWidget {
 
   public:
     explicit FavoritesListWidget(QWidget* parent = nullptr);
+    virtual ~FavoritesListWidget() = default;
 
   public slots:
     void loadFileItem(const QString& file_path);
 
   protected:
-    void keyPressEvent(QKeyEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event) override;
 };
 
 class FilesystemSidebar : public DockWidget {
@@ -33,13 +35,14 @@ class FilesystemSidebar : public DockWidget {
 
   public:
     explicit FilesystemSidebar(QWidget* parent = nullptr);
+    virtual ~FilesystemSidebar() = default;
 
-    Qt::DockWidgetArea initialArea() const;
-    bool initiallyVisible() const;
-    int initialWidth() const;
+    virtual Qt::DockWidgetArea initialArea() const override;
+    virtual bool initiallyVisible() const override;
+    virtual int initialWidth() const override;
 
   public slots:
-    void load();
+    virtual void load() override;
 
   private slots:
     void addFileToFavorites();

@@ -5,29 +5,25 @@
 #include "miscellaneous/application.h"
 #include "miscellaneous/systemfactory.h"
 
-SettingsGeneral::SettingsGeneral(Settings* settings, QWidget* parent) : SettingsPanel(settings, parent), m_ui(new Ui::SettingsGeneral) {
-  m_ui->setupUi(this);
-  connect(m_ui->m_checkRemoveTrolltechJunk, &QCheckBox::stateChanged, this, &SettingsGeneral::dirtifySettings);
-}
-
-SettingsGeneral::~SettingsGeneral() {
-  delete m_ui;
+SettingsGeneral::SettingsGeneral(Settings* settings, QWidget* parent) : SettingsPanel(settings, parent) {
+  m_ui.setupUi(this);
+  connect(m_ui.m_checkRemoveTrolltechJunk, &QCheckBox::stateChanged, this, &SettingsGeneral::dirtifySettings);
 }
 
 void SettingsGeneral::loadSettings() {
   onBeginLoadSettings();
 
 #if defined(Q_OS_WIN)
-  m_ui->m_checkRemoveTrolltechJunk->setVisible(true);
-  m_ui->m_checkRemoveTrolltechJunk->setChecked(settings()->value(GROUP(General), SETTING(General::RemoveTrolltechJunk)).toBool());
+  m_ui.m_checkRemoveTrolltechJunk->setVisible(true);
+  m_ui.m_checkRemoveTrolltechJunk->setChecked(settings()->value(GROUP(General), SETTING(General::RemoveTrolltechJunk)).toBool());
 #else
-  m_ui->m_checkRemoveTrolltechJunk->setVisible(false);
+  m_ui.m_checkRemoveTrolltechJunk->setVisible(false);
 #endif
   onEndLoadSettings();
 }
 
 void SettingsGeneral::saveSettings() {
   onBeginSaveSettings();
-  settings()->setValue(GROUP(General), General::RemoveTrolltechJunk, m_ui->m_checkRemoveTrolltechJunk->isChecked());
+  settings()->setValue(GROUP(General), General::RemoveTrolltechJunk, m_ui.m_checkRemoveTrolltechJunk->isChecked());
   onEndSaveSettings();
 }

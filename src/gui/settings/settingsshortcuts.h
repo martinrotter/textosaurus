@@ -12,16 +12,14 @@ class SettingsShortcuts : public SettingsPanel {
 
   public:
     explicit SettingsShortcuts(Settings* settings, QWidget* parent = nullptr);
-    virtual ~SettingsShortcuts();
+    virtual ~SettingsShortcuts() = default;
 
-    QString title() const;
-
-    void loadSettings();
-
-    void saveSettings();
+    virtual QString title() const override;
+    virtual void loadSettings() override;
+    virtual void saveSettings() override;
 
   private:
-    Ui::SettingsShortcuts* m_ui;
+    Ui::SettingsShortcuts m_ui;
 };
 
 inline QString SettingsShortcuts::title() const {

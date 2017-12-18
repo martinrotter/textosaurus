@@ -12,19 +12,17 @@ class SettingsGui : public SettingsPanel {
 
   public:
     explicit SettingsGui(Settings* settings, QWidget* parent = nullptr);
-    virtual ~SettingsGui();
+    virtual ~SettingsGui() = default;
 
-    QString title() const;
-    void loadSettings();
-    void saveSettings();
+    virtual QString title() const override;
+    virtual void loadSettings() override;
+    virtual void saveSettings() override;
 
   protected:
-
-    // Does check of controls before dialog can be submitted.
-    bool eventFilter(QObject* obj, QEvent* e);
+    virtual bool eventFilter(QObject* obj, QEvent* e) override;
 
   private:
-    Ui::SettingsGui* m_ui;
+    Ui::SettingsGui m_ui;
 };
 
 inline QString SettingsGui::title() const {
