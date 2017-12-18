@@ -7,74 +7,68 @@
 
 #include "definitions/definitions.h"
 
+#include "miscellaneous/iofactory.h"
 #include "miscellaneous/settingsproperties.h"
+
+#include "scintilla/include/Scintilla.h"
 
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
 #include <QNetworkProxy>
+#include <QStandardPaths>
 #include <QStringList>
 
-#define KEY extern const char*
-#define DKEY const char*
-#define VALUE(x) extern const x
-#define NON_CONST_VALUE(x) extern x
-#define DVALUE(x) const x
-#define NON_CONST_DVALUE(x) x
+/*
+ *
+ #define KEY extern const char*
+ #define constexpr auto const char*
+ #define VALUE(x) extern const x
+ #define NON_CONST_VALUE(x) extern x
+ #define DVALUE(x) const x
+ #define NON_CONST_DVALUE(x) x
+
+ */
+
+#define GROUP(x) x::ID
 #define SETTING(x) x, x ## Def
 #define DEFAULT_VALUE(x) x ## Def
-#define GROUP(x) x::ID
 
-// Editor.
 namespace Editor {
-  KEY ID;
-  KEY TabSize;
+  constexpr auto ID = "editor";
+  constexpr auto TabSize = "tab_size";
+  constexpr auto TabSizeDef = 2;
+  constexpr auto IndentSize = "indent_size";
+  constexpr auto IndentSizeDef = 2;
+  constexpr auto IndentWithTabs = "indent_with_tabs";
+  constexpr auto IndentWithTabsDef = false;
+  constexpr auto LineSpacing = "line_spacing";
+  constexpr auto LineSpacingDef = 0;
+  constexpr auto EolMode = "eol_mode";
 
-  VALUE(int) TabSizeDef;
+#if defined(Q_OS_WIN)
+  constexpr auto EolModeDef = SC_EOL_CRLF;
+#elif defined(Q_OS_MAC)
+  constexpr auto EolModeDef = SC_EOL_CR;
+#else
+  constexpr auto EolModeDef = SC_EOL_LF;
+#endif
 
-  KEY IndentSize;
-
-  VALUE(int) IndentSizeDef;
-
-  KEY IndentWithTabs;
-
-  VALUE(bool) IndentWithTabsDef;
-
-  KEY LineSpacing;
-
-  VALUE(int) LineSpacingDef;
-
-  KEY EolMode;
-
-  VALUE(int) EolModeDef;
-
-  KEY FontMain;
-  KEY RecentFiles;
-
-  VALUE(QStringList) RecentFilesDef;
-
-  KEY WordWrap;
-
-  VALUE(bool) WordWrapDef;
-
-  KEY LineNumbers;
-
-  VALUE(bool) LineNumbersDef;
-
-  KEY ViewEols;
-
-  VALUE(bool) ViewEolsDef;
-
-  KEY ViewWhitespaces;
-
-  VALUE(bool) ViewWhitespacesDef;
-
-  KEY DefaultLoadSaveDirectory;
-
-  VALUE(QString) DefaultLoadSaveDirectoryDef;
+  constexpr auto FontMain = "main_font";
+  constexpr auto WordWrap = "word_wrap";
+  constexpr auto WordWrapDef = true;
+  constexpr auto LineNumbers = "line_numbers";
+  constexpr auto LineNumbersDef = false;
+  constexpr auto RecentFiles = "recent_files";
+  const QStringList RecentFilesDef = QStringList();
+  constexpr auto ViewEols = "view_eols";
+  constexpr auto ViewEolsDef = false;
+  constexpr auto ViewWhitespaces = "view_whitespaces";
+  constexpr auto ViewWhitespacesDef = false;
+  constexpr auto DefaultLoadSaveDirectory = "load_save_directory";
+  const QString DefaultLoadSaveDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation);
 }
 
-// GUI.
 namespace GUI {
   constexpr auto ID = "gui";
   constexpr auto ToolbarStyle = "toolbar_style";
@@ -116,7 +110,6 @@ namespace GUI {
   constexpr auto StyleDef = APP_STYLE_DEFAULT;
 }
 
-// Web browser.
 namespace Browser {
   constexpr auto ID = "browser";
   constexpr auto CustomExternalBrowserEnabled = "custom_external_browser";
@@ -133,7 +126,6 @@ namespace Browser {
   const QString CustomExternalEmailArgumentsDef = QString();
 }
 
-// General.
 namespace General {
   constexpr auto ID = "main";
   constexpr auto RemoveTrolltechJunk = "remove_trolltech_junk";
@@ -144,7 +136,6 @@ namespace General {
   const auto LanguageDef = QLocale::system().name();
 }
 
-// Proxy.
 namespace Proxy {
   constexpr auto ID = "proxy";
   constexpr auto Type = "proxy_type";
@@ -159,7 +150,6 @@ namespace Proxy {
   constexpr auto PortDef = 80;
 }
 
-// Keyboard.
 namespace Keyboard {
   constexpr auto ID = "keyboard";
 }

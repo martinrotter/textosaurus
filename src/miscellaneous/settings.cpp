@@ -3,68 +3,12 @@
 #include "miscellaneous/settings.h"
 
 #include "miscellaneous/application.h"
-#include "miscellaneous/iofactory.h"
-
-#include "scintilla/include/Scintilla.h"
 
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
 #include <QLocale>
 #include <QPointer>
-
-// Editor.
-DKEY Editor::ID = "editor";
-DKEY Editor::TabSize = "tab_size";
-
-DVALUE(int) Editor::TabSizeDef = 2;
-
-DKEY Editor::IndentSize = "indent_size";
-
-DVALUE(int) Editor::IndentSizeDef = 2;
-
-DKEY Editor::IndentWithTabs = "indent_with_tabs";
-
-DVALUE(bool) Editor::IndentWithTabsDef = false;
-
-DKEY Editor::LineSpacing = "line_spacing";
-
-DVALUE(int) Editor::LineSpacingDef = 0;
-
-DKEY Editor::EolMode = "eol_mode";
-
-#if defined(Q_OS_WIN)
-DVALUE(int) Editor::EolModeDef = SC_EOL_CRLF;
-#elif defined(Q_OS_MAC)
-DVALUE(int) Editor::EolModeDef = SC_EOL_CR;
-#else
-DVALUE(int) Editor::EolModeDef = SC_EOL_LF;
-#endif
-
-DKEY Editor::FontMain = "main_font";
-DKEY Editor::WordWrap = "word_wrap";
-
-DVALUE(bool) Editor::WordWrapDef = true;
-
-DKEY Editor::LineNumbers = "line_numbers";
-
-DVALUE(bool) Editor::LineNumbersDef = false;
-
-DKEY Editor::RecentFiles = "recent_files";
-
-DVALUE(QStringList) Editor::RecentFilesDef = QStringList();
-
-DKEY Editor::ViewEols = "view_eols";
-
-DVALUE(bool) Editor::ViewEolsDef = false;
-
-DKEY Editor::ViewWhitespaces = "view_whitespaces";
-
-DVALUE(bool) Editor::ViewWhitespacesDef = false;
-
-DKEY Editor::DefaultLoadSaveDirectory = "load_save_directory";
-
-DVALUE(QString) Editor::DefaultLoadSaveDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation);
 
 Settings::Settings(const QString& file_name, Format format, SettingsType status, QObject* parent)
   : QSettings(file_name, format, parent), m_initializationStatus(status) {}
