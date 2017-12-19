@@ -38,6 +38,10 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
   QMap<QString, QMenu*> categories;
   QList<ExternalTool*> tools; tools << m_customTools << m_predefinedTools;
 
+  std::sort(tools.begin(), tools.end(), [](ExternalTool* lhs, ExternalTool* rhs) {
+    return QString::localeAwareCompare(lhs->name(), rhs->name()) < 0;
+  });
+
   foreach (ExternalTool* tool, tools) {
     if (tool->addToEditMenu()) {
       continue;
@@ -60,6 +64,18 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
     }
   }
 
+  std::sort(actions.begin(), actions.end(), [](QAction* lhs, QAction* rhs) {
+    if ((rhs->menu() != nullptr) == (lhs->menu() != nullptr)) {
+      return QString::localeAwareCompare(lhs->text(), rhs->text()) < 0;
+    }
+    else if (lhs->menu() != nullptr) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+
   return actions;
 }
 
@@ -67,6 +83,10 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
   QList<QAction*> actions;
   QMap<QString, QMenu*> categories;
   QList<ExternalTool*> tools; tools << m_customTools << m_predefinedTools;
+
+  std::sort(tools.begin(), tools.end(), [](ExternalTool* lhs, ExternalTool* rhs) {
+    return QString::localeAwareCompare(lhs->name(), rhs->name()) < 0;
+  });
 
   foreach (ExternalTool* tool, tools) {
     if (!tool->addToEditMenu()) {
@@ -88,6 +108,18 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
       actions.append(tool->action());
     }
   }
+
+  std::sort(actions.begin(), actions.end(), [](QAction* lhs, QAction* rhs) {
+    if ((rhs->menu() != nullptr) == (lhs->menu() != nullptr)) {
+      return QString::localeAwareCompare(lhs->text(), rhs->text()) < 0;
+    }
+    else if (lhs->menu() != nullptr) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
 
   return actions;
 }
@@ -452,7 +484,7 @@ void ExternalTools::loadCustomTools() {
     ext_bash_sha256->setCategory(tr("Bash (external tool examples)"));
     ext_bash_sha256->setInput(ToolInput::SelectionDocument);
     ext_bash_sha256->setOutput(ToolOutput::ReplaceSelectionDocument);
-    ext_bash_sha256->setName(tr("Get SHA256 sum of selected/all text"));
+    ext_bash_sha256->setName(tr("SHA256 sum of selected/all text"));
 
     m_customTools.append(ext_bash_sha256);
 
