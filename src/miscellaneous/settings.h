@@ -71,6 +71,8 @@ namespace GUI {
   constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
   constexpr auto MainMenuVisible = "main_menu_visible";
   constexpr auto MainMenuVisibleDef = true;
+  constexpr auto MainWindowState = "main_window_state";
+  const QByteArray MainWindowStateDef = QByteArray();
   constexpr auto ToolbarsVisible = "enable_toolbars";
   constexpr auto ToolbarsVisibleDef = true;
   constexpr auto StatusBarVisible = "enable_status_bar";

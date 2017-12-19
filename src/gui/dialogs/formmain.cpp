@@ -30,13 +30,18 @@
 
 FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
+
   qApp->setMainForm(this);
+
   setCentralWidget(m_tabEditors = new TabWidget(this));
   setStatusBar(m_statusBar = new StatusBar(this));
+  addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
+
+  m_statusBar->setObjectName(QSL("m_statusBar"));
+  m_tabEditors->setObjectName(QSL("m_tabEditors"));
+  m_toolBar->setObjectName(QSL("m_toolBar"));
 
   qApp->textApplication()->setMainForm(this);
-
-  addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
 
   // Prepare main window and tabs.
   prepareMenus();
@@ -218,6 +223,8 @@ void FormMain::loadSize() {
   if (!settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool()) {
     statusBar()->hide();
   }
+
+  restoreState(settings->value(GROUP(GUI), SETTING(GUI::MainWindowState)).toByteArray());
 }
 
 void FormMain::saveSize() {
@@ -242,6 +249,7 @@ void FormMain::saveSize() {
   settings->setValue(GROUP(GUI), GUI::MainWindowInitialSize, size());
   settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, toolBar()->isActive());
   settings->setValue(GROUP(GUI), GUI::StatusBarVisible, statusBar()->isActive());
+  settings->setValue(GROUP(GUI), GUI::MainWindowState, saveState());
 }
 
 void FormMain::createConnections() {
