@@ -13,17 +13,13 @@ class SilentNetworkAccessManager : public BaseNetworkAccessManager {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit SilentNetworkAccessManager(QObject* parent = nullptr);
-    virtual ~SilentNetworkAccessManager();
+    virtual ~SilentNetworkAccessManager() = default;
 
     // Returns pointer to global silent network manager
     static SilentNetworkAccessManager* instance();
 
   public slots:
-
-    // This cannot do any GUI stuff.
     void onAuthenticationRequired(QNetworkReply* reply, QAuthenticator* authenticator);
 };
 

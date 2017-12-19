@@ -15,10 +15,6 @@ SilentNetworkAccessManager::SilentNetworkAccessManager(QObject* parent)
           this, &SilentNetworkAccessManager::onAuthenticationRequired, Qt::DirectConnection);
 }
 
-SilentNetworkAccessManager::~SilentNetworkAccessManager() {
-  qDebug("Destroying SilentNetworkAccessManager instance.");
-}
-
 SilentNetworkAccessManager* SilentNetworkAccessManager::instance() {
   return qz_silent_acmanager();
 }

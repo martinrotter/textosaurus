@@ -12,8 +12,6 @@
 WebFactory::WebFactory(QObject* parent)
   : QObject(parent), m_escapes(QMap<QString, QString>()), m_deEscapes(QMap<QString, QString>()) {}
 
-WebFactory::~WebFactory() {}
-
 bool WebFactory::openUrlInExternalBrowser(const QString& url) const {
   if (qApp->settings()->value(GROUP(Browser), SETTING(Browser::CustomExternalBrowserEnabled)).toBool()) {
     const QString browser = qApp->settings()->value(GROUP(Browser), SETTING(Browser::CustomExternalBrowserExecutable)).toString();

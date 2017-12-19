@@ -6,12 +6,11 @@
 #include <QObject>
 
 #include "definitions/definitions.h"
+#include "network-web/silentnetworkaccessmanager.h"
 
-#include <QHttpMultiPart>
 #include <QNetworkReply>
 #include <QSslError>
 
-class SilentNetworkAccessManager;
 class QTimer;
 
 class Downloader : public QObject {
@@ -21,7 +20,7 @@ class Downloader : public QObject {
 
     // Constructors and destructors.
     explicit Downloader(QObject* parent = nullptr);
-    virtual ~Downloader();
+    virtual ~Downloader() = default;
 
     // Access to last received full output data/error/content-type.
     QByteArray lastOutputData() const;

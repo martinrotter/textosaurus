@@ -13,8 +13,6 @@
 #include <QTextDocument>
 #include <QTimer>
 
-NetworkFactory::NetworkFactory() {}
-
 QString NetworkFactory::networkErrorText(QNetworkReply::NetworkError error_code) {
   switch (error_code) {
     case QNetworkReply::ProtocolUnknownError:

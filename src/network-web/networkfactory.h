@@ -15,10 +15,9 @@ class Downloader;
 class NetworkFactory {
   Q_DECLARE_TR_FUNCTIONS(NetworkFactory)
 
-  private:
-    explicit NetworkFactory();
-
   public:
+    NetworkFactory() = delete;
+    ~NetworkFactory() = delete;
 
     // Returns human readable text for given network error.
     static QString networkErrorText(QNetworkReply::NetworkError error_code);

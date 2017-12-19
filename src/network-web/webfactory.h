@@ -12,7 +12,7 @@ class WebFactory : public QObject {
 
   public:
     explicit WebFactory(QObject* parent = nullptr);
-    virtual ~WebFactory();
+    virtual ~WebFactory() = default;
 
     // Strips "<....>" (HTML, XML) tags from given text.
     QString stripTags(QString text);

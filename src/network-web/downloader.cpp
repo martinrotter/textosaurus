@@ -3,9 +3,7 @@
 #include "network-web/downloader.h"
 
 #include "miscellaneous/iofactory.h"
-#include "network-web/silentnetworkaccessmanager.h"
 
-#include <QHttpMultiPart>
 #include <QRegularExpression>
 #include <QTimer>
 
@@ -19,8 +17,6 @@ Downloader::Downloader(QObject* parent)
   m_timer->setSingleShot(true);
   connect(m_timer, &QTimer::timeout, this, &Downloader::cancel);
 }
-
-Downloader::~Downloader() {}
 
 void Downloader::downloadFile(const QString& url, int timeout, bool protected_contents, const QString& username,
                               const QString& password) {
