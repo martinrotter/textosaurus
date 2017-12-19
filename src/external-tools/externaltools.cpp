@@ -634,10 +634,6 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
   ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
 
-  if (!error_text.isEmpty()) {
-    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, error_text, QMessageBox::Icon::Critical);
-  }
-
   switch (tool->output()) {
     case ToolOutput::InsertAtCursorPosition: {
       if (!output_text.isEmpty()) {
@@ -712,5 +708,16 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
     case ToolOutput::NoOutput:
     default:
       break;
+  }
+
+  if (!error_text.isEmpty()) {
+    m_application->outputWindow()->displayOutput(OutputSource::ExternalTool, error_text, QMessageBox::Icon::Critical);
+    m_application->outputWindow()->displayOutput(OutputSource::Application,
+                                                 tr("Tool '%1' finished with error(s)...").arg(tool->name()),
+                                                 QMessageBox::Icon::Critical);
+  }
+  else {
+    m_application->outputWindow()->displayOutput(OutputSource::Application,
+                                                 tr("Tool '%1' finished successfully...").arg(tool->name()));
   }
 }

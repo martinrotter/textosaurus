@@ -10,7 +10,6 @@
 class QPlainTextEdit;
 
 enum class OutputSource {
-  TextApplication,
   ExternalTool,
   Application
 };
