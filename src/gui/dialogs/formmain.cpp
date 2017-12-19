@@ -223,7 +223,6 @@ void FormMain::loadSize() {
 void FormMain::saveSize() {
   Settings* settings = qApp->settings();
   bool is_fullscreen = isFullScreen();
-  bool is_maximized = false;
 
   if (is_fullscreen) {
     switchFullscreenMode();
@@ -233,11 +232,7 @@ void FormMain::saveSize() {
   }
 
   if (isMaximized()) {
-    is_maximized = true;
-
-    // Window is maximized, we store that fact to settings and unmaximize.
-    qApp->settings()->setValue(GROUP(GUI), GUI::IsMainWindowMaximizedBeforeFullscreen, is_maximized);
-    setWindowState((windowState() & ~Qt::WindowMaximized) | Qt::WindowActive);
+    showNormal();
 
     // We process events to really have window un-maximized.
     qApp->processEvents();
