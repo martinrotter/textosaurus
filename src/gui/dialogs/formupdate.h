@@ -22,7 +22,7 @@ class FormUpdate : public QDialog {
 
     // Returns true if application can self-update
     // on current platform.
-    constexpr bool isSelfUpdateSupported() const;
+    constexpr bool isSelfUpdateSupported();
 
   private slots:
 
