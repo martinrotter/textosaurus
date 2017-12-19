@@ -36,28 +36,9 @@ ExternalTools::~ExternalTools() {
 QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
   QList<QAction*> actions;
   QMap<QString, QMenu*> categories;
+  QList<ExternalTool*> tools; tools << m_customTools << m_predefinedTools;
 
-  foreach (ExternalTool* tool, m_customTools) {
-    if (!tool->category().isEmpty()) {
-      if (!categories.contains(tool->category())) {
-        QMenu* category_menu = new QMenu(parent);
-
-        category_menu->setTitle(tool->category());
-
-        actions.append(category_menu->menuAction());
-        categories.insert(tool->category(), category_menu);
-      }
-
-      categories[tool->category()]->addAction(tool->action());
-    }
-    else {
-      actions.append(tool->action());
-    }
-  }
-
-  // We add already existing persistent actions for
-  // built-in tools to the "Tools" menu too.
-  foreach (ExternalTool* tool, m_predefinedTools) {
+  foreach (ExternalTool* tool, tools) {
     if (tool->addToEditMenu()) {
       continue;
     }
@@ -67,6 +48,7 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
         QMenu* category_menu = new QMenu(parent);
 
         category_menu->setTitle(tool->category());
+
         actions.append(category_menu->menuAction());
         categories.insert(tool->category(), category_menu);
       }
@@ -84,10 +66,9 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
 QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
   QList<QAction*> actions;
   QMap<QString, QMenu*> categories;
+  QList<ExternalTool*> tools; tools << m_customTools << m_predefinedTools;
 
-  // We add already existing persistent actions for
-  // built-in tools to the "Tools" menu too.
-  foreach (ExternalTool* tool, m_predefinedTools) {
+  foreach (ExternalTool* tool, tools) {
     if (!tool->addToEditMenu()) {
       continue;
     }
@@ -169,6 +150,10 @@ void ExternalTools::runSelectedExternalTool() {
 }
 
 void ExternalTools::loadPredefinedTools() {
+  if (!m_predefinedTools.isEmpty()) {
+    return;
+  }
+
   PredefinedTool* insert_date_time = new PredefinedTool(&PredefinedTools::currentDateTime, this);
 
   insert_date_time->setActionObjectName(QSL("m_actionPredefCurrDateTime"));
