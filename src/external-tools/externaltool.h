@@ -107,6 +107,9 @@ class ExternalTool : public QObject {
 
     bool isRunning() const;
 
+    QString promptValue() const;
+    void setPromptValue(const QString& prompt_value);
+
   public slots:
 
     // Runs tool with given string data (which is depending on tool input mode
@@ -130,6 +133,7 @@ class ExternalTool : public QObject {
     ToolInput m_input;
     ToolOutput m_output;
     QString m_prompt;
+    QString m_promptValue;
     QString m_shortcut;
     QString m_category;
     QString m_name;

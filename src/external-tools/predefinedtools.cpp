@@ -3,6 +3,7 @@
 #include "external-tools/predefinedtools.h"
 
 #include "definitions/definitions.h"
+#include "miscellaneous/application.h"
 #include "network-web/networkfactory.h"
 
 #include <QDateTime>
@@ -214,6 +215,28 @@ QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {
   Q_UNUSED(ok)
 
   return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
+}
+
+QString PredefinedTools::currentDate(const QString& data, bool* ok) {
+  Q_UNUSED(data)
+  Q_UNUSED(ok)
+
+  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(),
+                                                       qApp->localization()->loadedLocale().dateFormat(QLocale::FormatType::ShortFormat));
+}
+
+QString PredefinedTools::currentTime(const QString& data, bool* ok) {
+  Q_UNUSED(data)
+  Q_UNUSED(ok)
+
+  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(),
+                                                       qApp->localization()->loadedLocale().timeFormat(QLocale::FormatType::ShortFormat));
+}
+
+QString PredefinedTools::formattedDateTime(const QString& data, bool* ok) {
+  Q_UNUSED(ok)
+
+  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(), data);
 }
 
 QString PredefinedTools::toUrlEncoded(const QString& data, bool* ok) {

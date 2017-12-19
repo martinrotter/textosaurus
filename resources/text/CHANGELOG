@@ -1,6 +1,8 @@
 2017.12.XX
 ----------
 Added:
+* Enhanced external tools integration, sorted items in menus.
+* Added more DateTime built-in tools. (#9)
 * Build-int tools now can be assigned to keyboard shortcuts and added to toolbar.
 
 Changed:

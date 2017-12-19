@@ -189,12 +189,43 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* insert_date_time = new PredefinedTool(&PredefinedTools::currentDateTime, this);
 
   insert_date_time->setActionObjectName(QSL("m_actionPredefCurrDateTime"));
-  insert_date_time->setCategory(tr("Insert..."));
-  insert_date_time->setName(tr("Date/time"));
+  insert_date_time->setCategory(tr("DateTime"));
+  insert_date_time->setName(tr("Insert DateTime"));
   insert_date_time->setInput(ToolInput::NoInput);
   insert_date_time->setOutput(ToolOutput::InsertAtCursorPosition);
 
   m_predefinedTools.append(insert_date_time);
+
+  PredefinedTool* insert_date = new PredefinedTool(&PredefinedTools::currentDate, this);
+
+  insert_date->setActionObjectName(QSL("m_actionPredefCurrDate"));
+  insert_date->setCategory(tr("DateTime"));
+  insert_date->setName(tr("Insert Date"));
+  insert_date->setInput(ToolInput::NoInput);
+  insert_date->setOutput(ToolOutput::InsertAtCursorPosition);
+
+  m_predefinedTools.append(insert_date);
+
+  PredefinedTool* insert_time = new PredefinedTool(&PredefinedTools::currentTime, this);
+
+  insert_time->setActionObjectName(QSL("m_actionPredefCurrTime"));
+  insert_time->setCategory(tr("DateTime"));
+  insert_time->setName(tr("Insert Time"));
+  insert_time->setInput(ToolInput::NoInput);
+  insert_time->setOutput(ToolOutput::InsertAtCursorPosition);
+
+  m_predefinedTools.append(insert_time);
+
+  PredefinedTool* insert_formatted_datetime = new PredefinedTool(&PredefinedTools::formattedDateTime, this);
+
+  insert_formatted_datetime->setActionObjectName(QSL("m_actionPredefCurrFormatDateTime"));
+  insert_formatted_datetime->setCategory(tr("DateTime"));
+  insert_formatted_datetime->setName(tr("Insert DateTime (Custom Format)"));
+  insert_formatted_datetime->setInput(ToolInput::AskForInput);
+  insert_formatted_datetime->setPromptValue(QSL("HH:mm:ss dddd, dd.MM.yyyy"));
+  insert_formatted_datetime->setOutput(ToolOutput::InsertAtCursorPosition);
+
+  m_predefinedTools.append(insert_formatted_datetime);
 
   PredefinedTool* json_beautify = new PredefinedTool(&PredefinedTools::jsonBeautify, this);
 
@@ -586,7 +617,7 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
         bool ok;
 
         data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
-                                     tool_to_run->prompt(), QLineEdit::EchoMode::Normal, QString(), &ok);
+                                     tool_to_run->prompt(), QLineEdit::EchoMode::Normal, tool_to_run->promptValue(), &ok);
 
         if (!ok) {
           return;

@@ -25,8 +25,11 @@ class PredefinedTools {
     static QString xmlBeautify(const QString& data, bool* ok);
     static QString xmlLinearize(const QString& data, bool* ok);
 
-    // Inserting.
+    // Date/time.
     static QString currentDateTime(const QString& data, bool* ok);
+    static QString currentDate(const QString& data, bool* ok);
+    static QString currentTime(const QString& data, bool* ok);
+    static QString formattedDateTime(const QString& data, bool* ok);
 
     // Change case.
     static QString toLower(const QString& data, bool* ok);

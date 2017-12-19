@@ -110,6 +110,14 @@ void ExternalTool::onProcessFinished(QPointer<TextEditor> editor, int exit_code,
   bash_process->deleteLater();
 }
 
+QString ExternalTool::promptValue() const {
+  return m_promptValue;
+}
+
+void ExternalTool::setPromptValue(const QString& prompt_value) {
+  m_promptValue = prompt_value;
+}
+
 bool ExternalTool::isRunning() const {
   return m_isRunning;
 }
