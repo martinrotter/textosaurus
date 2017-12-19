@@ -65,8 +65,8 @@ namespace GUI {
   constexpr auto ToolbarActions = "toolbar";
   constexpr auto ToolbarActionsDef = "m_actionFileNew,m_actionFileOpen,m_actionFileSave,separator,"
                                      "m_actionEditBack,m_actionEditForward,separator,spacer,m_actionTabsCloseAllUnmodified";
-  constexpr auto MainWindowInitialSize = "window_size";
-  constexpr auto MainWindowInitialPosition = "window_position";
+  constexpr auto MainWindowGeometry = "main_window_geometry";
+  const QByteArray MainWindowGeometryDef = QByteArray();
   constexpr auto IsMainWindowMaximizedBeforeFullscreen = "is_window_maximized_before_fullscreen";
   constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
   constexpr auto MainMenuVisible = "main_menu_visible";

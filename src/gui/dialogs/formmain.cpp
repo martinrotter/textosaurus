@@ -209,12 +209,7 @@ void FormMain::setupIcons() {
 }
 
 void FormMain::loadSize() {
-  const QRect screen = qApp->desktop()->screenGeometry();
   const Settings* settings = qApp->settings();
-
-  // Reload main window size & position.
-  resize(settings->value(GROUP(GUI), GUI::MainWindowInitialSize, size()).toSize());
-  move(settings->value(GROUP(GUI), GUI::MainWindowInitialPosition, screen.center() - rect().center()).toPoint());
 
   if (!settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool()) {
     toolBar()->hide();
@@ -224,6 +219,7 @@ void FormMain::loadSize() {
     statusBar()->hide();
   }
 
+  restoreGeometry(settings->value(GROUP(GUI), SETTING(GUI::MainWindowGeometry)).toByteArray());
   restoreState(settings->value(GROUP(GUI), SETTING(GUI::MainWindowState)).toByteArray());
 }
 
@@ -245,10 +241,9 @@ void FormMain::saveSize() {
     qApp->processEvents();
   }
 
-  settings->setValue(GROUP(GUI), GUI::MainWindowInitialPosition, pos());
-  settings->setValue(GROUP(GUI), GUI::MainWindowInitialSize, size());
   settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, toolBar()->isActive());
   settings->setValue(GROUP(GUI), GUI::StatusBarVisible, statusBar()->isActive());
+  settings->setValue(GROUP(GUI), GUI::MainWindowGeometry, saveGeometry());
   settings->setValue(GROUP(GUI), GUI::MainWindowState, saveState());
 }
 
