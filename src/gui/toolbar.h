@@ -21,6 +21,15 @@ class ToolBar : public BaseToolBar {
     virtual QStringList savedActions() const override;
 
     void refreshVisualProperties();
+
+    bool isActive() const;
+
+  public slots:
+    void setIsActive(bool is_active);
+    void resetActiveState();
+
+  private:
+    bool m_isActive;
 };
 
 #endif // MAIN_TOOLBAR_H

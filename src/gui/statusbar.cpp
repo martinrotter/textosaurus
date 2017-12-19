@@ -36,3 +36,16 @@ void StatusBar::updateInfo() {
   lst.removeAll(QString());
   m_lblInfo->setText(lst.join(QSL(" \u2022 ")));
 }
+
+bool StatusBar::isActive() const {
+  return m_isActive;
+}
+
+void StatusBar::setIsActive(bool isActive) {
+  m_isActive = isActive;
+  setVisible(m_isActive);
+}
+
+void StatusBar::resetActiveState() {
+  setIsActive(m_isActive);
+}

@@ -18,6 +18,12 @@ class StatusBar : public QStatusBar {
     void setEncoding(const QString& encoding);
     void setFileType(const QString& file_type);
 
+    bool isActive() const;
+
+  public slots:
+    void setIsActive(bool isActive);
+    void resetActiveState();
+
   private:
     void updateInfo();
 
@@ -26,6 +32,7 @@ class StatusBar : public QStatusBar {
     QString m_infoEncoding;
     QString m_infoEol;
     QString m_infoLexer;
+    bool m_isActive;
 };
 
 #endif // STATUSBAR_H

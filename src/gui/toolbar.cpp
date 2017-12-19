@@ -89,3 +89,16 @@ void ToolBar::refreshVisualProperties() {
 
   setToolButtonStyle(button_style);
 }
+
+bool ToolBar::isActive() const {
+  return m_isActive;
+}
+
+void ToolBar::setIsActive(bool is_active) {
+  m_isActive = is_active;
+  setVisible(m_isActive);
+}
+
+void ToolBar::resetActiveState() {
+  setIsActive(m_isActive);
+}

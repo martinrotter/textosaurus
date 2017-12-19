@@ -211,21 +211,13 @@ void FormMain::loadSize() {
   resize(settings->value(GROUP(GUI), GUI::MainWindowInitialSize, size()).toSize());
   move(settings->value(GROUP(GUI), GUI::MainWindowInitialPosition, screen.center() - rect().center()).toPoint());
 
-  if (settings->value(GROUP(GUI), SETTING(GUI::MainWindowStartsMaximized)).toBool()) {
-    setWindowState(windowState() | Qt::WindowMaximized);
-
-    // We process events so that window is really maximized fast.
-    qApp->processEvents();
+  if (!settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool()) {
+    toolBar()->hide();
   }
 
-  // If user exited the application while in fullsreen mode,
-  // then re-enable it now.
-  if (settings->value(GROUP(GUI), SETTING(GUI::MainWindowStartsFullscreen)).toBool()) {
-    m_ui.m_actionFullscreen->setChecked(true);
+  if (!settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool()) {
+    statusBar()->hide();
   }
-
-  m_ui.m_actionSwitchToolBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
-  m_ui.m_actionSwitchStatusBar->setChecked(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
 }
 
 void FormMain::saveSize() {
@@ -234,7 +226,7 @@ void FormMain::saveSize() {
   bool is_maximized = false;
 
   if (is_fullscreen) {
-    m_ui.m_actionFullscreen->setChecked(false);
+    switchFullscreenMode();
 
     // We (process events to really) un-fullscreen, so that we can determine if window is really maximized.
     qApp->processEvents();
@@ -253,11 +245,8 @@ void FormMain::saveSize() {
 
   settings->setValue(GROUP(GUI), GUI::MainWindowInitialPosition, pos());
   settings->setValue(GROUP(GUI), GUI::MainWindowInitialSize, size());
-  settings->setValue(GROUP(GUI), GUI::MainWindowStartsMaximized, is_maximized);
-  settings->setValue(GROUP(GUI), GUI::MainWindowStartsFullscreen, is_fullscreen);
-
-  settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, m_ui.m_actionSwitchToolBar->isChecked());
-  settings->setValue(GROUP(GUI), GUI::StatusBarVisible, m_ui.m_actionSwitchStatusBar->isChecked());
+  settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, toolBar()->isActive());
+  settings->setValue(GROUP(GUI), GUI::StatusBarVisible, statusBar()->isActive());
 }
 
 void FormMain::createConnections() {
@@ -270,10 +259,15 @@ void FormMain::createConnections() {
   });
 
   // Menu "View" connections.
-  connect(m_ui.m_actionFullscreen, &QAction::toggled, this, &FormMain::switchFullscreenMode);
+  connect(m_ui.m_menuShowHide, &QMenu::aboutToShow, [this]() {
+    m_ui.m_actionFullscreen->setChecked(isFullScreen());
+    m_ui.m_actionSwitchStatusBar->setChecked(statusBar()->isVisible());
+    m_ui.m_actionSwitchToolBar->setChecked(toolBar()->isVisible());
+  });
+  connect(m_ui.m_actionFullscreen, &QAction::triggered, this, &FormMain::switchFullscreenMode);
   connect(m_ui.m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
-  connect(m_ui.m_actionSwitchToolBar, &QAction::toggled, toolBar(), &ToolBar::setVisible);
-  connect(m_ui.m_actionSwitchStatusBar, &QAction::toggled, statusBar(), &StatusBar::setVisible);
+  connect(m_ui.m_actionSwitchToolBar, &QAction::triggered, toolBar(), &ToolBar::setIsActive);
+  connect(m_ui.m_actionSwitchStatusBar, &QAction::triggered, statusBar(), &StatusBar::setIsActive);
 
   // Menu "Tools" connections.
   connect(m_ui.m_actionSettings, &QAction::triggered, this, [this]() {

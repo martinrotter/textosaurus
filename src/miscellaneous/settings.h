@@ -69,10 +69,6 @@ namespace GUI {
   constexpr auto MainWindowInitialPosition = "window_position";
   constexpr auto IsMainWindowMaximizedBeforeFullscreen = "is_window_maximized_before_fullscreen";
   constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
-  constexpr auto MainWindowStartsFullscreen = "start_in_fullscreen";
-  constexpr auto MainWindowStartsFullscreenDef = false;
-  constexpr auto MainWindowStartsMaximized = "window_is_maximized";
-  constexpr auto MainWindowStartsMaximizedDef = false;
   constexpr auto MainMenuVisible = "main_menu_visible";
   constexpr auto MainMenuVisibleDef = true;
   constexpr auto ToolbarsVisible = "enable_toolbars";
