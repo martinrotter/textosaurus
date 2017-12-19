@@ -20,10 +20,6 @@ TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
   m_syntaxHighlighting(new SyntaxHighlighting(this)) {}
 
-TextApplicationSettings::~TextApplicationSettings() {
-  qDebug("Destroying TextApplicationSettings");
-}
-
 QStringList TextApplicationSettings::recentFiles() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::RecentFiles)).toStringList();
 }

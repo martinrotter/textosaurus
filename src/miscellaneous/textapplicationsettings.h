@@ -17,7 +17,7 @@ class TextApplicationSettings : public QObject {
 
   public:
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
-    virtual ~TextApplicationSettings();
+    virtual ~TextApplicationSettings() = default;
 
     QStringList recentFiles() const;
     int eolMode() const;

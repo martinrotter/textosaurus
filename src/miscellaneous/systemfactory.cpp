@@ -27,8 +27,6 @@ using UpdateCheck = QPair<UpdateInfo, QNetworkReply::NetworkError>;
 
 SystemFactory::SystemFactory(QObject* parent) : QObject(parent) {}
 
-SystemFactory::~SystemFactory() {}
-
 QRegularExpression SystemFactory::supportedUpdateFiles() {
 #if defined(Q_OS_WIN)
   return QRegularExpression(QSL(".+win.+\\.(exe|7z)"));
@@ -56,20 +54,6 @@ bool SystemFactory::removeTrolltechJunkRegistryKeys() {
 }
 
 #endif
-
-QString SystemFactory::loggedInUser() const {
-  QString name = qgetenv("USER");
-
-  if (name.isEmpty()) {
-    name = qgetenv("USERNAME");
-  }
-
-  if (name.isEmpty()) {
-    name = tr("anonymous");
-  }
-
-  return name;
-}
 
 void SystemFactory::checkForUpdates() const {
   Downloader* downloader = new Downloader();
@@ -123,10 +107,6 @@ bool SystemFactory::isVersionNewer(const QString& new_version, const QString& ba
       return new_version_tkn.join(QString()).toInt() > 0;
     }
   }
-}
-
-bool SystemFactory::isVersionEqualOrNewer(const QString& new_version, const QString& base_version) {
-  return new_version == base_version || isVersionNewer(new_version, base_version);
 }
 
 bool SystemFactory::openFolderFile(const QString& file_path) {

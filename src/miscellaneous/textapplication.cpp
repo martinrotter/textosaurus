@@ -35,10 +35,6 @@ TextApplication::TextApplication(QObject* parent)
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
 }
 
-TextApplication::~TextApplication() {
-  qDebug("Destroying TextApplication");
-}
-
 TextEditor* TextApplication::currentEditor() const {
   return m_tabEditors->textEditorAt(m_tabEditors->currentIndex());
 }
@@ -70,7 +66,7 @@ int TextApplication::addTextEditor(TextEditor* editor) {
   return m_tabEditors->addTab(editor, QIcon(), tr("New text file"), TabType::TextEditor);
 }
 
-TextEditor* TextApplication::attachTextEditor(TextEditor* editor) {
+void TextApplication::attachTextEditor(TextEditor* editor) {
   editor->viewport()->installEventFilter(this);
 
   connect(editor, &TextEditor::editorReloaded, this, &TextApplication::onEditorReloaded);
@@ -78,8 +74,6 @@ TextEditor* TextApplication::attachTextEditor(TextEditor* editor) {
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestedVisibility, this, &TextApplication::onEditorRequestedVisibility);
-
-  return editor;
 }
 
 void TextApplication::saveCurrentEditor() {

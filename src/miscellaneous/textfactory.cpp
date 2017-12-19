@@ -19,8 +19,6 @@
 #include <QStringList>
 #include <QTextCodec>
 
-TextFactory::TextFactory() {}
-
 int TextFactory::stringHeight(const QString& string, const QFontMetrics& metrics) {
   const int count_lines = string.split(QL1C('\n')).size();
 

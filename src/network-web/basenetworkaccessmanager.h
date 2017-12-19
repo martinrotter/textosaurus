@@ -10,23 +10,17 @@ class BaseNetworkAccessManager : public QNetworkAccessManager {
   Q_OBJECT
 
   public:
-
-    // Constructors and desctructors.
     explicit BaseNetworkAccessManager(QObject* parent = nullptr);
-    virtual ~BaseNetworkAccessManager();
+    virtual ~BaseNetworkAccessManager() = default;
 
   public slots:
     virtual void loadSettings();
 
   protected slots:
-
-    // Called when some SSL-related errors are detected.
     void onSslErrors(QNetworkReply* reply, const QList<QSslError>& error);
 
   protected:
-
-    // Creates custom request.
-    QNetworkReply* createRequest(Operation op, const QNetworkRequest& request, QIODevice* outgoingData);
+    virtual QNetworkReply* createRequest(Operation op, const QNetworkRequest& request, QIODevice* outgoingData) override;
 };
 
 #endif // BASENETWORKACCESSMANAGER_H

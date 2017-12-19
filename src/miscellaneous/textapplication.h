@@ -27,7 +27,7 @@ class TextApplication : public QObject {
 
   public:
     explicit TextApplication(QObject* parent = nullptr);
-    virtual ~TextApplication();
+    virtual ~TextApplication() = default;
 
     TextEditor* currentEditor() const;
     OutputWindow* outputWindow() const;
@@ -41,7 +41,7 @@ class TextApplication : public QObject {
 
     // New editors.
     int addTextEditor(TextEditor* editor);
-    TextEditor* attachTextEditor(TextEditor* editor);
+    void attachTextEditor(TextEditor* editor);
 
     // Load/save/new files.
     void newFile();
@@ -64,7 +64,7 @@ class TextApplication : public QObject {
     void quit(bool* ok);
 
   protected:
-    bool eventFilter(QObject* obj, QEvent* event);
+    virtual bool eventFilter(QObject* obj, QEvent* event) override;
 
   private slots:
     void printPreviewCurrentEditor();
@@ -96,6 +96,7 @@ class TextApplication : public QObject {
     // External tools.
     void loadNewExternalTools();
 
+    // Misc.
     void initializeDockWidgetsMenu();
 
   private:

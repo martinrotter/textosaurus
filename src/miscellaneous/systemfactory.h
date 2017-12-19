@@ -12,22 +12,17 @@
 #include <QNetworkReply>
 #include <QPair>
 
-class UpdateUrl {
-  public:
-
-    QString m_fileUrl;
-    QString m_name;
-    QString m_size;
+struct UpdateUrl {
+  QString m_fileUrl;
+  QString m_name;
+  QString m_size;
 };
+struct UpdateInfo {
+  QString m_availableVersion;
+  QString m_changes;
+  QDateTime m_date;
 
-class UpdateInfo {
-  public:
-
-    QString m_availableVersion;
-    QString m_changes;
-    QDateTime m_date;
-
-    QList<UpdateUrl> m_urls;
+  QList<UpdateUrl> m_urls;
 };
 
 Q_DECLARE_METATYPE(UpdateInfo)
@@ -36,40 +31,26 @@ class SystemFactory : public QObject {
   Q_OBJECT
 
   public:
-
-    // Specifies possible states of auto-start functionality.
-    enum class AutoStartStatus {
-      Enabled,
-      Disabled,
-      Unavailable
-    };
-
     explicit SystemFactory(QObject* parent = nullptr);
-    virtual ~SystemFactory();
+    virtual ~SystemFactory() = default;
 
 #if defined(Q_OS_WIN)
     bool removeTrolltechJunkRegistryKeys();
 #endif
 
-    // Retrieves username of currently logged-in user.
-    QString loggedInUser() const;
-
     // Tries to download list with new updates.
     void checkForUpdates() const;
 
-    static QRegularExpression supportedUpdateFiles();
+    QRegularExpression supportedUpdateFiles();
 
     // Checks if update is newer than current application version.
-    static bool isVersionNewer(const QString& new_version, const QString& base_version);
-    static bool isVersionEqualOrNewer(const QString& new_version, const QString& base_version);
-    static bool openFolderFile(const QString& file_path);
+    bool isVersionNewer(const QString& new_version, const QString& base_version);
+    bool openFolderFile(const QString& file_path);
 
   signals:
     void updatesChecked(QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> updates) const;
 
   private:
-
-    // Performs parsing of downloaded file with list of updates.
     QList<UpdateInfo> parseUpdatesFile(const QByteArray& updates_file) const;
 };
 
