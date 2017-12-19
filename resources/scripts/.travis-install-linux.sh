@@ -6,7 +6,7 @@ mkdir textilosaurus-build && cd textilosaurus-build
 
 # Build application.
 lrelease -compress ../textilosaurus.pro
-qmake ../textilosaurus.pro "WITH_UBUNTU=true QMAKE_CXX=clang"
+qmake -spec linux-clang "WITH_UBUNTU=true" ../textilosaurus.pro 
 make
 make install
 
