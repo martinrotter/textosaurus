@@ -52,6 +52,12 @@ void TabWidget::closeAllTabs() {
   }
 }
 
+void TabWidget::closeCurrentTab() {
+  if (currentIndex() >= 0) {
+    closeTab(currentIndex());
+  }
+}
+
 void TabWidget::gotoNextTab() {
   if (currentIndex() == count() - 1) {
     setCurrentIndex(0);
@@ -86,11 +92,12 @@ void TabWidget::indentTabText(int index) {
 }
 
 bool TabWidget::removeTab(int index, bool clear_from_memory) {
-  bool closed = widget(index)->close();
+  auto widg = widget(index);
+  bool closed = widg != nullptr && widg->close();
 
   if (closed) {
     if (clear_from_memory) {
-      widget(index)->deleteLater();
+      widg->deleteLater();
     }
 
     QTabWidget::removeTab(index);

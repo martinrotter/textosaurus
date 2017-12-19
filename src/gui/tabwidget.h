@@ -42,6 +42,7 @@ class TabWidget : public QTabWidget {
     bool closeTab(int index);
     void closeAllTabsExceptCurrent();
     void closeAllTabs();
+    void closeCurrentTab();
 
     void gotoNextTab();
     void gotoPreviousTab();

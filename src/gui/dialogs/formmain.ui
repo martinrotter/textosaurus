@@ -38,7 +38,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -149,6 +149,7 @@
     <property name="title">
      <string>&amp;Tabs</string>
     </property>
+    <addaction name="m_actionTabsCloseCurrent"/>
     <addaction name="m_actionTabsCloseAll"/>
     <addaction name="m_actionTabsCloseAllExceptCurrent"/>
     <addaction name="m_actionTabsCloseAllUnmodified"/>
@@ -347,12 +348,12 @@
   </action>
   <action name="m_actionTabsCloseAll">
    <property name="text">
-    <string>Close all tabs</string>
+    <string>Close &amp;all tabs</string>
    </property>
   </action>
   <action name="m_actionTabsCloseAllExceptCurrent">
    <property name="text">
-    <string>Close all tabs except current</string>
+    <string>Close all tabs &amp;except current</string>
    </property>
   </action>
   <action name="m_actionTabsNext">
@@ -394,7 +395,7 @@
     <string>&amp;Save file as...</string>
    </property>
    <property name="shortcut">
-    <string notr="true">Ctrl+Shift+S</string>
+    <string notr="true">Ctrl+Alt+S</string>
    </property>
   </action>
   <action name="m_actionFileSaveAll">
@@ -402,7 +403,7 @@
     <string>&amp;Save all files</string>
    </property>
    <property name="shortcut">
-    <string notr="true">Ctrl+Alt+S</string>
+    <string>Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="m_actionTabsCloseAllUnmodified">
@@ -512,10 +513,16 @@
    <property name="text">
     <string>&amp;Print...</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+P</string>
+   </property>
   </action>
   <action name="m_actionPrintPreview">
    <property name="text">
     <string>&amp;Print pre&amp;view</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+P</string>
    </property>
   </action>
   <action name="m_actionDockShowOutput">
@@ -540,6 +547,14 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+R</string>
+   </property>
+  </action>
+  <action name="m_actionTabsCloseCurrent">
+   <property name="text">
+    <string>&amp;Close current tab</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+W</string>
    </property>
   </action>
  </widget>

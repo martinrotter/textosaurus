@@ -101,6 +101,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionTabsNext;
   actions << m_ui.m_actionTabsPrevious;
   actions << m_ui.m_actionTabsCloseAll;
+  actions << m_ui.m_actionTabsCloseCurrent;
   actions << m_ui.m_actionTabsCloseAllExceptCurrent;
   actions << m_ui.m_actionTabsCloseAllUnmodified;
 
@@ -197,6 +198,7 @@ void FormMain::setupIcons() {
   m_ui.m_actionTabsCloseAll->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionTabsCloseAllExceptCurrent->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionTabsCloseAllUnmodified->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
+  m_ui.m_actionTabsCloseCurrent->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionTabsNext->setIcon(icon_theme_factory->fromTheme(QSL("go-next")));
   m_ui.m_actionTabsPrevious->setIcon(icon_theme_factory->fromTheme(QSL("go-previous")));
 }
@@ -294,6 +296,7 @@ void FormMain::createConnections() {
   connect(m_ui.m_actionTabsPrevious, &QAction::triggered, m_tabEditors, &TabWidget::gotoPreviousTab);
   connect(m_ui.m_actionTabsCloseAllExceptCurrent, &QAction::triggered, m_tabEditors, &TabWidget::closeAllTabsExceptCurrent);
   connect(m_ui.m_actionTabsCloseAll, &QAction::triggered, m_tabEditors, &TabWidget::closeAllTabs);
+  connect(m_ui.m_actionTabsCloseCurrent, &QAction::triggered, m_tabEditors, &TabWidget::closeCurrentTab);
 }
 
 void FormMain::showWiki() {
