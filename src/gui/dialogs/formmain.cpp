@@ -227,16 +227,15 @@ void FormMain::loadSize() {
 
 void FormMain::saveSize() {
   Settings* settings = qApp->settings();
-  bool is_fullscreen = isFullScreen();
 
-  if (is_fullscreen) {
+  if (isFullScreen()) {
     switchFullscreenMode();
 
     // We (process events to really) un-fullscreen, so that we can determine if window is really maximized.
     qApp->processEvents();
   }
 
-  if (isMaximized()) {
+  if (isMaximized() || isMinimized()) {
     showNormal();
 
     // We process events to really have window un-maximized.
