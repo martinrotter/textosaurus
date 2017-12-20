@@ -30,11 +30,13 @@ class FavoritesListWidget : public QListWidget {
     virtual void keyPressEvent(QKeyEvent* event) override;
 };
 
+class TextApplication;
+
 class FilesystemSidebar : public DockWidget {
   Q_OBJECT
 
   public:
-    explicit FilesystemSidebar(QWidget* parent = nullptr);
+    explicit FilesystemSidebar(TextApplication* text_app, QWidget* parent = nullptr);
     virtual ~FilesystemSidebar() = default;
 
     virtual Qt::DockWidgetArea initialArea() const override;
@@ -57,6 +59,7 @@ class FilesystemSidebar : public DockWidget {
     void saveFavorites() const;
 
   private:
+    TextApplication* m_textApp;
     FileSystemSidebarModel* m_fsModel;
     QListView* m_fsView;
     FavoritesListWidget* m_lvFavorites;

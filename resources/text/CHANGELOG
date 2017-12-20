@@ -1,6 +1,7 @@
 2017.12.20
 ----------
 Added:
+* FS sidebar shows only supported file types. (#14)
 * FS sidebar's favorites list is not alphabetically sorted.
 * FS sidebar now can add folders to favorites list. (#14)
 * Fulscreen mode now automatically hides tool bar and status bar. (#8)

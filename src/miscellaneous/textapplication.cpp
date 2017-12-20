@@ -362,7 +362,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_outputSidebar = new OutputWindow(m_mainForm);
   m_outputSidebar->setObjectName(QSL("m_outputSidebar"));
 
-  m_filesystemSidebar = new FilesystemSidebar(m_mainForm);
+  m_filesystemSidebar = new FilesystemSidebar(this, m_mainForm);
   m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
 
   // Get pointers to editor-related global actions/menus.

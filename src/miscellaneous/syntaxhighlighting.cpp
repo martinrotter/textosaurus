@@ -7,8 +7,22 @@
 
 #include <QRegularExpression>
 
-SyntaxHighlighting::SyntaxHighlighting(QObject* parent) : QObject(parent), m_fileFilters(QStringList()),
-  m_lexers(QList<Lexer>()) {}
+SyntaxHighlighting::SyntaxHighlighting(QObject* parent)
+  : QObject(parent), m_bareFileFilters(QStringList()), m_fileFilters(QStringList()), m_lexers(QList<Lexer>()) {}
+
+QStringList SyntaxHighlighting::bareFileFilters() {
+  if (m_bareFileFilters.isEmpty()) {
+    for (const Lexer& lex : lexers()) {
+      for (const QString& suffix : lex.m_suffices) {
+        if (!suffix.isEmpty()) {
+          m_bareFileFilters << QSL("*") + suffix;
+        }
+      }
+    }
+  }
+
+  return m_bareFileFilters;
+}
 
 Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
   QRegularExpression reg(QSL("(?:\\.?)(\\w+$)|($)"), QRegularExpression::PatternOption::CaseInsensitiveOption);

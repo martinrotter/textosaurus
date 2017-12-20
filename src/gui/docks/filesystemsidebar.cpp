@@ -5,6 +5,8 @@
 #include "gui/plaintoolbutton.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
+#include "miscellaneous/syntaxhighlighting.h"
+#include "miscellaneous/textapplication.h"
 
 #include <QFileSystemModel>
 #include <QGroupBox>
@@ -12,7 +14,8 @@
 #include <QMimeData>
 #include <QVBoxLayout>
 
-FilesystemSidebar::FilesystemSidebar(QWidget* parent) : DockWidget(parent), m_fsModel(nullptr) {
+FilesystemSidebar::FilesystemSidebar(TextApplication* text_app, QWidget* parent) : DockWidget(parent),
+  m_textApp(text_app), m_fsModel(nullptr) {
   setWindowTitle(tr("Filesystem"));
 }
 
@@ -58,12 +61,14 @@ void FilesystemSidebar::load() {
     layout_toolbar->setMargin(0);
 
     // Initialize FS browser
+    m_fsModel->setNameFilterDisables(false);
+    m_fsModel->setNameFilters(m_textApp->settings()->syntaxHighlighting()->bareFileFilters());
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
+    m_lvFavorites->setIconSize(QSize(12, 12));
     m_fsModel->setRootPath(QString());
     m_fsView->setRootIndex(m_fsModel->index(qApp->documentsFolder()));
-    m_lvFavorites->setIconSize(QSize(12, 12));
 
     connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
 

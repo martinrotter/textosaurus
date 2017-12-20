@@ -30,6 +30,7 @@ class SyntaxHighlighting : public QObject {
     explicit SyntaxHighlighting(QObject* parent = nullptr);
     virtual ~SyntaxHighlighting() = default;
 
+    QStringList bareFileFilters();
     QStringList fileFilters();
     QList<Lexer> lexers();
     Lexer defaultLexer();
@@ -41,6 +42,7 @@ class SyntaxHighlighting : public QObject {
     Lexer lexerForName(const QString& name);
 
   private:
+    QStringList m_bareFileFilters;
     QStringList m_fileFilters;
 
     QList<Lexer> m_lexers;
