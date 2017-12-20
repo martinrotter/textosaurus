@@ -217,13 +217,8 @@ void FormMain::setupIcons() {
 void FormMain::loadSize() {
   const Settings* settings = qApp->settings();
 
-  if (!settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool()) {
-    toolBar()->hide();
-  }
-
-  if (!settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool()) {
-    statusBar()->hide();
-  }
+  toolBar()->setIsActive(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
+  statusBar()->setIsActive(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
 
   restoreGeometry(settings->value(GROUP(GUI), SETTING(GUI::MainWindowGeometry)).toByteArray());
   restoreState(settings->value(GROUP(GUI), SETTING(GUI::MainWindowState)).toByteArray());
