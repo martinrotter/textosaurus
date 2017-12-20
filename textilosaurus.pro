@@ -472,6 +472,11 @@ lupdate.commands = lupdate $$shell_path($$PWD/textilosaurus.pro)
 
 QMAKE_EXTRA_TARGETS += lupdate
 
+# Make sure QM translations are nerated.
+qtPrepareTool(LRELEASE, lrelease) {
+  system($$LRELEASE_EXECUTABLE -compress $$shell_path($$shell_quote($$PWD/textilosaurus.pro)))
+}
+
 # Create new "make 7zip" target and "make zip" target.
 win32 {
   seven_zip.target = 7zip
