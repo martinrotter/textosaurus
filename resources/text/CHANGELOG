@@ -1,5 +1,8 @@
 2018.01.XX
 ----------
+Added:
+* Ability to automatically reload externally modified documents.
+
 Fixed:
 * Some warnings/leaks detected by valgrind.
 * Some warnings about adding layout.

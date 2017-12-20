@@ -89,6 +89,7 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   setText(str.readAll().toUtf8().constData());
   emptyUndoBuffer();
   blockSignals(false);
+  reattachWatcher(m_filePath);
 
   emit loadedFromFile(m_filePath);
 }
@@ -105,7 +106,8 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
   bool not_again;
 
   if (MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File externally modified"),
-                       tr("File '%1' was modified outside of %2."),
+                       tr("File '%1' was modified outside of %2.").arg(QDir::toNativeSeparators(file_path),
+                                                                       APP_NAME),
                        tr("Do you want to reload file now? This will discard all unsaved changes."),
                        QString(), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
                        QMessageBox::StandardButton::Yes, &not_again, tr("Reload all files automatically (discard changes)")) ==
@@ -372,6 +374,8 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
     return;
   }
 
+  m_fileWatcher->blockSignals(true);
+
   QTextStream str(&file); str.setCodec(m_encoding.constData());
 
   str << getText(length() + 1);
@@ -379,6 +383,8 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   file.close();
 
   m_filePath = QDir::toNativeSeparators(file_path);
+  m_fileWatcher->blockSignals(false);
+  reattachWatcher(m_filePath);
 
   setSavePoint();
   emit savedToFile(m_filePath);
