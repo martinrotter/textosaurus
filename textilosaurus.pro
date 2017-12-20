@@ -8,14 +8,12 @@
 # Usage:
 #   a) DEBUG build for testing. (out of source build type)
 #     cd ../build-dir
-#     lrelease -compress ../textilosaurus-dir/textilosaurus.pro
 #     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=debug PREFIX=./usr
 #     make
 #     make install
 #
 #   b) RELEASE build for production use. (out of source build type)
 #     cd ../build-dir
-#     lrelease -compress ../textilosaurus-dir/textilosaurus.pro
 #     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=release PREFIX=./usr
 #     make
 #     make install
@@ -28,7 +26,7 @@
 # Other information:
 #   - supports Windows, Linux,
 #   - Qt 5.6.0 or higher is required,
-#   - C++ 11 is required.
+#   - C++ 14 is required.
 #
 # Authors and contributors:
 #   - Martin Rotter (project leader).
