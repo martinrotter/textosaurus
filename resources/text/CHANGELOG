@@ -1,3 +1,9 @@
+2018.01.XX
+----------
+Fixed:
+* Some warnings/leaks detected by valgrind.
+* Some warnings about adding layout.
+
 2017.12.20
 ----------
 Added:
