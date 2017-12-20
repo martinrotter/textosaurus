@@ -1,6 +1,7 @@
-2017.12.XX
+2017.12.20
 ----------
 Added:
+* Fulscreen mode now automatically hides tool bar and status bar. (#8)
 * Added couple of default keyboard shortcuts. (#7)
 * Enhanced external tools integration, sorted items in menus.
 * Added more DateTime built-in tools. (#9)

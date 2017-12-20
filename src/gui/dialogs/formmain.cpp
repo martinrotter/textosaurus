@@ -123,6 +123,9 @@ void FormMain::switchFullscreenMode() {
   if (!isFullScreen()) {
     qApp->settings()->setValue(GROUP(GUI), GUI::IsMainWindowMaximizedBeforeFullscreen, isMaximized());
     showFullScreen();
+
+    toolBar()->hide();
+    statusBar()->hide();
   }
   else {
     if (qApp->settings()->value(GROUP(GUI), SETTING(GUI::IsMainWindowMaximizedBeforeFullscreen)).toBool()) {
@@ -131,6 +134,9 @@ void FormMain::switchFullscreenMode() {
     else {
       showNormal();
     }
+
+    toolBar()->resetActiveState();
+    statusBar()->resetActiveState();
   }
 }
 
