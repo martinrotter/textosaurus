@@ -46,12 +46,12 @@ void FilesystemSidebar::load() {
     PlainToolButton* btn_add_favorites = new PlainToolButton(widget);
 
     connect(btn_parent, &PlainToolButton::clicked, this, &FilesystemSidebar::goToParentFolder);
-    connect(btn_add_favorites, &PlainToolButton::clicked, this, &FilesystemSidebar::addFileToFavorites);
+    connect(btn_add_favorites, &PlainToolButton::clicked, this, &FilesystemSidebar::addToFavorites);
 
     btn_parent->setIcon(qApp->icons()->fromTheme(QSL("go-up")));
     btn_parent->setToolTip(tr("Go to parent folder"));
     btn_add_favorites->setIcon(qApp->icons()->fromTheme(QSL("folder-favorites")));
-    btn_add_favorites->setToolTip(tr("Add selected file to favorites"));
+    btn_add_favorites->setToolTip(tr("Add selected item to favorites"));
     layout_toolbar->addWidget(btn_parent);
     layout_toolbar->addWidget(btn_add_favorites);
     layout_toolbar->addStretch();
@@ -63,11 +63,12 @@ void FilesystemSidebar::load() {
     m_fsView->setModel(m_fsModel);
     m_fsModel->setRootPath(QString());
     m_fsView->setRootIndex(m_fsModel->index(qApp->documentsFolder()));
+    m_lvFavorites->setIconSize(QSize(12, 12));
 
     connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
 
     // Initialize favorites.
-    connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteFile);
+    connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
 
     QStringList saved_files = qApp->settings()->value(GROUP(General),
                                                       objectName() + QSL("_files"),
@@ -77,6 +78,8 @@ void FilesystemSidebar::load() {
       m_lvFavorites->loadFileItem(file);
     }
 
+    m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
+
     layout->addLayout(layout_toolbar, 0);
     layout->addWidget(m_fsView, 1);
     layout->addWidget(m_lvFavorites, 1);
@@ -85,18 +88,26 @@ void FilesystemSidebar::load() {
   }
 }
 
-void FilesystemSidebar::addFileToFavorites() {
+void FilesystemSidebar::addToFavorites() {
   const QFileInfo file_info = m_fsModel->fileInfo(m_fsView->currentIndex());
 
-  if (file_info.isFile()) {
+  if (file_info.isFile() || file_info.isDir()) {
     m_lvFavorites->loadFileItem(QDir::toNativeSeparators(file_info.absoluteFilePath()));
   }
 
+  m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
   saveFavorites();
 }
 
-void FilesystemSidebar::openFavoriteFile(const QModelIndex& idx) {
-  emit openFileRequested(m_lvFavorites->item(idx.row())->data(Qt::UserRole).toString());
+void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
+  const auto file_folder = QFileInfo(m_lvFavorites->item(idx.row())->data(Qt::UserRole).toString());
+
+  if (file_folder.isDir()) {
+    m_fsView->setRootIndex(m_fsModel->index(file_folder.absoluteFilePath()));
+  }
+  else {
+    emit openFileRequested(file_folder.absoluteFilePath());
+  }
 }
 
 void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
@@ -126,9 +137,7 @@ void FilesystemSidebar::saveFavorites() const {
     favorites.append(m_lvFavorites->item(i)->data(Qt::UserRole).toString());
   }
 
-  qApp->settings()->setValue(GROUP(General),
-                             objectName() + QSL("_files"),
-                             favorites);
+  qApp->settings()->setValue(GROUP(General), objectName() + QSL("_files"), favorites);
 }
 
 FileSystemSidebarModel::FileSystemSidebarModel(QObject* parent) : QFileSystemModel(parent) {}
@@ -139,13 +148,15 @@ FavoritesListWidget::FavoritesListWidget(QWidget* parent) : QListWidget(parent) 
 
 void FavoritesListWidget::loadFileItem(const QString& file_path) {
   QListWidgetItem* item = new QListWidgetItem(this);
+  QFileInfo info(file_path);
 
   item->setData(Qt::UserRole, file_path);
   item->setToolTip(file_path);
+  item->setIcon(qApp->icons()->fromTheme(info.isDir() ? QSL("folder") : QSL("gtk-file")));
 
-  if (!QFile::exists(file_path)) {
+  if (!info.exists()) {
     item->setText(QFileInfo(file_path).fileName() + tr(" (N/A)"));
-    item->setForeground(Qt::darkRed);
+    item->setTextColor(Qt::darkRed);
   }
   else {
     item->setText(QFileInfo(file_path).fileName());

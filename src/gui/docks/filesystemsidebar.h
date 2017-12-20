@@ -45,8 +45,8 @@ class FilesystemSidebar : public DockWidget {
     virtual void load() override;
 
   private slots:
-    void addFileToFavorites();
-    void openFavoriteFile(const QModelIndex& idx);
+    void addToFavorites();
+    void openFavoriteItem(const QModelIndex& idx);
     void openFileFolder(const QModelIndex& idx);
     void goToParentFolder();
 
