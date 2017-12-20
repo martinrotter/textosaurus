@@ -69,7 +69,7 @@ QFont TextApplicationSettings::mainFont() const {
 }
 
 bool TextApplicationSettings::reloadModifiedDocumentsAutomatically() const {
-  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ReloadModified)).toInt();
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ReloadModified)).toBool();
 }
 
 int TextApplicationSettings::tabSize() const {
