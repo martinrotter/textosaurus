@@ -28,6 +28,7 @@ class TextApplicationSettings : public QObject {
     bool viewEols() const;
     int lineSpacing() const;
     QFont mainFont() const;
+    bool reloadModifiedDocumentsAutomatically() const;
 
     int tabSize() const;
     int indentSize() const;
@@ -45,6 +46,7 @@ class TextApplicationSettings : public QObject {
     void increaseFontSize();
     void decreaseFontSize();
 
+    void setReloadModifiedDocumentsAutomatically(bool reload_automatically);
     void setTabSize(int size);
     void setIndentSize(int size);
     void setIndentWithTabs(bool use_tabs);

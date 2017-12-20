@@ -103,9 +103,10 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
 
   // File is externally changed.
   emit requestedVisibility();
-  bool not_again;
+  auto not_again = false;
 
-  if (MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File externally modified"),
+  if (m_textApp->settings()->reloadModifiedDocumentsAutomatically() ||
+      MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File externally modified"),
                        tr("File '%1' was modified outside of %2.").arg(QDir::toNativeSeparators(file_path),
                                                                        APP_NAME),
                        tr("Do you want to reload file now? This will discard all unsaved changes."),
@@ -114,6 +115,10 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
       QMessageBox::StandardButton::Yes) {
 
     reloadFromDisk();
+
+    if (not_again) {
+      m_textApp->settings()->setReloadModifiedDocumentsAutomatically(true);
+    }
   }
 }
 

@@ -68,6 +68,10 @@ QFont TextApplicationSettings::mainFont() const {
   return fon;
 }
 
+bool TextApplicationSettings::reloadModifiedDocumentsAutomatically() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ReloadModified)).toInt();
+}
+
 int TextApplicationSettings::tabSize() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::TabSize)).toInt();
 }
@@ -92,6 +96,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setReloadModifiedDocumentsAutomatically(bool reload_automatically) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::ReloadModified, reload_automatically);
+  emit settingsChanged(false, false);
 }
 
 void TextApplicationSettings::setTabSize(int size) {

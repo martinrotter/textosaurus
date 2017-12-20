@@ -33,6 +33,8 @@ namespace Editor {
   constexpr auto IndentWithTabsDef = false;
   constexpr auto LineSpacing = "line_spacing";
   constexpr auto LineSpacingDef = 0;
+  constexpr auto ReloadModified = "reload_modified_files";
+  constexpr auto ReloadModifiedDef = false;
   constexpr auto EolMode = "eol_mode";
 
 #if defined(Q_OS_WIN)
