@@ -22,6 +22,7 @@
 
 #include <QDir>
 #include <QFileDialog>
+#include <QFileSystemWatcher>
 #include <QFontDatabase>
 #include <QMouseEvent>
 #include <QPrintDialog>
@@ -31,7 +32,9 @@
 #include <QTextStream>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
-  : ScintillaEdit(parent), m_settingsDirty(true), m_textApp(text_app), m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
+  : ScintillaEdit(parent), m_fileWatcher(nullptr), m_currentUrlStart(-1),
+  m_currentUrlEnd(-1), m_settingsDirty(true), m_textApp(text_app),
+  m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
@@ -92,6 +95,24 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
 
 void TextEditor::loadFromString(const QString& contents) {
   setText(contents.toUtf8().constData());
+}
+
+void TextEditor::onFileExternallyChanged(const QString& file_path) {
+  Q_UNUSED(file_path)
+
+  // File is externally changed.
+  emit requestedVisibility();
+  bool not_again;
+
+  if (MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File externally modified"),
+                       tr("File '%1' was modified outside of %2."),
+                       tr("Do you want to reload file now? This will discard all unsaved changes."),
+                       QString(), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
+                       QMessageBox::StandardButton::Yes, &not_again, tr("Reload all files automatically (discard changes)")) ==
+      QMessageBox::StandardButton::Yes) {
+
+    reloadFromDisk();
+  }
 }
 
 void TextEditor::onModified(int type, int position, int length, int lines_added, const QByteArray& text,
@@ -225,6 +246,21 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   else {
     ScintillaEdit::closeEvent(event);
   }
+}
+
+void TextEditor::reattachWatcher(const QString& file_path) {
+  if (!QFile::exists(file_path)) {
+    return;
+  }
+
+  if (m_fileWatcher == nullptr) {
+    m_fileWatcher = new QFileSystemWatcher(this);
+
+    connect(m_fileWatcher, &QFileSystemWatcher::fileChanged, this, &TextEditor::onFileExternallyChanged);
+  }
+
+  m_fileWatcher->removePaths(m_fileWatcher->files());
+  m_fileWatcher->addPath(file_path);
 }
 
 bool TextEditor::isMarginVisible(int margin_number) const {

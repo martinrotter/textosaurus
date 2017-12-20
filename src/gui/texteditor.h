@@ -13,6 +13,7 @@
 #define RGB_TO_SPRT(r, g, b) ((r) << 16) | ((g) << 8) | (b)
 
 class TextApplication;
+class QFileSystemWatcher;
 
 class TextEditor : public ScintillaEdit {
   Q_OBJECT
@@ -54,6 +55,7 @@ class TextEditor : public ScintillaEdit {
     void loadFromString(const QString& contents);
 
   private slots:
+    void onFileExternallyChanged(const QString& file_path);
     void onModified(int type, int position, int length, int lines_added, const QByteArray& text,
                     int line, int fold_now, int fold_prev);
 
@@ -69,12 +71,15 @@ class TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
+    void reattachWatcher(const QString& file_path);
     bool isMarginVisible(int margin_number) const;
     void updateLineNumberMarginWidth(int zoom, QFont font, int line_count);
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
-    int m_currentUrlStart, m_currentUrlEnd;
+    QFileSystemWatcher* m_fileWatcher;
+    int m_currentUrlStart;
+    int m_currentUrlEnd;
     bool m_settingsDirty;
     TextApplication* m_textApp;
     QString m_filePath;

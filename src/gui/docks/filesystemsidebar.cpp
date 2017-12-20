@@ -41,10 +41,9 @@ void FilesystemSidebar::load() {
     m_lvFavorites = new FavoritesListWidget(widget);
 
     layout->setMargin(0);
-    widget->setLayout(layout);
 
     // Initialize toolbar.
-    QHBoxLayout* layout_toolbar = new QHBoxLayout(widget);
+    QHBoxLayout* layout_toolbar = new QHBoxLayout();
     PlainToolButton* btn_parent = new PlainToolButton(widget);
     PlainToolButton* btn_add_favorites = new PlainToolButton(widget);
 

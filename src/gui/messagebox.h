@@ -29,7 +29,8 @@ class MessageBox : public QMessageBox {
                                             const QString& detailed_text = QString(),
                                             QMessageBox::StandardButtons buttons = QMessageBox::Ok,
                                             QMessageBox::StandardButton default_button = QMessageBox::Ok,
-                                            bool* dont_show_again = nullptr);
+                                            bool* dont_show_again = nullptr,
+                                            const QString& dont_show_again_text = QString());
     static QIcon iconForStatus(QMessageBox::Icon status);
 };
 
