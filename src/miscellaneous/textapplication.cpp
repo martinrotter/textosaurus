@@ -205,7 +205,7 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
 }
 
 OutputWindow* TextApplication::outputWindow() const {
-  return m_outputWindow;
+  return m_outputSidebar;
 }
 
 TextApplicationSettings* TextApplication::settings() const {
@@ -310,7 +310,7 @@ void TextApplication::createConnections() {
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
   connect(m_actionDockShowFilesystem, &QAction::triggered, m_filesystemSidebar, &FilesystemSidebar::setVisible);
-  connect(m_actionDockShowOutput, &QAction::triggered, m_outputWindow, &OutputWindow::setVisible);
+  connect(m_actionDockShowOutput, &QAction::triggered, m_outputSidebar, &OutputWindow::setVisible);
 
   // Menus.
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
@@ -359,8 +359,8 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_tabEditors = main_form->tabWidget();
   m_statusBar = main_form->statusBar();
 
-  m_outputWindow = new OutputWindow(m_mainForm);
-  m_outputWindow->setObjectName(QSL("m_outputWindow"));
+  m_outputSidebar = new OutputWindow(m_mainForm);
+  m_outputSidebar->setObjectName(QSL("m_outputSidebar"));
 
   m_filesystemSidebar = new FilesystemSidebar(m_mainForm);
   m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
@@ -438,7 +438,7 @@ void TextApplication::loadState() {
   m_mainForm->setCorner(Qt::Corner::TopLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
   m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
 
-  m_settings->loadDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
+  m_settings->loadInitialSidebarGuiSettings(m_mainForm, QList<DockWidget*>() << m_outputSidebar << m_filesystemSidebar);
 }
 
 void TextApplication::quit(bool* ok) {
@@ -450,7 +450,6 @@ void TextApplication::quit(bool* ok) {
     }
   }
 
-  //m_settings->saveDocksStates(m_mainForm, QList<DockWidget*>() << m_outputWindow << m_filesystemSidebar);
   *ok = true;
 }
 
@@ -796,7 +795,7 @@ void TextApplication::loadNewExternalTools() {
 }
 
 void TextApplication::initializeDockWidgetsMenu() {
-  m_actionDockShowOutput->setChecked(m_outputWindow->isVisible());
+  m_actionDockShowOutput->setChecked(m_outputSidebar->isVisible());
   m_actionDockShowFilesystem->setChecked(m_filesystemSidebar->isVisible());
 }
 

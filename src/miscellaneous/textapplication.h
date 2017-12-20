@@ -117,7 +117,7 @@ class TextApplication : public QObject {
     TextApplicationSettings* m_settings;
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
-    OutputWindow* m_outputWindow;
+    OutputWindow* m_outputSidebar;
     FilesystemSidebar* m_filesystemSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;

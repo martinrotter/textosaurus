@@ -164,7 +164,7 @@ SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
 }
 
-void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
+void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
   foreach (DockWidget* dock, dock_widgets) {
     int size = dock->initialWidth();
 
@@ -181,24 +181,6 @@ void TextApplicationSettings::loadDocksStates(FormMain* main_form, const QList<D
                            Qt::Horizontal : Qt::Vertical);
 
     dock->setVisible(true);
-  }
-}
-
-void TextApplicationSettings::saveDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
-  foreach (DockWidget* dock, dock_widgets) {
-    Qt::DockWidgetArea area = main_form->dockWidgetArea(dock);
-    bool visible = dock->isVisible();
-    int size = (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
-               dock->width() :
-               dock->height();
-
-    if (area == Qt::DockWidgetArea::NoDockWidgetArea) {
-      area = dock->initialArea();
-    }
-
-    qApp->settings()->setValue(GROUP(General), dock->objectName() + QSL("_width"), size);
-    qApp->settings()->setValue(GROUP(General), dock->objectName() + QSL("_visible"), visible);
-    qApp->settings()->setValue(GROUP(General), dock->objectName() + QSL("_area"), area);
   }
 }
 

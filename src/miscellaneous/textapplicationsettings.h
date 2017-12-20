@@ -37,8 +37,7 @@ class TextApplicationSettings : public QObject {
     SyntaxHighlighting* syntaxHighlighting() const;
 
   public slots:
-    void loadDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const;
-    void saveDocksStates(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const;
+    void loadInitialSidebarGuiSettings(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const;
 
     void increaseLineSpacing();
     void decreaseLineSpacing();
