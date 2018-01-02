@@ -1,6 +1,7 @@
 2018.01.XX
 ----------
 Added:
+* Upload to hastebin.com.
 * Ability to automatically reload externally modified documents.
 * Do not show "Output" sidebar when running built-in tools.
 

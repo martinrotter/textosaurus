@@ -30,7 +30,7 @@
      </property>
      <widget class="QWidget" name="m_tabExternalBrowser">
       <attribute name="title">
-       <string>External web browser</string>
+       <string>External Web Browser</string>
       </attribute>
       <layout class="QFormLayout" name="formLayout_17">
        <item row="0" column="0" colspan="2">
@@ -39,7 +39,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="title">
-          <string>Use custom external web browser</string>
+          <string>Use Custom External Web Browser</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -126,7 +126,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>External e-mail client</string>
+       <string>External E-mail Client</string>
       </attribute>
       <layout class="QFormLayout" name="formLayout_22">
        <item row="0" column="0" colspan="2">
@@ -135,7 +135,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="title">
-          <string>Use custom external e-mail client</string>
+          <string>Use Custom External E-mail Client</string>
          </property>
          <property name="flat">
           <bool>false</bool>

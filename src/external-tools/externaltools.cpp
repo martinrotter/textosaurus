@@ -412,6 +412,16 @@ void ExternalTools::loadPredefinedTools() {
 
   m_predefinedTools.append(send_to_clbin);
 
+  PredefinedTool* send_to_haste = new PredefinedTool(&PredefinedTools::sendToHastebin, this);
+
+  send_to_haste->setActionObjectName(QSL("m_actionPredefSendHastebin"));
+  send_to_haste->setCategory(tr("Upload to..."));
+  send_to_haste->setName(tr("hastebin.com"));
+  send_to_haste->setInput(ToolInput::SelectionDocument);
+  send_to_haste->setOutput(ToolOutput::DumpToOutputWindow);
+
+  m_predefinedTools.append(send_to_haste);
+
   PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
 
   send_to_github->setActionObjectName(QSL("m_actionPredefSendGithub"));

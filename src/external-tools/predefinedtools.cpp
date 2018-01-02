@@ -13,6 +13,28 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
+QString PredefinedTools::sendToHastebin(const QString& data, bool* ok) {
+  QByteArray output;
+  QString content = QString("%1").arg(data);
+  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_HASTE_POST,
+                                                                 DOWNLOAD_TIMEOUT,
+                                                                 content.toUtf8(),
+                                                                 output,
+                                                                 QNetworkAccessManager::Operation::PostOperation);
+
+  if (result.first == QNetworkReply::NetworkError::NoError) {
+    *ok = true;
+
+    QJsonDocument json_doc = QJsonDocument::fromJson(output);
+
+    return PASTEBIN_HASTE + json_doc.object()["key"].toString();
+  }
+  else {
+    *ok = false;
+    return NetworkFactory::networkErrorText(result.first);
+  }
+}
+
 QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
   QByteArray output;
   QString content = QString("clbin=%1").arg(data);

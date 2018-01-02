@@ -11,6 +11,7 @@ class PredefinedTools {
     ~PredefinedTools() = delete;
 
     // Uploading.
+    static QString sendToHastebin(const QString& data, bool* ok);
     static QString sendToClbin(const QString& data, bool* ok);
     static QString sendToIxio(const QString& data, bool* ok);
     static QString sendToSprunge(const QString& data, bool* ok);

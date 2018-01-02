@@ -47,22 +47,22 @@
     </property>
     <widget class="QMenu" name="m_menuFileSaveWithEncoding">
      <property name="title">
-      <string>&amp;Save file with encoding...</string>
+      <string>&amp;Save File with Encoding...</string>
      </property>
     </widget>
     <widget class="QMenu" name="m_menuFileOpenWithEncoding">
      <property name="title">
-      <string>&amp;Open file with encoding...</string>
+      <string>&amp;Open File with Encoding...</string>
      </property>
     </widget>
     <widget class="QMenu" name="m_menuRecentFiles">
      <property name="title">
-      <string>&amp;Recently opened files</string>
+      <string>&amp;Recent Files</string>
      </property>
     </widget>
     <widget class="QMenu" name="m_menuFileReopenWithEncoding">
      <property name="title">
-      <string>&amp;Reopen file with encoding...</string>
+      <string>&amp;Reopen File with Encoding...</string>
      </property>
     </widget>
     <addaction name="m_actionFileNew"/>
@@ -99,7 +99,7 @@
     </property>
     <widget class="QMenu" name="m_menuShowHide">
      <property name="title">
-      <string>&amp;UI elements</string>
+      <string>&amp;UI Elements</string>
      </property>
      <addaction name="m_actionFullscreen"/>
      <addaction name="m_actionSwitchToolBar"/>
@@ -112,7 +112,7 @@
       <string>This does not convert existing EOLs.</string>
      </property>
      <property name="title">
-      <string>&amp;EOL mode (does not convert existing EOLs)</string>
+      <string>&amp;EOL Mode (does not convert existing EOLs)</string>
      </property>
      <addaction name="m_actionEolMac"/>
      <addaction name="m_actionEolUnix"/>
@@ -120,7 +120,7 @@
     </widget>
     <widget class="QMenu" name="m_menuViewInvisibles">
      <property name="title">
-      <string>&amp;Invisible characters</string>
+      <string>&amp;Invisible Characters</string>
      </property>
      <addaction name="m_actionViewEols"/>
      <addaction name="m_actionViewWhitespaces"/>
@@ -166,7 +166,7 @@
       <string>Converts existing EOLs and sets mode for new EOLs.</string>
      </property>
      <property name="title">
-      <string>&amp;EOL conversion</string>
+      <string>&amp;EOL Conversion</string>
      </property>
      <addaction name="m_actionEolConvertMac"/>
      <addaction name="m_actionEolConvertUnix"/>
@@ -207,9 +207,6 @@
    <property name="text">
     <string>&amp;Quit</string>
    </property>
-   <property name="toolTip">
-    <string>Quit the application.</string>
-   </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Q</string>
    </property>
@@ -221,16 +218,10 @@
    <property name="text">
     <string>&amp;Settings</string>
    </property>
-   <property name="toolTip">
-    <string>Display settings of the application.</string>
-   </property>
   </action>
   <action name="m_actionAboutGuard">
    <property name="text">
-    <string>&amp;About application</string>
-   </property>
-   <property name="toolTip">
-    <string>Displays extra info about this application.</string>
+    <string>&amp;About Application</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -245,9 +236,6 @@
    </property>
    <property name="text">
     <string>View &amp;fullscreen</string>
-   </property>
-   <property name="toolTip">
-    <string>Switch fullscreen mode.</string>
    </property>
    <property name="shortcut">
     <string notr="true">F11</string>
@@ -283,10 +271,7 @@
   </action>
   <action name="m_actionCheckForUpdates">
    <property name="text">
-    <string>Check for &amp;updates</string>
-   </property>
-   <property name="toolTip">
-    <string>Check if new update for the application is available for download.</string>
+    <string>Check For &amp;Updates</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -294,7 +279,7 @@
   </action>
   <action name="m_actionReportBug">
    <property name="text">
-    <string>Report a &amp;bug...</string>
+    <string>Report a &amp;Bug...</string>
    </property>
   </action>
   <action name="m_actionSwitchToolBar">
@@ -307,9 +292,6 @@
    <property name="text">
     <string>View &amp;toolbar</string>
    </property>
-   <property name="toolTip">
-    <string>Switch visibility of toolbar.</string>
-   </property>
   </action>
   <action name="m_actionDonate">
    <property name="text">
@@ -321,7 +303,7 @@
   </action>
   <action name="m_actionDisplayWiki">
    <property name="text">
-    <string>Display &amp;wiki</string>
+    <string>Display &amp;Wiki</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -351,27 +333,27 @@
   </action>
   <action name="m_actionTabsCloseAll">
    <property name="text">
-    <string>Close &amp;all tabs</string>
+    <string>Close &amp;All Tabs</string>
    </property>
   </action>
   <action name="m_actionTabsCloseAllExceptCurrent">
    <property name="text">
-    <string>Close all tabs &amp;except current</string>
+    <string>Close All Tabs &amp;Except Current</string>
    </property>
   </action>
   <action name="m_actionTabsNext">
    <property name="text">
-    <string>Go to &amp;next tab</string>
+    <string>Go to &amp;Next Tab</string>
    </property>
   </action>
   <action name="m_actionTabsPrevious">
    <property name="text">
-    <string>Go to &amp;previous tab</string>
+    <string>Go to &amp;Previous Tab</string>
    </property>
   </action>
   <action name="m_actionFileNew">
    <property name="text">
-    <string>&amp;New file</string>
+    <string>&amp;New File</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+N</string>
@@ -379,7 +361,7 @@
   </action>
   <action name="m_actionFileOpen">
    <property name="text">
-    <string>&amp;Open file...</string>
+    <string>&amp;Open File...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+O</string>
@@ -387,7 +369,7 @@
   </action>
   <action name="m_actionFileSave">
    <property name="text">
-    <string>&amp;Save file</string>
+    <string>&amp;Save File</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+S</string>
@@ -395,7 +377,7 @@
   </action>
   <action name="m_actionFileSaveAs">
    <property name="text">
-    <string>&amp;Save file as...</string>
+    <string>&amp;Save File as...</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Alt+S</string>
@@ -403,7 +385,7 @@
   </action>
   <action name="m_actionFileSaveAll">
    <property name="text">
-    <string>&amp;Save all files</string>
+    <string>&amp;Save All Files</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -411,10 +393,7 @@
   </action>
   <action name="m_actionTabsCloseAllUnmodified">
    <property name="text">
-    <string>Close all &amp;unmodified editors</string>
-   </property>
-   <property name="toolTip">
-    <string>Close all unmodified editors</string>
+    <string>Close All &amp;Unmodified Editors</string>
    </property>
   </action>
   <action name="m_actionEolUnix">
@@ -446,7 +425,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Word wrap</string>
+    <string>&amp;Word Wrap</string>
    </property>
   </action>
   <action name="m_actionEditBack">
@@ -498,7 +477,7 @@
   </action>
   <action name="m_actionFindReplace">
    <property name="text">
-    <string>&amp;Find and replace</string>
+    <string>&amp;Find and Replace</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+F</string>
@@ -509,7 +488,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Line numbers</string>
+    <string>&amp;Line Numbers</string>
    </property>
   </action>
   <action name="m_actionPrint">
@@ -522,7 +501,7 @@
   </action>
   <action name="m_actionPrintPreview">
    <property name="text">
-    <string>&amp;Print pre&amp;view</string>
+    <string>Print Pre&amp;view</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+P</string>
@@ -546,7 +525,7 @@
   </action>
   <action name="m_actionFileReload">
    <property name="text">
-    <string>&amp;Reload from disk</string>
+    <string>&amp;Reload From Disk</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+R</string>
@@ -554,7 +533,7 @@
   </action>
   <action name="m_actionTabsCloseCurrent">
    <property name="text">
-    <string>&amp;Close current tab</string>
+    <string>&amp;Close Current Tab</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+W</string>

@@ -19,6 +19,7 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
 
   connect(m_ui.m_btnCount, &QPushButton::clicked, this, &FormFindReplace::displayCount);
   connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
+  connect(m_ui.m_btnFindPrevious, &QPushButton::clicked, this, &FormFindReplace::searchPrevious);
   connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::submitted, this, &FormFindReplace::searchNext);
   connect(m_ui.m_lblRegexInfo, &QLabel::linkActivated, qApp->web(), &WebFactory::openUrlInExternalBrowser);
 }
@@ -68,7 +69,11 @@ void FormFindReplace::searchNext() {
   // NOTE: informace scite
   // https://github.com/LuaDist/scite/blob/fab4a6321c52c6ea8d1e1eab9c4fee86f7388697/src/SciTEBase.cxx#L1052
 
-  search(m_ui.m_checkReverse->isChecked());
+  search(false);
+}
+
+void FormFindReplace::searchPrevious() {
+  search(true);
 }
 
 int FormFindReplace::extractFlags() {

@@ -121,7 +121,7 @@ p, li { white-space: pre-wrap; }
        </widget>
        <widget class="QWidget" name="tabFiles">
         <attribute name="title">
-         <string>Available files</string>
+         <string>Available Files</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="leftMargin">
