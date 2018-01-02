@@ -69,7 +69,7 @@ int OutputWindow::initialWidth() const {
 void OutputWindow::load() {
   if (m_txtOutput == nullptr) {
     m_txtOutput = new QPlainTextEdit(this);
-    m_txtOutput->setPlaceholderText(tr("This window can display output of external tools and some other critical information..."));
+    m_txtOutput->setPlaceholderText(tr("This sidebar displays output of external tools and some other critical information..."));
     m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
     m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
     m_txtOutput->setReadOnly(true);
