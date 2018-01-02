@@ -604,7 +604,6 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
                                                  QMessageBox::Icon::Warning);
   }
   else {
-
     QPointer<TextEditor> ptr_editor = editor;
     QString data;
 
@@ -642,7 +641,10 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
         break;
     }
 
-    m_application->outputWindow()->displayOutput(OutputSource::Application, QString("Running '%1' tool...").arg(tool_to_run->name()));
+    if (!tool_to_run->isPredefined()) {
+      m_application->outputWindow()->displayOutput(OutputSource::Application, QString("Running '%1' tool...").arg(tool_to_run->name()));
+    }
+
     tool_to_run->runTool(ptr_editor, data);
   }
 }
@@ -747,7 +749,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
                                                  tr("Tool '%1' finished with error(s)...").arg(tool->name()),
                                                  QMessageBox::Icon::Critical);
   }
-  else {
+  else if (!tool->isPredefined()) {
     m_application->outputWindow()->displayOutput(OutputSource::Application,
                                                  tr("Tool '%1' finished successfully...").arg(tool->name()));
   }

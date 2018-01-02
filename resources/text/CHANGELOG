@@ -2,6 +2,7 @@
 ----------
 Added:
 * Ability to automatically reload externally modified documents.
+* Do not show "Output" sidebar when running built-in tools.
 
 Changed:
 * Some UI strings tweaked for more consistency.
