@@ -127,7 +127,7 @@
     </widget>
     <widget class="QMenu" name="m_menuDockWidgets">
      <property name="title">
-      <string>&amp;Dock widgets</string>
+      <string>&amp;Sidebars</string>
      </property>
      <addaction name="m_actionDockShowOutput"/>
      <addaction name="m_actionDockShowFilesystem"/>
