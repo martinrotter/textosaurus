@@ -69,6 +69,7 @@ class ExternalTool : public QObject {
     explicit ExternalTool(const ExternalTool& other, QObject* parent = nullptr);
     virtual ~ExternalTool() = default;
 
+    virtual bool isRunning() const;
     virtual bool isPredefined() const;
 
     QString name() const;
@@ -104,8 +105,6 @@ class ExternalTool : public QObject {
 
     bool addToEditMenu() const;
     void setAddToEditMenu(bool add_to_edit_menu);
-
-    bool isRunning() const;
 
     QString promptValue() const;
     void setPromptValue(const QString& prompt_value);
