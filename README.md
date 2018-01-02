@@ -13,7 +13,7 @@ Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintil
 
 You can support author of Textilosaurus on [Liberapay](https://liberapay.com/martinrotter). Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
 
-![Textilosaurus](resources/screenshots/textilosaurus.png")
+![Textilosaurus](resources/screenshots/textilosaurus.png)
 
 Downloads
 ---------
