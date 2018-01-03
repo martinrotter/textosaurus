@@ -405,6 +405,13 @@ void TextEditor::setSettingsDirty(bool settings_dirty) {
   m_settingsDirty = settings_dirty;
 }
 
+void TextEditor::setReadOnly(bool read_only) {
+  if (read_only != readOnly()) {
+    ScintillaEdit::setReadOnly(read_only);
+    emit readOnlyChanged(read_only);
+  }
+}
+
 TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding) {
   QFile file(file_path);
 

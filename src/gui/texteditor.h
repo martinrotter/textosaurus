@@ -24,11 +24,14 @@ class TextEditor : public ScintillaEdit {
 
     QString filePath() const;
     Lexer lexer() const;
+
     QByteArray encoding() const;
     void setEncoding(const QByteArray& encoding);
 
     bool settingsDirty() const;
     void setSettingsDirty(bool settings_dirty);
+
+    void setReadOnly(bool read_only);
 
     static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
 
@@ -65,6 +68,7 @@ class TextEditor : public ScintillaEdit {
     virtual void closeEvent(QCloseEvent* event) override;
 
   signals:
+    void readOnlyChanged(bool read_only);
     void editorReloaded();
     void requestedVisibility();
     void loadedFromFile(QString source_file_path);

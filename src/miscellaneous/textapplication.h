@@ -109,7 +109,8 @@ class TextApplication : public QObject {
 
     void createConnections();
     void renameEditor(TextEditor* editor);
-    void updateEditorIcon(int index, bool modified);
+    void onEditorReadOnlyChanged(bool read_only);
+    void updateEditorIcon(int index, bool modified, bool read_only);
     void markEditorModified(TextEditor* editor, bool modified);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);

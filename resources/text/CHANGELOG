@@ -2,6 +2,7 @@
 ----------
 Added:
 * Tab context menu. (#11)
+* Ability to mark tab as "Read-Only". (#12)
 
 2018.01.02
 ----------

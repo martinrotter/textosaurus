@@ -74,6 +74,7 @@ void TextApplication::attachTextEditor(TextEditor* editor) {
   connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
   connect(editor, &TextEditor::requestedVisibility, this, &TextApplication::onEditorRequestedVisibility);
+  connect(editor, &TextEditor::readOnlyChanged, this, &TextApplication::onEditorReadOnlyChanged);
 }
 
 void TextApplication::saveCurrentEditor() {
@@ -155,6 +156,13 @@ void TextApplication::showTabContextMenu(const QPoint& point) {
   const int tab_index = m_tabEditors->tabBar()->tabAt(point);
 
   if (tab_index >= 0) {
+    QAction* act_read_only = menu.addAction(qApp->icons()->fromTheme(QSL("lock")), tr("Read-Only Mode"), [tab_index, this](bool toggle) {
+      m_tabEditors->textEditorAt(tab_index)->setReadOnly(toggle);
+    });
+
+    act_read_only->setCheckable(true);
+    act_read_only->setChecked(m_tabEditors->textEditorAt(tab_index)->readOnly());
+
     menu.addAction(qApp->icons()->fromTheme(QSL("document-save")), tr("Save"), [tab_index, this]() {
       bool ok;
       m_tabEditors->textEditorAt(tab_index)->save(&ok);
@@ -821,22 +829,36 @@ void TextApplication::initializeDockWidgetsMenu() {
   m_actionDockShowFilesystem->setChecked(m_filesystemSidebar->isVisible());
 }
 
-void TextApplication::updateEditorIcon(int index, bool modified) {
-  m_tabEditors->tabBar()->setTabIcon(index, modified ?
-                                     qApp->icons()->fromTheme(QSL("dialog-warning")) :
-                                     QIcon());
+void TextApplication::updateEditorIcon(int index, bool modified, bool read_only) {
+  if (read_only) {
+    m_tabEditors->tabBar()->setTabIcon(index, qApp->icons()->fromTheme(QSL("lock")));
+  }
+  else {
+    m_tabEditors->tabBar()->setTabIcon(index, modified ?
+                                       qApp->icons()->fromTheme(QSL("dialog-warning")) :
+                                       QIcon());
+  }
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {
   int index = m_tabEditors->indexOf(editor);
 
   if (index >= 0) {
-    updateEditorIcon(index, editor->modify());
+    updateEditorIcon(index, editor->modify(), editor->readOnly());
 
     if (!editor->filePath().isEmpty()) {
       m_tabEditors->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
       m_tabEditors->tabBar()->setTabToolTip(index, editor->filePath());
     }
+  }
+}
+
+void TextApplication::onEditorReadOnlyChanged(bool read_only) {
+  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+  int index = m_tabEditors->indexOf(editor);
+
+  if (index >= 0) {
+    updateEditorIcon(index, editor->modify(), read_only);
   }
 }
 
