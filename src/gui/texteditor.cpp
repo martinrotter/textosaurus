@@ -260,18 +260,19 @@ void TextEditor::closeEvent(QCloseEvent* event) {
 }
 
 void TextEditor::reattachWatcher(const QString& file_path) {
-  if (!QFile::exists(file_path)) {
-    return;
-  }
-
   if (m_fileWatcher == nullptr) {
     m_fileWatcher = new QFileSystemWatcher(this);
 
     connect(m_fileWatcher, &QFileSystemWatcher::fileChanged, this, &TextEditor::onFileExternallyChanged);
   }
 
-  m_fileWatcher->removePaths(m_fileWatcher->files());
-  m_fileWatcher->addPath(file_path);
+  if (!m_fileWatcher->files().isEmpty()) {
+    m_fileWatcher->removePaths(m_fileWatcher->files());
+  }
+
+  if (!file_path.isEmpty()) {
+    m_fileWatcher->addPath(file_path);
+  }
 }
 
 bool TextEditor::isMarginVisible(int margin_number) const {
@@ -372,19 +373,18 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
 }
 
 void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
-  if (!encoding.isEmpty()) {
-    m_encoding = encoding.toLocal8Bit();
-  }
-
   QFile file(file_path);
+
+  reattachWatcher(QString());
 
   if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
     *ok = false;
+    reattachWatcher(m_filePath);
     return;
   }
 
-  if (m_fileWatcher != nullptr) {
-    m_fileWatcher->blockSignals(true);
+  if (!encoding.isEmpty()) {
+    m_encoding = encoding.toLocal8Bit();
   }
 
   QTextStream str(&file);
@@ -395,10 +395,6 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   file.close();
 
   m_filePath = QDir::toNativeSeparators(file_path);
-
-  if (m_fileWatcher != nullptr) {
-    m_fileWatcher->blockSignals(false);
-  }
 
   reattachWatcher(m_filePath);
 
@@ -416,6 +412,8 @@ void TextEditor::setIsLog(bool is_log) {
   m_isLog = is_log;
 
   if (m_isLog) {
+    gotoPos(length());
+    newLine();
     appendText(4, "1234");
   }
 }
