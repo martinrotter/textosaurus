@@ -150,6 +150,26 @@ void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, boo
   }
 }
 
+void TextApplication::showTabContextMenu(const QPoint& point) {
+  QMenu menu;
+  const int tab_index = m_tabEditors->tabBar()->tabAt(point);
+
+  if (tab_index >= 0) {
+    menu.addAction(qApp->icons()->fromTheme(QSL("document-save")), tr("Save"), [tab_index, this]() {
+      bool ok;
+      m_tabEditors->textEditorAt(tab_index)->save(&ok);
+    });
+    menu.addAction(qApp->icons()->fromTheme(QSL("window-close")), tr("Close"), [tab_index, this]() {
+      m_tabEditors->closeTab(tab_index);
+    });
+  }
+  else {
+    menu.addAction(m_actionNoAction);
+  }
+
+  menu.exec(m_tabEditors->tabBar()->mapToGlobal(point));
+}
+
 void TextApplication::setupEolMenu() {
   TextEditor* editor = currentEditor();
 
@@ -366,6 +386,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
 
   // Get pointers to editor-related global actions/menus.
+  m_actionNoAction = m_mainForm->m_ui.m_actionNoActions;
   m_actionFileNew = m_mainForm->m_ui.m_actionFileNew;
   m_actionFileOpen = m_mainForm->m_ui.m_actionFileOpen;
   m_actionFileSave = m_mainForm->m_ui.m_actionFileSave;
@@ -414,6 +435,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionEolConvertUnix->setData(SC_EOL_LF);
   m_actionEolConvertWindows->setData(SC_EOL_CRLF);
 
+  connect(m_tabEditors->tabBar(), &TabBar::customContextMenuRequested, this, &TextApplication::showTabContextMenu);
   connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
 
   loadState();

@@ -24,20 +24,14 @@ class TabBar : public QTabBar {
     TabType tabType(int index) const;
 
   private slots:
-
-    // Called when user selects to close tab via close button.
     void closeTabViaButton();
 
   private:
-
-    // Reimplementations.
-    void mouseDoubleClickEvent(QMouseEvent* event);
-    void mousePressEvent(QMouseEvent* event);
-    void wheelEvent(QWheelEvent* event);
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
+    virtual void mousePressEvent(QMouseEvent* event) override;
+    virtual void wheelEvent(QWheelEvent* event) override;
 
   signals:
-
-    // Emmited if empty space on tab bar is double clicked.
     void emptySpaceDoubleClicked();
 };
 

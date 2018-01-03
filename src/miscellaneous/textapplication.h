@@ -92,6 +92,7 @@ class TextApplication : public QObject {
                           const QByteArray& text, int line, int foldNow, int foldPrev);
     void onEditorTabSwitched(int index = -1);
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
+    void showTabContextMenu(const QPoint& point);
 
     // External tools.
     void loadNewExternalTools();
@@ -125,6 +126,7 @@ class TextApplication : public QObject {
     QList<QAction*> m_lexerActions;
 
     // Pointers to important GUI elements outside of editors.
+    QAction* m_actionNoAction;
     QAction* m_actionFileNew;
     QAction* m_actionFileOpen;
     QAction* m_actionFileSave;
