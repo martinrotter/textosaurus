@@ -231,7 +231,7 @@ void ExternalTools::loadPredefinedTools() {
 
   json_beautify->setActionObjectName(QSL("m_actionPredefJsonBeautify"));
   json_beautify->setCategory(tr("JSON"));
-  json_beautify->setName(tr("Beautify"));
+  json_beautify->setName(tr("JSON &Beautify"));
   json_beautify->setInput(ToolInput::SelectionDocument);
   json_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
@@ -241,7 +241,7 @@ void ExternalTools::loadPredefinedTools() {
 
   json_minify->setActionObjectName(QSL("m_actionPredefMinify"));
   json_minify->setCategory(tr("JSON"));
-  json_minify->setName(tr("Minify"));
+  json_minify->setName(tr("JSON &Minify"));
   json_minify->setInput(ToolInput::SelectionDocument);
   json_minify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
@@ -251,7 +251,7 @@ void ExternalTools::loadPredefinedTools() {
 
   xml_check->setActionObjectName(QSL("m_actionPredefXmlCheck"));
   xml_check->setCategory(tr("XML"));
-  xml_check->setName(tr("Check XML syntax"));
+  xml_check->setName(tr("&Check XML syntax"));
   xml_check->setInput(ToolInput::SelectionDocument);
   xml_check->setOutput(ToolOutput::DumpToOutputWindow);
 
@@ -261,7 +261,7 @@ void ExternalTools::loadPredefinedTools() {
 
   xml_beautify->setActionObjectName(QSL("m_actionPredefXmlBeautify"));
   xml_beautify->setCategory(tr("XML"));
-  xml_beautify->setName(tr("Beautify"));
+  xml_beautify->setName(tr("XML &Beautify"));
   xml_beautify->setInput(ToolInput::SelectionDocument);
   xml_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
@@ -271,7 +271,7 @@ void ExternalTools::loadPredefinedTools() {
 
   xml_linearize->setActionObjectName(QSL("m_actionPredefMinify"));
   xml_linearize->setCategory(tr("XML"));
-  xml_linearize->setName(tr("Linearize/Minfy"));
+  xml_linearize->setName(tr("XML &Linearize/Minfy"));
   xml_linearize->setInput(ToolInput::SelectionDocument);
   xml_linearize->setOutput(ToolOutput::ReplaceSelectionDocument);
 
@@ -406,7 +406,7 @@ void ExternalTools::loadPredefinedTools() {
 
   send_to_clbin->setActionObjectName(QSL("m_actionPredefSendClbin"));
   send_to_clbin->setCategory(tr("Upload to..."));
-  send_to_clbin->setName(tr("clbin.com"));
+  send_to_clbin->setName(tr("Upload to &clbin.com"));
   send_to_clbin->setInput(ToolInput::SelectionDocument);
   send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
 
@@ -416,7 +416,7 @@ void ExternalTools::loadPredefinedTools() {
 
   send_to_haste->setActionObjectName(QSL("m_actionPredefSendHastebin"));
   send_to_haste->setCategory(tr("Upload to..."));
-  send_to_haste->setName(tr("hastebin.com"));
+  send_to_haste->setName(tr("Upload to &hastebin.com"));
   send_to_haste->setInput(ToolInput::SelectionDocument);
   send_to_haste->setOutput(ToolOutput::DumpToOutputWindow);
 
@@ -426,7 +426,7 @@ void ExternalTools::loadPredefinedTools() {
 
   send_to_github->setActionObjectName(QSL("m_actionPredefSendGithub"));
   send_to_github->setCategory(tr("Upload to..."));
-  send_to_github->setName(tr("github.com"));
+  send_to_github->setName(tr("Upload to &github.com"));
   send_to_github->setInput(ToolInput::SelectionDocument);
   send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
 
@@ -436,7 +436,7 @@ void ExternalTools::loadPredefinedTools() {
 
   send_to_ixio->setActionObjectName(QSL("m_actionPredefSendIxio"));
   send_to_ixio->setCategory(tr("Upload to..."));
-  send_to_ixio->setName(tr("ix.io"));
+  send_to_ixio->setName(tr("Upload to &ix.io"));
   send_to_ixio->setInput(ToolInput::SelectionDocument);
   send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
 
@@ -446,7 +446,7 @@ void ExternalTools::loadPredefinedTools() {
 
   send_to_sprunge->setActionObjectName(QSL("m_actionPredefSendSprunge"));
   send_to_sprunge->setCategory(tr("Upload to..."));
-  send_to_sprunge->setName(tr("sprunge.us"));
+  send_to_sprunge->setName(tr("Upload to &sprunge.us"));
   send_to_sprunge->setInput(ToolInput::SelectionDocument);
   send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
 
