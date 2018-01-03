@@ -414,7 +414,12 @@ void TextEditor::setIsLog(bool is_log) {
   if (m_isLog) {
     gotoPos(length());
     newLine();
-    appendText(4, "1234");
+
+    const QString date_str = QDateTime::currentDateTime().toString(Qt::DateFormat::DefaultLocaleShortDate);
+
+    insertText(currentPos(), date_str.toUtf8().constData());
+    gotoPos(length());
+    newLine();
   }
 }
 

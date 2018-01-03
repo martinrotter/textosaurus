@@ -1,5 +1,8 @@
 2018.01.XX
 ----------
+Added:
+* .LOG feature. (#17)
+
 Fixed:
 * Crash when saving new file.
 
