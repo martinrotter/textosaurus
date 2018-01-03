@@ -35,6 +35,9 @@ class TextEditor : public ScintillaEdit {
 
     static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
 
+    bool isLog() const;
+    void setIsLog(bool is_log);
+
   public slots:
     void reloadFromDisk();
     void toggleFolding(int position, int modifiers, int margin);
@@ -81,6 +84,7 @@ class TextEditor : public ScintillaEdit {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
+    bool m_isLog;
     QFileSystemWatcher* m_fileWatcher;
     int m_currentUrlStart;
     int m_currentUrlEnd;

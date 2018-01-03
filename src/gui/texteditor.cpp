@@ -92,6 +92,10 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
   reattachWatcher(m_filePath);
 
   emit loadedFromFile(m_filePath);
+
+  // We decide if this file is "log" file.
+  setTargetRange(0, lineLength(0));
+  setIsLog(searchInTarget(4, ".LOG") != -1);
 }
 
 void TextEditor::loadFromString(const QString& contents) {
@@ -379,22 +383,41 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
     return;
   }
 
-  m_fileWatcher->blockSignals(true);
+  if (m_fileWatcher != nullptr) {
+    m_fileWatcher->blockSignals(true);
+  }
 
-  QTextStream str(&file); str.setCodec(m_encoding.constData());
+  QTextStream str(&file);
 
+  str.setCodec(m_encoding.constData());
   str << getText(length() + 1);
   str.flush();
   file.close();
 
   m_filePath = QDir::toNativeSeparators(file_path);
-  m_fileWatcher->blockSignals(false);
+
+  if (m_fileWatcher != nullptr) {
+    m_fileWatcher->blockSignals(false);
+  }
+
   reattachWatcher(m_filePath);
 
   setSavePoint();
   emit savedToFile(m_filePath);
 
   *ok = true;
+}
+
+bool TextEditor::isLog() const {
+  return m_isLog;
+}
+
+void TextEditor::setIsLog(bool is_log) {
+  m_isLog = is_log;
+
+  if (m_isLog) {
+    appendText(4, "1234");
+  }
 }
 
 bool TextEditor::settingsDirty() const {
