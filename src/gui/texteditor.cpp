@@ -415,7 +415,7 @@ void TextEditor::setIsLog(bool is_log) {
     gotoPos(length());
     newLine();
 
-    const QString date_str = QDateTime::currentDateTime().toString(Qt::DateFormat::DefaultLocaleShortDate);
+    const QString date_str = QDateTime::currentDateTime().toString(m_textApp->settings()->logTimestampFormat());
 
     insertText(currentPos(), date_str.toUtf8().constData());
     gotoPos(length());

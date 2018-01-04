@@ -23,91 +23,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="3" column="0" colspan="3">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>483</width>
-       <height>183</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="1">
-    <widget class="QSpinBox" name="m_spinLineSpacing">
-     <property name="minimum">
-      <number>-10</number>
-     </property>
-     <property name="maximum">
-      <number>50</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Line spacing</string>
-     </property>
-     <property name="buddy">
-      <cstring>m_spinLineSpacing</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="3">
-    <widget class="QGroupBox" name="m_gbFonts">
-     <property name="title">
-      <string>Fonts</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QPushButton" name="m_btnFontMainChange">
-        <property name="text">
-         <string>&amp;Change</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="m_lblFontMain">
-        <property name="text">
-         <string>Text editor font</string>
-        </property>
-        <property name="buddy">
-         <cstring>m_btnFontMainChange</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="0" colspan="3">
     <widget class="QGroupBox" name="m_gbIndentation">
      <property name="title">
@@ -180,6 +95,130 @@
      </layout>
     </widget>
    </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QGroupBox" name="m_gbFonts">
+     <property name="title">
+      <string>Fonts</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="m_btnFontMainChange">
+        <property name="text">
+         <string>&amp;Change</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="m_lblFontMain">
+        <property name="text">
+         <string>Text editor font</string>
+        </property>
+        <property name="buddy">
+         <cstring>m_btnFontMainChange</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="3">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>483</width>
+       <height>183</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1">
+    <widget class="QSpinBox" name="m_spinLineSpacing">
+     <property name="minimum">
+      <number>-10</number>
+     </property>
+     <property name="maximum">
+      <number>50</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Line spacing</string>
+     </property>
+     <property name="buddy">
+      <cstring>m_spinLineSpacing</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QGroupBox" name="m_gbLog">
+     <property name="title">
+      <string>.LOG Feature</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Timestamp format</string>
+        </property>
+        <property name="buddy">
+         <cstring>m_cmbTimestampFormat</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="m_cmbTimestampFormat">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
@@ -187,6 +226,7 @@
   <tabstop>m_cmbIndentMode</tabstop>
   <tabstop>m_spinTabSize</tabstop>
   <tabstop>m_spinIndentSize</tabstop>
+  <tabstop>m_cmbTimestampFormat</tabstop>
   <tabstop>m_btnFontMainChange</tabstop>
  </tabstops>
  <resources/>

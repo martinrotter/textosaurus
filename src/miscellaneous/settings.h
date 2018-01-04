@@ -25,6 +25,8 @@
 
 namespace Editor {
   constexpr auto ID = "editor";
+  constexpr auto LogTimestampFormat = "log_timestamp_format";
+  const QString LogTimestampFormatDef = "yyyy-MM-dd HH:mm:ss";
   constexpr auto TabSize = "tab_size";
   constexpr auto TabSizeDef = 2;
   constexpr auto IndentSize = "indent_size";

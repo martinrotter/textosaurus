@@ -19,6 +19,7 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
   m_ui.m_cmbIndentMode->addItem(tr("Tabs"), true);
 
   connect(m_ui.m_cmbIndentMode, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
+  connect(m_ui.m_cmbTimestampFormat, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinIndentSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinTabSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinLineSpacing, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
@@ -34,6 +35,20 @@ void SettingsEditor::loadSettings() {
   m_ui.m_lblFontMain->setFont(qApp->textApplication()->settings()->mainFont());
   m_ui.m_spinLineSpacing->setValue(qApp->textApplication()->settings()->lineSpacing());
 
+  QStringList date_patterns;
+
+  date_patterns << QSL("yyyy-MM-ddTHH:mm:ss") << QSL("MMM dd yyyy hh:mm:ss") <<
+    QSL("MMM d yyyy hh:mm:ss") << QSL("ddd, dd MMM yyyy HH:mm:ss") <<
+    QSL("dd MMM yyyy") << QSL("yyyy-MM-dd HH:mm:ss.z") << QSL("yyyy-MM-dd") <<
+    QSL("yyyy") << QSL("yyyy-MM") << QSL("yyyy-MM-dd") << QSL("yyyy-MM-ddThh:mm") <<
+    QSL("yyyy-MM-ddThh:mm:ss");
+
+  for (const QString& pattern : date_patterns) {
+    m_ui.m_cmbTimestampFormat->addItem(pattern);
+  }
+
+  m_ui.m_cmbTimestampFormat->setCurrentText(qApp->textApplication()->settings()->logTimestampFormat());
+
   onEndLoadSettings();
 }
 
@@ -45,6 +60,7 @@ void SettingsEditor::saveSettings() {
   qApp->textApplication()->settings()->setTabSize(m_ui.m_spinTabSize->value());
   qApp->textApplication()->settings()->setIndentWithTabs(m_ui.m_cmbIndentMode->currentData().toBool());
   qApp->textApplication()->settings()->setMainFont(m_ui.m_lblFontMain->font());
+  qApp->textApplication()->settings()->setLogTimestampFormat(m_ui.m_cmbTimestampFormat->currentText());
   qApp->textApplication()->settings()->blockSignals(false);
 
   // NOTE: Execute last command with signals ON, so that editor do refresh their settings.

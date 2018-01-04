@@ -72,6 +72,10 @@ bool TextApplicationSettings::reloadModifiedDocumentsAutomatically() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ReloadModified)).toBool();
 }
 
+QString TextApplicationSettings::logTimestampFormat() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::LogTimestampFormat)).toString();
+}
+
 int TextApplicationSettings::tabSize() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::TabSize)).toInt();
 }
@@ -96,6 +100,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setLogTimestampFormat(const QString& format) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::LogTimestampFormat, format);
+  emit settingsChanged(false, false);
 }
 
 void TextApplicationSettings::setReloadModifiedDocumentsAutomatically(bool reload_automatically) {
