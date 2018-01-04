@@ -453,6 +453,10 @@ CONFIG(release, debug|release) {
   DEFINES *= NDEBUG=1
 }
 
+# Add hoextdown.
+SOURCES += $$files(src/hoextdown/*.c, false)
+HEADERS  += $$files(src/hoextdown/*.h, false)
+
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
                 $$PWD/src/gui \
