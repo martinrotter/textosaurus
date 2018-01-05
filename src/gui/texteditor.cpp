@@ -4,8 +4,8 @@
 
 #include "definitions/definitions.h"
 #include "exceptions/ioexception.h"
-#include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
+#include "gui/sidebars/outputsidebar.h"
 #include "gui/texteditorprinter.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iofactory.h"

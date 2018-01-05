@@ -192,7 +192,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/dialogs/formmain.h \
             src/gui/dialogs/formsettings.h \
             src/gui/dialogs/formupdate.h \
-            src/gui/sidebars/outputwindow.h \
             src/gui/guiutilities.h \
             src/gui/labelwithstatus.h \
             src/gui/messagebox.h \
@@ -257,7 +256,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/prmem.h \
             src/uchardet/uchardet.h \
             src/gui/sidebars/dockwidget.h \
-            src/gui/sidebars/filesystemsidebar.h
+            src/gui/sidebars/filesystemsidebar.h \
+    src/gui/sidebars/outputsidebar.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -274,7 +274,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/dialogs/formmain.cpp \
             src/gui/dialogs/formsettings.cpp \
             src/gui/dialogs/formupdate.cpp \
-            src/gui/sidebars/outputwindow.cpp \
             src/gui/guiutilities.cpp \
             src/gui/labelwithstatus.cpp \
             src/gui/messagebox.cpp \
@@ -366,7 +365,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsUTF8Prober.cpp \
             src/uchardet/uchardet.cpp \
             src/gui/sidebars/dockwidget.cpp \
-            src/gui/sidebars/filesystemsidebar.cpp
+            src/gui/sidebars/filesystemsidebar.cpp \
+    src/gui/sidebars/outputsidebar.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

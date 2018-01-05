@@ -4,7 +4,7 @@
 
 #include "external-tools/externaltool.h"
 #include "external-tools/predefinedtools.h"
-#include "gui/docks/outputwindow.h"
+#include "gui/sidebars/outputsidebar.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/textapplication.h"

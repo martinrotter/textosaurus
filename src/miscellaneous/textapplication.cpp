@@ -6,10 +6,9 @@
 #include "external-tools/externaltools.h"
 #include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formmain.h"
-#include "gui/docks/dockwidget.h"
-#include "gui/docks/filesystemsidebar.h"
-#include "gui/docks/outputwindow.h"
 #include "gui/messagebox.h"
+#include "gui/sidebars/filesystemsidebar.h"
+#include "gui/sidebars/outputsidebar.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
@@ -234,7 +233,7 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
   }
 }
 
-OutputWindow* TextApplication::outputWindow() const {
+OutputSidebar* TextApplication::outputWindow() const {
   return m_outputSidebar;
 }
 
@@ -340,7 +339,7 @@ void TextApplication::createConnections() {
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
   connect(m_actionDockShowFilesystem, &QAction::triggered, m_filesystemSidebar, &FilesystemSidebar::setVisible);
-  connect(m_actionDockShowOutput, &QAction::triggered, m_outputSidebar, &OutputWindow::setVisible);
+  connect(m_actionDockShowOutput, &QAction::triggered, m_outputSidebar, &OutputSidebar::setVisible);
 
   // Menus.
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
@@ -389,7 +388,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_tabEditors = main_form->tabWidget();
   m_statusBar = main_form->statusBar();
 
-  m_outputSidebar = new OutputWindow(m_mainForm);
+  m_outputSidebar = new OutputSidebar(m_mainForm);
   m_outputSidebar->setObjectName(QSL("m_outputSidebar"));
 
   m_filesystemSidebar = new FilesystemSidebar(this, m_mainForm);

@@ -2,7 +2,7 @@
 
 #include "external-tools/externaltool.h"
 
-#include "gui/docks/outputwindow.h"
+#include "gui/sidebars/outputsidebar.h"
 #include "gui/texteditor.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"

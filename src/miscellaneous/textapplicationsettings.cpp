@@ -4,7 +4,7 @@
 
 #include "external-tools/externaltools.h"
 #include "gui/dialogs/formmain.h"
-#include "gui/docks/dockwidget.h"
+#include "gui/sidebars/outputsidebar.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
 #include "miscellaneous/syntaxhighlighting.h"

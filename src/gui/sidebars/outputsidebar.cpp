@@ -1,6 +1,6 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "gui/sidebars/outputwindow.h"
+#include "gui/sidebars/outputsidebar.h"
 
 #include "gui/plaintoolbutton.h"
 #include "miscellaneous/application.h"
@@ -11,12 +11,12 @@
 #include <QScrollBar>
 #include <QTabBar>
 
-OutputWindow::OutputWindow(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
+OutputSidebar::OutputSidebar(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
   m_txtOutput(nullptr) {
   setWindowTitle(tr("Output"));
 }
 
-void OutputWindow::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
+void OutputSidebar::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
   Q_UNUSED(source)
   show();
   raise();
@@ -38,7 +38,7 @@ void OutputWindow::displayOutput(OutputSource source, const QString& message, QM
   }
 }
 
-QColor OutputWindow::colorForLevel(QMessageBox::Icon level) {
+QColor OutputSidebar::colorForLevel(QMessageBox::Icon level) {
   switch (level) {
     case QMessageBox::Icon::Information:
       return Qt::GlobalColor::blue;
@@ -54,19 +54,19 @@ QColor OutputWindow::colorForLevel(QMessageBox::Icon level) {
   }
 }
 
-Qt::DockWidgetArea OutputWindow::initialArea() const {
+Qt::DockWidgetArea OutputSidebar::initialArea() const {
   return Qt::DockWidgetArea::BottomDockWidgetArea;
 }
 
-bool OutputWindow::initiallyVisible() const {
+bool OutputSidebar::initiallyVisible() const {
   return true;
 }
 
-int OutputWindow::initialWidth() const {
+int OutputSidebar::initialWidth() const {
   return 150;
 }
 
-void OutputWindow::load() {
+void OutputSidebar::load() {
   if (m_txtOutput == nullptr) {
     m_txtOutput = new QPlainTextEdit(this);
     m_txtOutput->setPlaceholderText(tr("This sidebar displays output of external tools and some other critical information..."));

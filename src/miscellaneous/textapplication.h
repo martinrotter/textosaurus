@@ -11,7 +11,7 @@
 
 class TextEditor;
 class TabWidget;
-class OutputWindow;
+class OutputSidebar;
 class FormMain;
 class StatusBar;
 class FormFindReplace;
@@ -30,7 +30,7 @@ class TextApplication : public QObject {
     virtual ~TextApplication() = default;
 
     TextEditor* currentEditor() const;
-    OutputWindow* outputWindow() const;
+    OutputSidebar* outputWindow() const;
     TextApplicationSettings* settings() const;
 
     void setMainForm(FormMain* main_form);
@@ -119,7 +119,7 @@ class TextApplication : public QObject {
     TextApplicationSettings* m_settings;
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
-    OutputWindow* m_outputSidebar;
+    OutputSidebar* m_outputSidebar;
     FilesystemSidebar* m_filesystemSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;

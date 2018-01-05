@@ -14,12 +14,12 @@ enum class OutputSource {
   Application
 };
 
-class OutputWindow : public DockWidget {
+class OutputSidebar : public DockWidget {
   Q_OBJECT
 
   public:
-    explicit OutputWindow(QWidget* parent = nullptr);
-    virtual ~OutputWindow() = default;
+    explicit OutputSidebar(QWidget* parent = nullptr);
+    virtual ~OutputSidebar() = default;
 
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;
