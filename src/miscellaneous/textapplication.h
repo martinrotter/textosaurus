@@ -12,6 +12,7 @@
 class TextEditor;
 class TabWidget;
 class OutputSidebar;
+class FindResultsSidebar;
 class FormMain;
 class StatusBar;
 class FormFindReplace;
@@ -121,6 +122,7 @@ class TextApplication : public QObject {
     StatusBar* m_statusBar;
     OutputSidebar* m_outputSidebar;
     FilesystemSidebar* m_filesystemSidebar;
+    FindResultsSidebar* m_findResultsSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;
 
@@ -153,6 +155,7 @@ class TextApplication : public QObject {
     QAction* m_actionPrintPreviewCurrentEditor;
     QAction* m_actionDockShowOutput;
     QAction* m_actionDockShowFilesystem;
+    QAction* m_actionDockShowFindResults;
     QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;

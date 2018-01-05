@@ -5,9 +5,16 @@
 
 #include "gui/sidebars/dockwidget.h"
 
+#include <QAbstractListModel>
+
+#include "gui/texteditor.h"
+
 class TextApplication;
+class QTreeWidget;
 
 class FindResultsSidebar : public DockWidget {
+  Q_OBJECT
+
   public:
     explicit FindResultsSidebar(TextApplication* app, QWidget* parent = nullptr);
 
@@ -17,6 +24,10 @@ class FindResultsSidebar : public DockWidget {
 
   public slots:
     void load();
+    void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
+
+  private:
+    QTreeWidget* m_viewResults;
 };
 
 #endif // FINDRESULTSSIDEBAR_H

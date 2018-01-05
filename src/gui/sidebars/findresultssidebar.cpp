@@ -2,7 +2,15 @@
 
 #include "gui/sidebars/findresultssidebar.h"
 
-FindResultsSidebar::FindResultsSidebar(TextApplication* app, QWidget* parent) : DockWidget(parent) {}
+#include <QTreeWidget>
+
+FindResultsSidebar::FindResultsSidebar(TextApplication* app, QWidget* parent)
+  : DockWidget(parent), m_viewResults(new QTreeWidget(this)) {
+  setWidget(m_viewResults);
+  setWindowTitle(tr("Find Results"));
+
+  m_viewResults->setHeaderHidden(true);
+}
 
 Qt::DockWidgetArea FindResultsSidebar::initialArea() const {
   return Qt::DockWidgetArea::BottomDockWidgetArea;
@@ -17,3 +25,5 @@ int FindResultsSidebar::initialWidth() const {
 }
 
 void FindResultsSidebar::load() {}
+
+void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {}

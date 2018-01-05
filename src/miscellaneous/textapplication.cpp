@@ -8,6 +8,7 @@
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
 #include "gui/sidebars/filesystemsidebar.h"
+#include "gui/sidebars/findresultssidebar.h"
 #include "gui/sidebars/outputsidebar.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
@@ -340,6 +341,7 @@ void TextApplication::createConnections() {
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
   connect(m_actionDockShowFilesystem, &QAction::triggered, m_filesystemSidebar, &FilesystemSidebar::setVisible);
   connect(m_actionDockShowOutput, &QAction::triggered, m_outputSidebar, &OutputSidebar::setVisible);
+  connect(m_actionDockShowFindResults, &QAction::triggered, m_findResultsSidebar, &FindResultsSidebar::setVisible);
 
   // Menus.
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
@@ -394,6 +396,9 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_filesystemSidebar = new FilesystemSidebar(this, m_mainForm);
   m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
 
+  m_findResultsSidebar = new FindResultsSidebar(this, m_mainForm);
+  m_findResultsSidebar->setObjectName(QSL("m_findResultsSidebar"));
+
   // Get pointers to editor-related global actions/menus.
   m_actionNoAction = m_mainForm->m_ui.m_actionNoActions;
   m_actionFileNew = m_mainForm->m_ui.m_actionFileNew;
@@ -421,6 +426,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
   m_actionDockShowFilesystem = m_mainForm->m_ui.m_actionDockShowFilesystem;
   m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
+  m_actionDockShowFindResults = m_mainForm->m_ui.m_actionDockShowFindResults;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
   m_menuEdit = m_mainForm->m_ui.m_menuEdit;
@@ -469,7 +475,8 @@ void TextApplication::loadState() {
   m_mainForm->setCorner(Qt::Corner::TopLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
   m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
 
-  m_settings->loadInitialSidebarGuiSettings(m_mainForm, QList<DockWidget*>() << m_outputSidebar << m_filesystemSidebar);
+  m_settings->loadInitialSidebarGuiSettings(m_mainForm,
+                                            QList<DockWidget*>() << m_outputSidebar << m_filesystemSidebar << m_findResultsSidebar);
 }
 
 void TextApplication::quit(bool* ok) {
@@ -828,6 +835,7 @@ void TextApplication::loadNewExternalTools() {
 void TextApplication::initializeDockWidgetsMenu() {
   m_actionDockShowOutput->setChecked(m_outputSidebar->isVisible());
   m_actionDockShowFilesystem->setChecked(m_filesystemSidebar->isVisible());
+  m_actionDockShowFindResults->setChecked(m_findResultsSidebar->isVisible());
 }
 
 void TextApplication::updateEditorIcon(int index, bool modified, bool read_only) {

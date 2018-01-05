@@ -18,6 +18,7 @@ OutputSidebar::OutputSidebar(QWidget* parent) : DockWidget(parent), m_currentLev
 
 void OutputSidebar::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
   Q_UNUSED(source)
+
   show();
   raise();
 
