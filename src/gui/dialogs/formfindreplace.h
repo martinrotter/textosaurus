@@ -27,10 +27,11 @@ class FormFindReplace : public QDialog {
     void displayCount();
     void searchNext();
     void searchPrevious();
+    void searchAll();
 
   private:
     int extractFlags();
-    void search(bool reverse);
+    void searchOne(bool reverse);
 
   private:
     Ui::FormFindReplace m_ui;

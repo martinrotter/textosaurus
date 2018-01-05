@@ -103,7 +103,7 @@
      <item>
       <widget class="QPushButton" name="m_btnReplaceNext">
        <property name="text">
-        <string>&amp;Replace</string>
+        <string>&amp;Replace Next</string>
        </property>
       </widget>
      </item>

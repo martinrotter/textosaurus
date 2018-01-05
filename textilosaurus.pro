@@ -192,7 +192,7 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/dialogs/formmain.h \
             src/gui/dialogs/formsettings.h \
             src/gui/dialogs/formupdate.h \
-            src/gui/docks/outputwindow.h \
+            src/gui/sidebars/outputwindow.h \
             src/gui/guiutilities.h \
             src/gui/labelwithstatus.h \
             src/gui/messagebox.h \
@@ -256,8 +256,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/nsUTF8Prober.h \
             src/uchardet/prmem.h \
             src/uchardet/uchardet.h \
-    src/gui/docks/dockwidget.h \
-    src/gui/docks/filesystemsidebar.h
+            src/gui/sidebars/dockwidget.h \
+            src/gui/sidebars/filesystemsidebar.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -274,7 +274,7 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/dialogs/formmain.cpp \
             src/gui/dialogs/formsettings.cpp \
             src/gui/dialogs/formupdate.cpp \
-            src/gui/docks/outputwindow.cpp \
+            src/gui/sidebars/outputwindow.cpp \
             src/gui/guiutilities.cpp \
             src/gui/labelwithstatus.cpp \
             src/gui/messagebox.cpp \
@@ -365,8 +365,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsUniversalDetector.cpp \
             src/uchardet/nsUTF8Prober.cpp \
             src/uchardet/uchardet.cpp \
-    src/gui/docks/dockwidget.cpp \
-    src/gui/docks/filesystemsidebar.cpp
+            src/gui/sidebars/dockwidget.cpp \
+            src/gui/sidebars/filesystemsidebar.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -461,7 +461,7 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
                 $$PWD/src/gui \
                 $$PWD/src/gui/dialogs \
-                $$PWD/src/gui/docks \
+                $$PWD/src/gui/sidebars \
                 $$PWD/src/dynamic-shortcuts \
                 $$PWD/src/external-tools
 

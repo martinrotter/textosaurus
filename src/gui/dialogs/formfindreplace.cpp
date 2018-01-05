@@ -11,7 +11,6 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   m_ui.setupUi(this);
   m_ui.m_lblResult->setStyleSheet(QSL("color: red;"));
 
-  m_ui.m_btnFindAll->setVisible(false);
   m_ui.m_btnReplaceNext->setVisible(false);
   m_ui.m_btnReplaceAll->setVisible(false);
 
@@ -22,6 +21,7 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   connect(m_ui.m_btnFindPrevious, &QPushButton::clicked, this, &FormFindReplace::searchPrevious);
   connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::submitted, this, &FormFindReplace::searchNext);
   connect(m_ui.m_lblRegexInfo, &QLabel::linkActivated, qApp->web(), &WebFactory::openUrlInExternalBrowser);
+  connect(m_ui.m_btnFindAll, &QPushButton::clicked, this, &FormFindReplace::searchAll);
 }
 
 void FormFindReplace::display() {
@@ -69,11 +69,41 @@ void FormFindReplace::searchNext() {
   // NOTE: informace scite
   // https://github.com/LuaDist/scite/blob/fab4a6321c52c6ea8d1e1eab9c4fee86f7388697/src/SciTEBase.cxx#L1052
 
-  search(false);
+  searchOne(false);
 }
 
 void FormFindReplace::searchPrevious() {
-  search(true);
+  searchOne(true);
+}
+
+void FormFindReplace::searchAll() {
+  TextEditor* editor = m_application->currentEditor();
+
+  if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
+    m_ui.m_lblResult->setText("Either no input or no text editor active.");
+    return;
+  }
+
+  QList<QPair<int, int>> found_ranges;
+  int start_position = 0, end_position = editor->length(), search_flags = extractFlags();
+
+  while (true) {
+    QPair<int, int> found_range = editor->findText(search_flags,
+                                                   m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
+                                                   start_position,
+                                                   end_position);
+
+    if (found_range.first >= 0) {
+      found_ranges.append(found_range);
+      start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
+    }
+    else {
+      break;
+    }
+  }
+
+  // TODO: Send results to "Find results" sidebar, which will handle it.
+  //m_application->findResultsSidebar();
 }
 
 int FormFindReplace::extractFlags() {
@@ -86,7 +116,7 @@ int FormFindReplace::extractFlags() {
   return search_flags;
 }
 
-void FormFindReplace::search(bool reverse) {
+void FormFindReplace::searchOne(bool reverse) {
   TextEditor* editor = m_application->currentEditor();
 
   if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
