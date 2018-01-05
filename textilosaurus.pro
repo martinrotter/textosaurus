@@ -257,7 +257,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/uchardet.h \
             src/gui/sidebars/dockwidget.h \
             src/gui/sidebars/filesystemsidebar.h \
-    src/gui/sidebars/outputsidebar.h
+    src/gui/sidebars/outputsidebar.h \
+    src/gui/sidebars/findresultssidebar.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -366,7 +367,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/uchardet.cpp \
             src/gui/sidebars/dockwidget.cpp \
             src/gui/sidebars/filesystemsidebar.cpp \
-    src/gui/sidebars/outputsidebar.cpp
+    src/gui/sidebars/outputsidebar.cpp \
+    src/gui/sidebars/findresultssidebar.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
