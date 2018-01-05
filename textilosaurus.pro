@@ -258,7 +258,9 @@ HEADERS +=  src/definitions/definitions.h \
             src/gui/sidebars/dockwidget.h \
             src/gui/sidebars/filesystemsidebar.h \
     src/gui/sidebars/outputsidebar.h \
-    src/gui/sidebars/findresultssidebar.h
+    src/gui/sidebars/findresultssidebar.h \
+    src/gui/sidebars/findresultsmodel.h \
+    src/gui/sidebars/findresultsmodelitem.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -368,7 +370,9 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/gui/sidebars/dockwidget.cpp \
             src/gui/sidebars/filesystemsidebar.cpp \
     src/gui/sidebars/outputsidebar.cpp \
-    src/gui/sidebars/findresultssidebar.cpp
+    src/gui/sidebars/findresultssidebar.cpp \
+    src/gui/sidebars/findresultsmodel.cpp \
+    src/gui/sidebars/findresultsmodelitem.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

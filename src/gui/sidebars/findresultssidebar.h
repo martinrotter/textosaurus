@@ -10,7 +10,8 @@
 #include "gui/texteditor.h"
 
 class TextApplication;
-class QTreeWidget;
+class FindResultsModel;
+class QTreeView;
 
 class FindResultsSidebar : public DockWidget {
   Q_OBJECT
@@ -23,11 +24,14 @@ class FindResultsSidebar : public DockWidget {
     int initialWidth() const;
 
   public slots:
-    void load();
+    virtual void load() override;
+
+    void clear();
     void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
 
   private:
-    QTreeWidget* m_viewResults;
+    QTreeView* m_viewResults;
+    FindResultsModel* m_model;
 };
 
 #endif // FINDRESULTSSIDEBAR_H
