@@ -221,7 +221,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       QSL("xsd"), QSL("xul"), QSL("kml"), QSL("svg"), QSL("mxml"), QSL("xsml"),
       QSL("wsdl"), QSL("xlf"), QSL("xliff"), QSL("xbl"), QSL("xml"), QSL("sxbl"),
       QSL("sitemap"), QSL("gml"), QSL("gpx"), QSL("plist"), QSL("ts"), QSL("qrc"), QSL("vcxproj"),
-      QSL("opml"), QSL("rss"), QSL("atom"), QSL("feed")
+      QSL("opml"), QSL("rss"), QSL("atom"), QSL("feed"), QSL("vbox"), QSL("vbox-prev")
     }, SCLEX_XML)
       << Lexer(QSL("YAML"), QStringList {
       QSL("yml"), QSL("yaml")
