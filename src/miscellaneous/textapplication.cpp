@@ -134,6 +134,12 @@ void TextApplication::reloadCurrentEditor() {
   }
 }
 
+void TextApplication::makeEditorVisible(TextEditor* editor) {
+  if (editor != nullptr) {
+    m_tabEditors->setCurrentWidget(editor);
+  }
+}
+
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   foreach (TextEditor* editor, m_tabEditors->editors()) {
     editor->setSettingsDirty(true);
@@ -221,9 +227,7 @@ void TextApplication::updateEolMenu(int eol_mode) {
 void TextApplication::onEditorRequestedVisibility() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
-  if (editor != nullptr) {
-    m_tabEditors->setCurrentWidget(editor);
-  }
+  makeEditorVisible(editor);
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {

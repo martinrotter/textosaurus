@@ -11,10 +11,12 @@ FindResultsModelItemEditor::FindResultsModelItemEditor(TextEditor* editor, QObje
 QVariant FindResultsModelItemEditor::data(int role) const {
   switch (role) {
     case Qt::ItemDataRole::DisplayRole:
-      return "editor";
+      return m_editor.isNull() ?
+             tr("<editor-closed>") :
+             (tr("%n result(s) - ", "", childCount()) + (m_editor->filePath().isEmpty() ? tr("<unnamed-document") : m_editor->filePath()));
 
     case Qt::ItemDataRole::BackgroundRole:
-      return QColor(0, 200, 0, 10);
+      return QColor(0, 180, 0, 10);
 
     default:
       return QVariant();

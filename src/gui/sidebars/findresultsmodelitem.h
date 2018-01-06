@@ -23,6 +23,9 @@ class FindResultsModelItem : public QObject {
 
     void setParentItem(FindResultsModelItem* parent_item);
 
+    QList<FindResultsModelItem*> childItems() const;
+    void clearChildren();
+
   private:
     QList<FindResultsModelItem*> m_childItems;
     FindResultsModelItem* m_parentItem;

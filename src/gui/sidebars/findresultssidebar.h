@@ -29,6 +29,9 @@ class FindResultsSidebar : public DockWidget {
     void clear();
     void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
 
+  private slots:
+    void navigateToResult(const QModelIndex& index);
+
   private:
     QTreeView* m_viewResults;
     TextApplication* m_textApp;

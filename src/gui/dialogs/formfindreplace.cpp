@@ -104,8 +104,13 @@ void FormFindReplace::searchAll() {
     }
   }
 
-  m_application->findResultsSidebar()->addResults(editor, found_ranges);
-  close();
+  if (found_ranges.isEmpty()) {
+    m_ui.m_lblResult->setText(tr("Nothing found."));
+  }
+  else {
+    m_application->findResultsSidebar()->addResults(editor, found_ranges);
+    close();
+  }
 }
 
 int FormFindReplace::extractFlags() {

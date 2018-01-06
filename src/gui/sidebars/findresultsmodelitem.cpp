@@ -38,6 +38,15 @@ void FindResultsModelItem::setParentItem(FindResultsModelItem* parent_item) {
   m_parentItem = parent_item;
 }
 
+QList<FindResultsModelItem*> FindResultsModelItem::childItems() const {
+  return m_childItems;
+}
+
+void FindResultsModelItem::clearChildren() {
+  qDeleteAll(m_childItems);
+  m_childItems.clear();
+}
+
 int FindResultsModelItem::row() const {
   if (m_parentItem != nullptr) {
     return m_parentItem->m_childItems.indexOf(const_cast<FindResultsModelItem*>(this));

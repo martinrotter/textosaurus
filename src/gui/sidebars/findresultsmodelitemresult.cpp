@@ -7,12 +7,15 @@
 #include <QColor>
 #include <QVariant>
 
-FindResultsModelItemResult::FindResultsModelItemResult(QObject* parent) : FindResultsModelItem(parent) {}
+FindResultsModelItemResult::FindResultsModelItemResult(const QString& found_text, const QPair<int, int> range, QObject* parent)
+  : FindResultsModelItem(parent), m_resultText(found_text), m_range(range) {}
 
 QVariant FindResultsModelItemResult::data(int role) const {
   switch (role) {
     case Qt::ItemDataRole::DisplayRole:
-      return "result";
+      return QString("Found text: \"%1\" (%2...%3)").arg(m_resultText,
+                                                         QString::number(m_range.first),
+                                                         QString::number(m_range.second));
 
     default:
       return QVariant();
@@ -28,4 +31,8 @@ TextEditor* FindResultsModelItemResult::editor() const {
   else {
     return nullptr;
   }
+}
+
+QPair<int, int> FindResultsModelItemResult::range() const {
+  return m_range;
 }

@@ -6,6 +6,8 @@
 #include <QAbstractItemModel>
 
 class FindResultsModelItem;
+class FindResultsModelItemEditor;
+class TextEditor;
 
 class FindResultsModel : public QAbstractItemModel {
   Q_OBJECT
@@ -14,13 +16,13 @@ class FindResultsModel : public QAbstractItemModel {
     explicit FindResultsModel(QObject* parent = nullptr);
     virtual ~FindResultsModel();
 
-    QModelIndex index(int row, int column, const QModelIndex& parent) const;
-    QModelIndex parent(const QModelIndex& child) const;
-    int rowCount(const QModelIndex& parent) const;
-    int columnCount(const QModelIndex& parent) const;
-    QVariant data(const QModelIndex& index, int role) const;
+    virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override;
+    virtual QModelIndex parent(const QModelIndex& child) const override;
+    virtual int rowCount(const QModelIndex& parent) const override;
+    virtual int columnCount(const QModelIndex& parent) const override;
+    virtual QVariant data(const QModelIndex& index, int role) const override;
 
-  private:
+    void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
     FindResultsModelItem* itemForIndex(const QModelIndex& idx) const;
 
   private:

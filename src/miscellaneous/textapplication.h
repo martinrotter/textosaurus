@@ -62,6 +62,8 @@ class TextApplication : public QObject {
     void closeAllUnmodifiedEditors();
     void reloadCurrentEditor();
 
+    void makeEditorVisible(TextEditor* editor);
+
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
 

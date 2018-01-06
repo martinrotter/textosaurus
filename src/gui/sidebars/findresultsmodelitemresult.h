@@ -11,10 +11,17 @@ class FindResultsModelItemResult : public FindResultsModelItem {
   Q_OBJECT
 
   public:
-    explicit FindResultsModelItemResult(QObject* parent = nullptr);
+    explicit FindResultsModelItemResult(const QString& found_text, const QPair<int, int> range, QObject* parent = nullptr);
 
     virtual QVariant data(int role) const override;
     TextEditor* editor() const;
+
+    QPair<int, int> range() const;
+
+  private:
+    QString m_resultText;
+
+    QPair<int, int> m_range;
 };
 
 #endif // FINDRESULTSMODELITEMRESULT_H
