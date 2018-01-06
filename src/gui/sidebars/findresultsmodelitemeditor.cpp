@@ -17,7 +17,7 @@ QVariant FindResultsModelItemEditor::data(int role) const {
               (m_editor->filePath().isEmpty() ? tr("<unnamed-document") : m_editor->filePath()));
 
     case Qt::ItemDataRole::BackgroundRole:
-      return QColor(0, 180, 0, 10);
+      return m_editor.isNull() ? QColor(180, 0, 0, 100) : QColor(0, 180, 0, 100);
 
     default:
       return QVariant();
