@@ -53,7 +53,7 @@ void FindResultsSidebar::navigateToResult(const QModelIndex& index) {
   FindResultsModelItem* item = m_model->itemForIndex(index);
   FindResultsModelItemResult* result_item = qobject_cast<FindResultsModelItemResult*>(item);
 
-  if (item != nullptr && result_item->editor() != nullptr) {
+  if (result_item != nullptr && result_item->editor() != nullptr) {
     m_textApp->makeEditorVisible(result_item->editor());
 
     result_item->editor()->setSel(result_item->range().first, result_item->range().second);

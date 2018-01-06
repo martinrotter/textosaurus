@@ -13,7 +13,8 @@ QVariant FindResultsModelItemEditor::data(int role) const {
     case Qt::ItemDataRole::DisplayRole:
       return m_editor.isNull() ?
              tr("<editor-closed>") :
-             (tr("%n result(s) - ", "", childCount()) + (m_editor->filePath().isEmpty() ? tr("<unnamed-document") : m_editor->filePath()));
+             (tr("%n result(s) - ", "", childCount()) +
+              (m_editor->filePath().isEmpty() ? tr("<unnamed-document") : m_editor->filePath()));
 
     case Qt::ItemDataRole::BackgroundRole:
       return QColor(0, 180, 0, 10);
