@@ -234,8 +234,12 @@ void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
   }
 }
 
-OutputSidebar* TextApplication::outputWindow() const {
+OutputSidebar* TextApplication::outputSidebar() const {
   return m_outputSidebar;
+}
+
+FindResultsSidebar* TextApplication::findResultsSidebar() const {
+  return m_findResultsSidebar;
 }
 
 TextApplicationSettings* TextApplication::settings() const {

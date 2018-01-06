@@ -12,6 +12,7 @@ FindResultsModelItem::~FindResultsModelItem() {
 }
 
 QVariant FindResultsModelItem::data(int role) const {
+  Q_UNUSED(role)
   return QVariant();
 }
 
@@ -29,7 +30,7 @@ int FindResultsModelItem::childCount() const {
   return m_childItems.count();
 }
 
-FindResultsModelItem* FindResultsModelItem::parentItem() {
+FindResultsModelItem* FindResultsModelItem::parentItem() const {
   return m_parentItem;
 }
 

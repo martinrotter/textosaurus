@@ -19,7 +19,7 @@ class FindResultsModelItem : public QObject {
 
     int childCount() const;
     int row() const;
-    FindResultsModelItem* parentItem();
+    FindResultsModelItem* parentItem() const;
 
     void setParentItem(FindResultsModelItem* parent_item);
 

@@ -2,6 +2,7 @@
 
 #include "gui/dialogs/formfindreplace.h"
 
+#include "gui/sidebars/findresultssidebar.h"
 #include "gui/texteditor.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/textapplication.h"
@@ -14,7 +15,8 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   m_ui.m_btnReplaceNext->setVisible(false);
   m_ui.m_btnReplaceAll->setVisible(false);
 
-  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint |
+                 Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 
   connect(m_ui.m_btnCount, &QPushButton::clicked, this, &FormFindReplace::displayCount);
   connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
@@ -102,8 +104,8 @@ void FormFindReplace::searchAll() {
     }
   }
 
-  // TODO: Send results to "Find results" sidebar, which will handle it.
-  //m_application->findResultsSidebar();
+  m_application->findResultsSidebar()->addResults(editor, found_ranges);
+  close();
 }
 
 int FormFindReplace::extractFlags() {

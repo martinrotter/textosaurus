@@ -31,7 +31,8 @@ class TextApplication : public QObject {
     virtual ~TextApplication() = default;
 
     TextEditor* currentEditor() const;
-    OutputSidebar* outputWindow() const;
+    OutputSidebar* outputSidebar() const;
+    FindResultsSidebar* findResultsSidebar() const;
     TextApplicationSettings* settings() const;
 
     void setMainForm(FormMain* main_form);

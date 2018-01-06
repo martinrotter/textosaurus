@@ -9,7 +9,7 @@
 FindResultsModel::FindResultsModel(QObject* parent)
   : QAbstractItemModel(parent), m_rootItem(new FindResultsModelItem(this)) {
 
-  auto aa = new FindResultsModelItemEditor(this);
+  auto aa = new FindResultsModelItemEditor(nullptr, this);
   auto bb = new FindResultsModelItemResult(this);
   auto cc = new FindResultsModelItemResult(this);
 

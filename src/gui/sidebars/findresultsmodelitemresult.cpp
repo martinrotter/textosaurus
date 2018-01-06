@@ -2,6 +2,8 @@
 
 #include "gui/sidebars/findresultsmodelitemresult.h"
 
+#include "gui/sidebars/findresultsmodelitemeditor.h"
+
 #include <QColor>
 #include <QVariant>
 
@@ -14,5 +16,16 @@ QVariant FindResultsModelItemResult::data(int role) const {
 
     default:
       return QVariant();
+  }
+}
+
+TextEditor* FindResultsModelItemResult::editor() const {
+  FindResultsModelItemEditor* item_editor = qobject_cast<FindResultsModelItemEditor*>(parentItem());
+
+  if (item_editor != nullptr) {
+    return item_editor->editor();
+  }
+  else {
+    return nullptr;
   }
 }

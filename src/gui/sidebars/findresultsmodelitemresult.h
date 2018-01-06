@@ -5,6 +5,8 @@
 
 #include "gui/sidebars/findresultsmodelitem.h"
 
+class TextEditor;
+
 class FindResultsModelItemResult : public FindResultsModelItem {
   Q_OBJECT
 
@@ -12,6 +14,7 @@ class FindResultsModelItemResult : public FindResultsModelItem {
     explicit FindResultsModelItemResult(QObject* parent = nullptr);
 
     virtual QVariant data(int role) const override;
+    TextEditor* editor() const;
 };
 
 #endif // FINDRESULTSMODELITEMRESULT_H
