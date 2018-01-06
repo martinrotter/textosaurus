@@ -8,7 +8,7 @@
 #include <QTreeView>
 
 FindResultsSidebar::FindResultsSidebar(TextApplication* app, QWidget* parent)
-  : DockWidget(parent) {}
+  : DockWidget(parent), m_textApp(app) {}
 
 Qt::DockWidgetArea FindResultsSidebar::initialArea() const {
   return Qt::DockWidgetArea::BottomDockWidgetArea;
@@ -24,12 +24,14 @@ int FindResultsSidebar::initialWidth() const {
 
 void FindResultsSidebar::load() {
   m_model = new FindResultsModel(this);
+
   m_viewResults = new QTreeView(this);
   m_viewResults->setHeaderHidden(true);
+  m_viewResults->setModel(m_model);
+  m_viewResults->setIndentation(10);
+
   setWidget(m_viewResults);
   setWindowTitle(tr("Find Results"));
-
-  m_viewResults->setModel(m_model);
 }
 
 void FindResultsSidebar::clear() {}

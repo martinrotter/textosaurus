@@ -12,14 +12,13 @@ class FindResultsModelItem : public QObject {
     explicit FindResultsModelItem(QObject* parent = nullptr);
     virtual ~FindResultsModelItem();
 
-    void appendChild(FindResultsModelItem* child);
+    virtual QVariant data(int role) const;
 
+    void appendChild(FindResultsModelItem* child);
     FindResultsModelItem* child(int row);
 
     int childCount() const;
-    QVariant data() const;
     int row() const;
-
     FindResultsModelItem* parentItem();
 
     void setParentItem(FindResultsModelItem* parent_item);

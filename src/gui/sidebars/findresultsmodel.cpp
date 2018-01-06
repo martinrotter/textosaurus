@@ -3,13 +3,15 @@
 #include "gui/sidebars/findresultsmodel.h"
 
 #include "gui/sidebars/findresultsmodelitem.h"
+#include "gui/sidebars/findresultsmodelitemeditor.h"
+#include "gui/sidebars/findresultsmodelitemresult.h"
 
 FindResultsModel::FindResultsModel(QObject* parent)
   : QAbstractItemModel(parent), m_rootItem(new FindResultsModelItem(this)) {
 
-  auto aa = new FindResultsModelItem(this);
-  auto bb = new FindResultsModelItem(this);
-  auto cc = new FindResultsModelItem(this);
+  auto aa = new FindResultsModelItemEditor(this);
+  auto bb = new FindResultsModelItemResult(this);
+  auto cc = new FindResultsModelItemResult(this);
 
   aa->appendChild(bb);
   aa->appendChild(cc);
@@ -25,15 +27,7 @@ QModelIndex FindResultsModel::index(int row, int column, const QModelIndex& pare
     return QModelIndex();
   }
 
-  FindResultsModelItem* parentItem;
-
-  if (!parent.isValid()) {
-    parentItem = m_rootItem;
-  }
-  else {
-    parentItem = static_cast<FindResultsModelItem*>(parent.internalPointer());
-  }
-
+  FindResultsModelItem* parentItem = itemForIndex(parent);
   FindResultsModelItem* childItem = parentItem->child(row);
 
   if (childItem) {
@@ -49,34 +43,29 @@ QModelIndex FindResultsModel::parent(const QModelIndex& child) const {
     return QModelIndex();
   }
 
-  FindResultsModelItem* childItem = static_cast<FindResultsModelItem*>(child.internalPointer());
+  FindResultsModelItem* childItem = itemForIndex(child);
   FindResultsModelItem* parentItem = childItem->parentItem();
 
   if (parentItem == m_rootItem) {
     return QModelIndex();
   }
-
-  return createIndex(parentItem->row(), 0, parentItem);
+  else {
+    return createIndex(parentItem->row(), 0, parentItem);
+  }
 }
 
 int FindResultsModel::rowCount(const QModelIndex& parent) const {
-  FindResultsModelItem* parentItem;
-
   if (parent.column() > 0) {
     return 0;
   }
 
-  if (!parent.isValid()) {
-    parentItem = m_rootItem;
-  }
-  else {
-    parentItem = static_cast<FindResultsModelItem*>(parent.internalPointer());
-  }
+  FindResultsModelItem* parentItem = itemForIndex(parent);
 
   return parentItem->childCount();
 }
 
 int FindResultsModel::columnCount(const QModelIndex& parent) const {
+  Q_UNUSED(parent)
   return 1;
 }
 
@@ -84,12 +73,16 @@ QVariant FindResultsModel::data(const QModelIndex& index, int role) const {
   if (!index.isValid()) {
     return QVariant();
   }
-
-  if (role != Qt::DisplayRole) {
-    return QVariant();
+  else {
+    return itemForIndex(index)->data(role);
   }
+}
 
-  FindResultsModelItem* item = static_cast<FindResultsModelItem*>(index.internalPointer());
-
-  return item->data();
+FindResultsModelItem* FindResultsModel::itemForIndex(const QModelIndex& idx) const {
+  if (idx.isValid() && idx.model() == this) {
+    return static_cast<FindResultsModelItem*>(idx.internalPointer());
+  }
+  else {
+    return m_rootItem;
+  }
 }

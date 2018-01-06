@@ -21,6 +21,9 @@ class FindResultsModel : public QAbstractItemModel {
     QVariant data(const QModelIndex& index, int role) const;
 
   private:
+    FindResultsModelItem* itemForIndex(const QModelIndex& idx) const;
+
+  private:
     FindResultsModelItem* m_rootItem;
 };
 

@@ -19,9 +19,9 @@ class FindResultsSidebar : public DockWidget {
   public:
     explicit FindResultsSidebar(TextApplication* app, QWidget* parent = nullptr);
 
-    Qt::DockWidgetArea initialArea() const;
-    bool initiallyVisible() const;
-    int initialWidth() const;
+    virtual Qt::DockWidgetArea initialArea() const override;
+    virtual bool initiallyVisible() const override;
+    virtual int initialWidth() const override;
 
   public slots:
     virtual void load() override;
@@ -31,6 +31,7 @@ class FindResultsSidebar : public DockWidget {
 
   private:
     QTreeView* m_viewResults;
+    TextApplication* m_textApp;
     FindResultsModel* m_model;
 };
 

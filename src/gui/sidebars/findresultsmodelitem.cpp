@@ -11,8 +11,8 @@ FindResultsModelItem::~FindResultsModelItem() {
   qDeleteAll(m_childItems);
 }
 
-QVariant FindResultsModelItem::data() const {
-  return "aaa";
+QVariant FindResultsModelItem::data(int role) const {
+  return QVariant();
 }
 
 void FindResultsModelItem::appendChild(FindResultsModelItem* item) {
