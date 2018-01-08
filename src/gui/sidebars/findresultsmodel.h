@@ -14,19 +14,21 @@ class FindResultsModel : public QAbstractItemModel {
 
   public:
     explicit FindResultsModel(QObject* parent = nullptr);
-    virtual ~FindResultsModel();
+    virtual ~FindResultsModel() = default;
 
     virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override;
     virtual QModelIndex parent(const QModelIndex& child) const override;
     virtual int rowCount(const QModelIndex& parent) const override;
     virtual int columnCount(const QModelIndex& parent) const override;
     virtual QVariant data(const QModelIndex& index, int role) const override;
-
-    void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
     FindResultsModelItem* itemForIndex(const QModelIndex& idx) const;
 
+  public slots:
+    void clear();
+    void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
+
   private:
-    FindResultsModelItem* m_rootItem;
+    QScopedPointer<FindResultsModelItem> m_rootItem;
 };
 
 #endif // FINDRESULTSMODEL_H

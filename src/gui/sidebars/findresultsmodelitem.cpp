@@ -43,7 +43,10 @@ QList<FindResultsModelItem*> FindResultsModelItem::childItems() const {
 }
 
 void FindResultsModelItem::clearChildren() {
-  qDeleteAll(m_childItems);
+  for (FindResultsModelItem* child: m_childItems) {
+    child->deleteLater();
+  }
+
   m_childItems.clear();
 }
 

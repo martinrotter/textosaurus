@@ -32,6 +32,7 @@ void FormFindReplace::display() {
   raise();
 
   m_ui.m_txtSearchPhrase->setFocus();
+  m_ui.m_txtSearchPhrase->selectAll();
 }
 
 void FormFindReplace::displayCount() {

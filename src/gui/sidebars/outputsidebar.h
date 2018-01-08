@@ -26,11 +26,11 @@ class OutputSidebar : public DockWidget {
     virtual int initialWidth() const override;
 
   public slots:
-    virtual void load() override;
-
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);
 
   private:
+    virtual void load() override;
+
     QColor colorForLevel(QMessageBox::Icon level);
 
   private:

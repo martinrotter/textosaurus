@@ -331,7 +331,7 @@ void TextApplication::createConnections() {
   // Actions.
   connect(m_actionPrintCurrentEditor, &QAction::triggered, this, &TextApplication::printCurrentEditor);
   connect(m_actionPrintPreviewCurrentEditor, &QAction::triggered, this, &TextApplication::printPreviewCurrentEditor);
-  connect(m_actionFindReplace, &QAction::triggered, this, &TextApplication::openFindReplaceDialog);
+  connect(m_actionFindReplace, &QAction::triggered, this, &TextApplication::showFindReplaceDialog);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
   connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
@@ -568,7 +568,7 @@ void TextApplication::printCurrentEditor() {
   }
 }
 
-void TextApplication::openFindReplaceDialog() {
+void TextApplication::showFindReplaceDialog() {
   if (m_findReplaceDialog == nullptr) {
     m_findReplaceDialog = new FormFindReplace(this, qApp->mainFormWidget());
   }

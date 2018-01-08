@@ -24,13 +24,13 @@ class FindResultsSidebar : public DockWidget {
     virtual int initialWidth() const override;
 
   public slots:
-    virtual void load() override;
-
-    void clear();
     void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
 
   private slots:
     void navigateToResult(const QModelIndex& index);
+
+  private:
+    void load() override;
 
   private:
     QTreeView* m_viewResults;

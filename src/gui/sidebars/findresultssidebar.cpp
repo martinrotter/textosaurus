@@ -38,10 +38,6 @@ void FindResultsSidebar::load() {
   connect(m_viewResults, &QTreeView::activated, this, &FindResultsSidebar::navigateToResult);
 }
 
-void FindResultsSidebar::clear() {
-  // m_model->clear();
-}
-
 void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {
   show();
   raise();

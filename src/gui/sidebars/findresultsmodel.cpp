@@ -9,10 +9,6 @@
 FindResultsModel::FindResultsModel(QObject* parent)
   : QAbstractItemModel(parent), m_rootItem(new FindResultsModelItem(this)) {}
 
-FindResultsModel::~FindResultsModel() {
-  m_rootItem->deleteLater();
-}
-
 QModelIndex FindResultsModel::index(int row, int column, const QModelIndex& parent) const {
   if (!hasIndex(row, column, parent)) {
     return QModelIndex();
@@ -37,7 +33,7 @@ QModelIndex FindResultsModel::parent(const QModelIndex& child) const {
   FindResultsModelItem* childItem = itemForIndex(child);
   FindResultsModelItem* parentItem = childItem->parentItem();
 
-  if (parentItem == m_rootItem) {
+  if (parentItem == m_rootItem.data()) {
     return QModelIndex();
   }
   else {
@@ -69,24 +65,27 @@ QVariant FindResultsModel::data(const QModelIndex& index, int role) const {
   }
 }
 
-void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {
-  emit layoutAboutToBeChanged();
-
+void FindResultsModel::clear() {
+  beginRemoveRows(QModelIndex(), 0, rowCount(QModelIndex()));
   m_rootItem->clearChildren();
+  endRemoveRows();
+}
 
+void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {
+  clear();
+
+  beginInsertRows(QModelIndex(), 0, 1);
   FindResultsModelItemEditor* item_editor = new FindResultsModelItemEditor(editor, this);
 
   for (const QPair<int, int> range : results) {
     QString text = editor->textRange(range.first, range.second);
-    FindResultsModelItemResult* item_result = new FindResultsModelItemResult(text,
-                                                                             range,
-                                                                             item_editor);
+    FindResultsModelItemResult* item_result = new FindResultsModelItemResult(text, range, item_editor);
 
     item_editor->appendChild(item_result);
   }
 
   m_rootItem->appendChild(item_editor);
-  emit layoutChanged();
+  endInsertRows();
 }
 
 FindResultsModelItem* FindResultsModel::itemForIndex(const QModelIndex& idx) const {
@@ -94,6 +93,6 @@ FindResultsModelItem* FindResultsModel::itemForIndex(const QModelIndex& idx) con
     return static_cast<FindResultsModelItem*>(idx.internalPointer());
   }
   else {
-    return m_rootItem;
+    return m_rootItem.data();
   }
 }

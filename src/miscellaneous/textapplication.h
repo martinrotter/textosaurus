@@ -73,7 +73,7 @@ class TextApplication : public QObject {
   private slots:
     void printPreviewCurrentEditor();
     void printCurrentEditor();
-    void openFindReplaceDialog();
+    void showFindReplaceDialog();
 
     // EOL stuff.
     void convertEols(QAction* action);
