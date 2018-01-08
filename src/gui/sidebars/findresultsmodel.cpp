@@ -2,10 +2,6 @@
 
 #include "gui/sidebars/findresultsmodel.h"
 
-#include "gui/sidebars/findresultsmodelitem.h"
-#include "gui/sidebars/findresultsmodelitemeditor.h"
-#include "gui/sidebars/findresultsmodelitemresult.h"
-
 FindResultsModel::FindResultsModel(QObject* parent)
   : QAbstractItemModel(parent), m_rootItem(new FindResultsModelItem(this)) {}
 

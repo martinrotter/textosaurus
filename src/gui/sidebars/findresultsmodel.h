@@ -5,8 +5,10 @@
 
 #include <QAbstractItemModel>
 
-class FindResultsModelItem;
-class FindResultsModelItemEditor;
+#include "gui/sidebars/findresultsmodelitem.h"
+#include "gui/sidebars/findresultsmodelitemeditor.h"
+#include "gui/sidebars/findresultsmodelitemresult.h"
+
 class TextEditor;
 
 class FindResultsModel : public QAbstractItemModel {
