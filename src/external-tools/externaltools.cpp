@@ -230,7 +230,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* json_beautify = new PredefinedTool(&PredefinedTools::jsonBeautify, this);
 
   json_beautify->setActionObjectName(QSL("m_actionPredefJsonBeautify"));
-  json_beautify->setCategory(tr("JSON"));
+  json_beautify->setCategory(tr("&JSON"));
   json_beautify->setName(tr("JSON &Beautify"));
   json_beautify->setInput(ToolInput::SelectionDocument);
   json_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -610,8 +610,8 @@ void ExternalTools::reloadTools() {
 void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
   if (tool_to_run->isRunning()) {
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
-                                                 tr("Tool '%1' is already running.").arg(tool_to_run->name()),
-                                                 QMessageBox::Icon::Warning);
+                                                  tr("Tool '%1' is already running.").arg(tool_to_run->name()),
+                                                  QMessageBox::Icon::Warning);
   }
   else {
     QPointer<TextEditor> ptr_editor = editor;
@@ -670,8 +670,8 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
   if (editor.isNull()) {
     qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
-                                                 tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
-                                                 QMessageBox::Icon::Critical);
+                                                  tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
+                                                  QMessageBox::Icon::Critical);
     return;
   }
 
@@ -707,8 +707,8 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
       if (!output_text.isEmpty()) {
         qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
         m_application->outputSidebar()->displayOutput(OutputSource::Application,
-                                                     tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
-                                                     QMessageBox::Icon::Information);
+                                                      tr("Tool '%1' finished, output copied to clipboard.").arg(tool->name()),
+                                                      QMessageBox::Icon::Information);
       }
 
       break;
@@ -723,8 +723,8 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
     case ToolOutput::NewSavedFile: {
       if (!output_text.isEmpty()) {
         m_application->outputSidebar()->displayOutput(OutputSource::Application,
-                                                     tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
-                                                     QMessageBox::Icon::Information);
+                                                      tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
+                                                      QMessageBox::Icon::Information);
 
         m_application->loadTextEditorFromFile(IOFactory::writeToTempFile(output_text.toUtf8()), DEFAULT_TEXT_FILE_ENCODING);
       }
@@ -756,11 +756,11 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
   if (!error_text.isEmpty()) {
     m_application->outputSidebar()->displayOutput(OutputSource::ExternalTool, error_text, QMessageBox::Icon::Critical);
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
-                                                 tr("Tool '%1' finished with error(s)...").arg(tool->name()),
-                                                 QMessageBox::Icon::Critical);
+                                                  tr("Tool '%1' finished with error(s)...").arg(tool->name()),
+                                                  QMessageBox::Icon::Critical);
   }
   else if (!tool->isPredefined()) {
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
-                                                 tr("Tool '%1' finished successfully...").arg(tool->name()));
+                                                  tr("Tool '%1' finished successfully...").arg(tool->name()));
   }
 }
