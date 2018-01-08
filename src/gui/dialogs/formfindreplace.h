@@ -28,6 +28,7 @@ class FormFindReplace : public QDialog {
     void searchNext();
     void searchPrevious();
     void searchAll();
+    void replaceAll();
 
   private:
     int extractFlags();
