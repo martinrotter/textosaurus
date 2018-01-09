@@ -2,21 +2,13 @@
 #
 # For license of this file, see <project-root-folder>/LICENSE.md.
 #
-#
 # This is Textilosaurus compilation script for qmake.
 #
 # Usage:
-#   a) DEBUG build for testing. (out of source build type)
-#     cd ../build-dir
-#     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=debug PREFIX=./usr
-#     make
-#     make install
-#
-#   b) RELEASE build for production use. (out of source build type)
-#     cd ../build-dir
-#     qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=release PREFIX=./usr
-#     make
-#     make install
+#   cd ../build-dir
+#   qmake ../textilosaurus-dir/textilosaurus.pro -r CONFIG+=release PREFIX=./usr
+#   make
+#   make install
 #
 # Variables:
 #   PREFIX - specifies base folder to which files are copied during "make install"
@@ -36,18 +28,13 @@
 TEMPLATE    = app
 TARGET      = textilosaurus
 
-message(textilosaurus: Welcome Textilosaurus qmake script.)
-
-lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 6) {
-  error(textilosaurus: At least Qt \"5.6.0\" is required!!!)
-}
-
+MSG_PREFIX                    = "textilosaurus"
 APP_NAME                      = "Textilosaurus"
 APP_LOW_NAME                  = "textilosaurus"
 APP_REVERSE_NAME              = "com.github.textilosaurus"
 APP_AUTHOR                    = "Martin Rotter"
 APP_COPYRIGHT                 = "(C) 2018 $$APP_AUTHOR"
-APP_VERSION                   = "2018.01.04"
+APP_VERSION                   = "2018.01.09"
 APP_LONG_NAME                 = "$$APP_NAME $$APP_VERSION"
 APP_EMAIL                     = "rotter.martinos@gmail.com"
 APP_URL                       = "https://github.com/martinrotter/textilosaurus"
@@ -58,8 +45,15 @@ APP_USERAGENT                 = "Textilosaurus/$$APP_VERSION (github.com/martinr
 APP_DONATE_URL                = "https://liberapay.com/martinrotter"
 APP_WIN_ARCH                  = "win64"
 
+
+message($$MSG_PREFIX: Welcome to $$APP_NAME qmake script.)
+
+lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 6) {
+  error($$MSG_PREFIX: At least Qt \"5.6.0\" is required!!!)
+}
+
 isEmpty(PREFIX) {
-  message(textilosaurus: PREFIX variable is not set. This might indicate error.)
+  message($$MSG_PREFIX: PREFIX variable is not set. This might indicate error.)
 
   win32 {
     PREFIX = $$OUT_PWD/app
@@ -78,11 +72,11 @@ isEmpty(PREFIX) {
   }
 }
 
-message(textilosaurus: Shadow copy build directory \"$$OUT_PWD\".)
+message($$MSG_PREFIX: Shadow copy build directory \"$$OUT_PWD\".)
 
 isEmpty(LRELEASE_EXECUTABLE) {
   LRELEASE_EXECUTABLE = lrelease
-  message(textilosaurus: LRELEASE_EXECUTABLE variable is not set.)
+  message($$MSG_PREFIX: LRELEASE_EXECUTABLE variable is not set.)
 }
 
 # Custom definitions.
@@ -114,12 +108,12 @@ isEmpty(APP_REVISION) {
 
 DEFINES += APP_REVISION='"\\\"$$APP_REVISION\\\""'
 
-message(textilosaurus: Textilosaurus version is: \"$$APP_VERSION\".)
-message(textilosaurus: Detected Qt version: \"$$QT_VERSION\".)
-message(textilosaurus: Build destination directory: \"$$DESTDIR\".)
-message(textilosaurus: Prefix directory: \"$$PREFIX\".)
-message(textilosaurus: Build revision: \"$$APP_REVISION\".)
-message(textilosaurus: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
+message($$MSG_PREFIX: $$APP_NAME version is: \"$$APP_VERSION\".)
+message($$MSG_PREFIX: Detected Qt version: \"$$QT_VERSION\".)
+message($$MSG_PREFIX: Build destination directory: \"$$DESTDIR\".)
+message($$MSG_PREFIX: Prefix directory: \"$$PREFIX\".)
+message($$MSG_PREFIX: Build revision: \"$$APP_REVISION\".)
+message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
 QT *= core gui widgets network printsupport svg
 
@@ -130,10 +124,10 @@ VERSION = $$APP_VERSION
 win32 {
   # Makes sure we use correct subsystem on Windows.
   !contains(QMAKE_TARGET.arch, x86_64) {
-    message(textilosaurus: Compilling x86 variant.)
+    message($$MSG_PREFIX: Compilling x86 variant.)
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
   } else {
-    message(textilosaurus: Compilling x86_64 variant.)
+    message($$MSG_PREFIX: Compilling x86_64 variant.)
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
   }
 }
@@ -173,7 +167,7 @@ RESOURCES += resources/textilosaurus.qrc
 mac|win32|android {
   RESOURCES += resources/icons.qrc
 
-  message(textilosaurus: Adding resources for default icon theme.)
+  message($$MSG_PREFIX: Adding resources for default icon theme.)
 }
 
 HEADERS +=  src/definitions/definitions.h \
