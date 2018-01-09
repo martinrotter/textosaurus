@@ -110,7 +110,7 @@
      <item>
       <widget class="QPushButton" name="m_btnReplaceAll">
        <property name="text">
-        <string>R&amp;eplace All</string>
+        <string>Replace &amp;All</string>
        </property>
       </widget>
      </item>

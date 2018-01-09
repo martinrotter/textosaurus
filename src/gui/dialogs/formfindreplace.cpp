@@ -12,10 +12,7 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   m_ui.setupUi(this);
   m_ui.m_lblResult->setStyleSheet(QSL("color: red;"));
 
-  m_ui.m_btnReplaceNext->setVisible(false);
-
-  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint |
-                 Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 
   connect(m_ui.m_btnCount, &QPushButton::clicked, this, &FormFindReplace::displayCount);
   connect(m_ui.m_btnFindNext, &QPushButton::clicked, this, &FormFindReplace::searchNext);
@@ -24,6 +21,8 @@ FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialo
   connect(m_ui.m_lblRegexInfo, &QLabel::linkActivated, qApp->web(), &WebFactory::openUrlInExternalBrowser);
   connect(m_ui.m_btnFindAll, &QPushButton::clicked, this, &FormFindReplace::searchAll);
   connect(m_ui.m_btnReplaceAll, &QPushButton::clicked, this, &FormFindReplace::replaceAll);
+  connect(m_ui.m_txtSearchPhrase, &BaseLineEdit::textChanged, this, &FormFindReplace::clearTargetRange);
+  connect(m_ui.m_btnReplaceNext, &QPushButton::clicked, this, &FormFindReplace::searchReplaceNext);
 }
 
 void FormFindReplace::display() {
@@ -35,6 +34,16 @@ void FormFindReplace::display() {
   m_ui.m_txtSearchPhrase->setFocus();
   m_ui.m_txtSearchPhrase->selectAll();
   m_ui.m_txtReplaceString->clear();
+
+  clearTargetRange();
+}
+
+void FormFindReplace::clearTargetRange() {
+  TextEditor* editor = m_application->currentEditor();
+
+  if (editor != nullptr) {
+    editor->setTargetRange(-1, -1);
+  }
 }
 
 void FormFindReplace::displayCount() {
@@ -129,6 +138,10 @@ void FormFindReplace::replaceAll() {
   }
 }
 
+void FormFindReplace::searchReplaceNext() {
+  searchReplaceOne(false);
+}
+
 void FormFindReplace::searchAll() {
   TextEditor* editor = m_application->currentEditor();
 
@@ -172,6 +185,57 @@ int FormFindReplace::extractFlags() {
   search_flags |= m_ui.m_checkCaseSensitiveSearch->isChecked() ? SCFIND_MATCHCASE : 0;
 
   return search_flags;
+}
+
+void FormFindReplace::searchReplaceOne(bool reverse) {
+  TextEditor* editor = m_application->currentEditor();
+
+  if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
+    m_ui.m_lblResult->setText("Either no input or no text editor active.");
+    return;
+  }
+
+  int start_position, end_position;
+
+  if (reverse) {
+    start_position = editor->selectionStart();
+    end_position = 0;
+  }
+  else {
+    start_position = static_cast<int>(editor->selectionEnd());
+    end_position = editor->length();
+  }
+
+  int search_flags = extractFlags();
+
+  QPair<int, int> found_range = editor->findText(search_flags,
+                                                 m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
+                                                 start_position,
+                                                 end_position);
+
+  if (found_range.first < 0) {
+    // Next occurrence was not found.
+    m_ui.m_lblResult->setText(tr("Cannot find the text \"%1\".").arg(m_ui.m_txtSearchPhrase->text()));
+  }
+  else {
+    m_ui.m_lblResult->clear();
+
+    int replacement_length;
+
+    editor->setTargetRange(found_range.first, found_range.second);
+
+    // We replace.
+    if (m_ui.m_rbModeRegex->isChecked()) {
+      replacement_length = editor->replaceTargetRE(-1, m_ui.m_txtReplaceString->text().toUtf8().constData());
+    }
+    else {
+      replacement_length = editor->replaceTarget(-1, m_ui.m_txtReplaceString->text().toUtf8().constData());
+    }
+
+    // We highlight and scroll.
+    editor->setSelection(found_range.first, found_range.first + replacement_length);
+    editor->scrollCaret();
+  }
 }
 
 void FormFindReplace::searchOne(bool reverse) {
