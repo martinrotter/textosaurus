@@ -23,7 +23,7 @@ class SettingsShortcuts : public SettingsPanel {
 };
 
 inline QString SettingsShortcuts::title() const {
-  return tr("Keyboard shortcuts");
+  return tr("Keyboard Shortcuts");
 }
 
 #endif // SETTINGSSHORTCUTS_H

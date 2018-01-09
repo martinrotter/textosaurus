@@ -26,7 +26,7 @@ class SettingsGui : public SettingsPanel {
 };
 
 inline QString SettingsGui::title() const {
-  return tr("User interface");
+  return tr("User Interface");
 }
 
 #endif // SETTINGSGUI_H

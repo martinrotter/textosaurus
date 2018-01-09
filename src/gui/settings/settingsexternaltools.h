@@ -35,7 +35,7 @@ class SettingsExternalTools : public SettingsPanel {
 };
 
 inline QString SettingsExternalTools::title() const {
-  return tr("External tools");
+  return tr("External Tools");
 }
 
 #endif // SETTINGSEXTERNALTOOLS_H

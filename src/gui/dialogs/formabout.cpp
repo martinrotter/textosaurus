@@ -10,6 +10,7 @@
 #include "miscellaneous/textfactory.h"
 
 #include <QFile>
+#include <QFontDatabase>
 #include <QTextStream>
 
 FormAbout::FormAbout(QWidget* parent) : QDialog(parent) {
@@ -34,6 +35,7 @@ void FormAbout::loadSettingsAndPaths() {
 void FormAbout::loadLicenseAndInformation() {
   try {
     m_ui.m_txtLicenseGnu->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_GNU_GPL_HTML")));
+    m_ui.m_txtLicenseGnu->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
   catch (...) {
     m_ui.m_txtLicenseGnu->setText(tr("License not found."));
@@ -41,6 +43,7 @@ void FormAbout::loadLicenseAndInformation() {
 
   try {
     m_ui.m_txtLicenseMpl->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_MPL")));
+    m_ui.m_txtLicenseMpl->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
   catch (...) {
     m_ui.m_txtLicenseMpl->setText(tr("License not found."));
@@ -48,6 +51,7 @@ void FormAbout::loadLicenseAndInformation() {
 
   try {
     m_ui.m_txtChangelog->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/CHANGELOG")));
+    m_ui.m_txtChangelog->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
   catch (...) {
     m_ui.m_txtChangelog->setText(tr("Changelog not found."));

@@ -231,6 +231,14 @@ p, li { white-space: pre-wrap; }
           </layout>
          </widget>
          <widget class="QWidget" name="page">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>83</width>
+            <height>69</height>
+           </rect>
+          </property>
           <attribute name="label">
            <string>Mozilla Public License (applies to uchardet component)</string>
           </attribute>
@@ -391,7 +399,7 @@ p, li { white-space: pre-wrap; }
    <item>
     <widget class="QDialogButtonBox" name="m_buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Close</set>
      </property>
     </widget>
    </item>
@@ -409,7 +417,7 @@ p, li { white-space: pre-wrap; }
  <connections>
   <connection>
    <sender>m_buttonBox</sender>
-   <signal>accepted()</signal>
+   <signal>clicked(QAbstractButton*)</signal>
    <receiver>FormAbout</receiver>
    <slot>accept()</slot>
    <hints>
