@@ -458,8 +458,8 @@ CONFIG(release, debug|release) {
 }
 
 # Add hoextdown.
-SOURCES += $$files(src/hoextdown/*.c, false)
-HEADERS  += $$files(src/hoextdown/*.h, false)
+SOURCES += $$files(src/hoedown/*.c, false)
+HEADERS  += $$files(src/hoedown/*.h, false)
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
