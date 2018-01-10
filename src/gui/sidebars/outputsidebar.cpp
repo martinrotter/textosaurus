@@ -5,18 +5,21 @@
 #include "gui/plaintoolbutton.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
+#include "network-web/webfactory.h"
 
+#include <QFontDatabase>
 #include <QLayout>
-#include <QPlainTextEdit>
 #include <QScrollBar>
 #include <QTabBar>
+#include <QTextBrowser>
 
 OutputSidebar::OutputSidebar(QWidget* parent) : DockWidget(parent), m_currentLevel(QMessageBox::Icon::Information),
   m_txtOutput(nullptr) {
   setWindowTitle(tr("Output"));
 }
 
-void OutputSidebar::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level) {
+void OutputSidebar::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level,
+                                  const QUrl& url, std::function<void()> handler) {
   Q_UNUSED(source)
 
   show();
@@ -31,11 +34,24 @@ void OutputSidebar::displayOutput(OutputSource source, const QString& message, Q
     m_currentLevel = level;
   }
 
-  if (source == OutputSource::ExternalTool) {
-    m_txtOutput->appendPlainText(QString("%1").arg(message));
+  QString text_to_insert;
+
+  if (url.isValid()) {
+    if (handler) {
+      m_handlers.insert(url, handler);
+    }
+
+    text_to_insert = QString("<a href=\"%1\">%2</a>").arg(url.toString(), message);
   }
   else {
-    m_txtOutput->appendPlainText(QString("[%2] %1").arg(message, QDateTime::currentDateTime().toString(FORMAT_DATETIME_OUTPUT)));
+    text_to_insert = message;
+  }
+
+  if (source == OutputSource::ExternalTool) {
+    m_txtOutput->append(QString("%1").arg(text_to_insert));
+  }
+  else {
+    m_txtOutput->append(QString("[%2] %1").arg(text_to_insert, QDateTime::currentDateTime().toString(FORMAT_DATETIME_OUTPUT)));
   }
 }
 
@@ -69,13 +85,25 @@ int OutputSidebar::initialWidth() const {
 
 void OutputSidebar::load() {
   if (m_txtOutput == nullptr) {
-    m_txtOutput = new QPlainTextEdit(this);
+    m_txtOutput = new QTextBrowser(this);
     m_txtOutput->setPlaceholderText(tr("This sidebar displays output of external tools and some other critical information..."));
     m_txtOutput->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
     m_txtOutput->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
     m_txtOutput->setReadOnly(true);
+    m_txtOutput->setAutoFormatting(QTextEdit::AutoFormattingFlag::AutoNone);
     m_txtOutput->setObjectName(QSL("m_txtOutput"));
+    m_txtOutput->setOpenExternalLinks(false);
+    m_txtOutput->setOpenLinks(false);
     m_txtOutput->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+
+    connect(m_txtOutput, &QTextBrowser::anchorClicked, this, [this](const QUrl& url) {
+      if (m_handlers.contains(url)) {
+        m_handlers.value(url)();
+      }
+      else {
+        qApp->web()->openUrlInExternalBrowser(url.toString());
+      }
+    });
 
     setWidget(m_txtOutput);
   }

@@ -157,10 +157,10 @@ void Application::processExecutionMessage(const QString& message) {
   }
 }
 
-void Application::showGuiMessage(const QString& message, QMessageBox::Icon message_type) {
+void Application::showGuiMessage(const QString& message, QMessageBox::Icon message_type, const QUrl& url, std::function<void()> handler) {
   Q_UNUSED(message_type)
 
-  m_textApplication->outputSidebar()->displayOutput(OutputSource::Application, message, message_type);
+  m_textApplication->outputSidebar()->displayOutput(OutputSource::Application, message, message_type, url, handler);
 }
 
 Application* Application::instance() {

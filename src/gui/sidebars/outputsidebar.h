@@ -6,8 +6,11 @@
 #include "gui/sidebars/dockwidget.h"
 
 #include <QMessageBox>
+#include <QUrl>
 
-class QPlainTextEdit;
+#include <functional>
+
+class QTextBrowser;
 
 enum class OutputSource {
   ExternalTool,
@@ -26,7 +29,8 @@ class OutputSidebar : public DockWidget {
     virtual int initialWidth() const override;
 
   public slots:
-    void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon);
+    void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon,
+                       const QUrl& url = QUrl(), std::function<void()> handler = {});
 
   private:
     virtual void load() override;
@@ -34,8 +38,9 @@ class OutputSidebar : public DockWidget {
     QColor colorForLevel(QMessageBox::Icon level);
 
   private:
+    QHash<QUrl, std::function<void()>> m_handlers;
     QMessageBox::Icon m_currentLevel;
-    QPlainTextEdit* m_txtOutput;
+    QTextBrowser* m_txtOutput;
 };
 
 #endif // TOOLBOX_H
