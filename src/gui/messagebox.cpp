@@ -39,14 +39,13 @@ QString MessageBox::getSaveFileName(QWidget* parent, const QString& caption, con
                                     const QString& preselected_file, const QStringList& filters, QString* selected_filter) {
   QFileDialog dialog(parent, caption, initial_dir, filters.join(QSL(";;")));
 
-  dialog.setDefaultSuffix(QSL("txt"));
   dialog.setFileMode(QFileDialog::FileMode::AnyFile);
   dialog.selectFile(preselected_file);
   dialog.setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
   dialog.setOption(QFileDialog::Option::ShowDirsOnly, false);
   dialog.setOption(QFileDialog::Option::DontConfirmOverwrite, false);
 
-  if (dialog.exec()) {
+  if (dialog.exec() == QDialog::DialogCode::Accepted) {
     if (selected_filter != nullptr) {
       *selected_filter = dialog.selectedNameFilter();
     }
