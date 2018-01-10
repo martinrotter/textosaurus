@@ -9,6 +9,7 @@
 
 #include <QFontDatabase>
 #include <QLayout>
+#include <QRegularExpression>
 #include <QScrollBar>
 #include <QTabBar>
 #include <QTextBrowser>
@@ -44,7 +45,21 @@ void OutputSidebar::displayOutput(OutputSource source, const QString& message, Q
     text_to_insert = QString("<a href=\"%1\">%2</a>").arg(url.toString(), message);
   }
   else {
-    text_to_insert = message;
+    if (source == OutputSource::ExternalTool) {
+      QRegularExpressionMatch http_regex = QRegularExpression(QSL("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]"
+                                                                  "{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_"
+                                                                  "\\+.~#?&\\/\\/=]*)")).match(message);
+
+      if (http_regex.hasMatch()) {
+        text_to_insert = QString("<a href=\"%1\">%2</a>").arg(http_regex.captured(), message);
+      }
+      else {
+        text_to_insert = message;
+      }
+    }
+    else {
+      text_to_insert = message;
+    }
   }
 
   if (source == OutputSource::ExternalTool) {
