@@ -36,11 +36,11 @@ void MessageBox::setCheckBox(QMessageBox* msg_box, const QString& text, bool* da
 }
 
 QString MessageBox::getSaveFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
-                                    const QString& preselected_file, const QStringList& filters, QString* selected_filter) {
+                                    const QStringList& filters, QString* selected_filter) {
   QFileDialog dialog(parent, caption, initial_dir, filters.join(QSL(";;")));
 
+  dialog.setDefaultSuffix(QSL("txt"));
   dialog.setFileMode(QFileDialog::FileMode::AnyFile);
-  dialog.selectFile(preselected_file);
   dialog.setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
   dialog.setOption(QFileDialog::Option::ShowDirsOnly, false);
   dialog.setOption(QFileDialog::Option::DontConfirmOverwrite, false);

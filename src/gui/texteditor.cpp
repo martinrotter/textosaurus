@@ -700,11 +700,10 @@ void TextEditor::save(bool* ok) {
 void TextEditor::saveAs(bool* ok, const QString& encoding) {
   // We save this documents as new file.
   QString file_path = MessageBox::getSaveFileName(qApp->mainFormWidget(),
-                                                  tr("Save file as"),
+                                                  tr("Save File as"),
                                                   m_filePath.isEmpty() ?
                                                   m_textApp->settings()->loadSaveDefaultDirectory() :
-                                                  QFileInfo(m_filePath).absolutePath(),
-                                                  QFileInfo(m_filePath).fileName(),
+                                                  m_filePath,
                                                   m_textApp->settings()->syntaxHighlighting()->fileFilters(),
                                                   nullptr);
 

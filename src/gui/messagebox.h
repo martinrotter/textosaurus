@@ -18,7 +18,7 @@ class MessageBox : public QMessageBox {
 
     static void setCheckBox(QMessageBox* msg_box, const QString& text, bool* data);
     static QString getSaveFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
-                                   const QString& preselected_file, const QStringList& filters, QString* selected_filter);
+                                   const QStringList& filters, QString* selected_filter);
 
     // Displays custom message box.
     static QMessageBox::StandardButton show(QWidget* parent,
