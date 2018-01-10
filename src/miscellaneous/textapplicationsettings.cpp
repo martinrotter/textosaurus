@@ -198,7 +198,7 @@ void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form,
                            (area == Qt::DockWidgetArea::LeftDockWidgetArea || area == Qt::DockWidgetArea::RightDockWidgetArea) ?
                            Qt::Horizontal : Qt::Vertical);
 
-    dock->setVisible(true);
+    dock->setVisible(dock->initiallyVisible());
   }
 }
 

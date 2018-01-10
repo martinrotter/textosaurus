@@ -140,23 +140,6 @@ void TextEditor::onModified(int type, int position, int length, int lines_added,
   Q_UNUSED(fold_prev)
 
   if (lines_added != 0) {
-    /*hoedown_renderer* renderer = hoedown_html_renderer_new(hoedown_html_flags::HOEDOWN_HTML_USE_XHTML, 0);
-       hoedown_document* document = hoedown_document_new(renderer, hoedown_extensions::HOEDOWN_EXT_MATH, 16);
-       hoedown_buffer* html = hoedown_buffer_new(this->length());
-       uint8_t* data = new uint8_t[this->length()];
-
-       for (int i = 0; i < this->length(); i++) {
-       data[i] = charAt(i);
-       }
-
-       hoedown_document_render(document, html, data, this->length());
-
-       QByteArray arr;
-
-       for (int i = 0; i < html->size; i++) {
-       arr.append(html->data[i]);
-       }*/
-
     updateLineNumberMarginVisibility();
   }
 }

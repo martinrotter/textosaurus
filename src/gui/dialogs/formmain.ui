@@ -38,7 +38,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -129,9 +129,10 @@
      <property name="title">
       <string>&amp;Sidebars</string>
      </property>
-     <addaction name="m_actionDockShowOutput"/>
      <addaction name="m_actionDockShowFilesystem"/>
      <addaction name="m_actionDockShowFindResults"/>
+     <addaction name="m_actionDockShowMarkdown"/>
+     <addaction name="m_actionDockShowOutput"/>
     </widget>
     <addaction name="m_menuDockWidgets"/>
     <addaction name="m_menuShowHide"/>
@@ -546,6 +547,14 @@
    </property>
    <property name="text">
     <string>&amp;Find Results</string>
+   </property>
+  </action>
+  <action name="m_actionDockShowMarkdown">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Markdown</string>
    </property>
   </action>
  </widget>

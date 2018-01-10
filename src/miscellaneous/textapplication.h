@@ -18,6 +18,7 @@ class StatusBar;
 class FormFindReplace;
 class ExternalTool;
 class FilesystemSidebar;
+class MarkdownSidebar;
 class QAction;
 class QMenu;
 class QLineEdit;
@@ -33,6 +34,7 @@ class TextApplication : public QObject {
     TextEditor* currentEditor() const;
     OutputSidebar* outputSidebar() const;
     FindResultsSidebar* findResultsSidebar() const;
+    MarkdownSidebar* markdownSidebar() const;
     TextApplicationSettings* settings() const;
 
     void setMainForm(FormMain* main_form);
@@ -126,6 +128,7 @@ class TextApplication : public QObject {
     OutputSidebar* m_outputSidebar;
     FilesystemSidebar* m_filesystemSidebar;
     FindResultsSidebar* m_findResultsSidebar;
+    MarkdownSidebar* m_markdownSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;
 
@@ -159,6 +162,7 @@ class TextApplication : public QObject {
     QAction* m_actionDockShowOutput;
     QAction* m_actionDockShowFilesystem;
     QAction* m_actionDockShowFindResults;
+    QAction* m_actionDockShowMarkdown;
     QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;
