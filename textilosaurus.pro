@@ -257,7 +257,6 @@ HEADERS +=  src/definitions/definitions.h \
     src/gui/sidebars/findresultsmodelitem.h \
     src/gui/sidebars/findresultsmodelitemeditor.h \
     src/gui/sidebars/findresultsmodelitemresult.h \
-    src/gui/sidebars/markdownsidebar.h \
     src/gui/sidebars/markdownsidebar.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
@@ -373,7 +372,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
     src/gui/sidebars/findresultsmodelitem.cpp \
     src/gui/sidebars/findresultsmodelitemeditor.cpp \
     src/gui/sidebars/findresultsmodelitemresult.cpp \
-    src/gui/sidebars/markdownsidebar.cpp \
     src/gui/sidebars/markdownsidebar.cpp
 
 mac {

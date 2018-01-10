@@ -5,10 +5,6 @@
 
 #include "gui/sidebars/dockwidget.h"
 
-namespace Ui {
-  class MarkdownSidebar;
-}
-
 class TextApplication;
 
 class MarkdownSidebar : public DockWidget {
@@ -22,7 +18,7 @@ class MarkdownSidebar : public DockWidget {
     virtual int initialWidth() const override;
 
   public slots:
-    void load();
+    virtual void load() override;
 
   private:
     TextApplication* m_textApp;
