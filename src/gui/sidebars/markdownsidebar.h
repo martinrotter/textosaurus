@@ -6,6 +6,7 @@
 #include "gui/sidebars/dockwidget.h"
 
 class TextApplication;
+class QTextBrowser;
 
 class MarkdownSidebar : public DockWidget {
   Q_OBJECT
@@ -21,7 +22,11 @@ class MarkdownSidebar : public DockWidget {
     virtual void load() override;
 
   private:
+    QString convertMarkdownToHtml(const uint8_t* raw_utf8_data);
+
+  private:
     TextApplication* m_textApp;
+    QTextBrowser* m_txtPreview;
 };
 
 #endif // MARKDOWNSIDEBAR_H

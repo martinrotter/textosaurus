@@ -1,6 +1,7 @@
 2018.01.XX
 ----------
 Added:
+* New "Markdown" sidebar which allows you to preview your Markdown text files.
 * "Output" sidebar now supports clickable hyperlinks and also detects URLs.
 
 2018.01.09
