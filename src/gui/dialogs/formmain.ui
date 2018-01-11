@@ -237,10 +237,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>View &amp;fullscreen</string>
+    <string>View &amp;Fullscreen</string>
    </property>
    <property name="shortcut">
-    <string notr="true">F11</string>
+    <string>F11</string>
    </property>
   </action>
   <action name="m_actionNoActions">
@@ -259,21 +259,15 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Switch visibility of main &amp;window</string>
+    <string>Switch Visibility of Main &amp;Window</string>
    </property>
    <property name="toolTip">
     <string>Hides main window if it is visible and shows it if it is hidden.</string>
    </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
   </action>
   <action name="m_actionCheckForUpdates">
    <property name="text">
-    <string>Check For &amp;Updates</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
+    <string>Check for &amp;Updates</string>
    </property>
   </action>
   <action name="m_actionReportBug">
@@ -289,7 +283,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>View &amp;toolbar</string>
+    <string>View &amp;Toolbar</string>
    </property>
   </action>
   <action name="m_actionDonate">
@@ -324,10 +318,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>View &amp;statusbar</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
+    <string>View &amp;Statusbar</string>
    </property>
   </action>
   <action name="m_actionTabsCloseAll">
@@ -471,7 +462,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Display &amp;whitespaces</string>
+    <string>Display &amp;Whitespaces</string>
    </property>
   </action>
   <action name="m_actionFindReplace">
