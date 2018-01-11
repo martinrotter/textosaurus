@@ -12,6 +12,7 @@
 #include <QGroupBox>
 #include <QListWidget>
 #include <QMimeData>
+#include <QToolBar>
 #include <QVBoxLayout>
 
 FilesystemSidebar::FilesystemSidebar(TextApplication* text_app, QWidget* parent) : DockWidget(parent),
@@ -43,21 +44,18 @@ void FilesystemSidebar::load() {
     layout->setMargin(0);
 
     // Initialize toolbar.
-    QHBoxLayout* layout_toolbar = new QHBoxLayout();
-    PlainToolButton* btn_parent = new PlainToolButton(widget);
-    PlainToolButton* btn_add_favorites = new PlainToolButton(widget);
+    QToolBar* tool_bar = new QToolBar(widget);
+    QAction* btn_parent = new QAction(qApp->icons()->fromTheme(QSL("go-up")),
+                                      tr("Go to parent folder"), widget);
+    QAction* btn_add_favorites = new QAction(qApp->icons()->fromTheme(QSL("folder-favorites")),
+                                             tr("Add selected item to favorites"), widget);
 
-    connect(btn_parent, &PlainToolButton::clicked, this, &FilesystemSidebar::goToParentFolder);
-    connect(btn_add_favorites, &PlainToolButton::clicked, this, &FilesystemSidebar::addToFavorites);
+    connect(btn_parent, &QAction::triggered, this, &FilesystemSidebar::goToParentFolder);
+    connect(btn_add_favorites, &QAction::triggered, this, &FilesystemSidebar::addToFavorites);
 
-    btn_parent->setIcon(qApp->icons()->fromTheme(QSL("go-up")));
-    btn_parent->setToolTip(tr("Go to parent folder"));
-    btn_add_favorites->setIcon(qApp->icons()->fromTheme(QSL("folder-favorites")));
-    btn_add_favorites->setToolTip(tr("Add selected item to favorites"));
-    layout_toolbar->addWidget(btn_parent);
-    layout_toolbar->addWidget(btn_add_favorites);
-    layout_toolbar->addStretch();
-    layout_toolbar->setMargin(0);
+    tool_bar->addAction(btn_parent);
+    tool_bar->addAction(btn_add_favorites);
+    tool_bar->setIconSize(QSize(16, 16));
 
     // Initialize FS browser
     m_fsModel->setNameFilterDisables(false);
@@ -84,7 +82,7 @@ void FilesystemSidebar::load() {
 
     m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
 
-    layout->addLayout(layout_toolbar, 0);
+    layout->addWidget(tool_bar, 0);
     layout->addWidget(m_fsView, 1);
     layout->addWidget(m_lvFavorites, 1);
 

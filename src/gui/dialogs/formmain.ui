@@ -248,13 +248,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>No actions available</string>
+    <string>No Actions Available</string>
    </property>
    <property name="toolTip">
     <string>No actions are available right now.</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
    </property>
   </action>
   <action name="m_actionSwitchMainWindow">
