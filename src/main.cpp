@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
   qDebug("Showing the main window when the application is starting.");
   main_window.show();
 
-  if (true || qApp->isFirstRun() || qApp->isFirstRun(APP_VERSION)) {
+  if (qApp->isFirstRun() || qApp->isFirstRun(APP_VERSION)) {
     qApp->showGuiMessage(QObject::tr("Welcome to %1. Click on me to check out NEW features.").arg(APP_LONG_NAME),
                          QMessageBox::Icon::Information, QUrl("http://update.textilosaurus"),
                          [&main_window]() {
