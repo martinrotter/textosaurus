@@ -5,12 +5,16 @@
 #ifndef DOCKWIDGET_H
 #define DOCKWIDGET_H
 
+class TextApplication;
+
 class DockWidget : public QDockWidget {
   Q_OBJECT
 
   public:
     explicit DockWidget(QWidget* parent = nullptr);
     virtual ~DockWidget() = default;
+
+    void setTextApplication(TextApplication* text_app);
 
     virtual Qt::DockWidgetArea initialArea() const = 0;
     virtual bool initiallyVisible() const = 0;
@@ -21,6 +25,9 @@ class DockWidget : public QDockWidget {
 
   protected:
     virtual void showEvent(QShowEvent* event) override;
+
+  protected:
+    TextApplication* m_textApp;
 };
 
 #endif // DOCKWIDGET_H

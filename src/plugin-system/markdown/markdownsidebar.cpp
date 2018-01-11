@@ -1,6 +1,6 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "gui/sidebars/markdownsidebar.h"
+#include "plugin-system/markdown/markdownsidebar.h"
 
 #include "gui/texteditor.h"
 #include "hoedown/hdocument.h"
@@ -13,7 +13,7 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-MarkdownSidebar::MarkdownSidebar(TextApplication* app, QWidget* parent) : DockWidget(parent), m_textApp(app), m_txtPreview(nullptr) {
+MarkdownSidebar::MarkdownSidebar(QWidget* parent) : DockWidget(parent), m_txtPreview(nullptr) {
   setWindowTitle(tr("Markdown Preview"));
 }
 

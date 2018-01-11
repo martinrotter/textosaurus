@@ -257,7 +257,10 @@ HEADERS +=  src/definitions/definitions.h \
     src/gui/sidebars/findresultsmodelitem.h \
     src/gui/sidebars/findresultsmodelitemeditor.h \
     src/gui/sidebars/findresultsmodelitemresult.h \
-    src/gui/sidebars/markdownsidebar.h
+    src/plugin-system/markdown/markdownsidebar.h \
+    src/plugin-system/pluginfactory.h \
+    src/plugin-system/pluginbase.h \
+    src/plugin-system/markdown/markdownplugin.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -372,7 +375,9 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
     src/gui/sidebars/findresultsmodelitem.cpp \
     src/gui/sidebars/findresultsmodelitemeditor.cpp \
     src/gui/sidebars/findresultsmodelitemresult.cpp \
-    src/gui/sidebars/markdownsidebar.cpp
+    src/plugin-system/markdown/markdownsidebar.cpp \
+    src/plugin-system/pluginfactory.cpp \
+    src/plugin-system/markdown/markdownplugin.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -469,7 +474,8 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src/gui/dialogs \
                 $$PWD/src/gui/sidebars \
                 $$PWD/src/dynamic-shortcuts \
-                $$PWD/src/external-tools
+                $$PWD/src/external-tools \
+                $$PWD/src/plugin-system
 
 TRANSLATIONS += $$PWD/localization/textilosaurus_en_GB.ts \
                 $$PWD/localization/textilosaurus_en.ts

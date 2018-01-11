@@ -10,6 +10,10 @@ DockWidget::DockWidget(QWidget* parent) : QDockWidget(parent) {
   setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
 }
 
+void DockWidget::setTextApplication(TextApplication* text_app) {
+  m_textApp = text_app;
+}
+
 void DockWidget::showEvent(QShowEvent* event) {
   load();
   QDockWidget::showEvent(event);

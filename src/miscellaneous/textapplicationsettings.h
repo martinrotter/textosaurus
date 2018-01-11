@@ -10,6 +10,7 @@ class SyntaxHighlighting;
 class ExternalTools;
 class FormMain;
 class QAction;
+class PluginFactory;
 class DockWidget;
 
 class TextApplicationSettings : public QObject {
@@ -37,6 +38,7 @@ class TextApplicationSettings : public QObject {
 
     ExternalTools* externalTools() const;
     SyntaxHighlighting* syntaxHighlighting() const;
+    PluginFactory* pluginFactory() const;
 
   public slots:
     void loadInitialSidebarGuiSettings(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const;
@@ -71,6 +73,7 @@ class TextApplicationSettings : public QObject {
     TextApplication* m_textApplication;
     ExternalTools* m_externalTools;
     SyntaxHighlighting* m_syntaxHighlighting;
+    PluginFactory* m_pluginFactory;
 };
 
 #endif // TEXTAPPLICATIONSETTINGS_H

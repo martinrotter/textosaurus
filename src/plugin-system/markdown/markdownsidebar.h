@@ -12,7 +12,7 @@ class MarkdownSidebar : public DockWidget {
   Q_OBJECT
 
   public:
-    explicit MarkdownSidebar(TextApplication* app, QWidget* parent = nullptr);
+    explicit MarkdownSidebar(QWidget* parent = nullptr);
 
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;
@@ -25,7 +25,6 @@ class MarkdownSidebar : public DockWidget {
     QString convertMarkdownToHtml(const uint8_t* raw_utf8_data);
 
   private:
-    TextApplication* m_textApp;
     QTextBrowser* m_txtPreview;
 };
 

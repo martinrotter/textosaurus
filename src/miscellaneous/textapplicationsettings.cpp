@@ -9,6 +9,7 @@
 #include "miscellaneous/settings.h"
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
+#include "plugin-system/pluginfactory.h"
 
 #include <QAction>
 #include <QDir>
@@ -18,7 +19,7 @@
 
 TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
-  m_syntaxHighlighting(new SyntaxHighlighting(this)) {}
+  m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)) {}
 
 QStringList TextApplicationSettings::recentFiles() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::RecentFiles)).toStringList();
@@ -180,6 +181,10 @@ void TextApplicationSettings::setEolMode(int mode) {
 
 SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
+}
+
+PluginFactory* TextApplicationSettings::pluginFactory() const {
+  return m_pluginFactory;
 }
 
 void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {

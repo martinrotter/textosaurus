@@ -9,7 +9,6 @@
 #include "gui/messagebox.h"
 #include "gui/sidebars/filesystemsidebar.h"
 #include "gui/sidebars/findresultssidebar.h"
-#include "gui/sidebars/markdownsidebar.h"
 #include "gui/sidebars/outputsidebar.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
@@ -17,6 +16,7 @@
 #include "gui/toolbar.h"
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textfactory.h"
+#include "plugin-system/pluginfactory.h"
 
 #include "uchardet/uchardet.h"
 
@@ -34,6 +34,8 @@ TextApplication::TextApplication(QObject* parent)
   : QObject(parent), m_settings(new TextApplicationSettings(this)), m_findReplaceDialog(nullptr) {
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
+
+  settings()->pluginFactory()->loadPlugins();
 }
 
 TextEditor* TextApplication::currentEditor() const {
@@ -247,10 +249,6 @@ FindResultsSidebar* TextApplication::findResultsSidebar() const {
   return m_findResultsSidebar;
 }
 
-MarkdownSidebar* TextApplication::markdownSidebar() const {
-  return m_markdownSidebar;
-}
-
 TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
 }
@@ -355,7 +353,6 @@ void TextApplication::createConnections() {
   connect(m_actionDockShowFilesystem, &QAction::triggered, m_filesystemSidebar, &FilesystemSidebar::setVisible);
   connect(m_actionDockShowOutput, &QAction::triggered, m_outputSidebar, &OutputSidebar::setVisible);
   connect(m_actionDockShowFindResults, &QAction::triggered, m_findResultsSidebar, &FindResultsSidebar::setVisible);
-  connect(m_actionDockShowMarkdown, &QAction::triggered, m_markdownSidebar, &MarkdownSidebar::setVisible);
 
   // Menus.
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
@@ -406,9 +403,6 @@ void TextApplication::setMainForm(FormMain* main_form) {
 
   m_outputSidebar = new OutputSidebar(m_mainForm);
   m_outputSidebar->setObjectName(QSL("m_outputSidebar"));
-
-  m_markdownSidebar = new MarkdownSidebar(this, m_mainForm);
-  m_markdownSidebar->setObjectName(QSL("m_markdownSidebar"));
 
   m_filesystemSidebar = new FilesystemSidebar(this, m_mainForm);
   m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
@@ -495,7 +489,7 @@ void TextApplication::loadState() {
 
   m_settings->loadInitialSidebarGuiSettings(m_mainForm,
                                             QList<DockWidget*>() << m_outputSidebar << m_filesystemSidebar
-                                                                 << m_markdownSidebar << m_findResultsSidebar);
+                                                                 << m_findResultsSidebar);
 }
 
 void TextApplication::quit(bool* ok) {
@@ -855,7 +849,6 @@ void TextApplication::initializeDockWidgetsMenu() {
   m_actionDockShowOutput->setChecked(m_outputSidebar->isVisible());
   m_actionDockShowFilesystem->setChecked(m_filesystemSidebar->isVisible());
   m_actionDockShowFindResults->setChecked(m_findResultsSidebar->isVisible());
-  m_actionDockShowMarkdown->setChecked(m_markdownSidebar->isVisible());
 }
 
 void TextApplication::updateEditorIcon(int index, bool modified, bool read_only) {
