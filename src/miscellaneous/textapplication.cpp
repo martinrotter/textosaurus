@@ -493,6 +493,8 @@ void TextApplication::loadState() {
   sidebars << m_outputSidebar << m_filesystemSidebar
            << m_findResultsSidebar << m_settings->pluginFactory()->sidebars();
 
+  // TODO: pokračovat tady, provést vygenerování QAction pro zobrazení každého sidebaru
+  // atd atd
   //hookSidebars(m_mainForm, sidebars);
   m_settings->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
 }
