@@ -18,3 +18,13 @@ void PluginFactory::loadPlugins() {
 QList<PluginBase*> PluginFactory::plugins() const {
   return m_plugins;
 }
+
+QList<DockWidget*> PluginFactory::sidebars() const {
+  QList<DockWidget*> sidebars;
+
+  for (const PluginBase* plugin : m_plugins) {
+    sidebars.append(plugin->sidebars());
+  }
+
+  return sidebars;
+}

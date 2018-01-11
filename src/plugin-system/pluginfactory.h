@@ -6,6 +6,7 @@
 #include <QObject>
 
 class PluginBase;
+class DockWidget;
 
 class PluginFactory : public QObject {
   Q_OBJECT
@@ -14,6 +15,7 @@ class PluginFactory : public QObject {
     explicit PluginFactory(QObject* parent = nullptr);
 
     QList<PluginBase*> plugins() const;
+    QList<DockWidget*> sidebars() const;
 
   public slots:
     void loadPlugins();

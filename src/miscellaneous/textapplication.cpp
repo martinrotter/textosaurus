@@ -487,9 +487,14 @@ void TextApplication::loadState() {
   m_mainForm->setCorner(Qt::Corner::TopLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
   m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
 
-  m_settings->loadInitialSidebarGuiSettings(m_mainForm,
-                                            QList<DockWidget*>() << m_outputSidebar << m_filesystemSidebar
-                                                                 << m_findResultsSidebar);
+  // We load sidebars (built-in and from "plugins").
+
+  QList<DockWidget*> sidebars;
+  sidebars << m_outputSidebar << m_filesystemSidebar
+           << m_findResultsSidebar << m_settings->pluginFactory()->sidebars();
+
+  //hookSidebars(m_mainForm, sidebars);
+  m_settings->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
 }
 
 void TextApplication::quit(bool* ok) {
