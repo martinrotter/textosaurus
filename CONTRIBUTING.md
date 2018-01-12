@@ -3,7 +3,7 @@
 You can contribute to Textilosaurus project in a several different ways:
 
 - by translating Textilosaurus to some other languages (create new feature request for your localization [here](https://github.com/martinrotter/textilosaurus/issues/new)),
-- by submitting pathes and pull requests (see [here](https://github.com/martinrotter/textilosaurus/pulls)),
+- by submitting patches and pull requests (see [here](https://github.com/martinrotter/textilosaurus/pulls)),
 - by reporting [bugs](https://github.com/martinrotter/textilosaurus/issues/new),
 - by donating some money to support and encourage developers (see below and [here](https://liberapay.com/martinrotter)).
 
