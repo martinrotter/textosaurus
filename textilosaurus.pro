@@ -250,18 +250,18 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/prmem.h \
             src/uchardet/uchardet.h \
             src/gui/sidebars/dockwidget.h \
+            src/gui/sidebars/outputsidebar.h \
+            src/gui/sidebars/findresultssidebar.h \
+            src/gui/sidebars/findresultsmodel.h \
+            src/gui/sidebars/findresultsmodelitem.h \
+            src/gui/sidebars/findresultsmodelitemeditor.h \
+            src/gui/sidebars/findresultsmodelitemresult.h \
+            src/plugin-system/markdown/markdownsidebar.h \
+            src/plugin-system/pluginfactory.h \
+            src/plugin-system/pluginbase.h \
+            src/plugin-system/markdown/markdownplugin.h \
             src/plugin-system/filesystem/filesystemsidebar.h \
-    src/gui/sidebars/outputsidebar.h \
-    src/gui/sidebars/findresultssidebar.h \
-    src/gui/sidebars/findresultsmodel.h \
-    src/gui/sidebars/findresultsmodelitem.h \
-    src/gui/sidebars/findresultsmodelitemeditor.h \
-    src/gui/sidebars/findresultsmodelitemresult.h \
-    src/plugin-system/markdown/markdownsidebar.h \
-    src/plugin-system/pluginfactory.h \
-    src/plugin-system/pluginbase.h \
-    src/plugin-system/markdown/markdownplugin.h \
-    src/plugin-system/filesystem/filesystemplugin.h
+            src/plugin-system/filesystem/filesystemplugin.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -369,17 +369,17 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsUTF8Prober.cpp \
             src/uchardet/uchardet.cpp \
             src/gui/sidebars/dockwidget.cpp \
+            src/gui/sidebars/outputsidebar.cpp \
+            src/gui/sidebars/findresultssidebar.cpp \
+            src/gui/sidebars/findresultsmodel.cpp \
+            src/gui/sidebars/findresultsmodelitem.cpp \
+            src/gui/sidebars/findresultsmodelitemeditor.cpp \
+            src/gui/sidebars/findresultsmodelitemresult.cpp \
+            src/plugin-system/markdown/markdownsidebar.cpp \
+            src/plugin-system/pluginfactory.cpp \
+            src/plugin-system/markdown/markdownplugin.cpp \
             src/plugin-system/filesystem/filesystemsidebar.cpp \
-    src/gui/sidebars/outputsidebar.cpp \
-    src/gui/sidebars/findresultssidebar.cpp \
-    src/gui/sidebars/findresultsmodel.cpp \
-    src/gui/sidebars/findresultsmodelitem.cpp \
-    src/gui/sidebars/findresultsmodelitemeditor.cpp \
-    src/gui/sidebars/findresultsmodelitemresult.cpp \
-    src/plugin-system/markdown/markdownsidebar.cpp \
-    src/plugin-system/pluginfactory.cpp \
-    src/plugin-system/markdown/markdownplugin.cpp \
-    src/plugin-system/filesystem/filesystemplugin.cpp
+            src/plugin-system/filesystem/filesystemplugin.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
