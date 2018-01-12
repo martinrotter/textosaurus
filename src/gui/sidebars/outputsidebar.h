@@ -21,7 +21,7 @@ class OutputSidebar : public DockWidget {
   Q_OBJECT
 
   public:
-    explicit OutputSidebar(QWidget* parent = nullptr);
+    explicit OutputSidebar(TextApplication* text_app, QWidget* parent = nullptr);
     virtual ~OutputSidebar() = default;
 
     virtual Qt::DockWidgetArea initialArea() const override;

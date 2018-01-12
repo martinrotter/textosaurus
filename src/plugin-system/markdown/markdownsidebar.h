@@ -12,7 +12,7 @@ class MarkdownSidebar : public DockWidget {
   Q_OBJECT
 
   public:
-    explicit MarkdownSidebar(QWidget* parent = nullptr);
+    explicit MarkdownSidebar(TextApplication* text_app, QWidget* parent = nullptr);
 
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;

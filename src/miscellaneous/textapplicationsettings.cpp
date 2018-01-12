@@ -189,6 +189,8 @@ PluginFactory* TextApplicationSettings::pluginFactory() const {
 
 void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const {
   foreach (DockWidget* dock, dock_widgets) {
+    dock->setParent(main_form);
+
     int size = dock->initialWidth();
 
     Qt::DockWidgetArea area = dock->initialArea();

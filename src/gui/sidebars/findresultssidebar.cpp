@@ -10,7 +10,10 @@
 #include <QTreeView>
 
 FindResultsSidebar::FindResultsSidebar(TextApplication* app, QWidget* parent)
-  : DockWidget(parent), m_textApp(app) {}
+  : DockWidget(app, parent) {
+  setWindowTitle(tr("Find Results"));
+  setObjectName(QSL("m_sidebarFindResults"));
+}
 
 Qt::DockWidgetArea FindResultsSidebar::initialArea() const {
   return Qt::DockWidgetArea::BottomDockWidgetArea;
@@ -33,8 +36,6 @@ void FindResultsSidebar::load() {
   m_viewResults->setIndentation(10);
 
   setWidget(m_viewResults);
-  setWindowTitle(tr("Find Results"));
-
   connect(m_viewResults, &QTreeView::activated, this, &FindResultsSidebar::navigateToResult);
 }
 

@@ -7,7 +7,6 @@
 #include "gui/dialogs/formfindreplace.h"
 #include "gui/dialogs/formmain.h"
 #include "gui/messagebox.h"
-#include "gui/sidebars/filesystemsidebar.h"
 #include "gui/sidebars/findresultssidebar.h"
 #include "gui/sidebars/outputsidebar.h"
 #include "gui/statusbar.h"
@@ -35,7 +34,7 @@ TextApplication::TextApplication(QObject* parent)
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
 
-  settings()->pluginFactory()->loadPlugins();
+  settings()->pluginFactory()->loadPlugins(this);
 }
 
 TextEditor* TextApplication::currentEditor() const {
@@ -350,9 +349,6 @@ void TextApplication::createConnections() {
   connect(m_actionViewWhitespaces, &QAction::triggered, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
-  connect(m_actionDockShowFilesystem, &QAction::triggered, m_filesystemSidebar, &FilesystemSidebar::setVisible);
-  connect(m_actionDockShowOutput, &QAction::triggered, m_outputSidebar, &OutputSidebar::setVisible);
-  connect(m_actionDockShowFindResults, &QAction::triggered, m_findResultsSidebar, &FindResultsSidebar::setVisible);
 
   // Menus.
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
@@ -380,17 +376,11 @@ void TextApplication::createConnections() {
     }
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
-  connect(m_menuDockWidgets, &QMenu::aboutToShow, this, &TextApplication::initializeDockWidgetsMenu);
   connect(m_menuRecentFiles, &QMenu::aboutToShow, this, &TextApplication::fillRecentFiles);
   connect(m_menuLanguage, &QMenu::aboutToShow, this, &TextApplication::loadLexersMenu);
   connect(m_menuLanguage, &QMenu::triggered, this, &TextApplication::changeLexer);
   connect(m_menuRecentFiles, &QMenu::triggered, this, [this](QAction* action) {
     loadTextEditorFromFile(action->text());
-  });
-
-  // Hook FS sidebar.
-  connect(m_filesystemSidebar, &FilesystemSidebar::openFileRequested, this, [this](const QString& file_path) {
-    loadTextEditorFromFile(file_path);
   });
 }
 
@@ -401,11 +391,8 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_tabEditors = main_form->tabWidget();
   m_statusBar = main_form->statusBar();
 
-  m_outputSidebar = new OutputSidebar(m_mainForm);
+  m_outputSidebar = new OutputSidebar(this, m_mainForm);
   m_outputSidebar->setObjectName(QSL("m_outputSidebar"));
-
-  m_filesystemSidebar = new FilesystemSidebar(this, m_mainForm);
-  m_filesystemSidebar->setObjectName(QSL("m_filesystemSidebar"));
 
   m_findResultsSidebar = new FindResultsSidebar(this, m_mainForm);
   m_findResultsSidebar->setObjectName(QSL("m_findResultsSidebar"));
@@ -435,10 +422,6 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionViewEols = m_mainForm->m_ui.m_actionViewEols;
   m_actionPrintCurrentEditor = m_mainForm->m_ui.m_actionPrint;
   m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
-  m_actionDockShowFilesystem = m_mainForm->m_ui.m_actionDockShowFilesystem;
-  m_actionDockShowOutput = m_mainForm->m_ui.m_actionDockShowOutput;
-  m_actionDockShowFindResults = m_mainForm->m_ui.m_actionDockShowFindResults;
-  m_actionDockShowMarkdown = m_mainForm->m_ui.m_actionDockShowMarkdown;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
   m_menuEdit = m_mainForm->m_ui.m_menuEdit;
@@ -488,15 +471,24 @@ void TextApplication::loadState() {
   m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
 
   // We load sidebars (built-in and from "plugins").
-
   QList<DockWidget*> sidebars;
-  sidebars << m_outputSidebar << m_filesystemSidebar
-           << m_findResultsSidebar << m_settings->pluginFactory()->sidebars();
+  sidebars << m_outputSidebar << m_findResultsSidebar << m_settings->pluginFactory()->sidebars();
 
-  // TODO: pokračovat tady, provést vygenerování QAction pro zobrazení každého sidebaru
-  // atd atd
-  //hookSidebars(m_mainForm, sidebars);
+  hookSidebars(sidebars);
   m_settings->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
+}
+
+void TextApplication::hookSidebars(const QList<DockWidget*>& sidebars) {
+  for (DockWidget* sidebar : sidebars) {
+    QAction* act_show = new QAction(sidebar->windowTitle(), this);
+
+    act_show->setCheckable(true);
+
+    connect(sidebar, &DockWidget::visibilityChanged, act_show, &QAction::toggle);
+    connect(act_show, &QAction::triggered, sidebar, &DockWidget::switchVisibility);
+
+    m_menuDockWidgets->addAction(act_show);
+  }
 }
 
 void TextApplication::quit(bool* ok) {
@@ -850,12 +842,6 @@ void TextApplication::loadNewExternalTools() {
   m_menuEdit->addSeparator();
   m_menuEdit->addMenu(m_menuEolConversion);
   m_menuEdit->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
-}
-
-void TextApplication::initializeDockWidgetsMenu() {
-  m_actionDockShowOutput->setChecked(m_outputSidebar->isVisible());
-  m_actionDockShowFilesystem->setChecked(m_filesystemSidebar->isVisible());
-  m_actionDockShowFindResults->setChecked(m_findResultsSidebar->isVisible());
 }
 
 void TextApplication::updateEditorIcon(int index, bool modified, bool read_only) {

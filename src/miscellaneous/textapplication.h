@@ -101,10 +101,8 @@ class TextApplication : public QObject {
     // External tools.
     void loadNewExternalTools();
 
-    // Misc.
-    void initializeDockWidgetsMenu();
-
   private:
+    void hookSidebars(const QList<DockWidget*>& sidebars);
     void updateEolMenu(int eol_mode);
 
     // Loads initial state of text application, including session restoring,
@@ -124,7 +122,6 @@ class TextApplication : public QObject {
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
     OutputSidebar* m_outputSidebar;
-    FilesystemSidebar* m_filesystemSidebar;
     FindResultsSidebar* m_findResultsSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;
@@ -156,10 +153,6 @@ class TextApplication : public QObject {
     QAction* m_actionViewEols;
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
-    QAction* m_actionDockShowOutput;
-    QAction* m_actionDockShowFilesystem;
-    QAction* m_actionDockShowFindResults;
-    QAction* m_actionDockShowMarkdown;
     QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;

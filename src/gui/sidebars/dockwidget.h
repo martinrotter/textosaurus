@@ -11,7 +11,7 @@ class DockWidget : public QDockWidget {
   Q_OBJECT
 
   public:
-    explicit DockWidget(QWidget* parent = nullptr);
+    explicit DockWidget(TextApplication* text_app, QWidget* parent = nullptr);
     virtual ~DockWidget() = default;
 
     void setTextApplication(TextApplication* text_app);
@@ -21,6 +21,7 @@ class DockWidget : public QDockWidget {
     virtual int initialWidth() const = 0;
 
   public slots:
+    void switchVisibility();
     virtual void load() = 0;
 
   protected:

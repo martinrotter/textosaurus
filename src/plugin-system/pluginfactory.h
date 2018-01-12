@@ -7,6 +7,7 @@
 
 class PluginBase;
 class DockWidget;
+class TextApplication;
 
 class PluginFactory : public QObject {
   Q_OBJECT
@@ -18,10 +19,11 @@ class PluginFactory : public QObject {
     QList<DockWidget*> sidebars() const;
 
   public slots:
-    void loadPlugins();
+    void loadPlugins(TextApplication* text_app);
 
   private:
     QList<PluginBase*> m_plugins;
+    QList<DockWidget*> m_sidebars;
 };
 
 #endif // PLUGINFACTORY_H

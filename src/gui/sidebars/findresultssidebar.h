@@ -34,7 +34,6 @@ class FindResultsSidebar : public DockWidget {
 
   private:
     QTreeView* m_viewResults;
-    TextApplication* m_textApp;
     FindResultsModel* m_model;
 };
 

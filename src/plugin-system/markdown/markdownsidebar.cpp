@@ -13,8 +13,9 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-MarkdownSidebar::MarkdownSidebar(QWidget* parent) : DockWidget(parent), m_txtPreview(nullptr) {
+MarkdownSidebar::MarkdownSidebar(TextApplication* text_app, QWidget* parent) : DockWidget(text_app, parent), m_txtPreview(nullptr) {
   setWindowTitle(tr("Markdown Preview"));
+  setObjectName(QSL("m_sidebarMarkdown"));
 }
 
 Qt::DockWidgetArea MarkdownSidebar::initialArea() const {

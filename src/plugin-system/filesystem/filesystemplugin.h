@@ -1,22 +1,22 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#ifndef MARKDOWNPLUGIN_H
-#define MARKDOWNPLUGIN_H
+#ifndef FILESYSTEMPLUGIN_H
+#define FILESYSTEMPLUGIN_H
 
 #include <QObject>
 
 #include "plugin-system/pluginbase.h"
 
-class MarkdownPlugin : public QObject, public PluginBase {
+class FilesystemPlugin : public QObject, public PluginBase {
   Q_OBJECT
 
-  //Q_PLUGIN_METADATA(IID "com.github.textilosaurus.markdown")
+  //Q_PLUGIN_METADATA(IID "com.github.textilosaurus.filesystem")
 
   public:
-    explicit MarkdownPlugin(QObject* parent = nullptr);
+    explicit FilesystemPlugin(QObject* parent = nullptr);
 
     virtual QString name() const override;
     virtual QList<DockWidget*> sidebars() const override;
 };
 
-#endif // MARKDOWNPLUGIN_H
+#endif // FILESYSTEMPLUGIN_H

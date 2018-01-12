@@ -7,6 +7,8 @@
 
 #include "gui/sidebars/dockwidget.h"
 
+class TextApplication;
+
 class PluginBase {
   public:
     explicit PluginBase() = default;
@@ -14,6 +16,15 @@ class PluginBase {
 
     virtual QString name() const = 0;
     virtual QList<DockWidget*> sidebars() const = 0;
+
+    void setTextApp(TextApplication* text_app);
+
+  protected:
+    TextApplication* m_textApp;
 };
+
+inline void PluginBase::setTextApp(TextApplication* text_app) {
+  m_textApp = text_app;
+}
 
 #endif // PLUGINBASE_H

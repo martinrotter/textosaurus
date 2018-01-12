@@ -2,16 +2,20 @@
 
 #include "plugin-system/pluginfactory.h"
 
+#include "plugin-system/filesystem/filesystemplugin.h"
 #include "plugin-system/markdown/markdownplugin.h"
 #include "plugin-system/pluginbase.h"
 
-PluginFactory::PluginFactory(QObject* parent) : QObject(parent), m_plugins(QList<PluginBase*>()) {}
+PluginFactory::PluginFactory(QObject* parent) : QObject(parent), m_plugins(QList<PluginBase*>()), m_sidebars(QList<DockWidget*>()) {}
 
-void PluginFactory::loadPlugins() {
+void PluginFactory::loadPlugins(TextApplication* text_app) {
   if (m_plugins.isEmpty()) {
-    // NOTE: Once we use plugins separated in shared libraries, then
-    // here plugins will be loaded via QPluginLoader instances.
-    m_plugins.append(new MarkdownPlugin(this));
+    m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this);
+
+    for (PluginBase* plugin : m_plugins) {
+      plugin->setTextApp(text_app);
+      m_sidebars << plugin->sidebars();
+    }
   }
 }
 
@@ -20,11 +24,5 @@ QList<PluginBase*> PluginFactory::plugins() const {
 }
 
 QList<DockWidget*> PluginFactory::sidebars() const {
-  QList<DockWidget*> sidebars;
-
-  for (const PluginBase* plugin : m_plugins) {
-    sidebars.append(plugin->sidebars());
-  }
-
-  return sidebars;
+  return m_sidebars;
 }

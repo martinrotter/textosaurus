@@ -5,13 +5,17 @@
 #include <QEvent>
 #include <QMetaObject>
 
-DockWidget::DockWidget(QWidget* parent) : QDockWidget(parent) {
+DockWidget::DockWidget(TextApplication* text_app, QWidget* parent) : QDockWidget(parent), m_textApp(text_app) {
   setContentsMargins(0, 0, 0, 0);
   setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
 }
 
 void DockWidget::setTextApplication(TextApplication* text_app) {
   m_textApp = text_app;
+}
+
+void DockWidget::switchVisibility() {
+  isVisible() ? hide() : show();
 }
 
 void DockWidget::showEvent(QShowEvent* event) {
