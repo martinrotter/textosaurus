@@ -6,10 +6,13 @@
 #include "gui/sidebars/basesidebar.h"
 
 class TextApplication;
+class MarkdownPlugin;
 class QTextBrowser;
 
 class MarkdownSidebar : public BaseSidebar {
   Q_OBJECT
+
+  friend class MarkdownPlugin;
 
   public:
     explicit MarkdownSidebar(TextApplication* text_app, QWidget* parent = nullptr);
@@ -19,6 +22,8 @@ class MarkdownSidebar : public BaseSidebar {
     virtual int initialWidth() const override;
 
   public slots:
+    void refreshPreview();
+
     virtual void load() override;
 
   private:
@@ -26,6 +31,7 @@ class MarkdownSidebar : public BaseSidebar {
 
   private:
     QTextBrowser* m_txtPreview;
+    QAction* m_actionRefreshPreview;
 };
 
 #endif // MARKDOWNSIDEBAR_H

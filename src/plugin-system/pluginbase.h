@@ -15,7 +15,8 @@ class PluginBase {
     virtual ~PluginBase() = default;
 
     virtual QString name() const = 0;
-    virtual QList<BaseSidebar*> sidebars() const = 0;
+    virtual QList<BaseSidebar*> sidebars() = 0;
+    virtual QList<QAction*> userActions() = 0;
 
     void setTextApp(TextApplication* text_app);
 

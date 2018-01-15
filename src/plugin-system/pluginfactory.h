@@ -20,6 +20,7 @@ class PluginFactory : public QObject {
     QList<BaseSidebar*> sidebars() const;
     QList<QAction*> assignableActions() const;
     QList<QAction*> sidebarActions() const;
+    QList<QAction*> generateMenusForPlugins(QWidget* parent) const;
 
     void hookPluginsIntoApplication(TextApplication* text_app);
 

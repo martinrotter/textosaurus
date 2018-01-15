@@ -10,7 +10,6 @@
 #include "plugin-system/markdown/markdownplugin.h"
 #include "plugin-system/pluginbase.h"
 
-#include <QAction>
 #include <QMenu>
 
 PluginFactory::PluginFactory(QObject* parent)
@@ -19,6 +18,9 @@ PluginFactory::PluginFactory(QObject* parent)
 
 void PluginFactory::loadPlugins(TextApplication* text_app) {
   if (m_plugins.isEmpty()) {
+    // NOTE: If we decide to separate optional plugins
+    // into separate assemblies, then we load them here
+    // via QPluginLoader instead of these hardcoded references.
     m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this);
 
     for (PluginBase* plugin : m_plugins) {
@@ -27,6 +29,7 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
       auto plugin_sidebars = plugin->sidebars();
 
       m_sidebars << plugin_sidebars;
+      m_assignableActions << plugin->userActions();
 
       for (BaseSidebar* sidebar : plugin_sidebars) {
         QAction* act_show = sidebar->generateAction();
@@ -52,6 +55,23 @@ QList<QAction*> PluginFactory::assignableActions() const {
 
 QList<QAction*> PluginFactory::sidebarActions() const {
   return m_sidebarActions;
+}
+
+QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) const {
+  QList<QAction*> menus;
+
+  for (PluginBase* plugin : m_plugins) {
+    auto plugin_actions = plugin->userActions();
+
+    if (!plugin_actions.isEmpty()) {
+      QMenu* menu_plugin = new QMenu(plugin->name(), parent);
+
+      menu_plugin->addActions(plugin_actions);
+      menus.append(menu_plugin->menuAction());
+    }
+  }
+
+  return menus;
 }
 
 void PluginFactory::hookPluginsIntoApplication(TextApplication* text_app) {

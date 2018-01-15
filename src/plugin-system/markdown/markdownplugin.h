@@ -7,6 +7,8 @@
 
 #include "plugin-system/pluginbase.h"
 
+class MarkdownSidebar;
+
 class MarkdownPlugin : public QObject, public PluginBase {
   Q_OBJECT
 
@@ -16,7 +18,14 @@ class MarkdownPlugin : public QObject, public PluginBase {
     explicit MarkdownPlugin(QObject* parent = nullptr);
 
     virtual QString name() const override;
-    virtual QList<BaseSidebar*> sidebars() const override;
+    virtual QList<BaseSidebar*> sidebars() override;
+    virtual QList<QAction*> userActions() override;
+
+  private:
+    MarkdownSidebar* sidebar();
+
+  private:
+    MarkdownSidebar* m_sidebar;
 };
 
 #endif // MARKDOWNPLUGIN_H

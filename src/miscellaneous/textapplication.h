@@ -36,7 +36,7 @@ class TextApplication : public QObject {
     FindResultsSidebar* findResultsSidebar() const;
     TextApplicationSettings* settings() const;
 
-    QList<QAction*> miscUserActions() const;
+    QList<QAction*> userActions() const;
 
     void setMainForm(FormMain* main_form);
 

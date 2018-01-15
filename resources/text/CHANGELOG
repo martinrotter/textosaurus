@@ -1,3 +1,9 @@
+2018.01.XX
+----------
+Added:
+* Plugins now can register actions which can be assigned to keyboard shortcuts.
+* Added missing license for [Hoedown](https://github.com/hoedown/hoedown) component.
+
 2018.01.11
 ----------
 Added:

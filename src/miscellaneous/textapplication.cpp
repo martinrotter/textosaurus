@@ -451,8 +451,10 @@ void TextApplication::setMainForm(FormMain* main_form) {
   createConnections();
 }
 
-QList<QAction*> TextApplication::miscUserActions() const {
-  return QList<QAction*>() << m_actionShowFindResultsSidebar << m_actionShowOutputSidebar;
+QList<QAction*> TextApplication::userActions() const {
+  return QList<QAction*>() << m_actionShowFindResultsSidebar << m_actionShowOutputSidebar
+                           << settings()->pluginFactory()->assignableActions()
+                           << settings()->externalTools()->predefinedToolsActions();
 }
 
 void TextApplication::loadState() {
@@ -475,6 +477,9 @@ void TextApplication::loadState() {
 
   // We load plugins etc.
   settings()->pluginFactory()->hookPluginsIntoApplication(this);
+
+  m_menuDockWidgets->addAction(m_actionShowFindResultsSidebar);
+  m_menuDockWidgets->addAction(m_actionShowOutputSidebar);
 
   QList<BaseSidebar*> sidebars; sidebars << m_outputSidebar << m_findResultsSidebar << settings()->pluginFactory()->sidebars();
   settings()->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
@@ -821,6 +826,8 @@ void TextApplication::loadNewExternalTools() {
   // Make sure we reload external tools.
   m_menuTools->clear();
   m_menuTools->addAction(m_actionSettings);
+  m_menuTools->addSeparator();
+  m_menuTools->addActions(m_settings->pluginFactory()->generateMenusForPlugins(m_menuTools));
   m_menuTools->addSeparator();
   m_menuTools->addActions(m_settings->externalTools()->generateToolsMenuTools(m_menuTools));
 

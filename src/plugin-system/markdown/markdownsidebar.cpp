@@ -13,9 +13,16 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-MarkdownSidebar::MarkdownSidebar(TextApplication* text_app, QWidget* parent) : BaseSidebar(text_app, parent), m_txtPreview(nullptr) {
+MarkdownSidebar::MarkdownSidebar(TextApplication* text_app, QWidget* parent)
+  : BaseSidebar(text_app, parent), m_txtPreview(nullptr) {
   setWindowTitle(tr("Markdown Preview"));
   setObjectName(QSL("m_sidebarMarkdown"));
+
+  m_actionRefreshPreview = new QAction(qApp->icons()->fromTheme(QSL("view-refresh")),
+                                       tr("Refresh Markdown Preview"),
+                                       this);
+  m_actionRefreshPreview->setObjectName(QSL("m_actionRefreshMarkdownPreview"));
+  connect(m_actionRefreshPreview, &QAction::triggered, this, &MarkdownSidebar::refreshPreview);
 }
 
 Qt::DockWidgetArea MarkdownSidebar::initialArea() const {
@@ -28,6 +35,20 @@ bool MarkdownSidebar::initiallyVisible() const {
 
 int MarkdownSidebar::initialWidth() const {
   return 150;
+}
+
+void MarkdownSidebar::refreshPreview() {
+  show();
+  raise();
+
+  TextEditor* editor = m_textApp->currentEditor();
+
+  if (editor != nullptr) {
+    m_txtPreview->setText(convertMarkdownToHtml((const uint8_t*)editor->characterPointer()));
+  }
+  else {
+    m_txtPreview->clear();
+  }
 }
 
 void MarkdownSidebar::load() {
@@ -44,25 +65,12 @@ void MarkdownSidebar::load() {
     QWidget* widget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(widget);
     QToolBar* tool_bar = new QToolBar(widget);
-    QAction* act_refresh = new QAction(qApp->icons()->fromTheme(QSL("view-refresh")),
-                                       tr("Refresh preview"), widget);
 
-    tool_bar->addAction(act_refresh);
+    tool_bar->addAction(m_actionRefreshPreview);
     tool_bar->setIconSize(QSize(16, 16));
     layout->setMargin(0);
     layout->addWidget(tool_bar);
     layout->addWidget(m_txtPreview, 1);
-
-    connect(act_refresh, &QAction::triggered, this, [this]() {
-      TextEditor* editor = m_textApp->currentEditor();
-
-      if (editor != nullptr) {
-        m_txtPreview->setText(convertMarkdownToHtml((const uint8_t*)editor->characterPointer()));
-      }
-      else {
-        m_txtPreview->clear();
-      }
-    });
 
     setWidget(widget);
   }

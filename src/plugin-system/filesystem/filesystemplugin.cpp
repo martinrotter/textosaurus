@@ -11,6 +11,10 @@ QString FilesystemPlugin::name() const {
   return QSL("Filesystem");
 }
 
-QList<BaseSidebar*> FilesystemPlugin::sidebars() const {
+QList<BaseSidebar*> FilesystemPlugin::sidebars() {
   return QList<BaseSidebar*>() << new FilesystemSidebar(m_textApp, nullptr);
+}
+
+QList<QAction*> FilesystemPlugin::userActions() {
+  return QList<QAction*>();
 }

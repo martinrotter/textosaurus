@@ -16,7 +16,8 @@ class FilesystemPlugin : public QObject, public PluginBase {
     explicit FilesystemPlugin(QObject* parent = nullptr);
 
     virtual QString name() const override;
-    virtual QList<BaseSidebar*> sidebars() const override;
+    virtual QList<BaseSidebar*> sidebars() override;
+    virtual QList<QAction*> userActions() override;
 };
 
 #endif // FILESYSTEMPLUGIN_H
