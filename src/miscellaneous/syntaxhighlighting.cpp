@@ -3,7 +3,7 @@
 #include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"
 
-#include "scintilla/include/SciLexer.h"
+#include "3rd-party/scintilla/include/SciLexer.h"
 
 #include <QRegularExpression>
 

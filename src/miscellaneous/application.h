@@ -3,7 +3,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "qtsingleapplication/qtsingleapplication.h"
+#include "3rd-party/qtsingleapplication/qtsingleapplication.h"
 
 #include "definitions/definitions.h"
 #include "miscellaneous/iofactory.h"

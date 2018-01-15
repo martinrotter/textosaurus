@@ -10,7 +10,7 @@
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/settingsproperties.h"
 
-#include "scintilla/include/Scintilla.h"
+#include "3rd-party/scintilla/include/Scintilla.h"
 
 #include <QByteArray>
 #include <QColor>

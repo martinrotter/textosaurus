@@ -3,7 +3,7 @@
 #ifndef TEXTEDITOR_H
 #define TEXTEDITOR_H
 
-#include <scintilla/qt/ScintillaEdit/ScintillaEdit.h>
+#include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
 
 #include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"

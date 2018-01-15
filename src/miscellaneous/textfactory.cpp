@@ -8,8 +8,8 @@
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
 
-#include "scintilla/include/Scintilla.h"
-#include "uchardet/uchardet.h"
+#include "3rd-party/scintilla/include/Scintilla.h"
+#include "3rd-party/uchardet/uchardet.h"
 
 #include <QDir>
 #include <QLocale>

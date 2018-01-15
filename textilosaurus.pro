@@ -223,32 +223,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/network-web/networkfactory.h \
             src/network-web/silentnetworkaccessmanager.h \
             src/network-web/webfactory.h \
-            src/qtsingleapplication/qtlocalpeer.h \
-            src/qtsingleapplication/qtlockedfile.h \
-            src/qtsingleapplication/qtsingleapplication.h \
-            src/qtsingleapplication/qtsinglecoreapplication.h \
-            src/uchardet/CharDistribution.h \
-            src/uchardet/JpCntx.h \
-            src/uchardet/nsBig5Prober.h \
-            src/uchardet/nsCodingStateMachine.h \
-            src/uchardet/nscore.h \
-            src/uchardet/nsEscCharsetProber.h \
-            src/uchardet/nsEUCJPProber.h \
-            src/uchardet/nsEUCKRProber.h \
-            src/uchardet/nsEUCTWProber.h \
-            src/uchardet/nsGB2312Prober.h \
-            src/uchardet/nsHebrewProber.h \
-            src/uchardet/nsCharSetProber.h \
-            src/uchardet/nsLatin1Prober.h \
-            src/uchardet/nsMBCSGroupProber.h \
-            src/uchardet/nsPkgInt.h \
-            src/uchardet/nsSBCSGroupProber.h \
-            src/uchardet/nsSBCharSetProber.h \
-            src/uchardet/nsSJISProber.h \
-            src/uchardet/nsUniversalDetector.h \
-            src/uchardet/nsUTF8Prober.h \
-            src/uchardet/prmem.h \
-            src/uchardet/uchardet.h \
             src/gui/sidebars/outputsidebar.h \
             src/gui/sidebars/findresultssidebar.h \
             src/gui/sidebars/findresultsmodel.h \
@@ -261,7 +235,7 @@ HEADERS +=  src/definitions/definitions.h \
             src/plugin-system/markdown/markdownplugin.h \
             src/plugin-system/filesystem/filesystemsidebar.h \
             src/plugin-system/filesystem/filesystemplugin.h \
-    src/gui/sidebars/basesidebar.h
+            src/gui/sidebars/basesidebar.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -315,59 +289,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/network-web/networkfactory.cpp \
             src/network-web/silentnetworkaccessmanager.cpp \
             src/network-web/webfactory.cpp \
-            src/qtsingleapplication/qtlocalpeer.cpp \
-            src/qtsingleapplication/qtlockedfile.cpp \
-            src/qtsingleapplication/qtsingleapplication.cpp \
-            src/qtsingleapplication/qtsinglecoreapplication.cpp \
-            src/uchardet/CharDistribution.cpp \
-            src/uchardet/JpCntx.cpp \
-            src/uchardet/LangArabicModel.cpp \
-            src/uchardet/LangBulgarianModel.cpp \
-            src/uchardet/LangCroatianModel.cpp \
-            src/uchardet/LangCzechModel.cpp \
-            src/uchardet/LangDanishModel.cpp \
-            src/uchardet/LangEsperantoModel.cpp \
-            src/uchardet/LangEstonianModel.cpp \
-            src/uchardet/LangFinnishModel.cpp \
-            src/uchardet/LangFrenchModel.cpp \
-            src/uchardet/LangGermanModel.cpp \
-            src/uchardet/LangGreekModel.cpp \
-            src/uchardet/LangHebrewModel.cpp \
-            src/uchardet/LangHungarianModel.cpp \
-            src/uchardet/LangIrishModel.cpp \
-            src/uchardet/LangItalianModel.cpp \
-            src/uchardet/LangLatvianModel.cpp \
-            src/uchardet/LangLithuanianModel.cpp \
-            src/uchardet/LangMalteseModel.cpp \
-            src/uchardet/LangPolishModel.cpp \
-            src/uchardet/LangPortugueseModel.cpp \
-            src/uchardet/LangRomanianModel.cpp \
-            src/uchardet/LangRussianModel.cpp \
-            src/uchardet/LangSlovakModel.cpp \
-            src/uchardet/LangSloveneModel.cpp \
-            src/uchardet/LangSpanishModel.cpp \
-            src/uchardet/LangSwedishModel.cpp \
-            src/uchardet/LangThaiModel.cpp \
-            src/uchardet/LangTurkishModel.cpp \
-            src/uchardet/LangVietnameseModel.cpp \
-            src/uchardet/nsBig5Prober.cpp \
-            src/uchardet/nsEscCharsetProber.cpp \
-            src/uchardet/nsEscSM.cpp \
-            src/uchardet/nsEUCJPProber.cpp \
-            src/uchardet/nsEUCKRProber.cpp \
-            src/uchardet/nsEUCTWProber.cpp \
-            src/uchardet/nsGB2312Prober.cpp \
-            src/uchardet/nsHebrewProber.cpp \
-            src/uchardet/nsCharSetProber.cpp \
-            src/uchardet/nsLatin1Prober.cpp \
-            src/uchardet/nsMBCSGroupProber.cpp \
-            src/uchardet/nsMBCSSM.cpp \
-            src/uchardet/nsSBCSGroupProber.cpp \
-            src/uchardet/nsSBCharSetProber.cpp \
-            src/uchardet/nsSJISProber.cpp \
-            src/uchardet/nsUniversalDetector.cpp \
-            src/uchardet/nsUTF8Prober.cpp \
-            src/uchardet/uchardet.cpp \
             src/gui/sidebars/outputsidebar.cpp \
             src/gui/sidebars/findresultssidebar.cpp \
             src/gui/sidebars/findresultsmodel.cpp \
@@ -379,7 +300,7 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/plugin-system/markdown/markdownplugin.cpp \
             src/plugin-system/filesystem/filesystemsidebar.cpp \
             src/plugin-system/filesystem/filesystemplugin.cpp \
-    src/gui/sidebars/basesidebar.cpp
+            src/gui/sidebars/basesidebar.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -399,66 +320,74 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/toolbareditor.ui \
             src/gui/settings/settingseditor.ui
 
+# Add qtsingleapplication.
+SOURCES += $$files(src/3rd-party/qtsingleapplication/*.cpp, false)
+HEADERS  += $$files(src/3rd-party/qtsingleapplication/*.h, false)
+
+# Add uchardet.
+SOURCES += $$files(src/3rd-party/uchardet/*.cpp, false)
+HEADERS  += $$files(src/3rd-party/uchardet/*.h, false)
+
 # Add Scintilla.
 win32 {
   QMAKE_CXXFLAGS += -std:c++latest
 }
 
 SOURCES += \
-    src/scintilla/qt/ScintillaEdit/ScintillaEdit.cpp \
-    src/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp \
-    src/scintilla/qt/ScintillaEditBase/PlatQt.cpp \
-    src/scintilla/qt/ScintillaEditBase/ScintillaQt.cpp \
-    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp \
-    src/scintilla/src/XPM.cxx \
-    src/scintilla/src/ViewStyle.cxx \
-    src/scintilla/src/UniConversion.cxx \
-    src/scintilla/src/Style.cxx \
-    src/scintilla/src/Selection.cxx \
-    src/scintilla/src/ScintillaBase.cxx \
-    src/scintilla/src/RunStyles.cxx \
-    src/scintilla/src/RESearch.cxx \
-    src/scintilla/src/PositionCache.cxx \
-    src/scintilla/src/PerLine.cxx \
-    src/scintilla/src/MarginView.cxx \
-    src/scintilla/src/LineMarker.cxx \
-    src/scintilla/src/KeyMap.cxx \
-    src/scintilla/src/Indicator.cxx \
-    src/scintilla/src/ExternalLexer.cxx \
-    src/scintilla/src/EditView.cxx \
-    src/scintilla/src/Editor.cxx \
-    src/scintilla/src/EditModel.cxx \
-    src/scintilla/src/Document.cxx \
-    src/scintilla/src/Decoration.cxx \
-    src/scintilla/src/DBCS.cxx \
-    src/scintilla/src/ContractionState.cxx \
-    src/scintilla/src/CharClassify.cxx \
-    src/scintilla/src/CellBuffer.cxx \
-    src/scintilla/src/Catalogue.cxx \
-    src/scintilla/src/CaseFolder.cxx \
-    src/scintilla/src/CaseConvert.cxx \
-    src/scintilla/src/CallTip.cxx \
-    src/scintilla/src/AutoComplete.cxx \
-    src/scintilla/lexlib/WordList.cxx \
-    src/scintilla/lexlib/StyleContext.cxx \
-    src/scintilla/lexlib/PropSetSimple.cxx \
-    src/scintilla/lexlib/LexerSimple.cxx \
-    src/scintilla/lexlib/LexerNoExceptions.cxx \
-    src/scintilla/lexlib/LexerModule.cxx \
-    src/scintilla/lexlib/LexerBase.cxx \
-    src/scintilla/lexlib/DefaultLexer.cxx \
-    src/scintilla/lexlib/CharacterSet.cxx \
-    src/scintilla/lexlib/CharacterCategory.cxx \
-    src/scintilla/lexlib/Accessor.cxx \
-    $$files(src/scintilla/lexers/*.cxx, false)
+    src/3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.cpp \
+    src/3rd-party/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp \
+    src/3rd-party/scintilla/qt/ScintillaEditBase/PlatQt.cpp \
+    src/3rd-party/scintilla/qt/ScintillaEditBase/ScintillaQt.cpp \
+    src/3rd-party/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp \
+    src/3rd-party/scintilla/src/XPM.cxx \
+    src/3rd-party/scintilla/src/ViewStyle.cxx \
+    src/3rd-party/scintilla/src/UniConversion.cxx \
+    src/3rd-party/scintilla/src/Style.cxx \
+    src/3rd-party/scintilla/src/Selection.cxx \
+    src/3rd-party/scintilla/src/ScintillaBase.cxx \
+    src/3rd-party/scintilla/src/RunStyles.cxx \
+    src/3rd-party/scintilla/src/RESearch.cxx \
+    src/3rd-party/scintilla/src/PositionCache.cxx \
+    src/3rd-party/scintilla/src/PerLine.cxx \
+    src/3rd-party/scintilla/src/MarginView.cxx \
+    src/3rd-party/scintilla/src/LineMarker.cxx \
+    src/3rd-party/scintilla/src/KeyMap.cxx \
+    src/3rd-party/scintilla/src/Indicator.cxx \
+    src/3rd-party/scintilla/src/ExternalLexer.cxx \
+    src/3rd-party/scintilla/src/EditView.cxx \
+    src/3rd-party/scintilla/src/Editor.cxx \
+    src/3rd-party/scintilla/src/EditModel.cxx \
+    src/3rd-party/scintilla/src/Document.cxx \
+    src/3rd-party/scintilla/src/Decoration.cxx \
+    src/3rd-party/scintilla/src/DBCS.cxx \
+    src/3rd-party/scintilla/src/ContractionState.cxx \
+    src/3rd-party/scintilla/src/CharClassify.cxx \
+    src/3rd-party/scintilla/src/CellBuffer.cxx \
+    src/3rd-party/scintilla/src/Catalogue.cxx \
+    src/3rd-party/scintilla/src/CaseFolder.cxx \
+    src/3rd-party/scintilla/src/CaseConvert.cxx \
+    src/3rd-party/scintilla/src/CallTip.cxx \
+    src/3rd-party/scintilla/src/AutoComplete.cxx \
+    src/3rd-party/scintilla/lexlib/WordList.cxx \
+    src/3rd-party/scintilla/lexlib/StyleContext.cxx \
+    src/3rd-party/scintilla/lexlib/PropSetSimple.cxx \
+    src/3rd-party/scintilla/lexlib/LexerSimple.cxx \
+    src/3rd-party/scintilla/lexlib/LexerNoExceptions.cxx \
+    src/3rd-party/scintilla/lexlib/LexerModule.cxx \
+    src/3rd-party/scintilla/lexlib/LexerBase.cxx \
+    src/3rd-party/scintilla/lexlib/DefaultLexer.cxx \
+    src/3rd-party/scintilla/lexlib/CharacterSet.cxx \
+    src/3rd-party/scintilla/lexlib/CharacterCategory.cxx \
+    src/3rd-party/scintilla/lexlib/Accessor.cxx \
+    $$files(src/3rd-party/scintilla/lexers/*.cxx, false)
 
 HEADERS  += \
-    src/scintilla/qt/ScintillaEdit/ScintillaEdit.h \
-    src/scintilla/qt/ScintillaEdit/ScintillaDocument.h \
-    src/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
-    src/scintilla/qt/ScintillaEditBase/ScintillaQt.h
+    src/3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h \
+    src/3rd-party/scintilla/qt/ScintillaEdit/ScintillaDocument.h \
+    src/3rd-party/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
+    src/3rd-party/scintilla/qt/ScintillaEditBase/ScintillaQt.h
 
-INCLUDEPATH += src/scintilla/qt/ScintillaEditBase src/scintilla/include src/scintilla/src src/scintilla/lexlib
+INCLUDEPATH += src/3rd-party/scintilla/qt/ScintillaEditBase src/3rd-party/scintilla/include src/3rd-party/scintilla/src src/3rd-party/scintilla/lexlib
 
 DEFINES *= SCINTILLA_QT=1 SCI_LEXER=1 _CRT_SECURE_NO_DEPRECATE=1 EXPORT_IMPORT_API=
 
@@ -467,8 +396,8 @@ CONFIG(release, debug|release) {
 }
 
 # Add hoextdown.
-SOURCES += $$files(src/hoedown/*.c, false)
-HEADERS  += $$files(src/hoedown/*.h, false)
+SOURCES += $$files(src/3rd-party/hoedown/*.c, false)
+HEADERS  += $$files(src/3rd-party/hoedown/*.h, false)
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \

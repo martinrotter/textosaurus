@@ -2,8 +2,8 @@
 
 #include "gui/texteditorprinter.h"
 
+#include "3rd-party/scintilla/include/Scintilla.h"
 #include "gui/texteditor.h"
-#include "scintilla/include/Scintilla.h"
 
 #include <QPainter>
 #include <QStack>

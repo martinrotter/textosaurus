@@ -37,7 +37,7 @@ Features
     - **movable dock sidebars**:
         * "Output" sidebar - can display output of external tools and other information,
         * "Filesystem" sidebar - allows to browse folder hierarchy and mark some files as favorites,
-	* "Markdown Preview" sidebar - allows yout to display simple preview of your Markdown scripts,
+        * "Markdown Preview" sidebar - allows yout to display simple preview of your Markdown scripts,
     - tabbed interface.
 * Text editor component:
     - **supports a lot of input encodings**,

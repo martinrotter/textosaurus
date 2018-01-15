@@ -15,10 +15,12 @@
 #include "miscellaneous/textfactory.h"
 #include "network-web/webfactory.h"
 
-#include "scintilla/include/ILoader.h"
-#include "scintilla/include/Platform.h"
-#include "scintilla/include/SciLexer.h"
-#include "scintilla/qt/ScintillaEditBase/PlatQt.h"
+#include "3rd-party/hoedown/hdocument.h"
+#include "3rd-party/hoedown/html.h"
+#include "3rd-party/scintilla/include/ILoader.h"
+#include "3rd-party/scintilla/include/Platform.h"
+#include "3rd-party/scintilla/include/SciLexer.h"
+#include "3rd-party/scintilla/qt/ScintillaEditBase/PlatQt.h"
 
 #include <QDir>
 #include <QFileDialog>
@@ -30,9 +32,6 @@
 #include <QRegularExpression>
 #include <QTextCodec>
 #include <QTextStream>
-
-#include "hoedown/hdocument.h"
-#include "hoedown/html.h"
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   : ScintillaEdit(parent), m_fileWatcher(nullptr), m_currentUrlStart(-1),

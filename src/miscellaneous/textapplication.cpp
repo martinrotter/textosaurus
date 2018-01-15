@@ -17,7 +17,7 @@
 #include "miscellaneous/textfactory.h"
 #include "plugin-system/pluginfactory.h"
 
-#include "uchardet/uchardet.h"
+#include "3rd-party/uchardet/uchardet.h"
 
 #include <QClipboard>
 #include <QDockWidget>

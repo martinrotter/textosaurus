@@ -3,11 +3,13 @@
 #include "plugin-system/markdown/markdownsidebar.h"
 
 #include "gui/texteditor.h"
-#include "hoedown/hdocument.h"
-#include "hoedown/html.h"
+
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/textapplication.h"
+
+#include "3rd-party/hoedown/hdocument.h"
+#include "3rd-party/hoedown/html.h"
 
 #include <QTextBrowser>
 #include <QToolBar>
