@@ -12,7 +12,7 @@
 MarkdownPlugin::MarkdownPlugin(QObject* parent) : QObject(parent), m_sidebar(nullptr) {}
 
 QString MarkdownPlugin::name() const {
-  return QSL("Markdown");
+  return QSL("Markdown Preview");
 }
 
 QList<BaseSidebar*> MarkdownPlugin::sidebars() {
