@@ -76,8 +76,8 @@ void FilesystemSidebar::load() {
     // Initialize favorites.
     connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
 
-    QStringList saved_files = qApp->settings()->value(GROUP(General),
-                                                      objectName() + QSL("_files"),
+    QStringList saved_files = qApp->settings()->value(windowTitle(),
+                                                      QSL("favorites"),
                                                       QStringList()).toStringList();
 
     foreach (const QString& file, saved_files) {
@@ -143,7 +143,7 @@ void FilesystemSidebar::saveFavorites() const {
     favorites.append(m_lvFavorites->item(i)->data(Qt::UserRole).toString());
   }
 
-  qApp->settings()->setValue(GROUP(General), objectName() + QSL("_files"), favorites);
+  qApp->settings()->setValue(windowTitle(), QSL("favorites"), favorites);
 }
 
 FileSystemSidebarModel::FileSystemSidebarModel(QObject* parent) : QFileSystemModel(parent) {}
