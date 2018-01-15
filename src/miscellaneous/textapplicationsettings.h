@@ -11,7 +11,7 @@ class ExternalTools;
 class FormMain;
 class QAction;
 class PluginFactory;
-class DockWidget;
+class BaseSidebar;
 
 class TextApplicationSettings : public QObject {
   Q_OBJECT
@@ -41,7 +41,7 @@ class TextApplicationSettings : public QObject {
     PluginFactory* pluginFactory() const;
 
   public slots:
-    void loadInitialSidebarGuiSettings(FormMain* main_form, const QList<DockWidget*>& dock_widgets) const;
+    void loadInitialSidebarGuiSettings(FormMain* main_form, const QList<BaseSidebar*>& dock_widgets) const;
 
     void increaseLineSpacing();
     void decreaseLineSpacing();

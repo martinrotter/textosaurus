@@ -11,6 +11,6 @@ QString FilesystemPlugin::name() const {
   return QSL("Filesystem");
 }
 
-QList<DockWidget*> FilesystemPlugin::sidebars() const {
-  return QList<DockWidget*>() << new FilesystemSidebar(m_textApp, nullptr);
+QList<BaseSidebar*> FilesystemPlugin::sidebars() const {
+  return QList<BaseSidebar*>() << new FilesystemSidebar(m_textApp, nullptr);
 }

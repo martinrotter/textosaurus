@@ -2,20 +2,21 @@
 
 #include <QDockWidget>
 
-#ifndef DOCKWIDGET_H
-#define DOCKWIDGET_H
+#ifndef BASESIDEBAR_H
+#define BASESIDEBAR_H
 
 class TextApplication;
 
-class DockWidget : public QDockWidget {
+class BaseSidebar : public QDockWidget {
   Q_OBJECT
 
   public:
-    explicit DockWidget(TextApplication* text_app, QWidget* parent = nullptr);
-    virtual ~DockWidget() = default;
+    explicit BaseSidebar(TextApplication* text_app, QWidget* parent = nullptr);
+    virtual ~BaseSidebar() = default;
 
     void setTextApplication(TextApplication* text_app);
 
+    QAction* generateAction();
     virtual Qt::DockWidgetArea initialArea() const = 0;
     virtual bool initiallyVisible() const = 0;
     virtual int initialWidth() const = 0;
@@ -31,4 +32,4 @@ class DockWidget : public QDockWidget {
     TextApplication* m_textApp;
 };
 
-#endif // DOCKWIDGET_H
+#endif // BASESIDEBAR_H

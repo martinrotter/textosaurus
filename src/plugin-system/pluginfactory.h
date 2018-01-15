@@ -6,8 +6,9 @@
 #include <QObject>
 
 class PluginBase;
-class DockWidget;
+class BaseSidebar;
 class TextApplication;
+class QAction;
 
 class PluginFactory : public QObject {
   Q_OBJECT
@@ -16,14 +17,20 @@ class PluginFactory : public QObject {
     explicit PluginFactory(QObject* parent = nullptr);
 
     QList<PluginBase*> plugins() const;
-    QList<DockWidget*> sidebars() const;
+    QList<BaseSidebar*> sidebars() const;
+    QList<QAction*> assignableActions() const;
+    QList<QAction*> sidebarActions() const;
+
+    void hookPluginsIntoApplication(TextApplication* text_app);
 
   public slots:
     void loadPlugins(TextApplication* text_app);
 
   private:
     QList<PluginBase*> m_plugins;
-    QList<DockWidget*> m_sidebars;
+    QList<BaseSidebar*> m_sidebars;
+    QList<QAction*> m_assignableActions;
+    QList<QAction*> m_sidebarActions;
 };
 
 #endif // PLUGINFACTORY_H

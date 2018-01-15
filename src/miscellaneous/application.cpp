@@ -12,6 +12,7 @@
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/textapplication.h"
 #include "network-web/webfactory.h"
+#include "plugin-system/pluginfactory.h"
 
 #include <QProcess>
 #include <QSessionManager>
@@ -35,6 +36,8 @@ Application::Application(const QString& id, int& argc, char** argv)
 QList<QAction*> Application::userActions() {
   if (m_mainForm != nullptr && m_userActions.isEmpty()) {
     m_userActions = m_mainForm->allActions();
+    m_userActions.append(m_textApplication->miscUserActions());
+    m_userActions.append(m_textApplication->settings()->pluginFactory()->assignableActions());
     m_userActions.append(m_textApplication->settings()->externalTools()->predefinedToolsActions());
   }
 

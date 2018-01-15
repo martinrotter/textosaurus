@@ -17,7 +17,6 @@ class FormMain;
 class StatusBar;
 class FormFindReplace;
 class ExternalTool;
-class FilesystemSidebar;
 class QAction;
 class QMenu;
 class QLineEdit;
@@ -25,6 +24,8 @@ class QLineEdit;
 // Main class which ties text box functionality into GUI and gels all together.
 class TextApplication : public QObject {
   Q_OBJECT
+
+  friend class PluginFactory;
 
   public:
     explicit TextApplication(QObject* parent = nullptr);
@@ -34,6 +35,8 @@ class TextApplication : public QObject {
     OutputSidebar* outputSidebar() const;
     FindResultsSidebar* findResultsSidebar() const;
     TextApplicationSettings* settings() const;
+
+    QList<QAction*> miscUserActions() const;
 
     void setMainForm(FormMain* main_form);
 
@@ -102,7 +105,6 @@ class TextApplication : public QObject {
     void loadNewExternalTools();
 
   private:
-    void hookSidebars(const QList<DockWidget*>& sidebars);
     void updateEolMenu(int eol_mode);
 
     // Loads initial state of text application, including session restoring,
@@ -153,6 +155,8 @@ class TextApplication : public QObject {
     QAction* m_actionViewEols;
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
+    QAction* m_actionShowOutputSidebar;
+    QAction* m_actionShowFindResultsSidebar;
     QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;

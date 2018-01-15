@@ -3,7 +3,7 @@
 #ifndef TOOLBOX_H
 #define TOOLBOX_H
 
-#include "gui/sidebars/dockwidget.h"
+#include "gui/sidebars/basesidebar.h"
 
 #include <QMessageBox>
 #include <QUrl>
@@ -17,7 +17,7 @@ enum class OutputSource {
   Application
 };
 
-class OutputSidebar : public DockWidget {
+class OutputSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:

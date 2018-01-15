@@ -249,7 +249,6 @@ HEADERS +=  src/definitions/definitions.h \
             src/uchardet/nsUTF8Prober.h \
             src/uchardet/prmem.h \
             src/uchardet/uchardet.h \
-            src/gui/sidebars/dockwidget.h \
             src/gui/sidebars/outputsidebar.h \
             src/gui/sidebars/findresultssidebar.h \
             src/gui/sidebars/findresultsmodel.h \
@@ -261,7 +260,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/plugin-system/pluginbase.h \
             src/plugin-system/markdown/markdownplugin.h \
             src/plugin-system/filesystem/filesystemsidebar.h \
-            src/plugin-system/filesystem/filesystemplugin.h
+            src/plugin-system/filesystem/filesystemplugin.h \
+    src/gui/sidebars/basesidebar.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -368,7 +368,6 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/uchardet/nsUniversalDetector.cpp \
             src/uchardet/nsUTF8Prober.cpp \
             src/uchardet/uchardet.cpp \
-            src/gui/sidebars/dockwidget.cpp \
             src/gui/sidebars/outputsidebar.cpp \
             src/gui/sidebars/findresultssidebar.cpp \
             src/gui/sidebars/findresultsmodel.cpp \
@@ -379,7 +378,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/plugin-system/pluginfactory.cpp \
             src/plugin-system/markdown/markdownplugin.cpp \
             src/plugin-system/filesystem/filesystemsidebar.cpp \
-            src/plugin-system/filesystem/filesystemplugin.cpp
+            src/plugin-system/filesystem/filesystemplugin.cpp \
+    src/gui/sidebars/basesidebar.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

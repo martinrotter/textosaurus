@@ -3,12 +3,12 @@
 #ifndef MARKDOWNSIDEBAR_H
 #define MARKDOWNSIDEBAR_H
 
-#include "gui/sidebars/dockwidget.h"
+#include "gui/sidebars/basesidebar.h"
 
 class TextApplication;
 class QTextBrowser;
 
-class MarkdownSidebar : public DockWidget {
+class MarkdownSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:

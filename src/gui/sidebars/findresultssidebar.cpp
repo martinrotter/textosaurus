@@ -10,7 +10,7 @@
 #include <QTreeView>
 
 FindResultsSidebar::FindResultsSidebar(TextApplication* app, QWidget* parent)
-  : DockWidget(app, parent) {
+  : BaseSidebar(app, parent) {
   setWindowTitle(tr("Find Results"));
   setObjectName(QSL("m_sidebarFindResults"));
 }

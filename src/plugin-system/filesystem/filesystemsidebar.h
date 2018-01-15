@@ -3,7 +3,7 @@
 #ifndef FILESYSTEMSIDEBAR_H
 #define FILESYSTEMSIDEBAR_H
 
-#include "src/gui/sidebars/dockwidget.h"
+#include "src/gui/sidebars/basesidebar.h"
 
 #include <QFileSystemModel>
 #include <QListWidget>
@@ -32,7 +32,7 @@ class FavoritesListWidget : public QListWidget {
 
 class TextApplication;
 
-class FilesystemSidebar : public DockWidget {
+class FilesystemSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:

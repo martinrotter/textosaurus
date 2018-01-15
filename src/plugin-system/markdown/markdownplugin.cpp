@@ -11,6 +11,6 @@ QString MarkdownPlugin::name() const {
   return QSL("Markdown");
 }
 
-QList<DockWidget*> MarkdownPlugin::sidebars() const {
-  return QList<DockWidget*>() << new MarkdownSidebar(m_textApp, nullptr);
+QList<BaseSidebar*> MarkdownPlugin::sidebars() const {
+  return QList<BaseSidebar*>() << new MarkdownSidebar(m_textApp, nullptr);
 }

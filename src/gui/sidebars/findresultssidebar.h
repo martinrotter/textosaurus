@@ -3,7 +3,7 @@
 #ifndef FINDRESULTSSIDEBAR_H
 #define FINDRESULTSSIDEBAR_H
 
-#include "gui/sidebars/dockwidget.h"
+#include "gui/sidebars/basesidebar.h"
 
 #include <QAbstractListModel>
 
@@ -13,7 +13,7 @@ class TextApplication;
 class FindResultsModel;
 class QTreeView;
 
-class FindResultsSidebar : public DockWidget {
+class FindResultsSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:

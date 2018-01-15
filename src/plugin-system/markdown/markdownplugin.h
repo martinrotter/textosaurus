@@ -16,7 +16,7 @@ class MarkdownPlugin : public QObject, public PluginBase {
     explicit MarkdownPlugin(QObject* parent = nullptr);
 
     virtual QString name() const override;
-    virtual QList<DockWidget*> sidebars() const override;
+    virtual QList<BaseSidebar*> sidebars() const override;
 };
 
 #endif // MARKDOWNPLUGIN_H

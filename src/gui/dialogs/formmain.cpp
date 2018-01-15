@@ -30,7 +30,6 @@
 
 FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
-
   qApp->setMainForm(this);
 
   setCentralWidget(m_tabEditors = new TabWidget(this));
@@ -43,13 +42,8 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
 
   qApp->textApplication()->setMainForm(this);
 
-  // Prepare main window and tabs.
   prepareMenus();
-
-  // Establish connections.
   createConnections();
-
-  // Setup some appearance of the window.
   setupIcons();
   loadSize();
 }

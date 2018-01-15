@@ -15,7 +15,7 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-FilesystemSidebar::FilesystemSidebar(TextApplication* text_app, QWidget* parent) : DockWidget(text_app, parent), m_fsModel(nullptr) {
+FilesystemSidebar::FilesystemSidebar(TextApplication* text_app, QWidget* parent) : BaseSidebar(text_app, parent), m_fsModel(nullptr) {
   setWindowTitle(tr("Filesystem"));
   setObjectName(QSL("m_sidebarFilesystem"));
 

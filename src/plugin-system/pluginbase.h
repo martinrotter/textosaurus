@@ -5,7 +5,7 @@
 
 #include <QObject>
 
-#include "gui/sidebars/dockwidget.h"
+#include "gui/sidebars/basesidebar.h"
 
 class TextApplication;
 
@@ -15,7 +15,7 @@ class PluginBase {
     virtual ~PluginBase() = default;
 
     virtual QString name() const = 0;
-    virtual QList<DockWidget*> sidebars() const = 0;
+    virtual QList<BaseSidebar*> sidebars() const = 0;
 
     void setTextApp(TextApplication* text_app);
 

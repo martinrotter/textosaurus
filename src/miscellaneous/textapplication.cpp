@@ -31,9 +31,14 @@
 
 TextApplication::TextApplication(QObject* parent)
   : QObject(parent), m_settings(new TextApplicationSettings(this)), m_findReplaceDialog(nullptr) {
+  m_outputSidebar = new OutputSidebar(this, nullptr);
+  m_actionShowOutputSidebar = m_outputSidebar->generateAction();
+
+  m_findResultsSidebar = new FindResultsSidebar(this, nullptr);
+  m_actionShowFindResultsSidebar = m_findResultsSidebar->generateAction();
+
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
-
   settings()->pluginFactory()->loadPlugins(this);
 }
 
@@ -391,12 +396,6 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_tabEditors = main_form->tabWidget();
   m_statusBar = main_form->statusBar();
 
-  m_outputSidebar = new OutputSidebar(this, m_mainForm);
-  m_outputSidebar->setObjectName(QSL("m_outputSidebar"));
-
-  m_findResultsSidebar = new FindResultsSidebar(this, m_mainForm);
-  m_findResultsSidebar->setObjectName(QSL("m_findResultsSidebar"));
-
   // Get pointers to editor-related global actions/menus.
   m_actionNoAction = m_mainForm->m_ui.m_actionNoActions;
   m_actionFileNew = m_mainForm->m_ui.m_actionFileNew;
@@ -452,6 +451,10 @@ void TextApplication::setMainForm(FormMain* main_form) {
   createConnections();
 }
 
+QList<QAction*> TextApplication::miscUserActions() const {
+  return QList<QAction*>() << m_actionShowFindResultsSidebar << m_actionShowOutputSidebar;
+}
+
 void TextApplication::loadState() {
   m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
   m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
@@ -470,25 +473,11 @@ void TextApplication::loadState() {
   m_mainForm->setCorner(Qt::Corner::TopLeftCorner, Qt::DockWidgetArea::LeftDockWidgetArea);
   m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
 
-  // We load sidebars (built-in and from "plugins").
-  QList<DockWidget*> sidebars;
-  sidebars << m_outputSidebar << m_findResultsSidebar << m_settings->pluginFactory()->sidebars();
+  // We load plugins etc.
+  settings()->pluginFactory()->hookPluginsIntoApplication(this);
 
-  hookSidebars(sidebars);
-  m_settings->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
-}
-
-void TextApplication::hookSidebars(const QList<DockWidget*>& sidebars) {
-  for (DockWidget* sidebar : sidebars) {
-    QAction* act_show = new QAction(sidebar->windowTitle(), this);
-
-    act_show->setCheckable(true);
-
-    connect(sidebar, &DockWidget::visibilityChanged, act_show, &QAction::toggle);
-    connect(act_show, &QAction::triggered, sidebar, &DockWidget::switchVisibility);
-
-    m_menuDockWidgets->addAction(act_show);
-  }
+  QList<BaseSidebar*> sidebars; sidebars << m_outputSidebar << m_findResultsSidebar << settings()->pluginFactory()->sidebars();
+  settings()->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
 }
 
 void TextApplication::quit(bool* ok) {

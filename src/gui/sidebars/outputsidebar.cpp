@@ -15,7 +15,7 @@
 #include <QTextBrowser>
 
 OutputSidebar::OutputSidebar(TextApplication* text_app, QWidget* parent)
-  : DockWidget(text_app, parent), m_currentLevel(QMessageBox::Icon::Information),
+  : BaseSidebar(text_app, parent), m_currentLevel(QMessageBox::Icon::Information),
   m_txtOutput(nullptr) {
   setWindowTitle(tr("Output"));
   setObjectName(QSL("m_sidebarOutput"));
