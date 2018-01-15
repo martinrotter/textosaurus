@@ -1,5 +1,7 @@
 2018.01.XX
 ----------
+**This release has some backwards-incompatible changes, some of your settings (favorite items in FS sidebars) might be lost.**
+
 Added:
 * Plugins now can register actions which can be assigned to keyboard shortcuts.
 * Added missing license for [Hoedown](https://github.com/hoedown/hoedown) component.
