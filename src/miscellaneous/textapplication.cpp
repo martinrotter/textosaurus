@@ -478,9 +478,11 @@ void TextApplication::loadState() {
   // We load plugins etc.
   settings()->pluginFactory()->hookPluginsIntoApplication(this);
 
+  // We add built-in sidebars.
   m_menuDockWidgets->addAction(m_actionShowFindResultsSidebar);
   m_menuDockWidgets->addAction(m_actionShowOutputSidebar);
 
+  // We load GUI state of all sidebars.
   QList<BaseSidebar*> sidebars; sidebars << m_outputSidebar << m_findResultsSidebar << settings()->pluginFactory()->sidebars();
   settings()->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
 }

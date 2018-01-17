@@ -1,10 +1,14 @@
-2018.01.XX
+2018.01.17
 ----------
 **This release has some backwards-incompatible changes, some of your settings (favorite items in FS sidebars) might be lost.**
 
 Added:
 * Plugins now can register actions which can be assigned to keyboard shortcuts.
 * Added missing license for [Hoedown](https://github.com/hoedown/hoedown) component.
+
+Fixed:
+* Some problems regarding "Markdown Preview" plugin.
+* Bad formatting in "Output" sidebar.
 
 2018.01.11
 ----------
