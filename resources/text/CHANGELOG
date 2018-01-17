@@ -1,3 +1,8 @@
+2018.01.XX
+----------
+Added:
+* "Markdown Preview" has clickable hyperlinks.
+
 2018.01.17
 ----------
 **This release has some backwards-incompatible changes, some of your settings (favorite items in FS sidebars) might be lost.**

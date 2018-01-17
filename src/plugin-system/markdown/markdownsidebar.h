@@ -7,7 +7,7 @@
 
 class TextApplication;
 class MarkdownPlugin;
-class QTextBrowser;
+class MarkdownTextBrowser;
 
 class MarkdownSidebar : public BaseSidebar {
   Q_OBJECT
@@ -30,7 +30,7 @@ class MarkdownSidebar : public BaseSidebar {
     QString convertMarkdownToHtml(const uint8_t* raw_utf8_data);
 
   private:
-    QTextBrowser* m_txtPreview;
+    MarkdownTextBrowser* m_txtPreview;
     QAction* m_actionRefreshPreview;
 };
 

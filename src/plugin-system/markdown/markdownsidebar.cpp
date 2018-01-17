@@ -7,6 +7,8 @@
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/textapplication.h"
+#include "network-web/webfactory.h"
+#include "plugin-system/markdown/markdowntextbrowser.h"
 
 #include "3rd-party/hoedown/hdocument.h"
 #include "3rd-party/hoedown/html.h"
@@ -46,23 +48,29 @@ void MarkdownSidebar::refreshPreview() {
   TextEditor* editor = m_textApp->currentEditor();
 
   if (editor != nullptr) {
-    m_txtPreview->setText(convertMarkdownToHtml((const uint8_t*)editor->characterPointer()));
+    m_txtPreview->setMarkdownDocument(QFileInfo(editor->filePath()).absolutePath(),
+                                      convertMarkdownToHtml((const uint8_t*)editor->characterPointer()));
   }
   else {
-    m_txtPreview->clear();
+    m_txtPreview->clearMarkdownDocument();
   }
 }
 
 void MarkdownSidebar::load() {
   if (m_txtPreview == nullptr) {
-    m_txtPreview = new QTextBrowser(this);
+    m_txtPreview = new MarkdownTextBrowser(this);
     m_txtPreview->setPlaceholderText(tr("This sidebar displays simple HTML preview of your Markdown source..."));
     m_txtPreview->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     m_txtPreview->setWordWrapMode(QTextOption::WrapMode::WrapAnywhere);
     m_txtPreview->setReadOnly(true);
+    m_txtPreview->setUndoRedoEnabled(false);
     m_txtPreview->setObjectName(QSL("m_txtPreview"));
     m_txtPreview->setOpenExternalLinks(false);
     m_txtPreview->setOpenLinks(false);
+
+    connect(m_txtPreview, &QTextBrowser::anchorClicked, this, [this](const QUrl& url) {
+      qApp->web()->openUrlInExternalBrowser(url.toString());
+    });
 
     QWidget* widget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(widget);
@@ -70,6 +78,7 @@ void MarkdownSidebar::load() {
 
     tool_bar->addAction(m_actionRefreshPreview);
     tool_bar->setIconSize(QSize(16, 16));
+
     layout->setMargin(0);
     layout->addWidget(tool_bar);
     layout->addWidget(m_txtPreview, 1);
