@@ -29,10 +29,20 @@ void OutputSidebar::displayOutput(OutputSource source, const QString& message, Q
   raise();
 
   if (level != m_currentLevel) {
+    QTextCursor cursor = m_txtOutput->textCursor();
+
+    cursor.movePosition(QTextCursor::MoveOperation::End, QTextCursor::MoveMode::MoveAnchor);
+    m_txtOutput->setTextCursor(cursor);
+
     QColor target_color = colorForLevel(level);
     QTextCharFormat c = m_txtOutput->currentCharFormat();
 
+    c.setAnchor(false);
+    c.setAnchorHref(QString());
+    c.setAnchorName(QString());
     c.setForeground(target_color);
+    c.setUnderlineStyle(QTextCharFormat::UnderlineStyle::NoUnderline);
+
     m_txtOutput->setCurrentCharFormat(c);
     m_currentLevel = level;
   }
