@@ -121,17 +121,6 @@ CONFIG *= c++14 warn_on
 DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
 VERSION = $$APP_VERSION
 
-win32 {
-  # Makes sure we use correct subsystem on Windows.
-  !contains(QMAKE_TARGET.arch, x86_64) {
-    message($$MSG_PREFIX: Compilling x86 variant.)
-    QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
-  } else {
-    message($$MSG_PREFIX: Compilling x86_64 variant.)
-    QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
-  }
-}
-
 # Setup specific compiler options.
 CONFIG(release, debug|release) {
   gcc:QMAKE_CXXFLAGS_RELEASE += -O3
