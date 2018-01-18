@@ -426,7 +426,6 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_menuEdit = m_mainForm->m_ui.m_menuEdit;
   m_menuViewInvisibles = m_mainForm->m_ui.m_menuViewInvisibles;
   m_menuDockWidgets = m_mainForm->m_ui.m_menuDockWidgets;
-  m_menuSearch = m_mainForm->m_ui.m_menuSearch;
   m_menuFileSaveWithEncoding = m_mainForm->m_ui.m_menuFileSaveWithEncoding;
   m_menuFileOpenWithEncoding = m_mainForm->m_ui.m_menuFileOpenWithEncoding;
   m_menuFileReopenWithEncoding = m_mainForm->m_ui.m_menuFileReopenWithEncoding;
@@ -835,6 +834,8 @@ void TextApplication::loadNewExternalTools() {
 
   // Load also edit menu.
   m_menuEdit->clear();
+  m_menuEdit->addAction(m_actionFindReplace);
+  m_menuEdit->addSeparator();
   m_menuEdit->addAction(m_actionEditBack);
   m_menuEdit->addAction(m_actionEditForward);
   m_menuEdit->addSeparator();

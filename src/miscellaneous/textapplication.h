@@ -167,7 +167,6 @@ class TextApplication : public QObject {
     QMenu* m_menuView;
     QMenu* m_menuViewInvisibles;
     QMenu* m_menuTools;
-    QMenu* m_menuSearch;
     QMenu* m_menuRecentFiles;
     QMenu* m_menuLanguage;
     QMenu* m_menuEncoding;

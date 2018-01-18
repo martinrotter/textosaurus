@@ -170,16 +170,12 @@
      <addaction name="m_actionEolConvertUnix"/>
      <addaction name="m_actionEolConvertWindows"/>
     </widget>
+    <addaction name="m_actionFindReplace"/>
+    <addaction name="separator"/>
     <addaction name="m_actionEditBack"/>
     <addaction name="m_actionEditForward"/>
     <addaction name="separator"/>
     <addaction name="m_menuEolConversion"/>
-   </widget>
-   <widget class="QMenu" name="m_menuSearch">
-    <property name="title">
-     <string>&amp;Search</string>
-    </property>
-    <addaction name="m_actionFindReplace"/>
    </widget>
    <widget class="QMenu" name="m_menuLanguage">
     <property name="title">
@@ -193,10 +189,9 @@
    </widget>
    <addaction name="m_menuFile"/>
    <addaction name="m_menuEdit"/>
-   <addaction name="m_menuSearch"/>
+   <addaction name="m_menuView"/>
    <addaction name="m_menuLanguage"/>
    <addaction name="m_menuEncoding"/>
-   <addaction name="m_menuView"/>
    <addaction name="m_menuWebBrowserTabs"/>
    <addaction name="m_menuTools"/>
    <addaction name="m_menuHelp"/>
