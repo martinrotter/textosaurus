@@ -23,7 +23,7 @@ QAction* BaseSidebar::generateAction() {
   act_show->setObjectName(QString("m_actionShow") + windowTitle().replace(QSL(" "), QSL("")));
   act_show->setCheckable(true);
 
-  connect(this, &BaseSidebar::visibilityChanged, act_show, &QAction::toggle);
+  connect(this, &BaseSidebar::visibilityChanged, act_show, &QAction::setChecked);
   connect(act_show, &QAction::triggered, this, &BaseSidebar::switchVisibility);
 
   return act_show;

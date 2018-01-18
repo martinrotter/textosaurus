@@ -1,5 +1,8 @@
 2018.01.XX
 ----------
+Fixed:
+* Invalid synchronization between sidebar visibility and assigned "View/Sidebars" menu item.
+
 Added:
 * "Markdown Preview" has clickable hyperlinks.
 

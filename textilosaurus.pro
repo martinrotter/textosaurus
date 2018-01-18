@@ -118,6 +118,7 @@ message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 QT *= core gui widgets network printsupport svg
 
 CONFIG *= c++14 warn_on
+CONFIG -=  debug_and_release
 DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
 VERSION = $$APP_VERSION
 
