@@ -124,12 +124,12 @@ VERSION = $$APP_VERSION
 
 # Setup specific compiler options.
 CONFIG(release, debug|release) {
-  gcc:QMAKE_CXXFLAGS_RELEASE += -O3
-  clang:QMAKE_CXXFLAGS_RELEASE += -O3
+  gcc:QMAKE_CXXFLAGS_RELEASE *= -O3 -oFast
+  clang:QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 else {
-  gcc:QMAKE_CXXFLAGS_DEBUG += -Wall
-  clang:QMAKE_CXXFLAGS_DEBUG += -Wall
+  gcc:QMAKE_CXXFLAGS_DEBUG *= -Wall
+  clang:QMAKE_CXXFLAGS_DEBUG *= -Wall
 }
 
 DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
