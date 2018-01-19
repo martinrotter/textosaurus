@@ -321,10 +321,6 @@ SOURCES += $$files(src/3rd-party/uchardet/*.cpp, false)
 HEADERS  += $$files(src/3rd-party/uchardet/*.h, false)
 
 # Add Scintilla.
-win32 {
-  QMAKE_CXXFLAGS += -std:c++latest
-}
-
 SOURCES += \
     src/3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.cpp \
     src/3rd-party/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp \
@@ -455,28 +451,19 @@ win32 {
   QMAKE_EXTRA_TARGETS += windows_all
 }
 
-# Install all files on Windows.
+# Install all Mingw64 files on Windows.
 win32 {
   target.path = $$PREFIX
 
-  qt_dlls_root.files =  resources/binaries/qt/windows/qt5-msvc2015/libeay32.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/msvcp140.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/qt.conf \
-                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Core.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Gui.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Widgets.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Network.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/Qt5Svg.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/ssleay32.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015/vcruntime140.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015-webengine/Qt5PrintSupport.dll \
-                        resources/binaries/qt/windows/qt5-msvc2015-webengine/printsupport
+  qt_dlls_root.files =  resources/binaries/qt/windows/qt5-mingw64/*.dll
   qt_dlls_root.path = $$quote($$PREFIX/)
 
-  qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-msvc2015/bearer \
-                            resources/binaries/qt/windows/qt5-msvc2015/iconengines \
-                            resources/binaries/qt/windows/qt5-msvc2015/imageformats \
-                            resources/binaries/qt/windows/qt5-msvc2015/platforms
+  qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-mingw64/bearer \
+                            resources/binaries/qt/windows/qt5-mingw64/iconengines \
+                            resources/binaries/qt/windows/qt5-mingw64/imageformats \
+                            resources/binaries/qt/windows/qt5-mingw64/platforms \
+                            resources/binaries/qt/windows/qt5-mingw64/printsupport \
+                            resources/binaries/qt/windows/qt5-mingw64/styles
   qt_dlls_plugins.path = $$quote($$PREFIX/)
 
   INSTALLS += target qt_dlls_root qt_dlls_plugins

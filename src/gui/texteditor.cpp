@@ -524,7 +524,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
 void TextEditor::reloadFromDisk() {
   if (!filePath().isEmpty()) {
     if (modify()) {
-      int answer = QMessageBox::question(qApp->mainFormWidget(), tr("Unsaved changes"),
+      int answer = QMessageBox::question(qApp->mainFormWidget(), tr("Unsaved Changes"),
                                          tr("File '%1' was externally changed, do you want to reload "
                                             "it from disk and discard any unsaved changes?"),
                                          QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
@@ -727,7 +727,7 @@ void TextEditor::closeEditor(bool* ok) {
 
     // We need to save.
     QMessageBox::StandardButton response = QMessageBox::question(qApp->mainFormWidget(),
-                                                                 tr("Unsaved changes"),
+                                                                 tr("Unsaved Changes"),
                                                                  tr("This document has unsaved changes, do you want to save them?"),
                                                                  QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
                                                                  QMessageBox::Save);
