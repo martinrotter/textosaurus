@@ -2,6 +2,8 @@ $OutputEncoding = New-Object -typename System.Text.UTF8Encoding
 chcp 65001
 $OutputEncoding
 
+cd C:\textilosaurus\textilosaurus-build
+
 git clone -q --depth=1 https://github.com/martinrotter/textilosaurus.wiki.git C:\textilosaurus-wiki
 git config --global credential.helper store
 Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"

@@ -34,4 +34,4 @@ build_script:
   - C:\msys64\usr\bin\bash.exe --login "C:\textilosaurus\resources\scripts\.appveyor-build-win.sh"
 
 on_success:
-  - ps: .\..\resources\scripts\.appveyor-install-win.ps1
+  - ps: C:\textilosaurus\resources\scripts\.appveyor-install-win.ps1
