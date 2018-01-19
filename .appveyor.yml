@@ -31,6 +31,6 @@ deploy:
     
 build_script:
   - git submodule update --init --recursive
-  - C:\msys64\msys2_shell.cmd -mingw64 "C:\textilosaurus\resources\scripts\.appveyor-prepare-win.sh"
+  - C:\msys64\usr\bin\bash.exe --login "C:\textilosaurus\resources\scripts\.appveyor-prepare-win.sh"
   - mkdir textilosaurus-build
   - cd textilosaurus-build
