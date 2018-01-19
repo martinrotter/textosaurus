@@ -7,7 +7,6 @@ clone_folder: C:\textilosaurus
 environment:
   QTDIR: 'C:\msys64\mingw64\share\qt5'
   QMAKESPEC: win32-g++
-  COMPILERBAT: '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"'
   access_token:
     secure: bM8uJbH7GK+2EW6aL8D0/qwwdM/lzW6y2odXWs/VcMq+nUBZa68x+k3EpZEAo6iT
 
