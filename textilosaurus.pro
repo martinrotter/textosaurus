@@ -415,6 +415,19 @@ qtPrepareTool(LRELEASE, lrelease) {
   system($$LRELEASE_EXECUTABLE -compress textilosaurus.pro)
 }
 
+static {
+  message($$MSG_PREFIX: Building static version of application.)
+
+  QTPLUGIN.iconengines = qsvgicon
+  QTPLUGIN.platforms = qminimal qwindows
+  QTPLUGIN.imageformats = qgif qicns qico qjp2 qjpeg qsvg qtga qtiff qwbmp qwebp
+  QTPLUGIN.printsupport = windowsprintersupport
+  QTPLUGIN.styles = qwindowsvistastyle
+}
+else {
+  message($$MSG_PREFIX: Building shared version of application.)
+}
+
 # Create new "make 7zip" target and "make zip" target.
 win32 {
   seven_zip.target = 7zip
@@ -460,18 +473,24 @@ win32 {
 win32 {
   target.path = $$PREFIX
 
-  qt_dlls_root.files =  resources/binaries/qt/windows/qt5-mingw64/*.dll
-  qt_dlls_root.path = $$quote($$PREFIX/)
+  INSTALLS += target
 
-  qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-mingw64/bearer \
-                            resources/binaries/qt/windows/qt5-mingw64/iconengines \
-                            resources/binaries/qt/windows/qt5-mingw64/imageformats \
-                            resources/binaries/qt/windows/qt5-mingw64/platforms \
-                            resources/binaries/qt/windows/qt5-mingw64/printsupport \
-                            resources/binaries/qt/windows/qt5-mingw64/styles
-  qt_dlls_plugins.path = $$quote($$PREFIX/)
+  !static {
+    message($$MSG_PREFIX: Deploying Windows/MinGW DLLs.)
 
-  INSTALLS += target qt_dlls_root qt_dlls_plugins
+    qt_dlls_root.files =  resources/binaries/qt/windows/qt5-mingw64/*.dll
+    qt_dlls_root.path = $$quote($$PREFIX/)
+
+    qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-mingw64/bearer \
+                              resources/binaries/qt/windows/qt5-mingw64/iconengines \
+                              resources/binaries/qt/windows/qt5-mingw64/imageformats \
+                              resources/binaries/qt/windows/qt5-mingw64/platforms \
+                              resources/binaries/qt/windows/qt5-mingw64/printsupport \
+                              resources/binaries/qt/windows/qt5-mingw64/styles
+    qt_dlls_plugins.path = $$quote($$PREFIX/)
+
+    INSTALLS += qt_dlls_root qt_dlls_plugins
+  }
 }
 
 # Install all files on Linux.
