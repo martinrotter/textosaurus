@@ -5,7 +5,7 @@ clone_depth: 1
 clone_folder: C:\textilosaurus
 
 environment:
-  QTDIR: 'C:\Qt\5.9\msvc2017_64'
+  QTDIR: 'C:\msys64\mingw64\share\qt5'
   QMAKESPEC: win32-g++
   COMPILERBAT: '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"'
   access_token:
@@ -32,5 +32,7 @@ deploy:
 build_script:
   - git submodule update --init --recursive
   - C:\msys64\usr\bin\bash.exe --login "C:\textilosaurus\resources\scripts\.appveyor-prepare-win.sh"
-  - mkdir textilosaurus-build
-  - cd textilosaurus-build
+  - C:\msys64\usr\bin\bash.exe --login "C:\textilosaurus\resources\scripts\.appveyor-build-win.sh"
+
+on_success:
+  - ps: .\..\resources\scripts\.appveyor-install-win.ps1
