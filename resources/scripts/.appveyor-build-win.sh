@@ -1,5 +1,5 @@
 #!/bin/bash
-PATH="/mingw64/bin:$PATH"
+PATH="/mingw64/qt5-static/bin:/mingw64/bin:$PATH"
 
 cd "/c/textilosaurus"
 mkdir "textilosaurus-build"
