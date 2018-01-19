@@ -4,6 +4,7 @@ Fixed:
 * Invalid synchronization between sidebar visibility and assigned "View/Sidebars" menu item.
 
 Added:
+* Prebuilt binaries for Windows now use MinGW-w64 toolchain, which is completely FOSS. MVC++ runtime libraries are no longed needed.
 * "Markdown Preview" has clickable hyperlinks.
 
 2018.01.17
