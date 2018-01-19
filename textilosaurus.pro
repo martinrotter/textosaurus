@@ -124,10 +124,14 @@ VERSION = $$APP_VERSION
 
 # Setup specific compiler options.
 CONFIG(release, debug|release) {
-  gcc:QMAKE_CXXFLAGS_RELEASE *= -O3 -oFast
+  #gcc:QMAKE_LFLAGS_RELEASE *=
+  #clang:QMAKE_LFLAGS_RELEASE *=
+  gcc:QMAKE_CXXFLAGS_RELEASE *= -O3
   clang:QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 else {
+  #gcc:QMAKE_LFLAGS_DEBUG *=
+  #clang:QMAKE_LFLAGS_DEBUG *=
   gcc:QMAKE_CXXFLAGS_DEBUG *= -Wall
   clang:QMAKE_CXXFLAGS_DEBUG *= -Wall
 }
