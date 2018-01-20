@@ -5,7 +5,7 @@ Fixed:
 
 Added:
 * Line number column is initially wider.
-* Prebuilt binaries for Windows now use MinGW-w64 toolchain, which is completely FOSS. MVC++ runtime libraries are no longed needed. Linkage of dependencies is completely static, making Textilosaurus deployment easier, as it now consists of single executable file and that's it.
+* Prebuilt binaries for Windows now use MinGW-w64 toolchain, which is completely FOSS. MSVC++ runtime libraries are no longed needed. Linkage of dependencies is completely static, making Textilosaurus deployment easier, as it now consists of single executable file and that's it.
 * "Markdown Preview" has clickable hyperlinks.
 
 2018.01.17
