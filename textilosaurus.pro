@@ -46,7 +46,6 @@ APP_USERAGENT                 = "Textilosaurus/$$APP_VERSION (github.com/martinr
 APP_DONATE_URL                = "https://liberapay.com/martinrotter"
 APP_WIN_ARCH                  = "win64"
 
-
 message($$MSG_PREFIX: Welcome to $$APP_NAME qmake script.)
 
 lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 6) {
