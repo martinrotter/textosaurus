@@ -5,7 +5,7 @@
     <name>Application</name>
     <message>
         <source>Application is already running.</source>
-        <translation>Application is already running</translation>
+        <translation type="vanished">Application is already running</translation>
     </message>
 </context>
 <context>
@@ -125,6 +125,260 @@ Click here to open parent directory.</translation>
     </message>
 </context>
 <context>
+    <name>ExternalTools</name>
+    <message>
+        <source>&amp;DateTime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert &amp;DateTime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert &amp;Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert &amp;Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert &amp;DateTime (Custom Format)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;JSON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JSON &amp;Beautify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JSON &amp;Minify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;XML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Check XML syntax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML &amp;Beautify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML &amp;Linearize/Minfy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;MIME tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text → &amp;Base64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text → &amp;Base64Url</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text → &amp;HTML escaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text → &amp;URL encoded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Text Case Conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to &amp;lower case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TO &amp;UPPER CASE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To &amp;sentence case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To &amp;Title Case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Invert case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Base64 → text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Base64Url → text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;URL encoded → text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Upload to...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload to &amp;clbin.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload to &amp;hastebin.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload to &amp;github.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload to &amp;ix.io</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload to &amp;sprunge.us</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bash (external tool examples)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Python (external tool examples)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SHA256 sum of selected/all text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse current line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter sequence bounds (for example &quot;0 10&quot;):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate sequence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Python code:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run Python code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter number of lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate garbage text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Bash code:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run Bash code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool &apos;%1&apos; is already running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter input for external tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot deliver output of external tool, assigned text editor no longer exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool &apos;%1&apos; finished, output copied to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool &apos;%1&apos; finished, opening output in new tab.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool &apos;%1&apos; finished with error(s)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool &apos;%1&apos; finished successfully...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesListWidget</name>
+    <message>
+        <source> (N/A)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FilesystemSidebar</name>
+    <message>
+        <source>Filesystem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to parent folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add selected item to favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FindResultsModelItemEditor</name>
+    <message>
+        <source>&lt;editor-closed&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n result(s) - </source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>&lt;unnamed-document</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FindResultsSidebar</name>
+    <message>
+        <source>Find Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FormAbout</name>
     <message>
         <source>Information</source>
@@ -136,7 +390,7 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>GNU GPL License (applies to RSS Guard source code)</source>
-        <translation>GNU GPL License (applies to RSS Guard source code)</translation>
+        <translation type="vanished">GNU GPL License (applies to RSS Guard source code)</translation>
     </message>
     <message>
         <source>GNU GPL License</source>
@@ -184,14 +438,124 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>&lt;b&gt;%8&lt;/b&gt;&lt;br&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)&lt;br&gt;</source>
-        <translation>&lt;b&gt;%8&lt;/b&gt;&lt;br&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)&lt;br&gt;</translation>
+        <translation type="vanished">&lt;b&gt;%8&lt;/b&gt;&lt;br&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)&lt;br&gt;</translation>
     </message>
     <message>
         <source>NOT portable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and QScintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</source>
+        <source>GNU GPL License (Textilosaurus source code)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mozilla Public License (uchardet source code)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISC License (Hoedown source code)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and Scintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FormFindReplace</name>
+    <message>
+        <source>Find and Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match whole words only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Find Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find &amp;Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Replace Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case-sensitive search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phrase to search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace with</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace string</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count: %1 matches.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>Replaced %n occurrence(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Nothing found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find the text &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -223,19 +587,19 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Quit the application.</source>
-        <translation>Quit the application.</translation>
+        <translation type="vanished">Quit the application.</translation>
     </message>
     <message>
         <source>Display settings of the application.</source>
-        <translation>Display settings of the application.</translation>
+        <translation type="vanished">Display settings of the application.</translation>
     </message>
     <message>
         <source>Switch fullscreen mode.</source>
-        <translation>Switch fullscreen mode.</translation>
+        <translation type="vanished">Switch fullscreen mode.</translation>
     </message>
     <message>
         <source>No actions available</source>
-        <translation>No actions available</translation>
+        <translation type="vanished">No actions available</translation>
     </message>
     <message>
         <source>No actions are available right now.</source>
@@ -247,15 +611,15 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Check if new update for the application is available for download.</source>
-        <translation>Check if new update for the application is available for download.</translation>
+        <translation type="vanished">Check if new update for the application is available for download.</translation>
     </message>
     <message>
         <source>&amp;About application</source>
-        <translation>&amp;About application</translation>
+        <translation type="vanished">&amp;About application</translation>
     </message>
     <message>
         <source>Displays extra info about this application.</source>
-        <translation>Displays extra info about this application.</translation>
+        <translation type="vanished">Displays extra info about this application.</translation>
     </message>
     <message>
         <source>Hides or displays the main menu.</source>
@@ -263,7 +627,7 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Check for &amp;updates</source>
-        <translation>Check for &amp;updates</translation>
+        <translation type="vanished">Check for &amp;updates</translation>
     </message>
     <message>
         <source>Show/hide</source>
@@ -275,11 +639,11 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Switch visibility of main &amp;window</source>
-        <translation>Switch visibility of main &amp;window</translation>
+        <translation type="vanished">Switch visibility of main &amp;window</translation>
     </message>
     <message>
         <source>Cannot open external browser</source>
-        <translation>Cannot open external browser</translation>
+        <translation type="vanished">Cannot open external browser</translation>
     </message>
     <message>
         <source>Cannot open external browser. Navigate to application website manually.</source>
@@ -287,7 +651,7 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Display &amp;wiki</source>
-        <translation>Display &amp;wiki</translation>
+        <translation type="vanished">Display &amp;wiki</translation>
     </message>
     <message>
         <source>&amp;Downloads</source>
@@ -299,19 +663,15 @@ Click here to open parent directory.</translation>
     </message>
     <message>
         <source>Report a &amp;bug...</source>
-        <translation>Report a &amp;bug...</translation>
+        <translation type="vanished">Report a &amp;bug...</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation>Close all tabs</translation>
+        <translation type="vanished">Close all tabs</translation>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation>Close all tabs except current</translation>
-    </message>
-    <message>
-        <source>View &amp;fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Close all tabs except current</translation>
     </message>
     <message>
         <source>Tabs</source>
@@ -322,31 +682,7 @@ Click here to open parent directory.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Go to &amp;next tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to &amp;previous tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch visibility of toolbar.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Donate...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save file with encoding...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open file with encoding...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UI elements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -358,43 +694,211 @@ Click here to open parent directory.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View &amp;toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View &amp;statusbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Open file...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save file as...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save all files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close all &amp;saved tabs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save File with Encoding...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open File with Encoding...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Recent Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reopen File with Encoding...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;UI Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This does not convert existing EOLs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;EOL Mode (does not convert existing EOLs)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Invisible Characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Sidebars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Converts existing EOLs and sets mode for new EOLs.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;EOL Conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Encoding</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About Application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Actions Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch Visibility of Main &amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for &amp;Updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report a &amp;Bug...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display &amp;Wiki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Statusbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close &amp;All Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close All Tabs &amp;Except Current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to &amp;Next Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to &amp;Previous Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save File as...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close All &amp;Unmodified Editors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;Unix (LF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;Windows (CRLF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;Mac (CR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Word Wrap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to &amp;Mac (CR)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to &amp;Unix (LF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to &amp;Windows (CRLF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display &amp;EOLs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display &amp;Whitespaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Find and Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Line Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reload From Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close Current Tab</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -489,7 +993,7 @@ currently installed one.</translation>
     </message>
     <message>
         <source>Cannot update application</source>
-        <translation>Cannot update application</translation>
+        <translation type="vanished">Cannot update application</translation>
     </message>
     <message>
         <source>Cannot navigate to installation file. Check new installation downloads manually on project website.</source>
@@ -538,10 +1042,6 @@ downloaded.</translation>
         <translation type="unfinished">Changelog</translation>
     </message>
     <message>
-        <source>Available files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Download selected update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,6 +1062,14 @@ downloaded.</translation>
 You can install it now.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Available Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot start installer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IOFactory</name>
@@ -572,6 +1080,25 @@ You can install it now.</source>
     <message>
         <source>Cannot open file &apos;%1&apos; for writting.</source>
         <translation>Cannot open file &apos;%1&apos; for writting.</translation>
+    </message>
+    <message>
+        <source>Cannot open temporary file for writting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MarkdownSidebar</name>
+    <message>
+        <source>Markdown Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh Markdown Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This sidebar displays simple HTML preview of your Markdown source...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -661,6 +1188,21 @@ You can install it now.</source>
         <extracomment>Network status.</extracomment>
         <translation>unknown content</translation>
     </message>
+    <message>
+        <source>invalid operation, maybe input is too big</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OutputSidebar</name>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This sidebar displays output of external tools and some other critical information...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -672,40 +1214,52 @@ You can install it now.</source>
     <message>
         <source>LANG_AUTHOR</source>
         <extracomment>Name of translator - optional.</extracomment>
-        <translation>Martin Rotter</translation>
+        <translation type="vanished">Martin Rotter</translation>
     </message>
     <message>
         <source>LANG_EMAIL</source>
-        <translation>rotter.martinos@gmail.com</translation>
+        <translation type="vanished">rotter.martinos@gmail.com</translation>
     </message>
     <message>
         <source>Welcome to %1.
 
 Please, check NEW stuff included in this
 version by clicking this popup notification.</source>
-        <translation>Welcome to %1.
+        <translation type="vanished">Welcome to %1.
 
 Please, check NEW stuff included in this
 version by clicking this popup notification.</translation>
     </message>
     <message>
         <source>Welcome to %1.</source>
-        <translation>Welcome to %1.</translation>
+        <translation type="vanished">Welcome to %1.</translation>
     </message>
     <message>
         <source>New version available</source>
-        <translation type="unfinished">New version available</translation>
+        <translation type="obsolete">New version available</translation>
     </message>
     <message>
         <source>Click the bubble for more information.</source>
-        <translation type="unfinished">Click the bubble for more information.</translation>
+        <translation type="obsolete">Click the bubble for more information.</translation>
+    </message>
+    <message>
+        <source>Parsing of JSON document failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML is well-formed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Welcome to %1. Click on me to check out NEW features.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsBrowserMail</name>
     <message>
         <source>External web browser</source>
-        <translation type="unfinished">External web browser</translation>
+        <translation type="obsolete">External web browser</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -713,7 +1267,7 @@ version by clicking this popup notification.</translation>
     </message>
     <message>
         <source>Use custom external web browser</source>
-        <translation type="unfinished">Use custom external web browser</translation>
+        <translation type="obsolete">Use custom external web browser</translation>
     </message>
     <message>
         <source>Web browser executable</source>
@@ -745,15 +1299,15 @@ version by clicking this popup notification.</translation>
     </message>
     <message>
         <source>Note that &quot;%1&quot; (without quotation marks) is placeholder for URL of selected message.</source>
-        <translation type="unfinished">Note that &quot;%1&quot; (without quotation marks) is placeholder for URL of selected message.</translation>
+        <translation type="obsolete">Note that &quot;%1&quot; (without quotation marks) is placeholder for URL of selected message.</translation>
     </message>
     <message>
         <source>External e-mail client</source>
-        <translation type="unfinished">External e-mail client</translation>
+        <translation type="obsolete">External e-mail client</translation>
     </message>
     <message>
         <source>Use custom external e-mail client</source>
-        <translation type="unfinished">Use custom external e-mail client</translation>
+        <translation type="obsolete">Use custom external e-mail client</translation>
     </message>
     <message>
         <source>E-mail client executable</source>
@@ -865,7 +1419,27 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Web browser &amp; e-mail &amp; proxy</source>
-        <translation type="unfinished">Web browser &amp; e-mail &amp; proxy</translation>
+        <translation type="obsolete">Web browser &amp; e-mail &amp; proxy</translation>
+    </message>
+    <message>
+        <source>External Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Custom External Web Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>External E-mail Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Custom External E-mail Client</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -904,6 +1478,192 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
 </context>
 <context>
+    <name>SettingsEditor</name>
+    <message>
+        <source>Indentation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indent with</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tab size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indent size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text editor font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line spacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>.LOG Feature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timestamp format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs</source>
+        <translation type="unfinished">Tabs</translation>
+    </message>
+    <message>
+        <source>Select new text editor main font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsExternalTools</name>
+    <message>
+        <source>Add new external tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove selected external tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full-blown script goes here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>External tool title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional category name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interpreter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interpreter for the script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It is generally better to have your interpreters available via your PATH environment variable, so that simply typing in &quot;bash&quot; or &quot;python&quot; could work.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional prompt text for input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prompt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current selection/document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saved file path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask user for input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace current selection/document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace current line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert at cursor position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dump to output window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>External Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsGeneral</name>
     <message>
         <source>Launch %1 on operating system startup</source>
@@ -911,11 +1671,11 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Check for updates on application startup</source>
-        <translation type="unfinished">Check for updates on application startup</translation>
+        <translation type="obsolete">Check for updates on application startup</translation>
     </message>
     <message>
         <source>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits (Use at your own risk!)</source>
-        <translation type="unfinished">Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits (Use at your own risk!)</translation>
+        <translation type="obsolete">Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits (Use at your own risk!)</translation>
     </message>
     <message>
         <source> (not supported on this platform)</source>
@@ -925,12 +1685,16 @@ File filter for external e-mail selection dialog.</extracomment>
         <source>General</source>
         <translation type="unfinished">General</translation>
     </message>
+    <message>
+        <source>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsGui</name>
     <message>
         <source>Icons &amp;&amp; skins</source>
-        <translation type="unfinished">Icons &amp;&amp; skins</translation>
+        <translation type="obsolete">Icons &amp;&amp; skins</translation>
     </message>
     <message>
         <source>Icon theme</source>
@@ -946,11 +1710,11 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Hide tab bar if just one tab is visible</source>
-        <translation type="unfinished">Hide tab bar if just one tab is visible</translation>
+        <translation type="obsolete">Hide tab bar if just one tab is visible</translation>
     </message>
     <message>
         <source>Close tabs with</source>
-        <translation type="unfinished">Close tabs with</translation>
+        <translation type="obsolete">Close tabs with</translation>
     </message>
     <message>
         <source>Right mouse button double-click</source>
@@ -978,7 +1742,6 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>no icon theme/system icon theme</source>
-        <extracomment>Label for disabling icon theme.</extracomment>
         <translation type="unfinished">no icon theme/system icon theme</translation>
     </message>
     <message>
@@ -1003,7 +1766,7 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>User interface</source>
-        <translation type="unfinished">User interface</translation>
+        <translation type="obsolete">User interface</translation>
     </message>
     <message>
         <source>Style</source>
@@ -1015,6 +1778,18 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icons &amp;&amp; Skins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Tabs with</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Interface</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1030,14 +1805,22 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished">Author</translation>
+        <translation type="obsolete">Author</translation>
+    </message>
+    <message>
+        <source>Localization</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsShortcuts</name>
     <message>
         <source>Keyboard shortcuts</source>
-        <translation type="unfinished">Keyboard shortcuts</translation>
+        <translation type="obsolete">Keyboard shortcuts</translation>
+    </message>
+    <message>
+        <source>Keyboard Shortcuts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1079,10 +1862,21 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
 </context>
 <context>
+    <name>SyntaxHighlighting</name>
+    <message>
+        <source> files (*</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SystemFactory</name>
     <message>
         <source>anonymous</source>
-        <translation>anonymous</translation>
+        <translation type="vanished">anonymous</translation>
     </message>
     <message>
         <source> bytes</source>
@@ -1092,12 +1886,12 @@ File filter for external e-mail selection dialog.</extracomment>
 <context>
     <name>TabBar</name>
     <message>
-        <source>Close this tab.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close tab</source>
         <translation>Close tab</translation>
+    </message>
+    <message>
+        <source>Close this tab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1119,11 +1913,58 @@ File filter for external e-mail selection dialog.</extracomment>
     <name>TextApplication</name>
     <message>
         <source>Cannot open file</source>
-        <translation type="unfinished">Cannot open file</translation>
+        <translation type="obsolete">Cannot open file</translation>
     </message>
     <message>
-        <source>File &apos;%1&apos; does not exist and cannot be opened.</source>
+        <source>New text file</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read-Only Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved text file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save your file first, please</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextEditor</name>
+    <message>
+        <source>File externally modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; was modified outside of %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to reload file now? This will discard all unsaved changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload all files automatically (discard changes)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open file</source>
+        <translation type="unfinished">Cannot open file</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
@@ -1150,52 +1991,35 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New text file</source>
+        <source>Loading big file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open file with %1 encoding</source>
+        <source>File &apos;%1&apos; is big. %2 will switch some features (for example &apos;Word wrap&apos;) off to make sure that file loading is not horribly slow.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text files (*.txt);;All files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextEditor</name>
-    <message>
-        <source>Save file as</source>
+        <source>Unsaved Changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unsaved changed</source>
+        <source>File &apos;%1&apos; was externally changed, do you want to reload it from disk and discard any unsaved changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This document has unsaved changed, do you want to save them?</source>
+        <source>Save File as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This document has unsaved changes, do you want to save them?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TimeSpinBox</name>
-    <message numerus="yes">
-        <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
     <message>
         <source> and </source>
-        <translation> and </translation>
+        <translation type="vanished"> and </translation>
     </message>
 </context>
 <context>
@@ -1209,11 +2033,11 @@ File filter for external e-mail selection dialog.</extracomment>
     <name>ToolBarEditor</name>
     <message>
         <source>Activated actions</source>
-        <translation>Activated actions</translation>
+        <translation type="vanished">Activated actions</translation>
     </message>
     <message>
         <source>Available actions</source>
-        <translation>Available actions</translation>
+        <translation type="vanished">Available actions</translation>
     </message>
     <message>
         <source>Insert separator</source>
@@ -1253,6 +2077,14 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <source>Reset toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activated Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available Actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

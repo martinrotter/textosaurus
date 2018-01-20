@@ -16,7 +16,8 @@
 #   LRELEASE_EXECUTABLE - specifies the name/path of "lrelease" executable, defaults to "lrelease".
 #
 # Other information:
-#   - supports Windows, Linux,
+#   - supports Windows or Linux,
+#   - supports static Qt,
 #   - Qt 5.6.0 or higher is required,
 #   - C++ 14 is required.
 #
@@ -124,12 +125,16 @@ VERSION = $$APP_VERSION
 
 # Setup specific compiler options.
 CONFIG(release, debug|release) {
+  message($$MSG_PREFIX: Building in "release" mode.)
+
   #gcc:QMAKE_LFLAGS_RELEASE *=
   #clang:QMAKE_LFLAGS_RELEASE *=
   gcc:QMAKE_CXXFLAGS_RELEASE *= -O3
   clang:QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 else {
+  message($$MSG_PREFIX: Building in "debug" mode.)
+
   #gcc:QMAKE_LFLAGS_DEBUG *=
   #clang:QMAKE_LFLAGS_DEBUG *=
   gcc:QMAKE_CXXFLAGS_DEBUG *= -Wall
