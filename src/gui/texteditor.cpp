@@ -67,7 +67,7 @@ void TextEditor::updateLineNumberMarginWidth(int zoom, QFont font, int line_coun
   QFontMetrics metr(font);
   int width = TextFactory::stringWidth(QString::number(line_count), metr) + MARGIN_PADDING_LINE_NUMBERS;
 
-  setMarginWidthN(MARGIN_LINE_NUMBERS, width);
+  setMarginWidthN(MARGIN_LINE_NUMBERS, qMax(MARGIN_LINE_NUMBERS_MIN_WIDTH + MARGIN_PADDING_LINE_NUMBERS, width));
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {

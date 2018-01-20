@@ -5,6 +5,7 @@
 
 #include <QtGlobal>
 
+constexpr auto MARGIN_LINE_NUMBERS_MIN_WIDTH = 22;
 constexpr auto MARGIN_LINE_NUMBERS = 0;
 constexpr auto MARGIN_SYMBOLS = 1;
 constexpr auto MARGIN_FOLDING = 2;

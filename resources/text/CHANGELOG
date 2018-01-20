@@ -4,6 +4,7 @@ Fixed:
 * Invalid synchronization between sidebar visibility and assigned "View/Sidebars" menu item.
 
 Added:
+* Line number column is initially wider.
 * Prebuilt binaries for Windows now use MinGW-w64 toolchain, which is completely FOSS. MVC++ runtime libraries are no longed needed. Linkage of dependencies is completely static, making Textilosaurus deployment easier, as it now consists of single executable file and that's it.
 * "Markdown Preview" has clickable hyperlinks.
 
