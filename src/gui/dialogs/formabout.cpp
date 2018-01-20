@@ -42,6 +42,14 @@ void FormAbout::loadLicenseAndInformation() {
   }
 
   try {
+    m_ui.m_txtLicenseGnuLgpl->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_GNU_LGPL_HTML")));
+    m_ui.m_txtLicenseGnuLgpl->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+  }
+  catch (...) {
+    m_ui.m_txtLicenseGnuLgpl->setText(tr("License not found."));
+  }
+
+  try {
     m_ui.m_txtLicenseHoedown->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_HOEDOWN")));
     m_ui.m_txtLicenseHoedown->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
