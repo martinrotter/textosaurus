@@ -18,6 +18,7 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
   m_ui.m_cmbIndentMode->addItem(tr("Spaces"), false);
   m_ui.m_cmbIndentMode->addItem(tr("Tabs"), true);
 
+  connect(m_ui.m_cbReloadFilesAutomatically, &QCheckBox::toggled, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_cmbIndentMode, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_cmbTimestampFormat, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinIndentSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
