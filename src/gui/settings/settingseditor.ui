@@ -23,7 +23,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="1" column="0" colspan="3">
+   <item row="2" column="0" colspan="3">
     <widget class="QGroupBox" name="m_gbIndentation">
      <property name="title">
       <string>Indentation</string>
@@ -95,7 +95,7 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="3">
+   <item row="4" column="0" colspan="3">
     <widget class="QGroupBox" name="m_gbFonts">
      <property name="title">
       <string>Fonts</string>
@@ -134,7 +134,7 @@
      </layout>
     </widget>
    </item>
-   <item row="4" column="0" colspan="3">
+   <item row="5" column="0" colspan="3">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -147,7 +147,7 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="2">
+   <item row="1" column="2">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -160,7 +160,7 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="1">
+   <item row="1" column="1">
     <widget class="QSpinBox" name="m_spinLineSpacing">
      <property name="minimum">
       <number>-10</number>
@@ -170,7 +170,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Line spacing</string>
@@ -180,7 +180,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="3">
+   <item row="3" column="0" colspan="3">
     <widget class="QGroupBox" name="m_gbLog">
      <property name="title">
       <string>.LOG Feature</string>
@@ -219,9 +219,17 @@
      </layout>
     </widget>
    </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QCheckBox" name="m_cbReloadFilesAutomatically">
+     <property name="text">
+      <string>Reload externally edited files automatically</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
+  <tabstop>m_cbReloadFilesAutomatically</tabstop>
   <tabstop>m_spinLineSpacing</tabstop>
   <tabstop>m_cmbIndentMode</tabstop>
   <tabstop>m_spinTabSize</tabstop>

@@ -1,5 +1,10 @@
 2018.01.20
 ----------
+Added:
+* Usec can turn off automatic reloading of externally modified documents in settings.
+
+2018.01.20
+----------
 Fixed:
 * Invalid synchronization between sidebar visibility and assigned "View/Sidebars" menu item.
 
