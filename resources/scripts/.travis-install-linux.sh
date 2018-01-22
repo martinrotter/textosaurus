@@ -31,7 +31,8 @@ rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 imagename="$1"
 git_revision=$(git rev-parse --short HEAD)
-imagenamenospace="textilosaurus-${git_revision}-linux64.AppImage"
+git_tag_name=$(git describe --abbrev=0)
+imagenamenospace="textilosaurus-${git_tag_name}-${git_revision}-linux64.AppImage"
 
 mv "$imagename" "$imagenamenospace"
 imagename="$imagenamenospace"
