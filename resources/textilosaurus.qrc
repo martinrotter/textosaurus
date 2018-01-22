@@ -27,26 +27,7 @@
         <file>desktop/com.github.textilosaurus.desktop</file>
         <file>../localization/textilosaurus_en.qm</file>
         <file>../localization/textilosaurus_en_GB.qm</file>
-        <file>../localization/qt_bg.qm</file>
-        <file>../localization/qt_ca.qm</file>
-        <file>../localization/qt_cs.qm</file>
-        <file>../localization/qt_da.qm</file>
-        <file>../localization/qt_de.qm</file>
         <file>../localization/qt_en.qm</file>
-        <file>../localization/qt_es.qm</file>
-        <file>../localization/qt_fi.qm</file>
-        <file>../localization/qt_fr.qm</file>
-        <file>../localization/qt_gd.qm</file>
-        <file>../localization/qt_he.qm</file>
-        <file>../localization/qt_hu.qm</file>
-        <file>../localization/qt_it.qm</file>
-        <file>../localization/qt_ja.qm</file>
-        <file>../localization/qt_ko.qm</file>
-        <file>../localization/qt_lv.qm</file>
-        <file>../localization/qt_pl.qm</file>
-        <file>../localization/qt_ru.qm</file>
-        <file>../localization/qt_sk.qm</file>
-        <file>../localization/qt_uk.qm</file>
         <file>text/COPYING_MPL</file>
     </qresource>
 </RCC>
