@@ -16,6 +16,19 @@ class FileSystemSidebarModel : public QFileSystemModel {
     virtual ~FileSystemSidebarModel() = default;
 };
 
+class FilesystemView : public QListView {
+  Q_OBJECT
+
+  public:
+    explicit FilesystemView(QWidget* parent = nullptr);
+    virtual ~FilesystemView() = default;
+
+    virtual void setRootIndex(const QModelIndex& index) override;
+
+  signals:
+    void rootIndexChanged(const QModelIndex& index);
+};
+
 class FavoritesListWidget : public QListWidget {
   Q_OBJECT
 
@@ -48,6 +61,8 @@ class FilesystemSidebar : public BaseSidebar {
     void openFavoriteItem(const QModelIndex& idx);
     void openFileFolder(const QModelIndex& idx);
     void goToParentFolder();
+    void saveCurrentFolder(const QModelIndex& idx);
+    void saveFavorites() const;
 
   signals:
     void openFileRequested(const QString& file_path);
@@ -55,11 +70,9 @@ class FilesystemSidebar : public BaseSidebar {
   private:
     virtual void load() override;
 
-    void saveFavorites() const;
-
   private:
     FileSystemSidebarModel* m_fsModel;
-    QListView* m_fsView;
+    FilesystemView* m_fsView;
     FavoritesListWidget* m_lvFavorites;
 };
 

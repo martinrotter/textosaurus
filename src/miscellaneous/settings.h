@@ -73,16 +73,12 @@ namespace GUI {
   const QByteArray MainWindowGeometryDef = QByteArray();
   constexpr auto IsMainWindowMaximizedBeforeFullscreen = "is_window_maximized_before_fullscreen";
   constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
-  constexpr auto MainMenuVisible = "main_menu_visible";
-  constexpr auto MainMenuVisibleDef = true;
   constexpr auto MainWindowState = "main_window_state";
   const QByteArray MainWindowStateDef = QByteArray();
   constexpr auto ToolbarsVisible = "enable_toolbars";
   constexpr auto ToolbarsVisibleDef = true;
-  constexpr auto StatusBarVisible = "enable_status_bar";
+  constexpr auto StatusBarVisible = "enable_statusbar";
   constexpr auto StatusBarVisibleDef = true;
-  constexpr auto EnableNotifications = "enable_notifications";
-  constexpr auto EnableNotificationsDef = true;
   constexpr auto TabCloseMiddleClick = "tab_close_mid_button";
   constexpr auto TabCloseMiddleClickDef = true;
   constexpr auto TabCloseDoubleClick = "tab_close_double_button";

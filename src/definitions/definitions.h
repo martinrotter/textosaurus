@@ -79,15 +79,19 @@ constexpr auto APP_DESKTOP_ENTRY_PATH = ":/desktop";
 
 #elif defined(Q_OS_OSX)
 constexpr auto OS_ID = "Mac OS X";
+constexpr auto OS_ID_LOW = "macosx";
 
 #elif defined(Q_OS_WIN)
 constexpr auto OS_ID = "Windows";
+constexpr auto OS_ID_LOW = "windows";
 
 #elif defined(Q_OS_ANDROID)
 constexpr auto OS_ID = "Android";
+constexpr auto OS_ID_LOW = "android";
 
 #else
 constexpr auto OS_ID = "";
+constexpr auto OS_ID_LOW = "";
 
 #endif
 

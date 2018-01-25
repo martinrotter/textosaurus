@@ -42,7 +42,7 @@ void FilesystemSidebar::load() {
     QVBoxLayout* layout = new QVBoxLayout(widget);
 
     m_fsModel = new FileSystemSidebarModel(widget);
-    m_fsView = new QListView(widget);
+    m_fsView = new FilesystemView(widget);
     m_lvFavorites = new FavoritesListWidget(widget);
 
     layout->setMargin(0);
@@ -71,9 +71,12 @@ void FilesystemSidebar::load() {
     m_fsView->setModel(m_fsModel);
     m_lvFavorites->setIconSize(QSize(12, 12));
     m_fsModel->setRootPath(QString());
-    m_fsView->setRootIndex(m_fsModel->index(qApp->documentsFolder()));
+    m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(windowTitle(),
+                                                                    QL1S("current_folder_") + OS_ID_LOW,
+                                                                    qApp->documentsFolder()).toString()));
 
     connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
+    connect(m_fsView, &FilesystemView::rootIndexChanged, this, &FilesystemSidebar::saveCurrentFolder);
 
     // Initialize favorites.
     connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
@@ -94,6 +97,12 @@ void FilesystemSidebar::load() {
 
     setWidget(widget);
   }
+}
+
+void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
+  qApp->settings()->setValue(windowTitle(),
+                             QL1S("current_folder_") + OS_ID_LOW,
+                             QDir::toNativeSeparators((m_fsModel->filePath(idx))));
 }
 
 void FilesystemSidebar::addToFavorites() {
@@ -184,4 +193,11 @@ void FavoritesListWidget::keyPressEvent(QKeyEvent* event) {
   else {
     QListWidget::keyPressEvent(event);
   }
+}
+
+FilesystemView::FilesystemView(QWidget* parent) : QListView(parent) {}
+
+void FilesystemView::setRootIndex(const QModelIndex& index) {
+  QListView::setRootIndex(index);
+  emit rootIndexChanged(index);
 }
