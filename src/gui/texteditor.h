@@ -78,6 +78,7 @@ class TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
+    void detachWatcher();
     void reattachWatcher(const QString& file_path);
     bool isMarginVisible(int margin_number) const;
     void updateLineNumberMarginWidth(int zoom, QFont font, int line_count);

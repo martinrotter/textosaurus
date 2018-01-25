@@ -107,6 +107,8 @@ void TextEditor::loadFromString(const QString& contents) {
 void TextEditor::onFileExternallyChanged(const QString& file_path) {
   Q_UNUSED(file_path)
 
+  detachWatcher();
+
   // File is externally changed.
   emit requestedVisibility();
   auto not_again = false;
@@ -258,6 +260,14 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
   else {
     ScintillaEdit::closeEvent(event);
+  }
+}
+
+void TextEditor::detachWatcher() {
+  if (m_fileWatcher != nullptr) {
+    if (!m_fileWatcher->files().isEmpty()) {
+      m_fileWatcher->removePaths(m_fileWatcher->files());
+    }
   }
 }
 
