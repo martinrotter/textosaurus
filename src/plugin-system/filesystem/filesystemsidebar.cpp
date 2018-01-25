@@ -62,9 +62,9 @@ void FilesystemSidebar::load() {
     tool_bar->setIconSize(QSize(16, 16));
 
     // Initialize FS browser
-    m_fsModel->setNameFilterDisables(false);/*
-                                               m_fsModel->setFilter(QDir::Filter::Dirs | QDir::Filter::Files | QDir::Filter::Hidden |
-                                               QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDotAndDotDot);*/
+    m_fsModel->setNameFilterDisables(false);
+    m_fsModel->setFilter(QDir::Filter::Dirs | QDir::Filter::Files | QDir::Filter::Hidden |
+                         QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDotAndDotDot);
     m_fsModel->setNameFilters(m_textApp->settings()->syntaxHighlighting()->bareFileFilters());
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));

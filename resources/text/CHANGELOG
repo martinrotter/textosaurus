@@ -1,7 +1,11 @@
-2018.01.20
+2018.01.XX
 ----------
 Added:
+* FS sidebar now displays hidden dirs.
 * Usec can turn off automatic reloading of externally modified documents in settings.
+
+Fixed:
+* Avoid multiple warning of externally edited document.
 
 2018.01.20
 ----------
