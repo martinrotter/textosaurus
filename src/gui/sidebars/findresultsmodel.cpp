@@ -74,8 +74,12 @@ void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int
   FindResultsModelItemEditor* item_editor = new FindResultsModelItemEditor(editor, this);
 
   for (const QPair<int, int> range : results) {
-    QString text = editor->textRange(range.first, range.second);
-    FindResultsModelItemResult* item_result = new FindResultsModelItemResult(text, range, item_editor);
+    int line = editor->lineFromPosition(range.first) + 1;
+    QString text = QString("%2\"%1\"%3").arg(QString(editor->textRange(range.first, range.second)),
+                                             QString(editor->textRange(qMax(range.first - 4, 0), range.first)),
+                                             QString(editor->textRange(range.second,
+                                                                       qMin(range.second + 4, int(editor->length())))));
+    FindResultsModelItemResult* item_result = new FindResultsModelItemResult(text, line, range, item_editor);
 
     item_editor->appendChild(item_result);
   }

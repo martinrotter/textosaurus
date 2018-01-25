@@ -11,7 +11,7 @@ class FindResultsModelItemResult : public FindResultsModelItem {
   Q_OBJECT
 
   public:
-    explicit FindResultsModelItemResult(const QString& found_text, const QPair<int, int> range, QObject* parent = nullptr);
+    explicit FindResultsModelItemResult(const QString& found_text, int line, const QPair<int, int> range, QObject* parent = nullptr);
 
     virtual QVariant data(int role) const override;
     TextEditor* editor() const;
@@ -20,6 +20,7 @@ class FindResultsModelItemResult : public FindResultsModelItem {
 
   private:
     QString m_resultText;
+    int m_line;
 
     QPair<int, int> m_range;
 };

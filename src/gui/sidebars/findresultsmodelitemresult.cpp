@@ -7,15 +7,16 @@
 #include <QColor>
 #include <QVariant>
 
-FindResultsModelItemResult::FindResultsModelItemResult(const QString& found_text, const QPair<int, int> range, QObject* parent)
-  : FindResultsModelItem(parent), m_resultText(found_text), m_range(range) {}
+FindResultsModelItemResult::FindResultsModelItemResult(const QString& found_text, int line, const QPair<int, int> range, QObject* parent)
+  : FindResultsModelItem(parent), m_resultText(found_text), m_line(line), m_range(range) {}
 
 QVariant FindResultsModelItemResult::data(int role) const {
   switch (role) {
     case Qt::ItemDataRole::DisplayRole:
-      return QString("Found text: \"%1\" (%2...%3)").arg(m_resultText,
-                                                         QString::number(m_range.first),
-                                                         QString::number(m_range.second));
+      return QString("Line: %4: \"%1\" (%2 •• %3)").arg(m_resultText,
+                                                        QString::number(m_range.first),
+                                                        QString::number(m_range.second),
+                                                        QString::number(m_line));
 
     default:
       return QVariant();
