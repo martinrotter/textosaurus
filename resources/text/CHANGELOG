@@ -1,6 +1,7 @@
 2018.01.XX
 ----------
 Added:
+* FS sidebar displays current path and unifies used folder/file icons.
 * FS sidebar remembers its default folder on all platforms in a x-platform way.
 * FS sidebar now displays hidden dirs.
 * Usec can turn off automatic reloading of externally modified documents in settings.
