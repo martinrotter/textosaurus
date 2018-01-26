@@ -2,6 +2,7 @@
 
 #include "src/plugin-system/filesystem/filesystemsidebar.h"
 
+#include "definitions/definitions.h"
 #include "gui/baselineedit.h"
 #include "gui/plaintoolbutton.h"
 #include "miscellaneous/application.h"
