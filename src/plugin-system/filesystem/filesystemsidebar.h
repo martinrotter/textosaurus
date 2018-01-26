@@ -14,6 +14,8 @@ class FileSystemSidebarModel : public QFileSystemModel {
   public:
     explicit FileSystemSidebarModel(QObject* parent = nullptr);
     virtual ~FileSystemSidebarModel() = default;
+
+    virtual QVariant data(const QModelIndex& index, int role) const override;
 };
 
 class FilesystemView : public QListView {

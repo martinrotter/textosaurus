@@ -139,12 +139,7 @@ void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
 void FilesystemSidebar::goToParentFolder() {
   QModelIndex prnt = m_fsView->rootIndex().parent();
 
-  if (prnt.isValid()) {
-    m_fsView->setRootIndex(prnt);
-  }
-  else {
-    m_fsView->setRootIndex(m_fsModel->index(QString()));
-  }
+  m_fsView->setRootIndex(prnt.isValid() ? prnt : m_fsModel->index(m_fsModel->rootPath()));
 }
 
 void FilesystemSidebar::saveFavorites() const {
@@ -158,6 +153,15 @@ void FilesystemSidebar::saveFavorites() const {
 }
 
 FileSystemSidebarModel::FileSystemSidebarModel(QObject* parent) : QFileSystemModel(parent) {}
+
+QVariant FileSystemSidebarModel::data(const QModelIndex& index, int role) const {
+  if (role == Qt::ItemDataRole::DecorationRole) {
+    return qApp->icons()->fromTheme(isDir(index) ? QSL("folder") : QSL("gtk-file"));
+  }
+  else {
+    return QFileSystemModel::data(index, role);
+  }
+}
 
 FavoritesListWidget::FavoritesListWidget(QWidget* parent) : QListWidget(parent) {
   setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
