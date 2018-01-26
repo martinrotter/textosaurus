@@ -46,6 +46,7 @@ class FavoritesListWidget : public QListWidget {
 };
 
 class TextApplication;
+class BaseLineEdit;
 
 class FilesystemSidebar : public BaseSidebar {
   Q_OBJECT
@@ -73,6 +74,7 @@ class FilesystemSidebar : public BaseSidebar {
     virtual void load() override;
 
   private:
+    BaseLineEdit* m_txtPath;
     FileSystemSidebarModel* m_fsModel;
     FilesystemView* m_fsView;
     FavoritesListWidget* m_lvFavorites;

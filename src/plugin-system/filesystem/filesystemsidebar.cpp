@@ -2,6 +2,7 @@
 
 #include "src/plugin-system/filesystem/filesystemsidebar.h"
 
+#include "gui/baselineedit.h"
 #include "gui/plaintoolbutton.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
@@ -44,6 +45,7 @@ void FilesystemSidebar::load() {
     m_fsModel = new FileSystemSidebarModel(widget);
     m_fsView = new FilesystemView(widget);
     m_lvFavorites = new FavoritesListWidget(widget);
+    m_txtPath = new BaseLineEdit(widget);
 
     layout->setMargin(0);
 
@@ -61,7 +63,7 @@ void FilesystemSidebar::load() {
     tool_bar->addAction(btn_add_favorites);
     tool_bar->setIconSize(QSize(16, 16));
 
-    // Initialize FS browser
+    // Initialize FS browser.
     m_fsModel->setNameFilterDisables(false);
     m_fsModel->setFilter(QDir::Filter::Dirs | QDir::Filter::Files | QDir::Filter::Hidden |
                          QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDotAndDotDot);
@@ -74,12 +76,14 @@ void FilesystemSidebar::load() {
     m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(windowTitle().toLower(),
                                                                     QL1S("current_folder_") + OS_ID_LOW,
                                                                     qApp->documentsFolder()).toString()));
+    saveCurrentFolder(m_fsView->rootIndex());
 
     connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
     connect(m_fsView, &FilesystemView::rootIndexChanged, this, &FilesystemSidebar::saveCurrentFolder);
-
-    // Initialize favorites.
     connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
+    connect(m_txtPath, &BaseLineEdit::submitted, this, [this]() {
+      m_fsView->setRootIndex(m_fsModel->index(m_txtPath->text()));
+    });
 
     QStringList saved_files = qApp->settings()->value(windowTitle().toLower(),
                                                       QSL("favorites"),
@@ -92,7 +96,8 @@ void FilesystemSidebar::load() {
     m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
 
     layout->addWidget(tool_bar, 0);
-    layout->addWidget(m_fsView, 1);
+    layout->addWidget(m_txtPath, 0);
+    layout->addWidget(m_fsView, 2);
     layout->addWidget(m_lvFavorites, 1);
 
     setWidget(widget);
@@ -100,9 +105,12 @@ void FilesystemSidebar::load() {
 }
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
+  auto path = QDir::toNativeSeparators((m_fsModel->filePath(idx)));
+
+  m_txtPath->setText(path);
   qApp->settings()->setValue(windowTitle().toLower(),
                              QL1S("current_folder_") + OS_ID_LOW,
-                             QDir::toNativeSeparators((m_fsModel->filePath(idx))));
+                             path);
 }
 
 void FilesystemSidebar::addToFavorites() {
