@@ -71,7 +71,7 @@ void FilesystemSidebar::load() {
     m_fsView->setModel(m_fsModel);
     m_lvFavorites->setIconSize(QSize(12, 12));
     m_fsModel->setRootPath(QString());
-    m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(windowTitle(),
+    m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(windowTitle().toLower(),
                                                                     QL1S("current_folder_") + OS_ID_LOW,
                                                                     qApp->documentsFolder()).toString()));
 
@@ -81,7 +81,7 @@ void FilesystemSidebar::load() {
     // Initialize favorites.
     connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
 
-    QStringList saved_files = qApp->settings()->value(windowTitle(),
+    QStringList saved_files = qApp->settings()->value(windowTitle().toLower(),
                                                       QSL("favorites"),
                                                       QStringList()).toStringList();
 
@@ -100,7 +100,7 @@ void FilesystemSidebar::load() {
 }
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
-  qApp->settings()->setValue(windowTitle(),
+  qApp->settings()->setValue(windowTitle().toLower(),
                              QL1S("current_folder_") + OS_ID_LOW,
                              QDir::toNativeSeparators((m_fsModel->filePath(idx))));
 }
@@ -154,7 +154,7 @@ void FilesystemSidebar::saveFavorites() const {
     favorites.append(m_lvFavorites->item(i)->data(Qt::UserRole).toString());
   }
 
-  qApp->settings()->setValue(windowTitle(), QSL("favorites"), favorites);
+  qApp->settings()->setValue(windowTitle().toLower(), QSL("favorites"), favorites);
 }
 
 FileSystemSidebarModel::FileSystemSidebarModel(QObject* parent) : QFileSystemModel(parent) {}
