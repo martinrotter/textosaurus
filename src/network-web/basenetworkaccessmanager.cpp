@@ -46,6 +46,7 @@ void BaseNetworkAccessManager::loadSettings() {
 void BaseNetworkAccessManager::onSslErrors(QNetworkReply* reply, const QList<QSslError>& error) {
   qWarning("Ignoring SSL errors for '%s': '%s' (code %d).", qPrintable(reply->url().toString()), qPrintable(reply->errorString()),
            (int) reply->error());
+
   reply->ignoreSslErrors(error);
 }
 

@@ -126,16 +126,19 @@ VERSION = $$APP_VERSION
 CONFIG(release, debug|release) {
   message($$MSG_PREFIX: Building in "release" mode.)
 
-  #gcc:QMAKE_LFLAGS_RELEASE *=
-  #clang:QMAKE_LFLAGS_RELEASE *=
+msvc {
+  CONFIG -= import_plugins
+  QTPLUGIN.imageformats = qgif qico qjpeg qsvg qtga qtiff qwbmp qwebp
+}
+
+  msvc:QMAKE_CXXFLAGS += /O1 /GL
+  msvc:QMAKE_LFLAGS += /LTCG
   gcc:QMAKE_CXXFLAGS_RELEASE *= -O3
   clang:QMAKE_CXXFLAGS_RELEASE *= -O3
 }
 else {
   message($$MSG_PREFIX: Building in "debug" mode.)
 
-  #gcc:QMAKE_LFLAGS_DEBUG *=
-  #clang:QMAKE_LFLAGS_DEBUG *=
   gcc:QMAKE_CXXFLAGS_DEBUG *= -Wall
   clang:QMAKE_CXXFLAGS_DEBUG *= -Wall
 }
@@ -159,7 +162,7 @@ win32 {
   QMAKE_TARGET_PRODUCT = $$APP_NAME
 }
 
-CONFIG *= resources_big
+CONFIG += resources_small
 RESOURCES += resources/textilosaurus.qrc
 
 mac|win32|android {
