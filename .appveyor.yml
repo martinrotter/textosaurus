@@ -31,5 +31,6 @@ build_script:
   - ps: C:\textilosaurus\resources\scripts\.appveyor-prepare-win.ps1
   - C:\textilosaurus\resources\scripts\.appveyor-build-win.bat
 
+
 on_success:
   - ps: C:\textilosaurus\resources\scripts\.appveyor-install-win.ps1
