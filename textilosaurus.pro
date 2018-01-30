@@ -127,11 +127,7 @@ CONFIG(release, debug|release) {
   message($$MSG_PREFIX: Building in "release" mode.)
 
 msvc:static {
-  CONFIG -= import_plugins
-  QTPLUGIN.imageformats = qgif qico qjpeg qsvg qtga qtiff qwbmp qwebp
-  QTPLUGIN.iconengines = qsvgicon
-  QTPLUGIN.platforms = qwindows
-  QTPLUGIN.printsupport = windowsprintersupport
+  message($$MSG_PREFIX: Setting up LTCG.)
 
   QMAKE_CXXFLAGS += /O1 /GL
   QMAKE_LFLAGS += /LTCG
