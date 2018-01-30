@@ -8,7 +8,7 @@ $mak_path = "C:\textilosaurus\textilosaurus-build\Makefile"
 
 $env:PATH = "c:\textilosaurus\qt-5.10-static-msvc2017-ltcg-x86_64\bin\;" + $env:PATH
 
-qmake.exe "C:\textilosaurus\textilosaurus.pro" "CONFIG+=release"
+& 'c:\textilosaurus\qt-5.10-static-msvc2017-ltcg-x86_64\bin\qmake.exe' "C:\textilosaurus\textilosaurus.pro" "CONFIG+=release"
 
 $mak_contents = [System.IO.File]::ReadAllText($mak_path).Replace(" qjp2.lib", "")
 [System.IO.File]::WriteAllText($mak_path, $mak_contents)
