@@ -126,16 +126,17 @@ VERSION = $$APP_VERSION
 CONFIG(release, debug|release) {
   message($$MSG_PREFIX: Building in "release" mode.)
 
-msvc {
+msvc:static {
   CONFIG -= import_plugins
   QTPLUGIN.imageformats = qgif qico qjpeg qsvg qtga qtiff qwbmp qwebp
   QTPLUGIN.iconengines = qsvgicon
   QTPLUGIN.platforms = qwindows
   QTPLUGIN.printsupport = windowsprintersupport
+
+  QMAKE_CXXFLAGS += /O1 /GL
+  QMAKE_LFLAGS += /LTCG
 }
 
-  msvc:QMAKE_CXXFLAGS += /O1 /GL
-  msvc:QMAKE_LFLAGS += /LTCG
   gcc:QMAKE_CXXFLAGS_RELEASE *= -O3
   clang:QMAKE_CXXFLAGS_RELEASE *= -O3
 }
