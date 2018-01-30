@@ -5,8 +5,6 @@ clone_depth: 1
 clone_folder: C:\textilosaurus
 
 environment:
-  QTDIR: 'c:\textilosaurus\qt-5.10-static-msvc2017-ltcg-x86_64'
-  QMAKESPEC: win32-msvc2017
   access_token:
     secure: bM8uJbH7GK+2EW6aL8D0/qwwdM/lzW6y2odXWs/VcMq+nUBZa68x+k3EpZEAo6iT
 
