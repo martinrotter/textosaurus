@@ -34,6 +34,7 @@ build_script:
   - mkdir textilosaurus-build
   - cd textilosaurus-build
   - C:\textilosaurus\qt-5.10-static-msvc2017-ltcg-x86_64\bin\qmake.exe C:\textilosaurus\textilosaurus.pro -r CONFIG+=release
+  - C:\textilosaurus\resources\scripts\findreplace\findreplace.exe " qjp2.lib" " " "C:\textilosaurus\textilosaurus-build\Makefile"
   - nmake
   - nmake windows_all
 
