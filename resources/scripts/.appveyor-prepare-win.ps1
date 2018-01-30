@@ -1,3 +1,9 @@
+& 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat'
+
+cl.exe
+
+Break
+
 $url = "https://bitbucket.org/skunkos/qt5-minimalistic-builds/downloads/qt-5.10-static-msvc2017-ltcg-x86_64.7z"
 $output = "qt.7z"
 
