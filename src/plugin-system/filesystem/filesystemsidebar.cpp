@@ -74,6 +74,7 @@ void FilesystemSidebar::load() {
     connect(btn_parent, &QAction::triggered, this, &FilesystemSidebar::goToParentFolder);
     connect(btn_add_favorites, &QAction::triggered, this, &FilesystemSidebar::addToFavorites);
 
+    tool_bar->setFixedHeight(26);
     tool_bar->addAction(btn_parent);
     tool_bar->addAction(btn_add_favorites);
     tool_bar->setIconSize(QSize(16, 16));
@@ -132,9 +133,8 @@ void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
 
   m_cmbDrives->setCurrentIndex(idx_root);
   m_txtPath->setText(path);
-  qApp->settings()->setValue(m_settingsSection,
-                             QL1S("current_folder_") + OS_ID_LOW,
-                             path);
+  m_txtPath->setToolTip(path);
+  qApp->settings()->setValue(m_settingsSection, QL1S("current_folder_") + OS_ID_LOW, path);
 }
 
 void FilesystemSidebar::addToFavorites() {
