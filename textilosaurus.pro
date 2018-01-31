@@ -481,23 +481,6 @@ win32 {
   target.path = $$PREFIX
 
   INSTALLS += target
-
-  !static {
-    message($$MSG_PREFIX: Deploying Windows/MinGW DLLs.)
-
-    qt_dlls_root.files =  resources/binaries/qt/windows/qt5-mingw64/*.dll
-    qt_dlls_root.path = $$quote($$PREFIX/)
-
-    qt_dlls_plugins.files =   resources/binaries/qt/windows/qt5-mingw64/bearer \
-                              resources/binaries/qt/windows/qt5-mingw64/iconengines \
-                              resources/binaries/qt/windows/qt5-mingw64/imageformats \
-                              resources/binaries/qt/windows/qt5-mingw64/platforms \
-                              resources/binaries/qt/windows/qt5-mingw64/printsupport \
-                              resources/binaries/qt/windows/qt5-mingw64/styles
-    qt_dlls_plugins.path = $$quote($$PREFIX/)
-
-    INSTALLS += qt_dlls_root qt_dlls_plugins
-  }
 }
 
 # Install all files on Linux.
