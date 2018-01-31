@@ -1,7 +1,8 @@
 2018.01.XX
 ----------
-Changed:
+Added:
 * FS sidebar was enhanced:
+    * Combo box with list of drives/mountpoints was added.
     * Favorites list was separated to extra tab.
     * Overall UI polishments.
 * Prebuilt Windows binaries now use MSVC toolchain again, but this time MSVC runtime is compiled in statically, more optimizations are used (LTCG), which makes final textilosaurus.exe file smaller and faster to run.

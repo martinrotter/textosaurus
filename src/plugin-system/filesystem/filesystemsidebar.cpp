@@ -13,10 +13,12 @@
 #include "plugin-system/filesystem/filesystemsidebarmodel.h"
 #include "plugin-system/filesystem/filesystemview.h"
 
+#include <QComboBox>
 #include <QFileSystemModel>
 #include <QGroupBox>
 #include <QListWidget>
 #include <QMimeData>
+#include <QStorageInfo>
 #include <QToolBar>
 #include <QVBoxLayout>
 
@@ -39,6 +41,12 @@ bool FilesystemSidebar::initiallyVisible() const {
 
 int FilesystemSidebar::initialWidth() const {
   return 200;
+}
+
+void FilesystemSidebar::openDrive(int index) {
+  QModelIndex idx = m_fsModel->index(index, 0, QModelIndex());
+
+  m_fsView->setRootIndex(idx);
 }
 
 void FilesystemSidebar::load() {
@@ -71,6 +79,10 @@ void FilesystemSidebar::load() {
     tool_bar->setIconSize(QSize(16, 16));
 
     // Initialize FS browser.
+    m_cmbDrives = new QComboBox(widget_browser);
+    m_cmbDrives->setModel(m_fsModel);
+    connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &FilesystemSidebar::openDrive);
+
     m_fsModel->setNameFilterDisables(false);
     m_fsModel->setFilter(QDir::Filter::Dirs | QDir::Filter::Files | QDir::Filter::Hidden |
                          QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDotAndDotDot);
@@ -80,8 +92,9 @@ void FilesystemSidebar::load() {
     m_fsView->setModel(m_fsModel);
     m_lvFavorites->setIconSize(QSize(12, 12));
     m_lvFavorites->setFrameShape(QFrame::Shape::NoFrame);
+    m_fsView->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setRootPath(QString());
-    m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(windowTitle().toLower(),
+    m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(m_settingsSection,
                                                                     QL1S("current_folder_") + OS_ID_LOW,
                                                                     qApp->documentsFolder()).toString()));
     saveCurrentFolder(m_fsView->rootIndex());
@@ -89,11 +102,8 @@ void FilesystemSidebar::load() {
     connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
     connect(m_fsView, &FilesystemView::rootIndexChanged, this, &FilesystemSidebar::saveCurrentFolder);
     connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
-    connect(m_txtPath, &BaseLineEdit::submitted, this, [this]() {
-      m_fsView->setRootIndex(m_fsModel->index(m_txtPath->text()));
-    });
 
-    QStringList saved_files = qApp->settings()->value(windowTitle().toLower(),
+    QStringList saved_files = qApp->settings()->value(m_settingsSection,
                                                       QSL("favorites"),
                                                       QStringList()).toStringList();
 
@@ -104,8 +114,9 @@ void FilesystemSidebar::load() {
     m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
 
     layout_browser->addWidget(tool_bar, 0);
+    layout_browser->addWidget(m_cmbDrives, 0);
     layout_browser->addWidget(m_txtPath, 0);
-    layout_browser->addWidget(m_fsView, 2);
+    layout_browser->addWidget(m_fsView, 1);
 
     m_tabWidget->addTab(widget_browser, tr("Explorer"));
     m_tabWidget->addTab(m_lvFavorites, tr("Favorites"));
@@ -116,9 +127,12 @@ void FilesystemSidebar::load() {
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
   auto path = QDir::toNativeSeparators((m_fsModel->filePath(idx)));
+  QStorageInfo file_drive(path);
+  auto idx_root = m_fsModel->index(file_drive.rootPath()).row();
 
+  m_cmbDrives->setCurrentIndex(idx_root);
   m_txtPath->setText(path);
-  qApp->settings()->setValue(windowTitle().toLower(),
+  qApp->settings()->setValue(m_settingsSection,
                              QL1S("current_folder_") + OS_ID_LOW,
                              path);
 }
@@ -169,7 +183,7 @@ void FilesystemSidebar::saveFavorites() const {
     favorites.append(m_lvFavorites->item(i)->data(Qt::UserRole).toString());
   }
 
-  qApp->settings()->setValue(windowTitle().toLower(), QSL("favorites"), favorites);
+  qApp->settings()->setValue(m_settingsSection, QSL("favorites"), favorites);
 }
 
 void FilesystemSidebar::makeExplorerVisible() const {
