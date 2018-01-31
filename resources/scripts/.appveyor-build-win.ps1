@@ -19,5 +19,5 @@ $env:PATH = "C:\textilosaurus\$qt_stub\bin\;" + $env:PATH
 $mak_contents = [System.IO.File]::ReadAllText($mak_path).Replace(" qjp2.lib", "")
 [System.IO.File]::WriteAllText($mak_path, $mak_contents)
 
-nmake
-nmake windows_all
+& "nmake"
+& "nmake" windows_all
