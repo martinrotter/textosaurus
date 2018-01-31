@@ -5,48 +5,12 @@
 
 #include "src/gui/sidebars/basesidebar.h"
 
-#include <QFileSystemModel>
-#include <QListWidget>
-
-class FileSystemSidebarModel : public QFileSystemModel {
-  Q_OBJECT
-
-  public:
-    explicit FileSystemSidebarModel(QObject* parent = nullptr);
-    virtual ~FileSystemSidebarModel() = default;
-
-    virtual QVariant data(const QModelIndex& index, int role) const override;
-};
-
-class FilesystemView : public QListView {
-  Q_OBJECT
-
-  public:
-    explicit FilesystemView(QWidget* parent = nullptr);
-    virtual ~FilesystemView() = default;
-
-    virtual void setRootIndex(const QModelIndex& index) override;
-
-  signals:
-    void rootIndexChanged(const QModelIndex& index);
-};
-
-class FavoritesListWidget : public QListWidget {
-  Q_OBJECT
-
-  public:
-    explicit FavoritesListWidget(QWidget* parent = nullptr);
-    virtual ~FavoritesListWidget() = default;
-
-  public slots:
-    void loadFileItem(const QString& file_path);
-
-  protected:
-    virtual void keyPressEvent(QKeyEvent* event) override;
-};
-
 class TextApplication;
 class BaseLineEdit;
+class FilesystemSidebarModel;
+class FilesystemView;
+class FavoritesListWidget;
+class QTabWidget;
 
 class FilesystemSidebar : public BaseSidebar {
   Q_OBJECT
@@ -71,13 +35,16 @@ class FilesystemSidebar : public BaseSidebar {
     void openFileRequested(const QString& file_path);
 
   private:
+    void makeExplorerVisible() const;
+    void makeFavoritesVisible() const;
     virtual void load() override;
 
   private:
     BaseLineEdit* m_txtPath;
-    FileSystemSidebarModel* m_fsModel;
+    FilesystemSidebarModel* m_fsModel;
     FilesystemView* m_fsView;
     FavoritesListWidget* m_lvFavorites;
+    QTabWidget* m_tabWidget;
 };
 
 #endif // FILESYSTEMSIDEBAR_H

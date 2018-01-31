@@ -9,6 +9,9 @@
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
+#include "plugin-system/filesystem/favoriteslistwidget.h"
+#include "plugin-system/filesystem/filesystemsidebarmodel.h"
+#include "plugin-system/filesystem/filesystemview.h"
 
 #include <QFileSystemModel>
 #include <QGroupBox>
@@ -40,22 +43,25 @@ int FilesystemSidebar::initialWidth() const {
 
 void FilesystemSidebar::load() {
   if (m_fsModel == nullptr) {
-    QWidget* widget = new QWidget(this);
-    QVBoxLayout* layout = new QVBoxLayout(widget);
+    m_tabWidget = new QTabWidget(this);
+    QWidget* widget_browser = new QWidget(this);
+    QVBoxLayout* layout_browser = new QVBoxLayout(widget_browser);
 
-    m_fsModel = new FileSystemSidebarModel(widget);
-    m_fsView = new FilesystemView(widget);
-    m_lvFavorites = new FavoritesListWidget(widget);
-    m_txtPath = new BaseLineEdit(widget);
+    m_fsModel = new FilesystemSidebarModel(widget_browser);
+    m_fsView = new FilesystemView(widget_browser);
+    m_lvFavorites = new FavoritesListWidget(m_tabWidget);
+    m_txtPath = new BaseLineEdit(widget_browser);
+    m_txtPath->setReadOnly(true);
 
-    layout->setMargin(0);
+    m_tabWidget->setTabPosition(QTabWidget::TabPosition::South);
+    layout_browser->setMargin(0);
 
     // Initialize toolbar.
-    QToolBar* tool_bar = new QToolBar(widget);
+    QToolBar* tool_bar = new QToolBar(widget_browser);
     QAction* btn_parent = new QAction(qApp->icons()->fromTheme(QSL("go-up")),
-                                      tr("Go to parent folder"), widget);
+                                      tr("Go to parent folder"), widget_browser);
     QAction* btn_add_favorites = new QAction(qApp->icons()->fromTheme(QSL("folder-favorites")),
-                                             tr("Add selected item to favorites"), widget);
+                                             tr("Add selected item to favorites"), widget_browser);
 
     connect(btn_parent, &QAction::triggered, this, &FilesystemSidebar::goToParentFolder);
     connect(btn_add_favorites, &QAction::triggered, this, &FilesystemSidebar::addToFavorites);
@@ -73,6 +79,7 @@ void FilesystemSidebar::load() {
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
     m_lvFavorites->setIconSize(QSize(12, 12));
+    m_lvFavorites->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setRootPath(QString());
     m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(windowTitle().toLower(),
                                                                     QL1S("current_folder_") + OS_ID_LOW,
@@ -96,12 +103,14 @@ void FilesystemSidebar::load() {
 
     m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
 
-    layout->addWidget(tool_bar, 0);
-    layout->addWidget(m_txtPath, 0);
-    layout->addWidget(m_fsView, 2);
-    layout->addWidget(m_lvFavorites, 1);
+    layout_browser->addWidget(tool_bar, 0);
+    layout_browser->addWidget(m_txtPath, 0);
+    layout_browser->addWidget(m_fsView, 2);
 
-    setWidget(widget);
+    m_tabWidget->addTab(widget_browser, tr("Explorer"));
+    m_tabWidget->addTab(m_lvFavorites, tr("Favorites"));
+
+    setWidget(m_tabWidget);
   }
 }
 
@@ -123,6 +132,7 @@ void FilesystemSidebar::addToFavorites() {
 
   m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
   saveFavorites();
+  makeFavoritesVisible();
 }
 
 void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
@@ -130,6 +140,7 @@ void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
 
   if (file_folder.isDir()) {
     m_fsView->setRootIndex(m_fsModel->index(file_folder.absoluteFilePath()));
+    makeExplorerVisible();
   }
   else {
     emit openFileRequested(file_folder.absoluteFilePath());
@@ -161,56 +172,10 @@ void FilesystemSidebar::saveFavorites() const {
   qApp->settings()->setValue(windowTitle().toLower(), QSL("favorites"), favorites);
 }
 
-FileSystemSidebarModel::FileSystemSidebarModel(QObject* parent) : QFileSystemModel(parent) {}
-
-QVariant FileSystemSidebarModel::data(const QModelIndex& index, int role) const {
-  if (role == Qt::ItemDataRole::DecorationRole) {
-    return qApp->icons()->fromTheme(isDir(index) ? QSL("folder") : QSL("gtk-file"));
-  }
-  else {
-    return QFileSystemModel::data(index, role);
-  }
+void FilesystemSidebar::makeExplorerVisible() const {
+  m_tabWidget->setCurrentIndex(0);
 }
 
-FavoritesListWidget::FavoritesListWidget(QWidget* parent) : QListWidget(parent) {
-  setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
-}
-
-void FavoritesListWidget::loadFileItem(const QString& file_path) {
-  QListWidgetItem* item = new QListWidgetItem(this);
-  QFileInfo info(file_path);
-
-  item->setData(Qt::UserRole, file_path);
-  item->setToolTip(file_path);
-  item->setIcon(qApp->icons()->fromTheme(info.isDir() ? QSL("folder") : QSL("gtk-file")));
-
-  if (!info.exists()) {
-    item->setText(QFileInfo(file_path).fileName() + tr(" (N/A)"));
-    item->setTextColor(Qt::darkRed);
-  }
-  else {
-    item->setText(QFileInfo(file_path).fileName());
-  }
-}
-
-void FavoritesListWidget::keyPressEvent(QKeyEvent* event) {
-  if (event->key() == Qt::Key_Delete) {
-    event->accept();
-
-    int row = currentRow();
-
-    if (row >= 0) {
-      delete takeItem(row);
-    }
-  }
-  else {
-    QListWidget::keyPressEvent(event);
-  }
-}
-
-FilesystemView::FilesystemView(QWidget* parent) : QListView(parent) {}
-
-void FilesystemView::setRootIndex(const QModelIndex& index) {
-  QListView::setRootIndex(index);
-  emit rootIndexChanged(index);
+void FilesystemSidebar::makeFavoritesVisible() const {
+  m_tabWidget->setCurrentIndex(1);
 }

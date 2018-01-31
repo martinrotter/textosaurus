@@ -1,6 +1,9 @@
 2018.01.XX
 ----------
 Changed:
+* FS sidebar was enhanced:
+    * Favorites list was separated to extra tab.
+    * Overall UI polishments.
 * Prebuilt Windows binaries now use MSVC toolchain again, but this time MSVC runtime is compiled in statically, more optimizations are used (LTCG), which makes final textilosaurus.exe file smaller and faster to run.
 
 2018.01.26

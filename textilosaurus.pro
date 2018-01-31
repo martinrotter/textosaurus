@@ -237,7 +237,10 @@ HEADERS +=  src/definitions/definitions.h \
             src/plugin-system/filesystem/filesystemsidebar.h \
             src/plugin-system/filesystem/filesystemplugin.h \
             src/gui/sidebars/basesidebar.h \
-    src/plugin-system/markdown/markdowntextbrowser.h
+    src/plugin-system/markdown/markdowntextbrowser.h \
+    src/plugin-system/filesystem/filesystemsidebarmodel.h \
+    src/plugin-system/filesystem/filesystemview.h \
+    src/plugin-system/filesystem/favoriteslistwidget.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -303,7 +306,10 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/plugin-system/filesystem/filesystemsidebar.cpp \
             src/plugin-system/filesystem/filesystemplugin.cpp \
             src/gui/sidebars/basesidebar.cpp \
-    src/plugin-system/markdown/markdowntextbrowser.cpp
+    src/plugin-system/markdown/markdowntextbrowser.cpp \
+    src/plugin-system/filesystem/filesystemsidebarmodel.cpp \
+    src/plugin-system/filesystem/filesystemview.cpp \
+    src/plugin-system/filesystem/favoriteslistwidget.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
