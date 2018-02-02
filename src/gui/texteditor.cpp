@@ -39,6 +39,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
+  connect(this, &TextEditor::updateUi, this, &TextEditor::uiUpdated);
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
   connect(this, &TextEditor::notify, this, [this](SCNotification* pscn) {
@@ -46,6 +47,11 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
       qApp->web()->openUrlInExternalBrowser(textRange(m_currentUrlStart, m_currentUrlEnd));
     }
   });
+
+  indicSetFore(m_quickFindIndicator, RGB_TO_SPRT(220, 30, 0));
+  indicSetStyle(m_quickFindIndicator, INDIC_FULLBOX);
+  indicSetHoverFore(m_quickFindIndicator, RGB_TO_SPRT(250, 50, 0));
+  indicSetHoverStyle(m_quickFindIndicator, INDIC_FULLBOX);
 
   // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
@@ -102,6 +108,13 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
 
 void TextEditor::loadFromString(const QString& contents) {
   setText(contents.toUtf8().constData());
+}
+
+void TextEditor::uiUpdated(int code) {
+  if ((code & SC_UPDATE_SELECTION) == SC_UPDATE_SELECTION) {
+    // Selection has changed.
+    updateOccurrencesHighlights();
+  }
 }
 
 void TextEditor::onFileExternallyChanged(const QString& file_path) {
@@ -260,6 +273,31 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
   else {
     ScintillaEdit::closeEvent(event);
+  }
+}
+
+void TextEditor::updateOccurrencesHighlights() {
+  QByteArray sel_text = getSelText();
+
+  setIndicatorCurrent(m_quickFindIndicator);
+  indicatorClearRange(0, length());
+
+  if (!sel_text.isEmpty()) {
+    // Find occurrences.
+    int start_position = 0, end_position = length(), search_flags = 0;
+
+    while (true) {
+      QPair<int, int> found_range = findText(search_flags, sel_text.constData(), start_position, end_position);
+
+      if (found_range.first >= 0) {
+        indicatorFillRange(found_range.first, found_range.second - found_range.first);
+
+        start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
+      }
+      else {
+        break;
+      }
+    }
   }
 }
 
@@ -513,7 +551,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
     else {
       // File is quite big, we turn some features off to make sure it loads faster.
       QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
-                           tr("File '%1' is big. %2 will switch some features (for example 'Word wrap') off to "
+                           tr("File '%1' is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
                               "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
                                                                                        QSL(APP_NAME)));
 
@@ -607,7 +645,7 @@ void TextEditor::reloadFromDisk() {
       else {
         // File is quite big, we turn some features off to make sure it loads faster.
         QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
-                             tr("File '%1' is big. %2 will switch some features (for example 'Word wrap') off to "
+                             tr("File '%1' is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
                                 "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(filePath()),
                                                                                          QSL(APP_NAME)));
 
