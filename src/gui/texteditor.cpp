@@ -111,7 +111,7 @@ void TextEditor::loadFromString(const QString& contents) {
 }
 
 void TextEditor::uiUpdated(int code) {
-  if ((code & SC_UPDATE_SELECTION) == SC_UPDATE_SELECTION) {
+  if ((code & (SC_UPDATE_SELECTION | SC_UPDATE_V_SCROLL)) > 0) {
     // Selection has changed.
     updateOccurrencesHighlights();
   }
@@ -283,8 +283,17 @@ void TextEditor::updateOccurrencesHighlights() {
   indicatorClearRange(0, length());
 
   if (!sel_text.isEmpty()) {
-    // Find occurrences.
-    int start_position = 0, end_position = length(), search_flags = 0;
+    // Count of lines visible on screen.
+    sptr_t visible_lines_count = linesOnScreen();
+    sptr_t first_visible_position = positionFromPoint(5, 5);
+    sptr_t start_position = first_visible_position;
+
+    // Firs line visible on screen.
+    sptr_t first_visible_line = lineFromPosition(start_position);
+    sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
+                                lineLength(first_visible_line + visible_lines_count);
+    sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
+    int search_flags = 0;
 
     while (true) {
       QPair<int, int> found_range = findText(search_flags, sel_text.constData(), start_position, end_position);

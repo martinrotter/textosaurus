@@ -1,7 +1,7 @@
 2018.02.XX
 ----------
 Added:
-* Initial implementation of highlighting of all matchin occurrences of current selection.
+* Initial implementation of highlighting of all matching occurrences of currently selected text.
 
 2018.01.31
 ----------
