@@ -468,8 +468,8 @@ win32 {
   nsis.depends = install
   nsis.commands = \
     $$shell_path($$shell_quote($$PWD/resources/scripts/sed/sed.exe)) -e \"s|@APP_VERSION@|$$APP_VERSION|g; s|@APP_WIN_ARCH@|$$APP_WIN_ARCH|g; s|@APP_REVISION@|$$APP_REVISION|g; s|@APP_NAME@|$$APP_NAME|g; s|@APP_LOW_NAME@|$$APP_LOW_NAME|g; s|@EXE_NAME@|$${APP_LOW_NAME}.exe|g; s|@PWD@|$$replace(PWD, /, \\\\\\\\\\\\\\\\)|g; s|@OUT_PWD@|$$replace(OUT_PWD, /, \\\\\\\\\\\\\\\\)|g\" $$shell_quote($$shell_path($$PWD/resources/nsis/NSIS.definitions.nsh.in)) > $$shell_quote($$shell_path($$OUT_PWD/NSIS.definitions.nsh)) && \
-    xcopy \"$$system_path($$PWD/resources/nsis/NSIS.template.in)\" \"$$system_path($$OUT_PWD/)\" /Y && \
-    $$shell_path($$shell_quote($$PWD/resources/scripts/nsis/makensis.exe)) \"$$system_path($$OUT_PWD/NSIS.template.in)\"
+    xcopy \'$$system_path($$PWD/resources/nsis/NSIS.template.in)\' \'$$system_path($$OUT_PWD/)\' //Y && \
+    $$shell_path($$shell_quote($$PWD/resources/scripts/nsis/makensis.exe)) \'$$system_path($$OUT_PWD/NSIS.template.in)\'
 
   QMAKE_EXTRA_TARGETS += nsis
 }
