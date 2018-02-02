@@ -285,7 +285,7 @@ void TextEditor::updateOccurrencesHighlights() {
   if (!sel_text.isEmpty()) {
     // Count of lines visible on screen.
     sptr_t visible_lines_count = linesOnScreen();
-    sptr_t first_visible_position = positionFromPoint(5, 5);
+    sptr_t first_visible_position = positionFromPoint(1, 1);
     sptr_t start_position = first_visible_position;
 
     // Firs line visible on screen.
