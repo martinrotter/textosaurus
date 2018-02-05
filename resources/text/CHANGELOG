@@ -1,6 +1,7 @@
 2018.02.XX
 ----------
 Changed:
+* "Find Results" sidebar now displays results highlighted with red color.
 * URL highlighting now respects URLs starting with just "www.".
 
 2018.02.05

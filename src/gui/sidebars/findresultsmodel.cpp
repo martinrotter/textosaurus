@@ -117,9 +117,8 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, 
 
   doc.setHtml(optionV4.text);
   doc.setDocumentMargin(2);
-
-  /// Painting item without text
   optionV4.text = QString();
+
   style->drawControl(QStyle::CE_ItemViewItem, &optionV4, painter);
 
   QAbstractTextDocumentLayout::PaintContext ctx;
@@ -130,13 +129,14 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, 
     }
   }
 
-  QRect textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &optionV4);
+  QRect text_rect = style->subElementRect(QStyle::SE_ItemViewItemText, &optionV4);
 
   painter->save();
-  painter->translate(textRect.topLeft());
-  painter->setClipRect(textRect.translated(-textRect.topLeft()));
+  painter->translate(text_rect.topLeft());
+  painter->setClipRect(text_rect.translated(-text_rect.topLeft()));
   doc.documentLayout()->draw(painter, ctx);
   painter->restore();
+
 }
 
 QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const {
