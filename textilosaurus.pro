@@ -126,12 +126,12 @@ VERSION = $$APP_VERSION
 CONFIG(release, debug|release) {
   message($$MSG_PREFIX: Building in "release" mode.)
 
-msvc:static {
-  message($$MSG_PREFIX: Setting up LTCG.)
+  msvc:static {
+    message($$MSG_PREFIX: Setting up LTCG.)
 
-  #QMAKE_CXXFLAGS += /O1QMAKE_CXXFLAGS +=  /GL
-  QMAKE_LFLAGS += /LTCG
-}
+    #QMAKE_CXXFLAGS += /O1QMAKE_CXXFLAGS +=  /GL
+    QMAKE_LFLAGS += /LTCG
+  }
 
   gcc:QMAKE_CXXFLAGS_RELEASE *= -O3
   clang:QMAKE_CXXFLAGS_RELEASE *= -O3
