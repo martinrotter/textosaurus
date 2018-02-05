@@ -1,7 +1,10 @@
-2018.02.XX
+2018.02.05
 ----------
 Fixed:
 * Some UI mistakes, missing strings, invalid Title Case, etc.
+
+Changed:
+* Windows prebuilt binaries are slimmed down.
 
 Added:
 * Initial implementation of highlighting of all matching occurrences of currently selected text, which works also on big files.
