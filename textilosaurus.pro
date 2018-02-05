@@ -433,9 +433,12 @@ qtPrepareTool(LRELEASE, lrelease) {
 static {
   message($$MSG_PREFIX: Building static version of application.)
 
+  QTPLUGIN.bearer = -
+  QTPLUGIN.generic = -
+  QTPLUGIN.sqldrivers = -
   QTPLUGIN.iconengines = qsvgicon
-  QTPLUGIN.platforms = qminimal qwindows
-  QTPLUGIN.imageformats = qgif qicns qico qjp2 qjpeg qsvg qtga qtiff qwbmp qwebp
+  QTPLUGIN.platforms = qwindows
+  QTPLUGIN.imageformats = qgif qico qjpeg qsvg qwbmp
   QTPLUGIN.printsupport = windowsprintersupport
   QTPLUGIN.styles = qwindowsvistastyle
 }
