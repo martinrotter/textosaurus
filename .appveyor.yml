@@ -5,8 +5,6 @@ clone_depth: 1
 clone_folder: C:\textilosaurus
 
 environment:
-  QTDIR: 'c:\msys64\mingw64\qt5-static\share\qt5\'
-  QMAKESPEC: win32-g++
   access_token:
     secure: bM8uJbH7GK+2EW6aL8D0/qwwdM/lzW6y2odXWs/VcMq+nUBZa68x+k3EpZEAo6iT
 
@@ -30,8 +28,9 @@ deploy:
     
 build_script:
   - git submodule update --init --recursive
-  - C:\msys64\usr\bin\bash.exe --login "C:\textilosaurus\resources\scripts\.appveyor-prepare-win.sh"
-  - C:\msys64\usr\bin\bash.exe --login "C:\textilosaurus\resources\scripts\.appveyor-build-win.sh"
+  - ps: C:\textilosaurus\resources\scripts\.appveyor-prepare-win.ps1
+  - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"'
+  - ps: C:\textilosaurus\resources\scripts\.appveyor-build-win.ps1
 
 on_success:
   - ps: C:\textilosaurus\resources\scripts\.appveyor-install-win.ps1
