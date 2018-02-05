@@ -539,7 +539,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
 
   if (file.size() > BIG_TEXT_FILE_SIZE) {
     if (encoding != DEFAULT_TEXT_FILE_ENCODING &&
-        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
+        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening Big File"),
                          tr("You want to open big text file in encoding which is different from %1. This operation "
                             "might take quite some time.").arg(DEFAULT_TEXT_FILE_ENCODING),
                          tr("Do you really want to open the file?"),
@@ -548,7 +548,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
     }
     else {
       // File is quite big, we turn some features off to make sure it loads faster.
-      QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
+      QMessageBox::warning(qApp->mainFormWidget(), tr("Loading Big File"),
                            tr("File '%1' is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
                               "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
                                                                                        QSL(APP_NAME)));
@@ -633,7 +633,7 @@ void TextEditor::reloadFromDisk() {
 
     if (file.size() > BIG_TEXT_FILE_SIZE) {
       if (encoding != DEFAULT_TEXT_FILE_ENCODING &&
-          MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening big file"),
+          MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening Big File"),
                            tr("You want to open big text file in encoding which is different from %1. This operation "
                               "might take quite some time.").arg(DEFAULT_TEXT_FILE_ENCODING),
                            tr("Do you really want to open the file?"),
@@ -642,7 +642,7 @@ void TextEditor::reloadFromDisk() {
       }
       else {
         // File is quite big, we turn some features off to make sure it loads faster.
-        QMessageBox::warning(qApp->mainFormWidget(), tr("Loading big file"),
+        QMessageBox::warning(qApp->mainFormWidget(), tr("Loading Big File"),
                              tr("File '%1' is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
                                 "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(filePath()),
                                                                                          QSL(APP_NAME)));

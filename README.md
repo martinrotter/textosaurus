@@ -45,7 +45,8 @@ Features
     - switchable encoding for each separate document,
     - **uses full UTF-8 internally**,
     - can load relatively big files (100 MB file should not be a problem),
-    - can **print files including syntax highlighting** and printing to PDF,
+    - can **print files including syntax highlighting**,
+    - can print to PDF,
     - hideable line numbers,
     - URL highlights (fast on big files, only currently visible lines),
     - highlights occurrences of current selection (fast on big files, only currently visible lines),
@@ -57,6 +58,8 @@ Features
     - simple find/replace functionality, which allows you to:
         * search forward/backward for plain string or regular expression (ECMAScript),
         * display number of occurrences of search phrase in a document,
+        * replace all occurrences,
+        * display results via "Find Results" sidebar,
     - switchable EOL mode for new documents,
     - EOL mode auto-detection,
     - **syntax highlighting** for many text formats,
