@@ -129,7 +129,7 @@ CONFIG(release, debug|release) {
 msvc:static {
   message($$MSG_PREFIX: Setting up LTCG.)
 
-  QMAKE_CXXFLAGS += /O1 /GL
+  #QMAKE_CXXFLAGS += /O1QMAKE_CXXFLAGS +=  /GL
   QMAKE_LFLAGS += /LTCG
 }
 

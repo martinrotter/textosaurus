@@ -17,6 +17,7 @@ void BaseLineEdit::keyPressEvent(QKeyEvent* event) {
 
     event->accept();
   }
-
-  QLineEdit::keyPressEvent(event);
+  else {
+    QLineEdit::keyPressEvent(event);
+  }
 }
