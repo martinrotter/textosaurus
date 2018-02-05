@@ -74,11 +74,7 @@ bool SelectionPosition::operator >=(const SelectionPosition &other) const {
 }
 
 Sci::Position SelectionRange::Length() const {
-	if (anchor > caret) {
-		return anchor.Position() - caret.Position();
-	} else {
-		return caret.Position() - anchor.Position();
-	}
+  return std::abs(anchor.Position() - caret.Position());
 }
 
 void SelectionRange::MoveForInsertDelete(bool insertion, Sci::Position startChange, Sci::Position length) {
