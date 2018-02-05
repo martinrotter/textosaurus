@@ -35,6 +35,7 @@ void FindResultsSidebar::load() {
   m_viewResults->setModel(m_model);
   m_viewResults->setIndentation(10);
   m_viewResults->setAlternatingRowColors(true);
+  m_viewResults->setItemDelegate(new HtmlDelegate(m_viewResults));
 
   setWidget(m_viewResults);
   connect(m_viewResults, &QTreeView::activated, this, &FindResultsSidebar::navigateToResult);

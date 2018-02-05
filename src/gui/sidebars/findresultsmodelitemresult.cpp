@@ -13,10 +13,10 @@ FindResultsModelItemResult::FindResultsModelItemResult(const QString& found_text
 QVariant FindResultsModelItemResult::data(int role) const {
   switch (role) {
     case Qt::ItemDataRole::DisplayRole:
-      return QString("Line: %4: \"%1\" (%2 •• %3)").arg(m_resultText,
-                                                        QString::number(m_range.first),
-                                                        QString::number(m_range.second),
-                                                        QString::number(m_line));
+      return QString("Line: %4: %1 (%2 •• %3)").arg(m_resultText,
+                                                    QString::number(m_range.first),
+                                                    QString::number(m_range.second),
+                                                    QString::number(m_line));
 
     default:
       return QVariant();

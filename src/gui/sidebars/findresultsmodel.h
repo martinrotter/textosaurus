@@ -4,6 +4,7 @@
 #define FINDRESULTSMODEL_H
 
 #include <QAbstractItemModel>
+#include <QStyledItemDelegate>
 
 #include "gui/sidebars/findresultsmodelitem.h"
 #include "gui/sidebars/findresultsmodelitemeditor.h"
@@ -31,6 +32,18 @@ class FindResultsModel : public QAbstractItemModel {
 
   private:
     QScopedPointer<FindResultsModelItem> m_rootItem;
+};
+
+class HtmlDelegate : public QStyledItemDelegate {
+  Q_OBJECT
+
+  public:
+    explicit HtmlDelegate(QObject* parent = nullptr);
+    virtual ~HtmlDelegate() = default;
+
+  protected:
+    void paint ( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
+    QSize sizeHint ( const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 };
 
 #endif // FINDRESULTSMODEL_H
