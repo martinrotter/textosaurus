@@ -61,13 +61,15 @@ class TextEditor : public ScintillaEdit {
     void loadFromString(const QString& contents);
 
   private slots:
+    void updateUrlHighlights();
+    void updateOccurrencesHighlights();
     void uiUpdated(int code);
+    void onNotification(SCNotification* pscn);
     void onFileExternallyChanged(const QString& file_path);
     void onModified(int type, int position, int length, int lines_added, const QByteArray& text,
                     int line, int fold_now, int fold_prev);
 
   protected:
-    virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void wheelEvent(QWheelEvent* event) override;
     virtual void closeEvent(QCloseEvent* event) override;
 
@@ -79,7 +81,6 @@ class TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
-    void updateOccurrencesHighlights();
     void detachWatcher();
     void reattachWatcher(const QString& file_path);
     bool isMarginVisible(int margin_number) const;
@@ -87,11 +88,10 @@ class TextEditor : public ScintillaEdit {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
+    const sptr_t m_urlIndicator = 0;
     const sptr_t m_quickFindIndicator = 1;
     bool m_isLog;
     QFileSystemWatcher* m_fileWatcher;
-    int m_currentUrlStart;
-    int m_currentUrlEnd;
     bool m_settingsDirty;
     TextApplication* m_textApp;
     QString m_filePath;

@@ -1,7 +1,11 @@
 2018.02.XX
 ----------
+Fixed:
+* Some UI mistakes, missing strings, invalid Title Case, etc.
+
 Added:
-* Initial implementation of highlighting of all matching occurrences of currently selected text.
+* Initial implementation of highlighting of all matching occurrences of currently selected text, which works also on big files.
+* URL highlighting now does not require mouse hover and works on big files.
 
 2018.01.31
 ----------

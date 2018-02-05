@@ -32,26 +32,27 @@
 #include <QRegularExpression>
 #include <QTextCodec>
 #include <QTextStream>
+#include <QTimer>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
-  : ScintillaEdit(parent), m_fileWatcher(nullptr), m_currentUrlStart(-1),
-  m_currentUrlEnd(-1), m_settingsDirty(true), m_textApp(text_app),
+  : ScintillaEdit(parent), m_fileWatcher(nullptr), m_settingsDirty(true), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
 
   connect(this, &TextEditor::updateUi, this, &TextEditor::uiUpdated);
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
-  connect(this, &TextEditor::notify, this, [this](SCNotification* pscn) {
-    if (pscn->nmhdr.code == SCN_INDICATORCLICK && pscn->modifiers == SCMOD_CTRL) {
-      qApp->web()->openUrlInExternalBrowser(textRange(m_currentUrlStart, m_currentUrlEnd));
-    }
-  });
+  connect(this, &TextEditor::notify, this, &TextEditor::onNotification);
 
   indicSetFore(m_quickFindIndicator, RGB_TO_SPRT(220, 30, 0));
   indicSetStyle(m_quickFindIndicator, INDIC_FULLBOX);
   indicSetHoverFore(m_quickFindIndicator, RGB_TO_SPRT(250, 50, 0));
   indicSetHoverStyle(m_quickFindIndicator, INDIC_FULLBOX);
+
+  indicSetFore(m_urlIndicator, RGB_TO_SPRT(0, 170, 0));
+  indicSetStyle(m_urlIndicator, INDIC_COMPOSITIONTHICK);
+  indicSetHoverFore(m_urlIndicator, RGB_TO_SPRT(0, 225, 0));
+  indicSetHoverStyle(m_urlIndicator, INDIC_COMPOSITIONTHICK);
 
   // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
@@ -113,7 +114,25 @@ void TextEditor::loadFromString(const QString& contents) {
 void TextEditor::uiUpdated(int code) {
   if ((code & (SC_UPDATE_SELECTION | SC_UPDATE_V_SCROLL)) > 0) {
     // Selection has changed.
+    // NOTE: We could even allow SC_UPDATE_CONTENT here with QTimer and
+    // completely remove uiUpdated method, but it would generate
+    // needless useless method calls too often.
     updateOccurrencesHighlights();
+  }
+
+  if ((code & (SC_UPDATE_CONTENT | SC_UPDATE_V_SCROLL)) > 0) {
+    // Content has changed.
+    updateUrlHighlights();
+  }
+}
+
+void TextEditor::onNotification(SCNotification* pscn) {
+  if (pscn->nmhdr.code == SCN_INDICATORCLICK && pscn->modifiers == SCMOD_CTRL) {
+    // Open clicked indicated URL.
+    sptr_t indic_start = indicatorStart(m_urlIndicator, pscn->position);
+    sptr_t indic_end = indicatorEnd(m_urlIndicator, pscn->position);
+
+    qApp->web()->openUrlInExternalBrowser(textRange(indic_start, indic_end));
   }
 }
 
@@ -156,74 +175,6 @@ void TextEditor::onModified(int type, int position, int length, int lines_added,
   if (lines_added != 0) {
     updateLineNumberMarginVisibility();
   }
-}
-
-void TextEditor::mouseMoveEvent(QMouseEvent* event) {
-  Scintilla::Point mouse_pos = Scintilla::PointFromQPoint(event->pos());
-  sptr_t text_pos = positionFromPointClose(mouse_pos.x, mouse_pos.y);
-
-  if (text_pos == -1 || text_pos < m_currentUrlStart || text_pos > m_currentUrlEnd) {
-    // We moved mouse pointer outside of existing URL indicator.
-    // Thus, we remove current indicator
-    if (m_currentUrlStart >= 0) {
-      indicatorClearRange(m_currentUrlStart, m_currentUrlEnd);
-      m_currentUrlStart = m_currentUrlEnd = -1;
-    }
-
-    if (text_pos >= 0) {
-
-      // We find word separator on the left and on the right.
-      sptr_t start = text_pos;
-      sptr_t end = text_pos;
-      int chr;
-
-      while (true) {
-        chr = charAt(start);
-
-        if (!TextFactory::isCharUrlValid(chr)) {
-          break;
-        }
-        else {
-          start--;
-        }
-      }
-
-      start++;
-
-      while (true) {
-        chr = charAt(end);
-
-        if (!TextFactory::isCharUrlValid(chr)) {
-          break;
-        }
-        else {
-          end++;
-        }
-      }
-
-      QByteArray ranged_text = textRange(start, end);
-      QRegularExpressionMatch match = QRegularExpression(QSL("(https?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                             "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#@!$&'*+,;=`.]+"))
-                                      .match(ranged_text);
-
-      if (match.hasMatch()) {
-        // We found correct URL in hovered range.
-        start = start + match.capturedStart();
-        end = end - ranged_text.size() + match.capturedEnd();
-
-        if (start != m_currentUrlStart || end != m_currentUrlEnd) {
-          m_currentUrlStart = start;
-          m_currentUrlEnd = end;
-
-          setIndicatorCurrent(0);
-          indicSetHoverStyle(0, INDIC_ROUNDBOX);
-          indicatorFillRange(m_currentUrlStart, m_currentUrlEnd - m_currentUrlStart);
-        }
-      }
-    }
-  }
-
-  ScintillaEdit::mouseMoveEvent(event);
 }
 
 void TextEditor::wheelEvent(QWheelEvent* event) {
@@ -273,6 +224,40 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
   else {
     ScintillaEdit::closeEvent(event);
+  }
+}
+
+void TextEditor::updateUrlHighlights() {
+  setIndicatorCurrent(m_urlIndicator);
+  indicatorClearRange(0, length());
+
+  // Count of lines visible on screen.
+  sptr_t visible_lines_count = linesOnScreen();
+  sptr_t first_visible_position = positionFromPoint(1, 1);
+  sptr_t start_position = first_visible_position;
+
+  // Firs line visible on screen.
+  sptr_t first_visible_line = lineFromPosition(start_position);
+  sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
+                              lineLength(first_visible_line + visible_lines_count);
+  sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
+  int search_flags = SCFIND_CXX11REGEX | SCFIND_REGEXP;
+
+  while (true) {
+    QPair<int, int> found_range = findText(search_flags,
+                                           "(https?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                           "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#@!$&'*+,;=`.]+",
+                                           start_position,
+                                           end_position);
+
+    if (found_range.first >= 0) {
+      indicatorFillRange(found_range.first, found_range.second - found_range.first);
+
+      start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
+    }
+    else {
+      break;
+    }
   }
 }
 
@@ -376,6 +361,10 @@ void TextEditor::reloadSettings() {
 
     reloadFont();
     reloadLexer(m_lexer);
+
+    // NOTE: Give text editor time to properly redraw itself.
+    QTimer::singleShot(500, this, &TextEditor::updateOccurrencesHighlights);
+    QTimer::singleShot(500, this, &TextEditor::updateUrlHighlights);
 
     m_settingsDirty = false;
   }
@@ -582,8 +571,8 @@ void TextEditor::reloadFromDisk() {
   if (!filePath().isEmpty()) {
     if (modify()) {
       int answer = QMessageBox::question(qApp->mainFormWidget(), tr("Unsaved Changes"),
-                                         tr("File '%1' was externally changed, do you want to reload "
-                                            "it from disk and discard any unsaved changes?"),
+                                         tr("File '%1' is modified, do you want to reload "
+                                            "it from disk and discard any unsaved changes?").arg(filePath()),
                                          QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
                                          QMessageBox::StandardButton::Yes);
 
