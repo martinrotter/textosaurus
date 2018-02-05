@@ -1,3 +1,8 @@
+2018.02.XX
+----------
+Changed:
+* URL highlighting now respects URLs starting with just "www.".
+
 2018.02.05
 ----------
 Fixed:

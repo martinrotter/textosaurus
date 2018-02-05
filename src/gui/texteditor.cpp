@@ -245,7 +245,7 @@ void TextEditor::updateUrlHighlights() {
 
   while (true) {
     QPair<int, int> found_range = findText(search_flags,
-                                           "(https?:\\/\\/|ftp:\\/\\/|mailto:)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                           "(https?:\\/\\/|ftp:\\/\\/|mailto:|www\\.)[ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                            "abcdefghijklmnopqrstuvwxyz0123456789\\-._~:\\/?#@!$&'*+,;=`.]+",
                                            start_position,
                                            end_position);
