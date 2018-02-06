@@ -85,7 +85,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       QSL("avs")
     }, SCLEX_AVS)
       << Lexer(QSL("Bash"), QStringList {
-      QSL("bash"), QSL("sh"), QSL("zsh"), QSL("PKGBUILD")
+      QSL("bash"), QSL("sh"), QSL("zsh"), QSL("bashrc"), QSL("zshrc"), QSL("_profile"), QSL("PKGBUILD")
     }, SCLEX_BASH)
       << Lexer(QSL("Batch"), QStringList {
       QSL("bat"), QSL("cmd")
