@@ -88,8 +88,6 @@ class TextEditor : public ScintillaEdit {
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
   private:
-    const sptr_t m_urlIndicator = 0;
-    const sptr_t m_quickFindIndicator = 1;
     bool m_isLog;
     QFileSystemWatcher* m_fileWatcher;
     bool m_settingsDirty;

@@ -44,26 +44,28 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
   connect(this, &TextEditor::notify, this, &TextEditor::onNotification);
 
-  indicSetFore(m_quickFindIndicator, RGB_TO_SPRT(220, 30, 0));
-  indicSetStyle(m_quickFindIndicator, INDIC_FULLBOX);
-  indicSetHoverFore(m_quickFindIndicator, RGB_TO_SPRT(250, 50, 0));
-  indicSetHoverStyle(m_quickFindIndicator, INDIC_FULLBOX);
+  indicSetFore(INDICATOR_FIND, RGB_TO_SPRT(220, 30, 0));
+  indicSetStyle(INDICATOR_FIND, INDIC_FULLBOX);
+  indicSetHoverFore(INDICATOR_FIND, RGB_TO_SPRT(250, 50, 0));
+  indicSetHoverStyle(INDICATOR_FIND, INDIC_FULLBOX);
 
-  indicSetFore(m_urlIndicator, RGB_TO_SPRT(0, 170, 0));
-  indicSetStyle(m_urlIndicator, INDIC_COMPOSITIONTHICK);
-  indicSetHoverFore(m_urlIndicator, RGB_TO_SPRT(0, 225, 0));
-  indicSetHoverStyle(m_urlIndicator, INDIC_COMPOSITIONTHICK);
+  indicSetFore(INDICATOR_URL, RGB_TO_SPRT(0, 170, 0));
+  indicSetStyle(INDICATOR_URL, INDIC_COMPOSITIONTHICK);
+  indicSetHoverFore(INDICATOR_URL, RGB_TO_SPRT(0, 225, 0));
+  indicSetHoverStyle(INDICATOR_URL, INDIC_COMPOSITIONTHICK);
 
   // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
 
   // Set initial settings.
+  setMultipleSelection(true);
+  setAdditionalSelectionTyping(true);
+  setMultiPaste(SC_MULTIPASTE_EACH);
+  setVirtualSpaceOptions(SCVS_RECTANGULARSELECTION);
   setCodePage(SC_CP_UTF8);
   setMarginWidthN(MARGIN_SYMBOLS, 0);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setEndAtLastLine(false);
-  setMultiPaste(SC_MULTIPASTE_EACH);
-  setMultipleSelection(true);
   setEOLMode(m_textApp->settings()->eolMode());
 }
 
@@ -129,8 +131,8 @@ void TextEditor::uiUpdated(int code) {
 void TextEditor::onNotification(SCNotification* pscn) {
   if (pscn->nmhdr.code == SCN_INDICATORCLICK && pscn->modifiers == SCMOD_CTRL) {
     // Open clicked indicated URL.
-    sptr_t indic_start = indicatorStart(m_urlIndicator, pscn->position);
-    sptr_t indic_end = indicatorEnd(m_urlIndicator, pscn->position);
+    sptr_t indic_start = indicatorStart(INDICATOR_URL, pscn->position);
+    sptr_t indic_end = indicatorEnd(INDICATOR_URL, pscn->position);
 
     qApp->web()->openUrlInExternalBrowser(textRange(indic_start, indic_end));
   }
@@ -228,7 +230,7 @@ void TextEditor::closeEvent(QCloseEvent* event) {
 }
 
 void TextEditor::updateUrlHighlights() {
-  setIndicatorCurrent(m_urlIndicator);
+  setIndicatorCurrent(INDICATOR_URL);
   indicatorClearRange(0, length());
 
   // Count of lines visible on screen.
@@ -264,7 +266,7 @@ void TextEditor::updateUrlHighlights() {
 void TextEditor::updateOccurrencesHighlights() {
   QByteArray sel_text = getSelText();
 
-  setIndicatorCurrent(m_quickFindIndicator);
+  setIndicatorCurrent(INDICATOR_FIND);
   indicatorClearRange(0, length());
 
   if (!sel_text.isEmpty()) {
