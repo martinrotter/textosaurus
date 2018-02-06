@@ -108,7 +108,7 @@ FindResultsModelItem* FindResultsModel::itemForIndex(const QModelIndex& idx) con
 HtmlDelegate::HtmlDelegate(QObject* parent) : QStyledItemDelegate(parent) {}
 
 void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
-  QStyleOptionViewItemV4 optionV4 = option;
+  QStyleOptionViewItem optionV4 = option;
 
   initStyleOption(&optionV4, index);
 
@@ -140,11 +140,9 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, 
 }
 
 QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const {
-  QStyleOptionViewItemV4 optionV4 = option;
+  QStyleOptionViewItem optionV4 = option;
 
   initStyleOption(&optionV4, index);
-
-  optionV4.text = "abc";
 
   QTextDocument doc;
 

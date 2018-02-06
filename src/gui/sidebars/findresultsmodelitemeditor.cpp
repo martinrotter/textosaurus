@@ -15,9 +15,11 @@ QVariant FindResultsModelItemEditor::data(int role) const {
         return tr("editor-closed");
       }
       else {
-        return tr("%n result(s) - ", "", childCount()) + (m_editor->filePath().isEmpty() ?
-                                                          tr("unnamed-document") :
-                                                          m_editor->filePath());
+        QString res = tr("%n result(s) - ", "", childCount()) + (m_editor->filePath().isEmpty() ?
+                                                                 tr("unnamed-document") :
+                                                                 m_editor->filePath());
+
+        return res;
       }
 
     case Qt::ItemDataRole::BackgroundRole:
