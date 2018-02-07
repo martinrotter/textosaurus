@@ -3,8 +3,7 @@
 #include "plugin-system/markdown/markdownplugin.h"
 
 #include "definitions/definitions.h"
-#include "miscellaneous/application.h"
-#include "miscellaneous/iconfactory.h"
+#include "miscellaneous/textapplication.h"
 #include "plugin-system/markdown/markdownsidebar.h"
 
 #include <QAction>
