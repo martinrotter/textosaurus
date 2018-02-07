@@ -26,6 +26,7 @@ class TextApplication : public QObject {
   Q_OBJECT
 
   friend class PluginFactory;
+  friend class TextEditor;
 
   public:
     explicit TextApplication(QObject* parent = nullptr);

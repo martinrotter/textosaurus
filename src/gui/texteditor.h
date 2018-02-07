@@ -70,6 +70,7 @@ class TextEditor : public ScintillaEdit {
                     int line, int fold_now, int fold_prev);
 
   protected:
+    virtual void contextMenuEvent(QContextMenuEvent* event) override;
     virtual void wheelEvent(QWheelEvent* event) override;
     virtual void closeEvent(QCloseEvent* event) override;
 

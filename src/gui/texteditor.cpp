@@ -8,6 +8,7 @@
 #include "gui/sidebars/outputsidebar.h"
 #include "gui/texteditorprinter.h"
 #include "miscellaneous/application.h"
+#include "miscellaneous/iconfactory.h"
 #include "miscellaneous/iofactory.h"
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
@@ -26,6 +27,7 @@
 #include <QFileDialog>
 #include <QFileSystemWatcher>
 #include <QFontDatabase>
+#include <QMenu>
 #include <QMouseEvent>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
@@ -177,6 +179,28 @@ void TextEditor::onModified(int type, int position, int length, int lines_added,
   if (lines_added != 0) {
     updateLineNumberMarginVisibility();
   }
+}
+
+void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
+  QMenu context_menu;
+
+  context_menu.addAction(m_textApp->m_actionEditBack);
+  context_menu.addAction(m_textApp->m_actionEditForward);
+  context_menu.addSeparator();
+  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-cut")), tr("&Select All"), [this]() {
+    selectAll();
+  })->setEnabled(length() > 0);
+  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-cut")), tr("&Cut"), [this]() {
+    cut();
+  })->setEnabled(!selectionEmpty());
+  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-copy")), tr("&Copy"), [this]() {
+    copy();
+  })->setEnabled(!selectionEmpty());
+  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-paste")), tr("&Paste"), [this]() {
+    paste();
+  })->setEnabled(canPaste());
+
+  context_menu.exec(event->globalPos());
 }
 
 void TextEditor::wheelEvent(QWheelEvent* event) {
