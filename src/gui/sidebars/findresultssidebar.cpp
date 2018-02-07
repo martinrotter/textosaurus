@@ -46,6 +46,7 @@ void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, i
   raise();
 
   m_model->addResults(editor, results);
+  m_viewResults->expand(m_model->index(0, 0, QModelIndex()));
 }
 
 void FindResultsSidebar::navigateToResult(const QModelIndex& index) {

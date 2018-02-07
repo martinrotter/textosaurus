@@ -5,6 +5,7 @@
 #include "definitions/definitions.h"
 #include "exceptions/ioexception.h"
 #include "gui/messagebox.h"
+#include "gui/sidebars/findresultssidebar.h"
 #include "gui/sidebars/outputsidebar.h"
 #include "gui/texteditorprinter.h"
 #include "miscellaneous/application.h"
@@ -115,6 +116,30 @@ void TextEditor::loadFromString(const QString& contents) {
   setText(contents.toUtf8().constData());
 }
 
+void TextEditor::findAllFromSelectedText() {
+  QList<QPair<int, int>> found_ranges;
+  int start_position = 0, end_position = length(), search_flags = 0;
+
+  while (true) {
+    QPair<int, int> found_range = findText(search_flags, getSelText(), start_position, end_position);
+
+    if (found_range.first >= 0) {
+      found_ranges.append(found_range);
+      start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
+    }
+    else {
+      break;
+    }
+  }
+
+  if (found_ranges.isEmpty()) {
+    m_textApp->outputSidebar()->displayOutput(OutputSource::Application, tr("Nothing found."), QMessageBox::Icon::Warning);
+  }
+  else {
+    m_textApp->findResultsSidebar()->addResults(this, found_ranges);
+  }
+}
+
 void TextEditor::uiUpdated(int code) {
   if ((code & (SC_UPDATE_SELECTION | SC_UPDATE_V_SCROLL)) > 0) {
     // Selection has changed.
@@ -184,10 +209,13 @@ void TextEditor::onModified(int type, int position, int length, int lines_added,
 void TextEditor::contextMenuEvent(QContextMenuEvent* event) {
   QMenu context_menu;
 
+  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-find")), tr("&Find All"), this,
+                         &TextEditor::findAllFromSelectedText)->setEnabled(!selectionEmpty());
+  context_menu.addSeparator();
   context_menu.addAction(m_textApp->m_actionEditBack);
   context_menu.addAction(m_textApp->m_actionEditForward);
   context_menu.addSeparator();
-  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-cut")), tr("&Select All"), [this]() {
+  context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-select-all")), tr("&Select All"), [this]() {
     selectAll();
   })->setEnabled(length() > 0);
   context_menu.addAction(qApp->icons()->fromTheme(QSL("edit-cut")), tr("&Cut"), [this]() {

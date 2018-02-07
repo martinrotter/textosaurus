@@ -61,6 +61,7 @@ class TextEditor : public ScintillaEdit {
     void loadFromString(const QString& contents);
 
   private slots:
+    void findAllFromSelectedText();
     void updateUrlHighlights();
     void updateOccurrencesHighlights();
     void uiUpdated(int code);

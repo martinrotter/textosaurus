@@ -1,6 +1,7 @@
 2018.02.XX
 ----------
 Added:
+* Enhanced context menu with "Find All" action.
 * Enabled better support for multiple text selections and editing.
 
 Changed:
