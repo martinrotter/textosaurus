@@ -132,8 +132,10 @@ void TextEditor::findAllFromSelectedText() {
     }
   }
 
-  if (found_ranges.isEmpty()) {
-    m_textApp->outputSidebar()->displayOutput(OutputSource::Application, tr("Nothing found."), QMessageBox::Icon::Warning);
+  if (found_ranges.size() <= 1) {
+    m_textApp->outputSidebar()->displayOutput(OutputSource::Application,
+                                              tr("No other occurrences of \"%1\" found.").arg(QString(getSelText())),
+                                              QMessageBox::Icon::Warning);
   }
   else {
     m_textApp->findResultsSidebar()->addResults(this, found_ranges);
