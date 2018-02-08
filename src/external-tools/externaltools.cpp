@@ -261,11 +261,21 @@ void ExternalTools::loadPredefinedTools() {
 
   xml_beautify->setActionObjectName(QSL("m_actionPredefXmlBeautify"));
   xml_beautify->setCategory(tr("&XML"));
-  xml_beautify->setName(tr("XML &Beautify"));
+  xml_beautify->setName(tr("XML &Beautify (Selected String)"));
   xml_beautify->setInput(ToolInput::SelectionDocument);
   xml_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(xml_beautify);
+
+  PredefinedTool* xml_beautify_file = new PredefinedTool(&PredefinedTools::xmlBeautifyFile, this);
+
+  xml_beautify_file->setActionObjectName(QSL("m_actionPredefXmlBeautifyFile"));
+  xml_beautify_file->setCategory(tr("&XML"));
+  xml_beautify_file->setName(tr("XML &Beautify (File)"));
+  xml_beautify_file->setInput(ToolInput::SavedFile);
+  xml_beautify_file->setOutput(ToolOutput::ReloadFile);
+
+  m_predefinedTools.append(xml_beautify_file);
 
   PredefinedTool* xml_linearize = new PredefinedTool(&PredefinedTools::xmlLinearize, this);
 

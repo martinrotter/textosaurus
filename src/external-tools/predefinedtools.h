@@ -24,6 +24,7 @@ class PredefinedTools {
     // XML.
     static QString xmlCheck(const QString& data, bool* ok);
     static QString xmlBeautify(const QString& data, bool* ok);
+    static QString xmlBeautifyFile(const QString& xml_file, bool* ok);
     static QString xmlLinearize(const QString& data, bool* ok);
 
     // Date/time.

@@ -15,6 +15,12 @@
 class TextApplication;
 class QFileSystemWatcher;
 
+struct FileInitialMetadata {
+  QString m_encoding;
+  Lexer m_lexer;
+  int m_eolMode;
+};
+
 class TextEditor : public ScintillaEdit {
   Q_OBJECT
 
@@ -34,6 +40,7 @@ class TextEditor : public ScintillaEdit {
     void setReadOnly(bool read_only);
 
     static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
+    static FileInitialMetadata getInitialMetadata(const QString& file_path, const QString& explicit_encoding = QString());
 
     bool isLog() const;
     void setIsLog(bool is_log);

@@ -200,6 +200,61 @@ QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
   }
 }
 
+QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
+  QFile file(xml_file);
+  QFile file_out(xml_file + ".out654321");
+
+  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+    *ok = false;
+    return file.errorString();
+  }
+
+  if (!file_out.open(QIODevice::OpenModeFlag::WriteOnly | QIODevice::OpenModeFlag::WriteOnly)) {
+    *ok = false;
+    file.close();
+    return file_out.errorString();
+  }
+
+  QXmlStreamReader reader(&file);
+  QXmlStreamWriter writer(&file_out);
+
+  writer.setAutoFormatting(true);
+  writer.setAutoFormattingIndent(2);
+
+  while (!reader.atEnd()) {
+    reader.readNext();
+
+    if (reader.error() != QXmlStreamReader::Error::NoError) {
+      break;
+    }
+
+    if (!reader.isWhitespace() &&
+        reader.tokenType() != QXmlStreamReader::TokenType::Invalid &&
+        reader.tokenType() != QXmlStreamReader::TokenType::NoToken) {
+      writer.writeCurrentToken(reader);
+    }
+  }
+
+  file.close();
+  file_out.close();
+
+  if (reader.hasError()) {
+    file_out.remove();
+
+    *ok = false;
+    return reader.errorString();
+  }
+  else {
+    auto original_filename = file.fileName();
+
+    file.remove();
+    file_out.rename(original_filename);
+
+    *ok = true;
+    return QString();
+  }
+}
+
 QString PredefinedTools::xmlLinearize(const QString& data, bool* ok) {
   QByteArray input = data.toUtf8();
   QString xml_out;
