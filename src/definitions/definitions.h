@@ -5,6 +5,7 @@
 
 #include <QtGlobal>
 
+constexpr auto FIND_RESULT_ENCLOSING_CHAR_COUNT = 8;
 constexpr auto INDICATOR_URL = 0;
 constexpr auto INDICATOR_FIND = 1;
 constexpr auto MARGIN_LINE_NUMBERS_MIN_WIDTH = 22;

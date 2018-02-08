@@ -82,10 +82,13 @@ void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int
   for (const QPair<int, int> range : results) {
     int line = editor->lineFromPosition(range.first) + 1;
     QString text = QString("%2<b style=\"color: red;\">%1</b>%3").arg(QString(editor->textRange(range.first, range.second)).toHtmlEscaped(),
-                                                                      QString(editor->textRange(qMax(range.first - 4, 0),
+                                                                      QString(editor->textRange(qMax(range.first -
+                                                                                                     FIND_RESULT_ENCLOSING_CHAR_COUNT,
+                                                                                                     0),
                                                                                                 range.first)).toHtmlEscaped(),
                                                                       QString(editor->textRange(range.second,
-                                                                                                qMin(range.second + 4,
+                                                                                                qMin(range.second +
+                                                                                                     FIND_RESULT_ENCLOSING_CHAR_COUNT,
                                                                                                      int(editor->length())))).toHtmlEscaped());
     FindResultsModelItemResult* item_result = new FindResultsModelItemResult(text, line, range, item_editor);
 
