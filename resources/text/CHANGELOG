@@ -1,10 +1,12 @@
 2018.02.XX
 ----------
 Added:
+* Auto-indent.
 * Enhanced context menu with "Find All" action.
 * Enabled better support for multiple text selections and editing.
 
 Changed:
+* All prebuilt binaries slimmed down by removing unused bundled icons.
 * "Find Results" sidebar now displays results highlighted with red color.
 * URL highlighting now respects URLs starting with just "www.".
 

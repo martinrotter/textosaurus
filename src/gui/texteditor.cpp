@@ -46,6 +46,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
   connect(this, &TextEditor::modified, this, &TextEditor::onModified);
   connect(this, &TextEditor::notify, this, &TextEditor::onNotification);
+  connect(this, &TextEditor::charAdded, this, &TextEditor::onCharAdded);
 
   indicSetFore(INDICATOR_FIND, RGB_TO_SPRT(220, 30, 0));
   indicSetStyle(INDICATOR_FIND, INDIC_FULLBOX);
@@ -154,6 +155,39 @@ void TextEditor::uiUpdated(int code) {
   if ((code & (SC_UPDATE_CONTENT | SC_UPDATE_V_SCROLL)) > 0) {
     // Content has changed.
     updateUrlHighlights();
+  }
+}
+
+void TextEditor::onCharAdded(int chr) {
+  // We perform auto-indent.
+  int target_chr;
+
+  switch (eOLMode()) {
+    case SC_EOL_CR:
+      target_chr = '\r';
+      break;
+
+    default:
+      target_chr = '\n';
+      break;
+  }
+
+  if (chr == target_chr) {
+    sptr_t curr_line = lineFromPosition(currentPos());
+
+    if (curr_line > 0) {
+      sptr_t range_start = positionFromLine(curr_line - 1);
+      sptr_t range_end = lineEndPosition(curr_line - 1);
+
+      QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
+
+      if (found.second > 0) {
+        QByteArray to_insert = textRange(found.first, found.second);
+
+        insertText(currentPos(), to_insert.constData());
+        setEmptySelection(currentPos() + to_insert.size());
+      }
+    }
   }
 }
 

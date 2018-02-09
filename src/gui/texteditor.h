@@ -72,6 +72,7 @@ class TextEditor : public ScintillaEdit {
     void updateUrlHighlights();
     void updateOccurrencesHighlights();
     void uiUpdated(int code);
+    void onCharAdded(int chr);
     void onNotification(SCNotification* pscn);
     void onFileExternallyChanged(const QString& file_path);
     void onModified(int type, int position, int length, int lines_added, const QByteArray& text,

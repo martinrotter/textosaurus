@@ -189,6 +189,7 @@ void FormMain::setupIcons() {
   m_ui.m_menuFileSaveWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
 
   // Edit.
+  m_ui.m_actionFindReplace->setIcon(icon_theme_factory->fromTheme(QSL("edit-find")));
   m_ui.m_actionEditBack->setIcon(icon_theme_factory->fromTheme(QSL("edit-undo")));
   m_ui.m_actionEditForward->setIcon(icon_theme_factory->fromTheme(QSL("edit-redo")));
 
