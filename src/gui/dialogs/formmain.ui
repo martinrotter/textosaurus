@@ -85,7 +85,7 @@
    </widget>
    <widget class="QMenu" name="m_menuHelp">
     <property name="title">
-     <string>&amp;Help</string>
+     <string>&amp;?</string>
     </property>
     <addaction name="m_actionCheckForUpdates"/>
     <addaction name="m_actionReportBug"/>
