@@ -22,6 +22,7 @@
     <file>./graphics/Papirus/actions/edit-redo.svg</file>
     <file>./graphics/Papirus/actions/edit-select-all.svg</file>
     <file>./graphics/Papirus/actions/edit-undo.svg</file>
+    <file>./graphics/Papirus/places/folder.svg</file>
     <file>./graphics/Papirus/places/folder-favorites.svg</file>
     <file>./graphics/Papirus/actions/go-jump.svg</file>
     <file>./graphics/Papirus/actions/go-left.svg</file>
@@ -29,6 +30,7 @@
     <file>./graphics/Papirus/actions/go-previous.svg</file>
     <file>./graphics/Papirus/actions/go-right.svg</file>
     <file>./graphics/Papirus/actions/go-up.svg</file>
+    <file>./graphics/Papirus/actions/gtk-file.svg</file>
     <file>./graphics/Papirus/actions/help-about.svg</file>
     <file>./graphics/Papirus/actions/insert-object.svg</file>
     <file>./graphics/Papirus/actions/list-add.svg</file>

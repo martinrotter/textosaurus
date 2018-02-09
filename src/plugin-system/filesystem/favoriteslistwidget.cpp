@@ -17,7 +17,13 @@ void FavoritesListWidget::loadFileItem(const QString& file_path) {
 
   item->setData(Qt::UserRole, file_path);
   item->setToolTip(file_path);
-  item->setIcon(qApp->icons()->fromTheme(info.isDir() ? QSL("folder") : QSL("gtk-file")));
+
+  if (info.isDir()) {
+    item->setIcon(qApp->icons()->fromTheme(QSL("folder")));
+  }
+  else {
+    item->setIcon(qApp->icons()->fromTheme(QSL("gtk-file")));
+  }
 
   if (!info.exists()) {
     item->setText(QFileInfo(file_path).fileName() + tr(" (N/A)"));

@@ -9,7 +9,12 @@ FilesystemSidebarModel::FilesystemSidebarModel(QObject* parent) : QFileSystemMod
 
 QVariant FilesystemSidebarModel::data(const QModelIndex& index, int role) const {
   if (role == Qt::ItemDataRole::DecorationRole) {
-    return qApp->icons()->fromTheme(isDir(index) ? QSL("folder") : QSL("gtk-file"));
+    if (isDir(index)) {
+      return qApp->icons()->fromTheme(QSL("folder"));
+    }
+    else {
+      return qApp->icons()->fromTheme(QSL("gtk-file"));
+    }
   }
   else {
     return QFileSystemModel::data(index, role);
