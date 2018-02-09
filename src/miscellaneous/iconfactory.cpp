@@ -8,33 +8,6 @@
 
 IconFactory::IconFactory(QObject* parent) : QObject(parent) {}
 
-QIcon IconFactory::fromByteArray(QByteArray array) {
-  array = QByteArray::fromBase64(array);
-  QIcon icon;
-  QBuffer buffer(&array);
-
-  buffer.open(QIODevice::ReadOnly);
-  QDataStream in(&buffer);
-
-  in.setVersion(QDataStream::Qt_4_7);
-  in >> icon;
-  buffer.close();
-  return icon;
-}
-
-QByteArray IconFactory::toByteArray(const QIcon& icon) {
-  QByteArray array;
-  QBuffer buffer(&array);
-
-  buffer.open(QIODevice::WriteOnly);
-  QDataStream out(&buffer);
-
-  out.setVersion(QDataStream::Qt_4_7);
-  out << icon;
-  buffer.close();
-  return array.toBase64();
-}
-
 QIcon IconFactory::fromTheme(const QString& name) {
   return QIcon::fromTheme(name);
 }

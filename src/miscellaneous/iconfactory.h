@@ -20,11 +20,6 @@ class IconFactory : public QObject {
     explicit IconFactory(QObject* parent = nullptr);
     virtual ~IconFactory() = default;
 
-    // Used to store/retrieve QIcons from/to Base64-encoded
-    // byte array.
-    static QIcon fromByteArray(QByteArray array);
-    static QByteArray toByteArray(const QIcon& icon);
-
     // Returns icon from active theme or invalid icon if
     // "no icon theme" is set.
     QIcon fromTheme(const QString& name);
