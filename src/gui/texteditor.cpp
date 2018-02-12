@@ -181,7 +181,7 @@ void TextEditor::onCharAdded(int chr) {
 
       QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
 
-      if (found.second > 0) {
+      if (found.first >= 0 && found.second > 0) {
         QByteArray to_insert = textRange(found.first, found.second);
 
         insertText(currentPos(), to_insert.constData());
