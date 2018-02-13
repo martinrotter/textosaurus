@@ -5,6 +5,7 @@
 #include "definitions/definitions.h"
 #include "exceptions/applicationexception.h"
 #include "gui/guiutilities.h"
+#include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 #include "miscellaneous/settingsproperties.h"
 #include "miscellaneous/textfactory.h"

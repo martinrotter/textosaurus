@@ -2,8 +2,7 @@
 
 #include "miscellaneous/settings.h"
 
-#include "miscellaneous/application.h"
-
+#include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
@@ -23,13 +22,13 @@ QSettings::Status Settings::checkSettings() {
   return status();
 }
 
-Settings* Settings::setupSettings(QObject* parent) {
+Settings* Settings::setupSettings(QObject* parent, const QString& app_path, const QString& user_path) {
   Settings* new_settings;
 
   // If settings file exists (and is writable) in executable file working directory
   // (in subdirectory APP_CFG_PATH), then use it (portable settings).
   // Otherwise use settings file stored in home path.
-  const SettingsProperties properties = determineProperties();
+  const SettingsProperties properties = determineProperties(app_path, user_path);
 
   // Portable settings are available, use them.
   new_settings = new Settings(properties.m_absoluteSettingsFileName, QSettings::IniFormat, properties.m_type, parent);
@@ -46,12 +45,10 @@ Settings* Settings::setupSettings(QObject* parent) {
   return new_settings;
 }
 
-SettingsProperties Settings::determineProperties() {
+SettingsProperties Settings::determineProperties(const QString& app_path, const QString& user_path) {
   SettingsProperties properties;
 
   properties.m_settingsSuffix = QDir::separator() + APP_CFG_PATH + QDir::separator() + APP_CFG_FILE;
-  const QString app_path = qApp->userDataAppFolder();
-  const QString home_path = qApp->userDataHomeFolder();
 
   // We will use PORTABLE settings only and only if it is available and NON-PORTABLE
   // settings was not initialized before.
@@ -61,7 +58,7 @@ SettingsProperties Settings::determineProperties() {
   const bool will_we_use_portable_settings = false;
 #else
   const QString exe_path = qApp->applicationDirPath();
-  const QString home_path_file = home_path + properties.m_settingsSuffix;
+  const QString home_path_file = user_path + properties.m_settingsSuffix;
   const bool portable_settings_available = IOFactory::isFolderWritable(exe_path);
   const bool non_portable_settings_exist = QFile::exists(home_path_file);
   const bool will_we_use_portable_settings = portable_settings_available && !non_portable_settings_exist;
@@ -73,7 +70,7 @@ SettingsProperties Settings::determineProperties() {
   }
   else {
     properties.m_type = SettingsType::NonPortable;
-    properties.m_baseDirectory = home_path;
+    properties.m_baseDirectory = user_path;
   }
 
   properties.m_absoluteSettingsFileName = properties.m_baseDirectory + properties.m_settingsSuffix;

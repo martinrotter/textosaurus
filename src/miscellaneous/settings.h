@@ -164,10 +164,10 @@ class Settings : public QSettings {
     QSettings::Status checkSettings();
 
     // Creates settings file in correct location.
-    static Settings* setupSettings(QObject* parent);
+    static Settings* setupSettings(QObject* parent, const QString& app_path, const QString& user_path);
 
     // Returns properties of the actual application-wide settings.
-    static SettingsProperties determineProperties();
+    static SettingsProperties determineProperties(const QString& app_path, const QString& user_path);
 
   private:
     explicit Settings(const QString& file_name, Format format, SettingsType type, QObject* parent = nullptr);

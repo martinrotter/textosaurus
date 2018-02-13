@@ -2,8 +2,6 @@
 
 #include "miscellaneous/iconfactory.h"
 
-#include "miscellaneous/settings.h"
-
 #include <QBuffer>
 
 IconFactory::IconFactory(QObject* parent) : QObject(parent) {}
@@ -28,16 +26,11 @@ void IconFactory::setupSearchPaths() {
                     .replaceInStrings(QRegExp(QSL("/")), QDir::separator()).join(QSL(", "))));
 }
 
-void IconFactory::setCurrentIconTheme(const QString& theme_name) {
-  qApp->settings()->setValue(GROUP(GUI), GUI::IconTheme, theme_name);
-}
-
-void IconFactory::loadCurrentIconTheme() {
+void IconFactory::loadIconTheme(const QString& theme_name) {
   const QStringList installed_themes = installedIconThemes();
-  const QString theme_name_from_settings = qApp->settings()->value(GROUP(GUI), SETTING(GUI::IconTheme)).toString();
 
-  if (QIcon::themeName() == theme_name_from_settings) {
-    qDebug("Icon theme '%s' already loaded.", qPrintable(theme_name_from_settings));
+  if (currentIconTheme() == theme_name) {
+    qDebug("Icon theme '%s' already loaded.", qPrintable(theme_name));
     return;
   }
 
@@ -47,16 +40,16 @@ void IconFactory::loadCurrentIconTheme() {
                     .replaceInStrings(QRegExp(QSL("^|$")), QSL("\'"))
                     .replaceInStrings(QRegExp(QSL("^\\'$")), QSL("\'\'")).join(QSL(", "))));
 
-  if (installed_themes.contains(theme_name_from_settings)) {
+  if (installed_themes.contains(theme_name)) {
     // Desired icon theme is installed and can be loaded.
-    qDebug("Loading icon theme '%s'.", qPrintable(theme_name_from_settings));
-    QIcon::setThemeName(theme_name_from_settings);
+    qDebug("Loading icon theme '%s'.", qPrintable(theme_name));
+    QIcon::setThemeName(theme_name);
   }
   else {
     // Desired icon theme is not currently available.
     // Install "default" icon theme instead.
     qWarning("Icon theme '%s' cannot be loaded because it is not installed. No icon theme (or default icon theme) is loaded now.",
-             qPrintable(theme_name_from_settings));
+             qPrintable(theme_name));
     QIcon::setThemeName(APP_NO_THEME);
   }
 }

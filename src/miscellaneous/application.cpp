@@ -20,7 +20,8 @@
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
   m_userActions(QList<QAction*>()), m_textApplication(new TextApplication(this)), m_mainForm(nullptr),
-  m_settings(Settings::setupSettings(this)), m_webFactory(new WebFactory(this)),
+  m_settings(Settings::setupSettings(this, qApp->userDataAppFolder(), qApp->userDataHomeFolder())),
+  m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
   m_shouldRestart(false) {

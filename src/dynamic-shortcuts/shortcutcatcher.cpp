@@ -4,6 +4,7 @@
 
 #include "gui/plaintoolbutton.h"
 #include "miscellaneous/iconfactory.h"
+#include "miscellaneous/application.h"
 
 #include <QHBoxLayout>
 #include <QKeySequenceEdit>

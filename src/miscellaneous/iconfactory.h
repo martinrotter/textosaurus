@@ -6,7 +6,6 @@
 #include <QObject>
 
 #include "definitions/definitions.h"
-#include "miscellaneous/application.h"
 
 #include <QDir>
 #include <QHash>
@@ -36,13 +35,10 @@ class IconFactory : public QObject {
     // Loads name of selected icon theme (from settings) for the application and
     // activates it. If that particular theme is not installed, then
     // "default" theme is loaded.
-    void loadCurrentIconTheme();
+    void loadIconTheme(const QString& theme_name);
 
     // Returns name of currently activated theme for the application.
     QString currentIconTheme() const;
-
-    // Sets icon theme with given name as the active one and loads it.
-    void setCurrentIconTheme(const QString& theme_name);
 };
 
 inline QString IconFactory::currentIconTheme() const {

@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
 
   qApp->localization()->loadActiveLanguage();
   qApp->icons()->setupSearchPaths();
-  qApp->icons()->loadCurrentIconTheme();
+  qApp->icons()->loadIconTheme(qApp->settings()->value(GROUP(GUI), SETTING(GUI::IconTheme)).toString());
   qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
 
   // Setup single-instance behavior.

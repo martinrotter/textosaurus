@@ -3,6 +3,7 @@
 #include "gui/widgetwithstatus.h"
 
 #include "gui/plaintoolbutton.h"
+#include "miscellaneous/application.h"
 #include "miscellaneous/iconfactory.h"
 
 #include <QHBoxLayout>

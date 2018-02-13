@@ -116,7 +116,7 @@ void SettingsGui::saveSettings() {
   QString selected_icon_theme = m_ui.m_cmbIconTheme->itemData(m_ui.m_cmbIconTheme->currentIndex()).toString();
   QString original_icon_theme = qApp->icons()->currentIconTheme();
 
-  qApp->icons()->setCurrentIconTheme(selected_icon_theme);
+  qApp->settings()->setValue(GROUP(GUI), GUI::IconTheme, selected_icon_theme);
 
   // Check if icon theme was changed.
   if (selected_icon_theme != original_icon_theme) {

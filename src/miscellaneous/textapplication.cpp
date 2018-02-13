@@ -13,6 +13,7 @@
 #include "gui/tabwidget.h"
 #include "gui/texteditor.h"
 #include "gui/toolbar.h"
+#include "miscellaneous/application.h"
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textfactory.h"
 #include "plugin-system/pluginfactory.h"
