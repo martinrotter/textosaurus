@@ -216,11 +216,10 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
   if (QFile::exists(file_path)) {
     // File exists and was externally modified.
     if (m_textApp->settings()->reloadModifiedDocumentsAutomatically() ||
-        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File externally modified"),
-                         tr("File '%1' was modified outside of %2.").arg(QDir::toNativeSeparators(file_path),
-                                                                         APP_NAME),
+        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File Externally Modified"),
+                         tr("This file was modified outside of %1.").arg(APP_NAME),
                          tr("Do you want to reload file now? This will discard all unsaved changes."),
-                         QString(), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
+                         QDir::toNativeSeparators(file_path), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
                          QMessageBox::StandardButton::Yes, &not_again, tr("Reload all files automatically (discard changes)")) ==
         QMessageBox::StandardButton::Yes) {
 
@@ -699,8 +698,8 @@ void TextEditor::reloadFromDisk() {
                                                             tr("Unsaved Changes"),
                                                             tr("This document has unsaved changes, "
                                                                "do you want to ignore the changes and reload file?"),
-                                                            !filePath().isEmpty() ? filePath() : QString(),
                                                             QString(),
+                                                            !filePath().isEmpty() ? filePath() : QString(),
                                                             QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
                                                             QMessageBox::StandardButton::Yes);
 
@@ -838,8 +837,8 @@ void TextEditor::closeEditor(bool* ok) {
                                                             QMessageBox::Icon::Question,
                                                             tr("Unsaved Changes"),
                                                             tr("This document has unsaved changes, do you want to save them?"),
-                                                            !filePath().isEmpty() ? filePath() : QString(),
                                                             QString(),
+                                                            !filePath().isEmpty() ? filePath() : QString(),
                                                             QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
                                                             QMessageBox::Save);
 
