@@ -71,7 +71,7 @@ void FilesystemSidebar::load() {
     QAction* btn_add_favorites = new QAction(qApp->icons()->fromTheme(QSL("folder-favorites")),
                                              tr("Add selected item to favorites"), widget_browser);
 
-    connect(btn_parent, &QAction::triggered, this, &FilesystemSidebar::goToParentFolder);
+    connect(btn_parent, &QAction::triggered, m_fsView, &FilesystemView::cdUp);
     connect(btn_add_favorites, &QAction::triggered, this, &FilesystemSidebar::addToFavorites);
 
     tool_bar->setFixedHeight(26);
@@ -85,8 +85,7 @@ void FilesystemSidebar::load() {
     connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &FilesystemSidebar::openDrive);
 
     m_fsModel->setNameFilterDisables(false);
-    m_fsModel->setFilter(QDir::Filter::Dirs | QDir::Filter::Files | QDir::Filter::Hidden |
-                         QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDotAndDotDot);
+    m_fsModel->setFilter(QDir::Filter::Files | QDir::Filter::Hidden | QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDot);
     m_fsModel->setNameFilters(m_textApp->settings()->syntaxHighlighting()->bareFileFilters());
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));
@@ -100,13 +99,14 @@ void FilesystemSidebar::load() {
                                                                     qApp->documentsFolder()).toString()));
     saveCurrentFolder(m_fsView->rootIndex());
 
-    connect(m_fsView, &QListView::doubleClicked, this, &FilesystemSidebar::openFileFolder);
+    connect(m_fsView, &QListView::activated, this, &FilesystemSidebar::openFileFolder);
     connect(m_fsView, &FilesystemView::rootIndexChanged, this, &FilesystemSidebar::saveCurrentFolder);
-    connect(m_lvFavorites, &QListWidget::doubleClicked, this, &FilesystemSidebar::openFavoriteItem);
+    connect(m_lvFavorites, &QListWidget::activated, this, &FilesystemSidebar::openFavoriteItem);
+    connect(m_fsView, &FilesystemView::rootIndexChanged, this, [this]() {
+      m_fsView->setFocus();
+    });
 
-    QStringList saved_files = qApp->settings()->value(m_settingsSection,
-                                                      QSL("favorites"),
-                                                      QStringList()).toStringList();
+    QStringList saved_files = qApp->settings()->value(m_settingsSection, QSL("favorites"), QStringList()).toStringList();
 
     foreach (const QString& file, saved_files) {
       m_lvFavorites->loadFileItem(file);
@@ -123,6 +123,7 @@ void FilesystemSidebar::load() {
     m_tabWidget->addTab(m_lvFavorites, tr("Favorites"));
 
     setWidget(m_tabWidget);
+    setFocusProxy(m_fsView);
   }
 }
 
@@ -163,7 +164,9 @@ void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
 
 void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
   if (m_fsModel->isDir(idx)) {
-    m_fsView->setRootIndex(idx);
+    // NOTE: This goes from index -> path -> index to properly
+    // resolve ".." parent item.
+    m_fsView->setRootIndex(m_fsModel->index(m_fsModel->filePath(idx)));
   }
   else {
     emit openFileRequested(m_fsModel->filePath(idx));

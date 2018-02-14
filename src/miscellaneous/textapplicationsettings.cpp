@@ -21,6 +21,10 @@ TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
   m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)) {}
 
+bool TextApplicationSettings::autoIndentEnabled() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::AutoIndent)).toBool();
+}
+
 QStringList TextApplicationSettings::recentFiles() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::RecentFiles)).toStringList();
 }
@@ -101,6 +105,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setAutoIndentEnabled(bool enabled) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::AutoIndent, enabled);
+  emit settingsChanged(false, false);
 }
 
 void TextApplicationSettings::setLogTimestampFormat(const QString& format) {

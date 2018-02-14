@@ -35,7 +35,7 @@ void FavoritesListWidget::loadFileItem(const QString& file_path) {
 }
 
 void FavoritesListWidget::keyPressEvent(QKeyEvent* event) {
-  if (event->key() == Qt::Key_Delete) {
+  if (event->key() == Qt::Key::Key_Delete) {
     event->accept();
 
     int row = currentRow();

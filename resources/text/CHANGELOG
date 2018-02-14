@@ -1,3 +1,9 @@
+2018.02.XX
+----------
+Added:
+* Auto-indent is now switchable per-document and is assignable to shortcut.
+* FS sidebar has better keyboard integration.
+
 2018.02.12
 ----------
 Added:

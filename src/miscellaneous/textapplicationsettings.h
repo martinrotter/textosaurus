@@ -20,6 +20,7 @@ class TextApplicationSettings : public QObject {
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
     virtual ~TextApplicationSettings() = default;
 
+    bool autoIndentEnabled() const;
     QStringList recentFiles() const;
     int eolMode() const;
     bool wordWrapEnabled() const;
@@ -49,6 +50,7 @@ class TextApplicationSettings : public QObject {
     void increaseFontSize();
     void decreaseFontSize();
 
+    void setAutoIndentEnabled(bool enabled);
     void setLogTimestampFormat(const QString& format);
     void setReloadModifiedDocumentsAutomatically(bool reload_automatically);
     void setTabSize(int size);

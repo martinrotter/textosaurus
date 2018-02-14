@@ -194,10 +194,20 @@ void TextApplication::showTabContextMenu(const QPoint& point) {
   menu.exec(m_tabEditors->tabBar()->mapToGlobal(point));
 }
 
+void TextApplication::setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled) {
+  TextEditor* editor = currentEditor();
+
+  if (editor != nullptr) {
+    editor->setAutoIndentEnabled(auto_indent_enabled);
+  }
+
+  m_settings->setAutoIndentEnabled(auto_indent_enabled);
+}
+
 void TextApplication::setupEolMenu() {
   TextEditor* editor = currentEditor();
 
-  if (currentEditor() != nullptr) {
+  if (editor != nullptr) {
     updateEolMenu(editor->eOLMode());
   }
   else {
@@ -355,6 +365,7 @@ void TextApplication::createConnections() {
   connect(m_actionViewWhitespaces, &QAction::triggered, m_settings, &TextApplicationSettings::setViewWhitespaces);
   connect(m_actionEditBack, &QAction::triggered, this, &TextApplication::undo);
   connect(m_actionEditForward, &QAction::triggered, this, &TextApplication::redo);
+  connect(m_actionAutoIndentEnabled, &QAction::triggered, this, &TextApplication::setCurrentEditorAutoIndentEnabled);
 
   // Menus.
   connect(m_menuEolMode, &QMenu::triggered, this, &TextApplication::changeEolMode);
@@ -422,6 +433,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionViewEols = m_mainForm->m_ui.m_actionViewEols;
   m_actionPrintCurrentEditor = m_mainForm->m_ui.m_actionPrint;
   m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
+  m_actionAutoIndentEnabled = m_mainForm->m_ui.m_actionAutoIndentEnabled;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
   m_menuEdit = m_mainForm->m_ui.m_menuEdit;
@@ -751,6 +763,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
       // Current editor changed.
       m_actionEditBack->setEnabled(editor->canUndo());
       m_actionEditForward->setEnabled(editor->canRedo());
+      m_actionAutoIndentEnabled->setChecked(editor->autoIndentEnabled());
 
       if (!only_modified) {
         m_actionFileSave->setEnabled(true);
@@ -776,6 +789,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     m_menuFileReopenWithEncoding->setEnabled(false);
     m_actionEditBack->setEnabled(false);
     m_actionEditForward->setEnabled(false);
+    m_actionAutoIndentEnabled->setChecked(settings()->autoIndentEnabled());
     m_actionFileSaveAll->setEnabled(false);
     m_actionPrintCurrentEditor->setEnabled(false);
     m_actionPrintPreviewCurrentEditor->setEnabled(false);
@@ -840,7 +854,10 @@ void TextApplication::loadNewExternalTools() {
   m_menuEdit->addAction(m_actionEditBack);
   m_menuEdit->addAction(m_actionEditForward);
   m_menuEdit->addSeparator();
+  m_menuEdit->addAction(m_actionAutoIndentEnabled);
+  m_menuEdit->addSeparator();
   m_menuEdit->addMenu(m_menuEolConversion);
+  m_menuEdit->addMenu(m_menuEolMode);
   m_menuEdit->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
 }
 

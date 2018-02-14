@@ -107,17 +107,6 @@
      <addaction name="separator"/>
      <addaction name="m_actionSwitchMainWindow"/>
     </widget>
-    <widget class="QMenu" name="m_menuEolMode">
-     <property name="toolTip">
-      <string>This does not convert existing EOLs.</string>
-     </property>
-     <property name="title">
-      <string>&amp;EOL Mode (does not convert existing EOLs)</string>
-     </property>
-     <addaction name="m_actionEolMac"/>
-     <addaction name="m_actionEolUnix"/>
-     <addaction name="m_actionEolWindows"/>
-    </widget>
     <widget class="QMenu" name="m_menuViewInvisibles">
      <property name="title">
       <string>&amp;Invisible Characters</string>
@@ -133,7 +122,6 @@
     <addaction name="m_menuDockWidgets"/>
     <addaction name="m_menuShowHide"/>
     <addaction name="m_menuViewInvisibles"/>
-    <addaction name="m_menuEolMode"/>
     <addaction name="m_actionWordWrap"/>
     <addaction name="m_actionLineNumbers"/>
    </widget>
@@ -170,12 +158,26 @@
      <addaction name="m_actionEolConvertUnix"/>
      <addaction name="m_actionEolConvertWindows"/>
     </widget>
+    <widget class="QMenu" name="m_menuEolMode">
+     <property name="toolTip">
+      <string>This does not convert existing EOLs.</string>
+     </property>
+     <property name="title">
+      <string>&amp;EOL Mode (does not convert existing EOLs)</string>
+     </property>
+     <addaction name="m_actionEolMac"/>
+     <addaction name="m_actionEolUnix"/>
+     <addaction name="m_actionEolWindows"/>
+    </widget>
     <addaction name="m_actionFindReplace"/>
     <addaction name="separator"/>
     <addaction name="m_actionEditBack"/>
     <addaction name="m_actionEditForward"/>
     <addaction name="separator"/>
+    <addaction name="m_actionAutoIndentEnabled"/>
+    <addaction name="separator"/>
     <addaction name="m_menuEolConversion"/>
+    <addaction name="m_menuEolMode"/>
    </widget>
    <widget class="QMenu" name="m_menuLanguage">
     <property name="title">
@@ -502,6 +504,14 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+W</string>
+   </property>
+  </action>
+  <action name="m_actionAutoIndentEnabled">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Enable Auto-Indent</string>
    </property>
   </action>
  </widget>

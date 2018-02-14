@@ -40,7 +40,8 @@
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   : ScintillaEdit(parent), m_fileWatcher(nullptr), m_settingsDirty(true), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
-  m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()) {
+  m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()),
+  m_autoIndentEnabled(text_app->settings()->autoIndentEnabled()) {
 
   connect(this, &TextEditor::updateUi, this, &TextEditor::uiUpdated);
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
@@ -159,33 +160,35 @@ void TextEditor::uiUpdated(int code) {
 }
 
 void TextEditor::onCharAdded(int chr) {
-  // We perform auto-indent.
-  int target_chr;
+  if (m_autoIndentEnabled) {
+    // We perform auto-indent.
+    int target_chr;
 
-  switch (eOLMode()) {
-    case SC_EOL_CR:
-      target_chr = '\r';
-      break;
+    switch (eOLMode()) {
+      case SC_EOL_CR:
+        target_chr = '\r';
+        break;
 
-    default:
-      target_chr = '\n';
-      break;
-  }
+      default:
+        target_chr = '\n';
+        break;
+    }
 
-  if (chr == target_chr) {
-    sptr_t curr_line = lineFromPosition(currentPos());
+    if (chr == target_chr) {
+      sptr_t curr_line = lineFromPosition(currentPos());
 
-    if (curr_line > 0) {
-      sptr_t range_start = positionFromLine(curr_line - 1);
-      sptr_t range_end = lineEndPosition(curr_line - 1);
+      if (curr_line > 0) {
+        sptr_t range_start = positionFromLine(curr_line - 1);
+        sptr_t range_end = lineEndPosition(curr_line - 1);
 
-      QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
+        QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
 
-      if (found.first >= 0 && found.second > 0) {
-        QByteArray to_insert = textRange(found.first, found.second);
+        if (found.first >= 0 && found.second > 0) {
+          QByteArray to_insert = textRange(found.first, found.second);
 
-        insertText(currentPos(), to_insert.constData());
-        setEmptySelection(currentPos() + to_insert.size());
+          insertText(currentPos(), to_insert.constData());
+          setEmptySelection(currentPos() + to_insert.size());
+        }
       }
     }
   }
@@ -545,6 +548,14 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   emit savedToFile(m_filePath);
 
   *ok = true;
+}
+
+bool TextEditor::autoIndentEnabled() const {
+  return m_autoIndentEnabled;
+}
+
+void TextEditor::setAutoIndentEnabled(bool auto_indent_enabled) {
+  m_autoIndentEnabled = auto_indent_enabled;
 }
 
 bool TextEditor::isLog() const {

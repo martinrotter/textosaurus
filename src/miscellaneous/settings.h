@@ -52,6 +52,8 @@ namespace Editor {
   constexpr auto WordWrapDef = true;
   constexpr auto LineNumbers = "line_numbers";
   constexpr auto LineNumbersDef = false;
+  constexpr auto AutoIndent = "auto_indent";
+  constexpr auto AutoIndentDef = true;
   constexpr auto RecentFiles = "recent_files";
   const QStringList RecentFilesDef = QStringList();
   constexpr auto ViewEols = "view_eols";

@@ -101,6 +101,7 @@ class TextApplication : public QObject {
     void onEditorTabSwitched(int index = -1);
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void showTabContextMenu(const QPoint& point);
+    void setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled);
 
     // External tools.
     void loadNewExternalTools();
@@ -158,6 +159,7 @@ class TextApplication : public QObject {
     QAction* m_actionPrintPreviewCurrentEditor;
     QAction* m_actionShowOutputSidebar;
     QAction* m_actionShowFindResultsSidebar;
+    QAction* m_actionAutoIndentEnabled;
     QMenu* m_menuDockWidgets;
     QMenu* m_menuFileSaveWithEncoding;
     QMenu* m_menuFileOpenWithEncoding;

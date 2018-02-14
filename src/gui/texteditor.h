@@ -45,6 +45,9 @@ class TextEditor : public ScintillaEdit {
     bool isLog() const;
     void setIsLog(bool is_log);
 
+    bool autoIndentEnabled() const;
+    void setAutoIndentEnabled(bool auto_indent_enabled);
+
   public slots:
     void reloadFromDisk();
     void toggleFolding(int position, int modifiers, int margin);
@@ -105,6 +108,7 @@ class TextEditor : public ScintillaEdit {
     QString m_filePath;
     QByteArray m_encoding;
     Lexer m_lexer;
+    bool m_autoIndentEnabled;
 };
 
 #endif // TEXTEDITOR_H
