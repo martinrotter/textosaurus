@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QRegularExpression>
+#include <QTemporaryFile>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
@@ -202,14 +203,14 @@ QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
 
 QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
   QFile file(xml_file);
-  QFile file_out(xml_file + ".out654321");
+  QTemporaryFile file_out;
 
-  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+  if (!file.open(QIODevice::OpenModeFlag::ReadWrite)) {
     *ok = false;
     return file.errorString();
   }
 
-  if (!file_out.open(QIODevice::OpenModeFlag::WriteOnly | QIODevice::OpenModeFlag::WriteOnly)) {
+  if (!file_out.open()) {
     *ok = false;
     file.close();
     return file_out.errorString();
@@ -235,20 +236,25 @@ QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
     }
   }
 
-  file.close();
-  file_out.close();
-
   if (reader.hasError()) {
-    file_out.remove();
-
+    file.close();
+    file_out.close();
     *ok = false;
     return reader.errorString();
   }
   else {
-    auto original_filename = file.fileName();
+    file.seek(0);
+    file_out.seek(0);
 
-    file.remove();
-    file_out.rename(original_filename);
+    while (!file_out.atEnd()) {
+      file.write(file_out.readLine());
+    }
+
+    file.resize(file.pos());
+
+    file_out.close();
+    file.flush();
+    file.close();
 
     *ok = true;
     return QString();
