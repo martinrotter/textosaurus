@@ -11,7 +11,7 @@ if test "$TRAVIS_OS_NAME" = "osx"; then
   brew link --force curl
 else
   # Linux.
-  sudo add-apt-repository ppa:jonathonf/gcc-7.3 -y
+  sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y
   sudo apt-get update
   sudo apt-get -y install gcc-7 g++-7 qt59tools qt59base qt59svg
