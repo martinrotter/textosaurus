@@ -126,7 +126,7 @@ msvc {
   QMAKE_CXXFLAGS += /std:c++latest
 }
 
-gcc|clang {
+gcc|g++|clang* {
   QMAKE_CXXFLAGS += -std=c++17
 }
 
