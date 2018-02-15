@@ -4,6 +4,9 @@ Added:
 * Auto-indent is now switchable per-document and is assignable to shortcut.
 * FS sidebar has better keyboard integration.
 
+Changed:
+* Scintilla updated to latest master (4.0.3).
+
 2018.02.12
 ----------
 Added:

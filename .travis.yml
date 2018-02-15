@@ -6,7 +6,7 @@ os:
 notifications:
   email: false
 compiler:
-- clang
+- gcc
 git:
   submodules: true
   depth: 1
