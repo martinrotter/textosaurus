@@ -19,7 +19,7 @@
 #   - supports Windows or Linux,
 #   - supports static Qt,
 #   - Qt 5.6.0 or higher is required,
-#   - C++ 14 is required.
+#   - C++ 17 is required.
 #
 # Authors and contributors:
 #   - Martin Rotter (project leader).
@@ -117,10 +117,18 @@ message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
 QT *= core gui widgets network printsupport svg
 
-CONFIG *= c++14 warn_on
+CONFIG *= c++1z warn_on
 CONFIG -=  debug_and_release
 DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
 VERSION = $$APP_VERSION
+
+msvc {
+  QMAKE_CXXFLAGS += /std:c++latest
+}
+
+gcc|clang {
+  QMAKE_CXXFLAGS += -std=c++17
+}
 
 # Setup specific compiler options.
 CONFIG(release, debug|release) {
