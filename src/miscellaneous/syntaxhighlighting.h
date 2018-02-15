@@ -5,10 +5,6 @@
 
 #include <QObject>
 
-#include <functional>
-
-#define LAMBDA_LEX_GEN(lex) []() { return new QsciLexer ## lex(); }
-
 struct Lexer {
   explicit Lexer();
   explicit Lexer(const QString& name, const QStringList& suffices, int code);
