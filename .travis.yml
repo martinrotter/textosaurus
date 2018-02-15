@@ -8,7 +8,7 @@ notifications:
 compiler:
 - clang
 git:
-  submodules: false
+  submodules: true
   depth: 1
 deploy:
   provider: releases
