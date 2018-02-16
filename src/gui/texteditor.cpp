@@ -378,13 +378,16 @@ void TextEditor::updateOccurrencesHighlights() {
     while (true) {
       QPair<int, int> found_range = findText(search_flags, sel_text.constData(), start_position, end_position);
 
-      if (found_range.first >= 0) {
-        indicatorFillRange(found_range.first, found_range.second - found_range.first);
-
-        start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
+      if (found_range.first < 0) {
+        break;
       }
       else {
-        break;
+        if (found_range.first != qMin(selectionStart(), selectionEnd()) &&
+            found_range.second != qMax(selectionStart(), selectionEnd())) {
+          indicatorFillRange(found_range.first, found_range.second - found_range.first);
+        }
+
+        start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
       }
     }
   }
@@ -422,20 +425,12 @@ void TextEditor::reloadFont() {
   QFont new_font = m_textApp->settings()->mainFont();
 
   if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() ||
-      styleSize(STYLE_DEFAULT) != new_font.pointSize() ||
-      styleBold(STYLE_DEFAULT) != new_font.bold()) {
+      styleSize(STYLE_DEFAULT) != new_font.pointSize()) {
     styleSetFont(STYLE_DEFAULT, new_font.family().toUtf8().constData());
     styleSetSize(STYLE_DEFAULT, new_font.pointSize());
-    styleSetBold(STYLE_DEFAULT, new_font.bold());
   }
 
   styleClearAll();
-
-  // Now, we set some specific stuff.
-  styleSetBold(STYLE_LINENUMBER, false);
-  styleSetItalic(STYLE_LINENUMBER, false);
-  styleSetWeight(STYLE_LINENUMBER, 1);
-
   updateLineNumberMarginVisibility();
 }
 
@@ -469,21 +464,59 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
   setLexer(m_lexer.m_code);
 
+  auto color_theme = m_textApp->settings()->syntaxHighlighting()->defaultTheme();
+
   // Style with number 0 always black.
-  styleSetFore(0, 0);
+  //styleSetFore(0, 0);
 
   // Gray whitespace characters.
-  setWhitespaceFore(true, RGB_TO_SPRT(200, 200, 200));
+  setWhitespaceFore(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaControlChar).m_colorForeground));
   setWhitespaceSize(3);
 
-  // Load more specific colors = keywords, operators etc.
-  for (int i = 1; i <= STYLE_MAX; i++) {
-    // We set colors for all non-predefined styles.
-    if (m_lexer.m_code != SCLEX_NULL &&  (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED)) {
-      styleSetFore(i, RGB_TO_SPRT(rand() % 160, rand() % 160, rand() % 160));
-    }
-    else {
-      styleSetFore(i, 0);
+  // We set special style classes here.
+  //
+  // "STYLE_DEFAULT" has some special behavior, its background color
+  // is used as "paper" color.
+  color_theme.component(SyntaxColorTheme::StyleComponents::Default).applyToEditor(this, STYLE_DEFAULT);
+
+  // Override background color.
+  styleSetBack(STYLE_DEFAULT,
+               QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));
+
+  // All "STYLE_DEFAULT" properties now get copied into other style classes.
+  styleClearAll();
+
+  color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).applyToEditor(this, STYLE_LINENUMBER);
+
+  setSelFore(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));
+  setSelBack(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorForeground));
+
+  if (m_lexer.m_code != SCLEX_NULL) {
+    // Load more specific colors = keywords, operators etc.
+    for (int i = 0; i <= STYLE_MAX; i++) {
+      // We set colors for all non-predefined styles.
+      if (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED) {
+        if (default_lexer.m_styleMappings.contains(i)) {
+          // Lexer specifies mapping of Scintilla style code into Textilosaurus style code, we use it.
+
+          auto color_component = color_theme.component(default_lexer.m_styleMappings.value(i));
+
+          color_component.applyToEditor(this, i);
+        }
+        else if (default_lexer.m_styleMappings.contains(0)) {
+          // We use "default" style color.
+          auto color_component = color_theme.component(default_lexer.m_styleMappings.value(0));
+
+          color_component.applyToEditor(this, i);
+        }
+        else {
+          // Lexer does not define mapping to neither specific style nor default style,
+          // use randomized style.
+          auto color_component = color_theme.randomizedComponent(i);
+
+          color_component.applyToEditor(this, i);
+        }
+      }
     }
   }
 

@@ -6,9 +6,11 @@
 #include "3rd-party/scintilla/include/SciLexer.h"
 
 #include <QRegularExpression>
+#include <QSettings>
 
 SyntaxHighlighting::SyntaxHighlighting(QObject* parent)
-  : QObject(parent), m_bareFileFilters(QStringList()), m_fileFilters(QStringList()), m_lexers(QList<Lexer>()) {}
+  : QObject(parent), m_bareFileFilters(QStringList()), m_fileFilters(QStringList()), m_lexers(QList<Lexer>()),
+  m_colorThemes(QList<SyntaxColorTheme>()) {}
 
 QStringList SyntaxHighlighting::bareFileFilters() {
   if (m_bareFileFilters.isEmpty()) {
@@ -51,6 +53,46 @@ Lexer SyntaxHighlighting::lexerForName(const QString& name) {
 
   // We return first lexer, which is lexer for plain text files.
   return m_lexers.first();
+}
+
+void SyntaxHighlighting::loadColorThemes() {
+  // Add predefined themes.
+
+  // Plain color scheme, no syntax highlighting.
+  m_colorThemes.append(SyntaxColorTheme(QSL("Textilosaurus"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), "#ffffff")},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent("#000", "#ffffff")},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent("#606060", "#eeeeee")},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent("#000")},
+  }));
+
+  // Solarized Light - http://ethanschoonover.com/solarized
+  m_colorThemes.append(SyntaxColorTheme(QSL("Solarized Light"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), "#fdf6e3")},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent("#c6cdcd", "#fdf6e3")},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent("#93a1a1", "#eee8d5")},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent("#657b83")},
+    {SyntaxColorTheme::StyleComponents::Identifier, SyntaxColorThemeComponent(QSL("#859900"))},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QSL("#268bd2"), QColor(), false, true)},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent("#d33682", QColor(), true, true)},
+    {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QSL("#cb4b16"))},
+    {SyntaxColorTheme::StyleComponents::PlainData, SyntaxColorThemeComponent(QSL("#657b83"))},
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent("#6c71c4", QColor(), true)}
+  }));
+
+  // TODO: Load custom themes.
+}
+
+QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {
+  if (m_colorThemes.isEmpty()) {
+    loadColorThemes();
+  }
+
+  return m_colorThemes;
+}
+
+SyntaxColorTheme SyntaxHighlighting::defaultTheme() {
+  return colorThemes().at(1);
 }
 
 QStringList SyntaxHighlighting::fileFilters() {
@@ -216,13 +258,28 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       << Lexer(QSL("Visual Basic"), QStringList {
       QSL("vb"),
     }, SCLEX_VB)
-      << Lexer(QSL("XML"), QStringList {
+      << Lexer(QSL("XML"), {
       QSL("xml"), QSL("xaml"), QSL("xsl"), QSL("xslt"), QSL("xml"),
       QSL("xsd"), QSL("xul"), QSL("kml"), QSL("svg"), QSL("mxml"), QSL("xsml"),
       QSL("wsdl"), QSL("xlf"), QSL("xliff"), QSL("xbl"), QSL("xml"), QSL("sxbl"),
       QSL("sitemap"), QSL("gml"), QSL("gpx"), QSL("plist"), QSL("ts"), QSL("qrc"), QSL("vcxproj"),
       QSL("opml"), QSL("rss"), QSL("atom"), QSL("feed"), QSL("vbox"), QSL("vbox-prev")
-    }, SCLEX_XML)
+    }, SCLEX_XML, {
+      {SCE_H_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_H_TAG, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_H_TAGUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_H_ATTRIBUTE, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_H_ATTRIBUTEUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_H_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_H_DOUBLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_H_SINGLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_H_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_H_TAGEND, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_H_XMLSTART, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_H_XMLEND, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_H_SCRIPT, SyntaxColorTheme::StyleComponents::Script},
+      {SCE_H_CDATA, SyntaxColorTheme::StyleComponents::PlainData}
+    })
       << Lexer(QSL("YAML"), QStringList {
       QSL("yml"), QSL("yaml")
     }, SCLEX_YAML);
@@ -237,8 +294,8 @@ Lexer SyntaxHighlighting::defaultLexer() {
 
 Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL), m_suffices(QStringList()) {}
 
-Lexer::Lexer(const QString& name, const QStringList& suffices, int code)
-  : m_name(name), m_code(code), m_suffices(suffices) {}
+Lexer::Lexer(const QString& name, const QStringList& suffices, int code, const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings)
+  : m_name(name), m_code(code), m_suffices(suffices), m_styleMappings(style_mappings) {}
 
 bool Lexer::isEmpty() const {
   return m_name.isEmpty() && m_suffices.isEmpty();
