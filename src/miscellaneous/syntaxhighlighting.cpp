@@ -72,10 +72,12 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent("#c6cdcd", "#fdf6e3")},
     {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent("#93a1a1", "#eee8d5")},
     {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent("#657b83")},
-    {SyntaxColorTheme::StyleComponents::Identifier, SyntaxColorThemeComponent(QSL("#859900"))},
+
+    //{SyntaxColorTheme::StyleComponents::Identifier, SyntaxColorThemeComponent(QSL("#859900"))},
     {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QSL("#268bd2"), QColor(), false, true)},
     {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent("#d33682", QColor(), true, true)},
     {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QSL("#cb4b16"))},
+    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QSL("#cb4b16"))},
     {SyntaxColorTheme::StyleComponents::PlainData, SyntaxColorThemeComponent(QSL("#657b83"))},
     {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent("#6c71c4", QColor(), true)}
   }));
@@ -92,7 +94,7 @@ QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {
 }
 
 SyntaxColorTheme SyntaxHighlighting::defaultTheme() {
-  return colorThemes().at(1);
+  return colorThemes().at(0);
 }
 
 QStringList SyntaxHighlighting::fileFilters() {
@@ -146,7 +148,30 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_CONF)
       << Lexer(QSL("C++"), QStringList {
       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
-    }, SCLEX_CPP)
+    }, SCLEX_CPP, {
+      {SCE_C_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_C_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTDOC, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTDOCKEYWORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_COMMENTDOCKEYWORDERROR, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_C_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTLINEDOC, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_C_WORD, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_WORD2, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_STRINGEOL, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_STRINGRAW, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_PREPROCESSOR, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_C_OPERATOR, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_C_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_C_VERBATIM, SyntaxColorTheme::StyleComponents::PlainData},
+      {SCE_C_REGEX, SyntaxColorTheme::StyleComponents::Regex},
+      {SCE_C_GLOBALCLASS, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_PREPROCESSORCOMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_PREPROCESSORCOMMENTDOC, SyntaxColorTheme::StyleComponents::Keyword}
+    })
       << Lexer(QSL("CSS"), QStringList {
       QSL("css")
     }, SCLEX_CSS)
@@ -275,8 +300,8 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_H_SINGLESTRING, SyntaxColorTheme::StyleComponents::String},
       {SCE_H_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_H_TAGEND, SyntaxColorTheme::StyleComponents::Identifier},
-      {SCE_H_XMLSTART, SyntaxColorTheme::StyleComponents::Identifier},
-      {SCE_H_XMLEND, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_H_XMLSTART, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_H_XMLEND, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_H_SCRIPT, SyntaxColorTheme::StyleComponents::Script},
       {SCE_H_CDATA, SyntaxColorTheme::StyleComponents::PlainData}
     })
