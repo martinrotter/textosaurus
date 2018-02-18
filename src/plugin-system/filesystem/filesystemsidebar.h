@@ -7,7 +7,7 @@
 
 class TextApplication;
 class BaseLineEdit;
-class FilesystemSidebarModel;
+class FilesystemModel;
 class FilesystemView;
 class FavoritesListWidget;
 class QTabWidget;
@@ -45,7 +45,7 @@ class FilesystemSidebar : public BaseSidebar {
     const QString m_settingsSection = "filesystem";
     BaseLineEdit* m_txtPath;
     QComboBox* m_cmbDrives;
-    FilesystemSidebarModel* m_fsModel;
+    FilesystemModel* m_fsModel;
     FilesystemView* m_fsView;
     FavoritesListWidget* m_lvFavorites;
     QTabWidget* m_tabWidget;

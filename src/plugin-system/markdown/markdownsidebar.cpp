@@ -68,7 +68,7 @@ void MarkdownSidebar::load() {
     m_txtPreview->setOpenExternalLinks(false);
     m_txtPreview->setOpenLinks(false);
 
-    connect(m_txtPreview, &QTextBrowser::anchorClicked, this, [this](const QUrl& url) {
+    connect(m_txtPreview, &QTextBrowser::anchorClicked, this, [](const QUrl& url) {
       qApp->web()->openUrlInExternalBrowser(url.toString());
     });
 

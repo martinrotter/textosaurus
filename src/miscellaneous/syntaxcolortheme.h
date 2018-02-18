@@ -86,6 +86,8 @@ class SyntaxColorTheme : public QObject {
     SyntaxColorTheme(SyntaxColorTheme&& another);
     virtual ~SyntaxColorTheme() = default;
 
+    SyntaxColorTheme& operator=(const SyntaxColorTheme& other);
+
     SyntaxColorThemeComponent component(StyleComponents code);
     SyntaxColorThemeComponent randomizedComponent(int scintilla_code);
     bool predefined() const;

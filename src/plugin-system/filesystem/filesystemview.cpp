@@ -2,11 +2,11 @@
 
 #include "plugin-system/filesystem/filesystemview.h"
 
-#include "plugin-system/filesystem/filesystemsidebarmodel.h"
+#include "plugin-system/filesystem/filesystemmodel.h"
 
 #include <QKeyEvent>
 
-FilesystemView::FilesystemView(QWidget* parent) : QListView(parent) {}
+FilesystemView::FilesystemView(FilesystemModel* model, QWidget* parent) : QListView(parent), m_model(model) {}
 
 void FilesystemView::setRootIndex(const QModelIndex& index) {
   QListView::setRootIndex(index);
@@ -22,13 +22,8 @@ void FilesystemView::keyPressEvent(QKeyEvent* event) {
   }
 }
 
-FilesystemSidebarModel* FilesystemView::model() const {
+FilesystemModel* FilesystemView::model() const {
   return m_model;
-}
-
-void FilesystemView::setModel(FilesystemSidebarModel* model) {
-  m_model = model;
-  QListView::setModel(model);
 }
 
 void FilesystemView::cdUp() {

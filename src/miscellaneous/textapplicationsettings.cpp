@@ -26,7 +26,7 @@ bool TextApplicationSettings::autoIndentEnabled() const {
 }
 
 QStringList TextApplicationSettings::recentFiles() const {
-  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::RecentFiles)).toStringList();
+  return qApp->settings()->value(GROUP(Editor), Editor::RecentFiles).toStringList();
 }
 
 void TextApplicationSettings::setRecentFiles(const QStringList& recent_files) {

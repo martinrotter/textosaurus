@@ -707,7 +707,7 @@ void TextApplication::loadEncodingMenu() {
     }
   }
   else {
-    QAction* checked_encoding_act = m_menuEncoding->actions().first()->actionGroup()->checkedAction();
+    QAction* checked_encoding_act = m_menuEncoding->actions().constFirst()->actionGroup()->checkedAction();
 
     if (checked_encoding_act != nullptr) {
       checked_encoding_act->setChecked(false);

@@ -5,12 +5,12 @@
 
 #include <QFileSystemModel>
 
-class FilesystemSidebarModel : public QFileSystemModel {
+class FilesystemModel : public QFileSystemModel {
   Q_OBJECT
 
   public:
-    explicit FilesystemSidebarModel(QObject* parent = nullptr);
-    virtual ~FilesystemSidebarModel() = default;
+    explicit FilesystemModel(QObject* parent = nullptr);
+    virtual ~FilesystemModel() = default;
 
     virtual QVariant data(const QModelIndex& index, int role) const override;
 };

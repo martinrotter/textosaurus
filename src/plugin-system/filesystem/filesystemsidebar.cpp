@@ -10,7 +10,7 @@
 #include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
 #include "plugin-system/filesystem/favoriteslistwidget.h"
-#include "plugin-system/filesystem/filesystemsidebarmodel.h"
+#include "plugin-system/filesystem/filesystemmodel.h"
 #include "plugin-system/filesystem/filesystemview.h"
 
 #include <QComboBox>
@@ -55,8 +55,8 @@ void FilesystemSidebar::load() {
     QWidget* widget_browser = new QWidget(this);
     QVBoxLayout* layout_browser = new QVBoxLayout(widget_browser);
 
-    m_fsModel = new FilesystemSidebarModel(widget_browser);
-    m_fsView = new FilesystemView(widget_browser);
+    m_fsModel = new FilesystemModel(widget_browser);
+    m_fsView = new FilesystemView(m_fsModel, widget_browser);
     m_lvFavorites = new FavoritesListWidget(m_tabWidget);
     m_txtPath = new BaseLineEdit(widget_browser);
     m_txtPath->setReadOnly(true);

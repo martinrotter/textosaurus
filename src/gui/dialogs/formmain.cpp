@@ -215,8 +215,8 @@ void FormMain::loadSize() {
   toolBar()->setIsActive(settings->value(GROUP(GUI), SETTING(GUI::ToolbarsVisible)).toBool());
   statusBar()->setIsActive(settings->value(GROUP(GUI), SETTING(GUI::StatusBarVisible)).toBool());
 
-  restoreGeometry(settings->value(GROUP(GUI), SETTING(GUI::MainWindowGeometry)).toByteArray());
-  restoreState(settings->value(GROUP(GUI), SETTING(GUI::MainWindowState)).toByteArray());
+  restoreGeometry(settings->value(GROUP(GUI), GUI::MainWindowGeometry).toByteArray());
+  restoreState(settings->value(GROUP(GUI), GUI::MainWindowState).toByteArray());
 }
 
 void FormMain::saveSize() {

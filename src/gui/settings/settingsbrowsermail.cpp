@@ -128,8 +128,8 @@ void SettingsBrowserMail::loadSettings() {
   // Load settings of e-mail.
   m_ui.m_cmbExternalEmailPreset->addItem(tr("Mozilla Thunderbird"), QSL("-compose \"subject='%1',body='%2'\""));
   m_ui.m_txtExternalEmailExecutable->setText(settings()->value(GROUP(Browser),
-                                                               SETTING(Browser::CustomExternalEmailExecutable)).toString());
-  m_ui.m_txtExternalEmailArguments->setText(settings()->value(GROUP(Browser), SETTING(Browser::CustomExternalEmailArguments)).toString());
+                                                               Browser::CustomExternalEmailExecutable).toString());
+  m_ui.m_txtExternalEmailArguments->setText(settings()->value(GROUP(Browser), Browser::CustomExternalEmailArguments).toString());
   m_ui.m_grpCustomExternalEmail->setChecked(settings()->value(GROUP(Browser), SETTING(Browser::CustomExternalEmailEnabled)).toBool());
   m_ui.m_cmbProxyType->addItem(tr("No proxy"), QNetworkProxy::NoProxy);
   m_ui.m_cmbProxyType->addItem(tr("System proxy"), QNetworkProxy::DefaultProxy);
@@ -140,9 +140,9 @@ void SettingsBrowserMail::loadSettings() {
   QNetworkProxy::ProxyType selected_proxy_type = static_cast<QNetworkProxy::ProxyType>(settings()->value(GROUP(Proxy),
                                                                                                          SETTING(Proxy::Type)).toInt());
   m_ui.m_cmbProxyType->setCurrentIndex(m_ui.m_cmbProxyType->findData(selected_proxy_type));
-  m_ui.m_txtProxyHost->setText(settings()->value(GROUP(Proxy), SETTING(Proxy::Host)).toString());
-  m_ui.m_txtProxyUsername->setText(settings()->value(GROUP(Proxy), SETTING(Proxy::Username)).toString());
-  m_ui.m_txtProxyPassword->setText(settings()->value(GROUP(Proxy), SETTING(Proxy::Password)).toString());
+  m_ui.m_txtProxyHost->setText(settings()->value(GROUP(Proxy), Proxy::Host).toString());
+  m_ui.m_txtProxyUsername->setText(settings()->value(GROUP(Proxy), Proxy::Username).toString());
+  m_ui.m_txtProxyPassword->setText(settings()->value(GROUP(Proxy), Proxy::Password).toString());
   m_ui.m_spinProxyPort->setValue(settings()->value(GROUP(Proxy), SETTING(Proxy::Port)).toInt());
 
   onEndLoadSettings();

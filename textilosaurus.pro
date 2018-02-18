@@ -18,7 +18,7 @@
 # Other information:
 #   - supports Windows or Linux,
 #   - supports static Qt,
-#   - Qt 5.6.0 or higher is required,
+#   - Qt 5.7.0 or higher is required,
 #   - C++ 17 is required.
 #
 # Authors and contributors:
@@ -48,8 +48,8 @@ APP_WIN_ARCH                  = "win64"
 
 message($$MSG_PREFIX: Welcome to $$APP_NAME qmake script.)
 
-lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 6) {
-  error($$MSG_PREFIX: At least Qt \"5.6.0\" is required!!!)
+lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 7) {
+  error($$MSG_PREFIX: At least Qt \"5.7.0\" is required!!!)
 }
 
 isEmpty(PREFIX) {
@@ -246,10 +246,10 @@ HEADERS +=  src/definitions/definitions.h \
             src/plugin-system/filesystem/filesystemplugin.h \
             src/gui/sidebars/basesidebar.h \
     src/plugin-system/markdown/markdowntextbrowser.h \
-    src/plugin-system/filesystem/filesystemsidebarmodel.h \
     src/plugin-system/filesystem/filesystemview.h \
     src/plugin-system/filesystem/favoriteslistwidget.h \
-    src/miscellaneous/syntaxcolortheme.h
+    src/miscellaneous/syntaxcolortheme.h \
+    src/plugin-system/filesystem/filesystemmodel.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -316,10 +316,10 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/plugin-system/filesystem/filesystemplugin.cpp \
             src/gui/sidebars/basesidebar.cpp \
     src/plugin-system/markdown/markdowntextbrowser.cpp \
-    src/plugin-system/filesystem/filesystemsidebarmodel.cpp \
     src/plugin-system/filesystem/filesystemview.cpp \
     src/plugin-system/filesystem/favoriteslistwidget.cpp \
-    src/miscellaneous/syntaxcolortheme.cpp
+    src/miscellaneous/syntaxcolortheme.cpp \
+    src/plugin-system/filesystem/filesystemmodel.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm

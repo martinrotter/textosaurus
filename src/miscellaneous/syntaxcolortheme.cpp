@@ -11,10 +11,11 @@
 #include <utility>
 
 SyntaxColorTheme::SyntaxColorTheme(const QString& name, bool predefined, const QMap<StyleComponents, SyntaxColorThemeComponent>& styles)
-  : m_name(name), m_styleColors(styles), m_predefined(predefined) {}
+  : m_styleColors(styles), m_name(name), m_predefined(predefined) {}
 
-SyntaxColorTheme::SyntaxColorTheme(const SyntaxColorTheme& another)
-  : m_styleColors(another.m_styleColors), m_name(another.m_name), m_predefined(another.predefined()) {}
+SyntaxColorTheme::SyntaxColorTheme(const SyntaxColorTheme& another) {
+  *this = another;
+}
 
 SyntaxColorTheme::SyntaxColorTheme(SyntaxColorTheme&& another)
   : m_styleColors(std::move(another.m_styleColors)), m_name(std::move(another.m_name)), m_predefined(another.predefined()) {}
@@ -69,6 +70,19 @@ void SyntaxColorTheme::toFile(const QString& file_path) {
   }
 
   settings.sync();
+}
+
+SyntaxColorTheme& SyntaxColorTheme::operator=(const SyntaxColorTheme& other) {
+  if(&other == this) {
+    return *this;
+  }
+  else {
+    m_styleColors = other.m_styleColors;
+    m_name = other.m_name;
+    m_predefined = other.predefined();
+
+    return *this;
+  }
 }
 
 SyntaxColorTheme SyntaxColorTheme::fromFile(const QString& file_path) {

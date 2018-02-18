@@ -6,19 +6,17 @@
 #include <QListView>
 
 class QKeyEvent;
-class FilesystemSidebarModel;
+class FilesystemModel;
 
 class FilesystemView : public QListView {
   Q_OBJECT
 
   public:
-    explicit FilesystemView(QWidget* parent = nullptr);
+    explicit FilesystemView(FilesystemModel* model, QWidget* parent = nullptr);
     virtual ~FilesystemView() = default;
 
+    FilesystemModel* model() const;
     virtual void setRootIndex(const QModelIndex& index) override;
-    FilesystemSidebarModel* model() const;
-
-    void setModel(FilesystemSidebarModel* model);
 
   public slots:
     void cdUp();
@@ -30,7 +28,7 @@ class FilesystemView : public QListView {
     void rootIndexChanged(const QModelIndex& index);
 
   private:
-    FilesystemSidebarModel* m_model;
+    FilesystemModel* m_model;
 };
 
 #endif // FILESYSTEMVIEW_H

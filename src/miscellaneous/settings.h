@@ -26,7 +26,7 @@
 namespace Editor {
   constexpr auto ID = "editor";
   constexpr auto LogTimestampFormat = "log_timestamp_format";
-  const QString LogTimestampFormatDef = "yyyy-MM-dd HH:mm:ss";
+  constexpr auto LogTimestampFormatDef = "yyyy-MM-dd HH:mm:ss";
   constexpr auto TabSize = "tab_size";
   constexpr auto TabSizeDef = 2;
   constexpr auto IndentSize = "indent_size";
@@ -55,7 +55,6 @@ namespace Editor {
   constexpr auto AutoIndent = "auto_indent";
   constexpr auto AutoIndentDef = true;
   constexpr auto RecentFiles = "recent_files";
-  const QStringList RecentFilesDef = QStringList();
   constexpr auto ViewEols = "view_eols";
   constexpr auto ViewEolsDef = false;
   constexpr auto ViewWhitespaces = "view_whitespaces";
@@ -72,11 +71,9 @@ namespace GUI {
   constexpr auto ToolbarActionsDef = "m_actionFileNew,m_actionFileOpen,m_actionFileSave,separator,"
                                      "m_actionEditBack,m_actionEditForward,separator,spacer,m_actionTabsCloseAllUnmodified";
   constexpr auto MainWindowGeometry = "main_window_geometry";
-  const QByteArray MainWindowGeometryDef = QByteArray();
   constexpr auto IsMainWindowMaximizedBeforeFullscreen = "is_window_maximized_before_fullscreen";
   constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
   constexpr auto MainWindowState = "main_window_state";
-  const QByteArray MainWindowStateDef = QByteArray();
   constexpr auto ToolbarsVisible = "enable_toolbars";
   constexpr auto ToolbarsVisibleDef = true;
   constexpr auto StatusBarVisible = "enable_statusbar";
@@ -104,15 +101,13 @@ namespace Browser {
   constexpr auto CustomExternalBrowserEnabled = "custom_external_browser";
   constexpr auto CustomExternalBrowserEnabledDef = false;
   constexpr auto CustomExternalBrowserExecutable = "external_browser_executable";
-  const QString CustomExternalBrowserExecutableDef = QString();
+  constexpr auto CustomExternalBrowserExecutableDef = "";
   constexpr auto CustomExternalBrowserArguments = "external_browser_arguments";
-  const QString CustomExternalBrowserArgumentsDef = "%1";
+  constexpr auto CustomExternalBrowserArgumentsDef = "%1";
   constexpr auto CustomExternalEmailEnabled = "custom_external_email";
   constexpr auto CustomExternalEmailEnabledDef = false;
   constexpr auto CustomExternalEmailExecutable = "external_email_executable";
-  const QString CustomExternalEmailExecutableDef = QString();
   constexpr auto CustomExternalEmailArguments = "external_email_arguments";
-  const QString CustomExternalEmailArgumentsDef = QString();
 }
 
 namespace General {
@@ -130,11 +125,8 @@ namespace Proxy {
   constexpr auto Type = "proxy_type";
   constexpr QNetworkProxy::ProxyType TypeDef = QNetworkProxy::NoProxy;
   constexpr auto Host = "host";
-  constexpr auto HostDef = "";
   constexpr auto Username = "username";
-  constexpr auto UsernameDef = "";
   constexpr auto Password = "password";
-  constexpr auto PasswordDef = "";
   constexpr auto Port = "port";
   constexpr auto PortDef = 80;
 }
