@@ -128,7 +128,7 @@ void FilesystemSidebar::load() {
 }
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
-  auto path = QDir::toNativeSeparators((m_fsModel->filePath(idx)));
+  auto path = QDir::toNativeSeparators((m_fsModel->fileInfo(idx).canonicalFilePath()));
   QStorageInfo file_drive(path);
   auto idx_root = m_fsModel->index(file_drive.rootPath()).row();
 

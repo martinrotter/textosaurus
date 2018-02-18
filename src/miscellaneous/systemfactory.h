@@ -39,7 +39,7 @@ class SystemFactory : public QObject {
 #endif
 
     // Tries to download list with new updates.
-    void checkForUpdates() const;
+    void checkForUpdates();
 
     QRegularExpression supportedUpdateFiles();
 
@@ -48,7 +48,7 @@ class SystemFactory : public QObject {
     bool openFolderFile(const QString& file_path);
 
   signals:
-    void updatesChecked(QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> updates) const;
+    void updatesChecked(QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> updates);
 
   private:
     QList<UpdateInfo> parseUpdatesFile(const QByteArray& updates_file) const;

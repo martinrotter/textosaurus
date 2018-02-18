@@ -45,7 +45,7 @@ void SettingsEditor::loadSettings() {
     QSL("yyyy") << QSL("yyyy-MM") << QSL("yyyy-MM-dd") << QSL("yyyy-MM-ddThh:mm") <<
     QSL("yyyy-MM-ddThh:mm:ss");
 
-  for (const QString& pattern : date_patterns) {
+  for (const QString& pattern : qAsConst(date_patterns)) {
     m_ui.m_cmbTimestampFormat->addItem(pattern);
   }
 

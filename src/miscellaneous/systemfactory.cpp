@@ -55,7 +55,7 @@ bool SystemFactory::removeTrolltechJunkRegistryKeys() {
 
 #endif
 
-void SystemFactory::checkForUpdates() const {
+void SystemFactory::checkForUpdates() {
   Downloader* downloader = new Downloader();
 
   connect(downloader, &Downloader::completed, this, [this, downloader]() {
