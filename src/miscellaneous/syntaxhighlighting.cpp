@@ -60,26 +60,24 @@ void SyntaxHighlighting::loadColorThemes() {
 
   // Plain color scheme, no syntax highlighting.
   m_colorThemes.append(SyntaxColorTheme(QSL("Textilosaurus"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
-    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), "#ffffff")},
-    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent("#000", "#ffffff")},
-    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent("#606060", "#eeeeee")},
-    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent("#000")},
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(255, 255, 255))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(0, 0, 0), QColor(255, 255, 255))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(96, 96, 96), QColor(238, 238, 238))},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(0, 0, 0))},
   }));
 
   // Solarized Light - http://ethanschoonover.com/solarized
   m_colorThemes.append(SyntaxColorTheme(QSL("Solarized Light"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
-    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), "#fdf6e3")},
-    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent("#c6cdcd", "#fdf6e3")},
-    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent("#93a1a1", "#eee8d5")},
-    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent("#657b83")},
-
-    //{SyntaxColorTheme::StyleComponents::Identifier, SyntaxColorThemeComponent(QSL("#859900"))},
-    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QSL("#268bd2"), QColor(), false, true)},
-    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent("#d33682", QColor(), true, true)},
-    {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QSL("#cb4b16"))},
-    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QSL("#cb4b16"))},
-    {SyntaxColorTheme::StyleComponents::PlainData, SyntaxColorThemeComponent(QSL("#657b83"))},
-    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent("#6c71c4", QColor(), true)}
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(SOLAR_LIGHT_BASE_3))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_CONTROL), QColor(SOLAR_LIGHT_BASE_3))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_1), QColor(SOLAR_LIGHT_BASE_2))},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_00))},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BLUE), QColor(), false, true)},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_MAGENTA), QColor(), true, true)},
+    {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_ORANGE))},
+    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_ORANGE))},
+    {SyntaxColorTheme::StyleComponents::PlainData, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_00))},
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_VIOLET), QColor(), true)}
   }));
 
   // TODO: Load custom themes.
@@ -94,7 +92,7 @@ QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {
 }
 
 SyntaxColorTheme SyntaxHighlighting::defaultTheme() {
-  return colorThemes().at(0);
+  return colorThemes().at(1);
 }
 
 QStringList SyntaxHighlighting::fileFilters() {

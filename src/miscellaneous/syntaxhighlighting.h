@@ -3,6 +3,16 @@
 #ifndef SYNTAXHIGHLIGHTING_H
 #define SYNTAXHIGHLIGHTING_H
 
+#define SOLAR_LIGHT_BASE_3    253, 246, 227
+#define SOLAR_LIGHT_BLUE      38, 139, 210
+#define SOLAR_LIGHT_MAGENTA   211, 54, 130
+#define SOLAR_LIGHT_ORANGE    203, 75, 22
+#define SOLAR_LIGHT_BASE_00   101, 123, 131
+#define SOLAR_LIGHT_VIOLET    108, 113, 196
+#define SOLAR_LIGHT_BASE_1    147, 161, 161
+#define SOLAR_LIGHT_BASE_2    238, 232, 213
+#define SOLAR_LIGHT_CONTROL   198, 205, 205
+
 #include <QObject>
 
 #include "miscellaneous/syntaxcolortheme.h"
