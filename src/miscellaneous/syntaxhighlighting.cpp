@@ -242,7 +242,21 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_MAKEFILE)
       << Lexer(QSL("Markdown"), QStringList {
       QSL("markdown"), QSL("md")
-    }, SCLEX_MARKDOWN)
+    }, SCLEX_MARKDOWN, {
+      {SCE_MARKDOWN_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_MARKDOWN_CODE, SyntaxColorTheme::StyleComponents::Script},
+      {SCE_MARKDOWN_CODE2, SyntaxColorTheme::StyleComponents::Script},
+      {SCE_MARKDOWN_CODEBK, SyntaxColorTheme::StyleComponents::Script},
+      {SCE_MARKDOWN_LINK, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_MARKDOWN_ULIST_ITEM, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_MARKDOWN_OLIST_ITEM, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_MARKDOWN_HEADER1, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_MARKDOWN_HEADER2, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_MARKDOWN_HEADER3, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_MARKDOWN_HEADER4, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_MARKDOWN_HEADER5, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_MARKDOWN_HEADER6, SyntaxColorTheme::StyleComponents::Comment},
+    })
       << Lexer(QSL("Matlab"), QStringList {
       QSL("m")
     }, SCLEX_MATLAB)
