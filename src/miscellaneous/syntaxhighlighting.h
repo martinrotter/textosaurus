@@ -13,6 +13,17 @@
 #define SOLAR_LIGHT_BASE_2    238, 232, 213
 #define SOLAR_LIGHT_CONTROL   198, 205, 205
 
+#define SOLAR_BASE_3    0, 43, 54
+#define SOLAR_BASE_00   131, 148, 150
+#define SOLAR_BASE_1    147, 161, 161
+#define SOLAR_BASE_2    7, 54, 66
+#define SOLAR_CONTROL   78, 90, 90
+#define SOLAR_GREEN     133, 153, 0
+#define SOLAR_VIOLET    108, 113, 196
+#define SOLAR_RED       220, 50, 47
+#define SOLAR_ORANGE    203, 75, 22
+#define SOLAR_BASE_01   88, 110, 117
+
 #include <QObject>
 
 #include "miscellaneous/syntaxcolortheme.h"

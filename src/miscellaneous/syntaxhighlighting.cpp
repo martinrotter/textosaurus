@@ -76,8 +76,23 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_MAGENTA), QColor(), true, true)},
     {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_ORANGE))},
     {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_ORANGE))},
+    {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_ORANGE))},
     {SyntaxColorTheme::StyleComponents::PlainData, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_00))},
     {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_VIOLET), QColor(), true)}
+  }));
+
+  // Solarized - http://ethanschoonover.com/solarized
+  m_colorThemes.append(SyntaxColorTheme(QSL("Solarized"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(SOLAR_BASE_3))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(SOLAR_CONTROL), QColor(SOLAR_BASE_3))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_BASE_1), QColor(SOLAR_BASE_2))},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(SOLAR_BASE_00))},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(SOLAR_GREEN), QColor(), false, true)},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(SOLAR_ORANGE), QColor(), true, true)},
+    {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QColor(SOLAR_VIOLET))},
+    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(SOLAR_ORANGE))},
+    {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(SOLAR_ORANGE))},
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(SOLAR_RED), QColor(), true)}
   }));
 
   // TODO: Load custom themes.
@@ -92,7 +107,7 @@ QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {
 }
 
 SyntaxColorTheme SyntaxHighlighting::defaultTheme() {
-  return colorThemes().at(1);
+  return colorThemes().at(2);
 }
 
 QStringList SyntaxHighlighting::fileFilters() {
@@ -128,7 +143,20 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_AVS)
       << Lexer(QSL("Bash"), QStringList {
       QSL("bash"), QSL("sh"), QSL("zsh"), QSL("bashrc"), QSL("zshrc"), QSL("_profile"), QSL("PKGBUILD")
-    }, SCLEX_BASH)
+    }, SCLEX_BASH, {
+      {SCE_SH_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_SH_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_SH_STRING, SyntaxColorTheme::StyleComponents::String},
+
+      {SCE_SH_ERROR, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_SH_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SH_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SH_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_SH_OPERATOR, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_SH_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_SH_BACKTICKS, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_SH_PARAM, SyntaxColorTheme::StyleComponents::Identifier}
+    })
       << Lexer(QSL("Batch"), QStringList {
       QSL("bat"), QSL("cmd")
     }, SCLEX_BATCH)
@@ -155,8 +183,8 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_C_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_C_COMMENTLINEDOC, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_C_NUMBER, SyntaxColorTheme::StyleComponents::Number},
-      {SCE_C_WORD, SyntaxColorTheme::StyleComponents::String},
-      {SCE_C_WORD2, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_WORD2, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_C_STRING, SyntaxColorTheme::StyleComponents::String},
       {SCE_C_STRINGEOL, SyntaxColorTheme::StyleComponents::String},
       {SCE_C_STRINGRAW, SyntaxColorTheme::StyleComponents::String},
