@@ -2,8 +2,10 @@
 
 #include "gui/settings/settingseditor.h"
 
+#include "gui/settings/syntaxcolorthemeeditor.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/settings.h"
+#include "miscellaneous/syntaxhighlighting.h"
 #include "miscellaneous/textapplication.h"
 #include "miscellaneous/textapplicationsettings.h"
 
@@ -25,6 +27,7 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
   connect(m_ui.m_spinTabSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinLineSpacing, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_btnFontMainChange, &QPushButton::clicked, this, &SettingsEditor::changeMainFont);
+  connect(m_ui.m_themeEditor, &SyntaxColorThemeEditor::colorThemesEdited, this, &SettingsEditor::dirtifySettings);
 }
 
 void SettingsEditor::loadSettings() {
@@ -36,6 +39,7 @@ void SettingsEditor::loadSettings() {
   m_ui.m_spinTabSize->setValue(qApp->textApplication()->settings()->tabSize());
   m_ui.m_lblFontMain->setFont(qApp->textApplication()->settings()->mainFont());
   m_ui.m_spinLineSpacing->setValue(qApp->textApplication()->settings()->lineSpacing());
+  m_ui.m_themeEditor->loadColorThemes(qApp->textApplication()->settings()->syntaxHighlighting()->colorThemes());
 
   QStringList date_patterns;
 
@@ -64,6 +68,9 @@ void SettingsEditor::saveSettings() {
   qApp->textApplication()->settings()->setIndentWithTabs(m_ui.m_cmbIndentMode->currentData().toBool());
   qApp->textApplication()->settings()->setMainFont(m_ui.m_lblFontMain->font());
   qApp->textApplication()->settings()->setLogTimestampFormat(m_ui.m_cmbTimestampFormat->currentText());
+  qApp->textApplication()->settings()->syntaxHighlighting()->saveColorThemes(m_ui.m_themeEditor->colorThemes(),
+                                                                             m_ui.m_themeEditor->currentColorThemeIndex());
+
   qApp->textApplication()->settings()->blockSignals(false);
 
   // NOTE: Execute last command with signals ON, so that editor do refresh their settings.

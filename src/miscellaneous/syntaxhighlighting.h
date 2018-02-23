@@ -60,7 +60,10 @@ class SyntaxHighlighting : public QObject {
     QList<Lexer> lexers();
     Lexer defaultLexer();
     QList<SyntaxColorTheme> colorThemes();
-    SyntaxColorTheme defaultTheme();
+    SyntaxColorTheme currentColorTheme();
+
+    void setCurrentColorTheme(const QString& theme_name);
+    void saveColorThemes(const QList<SyntaxColorTheme>& themes, int curr_theme_index);
 
     // Returns lexer suitable for syntax highlighting of given file and filter.
     // NOTE: Caller takes ownership of the lexer.
@@ -77,6 +80,7 @@ class SyntaxHighlighting : public QObject {
 
     QList<Lexer> m_lexers;
     QList<SyntaxColorTheme> m_colorThemes;
+    int m_currentColorThemeIndex;
 };
 
 #endif // SYNTAXHIGHLIGHTING_H

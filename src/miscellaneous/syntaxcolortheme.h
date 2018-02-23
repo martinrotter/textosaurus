@@ -67,14 +67,15 @@ class SyntaxColorTheme : public QObject {
 
       //ScintillaDefault = 1000,
       ScintillaMargin = 1001,
-      ScintillaBraceLight = 1002,
-      ScintillaBraceBad = 1003,
+
+      //ScintillaBraceLight = 1002,
+      //ScintillaBraceBad = 1003,
       ScintillaControlChar = 1004,
       ScintillaIndentGuide = 1005,
-      ScintillaCallTip = 1006,
-      ScintillaFoldDisplayText = 1007,
-      ScintillaLastPredefined = 1008,
-      ScintillaPaper = 1009
+
+      //ScintillaCallTip = 1006,
+      //ScintillaFoldDisplayText = 1007,
+      ScintillaPaper = 1008
     };
 
     Q_ENUM(StyleComponents)
@@ -88,12 +89,20 @@ class SyntaxColorTheme : public QObject {
 
     SyntaxColorTheme& operator=(const SyntaxColorTheme& other);
 
+    bool hasComponent(StyleComponents code) const;
+
     SyntaxColorThemeComponent component(StyleComponents code);
     SyntaxColorThemeComponent randomizedComponent(int scintilla_code);
     bool predefined() const;
     QString name() const;
     QMap<StyleComponents, SyntaxColorThemeComponent> styleColors() const;
     void clearStyleColors();
+
+    void removeComponent(StyleComponents code);
+
+    void setName(const QString& name);
+    void setPredefined(bool predefined);
+    void setComponent(StyleComponents code, const SyntaxColorThemeComponent& compon);
 
     void toFile(const QString& file_path);
 

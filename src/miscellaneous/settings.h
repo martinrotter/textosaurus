@@ -29,6 +29,7 @@ namespace Editor {
   constexpr auto LogTimestampFormatDef = "yyyy-MM-dd HH:mm:ss";
   constexpr auto TabSize = "tab_size";
   constexpr auto TabSizeDef = 2;
+  constexpr auto ColorTheme = "color_theme";
   constexpr auto IndentSize = "indent_size";
   constexpr auto IndentSizeDef = 2;
   constexpr auto IndentWithTabs = "indent_with_tabs";

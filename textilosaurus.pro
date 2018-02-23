@@ -249,7 +249,8 @@ HEADERS +=  src/definitions/definitions.h \
     src/plugin-system/filesystem/filesystemview.h \
     src/plugin-system/filesystem/favoriteslistwidget.h \
     src/miscellaneous/syntaxcolortheme.h \
-    src/plugin-system/filesystem/filesystemmodel.h
+    src/plugin-system/filesystem/filesystemmodel.h \
+    src/gui/settings/syntaxcolorthemeeditor.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -319,7 +320,8 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
     src/plugin-system/filesystem/filesystemview.cpp \
     src/plugin-system/filesystem/favoriteslistwidget.cpp \
     src/miscellaneous/syntaxcolortheme.cpp \
-    src/plugin-system/filesystem/filesystemmodel.cpp
+    src/plugin-system/filesystem/filesystemmodel.cpp \
+    src/gui/settings/syntaxcolorthemeeditor.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -337,7 +339,8 @@ FORMS +=    src/gui/dialogs/formabout.ui \
             src/gui/settings/settingslocalization.ui \
             src/gui/settings/settingsshortcuts.ui \
             src/gui/toolbareditor.ui \
-            src/gui/settings/settingseditor.ui
+            src/gui/settings/settingseditor.ui \
+            src/gui/settings/syntaxcolorthemeeditor.ui
 
 # Add qtsingleapplication.
 SOURCES += $$files(src/3rd-party/qtsingleapplication/*.cpp, false)

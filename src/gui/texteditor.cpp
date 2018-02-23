@@ -464,7 +464,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   m_lexer = default_lexer;
   setLexer(m_lexer.m_code);
 
-  auto color_theme = m_textApp->settings()->syntaxHighlighting()->defaultTheme();
+  auto color_theme = m_textApp->settings()->syntaxHighlighting()->currentColorTheme();
 
   // Style with number 0 always black.
   //styleSetFore(0, 0);

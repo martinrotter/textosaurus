@@ -34,6 +34,10 @@ void SyntaxColorTheme::clearStyleColors() {
   m_styleColors.clear();
 }
 
+void SyntaxColorTheme::removeComponent(SyntaxColorTheme::StyleComponents code) {
+  m_styleColors.remove(code);
+}
+
 void SyntaxColorTheme::toFile(const QString& file_path) {
   QSettings settings(file_path, QSettings::Format::IniFormat);
   QMetaEnum enum_converter = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
@@ -85,6 +89,10 @@ SyntaxColorTheme& SyntaxColorTheme::operator=(const SyntaxColorTheme& other) {
   }
 }
 
+bool SyntaxColorTheme::hasComponent(SyntaxColorTheme::StyleComponents code) const {
+  return m_styleColors.contains(code);
+}
+
 SyntaxColorTheme SyntaxColorTheme::fromFile(const QString& file_path) {
   QSettings settings(file_path, QSettings::Format::IniFormat);
   SyntaxColorTheme theme(settings.value(QSL("name")).toString(), false);
@@ -103,6 +111,18 @@ SyntaxColorTheme SyntaxColorTheme::fromFile(const QString& file_path) {
   }
 
   return theme;
+}
+
+void SyntaxColorTheme::setPredefined(bool predefined) {
+  m_predefined = predefined;
+}
+
+void SyntaxColorTheme::setComponent(SyntaxColorTheme::StyleComponents code, const SyntaxColorThemeComponent& compon) {
+  m_styleColors[code] = compon;
+}
+
+void SyntaxColorTheme::setName(const QString& name) {
+  m_name = name;
 }
 
 bool SyntaxColorTheme::predefined() const {

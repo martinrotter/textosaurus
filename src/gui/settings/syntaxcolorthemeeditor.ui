@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SyntaxColorThemeEditor</class>
+ <widget class="QWidget" name="SyntaxColorThemeEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>497</width>
+    <height>345</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="m_gbCustomizer">
+     <property name="title">
+      <string>Customize Substyle</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="PlainToolButton" name="m_btnForegroundSample">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="m_btnForeground">
+        <property name="text">
+         <string>Make &amp;Foreground Transparent</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="PlainToolButton" name="m_btnBackgroundSample">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="m_btnBackground">
+        <property name="text">
+         <string>Make &amp;Background Transparent</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="m_cbBold">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Bold</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_cbItalic">
+          <property name="font">
+           <font>
+            <italic>true</italic>
+           </font>
+          </property>
+          <property name="text">
+           <string>Italic</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_cbUnderline">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Underline</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QComboBox" name="m_cmbThemes"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnCopy">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>&amp;Copy...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0" rowspan="3">
+    <widget class="QListWidget" name="m_listComponents">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="m_lblInfo">
+     <property name="text">
+      <string>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle. &quot;Base&quot; substyle must always be defined.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="buddy">
+      <cstring>m_gbCustomizer</cstring>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlainToolButton</class>
+   <extends>QToolButton</extends>
+   <header>plaintoolbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_cmbThemes</tabstop>
+  <tabstop>m_btnCopy</tabstop>
+  <tabstop>m_listComponents</tabstop>
+  <tabstop>m_gbCustomizer</tabstop>
+  <tabstop>m_btnForegroundSample</tabstop>
+  <tabstop>m_btnForeground</tabstop>
+  <tabstop>m_btnBackgroundSample</tabstop>
+  <tabstop>m_btnBackground</tabstop>
+  <tabstop>m_cbBold</tabstop>
+  <tabstop>m_cbItalic</tabstop>
+  <tabstop>m_cbUnderline</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

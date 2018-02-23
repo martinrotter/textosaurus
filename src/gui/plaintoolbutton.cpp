@@ -2,6 +2,8 @@
 
 #include "gui/plaintoolbutton.h"
 
+#include "definitions/definitions.h"
+
 #include <QAction>
 #include <QPainter>
 #include <QPaintEvent>
@@ -26,7 +28,29 @@ void PlainToolButton::paintEvent(QPaintEvent* e) {
     p.setOpacity(0.3);
   }
 
-  icon().paint(&p, rect);
+  if (icon().isNull()) {
+    if (m_explicitColor.isValid()) {
+      p.fillRect(rect, m_explicitColor);
+    }
+    else {
+      rect.adjust(0, 0, -1, -1);
+      p.drawRect(rect);
+      p.drawText(rect, QSL("T"), QTextOption(Qt::AlignCenter));
+    }
+  }
+  else {
+    icon().paint(&p, rect);
+  }
+}
+
+QColor PlainToolButton::explicitColor() const {
+  return m_explicitColor;
+}
+
+void PlainToolButton::setExplicitColor(const QColor& explicit_color) {
+  m_explicitColor = explicit_color;
+
+  repaint();
 }
 
 void PlainToolButton::setPadding(int left, int top, int right, int bottom) {

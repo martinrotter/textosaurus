@@ -1,16 +1,17 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "definitions/definitions.h"
 #include "miscellaneous/syntaxhighlighting.h"
 
 #include "3rd-party/scintilla/include/SciLexer.h"
+#include "definitions/definitions.h"
+#include "miscellaneous/application.h"
 
 #include <QRegularExpression>
 #include <QSettings>
 
 SyntaxHighlighting::SyntaxHighlighting(QObject* parent)
   : QObject(parent), m_bareFileFilters(QStringList()), m_fileFilters(QStringList()), m_lexers(QList<Lexer>()),
-  m_colorThemes(QList<SyntaxColorTheme>()) {}
+  m_colorThemes(QList<SyntaxColorTheme>()), m_currentColorThemeIndex(0) {}
 
 QStringList SyntaxHighlighting::bareFileFilters() {
   if (m_bareFileFilters.isEmpty()) {
@@ -95,7 +96,18 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(SOLAR_RED), QColor(), true)}
   }));
 
+  const QString current_theme_name = qApp->settings()->value(GROUP(Editor), Editor::ColorTheme).toString();
+
   // TODO: Load custom themes.
+  // foreach (theme-file)
+  //  load-theme-file
+  // if (current_theme_name == theme_name)
+  // m_currentColorTheme = theme
+  //
+
+  if (current_theme_name.isEmpty()) {
+    m_currentColorThemeIndex = 0;
+  }
 }
 
 QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {
@@ -106,8 +118,20 @@ QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {
   return m_colorThemes;
 }
 
-SyntaxColorTheme SyntaxHighlighting::defaultTheme() {
-  return colorThemes().at(2);
+SyntaxColorTheme SyntaxHighlighting::currentColorTheme() {
+  return colorThemes().at(m_currentColorThemeIndex);
+}
+
+void SyntaxHighlighting::setCurrentColorTheme(const QString& theme_name) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::ColorTheme, theme_name);
+}
+
+void SyntaxHighlighting::saveColorThemes(const QList<SyntaxColorTheme>& themes, int curr_theme_index) {
+  // TODO: Save themes.
+  m_colorThemes = themes;
+  m_currentColorThemeIndex = curr_theme_index;
+
+  setCurrentColorTheme(m_colorThemes.at(m_currentColorThemeIndex).name());
 }
 
 QStringList SyntaxHighlighting::fileFilters() {
