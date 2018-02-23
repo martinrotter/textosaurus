@@ -39,7 +39,8 @@ void SettingsEditor::loadSettings() {
   m_ui.m_spinTabSize->setValue(qApp->textApplication()->settings()->tabSize());
   m_ui.m_lblFontMain->setFont(qApp->textApplication()->settings()->mainFont());
   m_ui.m_spinLineSpacing->setValue(qApp->textApplication()->settings()->lineSpacing());
-  m_ui.m_themeEditor->loadColorThemes(qApp->textApplication()->settings()->syntaxHighlighting()->colorThemes());
+  m_ui.m_themeEditor->loadColorThemes(qApp->textApplication()->settings()->syntaxHighlighting()->colorThemes(),
+                                      qApp->textApplication()->settings()->syntaxHighlighting()->currentColorTheme().name());
 
   QStringList date_patterns;
 

@@ -16,7 +16,7 @@ class SyntaxColorThemeEditor : public QWidget {
     explicit SyntaxColorThemeEditor(QWidget* parent = nullptr);
     virtual ~SyntaxColorThemeEditor() = default;
 
-    void loadColorThemes(const QList<SyntaxColorTheme>& themes);
+    void loadColorThemes(const QList<SyntaxColorTheme>& themes, const QString& current_theme_name);
 
     QList<SyntaxColorTheme> colorThemes() const;
     SyntaxColorTheme& currentColorTheme();

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>345</height>
+    <height>223</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -153,7 +153,10 @@
    <item row="2" column="1">
     <widget class="QLabel" name="m_lblInfo">
      <property name="text">
-      <string>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle. &quot;Base&quot; substyle must always be defined.</string>
+      <string>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

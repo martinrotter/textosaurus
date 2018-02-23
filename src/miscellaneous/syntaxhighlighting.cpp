@@ -83,7 +83,7 @@ void SyntaxHighlighting::loadColorThemes() {
   }));
 
   // Solarized - http://ethanschoonover.com/solarized
-  m_colorThemes.append(SyntaxColorTheme(QSL("Solarized"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+  m_colorThemes.append(SyntaxColorTheme(QSL("Solarized Dark"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(SOLAR_BASE_3))},
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(SOLAR_CONTROL), QColor(SOLAR_BASE_3))},
     {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_BASE_1), QColor(SOLAR_BASE_2))},

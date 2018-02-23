@@ -72,12 +72,16 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   connect(m_ui.m_btnBackground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearBackgroundColor);
 }
 
-void SyntaxColorThemeEditor::loadColorThemes(const QList<SyntaxColorTheme>& themes) {
+void SyntaxColorThemeEditor::loadColorThemes(const QList<SyntaxColorTheme>& themes, const QString& current_theme_name) {
   m_colorThemes.clear();
   m_ui.m_cmbThemes->clear();
 
   for (const auto& theme : themes) {
     loadColorTheme(theme);
+
+    if (m_colorThemes.constLast().name() == current_theme_name) {
+      m_ui.m_cmbThemes->setCurrentIndex(m_ui.m_cmbThemes->count() - 1);
+    }
   }
 }
 
@@ -137,6 +141,8 @@ void SyntaxColorThemeEditor::updateCurrentComponent() {
   SyntaxColorThemeComponent new_component = generateNewComponent();
 
   curr_theme.setComponent(comp, new_component);
+
+  emit colorThemesEdited();
 }
 
 void SyntaxColorThemeEditor::copyExistingTheme() {
@@ -149,14 +155,19 @@ void SyntaxColorThemeEditor::copyExistingTheme() {
     copy.setPredefined(false);
 
     loadColorTheme(copy);
-
     m_ui.m_cmbThemes->setCurrentIndex(m_ui.m_cmbThemes->count() - 1);
+
+    emit colorThemesEdited();
   }
 }
 
 void SyntaxColorThemeEditor::onThemeSwitched(int row) {
+  Q_UNUSED(row)
+
   m_ui.m_listComponents->setCurrentRow(-1);
   m_ui.m_listComponents->setCurrentRow(0);
+
+  emit colorThemesEdited();
 }
 
 void SyntaxColorThemeEditor::displayComponentDetails(int row) {
