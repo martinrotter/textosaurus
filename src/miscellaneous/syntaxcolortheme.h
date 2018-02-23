@@ -9,6 +9,7 @@
 #include <QMap>
 
 class TextEditor;
+class QSettings;
 
 struct SyntaxColorThemeComponent {
   explicit SyntaxColorThemeComponent() = default;
@@ -104,9 +105,9 @@ class SyntaxColorTheme : public QObject {
     void setPredefined(bool predefined);
     void setComponent(StyleComponents code, const SyntaxColorThemeComponent& compon);
 
-    void toFile(const QString& file_path);
+    void toSettings(QSettings& settings);
 
-    static SyntaxColorTheme fromFile(const QString& file_path);
+    static QList<SyntaxColorTheme> fromSettings(QSettings& settings);
 
   private:
     QMap<StyleComponents, SyntaxColorThemeComponent> m_styleColors;

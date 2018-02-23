@@ -5,6 +5,7 @@
 #include "definitions/definitions.h"
 #include "gui/texteditor.h"
 
+#include <QList>
 #include <QMetaEnum>
 #include <QSettings>
 
@@ -38,11 +39,12 @@ void SyntaxColorTheme::removeComponent(SyntaxColorTheme::StyleComponents code) {
   m_styleColors.remove(code);
 }
 
-void SyntaxColorTheme::toFile(const QString& file_path) {
-  QSettings settings(file_path, QSettings::Format::IniFormat);
-  QMetaEnum enum_converter = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
+void SyntaxColorTheme::toSettings(QSettings& settings) {
+  QMetaEnum enum_converter = QMetaEnum::fromType<StyleComponents>();
 
   QMapIterator<StyleComponents, SyntaxColorThemeComponent> i(m_styleColors);
+
+  settings.beginGroup(name());
 
   while (i.hasNext()) {
     i.next();
@@ -50,29 +52,14 @@ void SyntaxColorTheme::toFile(const QString& file_path) {
     auto component = enum_converter.valueToKey(int(i.key()));
     auto style = i.value();
 
-    settings.beginGroup(component);
-
-    if (style.m_colorForeground.isValid()) {
-      settings.setValue(QSL("fore"), style.m_colorForeground.name());
-    }
-    else {
-      settings.remove(QSL("fore"));
-    }
-
-    if (style.m_colorBackground.isValid()) {
-      settings.setValue(QSL("back"), style.m_colorBackground.name());
-    }
-    else {
-      settings.remove(QSL("back"));
-    }
-
-    settings.setValue(QSL("bold"), style.m_boldFont);
-    settings.setValue(QSL("italic"), style.m_italicFont);
-    settings.setValue(QSL("underlined"), style.m_underlinedFont);
-
-    settings.endGroup();
+    settings.setValue(QString("component_").arg(component), QString("%1#%2#%3#%4#%5").arg(style.m_colorForeground.name(),
+                                                                                          style.m_colorBackground.name(),
+                                                                                          QString::number(int(style.m_boldFont)),
+                                                                                          QString::number(int(style.m_italicFont)),
+                                                                                          QString::number(int(style.m_underlinedFont))));
   }
 
+  settings.endGroup();
   settings.sync();
 }
 
@@ -93,24 +80,34 @@ bool SyntaxColorTheme::hasComponent(SyntaxColorTheme::StyleComponents code) cons
   return m_styleColors.contains(code);
 }
 
-SyntaxColorTheme SyntaxColorTheme::fromFile(const QString& file_path) {
-  QSettings settings(file_path, QSettings::Format::IniFormat);
-  SyntaxColorTheme theme(settings.value(QSL("name")).toString(), false);
+QList<SyntaxColorTheme> SyntaxColorTheme::fromSettings(QSettings& settings) {
+  QStringList theme_names = settings.childGroups();
+
+  QList<SyntaxColorTheme> themes;
+
   QMetaEnum enum_converter = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
 
-  for (const QString& group : settings.childGroups()) {
-    auto component = static_cast<SyntaxColorTheme::StyleComponents>(enum_converter.keyToValue(qPrintable(group)));
-
+  for (const QString& group : theme_names) {
     settings.beginGroup(group);
-    theme.m_styleColors.insert(component, SyntaxColorThemeComponent(settings.value(QSL("fore")).toString(),
-                                                                    settings.value(QSL("back")).toString(),
-                                                                    settings.value(QSL("bold")).toBool(),
-                                                                    settings.value(QSL("italic")).toBool(),
-                                                                    settings.value(QSL("underlined")).toBool()));
+
+    SyntaxColorTheme theme(group, false);
+
+    for (const QString& key : settings.childKeys()) {
+      const QStringList raw_data = settings.value(key).toString().split('#');
+      auto component = static_cast<SyntaxColorTheme::StyleComponents>(enum_converter.keyToValue(qPrintable(key.split('_').last())));
+      SyntaxColorThemeComponent theme_component(raw_data.at(0),
+                                                raw_data.at(1),
+                                                raw_data.at(2).toInt(),
+                                                raw_data.at(3).toInt(),
+                                                raw_data.at(4).toInt());
+
+      theme.setComponent(component, theme_component);
+    }
+
     settings.endGroup();
   }
 
-  return theme;
+  return themes;
 }
 
 void SyntaxColorTheme::setPredefined(bool predefined) {
