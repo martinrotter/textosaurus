@@ -53,8 +53,8 @@ void SyntaxColorTheme::toSettings(QSettings& settings) const {
     auto style = i.value();
 
     settings.setValue(QString("component_%1").arg(component),
-                      QString("%1;%2;%3;%4;%5").arg(style.m_colorForeground.name(),
-                                                    style.m_colorBackground.name(),
+                      QString("%1;%2;%3;%4;%5").arg(style.m_colorForeground.isValid() ? style.m_colorForeground.name() : QString(),
+                                                    style.m_colorBackground.isValid() ? style.m_colorBackground.name() : QString(),
                                                     QString::number(int(style.m_boldFont)),
                                                     QString::number(int(style.m_italicFont)),
                                                     QString::number(int(style.m_underlinedFont))));
@@ -95,14 +95,20 @@ QList<SyntaxColorTheme> SyntaxColorTheme::fromSettings(QSettings& settings) {
 
     for (const QString& key : settings.childKeys()) {
       const QStringList raw_data = settings.value(key).toString().split(';');
-      auto component = static_cast<SyntaxColorTheme::StyleComponents>(enum_converter.keyToValue(qPrintable(key.split('_').last())));
-      SyntaxColorThemeComponent theme_component(raw_data.at(0),
-                                                raw_data.at(1),
-                                                raw_data.at(2).toInt(),
-                                                raw_data.at(3).toInt(),
-                                                raw_data.at(4).toInt());
 
-      theme.setComponent(component, theme_component);
+      if (raw_data.size() == 5) {
+        auto component = static_cast<SyntaxColorTheme::StyleComponents>(enum_converter.keyToValue(qPrintable(key.split('_').last())));
+        SyntaxColorThemeComponent theme_component(raw_data.at(0),
+                                                  raw_data.at(1),
+                                                  raw_data.at(2).toInt(),
+                                                  raw_data.at(3).toInt(),
+                                                  raw_data.at(4).toInt());
+
+        theme.setComponent(component, theme_component);
+      }
+      else {
+        qDebug("Failed to parse key \"%s\" when loading color scheme \"%s\".", qPrintable(key), qPrintable(group));
+      }
     }
 
     themes.append(theme);
