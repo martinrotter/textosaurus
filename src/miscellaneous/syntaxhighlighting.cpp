@@ -71,7 +71,8 @@ void SyntaxHighlighting::loadColorThemes() {
   // Solarized Light - http://ethanschoonover.com/solarized
   m_colorThemes.append(SyntaxColorTheme(QSL("Solarized Light"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(SOLAR_LIGHT_BASE_3))},
-    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_CONTROL), QColor(SOLAR_LIGHT_BASE_3))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar,
+     SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_CONTROL), QColor(SOLAR_LIGHT_BASE_3))},
     {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_1), QColor(SOLAR_LIGHT_BASE_2))},
     {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_00))},
     {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BLUE), QColor(), false, true)},
@@ -98,13 +99,17 @@ void SyntaxHighlighting::loadColorThemes() {
   }));
 
   const QString current_theme_name = qApp->settings()->value(GROUP(Editor), Editor::ColorTheme).toString();
+  QSettings settings(qApp->userDataFolder() + QDir::separator() + QSL("colors.ini"), QSettings::Format::IniFormat);
 
-  // TODO: Load custom themes.
-  // foreach (theme-file)
-  //  load-theme-file
-  // if (current_theme_name == theme_name)
-  // m_currentColorTheme = theme
-  //
+  QList<SyntaxColorTheme> custom_themes = SyntaxColorTheme::fromSettings(settings);
+
+  for (const SyntaxColorTheme& custom_theme : custom_themes) {
+    m_colorThemes.append(custom_theme);
+
+    if (custom_theme.name() == current_theme_name) {
+      m_currentColorThemeIndex = m_colorThemes.size() - 1;
+    }
+  }
 
   if (current_theme_name.isEmpty()) {
     m_currentColorThemeIndex = 0;

@@ -94,7 +94,7 @@ QList<SyntaxColorTheme> SyntaxColorTheme::fromSettings(QSettings& settings) {
     SyntaxColorTheme theme(group, false);
 
     for (const QString& key : settings.childKeys()) {
-      const QStringList raw_data = settings.value(key).toString().split('#');
+      const QStringList raw_data = settings.value(key).toString().split(';');
       auto component = static_cast<SyntaxColorTheme::StyleComponents>(enum_converter.keyToValue(qPrintable(key.split('_').last())));
       SyntaxColorThemeComponent theme_component(raw_data.at(0),
                                                 raw_data.at(1),
@@ -105,6 +105,7 @@ QList<SyntaxColorTheme> SyntaxColorTheme::fromSettings(QSettings& settings) {
       theme.setComponent(component, theme_component);
     }
 
+    themes.append(theme);
     settings.endGroup();
   }
 

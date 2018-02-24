@@ -11,7 +11,7 @@
 #endif
 
 void GuiUtilities::setLabelAsNotice(QLabel& label, bool is_warning) {
-  label.setMargin(6);
+  label.setMargin(4);
 
   if (is_warning) {
     label.setStyleSheet(QSL("font-weight: bold; font-style: italic; color: red"));
