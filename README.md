@@ -49,6 +49,7 @@ Features
     - can **print files including syntax highlighting**,
     - can print to PDF,
     - hideable line numbers,
+    - **configurable color schemes**,
     - URL highlights (fast on big files, only currently visible lines),
     - highlights occurrences of current selection (fast on big files, only currently visible lines),
     - switchable indent characters (spaces/tabs),
