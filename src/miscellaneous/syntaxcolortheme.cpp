@@ -139,16 +139,16 @@ QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> SyntaxColorTh
 SyntaxColorThemeComponent::SyntaxColorThemeComponent(const QColor& fore, const QColor& back, bool bold, bool italic, bool underline)
   : m_colorForeground(fore), m_colorBackground(back), m_boldFont(bold), m_italicFont(italic), m_underlinedFont(underline) {}
 
-void SyntaxColorThemeComponent::applyToEditor(TextEditor* editor, int style) {
+void SyntaxColorThemeComponent::applyToEditor(TextEditor& editor, int style) {
   if (m_colorForeground.isValid()) {
-    editor->styleSetFore(style, QCOLOR_TO_SPRT(m_colorForeground));
+    editor.styleSetFore(style, QCOLOR_TO_SPRT(m_colorForeground));
   }
 
   if (m_colorBackground.isValid()) {
-    editor->styleSetBack(style, QCOLOR_TO_SPRT(m_colorBackground));
+    editor.styleSetBack(style, QCOLOR_TO_SPRT(m_colorBackground));
   }
 
-  editor->styleSetBold(style, m_boldFont);
-  editor->styleSetItalic(style, m_italicFont);
-  editor->styleSetUnderline(style, m_underlinedFont);
+  editor.styleSetBold(style, m_boldFont);
+  editor.styleSetItalic(style, m_italicFont);
+  editor.styleSetUnderline(style, m_underlinedFont);
 }

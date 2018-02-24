@@ -16,7 +16,7 @@ struct SyntaxColorThemeComponent {
   explicit SyntaxColorThemeComponent(const QColor& fore, const QColor& back = QColor(), bool bold = false,
                                      bool italic = false, bool underline = false);
 
-  void applyToEditor(TextEditor* editor, int style);
+  void applyToEditor(TextEditor& editor, int style);
 
   QColor m_colorForeground;
   QColor m_colorBackground;
@@ -90,11 +90,11 @@ class SyntaxColorTheme : public QObject {
 
     SyntaxColorTheme& operator=(const SyntaxColorTheme& other);
 
+    bool predefined() const;
     bool hasComponent(StyleComponents code) const;
 
     SyntaxColorThemeComponent component(StyleComponents code);
     SyntaxColorThemeComponent randomizedComponent(int scintilla_code);
-    bool predefined() const;
     QString name() const;
     QMap<StyleComponents, SyntaxColorThemeComponent> styleColors() const;
     void clearStyleColors();

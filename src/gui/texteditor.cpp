@@ -477,7 +477,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   //
   // "STYLE_DEFAULT" has some special behavior, its background color
   // is used as "paper" color.
-  color_theme.component(SyntaxColorTheme::StyleComponents::Default).applyToEditor(this, STYLE_DEFAULT);
+  color_theme.component(SyntaxColorTheme::StyleComponents::Default).applyToEditor(*this, STYLE_DEFAULT);
 
   // Override background color.
   styleSetBack(STYLE_DEFAULT,
@@ -486,7 +486,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   // All "STYLE_DEFAULT" properties now get copied into other style classes.
   styleClearAll();
 
-  color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).applyToEditor(this, STYLE_LINENUMBER);
+  color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).applyToEditor(*this, STYLE_LINENUMBER);
 
   setSelFore(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));
   setSelBack(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorForeground));
@@ -501,20 +501,20 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
 
           auto color_component = color_theme.component(default_lexer.m_styleMappings.value(i));
 
-          color_component.applyToEditor(this, i);
+          color_component.applyToEditor(*this, i);
         }
         else if (default_lexer.m_styleMappings.contains(0)) {
           // We use "default" style color.
           auto color_component = color_theme.component(default_lexer.m_styleMappings.value(0));
 
-          color_component.applyToEditor(this, i);
+          color_component.applyToEditor(*this, i);
         }
         else {
           // Lexer does not define mapping to neither specific style nor default style,
           // use randomized style.
           auto color_component = color_theme.randomizedComponent(i);
 
-          color_component.applyToEditor(this, i);
+          color_component.applyToEditor(*this, i);
         }
       }
     }
