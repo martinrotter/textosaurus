@@ -105,7 +105,7 @@ class SyntaxColorTheme : public QObject {
     void setPredefined(bool predefined);
     void setComponent(StyleComponents code, const SyntaxColorThemeComponent& compon);
 
-    void toSettings(QSettings& settings);
+    void toSettings(QSettings& settings) const;
 
     static QList<SyntaxColorTheme> fromSettings(QSettings& settings);
 

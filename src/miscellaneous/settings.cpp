@@ -48,7 +48,7 @@ Settings* Settings::setupSettings(QObject* parent, const QString& app_path, cons
 SettingsProperties Settings::determineProperties(const QString& app_path, const QString& user_path) {
   SettingsProperties properties;
 
-  properties.m_settingsSuffix = QDir::separator() + APP_CFG_PATH + QDir::separator() + APP_CFG_FILE;
+  properties.m_settingsSuffix = QDir::separator() + APP_CFG_FILE;
 
   // We will use PORTABLE settings only and only if it is available and NON-PORTABLE
   // settings was not initialized before.

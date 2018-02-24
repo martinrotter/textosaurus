@@ -43,7 +43,6 @@ constexpr auto PASTEBIN_CLBIN = "https://clbin.com";
 constexpr auto PASTEBIN_IXIO = "http://ix.io";
 constexpr auto HTTP_HEADERS_CONTENT_TYPE = "Content-Type";
 constexpr auto HTTP_HEADERS_USER_AGENT = "User-Agent";
-constexpr auto APP_CFG_PATH = "config";
 constexpr auto APP_CFG_FILE = "config.ini";
 constexpr auto APP_QUIT_INSTANCE = "-q";
 constexpr auto APP_IS_RUNNING = "app_is_running";

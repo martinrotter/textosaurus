@@ -1,11 +1,17 @@
 2018.02.XX
 ----------
 Added:
+
+* Experimental support for color schemes. Color schemes offer these features:
+    * all custom schemes saved in single .ini file with simple format,
+    * schemes are valid for all supported Languages,
+    * simple scheme editor in application settings.
 * Auto-indent is now switchable per-document and is assignable to shortcut.
 * FS sidebar has better keyboard integration.
 * Initial support for context-based color schemes for some source code kinds.
 
 Changed:
+* Application user data (settings etc.) are now read directly from "data" subfolder, extra subsubfolder "config" is now not created. Check "About Application -> Paths" dialog for exact information.
 * Highlighting of occurrences of currently selected text polished a bit.
 * Scintilla updated to latest master (4.0.3).
 

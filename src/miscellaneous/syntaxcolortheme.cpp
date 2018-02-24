@@ -39,7 +39,7 @@ void SyntaxColorTheme::removeComponent(SyntaxColorTheme::StyleComponents code) {
   m_styleColors.remove(code);
 }
 
-void SyntaxColorTheme::toSettings(QSettings& settings) {
+void SyntaxColorTheme::toSettings(QSettings& settings) const {
   QMetaEnum enum_converter = QMetaEnum::fromType<StyleComponents>();
 
   QMapIterator<StyleComponents, SyntaxColorThemeComponent> i(m_styleColors);
@@ -52,11 +52,12 @@ void SyntaxColorTheme::toSettings(QSettings& settings) {
     auto component = enum_converter.valueToKey(int(i.key()));
     auto style = i.value();
 
-    settings.setValue(QString("component_").arg(component), QString("%1#%2#%3#%4#%5").arg(style.m_colorForeground.name(),
-                                                                                          style.m_colorBackground.name(),
-                                                                                          QString::number(int(style.m_boldFont)),
-                                                                                          QString::number(int(style.m_italicFont)),
-                                                                                          QString::number(int(style.m_underlinedFont))));
+    settings.setValue(QString("component_%1").arg(component),
+                      QString("%1;%2;%3;%4;%5").arg(style.m_colorForeground.name(),
+                                                    style.m_colorBackground.name(),
+                                                    QString::number(int(style.m_boldFont)),
+                                                    QString::number(int(style.m_italicFont)),
+                                                    QString::number(int(style.m_underlinedFont))));
   }
 
   settings.endGroup();

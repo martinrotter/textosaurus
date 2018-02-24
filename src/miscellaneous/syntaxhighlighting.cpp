@@ -6,6 +6,7 @@
 #include "definitions/definitions.h"
 #include "miscellaneous/application.h"
 
+#include <QDir>
 #include <QRegularExpression>
 #include <QSettings>
 
@@ -127,9 +128,16 @@ void SyntaxHighlighting::setCurrentColorTheme(const QString& theme_name) {
 }
 
 void SyntaxHighlighting::saveColorThemes(const QList<SyntaxColorTheme>& themes, int curr_theme_index) {
-  // TODO: Save themes.
   m_colorThemes = themes;
   m_currentColorThemeIndex = curr_theme_index;
+
+  QSettings settings(qApp->userDataFolder() + QDir::separator() + QSL("colors.ini"), QSettings::Format::IniFormat);
+
+  for (const SyntaxColorTheme& theme : m_colorThemes) {
+    if (!theme.predefined()) {
+      theme.toSettings(settings);
+    }
+  }
 
   setCurrentColorTheme(m_colorThemes.at(m_currentColorThemeIndex).name());
 }

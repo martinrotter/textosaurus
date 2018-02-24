@@ -422,6 +422,7 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src/gui \
                 $$PWD/src/gui/dialogs \
                 $$PWD/src/gui/sidebars \
+                $$PWD/src/gui/settings \
                 $$PWD/src/dynamic-shortcuts \
                 $$PWD/src/external-tools \
                 $$PWD/src/plugin-system
