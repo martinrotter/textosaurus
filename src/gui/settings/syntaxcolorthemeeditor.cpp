@@ -70,6 +70,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   connect(m_ui.m_btnBackgroundSample, &PlainToolButton::clicked, this, &SyntaxColorThemeEditor::editBackgroundColor);
   connect(m_ui.m_btnForeground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearForegroundColor);
   connect(m_ui.m_btnBackground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearBackgroundColor);
+  connect(m_ui.m_gbCustomizer, &QGroupBox::clicked, this, &SyntaxColorThemeEditor::colorThemesEdited);
 }
 
 void SyntaxColorThemeEditor::loadColorThemes(const QList<SyntaxColorTheme>& themes, const QString& current_theme_name) {
