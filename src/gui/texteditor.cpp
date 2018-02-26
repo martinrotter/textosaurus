@@ -691,23 +691,15 @@ FileInitialMetadata TextEditor::getInitialMetadata(const QString& file_path, con
   }
 
   if (file.size() > BIG_TEXT_FILE_SIZE) {
-    if (encoding != DEFAULT_TEXT_FILE_ENCODING &&
-        MessageBox::show(qApp->mainFormWidget(), QMessageBox::Question, tr("Opening Big File"),
-                         tr("You want to open big text file in encoding which is different from %1. This operation "
-                            "might take quite some time.").arg(DEFAULT_TEXT_FILE_ENCODING),
-                         tr("Do you really want to open the file?"),
-                         QDir::toNativeSeparators(file_path), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
-      return FileInitialMetadata();
-    }
-    else {
-      // File is quite big, we turn some features off to make sure it loads faster.
-      QMessageBox::warning(qApp->mainFormWidget(), tr("Loading Big File"),
-                           tr("File '%1' is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
-                              "make sure that file loading is not horribly slow.").arg(QDir::toNativeSeparators(file_path),
-                                                                                       QSL(APP_NAME)));
+    // File is quite big, we turn some features off to make sure it loads faster.
+    MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Warning, tr("Loading Big File"),
+                     tr("This file is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
+                        "make sure that file loading is not horribly slow.").arg(QSL(APP_NAME)),
+                     QString(),
+                     QDir::toNativeSeparators(file_path));
 
-      qApp->textApplication()->settings()->setWordWrapEnabled(false);
-    }
+    qApp->textApplication()->settings()->setWordWrapEnabled(false);
+    default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->defaultLexer();
   }
   else {
     // We try to detect default lexer.

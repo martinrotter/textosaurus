@@ -1,9 +1,14 @@
+2018.02.XX
+----------
+Changed:
+* Simplifications of some parts of GUI.
+* Better behavior when opening bigger files (no word wrap, "Plain text" lexer.
+
 2018.02.24
 ----------
 This release marks big milestone in development of Textilosaurus. At this point, all features I need from text editor, are implemented. In upcoming releases, there will be primarily performance enhancements, GUI polishments and bug fixes.
 
 Added:
-
 * Experimental support for color schemes. Color schemes offer these features:
     * all custom schemes saved in single .ini file with simple format,
     * schemes are valid for all supported Languages,
