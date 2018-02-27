@@ -33,9 +33,6 @@ int main(int argc, char* argv[]) {
   //: Examples: "cs", "en", "it", "cs_CZ", "en_GB", "en_US".
   QObject::tr("LANG_ABBREV");
 
-  // Ensure that ini format is used as application settings storage on Mac OS.
-  QSettings::setDefaultFormat(QSettings::IniFormat);
-
   // Setup debug output system.
   qInstallMessageHandler(Debugging::debugHandler);
 
@@ -81,7 +78,7 @@ int main(int argc, char* argv[]) {
   qDebug("Showing the main window when the application is starting.");
   main_window.show();
 
-  if (true || qApp->isFirstRun(APP_VERSION)) {
+  if (qApp->isFirstRun(APP_VERSION)) {
     qApp->showGuiMessage(QObject::tr("Welcome to %1. Click on me to check out NEW features.").arg(APP_LONG_NAME),
                          QMessageBox::Icon::Information, QUrl("http://update.textilosaurus"),
                          [&main_window]() {
