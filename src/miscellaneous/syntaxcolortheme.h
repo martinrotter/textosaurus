@@ -73,6 +73,8 @@ class SyntaxColorTheme : public QObject {
       //ScintillaBraceBad = 1003,
       ScintillaControlChar = 1004,
       ScintillaIndentGuide = 1005,
+      ScintillaUrlHighlight = 1006,
+      ScintillaOccurrencesHighlight = 1007,
 
       //ScintillaCallTip = 1006,
       //ScintillaFoldDisplayText = 1007,

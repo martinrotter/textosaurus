@@ -1,5 +1,8 @@
 2018.02.XX
 ----------
+Added:
+* Color schemes now have substyle for URL/occurrences highlighting.
+
 Changed:
 * Simplifications of some parts of GUI.
 * Better behavior when opening bigger files (no word wrap, "Plain text" lexer.

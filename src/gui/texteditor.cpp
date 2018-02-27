@@ -49,15 +49,12 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   connect(this, &TextEditor::notify, this, &TextEditor::onNotification);
   connect(this, &TextEditor::charAdded, this, &TextEditor::onCharAdded);
 
-  indicSetFore(INDICATOR_FIND, RGB_TO_SPRT(220, 30, 0));
-  indicSetStyle(INDICATOR_FIND, INDIC_FULLBOX);
-  indicSetHoverFore(INDICATOR_FIND, RGB_TO_SPRT(250, 50, 0));
-  indicSetHoverStyle(INDICATOR_FIND, INDIC_FULLBOX);
-
-  indicSetFore(INDICATOR_URL, RGB_TO_SPRT(0, 170, 0));
-  indicSetStyle(INDICATOR_URL, INDIC_COMPOSITIONTHICK);
-  indicSetHoverFore(INDICATOR_URL, RGB_TO_SPRT(0, 225, 0));
+  indicSetStyle(INDICATOR_URL, INDIC_COMPOSITIONTHIN);
   indicSetHoverStyle(INDICATOR_URL, INDIC_COMPOSITIONTHICK);
+  indicSetAlpha(INDICATOR_FIND, 120);
+  indicSetUnder(INDICATOR_FIND, true);
+  indicSetStyle(INDICATOR_FIND, INDIC_FULLBOX);
+  indicSetHoverStyle(INDICATOR_FIND, INDIC_FULLBOX);
 
   // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
@@ -465,6 +462,14 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   setLexer(m_lexer.m_code);
 
   auto color_theme = m_textApp->settings()->syntaxHighlighting()->currentColorTheme();
+
+  // Setup indicators to use colors from current theme (if defined).
+  indicSetFore(INDICATOR_URL, color_theme.hasComponent(SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight) ?
+               QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight).m_colorForeground) :
+               RGB_TO_SPRT(0, 225, 0));
+  indicSetFore(INDICATOR_FIND, color_theme.hasComponent(SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight) ?
+               QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight).m_colorForeground) :
+               RGB_TO_SPRT(220, 30, 0));
 
   // Style with number 0 always black.
   //styleSetFore(0, 0);

@@ -40,6 +40,8 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   //labels[SyntaxColorTheme::StyleComponents::ScintillaBraceBad] = tr("Matching brace (with error)");
   labels[SyntaxColorTheme::StyleComponents::ScintillaControlChar] = tr("Control characters (newline placeholder)");
   labels[SyntaxColorTheme::StyleComponents::ScintillaIndentGuide] = tr("Indent guides");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight] = tr("URL highlighting");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight] = tr("Occurrences highlighting");
 
   //labels[SyntaxColorTheme::StyleComponents::ScintillaCallTip] = tr("Calltips");
   //labels[SyntaxColorTheme::StyleComponents::ScintillaFoldDisplayText] = tr("Fold display text");
