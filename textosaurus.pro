@@ -35,7 +35,7 @@ APP_LOW_NAME                  = "textosaurus"
 APP_REVERSE_NAME              = "com.github.textosaurus"
 APP_AUTHOR                    = "Martin Rotter"
 APP_COPYRIGHT                 = "(C) 2018 $$APP_AUTHOR"
-APP_VERSION                   = "2018.02.25"
+APP_VERSION                   = "2018.03.05"
 APP_LONG_NAME                 = "$$APP_NAME $$APP_VERSION"
 APP_EMAIL                     = "rotter.martinos@gmail.com"
 APP_URL                       = "https://github.com/martinrotter/textosaurus"
@@ -429,8 +429,6 @@ INCLUDEPATH +=  $$PWD/. \
 
 TRANSLATIONS += $$PWD/localization/textosaurus_en_GB.ts \
                 $$PWD/localization/textosaurus_en.ts
-
-message($$QTPLUGIN)
 
 # Create new "make lupdate" target.
 lupdate.target = lupdate
