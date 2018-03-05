@@ -22,14 +22,14 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
 
   QMap<SyntaxColorTheme::StyleComponents, QString> labels;
 
-  labels[SyntaxColorTheme::StyleComponents::Default] = tr("Base");
+  labels[SyntaxColorTheme::StyleComponents::Default] = tr("Base colors");
   labels[SyntaxColorTheme::StyleComponents::Comment] = tr("Comments (both oneline and multiline)");
   labels[SyntaxColorTheme::StyleComponents::Number] = tr("Numbers");
   labels[SyntaxColorTheme::StyleComponents::String] = tr("Strings and character literals");
   labels[SyntaxColorTheme::StyleComponents::Operator] = tr("Operators");
   labels[SyntaxColorTheme::StyleComponents::Identifier] = tr("Identifiers");
   labels[SyntaxColorTheme::StyleComponents::Keyword] = tr("Keywords");
-  labels[SyntaxColorTheme::StyleComponents::Preprocessor] = tr("Preprocessor directives and optional code");
+  labels[SyntaxColorTheme::StyleComponents::Preprocessor] = tr("Preprocessor directives");
   labels[SyntaxColorTheme::StyleComponents::Regex] = tr("Regular expressions");
   labels[SyntaxColorTheme::StyleComponents::Script] = tr("Foreign scripts");
   labels[SyntaxColorTheme::StyleComponents::PlainData] = tr("Plain data");
@@ -45,7 +45,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
 
   //labels[SyntaxColorTheme::StyleComponents::ScintillaCallTip] = tr("Calltips");
   //labels[SyntaxColorTheme::StyleComponents::ScintillaFoldDisplayText] = tr("Fold display text");
-  labels[SyntaxColorTheme::StyleComponents::ScintillaPaper] = tr("Paper");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaPaper] = tr("Paper background");
 
   QMetaEnum enums = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
 

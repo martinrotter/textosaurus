@@ -1,6 +1,7 @@
 2018.03.XX
 ----------
 Added:
+* Current line highlight takes its color from "Base" substyle of current color scheme.
 * Caret inherits its color from active color scheme.
 
 2018.02.25

@@ -480,14 +480,10 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   setWhitespaceSize(3);
 
   // We set special style classes here.
-  //
-  // "STYLE_DEFAULT" has some special behavior, its background color
-  // is used as "paper" color.
   color_theme.component(SyntaxColorTheme::StyleComponents::Default).applyToEditor(*this, STYLE_DEFAULT);
 
   // Override background color.
-  styleSetBack(STYLE_DEFAULT,
-               QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));
+  styleSetBack(STYLE_DEFAULT, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));
 
   // All "STYLE_DEFAULT" properties now get copied into other style classes.
   styleClearAll();
@@ -500,6 +496,14 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
 
   // Set caret colors.
   setCaretFore(QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorForeground));
+
+  if (color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorBackground.isValid()) {
+    setCaretLineVisible(true);
+    setCaretLineBack(QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorBackground));
+  }
+  else {
+    setCaretLineVisible(false);
+  }
 
   if (m_lexer.m_code != SCLEX_NULL) {
     // Load more specific colors = keywords, operators etc.
