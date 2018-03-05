@@ -511,7 +511,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
       // We set colors for all non-predefined styles.
       if (i < STYLE_DEFAULT || i > STYLE_LASTPREDEFINED) {
         if (default_lexer.m_styleMappings.contains(i)) {
-          // Lexer specifies mapping of Scintilla style code into Textilosaurus style code, we use it.
+          // Lexer specifies mapping of Scintilla style code into Textosaurus style code, we use it.
 
           auto color_component = color_theme.component(default_lexer.m_styleMappings.value(i));
 

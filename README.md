@@ -1,28 +1,28 @@
-Textilosaurus
+Textosaurus
 =============
-[![AppVeyor](https://img.shields.io/appveyor/ci/martinrotter/textilosaurus.svg?maxAge=360)](https://ci.appveyor.com/project/martinrotter/textilosaurus)
-[![Travis CI](https://img.shields.io/travis/martinrotter/textilosaurus.svg?maxAge=360)](https://travis-ci.org/martinrotter/textilosaurus)
-[![Total downloads](https://img.shields.io/github/downloads/martinrotter/textilosaurus/total.svg?maxAge=360)](http://www.somsubhra.com/github-release-stats/?username=martinrotter&repository=textilosaurus)
-[![Version](https://img.shields.io/github/release/martinrotter/textilosaurus.svg?maxAge=360)](https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/text/CHANGELOG)
-[![GitHub issues](https://img.shields.io/github/issues/martinrotter/textilosaurus.svg?maxAge=360)](https://github.com/martinrotter/textilosaurus/issues)
-[![License](https://img.shields.io/github/license/martinrotter/textilosaurus.svg?maxAge=360000)](https://github.com/martinrotter/textilosaurus/blob/master/LICENSE.md)
+[![AppVeyor](https://img.shields.io/appveyor/ci/martinrotter/textosaurus.svg?maxAge=360)](https://ci.appveyor.com/project/martinrotter/textosaurus)
+[![Travis CI](https://img.shields.io/travis/martinrotter/textosaurus.svg?maxAge=360)](https://travis-ci.org/martinrotter/textosaurus)
+[![Total downloads](https://img.shields.io/github/downloads/martinrotter/textosaurus/total.svg?maxAge=360)](http://www.somsubhra.com/github-release-stats/?username=martinrotter&repository=textosaurus)
+[![Version](https://img.shields.io/github/release/martinrotter/textosaurus.svg?maxAge=360)](https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/text/CHANGELOG)
+[![GitHub issues](https://img.shields.io/github/issues/martinrotter/textosaurus.svg?maxAge=360)](https://github.com/martinrotter/textosaurus/issues)
+[![License](https://img.shields.io/github/license/martinrotter/textosaurus.svg?maxAge=360000)](https://github.com/martinrotter/textosaurus/blob/master/LICENSE.md)
 
-<img align="left" src="https://raw.githubusercontent.com/martinrotter/textilosaurus/master/resources/graphics/textilosaurus.png" alt="Textilosarus" height="100px" />
+<img align="left" src="https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/graphics/textosaurus.png" alt="Textosaurus" height="100px" />
 
-Textilosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textilosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
+Textosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
-You can support author of Textilosaurus on [Liberapay](https://liberapay.com/martinrotter). Textilosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
+You can support author of Textosaurus on [Liberapay](https://liberapay.com/martinrotter). Textosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
 
-![Textilosaurus](resources/screenshots/textilosaurus.png)
+![Textosaurus](resources/screenshots/textosaurus.png)
 
 Downloads
 ---------
-* [stable releases](https://github.com/martinrotter/textilosaurus/releases),
-* [development builds](https://github.com/martinrotter/textilosaurus/wiki/Development-builds).
+* [stable releases](https://github.com/martinrotter/textosaurus/releases),
+* [development builds](https://github.com/martinrotter/textosaurus/wiki/Development-builds).
 
 How to build
 ------------
-See main [project file](textilosaurus.pro) for instructions.
+See main [project file](textosaurus.pro) for instructions.
 
 Features
 --------
@@ -86,4 +86,4 @@ Features
     - no JavaScript components, no bundled Chromium, no Electron, no web technologies inside,
     - always OSS.
 
-\* Usually, custom external tools are executed via Bash or Python, so you must have used interpreter available in all environments where Textilosaurus is used. On Windows, Cygwin is probably the best way to use these.
+\* Usually, custom external tools are executed via Bash or Python, so you must have used interpreter available in all environments where Textosaurus is used. On Windows, Cygwin is probably the best way to use these.

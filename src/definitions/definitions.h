@@ -23,7 +23,7 @@ constexpr auto DEFAULT_TEXT_FILE_ENCODING = "UTF-8";
 constexpr auto BIG_TEXT_FILE_SIZE = qint64(15000000);
 constexpr auto MAX_TEXT_FILE_SIZE = qint64(std::numeric_limits<int>::max());
 constexpr auto ARGUMENTS_LIST_SEPARATOR = "\n";
-constexpr auto RELEASES_LIST = "https://api.github.com/repos/martinrotter/textilosaurus/releases";
+constexpr auto RELEASES_LIST = "https://api.github.com/repos/martinrotter/textosaurus/releases";
 constexpr auto DEFAULT_LOCALE = "en";
 constexpr auto ICON_SIZE_SETTINGS = 16;
 constexpr auto DOWNLOAD_TIMEOUT = 20000;
@@ -77,7 +77,7 @@ constexpr auto APP_THEME_SUFFIX = ".png";
 #if defined(Q_OS_LINUX)
 constexpr auto OS_ID = "Linux";
 constexpr auto OS_ID_LOW = "linux";
-constexpr auto APP_DESKTOP_ENTRY_FILE = "com.github.textilosaurus.desktop";
+constexpr auto APP_DESKTOP_ENTRY_FILE = "com.github.textosaurus.desktop";
 constexpr auto APP_DESKTOP_ENTRY_PATH = ":/desktop";
 
 #elif defined(Q_OS_OSX)
@@ -101,7 +101,7 @@ constexpr auto OS_ID_LOW = "";
 // Paths.
 constexpr auto APP_THEME_PATH = ":/graphics";
 constexpr auto APP_INFO_PATH = ":/text";
-constexpr auto APP_ICON_PATH = ":/graphics/textilosaurus.png";
+constexpr auto APP_ICON_PATH = ":/graphics/textosaurus.png";
 constexpr auto APP_LANG_PATH = ":/localization";
 
 #endif // DEFINITIONS_H

@@ -1,5 +1,7 @@
 2018.03.XX
 ----------
+Textilosaurus is now RENAMED to Textosaurus. Reason is simple, original name "Textilosaurus" was confusing and did not associate well with keyword "text".
+
 Added:
 * Current line highlight takes its color from "Base" substyle of current color scheme.
 * Caret inherits its color from active color scheme.
@@ -15,7 +17,7 @@ Changed:
 
 2018.02.24
 ----------
-This release marks big milestone in development of Textilosaurus. At this point, all features I need from text editor, are implemented. In upcoming releases, there will be primarily performance enhancements, GUI polishments and bug fixes.
+This release marks big milestone in development of Textosaurus. At this point, all features I need from text editor, are implemented. In upcoming releases, there will be primarily performance enhancements, GUI polishments and bug fixes.
 
 Added:
 * Experimental support for color schemes. Color schemes offer these features:
@@ -62,7 +64,7 @@ Added:
     * Combo box with list of drives/mountpoints was added.
     * Favorites list was separated to extra tab.
     * Overall UI polishments.
-* Prebuilt Windows binaries now use MSVC toolchain again, but this time MSVC runtime is compiled in statically, more optimizations are used (LTCG), which makes final textilosaurus.exe file smaller and faster to run.
+* Prebuilt Windows binaries now use MSVC toolchain again, but this time MSVC runtime is compiled in statically, more optimizations are used (LTCG), which makes final textosaurus.exe file smaller and faster to run.
 
 2018.01.26
 ----------
@@ -82,7 +84,7 @@ Fixed:
 
 Added:
 * Line number column is initially wider.
-* Prebuilt binaries for Windows now use MinGW-w64 toolchain, which is completely FOSS. MSVC++ runtime libraries are no longed needed. Linkage of dependencies is completely static, making Textilosaurus deployment easier, as it now consists of single executable file and that's it.
+* Prebuilt binaries for Windows now use MinGW-w64 toolchain, which is completely FOSS. MSVC++ runtime libraries are no longed needed. Linkage of dependencies is completely static, making Textosaurus deployment easier, as it now consists of single executable file and that's it.
 * "Markdown Preview" has clickable hyperlinks.
 
 2018.01.17

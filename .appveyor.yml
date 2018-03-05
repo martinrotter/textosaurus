@@ -2,25 +2,25 @@ version: 666.{build}
 skip_tags: false
 os: Visual Studio 2017
 clone_depth: 1
-clone_folder: C:\textilosaurus
+clone_folder: C:\textosaurus
 
 environment:
   access_token:
     secure: bM8uJbH7GK+2EW6aL8D0/qwwdM/lzW6y2odXWs/VcMq+nUBZa68x+k3EpZEAo6iT
 
 artifacts:
-  - path: 'textilosaurus-build\*win64.exe'
-    name: textilosaurusexe
+  - path: 'textosaurus-build\*win64.exe'
+    name: textosaurusexe
 
-  - path: 'textilosaurus-build\*win64.7z'
-    name: textilosaurus7z
+  - path: 'textosaurus-build\*win64.7z'
+    name: textosaurus7z
 
 deploy:
-  description: 'New Textilosaurus release.'
+  description: 'New Textosaurus release.'
   provider: GitHub
   auth_token:
     secure: XCWdr9wPgK4gm6289WXCg2vtMA02eBSnj6eKHC+ps6Z5lgw0jsK09UQ5y9E9ZFwS
-  artifact: textilosaurusexe, textilosaurus7z
+  artifact: textosaurusexe, textosaurus7z
   draft: false
   prerelease: false
   on:
@@ -28,9 +28,9 @@ deploy:
     
 build_script:
   - git submodule update --init --recursive
-  - ps: C:\textilosaurus\resources\scripts\.appveyor-prepare-win.ps1
+  - ps: C:\textosaurus\resources\scripts\.appveyor-prepare-win.ps1
   - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"'
-  - ps: C:\textilosaurus\resources\scripts\.appveyor-build-win.ps1
+  - ps: C:\textosaurus\resources\scripts\.appveyor-build-win.ps1
 
 on_success:
-  - ps: C:\textilosaurus\resources\scripts\.appveyor-install-win.ps1
+  - ps: C:\textosaurus\resources\scripts\.appveyor-install-win.ps1

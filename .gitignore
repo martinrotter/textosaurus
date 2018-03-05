@@ -23,5 +23,5 @@
 # Other files.
 *.autosave
 *.user*
-resources/localizations/textilosaurus*
-localization/textilosaurus*qm
+resources/localizations/textosaurus*
+localization/textosaurus*qm

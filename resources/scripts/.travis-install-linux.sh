@@ -2,11 +2,11 @@
 
 # Setup Qt build environment.
 source /opt/qt59/bin/qt59-env.sh
-mkdir textilosaurus-build && cd textilosaurus-build
+mkdir textosaurus-build && cd textosaurus-build
 
 # Build application.
-#lrelease -compress ../textilosaurus.pro
-qmake -spec linux-g++ "WITH_UBUNTU=true" ../textilosaurus.pro 
+#lrelease -compress ../textosaurus.pro
+qmake -spec linux-g++ "WITH_UBUNTU=true" ../textosaurus.pro 
 make
 make install
 
@@ -17,13 +17,13 @@ chmod a+x linuxdeployqt-continuous-x86_64.AppImage
 # Create AppImage.
 find . -type f
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textilosaurus.desktop" -bundle-non-qt-libs -no-translations
-./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textilosaurus.desktop" -appimage -no-translations
+./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textosaurus.desktop" -bundle-non-qt-libs -no-translations
+./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textosaurus.desktop" -appimage -no-translations
 
 # Upload image.
 git config --global user.email "rotter.martinos@gmail.com"
 git config --global user.name "martinrotter"
-git clone https://martinrotter:${GH_TOKEN}@github.com/martinrotter/textilosaurus.wiki.git ./build-wiki
+git clone https://martinrotter:${GH_TOKEN}@github.com/martinrotter/textosaurus.wiki.git ./build-wiki
 
 set -- T*.AppImage
 
@@ -32,7 +32,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 imagename="$1"
 git_revision=$(git rev-parse --short HEAD)
 git_tag_name=$(git describe --tags $(git rev-list --tags --max-count=1))
-imagenamenospace="textilosaurus-${git_tag_name}-${git_revision}-linux64.AppImage"
+imagenamenospace="textosaurus-${git_tag_name}-${git_revision}-linux64.AppImage"
 
 mv "$imagename" "$imagenamenospace"
 imagename="$imagenamenospace"
@@ -44,7 +44,7 @@ url=$(curl --upload-file "./$imagename" "https://transfer.sh/$imagenamenospace" 
 
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
-wikiline="| Linux | $(date +'%m-%d-%Y %T') | [$git_revision](https\://github.com/martinrotter/textilosaurus/commit/$git_revision) | [transfer.sh]($url) |  "
+wikiline="| Linux | $(date +'%m-%d-%Y %T') | [$git_revision](https\://github.com/martinrotter/textosaurus/commit/$git_revision) | [transfer.sh]($url) |  "
 wikifile="./build-wiki/Development-builds.md"
 wikifilenew="./build-wiki/Development-builds.md.new"
 

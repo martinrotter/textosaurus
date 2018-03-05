@@ -167,7 +167,7 @@ p, li { white-space: pre-wrap; }
            <bool>true</bool>
           </property>
           <attribute name="label">
-           <string>GNU GPL License (Textilosaurus source code)</string>
+           <string>GNU GPL License (Textosaurus source code)</string>
           </attribute>
           <attribute name="toolTip">
            <string>GNU GPL License</string>

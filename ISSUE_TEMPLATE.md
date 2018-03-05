@@ -1,5 +1,5 @@
 <!---
-Dear Textilosaurus contributor, please RESPECT this template. Also, you might be
+Dear Textosaurus contributor, please RESPECT this template. Also, you might be
 interested in reading this: http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
 -->
 

@@ -61,7 +61,7 @@ void SyntaxHighlighting::loadColorThemes() {
   // Add predefined themes.
 
   // Plain color scheme, no syntax highlighting.
-  m_colorThemes.append(SyntaxColorTheme(QSL("Textilosaurus"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+  m_colorThemes.append(SyntaxColorTheme(QSL("Textosaurus"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(255, 255, 255))},
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(0, 0, 0), QColor(255, 255, 255))},
     {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(96, 96, 96), QColor(238, 238, 238))},

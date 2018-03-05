@@ -8,13 +8,13 @@ read -p "Username: " USERNAME
 read -p "Password: " PASSWORD
 
 # Setup parameters.
-RESOURCE=../../../localization/textilosaurus_en.ts
+RESOURCE=../../../localization/textosaurus_en.ts
 CODES="en_GB"
-TRANSLATION='../../../localization/textilosaurus_$CODE.ts'
+TRANSLATION='../../../localization/textosaurus_$CODE.ts'
 
 declare PARAMS
 
-PARAMS+="-u "$USERNAME" -p "$PASSWORD" -ps "textilosaurus" -rs "textilosaurus" -ur "$RESOURCE" "
+PARAMS+="-u "$USERNAME" -p "$PASSWORD" -ps "textosaurus" -rs "textosaurus" -ur "$RESOURCE" "
 
 for CODE in $CODES; do
   PARAMS+="-dt "$CODE" "$(eval echo $TRANSLATION)" "

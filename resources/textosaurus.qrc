@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="/">
+    <file>text/CHANGELOG</file>
+    <file>text/COPYING_GNU_GPL</file>
+    <file>text/COPYING_GNU_GPL_HTML</file>
+    <file>text/COPYING_GNU_LGPL_HTML</file>
+    <file>text/COPYING_HOEDOWN</file>
+    <file>text/COPYING_MPL</file>
+    <file>graphics/textosaurus.ico</file>
+    <file>graphics/textosaurus.png</file>
+    <file>graphics/misc/flags/en.png</file>
+    <file>graphics/misc/flags/en_GB.png</file>
+    <file>desktop/com.github.textosaurus.desktop</file>
+    <file>../localization/textosaurus_en.qm</file>
+    <file>../localization/textosaurus_en_GB.qm</file>
+    <file>../localization/qt_en.qm</file>
+  </qresource>
+</RCC>

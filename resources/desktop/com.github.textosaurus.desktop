@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Exec=textosaurus %F
+Name=Textosaurus
+GenericName=Text editor
+Comment=Simple cross-platform text editor based on Qt and QScintilla
+Icon=textosaurus
+Terminal=false
+Categories=Office;Development;
+MimeType=text/plain;text/xml;
