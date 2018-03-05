@@ -109,7 +109,7 @@ int SyntaxColorThemeEditor::currentColorThemeIndex() const {
 
 void SyntaxColorThemeEditor::editForegroundColor() {
   auto new_color = QColorDialog::getColor(m_ui.m_btnForegroundSample->explicitColor(), this,
-                                          tr("Select Foreground Color"));
+                                          tr("Select Foreground Color"), QColorDialog::ColorDialogOption::DontUseNativeDialog);
 
   if (new_color.isValid()) {
     m_ui.m_btnForegroundSample->setExplicitColor(new_color);
@@ -124,7 +124,7 @@ void SyntaxColorThemeEditor::clearForegroundColor() {
 
 void SyntaxColorThemeEditor::editBackgroundColor() {
   auto new_color = QColorDialog::getColor(m_ui.m_btnBackgroundSample->explicitColor(), this,
-                                          tr("Select Background Color"));
+                                          tr("Select Background Color"), QColorDialog::ColorDialogOption::DontUseNativeDialog);
 
   if (new_color.isValid()) {
     m_ui.m_btnBackgroundSample->setExplicitColor(new_color);
