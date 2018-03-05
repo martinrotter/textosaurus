@@ -69,6 +69,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setEndAtLastLine(false);
   setEOLMode(m_textApp->settings()->eolMode());
+  setCaretWidth(2);
 }
 
 void TextEditor::updateLineNumberMarginWidth(int zoom, QFont font, int line_count) {
@@ -493,8 +494,12 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
 
   color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).applyToEditor(*this, STYLE_LINENUMBER);
 
+  // Set selection colors.
   setSelFore(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));
   setSelBack(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorForeground));
+
+  // Set caret colors.
+  setCaretFore(QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorForeground));
 
   if (m_lexer.m_code != SCLEX_NULL) {
     // Load more specific colors = keywords, operators etc.
