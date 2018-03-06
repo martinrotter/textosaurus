@@ -1,3 +1,8 @@
+2018.03.XX
+----------
+Fixed:
+* Main window state was not stored correctly when maximized. (#23)
+
 2018.03.05
 ----------
 Textilosaurus is now RENAMED to Textosaurus. Reason is simple, original name "Textilosaurus" was confusing and did not associate well with keyword "text".

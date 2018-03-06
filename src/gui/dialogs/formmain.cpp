@@ -229,13 +229,6 @@ void FormMain::saveSize() {
     qApp->processEvents();
   }
 
-  if (isMaximized() || isMinimized()) {
-    showNormal();
-
-    // We process events to really have window un-maximized.
-    qApp->processEvents();
-  }
-
   settings->setValue(GROUP(GUI), GUI::ToolbarsVisible, toolBar()->isActive());
   settings->setValue(GROUP(GUI), GUI::StatusBarVisible, statusBar()->isActive());
   settings->setValue(GROUP(GUI), GUI::MainWindowGeometry, saveGeometry());
