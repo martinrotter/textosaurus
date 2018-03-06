@@ -19,7 +19,7 @@ TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setUsesScrollButtons(true);
   setMovable(true);
   setIconSize(QSize(12, 12));
-  setDocumentMode(false);
+  setDocumentMode(true);
 
   createConnections();
 }
