@@ -247,12 +247,12 @@ HEADERS +=  src/definitions/definitions.h \
             src/plugin-system/filesystem/filesystemsidebar.h \
             src/plugin-system/filesystem/filesystemplugin.h \
             src/gui/sidebars/basesidebar.h \
-    src/plugin-system/markdown/markdowntextbrowser.h \
-    src/plugin-system/filesystem/filesystemview.h \
-    src/plugin-system/filesystem/favoriteslistwidget.h \
-    src/miscellaneous/syntaxcolortheme.h \
-    src/plugin-system/filesystem/filesystemmodel.h \
-    src/gui/settings/syntaxcolorthemeeditor.h
+            src/plugin-system/markdown/markdowntextbrowser.h \
+            src/plugin-system/filesystem/filesystemview.h \
+            src/plugin-system/filesystem/favoriteslistwidget.h \
+            src/miscellaneous/syntaxcolortheme.h \
+            src/plugin-system/filesystem/filesystemmodel.h \
+            src/gui/settings/syntaxcolorthemeeditor.h
 
 SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -318,12 +318,12 @@ SOURCES +=  src/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/plugin-system/filesystem/filesystemsidebar.cpp \
             src/plugin-system/filesystem/filesystemplugin.cpp \
             src/gui/sidebars/basesidebar.cpp \
-    src/plugin-system/markdown/markdowntextbrowser.cpp \
-    src/plugin-system/filesystem/filesystemview.cpp \
-    src/plugin-system/filesystem/favoriteslistwidget.cpp \
-    src/miscellaneous/syntaxcolortheme.cpp \
-    src/plugin-system/filesystem/filesystemmodel.cpp \
-    src/gui/settings/syntaxcolorthemeeditor.cpp
+            src/plugin-system/markdown/markdowntextbrowser.cpp \
+            src/plugin-system/filesystem/filesystemview.cpp \
+            src/plugin-system/filesystem/favoriteslistwidget.cpp \
+            src/miscellaneous/syntaxcolortheme.cpp \
+            src/plugin-system/filesystem/filesystemmodel.cpp \
+            src/gui/settings/syntaxcolorthemeeditor.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/miscellaneous/disablewindowtabbing.mm
@@ -419,6 +419,30 @@ CONFIG(release, debug|release) {
 SOURCES += $$files(src/3rd-party/hoedown/*.c, false)
 HEADERS  += $$files(src/3rd-party/hoedown/*.h, false)
 
+# Add hunspell.
+unix {
+  LIBS += -lhunspell
+}
+
+win32 {
+  debug {
+    static {
+      LIBS += $$PWD/resources/binaries/hunspell-msvc/debug-static/libhunspell.lib
+    }
+    else {
+      LIBS += $$PWD/resources/binaries/hunspell-msvc/debug-shared/libhunspell.lib
+    }
+  }
+  else {
+    static {
+      LIBS += $$PWD/resources/binaries/hunspell-msvc/release-static/libhunspell.lib
+    }
+    else {
+      LIBS += $$PWD/resources/binaries/hunspell-msvc/release-shared/libhunspell.lib
+    }
+  }
+}
+
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src \
                 $$PWD/src/gui \
@@ -427,7 +451,8 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/src/gui/settings \
                 $$PWD/src/dynamic-shortcuts \
                 $$PWD/src/external-tools \
-                $$PWD/src/plugin-system
+                $$PWD/src/plugin-system \
+                $$PWD/src/3rd-party
 
 TRANSLATIONS += $$PWD/localization/textosaurus_en_GB.ts \
                 $$PWD/localization/textosaurus_en.ts
