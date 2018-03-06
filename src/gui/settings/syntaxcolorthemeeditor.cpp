@@ -22,7 +22,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
 
   QMap<SyntaxColorTheme::StyleComponents, QString> labels;
 
-  labels[SyntaxColorTheme::StyleComponents::Default] = tr("Base colors");
+  labels[SyntaxColorTheme::StyleComponents::Default] = tr("Base color (fg color only)");
   labels[SyntaxColorTheme::StyleComponents::Comment] = tr("Comments (both oneline and multiline)");
   labels[SyntaxColorTheme::StyleComponents::Number] = tr("Numbers");
   labels[SyntaxColorTheme::StyleComponents::String] = tr("Strings and character literals");
@@ -45,7 +45,8 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
 
   //labels[SyntaxColorTheme::StyleComponents::ScintillaCallTip] = tr("Calltips");
   //labels[SyntaxColorTheme::StyleComponents::ScintillaFoldDisplayText] = tr("Fold display text");
-  labels[SyntaxColorTheme::StyleComponents::ScintillaPaper] = tr("Paper background");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaPaper] = tr("Paper background (bg color only)");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaCurrentLine] = tr("Current line background (bg color only");
 
   QMetaEnum enums = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
 

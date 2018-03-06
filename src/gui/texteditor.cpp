@@ -497,9 +497,9 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   // Set caret colors.
   setCaretFore(QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorForeground));
 
-  if (color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorBackground.isValid()) {
+  if (color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaCurrentLine).m_colorBackground.isValid()) {
     setCaretLineVisible(true);
-    setCaretLineBack(QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::Default).m_colorBackground));
+    setCaretLineBack(QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaCurrentLine).m_colorBackground));
   }
   else {
     setCaretLineVisible(false);
