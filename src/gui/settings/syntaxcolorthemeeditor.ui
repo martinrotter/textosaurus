@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>577</width>
+    <width>517</width>
     <height>312</height>
    </rect>
   </property>
@@ -152,8 +152,16 @@
    </item>
    <item row="2" column="1">
     <widget class="QLabel" name="m_lblInfo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
-      <string>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.</string>
+      <string>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
+
+Customizing too many substyles may lead to bad performance when handling big files.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
