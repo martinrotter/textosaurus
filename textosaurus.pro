@@ -534,7 +534,7 @@ win32 {
   QMAKE_EXTRA_TARGETS += windows_all
 }
 
-# Install all Mingw64 files on Windows.
+# Install all files on Windows.
 win32 {
   target.path = $$PREFIX
 
