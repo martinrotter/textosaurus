@@ -421,26 +421,34 @@ HEADERS  += $$files(src/3rd-party/hoedown/*.h, false)
 
 # Add hunspell.
 unix {
-  LIBS += -lhunspell
+  packagesExist(hunspell) {
+    DEFINES *= USE_HUNSPELL
+    LIBS *= -lhunspell
+
+    message($$MSG_PREFIX: Enabling spell-check functionality with Hunspell.)
+  }
 }
 
 win32 {
   debug {
     static {
-      LIBS += $$PWD/resources/binaries/hunspell-msvc/debug-static/libhunspell.lib
+      LIBS *= $$PWD/resources/binaries/hunspell-msvc/debug-static/libhunspell.lib
     }
     else {
-      LIBS += $$PWD/resources/binaries/hunspell-msvc/debug-shared/libhunspell.lib
+      LIBS *= $$PWD/resources/binaries/hunspell-msvc/debug-shared/libhunspell.lib
     }
   }
   else {
     static {
-      LIBS += $$PWD/resources/binaries/hunspell-msvc/release-static/libhunspell.lib
+      LIBS *= $$PWD/resources/binaries/hunspell-msvc/release-static/libhunspell.lib
     }
     else {
-      LIBS += $$PWD/resources/binaries/hunspell-msvc/release-shared/libhunspell.lib
+      LIBS *= $$PWD/resources/binaries/hunspell-msvc/release-shared/libhunspell.lib
     }
   }
+
+  DEFINES *= USE_HUNSPELL
+  message($$MSG_PREFIX: Enabling spell-check functionality with Hunspell.)
 }
 
 INCLUDEPATH +=  $$PWD/. \
@@ -465,8 +473,8 @@ QMAKE_EXTRA_TARGETS += lupdate
 
 # Make sure QM translations are nerated.
 qtPrepareTool(LRELEASE, lrelease) {
-  message($$MSG_PREFIX: Running: $$LRELEASE_EXECUTABLE -compress $$shell_quote($$shell_path($$PWD/textosaurus.pro)))
-  system($$LRELEASE_EXECUTABLE -compress textosaurus.pro)
+  message($$MSG_PREFIX: Running: \"$$LRELEASE_EXECUTABLE -compress $$system_quote($$system_path($$PWD/textosaurus.pro))\".)
+  system($$LRELEASE_EXECUTABLE -compress $$system_quote($$system_path($$PWD/textosaurus.pro)))
 }
 
 static {
