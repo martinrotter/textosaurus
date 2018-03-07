@@ -27,8 +27,6 @@ extern void disableWindowTabbing();
 
 #endif
 
-#include "hunspell/hunspell.hxx"
-
 int main(int argc, char* argv[]) {
   //: Abbreviation of language, e.g. en.
   //: Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code.
@@ -40,22 +38,6 @@ int main(int argc, char* argv[]) {
 
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
-
-  // hunspell test
-  Hunspell spl("C:\\Projekty\\cs_CZ.aff", "C:\\Projekty\\cs_CZ.dic");
-  bool aaa = spl.spell("autíčki");
-  QStringList suggestions;
-  char** suggestWordList = NULL;
-
-  // Encode from Unicode to the encoding used by current dictionary
-  int count = spl.suggest(&suggestWordList, "autíčki");
-
-  for (int i = 0; i < count; ++i) {
-    QString suggestion(suggestWordList[i]);
-
-    suggestions << suggestion;
-    free(suggestWordList[i]);
-  }
 
   qDebug("Instantiated Application class.");
 
