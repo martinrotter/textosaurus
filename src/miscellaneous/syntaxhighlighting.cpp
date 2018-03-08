@@ -381,7 +381,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       QSL("opml"), QSL("rss"), QSL("atom"), QSL("feed"), QSL("vbox"), QSL("vbox-prev")
     }, SCLEX_XML, {
       {SCE_H_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
-      {SCE_H_TAG, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_H_TAG, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_H_TAGUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
       {SCE_H_ATTRIBUTE, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_H_ATTRIBUTEUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
