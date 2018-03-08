@@ -100,7 +100,7 @@ void FormFindReplace::replaceAll() {
 
   int start_position = 0, replacements_made = 0, search_flags = extractFlags();
 
-  while (true) {
+  while (start_position < editor->length()) {
     QPair<int, int> found_range = editor->findText(search_flags,
                                                    m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
                                                    start_position,
@@ -120,9 +120,7 @@ void FormFindReplace::replaceAll() {
       }
 
       replacement_length += found_range.first;
-
-      // Move to next search.
-      start_position = qMin(replacement_length, editor->length());
+      start_position = found_range.first == found_range.second ? (replacement_length + 1) : replacement_length;
       replacements_made++;
     }
     else {

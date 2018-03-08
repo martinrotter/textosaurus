@@ -1,6 +1,7 @@
 2018.03.XX
 ----------
 Fixed:
+* Zero-length find result now highlighted with ⦚ in "Find Results" sidebar.
 * Current line highlighting now uses its own substyle and does not inherit its color from "Base" substyle anymore.
 * Add new tab on tab bar double-click. (#22)
 * URL highlighting now recognizes plain e-mail strings.
