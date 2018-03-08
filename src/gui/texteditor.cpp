@@ -534,6 +534,8 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     }
   }
 
+  setKeyWords(0, qstrdup(m_lexer.m_keywords.toLocal8Bit().constData()));
+
   // TODO: Setup folding, enable if some lexer is active, disable otherwise.
 
   /*if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER) {

@@ -34,7 +34,8 @@
 struct Lexer {
   explicit Lexer();
   explicit Lexer(const QString& name, const QStringList& suffices, int code,
-                 const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings = QMap<int, SyntaxColorTheme::StyleComponents>());
+                 const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings = QMap<int, SyntaxColorTheme::StyleComponents>(),
+                 const QString& keywords = QString());
   virtual ~Lexer() = default;
 
   bool isEmpty() const;
@@ -42,6 +43,7 @@ struct Lexer {
   QString m_name;
   int m_code;
   QStringList m_suffices;
+  QString m_keywords;
 
   QMap<int, SyntaxColorTheme::StyleComponents> m_styleMappings;
 };

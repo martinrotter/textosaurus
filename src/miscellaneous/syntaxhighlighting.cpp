@@ -212,9 +212,13 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       << Lexer(QSL("Config"), QStringList {
       QSL("conf")
     }, SCLEX_CONF)
-      << Lexer(QSL("C++"), QStringList {
-      QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL("cxx")
-    }, SCLEX_CPP, {
+      << Lexer(QSL("C++"),
+             QStringList {
+      QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL(
+        "cxx")
+    },
+             SCLEX_CPP,
+    {
       {SCE_C_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_C_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_C_COMMENTDOC, SyntaxColorTheme::StyleComponents::Comment},
@@ -237,7 +241,13 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_C_GLOBALCLASS, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_C_PREPROCESSORCOMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_C_PREPROCESSORCOMMENTDOC, SyntaxColorTheme::StyleComponents::Keyword}
-    })
+    }, "alignas alignof and and_eq asm auto bitand bitor bool break case catch char "
+       "char16_t char32_t class compl const constexpr const_cast continue decltype default "
+       "delete do double dynamic_cast else enum explicit export extern false final float for "
+       "friend goto if inline int long mutable namespace new noexcept not not_eq nullptr operator "
+       "or or_eq override private protected public register reinterpret_cast return short signed "
+       "sizeof static static_assert static_cast struct switch template this thread_local throw true "
+       "try typedef typeid typename union unsigned using virtual void volatile wchar_t while xor xor_eq")
       << Lexer(QSL("CSS"), QStringList {
       QSL("css")
     }, SCLEX_CSS)
@@ -399,8 +409,10 @@ Lexer SyntaxHighlighting::defaultLexer() {
 
 Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL), m_suffices(QStringList()) {}
 
-Lexer::Lexer(const QString& name, const QStringList& suffices, int code, const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings)
-  : m_name(name), m_code(code), m_suffices(suffices), m_styleMappings(style_mappings) {}
+Lexer::Lexer(const QString& name, const QStringList& suffices, int code,
+             const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings,
+             const QString& keywords)
+  : m_name(name), m_code(code), m_suffices(suffices), m_keywords(keywords), m_styleMappings(style_mappings) {}
 
 bool Lexer::isEmpty() const {
   return m_name.isEmpty() && m_suffices.isEmpty();

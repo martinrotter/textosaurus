@@ -290,7 +290,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* tobase64 = new PredefinedTool(&PredefinedTools::toBase64, this);
 
   tobase64->setActionObjectName(QSL("m_actionPredefToBase64"));
-  tobase64->setCategory(tr("&MIME tools"));
+  tobase64->setCategory(tr("&MIME Tools"));
   tobase64->setName(tr("Text → &Base64"));
   tobase64->setInput(ToolInput::SelectionDocument);
   tobase64->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -300,7 +300,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* tobase64url = new PredefinedTool(&PredefinedTools::toBase64Url, this);
 
   tobase64url->setActionObjectName(QSL("m_actionPredefToBase64Url"));
-  tobase64url->setCategory(tr("&MIME tools"));
+  tobase64url->setCategory(tr("&MIME Tools"));
   tobase64url->setName(tr("Text → &Base64Url"));
   tobase64url->setInput(ToolInput::SelectionDocument);
   tobase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -310,7 +310,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* tohtmlencoded = new PredefinedTool(&PredefinedTools::toHtmlEscaped, this);
 
   tohtmlencoded->setActionObjectName(QSL("m_actionPredefToHtmlEscaped"));
-  tohtmlencoded->setCategory(tr("&MIME tools"));
+  tohtmlencoded->setCategory(tr("&MIME Tools"));
   tohtmlencoded->setName(tr("Text → &HTML escaped"));
   tohtmlencoded->setInput(ToolInput::SelectionDocument);
   tohtmlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -320,7 +320,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* tourlencoded = new PredefinedTool(&PredefinedTools::toUrlEncoded, this);
 
   tourlencoded->setActionObjectName(QSL("m_actionPredefToUrlEncoded"));
-  tourlencoded->setCategory(tr("&MIME tools"));
+  tourlencoded->setCategory(tr("&MIME Tools"));
   tourlencoded->setName(tr("Text → &URL encoded"));
   tourlencoded->setInput(ToolInput::SelectionDocument);
   tourlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -385,7 +385,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 
   frombase64->setActionObjectName(QSL("m_actionPredefFromBase64"));
-  frombase64->setCategory(tr("&MIME tools"));
+  frombase64->setCategory(tr("&MIME Tools"));
   frombase64->setName(tr("&Base64 → text"));
   frombase64->setInput(ToolInput::SelectionDocument);
   frombase64->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -395,7 +395,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* frombase64url = new PredefinedTool(&PredefinedTools::fromBase64Url, this);
 
   frombase64url->setActionObjectName(QSL("m_actionPredefFromBase64Url"));
-  frombase64url->setCategory(tr("&MIME tools"));
+  frombase64url->setCategory(tr("&MIME Tools"));
   frombase64url->setName(tr("&Base64Url → text"));
   frombase64url->setInput(ToolInput::SelectionDocument);
   frombase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
@@ -405,7 +405,7 @@ void ExternalTools::loadPredefinedTools() {
   PredefinedTool* fromurlencoded = new PredefinedTool(&PredefinedTools::fromUrlEncoded, this);
 
   fromurlencoded->setActionObjectName(QSL("m_actionPredefFromUrlEncoded"));
-  fromurlencoded->setCategory(tr("&MIME tools"));
+  fromurlencoded->setCategory(tr("&MIME Tools"));
   fromurlencoded->setName(tr("&URL encoded → text"));
   fromurlencoded->setInput(ToolInput::SelectionDocument);
   fromurlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
