@@ -339,13 +339,12 @@ void TextEditor::updateUrlHighlights() {
   while (true) {
     QPair<int, int> found_range = findText(search_flags,
                                            "((((https?|ftp|mailto):(\\/\\/)?)|(www\\.))[\\w\\-.~:\\/?#@!$&'*+,;=`.]+)|"
-                                           "([\\w\\-.~:\\/?#@!$&'*+,;=`.]+@[\\w\\-\\.]+)",
+                                           "([\\w\\-.~:\\/?#@!$&*+,;=`.]+@[\\w\\-\\.]+)",
                                            start_position,
                                            end_position);
 
     if (found_range.first >= 0) {
       indicatorFillRange(found_range.first, found_range.second - found_range.first);
-
       start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
     }
     else {
