@@ -77,6 +77,8 @@ void ToolBarEditor::loadEditor(const QList<QAction*> activated_actions, const QL
                                                        action->text().replace('&', QString()),
                                                        m_ui->m_listActivatedActions);
 
+    action_item->setSizeHint(QSize(0, 24));
+
     if (action->isSeparator()) {
       action_item->setData(Qt::UserRole, SEPARATOR_ACTION_NAME);
       action_item->setIcon(qApp->icons()->fromTheme(QSL("insert-object")));
@@ -99,6 +101,8 @@ void ToolBarEditor::loadEditor(const QList<QAction*> activated_actions, const QL
       QListWidgetItem* action_item = new QListWidgetItem(action->icon(),
                                                          action->text().replace('&', QString()),
                                                          m_ui->m_listAvailableActions);
+
+      action_item->setSizeHint(QSize(0, 24));
 
       if (action->isSeparator()) {
         action_item->setData(Qt::UserRole, SEPARATOR_ACTION_NAME);
