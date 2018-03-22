@@ -45,6 +45,7 @@ void SyntaxColorTheme::toSettings(QSettings& settings) const {
   QMapIterator<StyleComponents, SyntaxColorThemeComponent> i(m_styleColors);
 
   settings.beginGroup(name());
+  settings.remove(QString());
 
   while (i.hasNext()) {
     i.next();

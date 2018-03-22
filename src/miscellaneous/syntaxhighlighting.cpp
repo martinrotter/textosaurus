@@ -355,9 +355,76 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       << Lexer(QSL("Spice"), QStringList {
       QSL("scp"), QSL("out")
     }, SCLEX_SPICE)
-      << Lexer(QSL("SQL"), QStringList {
-      QSL("sql")
-    }, SCLEX_SQL)
+      << Lexer(QSL("SQL"),
+             QStringList {
+      QSL(
+        "sql")
+    }, SCLEX_SQL, {
+      {SCE_SQL_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_SQL_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SQL_WORD2, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SQL_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_SQL_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_SQL_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_SQL_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SQL_COMMENTDOC, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SQL_COMMENTDOCKEYWORD, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SQL_COMMENTDOCKEYWORDERROR, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_SQL_COMMENTLINEDOC, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SQL_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SQL_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_SQL_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    }, "absolute action add admin after aggregate "
+       "alias all allocate alter and any are array as asc "
+       "assertion at authorization "
+       "before begin binary bit blob body boolean both breadth by "
+       "call cascade cascaded case cast catalog char character "
+       "check class clob close collate collation column commit "
+       "completion connect connection constraint constraints "
+       "constructor continue corresponding create cross cube current "
+       "current_date current_path current_role current_time current_timestamp "
+       "current_user cursor cycle "
+       "data date day deallocate dec decimal declare default "
+       "deferrable deferred delete depth deref desc describe descriptor "
+       "destroy destructor deterministic dictionary diagnostics disconnect "
+       "distinct domain double drop dynamic "
+       "each else end end-exec equals escape every except "
+       "exception exec execute exists exit external "
+       "false fetch first float for foreign found from free full "
+       "function "
+       "general get global go goto grant group grouping "
+       "having host hour "
+       "identity if ignore immediate in indicator initialize initially "
+       "inner inout input insert int integer intersect interval "
+       "into is isolation iterate "
+       "join "
+       "key "
+       "language large last lateral leading left less level like "
+       "limit local localtime localtimestamp locator "
+       "map match merge minute modifies modify module month "
+       "names national natural nchar nclob new next no none "
+       "not null numeric "
+       "object of off old on only open operation option "
+       "or order ordinality out outer output "
+       "package pad parameter parameters partial path postfix precision prefix "
+       "preorder prepare preserve primary "
+       "prior privileges procedure public "
+       "read reads real recursive ref references referencing relative "
+       "restrict result return returns revoke right "
+       "role rollback rollup routine row rows "
+       "savepoint schema scroll scope search second section select "
+       "sequence session session_user set sets size smallint some| space "
+       "specific specifictype sql sqlexception sqlstate sqlwarning start "
+       "state statement static structure system_user "
+       "table temporary terminate than then time timestamp "
+       "timezone_hour timezone_minute to trailing transaction translation "
+       "treat trigger true "
+       "under union unique unknown "
+       "unnest update usage user using "
+       "value values varchar variable varying view "
+       "when whenever where with without work write "
+       "year "
+       "zone")
       << Lexer(QSL("TCL"), QStringList {
       QSL("tcl")
     }, SCLEX_TCL)

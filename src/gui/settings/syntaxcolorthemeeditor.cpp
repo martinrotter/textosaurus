@@ -73,7 +73,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   connect(m_ui.m_btnBackgroundSample, &PlainToolButton::clicked, this, &SyntaxColorThemeEditor::editBackgroundColor);
   connect(m_ui.m_btnForeground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearForegroundColor);
   connect(m_ui.m_btnBackground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearBackgroundColor);
-  connect(m_ui.m_gbCustomizer, &QGroupBox::clicked, this, &SyntaxColorThemeEditor::colorThemesEdited);
+  connect(m_ui.m_gbCustomizer, &QGroupBox::clicked, this, &SyntaxColorThemeEditor::updateCurrentComponent);
 }
 
 void SyntaxColorThemeEditor::loadColorThemes(const QList<SyntaxColorTheme>& themes, const QString& current_theme_name) {
@@ -142,9 +142,15 @@ void SyntaxColorThemeEditor::updateCurrentComponent() {
   SyntaxColorTheme& curr_theme = currentColorTheme();
 
   SyntaxColorTheme::StyleComponents comp = itemComponent(m_ui.m_listComponents->currentRow());
-  SyntaxColorThemeComponent new_component = generateNewComponent();
 
-  curr_theme.setComponent(comp, new_component);
+  if (!m_ui.m_gbCustomizer->isCheckable() || m_ui.m_gbCustomizer->isChecked()) {
+    SyntaxColorThemeComponent new_component = generateNewComponent();
+
+    curr_theme.setComponent(comp, new_component);
+  }
+  else {
+    curr_theme.removeComponent(comp);
+  }
 
   emit colorThemesEdited();
 }
