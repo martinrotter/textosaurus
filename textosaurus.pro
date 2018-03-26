@@ -147,6 +147,8 @@ CONFIG(release, debug|release) {
 else {
   message($$MSG_PREFIX: Building in "debug" mode.)
 
+  DEFINES *= DEBUG=1
+
   gcc:QMAKE_CXXFLAGS_DEBUG *= -Wall
   clang:QMAKE_CXXFLAGS_DEBUG *= -Wall
 }

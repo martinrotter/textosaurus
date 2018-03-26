@@ -78,7 +78,11 @@ void FormUpdate::checkForUpdates() {
         m_ui.m_txtChanges->setText(m_updateInfo.m_changes);
       }
 
+#if defined(DEBUG)
+      if (true) {
+#else
       if (qApp->system()->isVersionNewer(m_updateInfo.m_availableVersion, APP_VERSION)) {
+#endif
         m_btnUpdate->setVisible(true);
         m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Ok,
                                     tr("New release available."),
@@ -148,7 +152,7 @@ void FormUpdate::loadAvailableFiles() {
 
   foreach (const UpdateUrl& url, m_updateInfo.m_urls) {
     if (qApp->system()->supportedUpdateFiles().match(url.m_name).hasMatch()) {
-      QListWidgetItem* item = new QListWidgetItem(url.m_name + tr(" (size ") + url.m_size + QSL(")"));
+      QListWidgetItem* item = new QListWidgetItem(url.m_name + QSL(" (") + url.m_size + QSL(")"));
 
       item->setData(Qt::UserRole, url.m_fileUrl);
       item->setToolTip(url.m_fileUrl);
