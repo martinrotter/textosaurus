@@ -1,7 +1,7 @@
 2018.03.XX
 ----------
 Added:
-* More precise styling for SQL lexer.
+* More precise styling for SQL, CSS lexers.
 
 Fixed:
 * Correct saving of custom color schemes when some substyle was explicitly removed.

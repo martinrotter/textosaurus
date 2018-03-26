@@ -216,9 +216,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
              QStringList {
       QSL("h"), QSL("hxx"), QSL("hpp"), QSL("c"), QSL("cpp"), QSL("cc"), QSL(
         "cxx")
-    },
-             SCLEX_CPP,
-    {
+    }, SCLEX_CPP, {
       {SCE_C_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_C_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_C_COMMENTDOC, SyntaxColorTheme::StyleComponents::Comment},
@@ -250,7 +248,24 @@ QList<Lexer> SyntaxHighlighting::lexers() {
        "try typedef typeid typename union unsigned using virtual void volatile wchar_t while xor xor_eq")
       << Lexer(QSL("CSS"), QStringList {
       QSL("css")
-    }, SCLEX_CSS)
+    }, SCLEX_CSS, {
+      {SCE_CSS_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_CSS_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_CSS_CLASS, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_CSS_ATTRIBUTE, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_CSS_IDENTIFIER, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_CSS_DOUBLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_CSS_SINGLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_CSS_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    }, "color background-color background-image background-repeat background-attachment background-position background "
+       "font-family font-style font-variant font-weight font-size font "
+       "word-spacing letter-spacing text-decoration vertical-align text-transform text-align text-indent line-height "
+       "margin-top margin-right margin-bottom margin-left margin "
+       "padding-top padding-right padding-bottom padding-left padding "
+       "border-top-width border-right-width border-bottom-width border-left-width border-width "
+       "border-top border-right border-bottom border-left border "
+       "border-color border-style width height float clear "
+       "display white-space list-style-type list-style-image list-style-position list-style")
       << Lexer(QSL("C#"), QStringList {
       QSL("cs")
     }, SCLEX_CPP)
