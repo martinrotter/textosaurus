@@ -143,7 +143,7 @@ void TextEditor::findAllFromSelectedText() {
 }
 
 void TextEditor::uiUpdated(int code) {
-  if ((code & (SC_UPDATE_SELECTION | SC_UPDATE_V_SCROLL)) > 0) {
+  if ((code & (SC_UPDATE_CONTENT | SC_UPDATE_SELECTION | SC_UPDATE_V_SCROLL)) > 0) {
     // Selection has changed.
     // NOTE: We could even allow SC_UPDATE_CONTENT here with QTimer and
     // completely remove uiUpdated method, but it would generate
@@ -356,20 +356,21 @@ void TextEditor::updateUrlHighlights() {
 void TextEditor::updateOccurrencesHighlights() {
   QByteArray sel_text = getSelText();
 
+  // Count of lines visible on screen.
+  sptr_t visible_lines_count = linesOnScreen();
+  sptr_t first_visible_position = positionFromPoint(1, 1);
+  sptr_t start_position = first_visible_position;
+
+  // Firs line visible on screen.
+  sptr_t first_visible_line = lineFromPosition(start_position);
+  sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
+                              lineLength(first_visible_line + visible_lines_count);
+  sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
+
   setIndicatorCurrent(INDICATOR_FIND);
-  indicatorClearRange(0, length());
+  indicatorClearRange(start_position, end_position);
 
   if (!sel_text.isEmpty()) {
-    // Count of lines visible on screen.
-    sptr_t visible_lines_count = linesOnScreen();
-    sptr_t first_visible_position = positionFromPoint(1, 1);
-    sptr_t start_position = first_visible_position;
-
-    // Firs line visible on screen.
-    sptr_t first_visible_line = lineFromPosition(start_position);
-    sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
-                                lineLength(first_visible_line + visible_lines_count);
-    sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
     int search_flags = 0;
 
     while (true) {
