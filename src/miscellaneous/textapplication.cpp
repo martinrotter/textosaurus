@@ -524,10 +524,12 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
           // We maybe dropped file.
           drop_event->accept();
 
-          QString file_path = drop_event->mimeData()->urls().first().toLocalFile();
+          for (const QUrl& urll : drop_event->mimeData()->urls()) {
+            QString file_path = urll.toLocalFile();
 
-          if (QFile::exists(file_path)) {
-            loadTextEditorFromFile(file_path);
+            if (QFile::exists(file_path)) {
+              loadTextEditorFromFile(file_path);
+            }
           }
 
           return true;
@@ -549,10 +551,12 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
         else {
           drop_event->accept();
 
-          QString file_path = drop_event->mimeData()->urls().first().toLocalFile();
+          for (const QUrl& urll : drop_event->mimeData()->urls()) {
+            QString file_path = urll.toLocalFile();
 
-          if (QFile::exists(file_path)) {
-            loadTextEditorFromFile(file_path);
+            if (QFile::exists(file_path)) {
+              loadTextEditorFromFile(file_path);
+            }
           }
 
           return true;
