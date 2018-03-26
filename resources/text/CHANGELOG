@@ -4,6 +4,7 @@ Added:
 * More precise styling for SQL, CSS lexers.
 
 Fixed:
+* Better regex for URL recongition. (#25)
 * Correct saving of custom color schemes when some substyle was explicitly removed.
 * Color scheme editor correctly handles removing of substyles.
 
