@@ -24,6 +24,17 @@
 #define SOLAR_ORANGE    203, 75, 22
 #define SOLAR_BASE_01   88, 110, 117
 
+#define MONOKAI_DARK    36, 36, 36        // paper
+#define MONOKAI_DARK_L  89, 89, 89        // control chars
+#define MONOKAI_LIGHT   249, 245, 221     // base font
+#define MONOKAI_RED     255, 87, 148      // operators
+#define MONOKAI_GREEN   178, 230, 76      // identifiers
+#define MONOKAI_ORANGE  250, 162, 61      // secondary keywords
+#define MONOKAI_PURPLE  170, 125, 252     // numbers
+#define MONOKAI_BROWN   204, 141, 102     // comments
+#define MONOKAI_YELLOW  230, 219, 122     // string literals
+#define MONOKAI_CYAN    102, 204, 225     // keywords
+
 #include <QObject>
 
 #include "miscellaneous/syntaxcolortheme.h"

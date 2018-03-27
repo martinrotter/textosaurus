@@ -102,6 +102,22 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(SOLAR_RED), QColor(), true)}
   }));
 
+  // Monokai Neo - http://ethanschoonover.com/solarized
+  m_colorThemes.append(SyntaxColorTheme(QSL("Monokai Neo"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(MONOKAI_DARK))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(MONOKAI_DARK_L), QColor(MONOKAI_DARK))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(MONOKAI_DARK_L), QColor(MONOKAI_DARK))},
+    {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(MONOKAI_GREEN))},
+    {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(MONOKAI_YELLOW))},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(MONOKAI_LIGHT))},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(MONOKAI_CYAN), QColor())},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(MONOKAI_DARK_L), QColor())},
+    {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QColor(MONOKAI_RED))},
+    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(MONOKAI_RED))},
+    {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(MONOKAI_PURPLE))},
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(MONOKAI_YELLOW), QColor())}
+  }));
+
   const QString current_theme_name = qApp->settings()->value(GROUP(Editor), Editor::ColorTheme).toString();
   QSettings settings(qApp->userDataFolder() + QDir::separator() + QSL("colors.ini"), QSettings::Format::IniFormat);
 

@@ -121,7 +121,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&amp;Copy...</string>
+        <string>&amp;Create New Theme...</string>
        </property>
       </widget>
      </item>
