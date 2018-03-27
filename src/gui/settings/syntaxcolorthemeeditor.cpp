@@ -29,6 +29,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   labels[SyntaxColorTheme::StyleComponents::Operator] = tr("Operators");
   labels[SyntaxColorTheme::StyleComponents::Identifier] = tr("Identifiers");
   labels[SyntaxColorTheme::StyleComponents::Keyword] = tr("Keywords");
+  labels[SyntaxColorTheme::StyleComponents::Keyword2] = tr("Secondary keywords");
   labels[SyntaxColorTheme::StyleComponents::Preprocessor] = tr("Preprocessor directives");
   labels[SyntaxColorTheme::StyleComponents::Regex] = tr("Regular expressions");
   labels[SyntaxColorTheme::StyleComponents::Script] = tr("Foreign scripts");

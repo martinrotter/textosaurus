@@ -57,6 +57,9 @@ class SyntaxColorTheme : public QObject {
       // Regular expression strings.
       Regex = 8,
 
+      // Secondary keyword set.
+      Keyword2 = 9,
+
       // Blocks of foreign code.
       Script = 11,
 
