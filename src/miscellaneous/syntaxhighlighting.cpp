@@ -349,7 +349,33 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_OCTAVE)
       << Lexer(QSL("Pascal"), QStringList {
       QSL("pas"), QSL("pp"), QSL("p"), QSL("inc")
-    }, SCLEX_PASCAL)
+    }, SCLEX_PASCAL, {
+      {SCE_PAS_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_PAS_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_PAS_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_PAS_HEXNUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_PAS_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_PAS_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_PAS_STRINGEOL, SyntaxColorTheme::StyleComponents::String},
+      {SCE_PAS_ASM, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_PAS_PREPROCESSOR, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_PAS_PREPROCESSOR2, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_PAS_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_PAS_COMMENT2, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_PAS_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_PAS_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_PAS_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    }, "absolute abstract and array as asm assembler automated begin case "
+       "cdecl class const constructor delayed deprecated destructor dispid dispinterface "
+       "div do downto dynamic else end except experimental export exports external far "
+       "file final finalization finally for forward function goto helper if "
+       "implementation in inherited initialization inline interface is label library "
+       "message mod near nil not object of on operator or out overload override packed "
+       "pascal platform private procedure program property protected public published "
+       "raise record reference register reintroduce repeat resourcestring safecall "
+       "sealed set shl shr static stdcall strict string then threadvar to try type unit "
+       "unsafe until uses var varargs virtual while winapi with xor "
+       "add default implements index name nodefault read readonly remove stored write writeonly")
       << Lexer(QSL("Perl"), QStringList {
       QSL("pl"), QSL("pm"), QSL("plx")
     }, SCLEX_PERL)
@@ -393,7 +419,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_SQL, {
       {SCE_SQL_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_SQL_WORD, SyntaxColorTheme::StyleComponents::Keyword},
-      {SCE_SQL_WORD2, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SQL_WORD2, SyntaxColorTheme::StyleComponents::Keyword2},
       {SCE_SQL_NUMBER, SyntaxColorTheme::StyleComponents::Number},
       {SCE_SQL_CHARACTER, SyntaxColorTheme::StyleComponents::String},
       {SCE_SQL_STRING, SyntaxColorTheme::StyleComponents::String},
