@@ -35,6 +35,19 @@
 #define MONOKAI_YELLOW  230, 219, 122     // string literals
 #define MONOKAI_CYAN    102, 204, 225     // keywords
 
+#define BASE16_L_PAPER      248, 248, 248
+#define BASE16_L_TEXT       56, 56, 56
+#define BASE16_L_CUR_LINE   184, 184, 184
+#define BASE16_L_LIN_NUM    184, 184, 184
+#define BASE16_L_NUMBERS    220, 150, 86
+#define BASE16_L_STRINGS    161, 181, 108
+#define BASE16_L_KEYWORDS   186, 139, 175
+#define BASE16_L_OPERATORS  56, 56, 56
+#define BASE16_L_PREPROC    124, 175, 194
+#define BASE16_L_WHITESP    216, 216, 216
+#define BASE16_L_COMMENT    184, 184, 184
+#define BASE16_L_OCCURR     184, 184, 184
+
 #include <QObject>
 
 #include "miscellaneous/syntaxcolortheme.h"

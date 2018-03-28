@@ -118,6 +118,22 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(MONOKAI_YELLOW), QColor())}
   }));
 
+  // Base16 Light - http://chriskempson.com/projects/base16/
+  m_colorThemes.append(SyntaxColorTheme(QSL("Base16 Light"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(BASE16_L_PAPER))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(BASE16_L_WHITESP), QColor(BASE16_L_PAPER))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(BASE16_L_LIN_NUM), QColor(BASE16_L_PAPER))},
+    {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(BASE16_L_STRINGS))},
+    {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(BASE16_L_OCCURR))},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(BASE16_L_TEXT))},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(BASE16_L_KEYWORDS), QColor())},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(BASE16_L_COMMENT), QColor())},
+    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(BASE16_L_OPERATORS))},
+    {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(BASE16_L_NUMBERS))},
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(BASE16_L_STRINGS), QColor())},
+    {SyntaxColorTheme::StyleComponents::Preprocessor, SyntaxColorThemeComponent(QColor(BASE16_L_PREPROC), QColor())}
+  }));
+
   const QString current_theme_name = qApp->settings()->value(GROUP(Editor), Editor::ColorTheme).toString();
   QSettings settings(qApp->userDataFolder() + QDir::separator() + QSL("colors.ini"), QSettings::Format::IniFormat);
 
