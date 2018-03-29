@@ -412,7 +412,27 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_PROPERTIES)
       << Lexer(QSL("Python"), QStringList {
       QSL("py"), QSL("pyw")
-    }, SCLEX_PYTHON)
+    }, SCLEX_PYTHON, {
+      {SCE_P_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_P_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_P_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_P_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_P_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_P_STRINGEOL, SyntaxColorTheme::StyleComponents::String},
+      {SCE_P_CLASSNAME, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_P_FCHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_P_FSTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_P_COMMENTBLOCK, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_P_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_P_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_P_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    }, "and del from not while "
+       "as elif global or with "
+       "assert else if pass yield "
+       "break except import print "
+       "class exec in raise "
+       "continue finally is return "
+       "def for lambda try")
       << Lexer(QSL("R"), QStringList {
       QSL("r")
     }, SCLEX_R)
