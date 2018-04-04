@@ -67,7 +67,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   setCodePage(SC_CP_UTF8);
   setMarginWidthN(MARGIN_SYMBOLS, 0);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
-  setEndAtLastLine(false);
+  setEndAtLastLine(true);
   setEOLMode(m_textApp->settings()->eolMode());
   setCaretWidth(2);
 }
