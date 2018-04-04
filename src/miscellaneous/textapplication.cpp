@@ -50,6 +50,11 @@ TextEditor* TextApplication::currentEditor() const {
 void TextApplication::loadTextEditorFromString(const QString& contents) {
   TextEditor* new_editor = new TextEditor(this, m_tabEditors);
 
+  if (m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
+    // We have one empty non modified editor already open, close it.
+    m_tabEditors->closeTab(0);
+  }
+
   attachTextEditor(new_editor);
   m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
   new_editor->loadFromString(contents);
@@ -63,6 +68,11 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
   TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
+    if (m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
+      // We have one empty non modified editor already open, close it.
+      m_tabEditors->closeTab(0);
+    }
+
     attachTextEditor(new_editor);
 
     m_settings->setLoadSaveDefaultDirectory(file_path);
