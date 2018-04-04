@@ -1,9 +1,12 @@
-2018.03.XX
+2018.04.XX
 ----------
 Added:
 * Substyles for Pascal lexer.
 * Monokai Neo color scheme.
 * Base16 Light color scheme.
+
+Fixed:
+* Some minor fixes and polishments.
 
 2018.03.26
 ----------
