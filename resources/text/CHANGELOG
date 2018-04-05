@@ -6,6 +6,7 @@ Added:
 * Base16 Light color scheme.
 
 Fixed:
+* Broken rendering of occurrences highlighting for bigger files.
 * Some minor fixes and polishments.
 
 2018.03.26

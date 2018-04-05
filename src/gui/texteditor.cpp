@@ -359,22 +359,24 @@ void TextEditor::updateOccurrencesHighlights() {
   // Count of lines visible on screen.
   sptr_t visible_lines_count = linesOnScreen();
   sptr_t first_visible_position = positionFromPoint(1, 1);
-  sptr_t start_position = first_visible_position;
 
   // Firs line visible on screen.
-  sptr_t first_visible_line = lineFromPosition(start_position);
+  sptr_t first_visible_line = lineFromPosition(first_visible_position);
   sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
                               lineLength(first_visible_line + visible_lines_count);
   sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
 
   setIndicatorCurrent(INDICATOR_FIND);
-  indicatorClearRange(start_position, end_position);
+  indicatorClearRange(first_visible_position, end_position - first_visible_position);
+
+  qDebug("pocet radku %d, prvni pozice %d (radek %d), posledni pozice %d (radek %d)", visible_lines_count, first_visible_position,
+         first_visible_line, end_position, lineFromPosition(end_position));
 
   if (!sel_text.isEmpty()) {
     int search_flags = 0;
 
     while (true) {
-      QPair<int, int> found_range = findText(search_flags, sel_text.constData(), start_position, end_position);
+      QPair<int, int> found_range = findText(search_flags, sel_text.constData(), first_visible_position, end_position);
 
       if (found_range.first < 0) {
         break;
@@ -385,7 +387,7 @@ void TextEditor::updateOccurrencesHighlights() {
           indicatorFillRange(found_range.first, found_range.second - found_range.first);
         }
 
-        start_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
+        first_visible_position = found_range.first == found_range.second ? (found_range.second + 1) : found_range.second;
       }
     }
   }
@@ -870,7 +872,11 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 }
 
 void TextEditor::closeEditor(bool* ok) {
-  if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
+  if (m_textApp->settings()->restorePreviousSession() && length() > 0 && filePath().isEmpty()) {
+    // We need to save this file as "temporary" for restoring of session.
+
+  }
+  else if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
     emit requestedVisibility();
 
     // We need to save.

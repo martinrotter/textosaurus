@@ -21,6 +21,10 @@ TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
   m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)) {}
 
+bool TextApplicationSettings::restorePreviousSession() const {
+  return qApp->settings()->value(GROUP(General), SETTING(General::RestoreSession)).toBool();
+}
+
 bool TextApplicationSettings::autoIndentEnabled() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::AutoIndent)).toBool();
 }
@@ -105,6 +109,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setRestorePreviousSession(bool restore) {
+  qApp->settings()->setValue(GROUP(General), General::RestoreSession, restore);
+  emit settingsChanged(false, false);
 }
 
 void TextApplicationSettings::setAutoIndentEnabled(bool enabled) {

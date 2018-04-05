@@ -117,6 +117,9 @@ namespace General {
   constexpr auto RemoveTrolltechJunkDef = false;
   constexpr auto FirstRun = "first_run";
   constexpr auto FirstRunDef = true;
+  constexpr auto RestoreSession = "restore_session";
+  constexpr auto RestoreSessionDef = false;
+  const QString RestoreSessionFiles = QString("restore_session_%1").arg(OS_ID_LOW);
   constexpr auto Language = "language";
   const auto LanguageDef = QLocale::system().name();
 }
