@@ -31,7 +31,7 @@
 #include <QWidgetAction>
 
 TextApplication::TextApplication(QObject* parent)
-  : QObject(parent), m_settings(new TextApplicationSettings(this)), m_findReplaceDialog(nullptr) {
+  : QObject(parent), m_shouldSaveSession(false), m_settings(new TextApplicationSettings(this)), m_findReplaceDialog(nullptr) {
   m_outputSidebar = new OutputSidebar(this, nullptr);
   m_actionShowOutputSidebar = m_outputSidebar->generateAction();
 
@@ -60,9 +60,9 @@ void TextApplication::loadTextEditorFromString(const QString& contents) {
   new_editor->loadFromString(contents);
 }
 
-void TextApplication::loadTextEditorFromFile(const QString& file_path,
-                                             const QString& explicit_encoding,
-                                             const QString& file_filter) {
+TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
+                                                    const QString& explicit_encoding,
+                                                    const QString& file_filter) {
   Q_UNUSED(file_filter)
 
   TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
@@ -80,6 +80,8 @@ void TextApplication::loadTextEditorFromFile(const QString& file_path,
 
     qobject_cast<QWidget*>(new_editor)->setFocus();
   }
+
+  return new_editor;
 }
 
 int TextApplication::addTextEditor(TextEditor* editor) {
@@ -276,6 +278,10 @@ FindResultsSidebar* TextApplication::findResultsSidebar() const {
 
 TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
+}
+
+int TextApplication::tabCount() const {
+  return m_tabEditors->count();
 }
 
 void TextApplication::loadFilesFromArgs(const QList<QString>& files) {
@@ -510,6 +516,8 @@ void TextApplication::loadState() {
 }
 
 void TextApplication::quit(bool* ok) {
+  beginSavingSession();
+
   while (m_tabEditors->count() > 0) {
     if (!m_tabEditors->closeTab(0)) {
       // User aborted.
@@ -519,6 +527,8 @@ void TextApplication::quit(bool* ok) {
   }
 
   *ok = true;
+
+  endSavingSession();
 }
 
 bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
@@ -825,6 +835,10 @@ void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
   }
 }
 
+bool TextApplication::shouldSaveSession() const {
+  return m_shouldSaveSession;
+}
+
 void TextApplication::convertEols(QAction* action) {
   int new_mode = action->data().toInt();
   TextEditor* current_editor = currentEditor();
@@ -873,6 +887,48 @@ void TextApplication::loadNewExternalTools() {
   m_menuEdit->addMenu(m_menuEolConversion);
   m_menuEdit->addMenu(m_menuEolMode);
   m_menuEdit->addActions(m_settings->externalTools()->generateEditMenuTools(m_menuEdit));
+}
+
+void TextApplication::restoreSession() {
+  if (settings()->restorePreviousSession()) {
+    // Restore editors.
+    const QStringList& session_files = qApp->settings()->value(GROUP(General), SETTING(General::RestoreSessionFiles)).toStringList();
+    const QString& user_data_path = qApp->userDataFolder();
+
+    for (const QString& session_file : session_files) {
+      if (session_file.startsWith(QL1S("#"))) {
+        // Temporary file.
+        TextEditor* editor = loadTextEditorFromFile(user_data_path + QDir::separator() + session_file.mid(1));
+
+        editor->setFilePath(QString());
+        m_tabEditors->setTabText(m_tabEditors->indexOf(editor), tr("New text file"));
+      }
+      else {
+        // Real file.
+        loadTextEditorFromFile(session_file);
+      }
+    }
+  }
+
+  removeSessionFiles();
+}
+
+void TextApplication::removeSessionFiles() {
+  for (const QString& session_temp_file : QDir(qApp->userDataFolder()).entryList({QString("tab_*_%1.session").arg(OS_ID_LOW)},
+                                                                                 QDir::Files,
+                                                                                 QDir::Name)) {
+    QFile::remove(session_temp_file);
+  }
+}
+
+void TextApplication::beginSavingSession() {
+  qApp->settings()->setValue(GROUP(General), General::RestoreSessionFiles, QStringList());
+  m_shouldSaveSession = settings()->restorePreviousSession();
+  removeSessionFiles();
+}
+
+void TextApplication::endSavingSession() {
+  m_shouldSaveSession = false;
 }
 
 void TextApplication::updateEditorIcon(int index, bool modified, bool read_only) {

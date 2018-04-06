@@ -320,6 +320,31 @@ void TextEditor::closeEvent(QCloseEvent* event) {
   }
 }
 
+void TextEditor::appendSessionFile(const QString& file_name, bool is_nonexistent) {
+  QString file_n = is_nonexistent ? (QL1S("#") + file_name) : file_name;
+
+  qApp->settings()->setValue(GROUP(General),
+                             General::RestoreSessionFiles,
+                             qApp->settings()->value(GROUP(General),
+                                                     SETTING(General::RestoreSessionFiles)).toStringList() << file_n);
+}
+
+QString TextEditor::getSessionFile() {
+  QDir dir_data(qApp->userDataFolder());
+  QString file_name;
+  int counter = 1;
+
+  do {
+    file_name = QString("tab_%2_%1.session").arg(OS_ID_LOW, QString::number(counter++));
+  } while (dir_data.exists(file_name));
+
+  return file_name;
+}
+
+void TextEditor::setFilePath(const QString& file_path) {
+  m_filePath = file_path;
+}
+
 void TextEditor::updateUrlHighlights() {
   setIndicatorCurrent(INDICATOR_URL);
   indicatorClearRange(0, length());
@@ -369,9 +394,10 @@ void TextEditor::updateOccurrencesHighlights() {
   setIndicatorCurrent(INDICATOR_FIND);
   indicatorClearRange(first_visible_position, end_position - first_visible_position);
 
-  qDebug("pocet radku %d, prvni pozice %d (radek %d), posledni pozice %d (radek %d)", visible_lines_count, first_visible_position,
+/*
+   qDebug("pocet radku %d, prvni pozice %d (radek %d), posledni pozice %d (radek %d)", visible_lines_count, first_visible_position,
          first_visible_line, end_position, lineFromPosition(end_position));
-
+ */
   if (!sel_text.isEmpty()) {
     int search_flags = 0;
 
@@ -872,9 +898,16 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 }
 
 void TextEditor::closeEditor(bool* ok) {
-  if (m_textApp->settings()->restorePreviousSession() && length() > 0 && filePath().isEmpty()) {
-    // We need to save this file as "temporary" for restoring of session.
+  if (m_textApp->shouldSaveSession() && length() > 0 && filePath().isEmpty()) {
+    // We save this editor "into" temporary session file.
+    QString session_file = getSessionFile();
 
+    saveToFile(qApp->userDataFolder() + QDir::separator() + session_file, ok, DEFAULT_TEXT_FILE_ENCODING);
+
+    // File is saved, we store the filename.
+    if (*ok) {
+      appendSessionFile(session_file, true);
+    }
   }
   else if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
     emit requestedVisibility();

@@ -37,9 +37,11 @@ class TextApplication : public QObject {
     FindResultsSidebar* findResultsSidebar() const;
     TextApplicationSettings* settings() const;
 
+    int tabCount() const;
     QList<QAction*> userActions() const;
 
     void setMainForm(FormMain* main_form);
+    bool shouldSaveSession() const;
 
   public slots:
     void undo();
@@ -55,9 +57,9 @@ class TextApplication : public QObject {
     void openTextFile(QAction* action = nullptr);
     void loadFilesFromArgs(const QList<QString>& files);
     void loadTextEditorFromString(const QString& contents);
-    void loadTextEditorFromFile(const QString& file_path,
-                                const QString& explicit_encoding = QString(),
-                                const QString& file_filter = QString());
+    TextEditor* loadTextEditorFromFile(const QString& file_path,
+                                       const QString& explicit_encoding = QString(),
+                                       const QString& file_filter = QString());
 
     void saveCurrentEditor();
     void saveCurrentEditorAs();
@@ -67,6 +69,8 @@ class TextApplication : public QObject {
     void reloadCurrentEditor();
 
     void makeEditorVisible(TextEditor* editor);
+
+    void restoreSession();
 
     // Closes all opened text documents (asks to save them if necessary).
     void quit(bool* ok);
@@ -107,6 +111,10 @@ class TextApplication : public QObject {
     void loadNewExternalTools();
 
   private:
+    void beginSavingSession();
+    void endSavingSession();
+    void removeSessionFiles();
+
     void updateEolMenu(int eol_mode);
 
     // Loads initial state of text application, including session restoring,
@@ -122,6 +130,7 @@ class TextApplication : public QObject {
     void updateStatusBarFromEditor(TextEditor* editor);
 
   private:
+    bool m_shouldSaveSession;
     TextApplicationSettings* m_settings;
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;

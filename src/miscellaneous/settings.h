@@ -120,6 +120,7 @@ namespace General {
   constexpr auto RestoreSession = "restore_session";
   constexpr auto RestoreSessionDef = false;
   const QString RestoreSessionFiles = QString("restore_session_%1").arg(OS_ID_LOW);
+  const QStringList RestoreSessionFilesDef = QStringList();
   constexpr auto Language = "language";
   const auto LanguageDef = QLocale::system().name();
 }

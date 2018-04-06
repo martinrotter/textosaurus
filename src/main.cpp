@@ -86,11 +86,13 @@ int main(int argc, char* argv[]) {
     });
   }
 
+  qApp->textApplication()->restoreSession();
+
   // We load any documents passed as parameters.
   if (application.arguments().size() > 1) {
     qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
   }
-  else {
+  else if (qApp->textApplication()->tabCount() == 0) {
     qApp->textApplication()->newFile();
   }
 

@@ -48,6 +48,7 @@ class TextEditor : public ScintillaEdit {
 
     bool autoIndentEnabled() const;
     void setAutoIndentEnabled(bool auto_indent_enabled);
+    void setFilePath(const QString& file_path);
 
   public slots:
     void reloadFromDisk();
@@ -95,11 +96,18 @@ class TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
+    void appendSessionFile(const QString& file_name, bool is_nonexistent);
+
     void detachWatcher();
     void reattachWatcher(const QString& file_path);
     bool isMarginVisible(int margin_number) const;
     void updateLineNumberMarginWidth(int zoom, QFont font, int line_count);
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
+
+    // Returns filename relative to "user data" folder.
+    // NOTE: This is used for saving of unattached editors
+    // to session files.
+    QString getSessionFile();
 
   private:
     bool m_isLog;
