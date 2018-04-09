@@ -902,6 +902,8 @@ void TextApplication::restoreSession() {
         TextEditor* editor = loadTextEditorFromFile(user_data_path + QDir::separator() + session_file.mid(1));
 
         if (editor != nullptr) {
+          // WARNING: We need to make sure that document looks
+          // "modified".
           auto rng = editor->textRange(0, 1);
 
           editor->insertText(0, rng);
