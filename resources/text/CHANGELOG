@@ -1,3 +1,8 @@
+2018.04.XX
+----------
+Fixed:
+* Restored "temporary" session documents are now "modified" on startup.
+
 2018.04.09
 ----------
 Added:

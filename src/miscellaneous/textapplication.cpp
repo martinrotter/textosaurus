@@ -902,6 +902,10 @@ void TextApplication::restoreSession() {
         TextEditor* editor = loadTextEditorFromFile(user_data_path + QDir::separator() + session_file.mid(1));
 
         if (editor != nullptr) {
+          auto rng = editor->textRange(0, 1);
+
+          editor->insertText(0, rng);
+          editor->deleteRange(0, 1);
           editor->setFilePath(QString());
           m_tabEditors->setTabText(m_tabEditors->indexOf(editor), tr("New text file"));
         }
