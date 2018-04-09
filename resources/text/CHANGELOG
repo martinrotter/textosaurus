@@ -1,6 +1,7 @@
 2018.04.XX
 ----------
 Added:
+* Saving/restoring of session.
 * Substyles for Pascal lexer.
 * Monokai Neo color scheme.
 * Base16 Light color scheme.

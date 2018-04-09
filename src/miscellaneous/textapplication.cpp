@@ -68,7 +68,8 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
   TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
-    if (m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
+    if (m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() &&
+        m_tabEditors->textEditorAt(0)->length() == 0 && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
       // We have one empty non modified editor already open, close it.
       m_tabEditors->closeTab(0);
     }
@@ -900,8 +901,10 @@ void TextApplication::restoreSession() {
         // Temporary file.
         TextEditor* editor = loadTextEditorFromFile(user_data_path + QDir::separator() + session_file.mid(1));
 
-        editor->setFilePath(QString());
-        m_tabEditors->setTabText(m_tabEditors->indexOf(editor), tr("New text file"));
+        if (editor != nullptr) {
+          editor->setFilePath(QString());
+          m_tabEditors->setTabText(m_tabEditors->indexOf(editor), tr("New text file"));
+        }
       }
       else {
         // Real file.
@@ -914,10 +917,10 @@ void TextApplication::restoreSession() {
 }
 
 void TextApplication::removeSessionFiles() {
-  for (const QString& session_temp_file : QDir(qApp->userDataFolder()).entryList({QString("tab_*_%1.session").arg(OS_ID_LOW)},
-                                                                                 QDir::Files,
-                                                                                 QDir::Name)) {
-    QFile::remove(session_temp_file);
+  for (const QFileInfo& session_temp_file : QDir(qApp->userDataFolder()).entryInfoList({QString("tab_*_%1.session").arg(OS_ID_LOW)},
+                                                                                       QDir::Files,
+                                                                                       QDir::Name)) {
+    QFile::remove(session_temp_file.absoluteFilePath());
   }
 }
 

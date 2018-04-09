@@ -898,16 +898,26 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 }
 
 void TextEditor::closeEditor(bool* ok) {
-  if (m_textApp->shouldSaveSession() && length() > 0 && filePath().isEmpty()) {
-    // We save this editor "into" temporary session file.
-    QString session_file = getSessionFile();
+  if (m_textApp->shouldSaveSession() && filePath().isEmpty()) {
+    if (length() > 0) {
+      // We save this editor "into" temporary session file.
+      QString session_file = getSessionFile();
 
-    saveToFile(qApp->userDataFolder() + QDir::separator() + session_file, ok, DEFAULT_TEXT_FILE_ENCODING);
+      saveToFile(qApp->userDataFolder() + QDir::separator() + session_file, ok, DEFAULT_TEXT_FILE_ENCODING);
 
-    // File is saved, we store the filename.
-    if (*ok) {
-      appendSessionFile(session_file, true);
+      // File is saved, we store the filename.
+      if (*ok) {
+        appendSessionFile(session_file, true);
+      }
     }
+    else {
+      *ok = true;
+    }
+  }
+  else if (m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) {
+    // No need to save, just mark to session if needed.
+    appendSessionFile(QDir::toNativeSeparators(filePath()), false);
+    *ok = true;
   }
   else if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
     emit requestedVisibility();
@@ -928,11 +938,21 @@ void TextEditor::closeEditor(bool* ok) {
 
         save(&ok_save);
         *ok = ok_save;
+
+        if (ok_save && m_textApp->shouldSaveSession()) {
+          appendSessionFile(QDir::toNativeSeparators(filePath()), false);
+        }
+
         break;
       }
 
       case QMessageBox::StandardButton::Discard:
         *ok = true;
+
+        if (m_textApp->shouldSaveSession()) {
+          appendSessionFile(QDir::toNativeSeparators(filePath()), false);
+        }
+
         break;
 
       case QMessageBox::StandardButton::Cancel:
