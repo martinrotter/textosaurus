@@ -25,6 +25,10 @@ bool TextApplicationSettings::restorePreviousSession() const {
   return qApp->settings()->value(GROUP(General), SETTING(General::RestoreSession)).toBool();
 }
 
+int TextApplicationSettings::restoredSessionTabIndex() const {
+  return qApp->settings()->value(GROUP(General), SETTING(General::RestoreSessionIndex)).toInt();
+}
+
 bool TextApplicationSettings::autoIndentEnabled() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::AutoIndent)).toBool();
 }
@@ -109,6 +113,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setRestoredSessionTabIndex(int index) {
+  qApp->settings()->setValue(GROUP(General), General::RestoreSessionIndex, index);
+  emit settingsChanged(false, false);
 }
 
 void TextApplicationSettings::setRestorePreviousSession(bool restore) {

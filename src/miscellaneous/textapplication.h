@@ -59,7 +59,8 @@ class TextApplication : public QObject {
     void loadTextEditorFromString(const QString& contents);
     TextEditor* loadTextEditorFromFile(const QString& file_path,
                                        const QString& explicit_encoding = QString(),
-                                       const QString& file_filter = QString());
+                                       const QString& file_filter = QString(),
+                                       bool restoring_session = false);
 
     void saveCurrentEditor();
     void saveCurrentEditorAs();

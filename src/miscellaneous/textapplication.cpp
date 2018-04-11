@@ -2,6 +2,7 @@
 
 #include "miscellaneous/textapplication.h"
 
+#include "definitions/definitions.h"
 #include "external-tools/externaltool.h"
 #include "external-tools/externaltools.h"
 #include "gui/dialogs/formfindreplace.h"
@@ -62,13 +63,14 @@ void TextApplication::loadTextEditorFromString(const QString& contents) {
 
 TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     const QString& explicit_encoding,
-                                                    const QString& file_filter) {
+                                                    const QString& file_filter,
+                                                    bool restoring_session) {
   Q_UNUSED(file_filter)
 
   TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
-    if (m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() &&
+    if (!restoring_session && m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() &&
         m_tabEditors->textEditorAt(0)->length() == 0 && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
       // We have one empty non modified editor already open, close it.
       m_tabEditors->closeTab(0);
@@ -519,6 +521,10 @@ void TextApplication::loadState() {
 void TextApplication::quit(bool* ok) {
   beginSavingSession();
 
+  if (shouldSaveSession()) {
+    settings()->setRestoredSessionTabIndex(m_tabEditors->currentIndex());
+  }
+
   while (m_tabEditors->count() > 0) {
     if (!m_tabEditors->closeTab(0)) {
       // User aborted.
@@ -893,13 +899,18 @@ void TextApplication::loadNewExternalTools() {
 void TextApplication::restoreSession() {
   if (settings()->restorePreviousSession()) {
     // Restore editors.
+    int index_to_activate = settings()->restoredSessionTabIndex();
+    int editors_added = 0;
     const QStringList& session_files = qApp->settings()->value(GROUP(General), SETTING(General::RestoreSessionFiles)).toStringList();
     const QString& user_data_path = qApp->userDataFolder();
 
     for (const QString& session_file : session_files) {
       if (session_file.startsWith(QL1S("#"))) {
         // Temporary file.
-        TextEditor* editor = loadTextEditorFromFile(user_data_path + QDir::separator() + session_file.mid(1));
+        TextEditor* editor = loadTextEditorFromFile(user_data_path + QDir::separator() + session_file.mid(1),
+                                                    QString(),
+                                                    QString(),
+                                                    true);
 
         if (editor != nullptr) {
           // WARNING: We need to make sure that document looks
@@ -910,12 +921,24 @@ void TextApplication::restoreSession() {
           editor->deleteRange(0, 1);
           editor->setFilePath(QString());
           m_tabEditors->setTabText(m_tabEditors->indexOf(editor), tr("New text file"));
+          editors_added++;
+        }
+        else {
+          if (index_to_activate >= (editors_added - 1)) {
+            index_to_activate--;
+          }
         }
       }
       else {
         // Real file.
-        loadTextEditorFromFile(session_file);
+        loadTextEditorFromFile(session_file, QString(), QString(), true);
       }
+    }
+
+    if (IS_IN_ARRAY(index_to_activate, editors_added)) {
+      m_tabEditors->setCurrentIndex(index_to_activate);
+      auto aa = m_tabEditors->currentIndex();
+      auto bb = 7;
     }
   }
 

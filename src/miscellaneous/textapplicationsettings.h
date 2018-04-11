@@ -21,6 +21,7 @@ class TextApplicationSettings : public QObject {
     virtual ~TextApplicationSettings() = default;
 
     bool restorePreviousSession() const;
+    int restoredSessionTabIndex() const;
     bool autoIndentEnabled() const;
     QStringList recentFiles() const;
     int eolMode() const;
@@ -51,6 +52,7 @@ class TextApplicationSettings : public QObject {
     void increaseFontSize();
     void decreaseFontSize();
 
+    void setRestoredSessionTabIndex(int index);
     void setRestorePreviousSession(bool restore);
     void setAutoIndentEnabled(bool enabled);
     void setLogTimestampFormat(const QString& format);

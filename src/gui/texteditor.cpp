@@ -207,11 +207,11 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
 
   detachWatcher();
 
-  // File is externally changed.
-  emit requestedVisibility();
-  auto not_again = false;
-
   if (QFile::exists(file_path)) {
+    // File is externally changed.
+    emit requestedVisibility();
+    auto not_again = false;
+
     // File exists and was externally modified.
     if (m_textApp->settings()->reloadModifiedDocumentsAutomatically() ||
         MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Question, tr("File Externally Modified"),
@@ -899,7 +899,8 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 
 void TextEditor::closeEditor(bool* ok) {
   if (m_textApp->shouldSaveSession() && filePath().isEmpty()) {
-    if (length() > 0) {
+    // Store even empty editors to session.
+    if (true /*length() > 0*/) {
       // We save this editor "into" temporary session file.
       QString session_file = getSessionFile();
 

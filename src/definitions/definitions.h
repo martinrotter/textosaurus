@@ -74,6 +74,8 @@ constexpr auto APP_THEME_SUFFIX = ".png";
 #define QL1C(x) QLatin1Char(x)
 #endif
 
+#define IS_IN_ARRAY(idx, count_array) (idx >= 0 && idx < count_array)
+
 #if defined(Q_OS_LINUX)
 constexpr auto OS_ID = "Linux";
 constexpr auto OS_ID_LOW = "linux";

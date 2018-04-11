@@ -1,6 +1,7 @@
 2018.04.XX
 ----------
 Fixed:
+* Correctly activate last active tab when restoring session. (#24)
 * Restored "temporary" session documents are now "modified" on startup.
 
 2018.04.09

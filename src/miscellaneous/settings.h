@@ -119,6 +119,8 @@ namespace General {
   constexpr auto FirstRunDef = true;
   constexpr auto RestoreSession = "restore_session";
   constexpr auto RestoreSessionDef = false;
+  const QString RestoreSessionIndex = QString("restore_session_index_%1").arg(OS_ID_LOW);
+  constexpr auto RestoreSessionIndexDef = -1;
   const QString RestoreSessionFiles = QString("restore_session_%1").arg(OS_ID_LOW);
   const QStringList RestoreSessionFilesDef = QStringList();
   constexpr auto Language = "language";
