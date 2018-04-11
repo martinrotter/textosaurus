@@ -101,7 +101,7 @@ class TextEditor : public ScintillaEdit {
     void detachWatcher();
     void reattachWatcher(const QString& file_path);
     bool isMarginVisible(int margin_number) const;
-    void updateLineNumberMarginWidth(int zoom, QFont font, int line_count);
+    void updateLineNumberMarginWidth(sptr_t zoom, QFont font, sptr_t line_count);
     void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
 
     // Returns filename relative to "user data" folder.

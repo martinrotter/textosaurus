@@ -72,9 +72,9 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   setCaretWidth(2);
 }
 
-void TextEditor::updateLineNumberMarginWidth(int zoom, QFont font, int line_count) {
+void TextEditor::updateLineNumberMarginWidth(sptr_t zoom, QFont font, sptr_t line_count) {
   // Set point size and add some padding.
-  font.setPointSize(font.pointSize() + zoom);
+  font.setPointSize(font.pointSize() + int(zoom));
 
   QFontMetrics metr(font);
   int width = TextFactory::stringWidth(QString::number(line_count), metr) + MARGIN_PADDING_LINE_NUMBERS;
@@ -118,7 +118,7 @@ void TextEditor::loadFromString(const QString& contents) {
 
 void TextEditor::findAllFromSelectedText() {
   QList<QPair<int, int>> found_ranges;
-  int start_position = 0, end_position = length(), search_flags = 0;
+  int start_position = 0, end_position = int(length()), search_flags = 0;
 
   while (true) {
     QPair<int, int> found_range = findText(search_flags, getSelText(), start_position, end_position);
@@ -176,8 +176,8 @@ void TextEditor::onCharAdded(int chr) {
       sptr_t curr_line = lineFromPosition(currentPos());
 
       if (curr_line > 0) {
-        sptr_t range_start = positionFromLine(curr_line - 1);
-        sptr_t range_end = lineEndPosition(curr_line - 1);
+        int range_start = int(positionFromLine(curr_line - 1));
+        int range_end = int(lineEndPosition(curr_line - 1));
 
         QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
 
@@ -195,8 +195,8 @@ void TextEditor::onCharAdded(int chr) {
 void TextEditor::onNotification(SCNotification* pscn) {
   if (pscn->nmhdr.code == SCN_INDICATORCLICK && pscn->modifiers == SCMOD_CTRL) {
     // Open clicked indicated URL.
-    sptr_t indic_start = indicatorStart(INDICATOR_URL, pscn->position);
-    sptr_t indic_end = indicatorEnd(INDICATOR_URL, pscn->position);
+    int indic_start = int(indicatorStart(INDICATOR_URL, pscn->position));
+    int indic_end = int(indicatorEnd(INDICATOR_URL, pscn->position));
 
     qApp->web()->openUrlInExternalBrowser(textRange(indic_start, indic_end));
   }
@@ -352,13 +352,13 @@ void TextEditor::updateUrlHighlights() {
   // Count of lines visible on screen.
   sptr_t visible_lines_count = linesOnScreen();
   sptr_t first_visible_position = positionFromPoint(1, 1);
-  sptr_t start_position = first_visible_position;
+  int start_position = int(first_visible_position);
 
   // Firs line visible on screen.
   sptr_t first_visible_line = lineFromPosition(start_position);
   sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
                               lineLength(first_visible_line + visible_lines_count);
-  sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
+  int end_position = ideal_end_position < 0 ? int(length()) : int(ideal_end_position);
   int search_flags = SCFIND_CXX11REGEX | SCFIND_REGEXP;
 
   while (true) {
@@ -383,13 +383,13 @@ void TextEditor::updateOccurrencesHighlights() {
 
   // Count of lines visible on screen.
   sptr_t visible_lines_count = linesOnScreen();
-  sptr_t first_visible_position = positionFromPoint(1, 1);
+  int first_visible_position = int(positionFromPoint(1, 1));
 
   // Firs line visible on screen.
   sptr_t first_visible_line = lineFromPosition(first_visible_position);
   sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
                               lineLength(first_visible_line + visible_lines_count);
-  sptr_t end_position = ideal_end_position < 0 ? length() : ideal_end_position;
+  int end_position = ideal_end_position < 0 ? int(length()) : int(ideal_end_position);
 
   setIndicatorCurrent(INDICATOR_FIND);
   indicatorClearRange(first_visible_position, end_position - first_visible_position);
@@ -450,8 +450,7 @@ bool TextEditor::isMarginVisible(int margin_number) const {
 void TextEditor::reloadFont() {
   QFont new_font = m_textApp->settings()->mainFont();
 
-  if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() ||
-      styleSize(STYLE_DEFAULT) != new_font.pointSize()) {
+  if (styleFont(STYLE_DEFAULT) != new_font.family().toUtf8() || styleSize(STYLE_DEFAULT) != new_font.pointSize()) {
     styleSetFont(STYLE_DEFAULT, new_font.family().toUtf8().constData());
     styleSetSize(STYLE_DEFAULT, new_font.pointSize());
   }
@@ -795,7 +794,7 @@ void TextEditor::setEncoding(const QByteArray& encoding) {
 }
 
 void TextEditor::updateLineNumberMarginVisibility() {
-  const int current_width = marginWidthN(MARGIN_LINE_NUMBERS);
+  const int current_width = int(marginWidthN(MARGIN_LINE_NUMBERS));
   const bool should_be_visible = m_textApp->settings()->lineNumbersEnabled();
 
   if (current_width <= 0 && !should_be_visible) {
@@ -814,7 +813,7 @@ void TextEditor::updateLineNumberMarginVisibility() {
 void TextEditor::toggleFolding(int position, int modifiers, int margin) {
   Q_UNUSED(modifiers)
 
-  const int line_number = lineFromPosition(position);
+  const sptr_t line_number = lineFromPosition(position);
 
   switch (margin) {
     case MARGIN_FOLDING:

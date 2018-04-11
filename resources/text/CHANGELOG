@@ -1,4 +1,4 @@
-2018.04.XX
+2018.04.11
 ----------
 Fixed:
 * Correctly activate last active tab when restoring session. (#24)
