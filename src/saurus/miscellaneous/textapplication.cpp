@@ -78,7 +78,10 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
 
     attachTextEditor(new_editor);
 
-    m_settings->setLoadSaveDefaultDirectory(file_path);
+    if (!restoring_session) {
+      m_settings->setLoadSaveDefaultDirectory(file_path);
+    }
+
     m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
 
     qobject_cast<QWidget*>(new_editor)->setFocus();
