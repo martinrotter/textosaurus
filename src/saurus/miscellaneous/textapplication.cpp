@@ -349,6 +349,10 @@ void TextApplication::onEditorSaved() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
   updateStatusBarFromEditor(editor);
+
+  if (!shouldSaveSession()) {
+    m_settings->setLoadSaveDefaultDirectory(editor->filePath());
+  }
 }
 
 void TextApplication::onEditorReloaded() {
