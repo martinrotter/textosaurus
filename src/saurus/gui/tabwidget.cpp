@@ -8,6 +8,7 @@
 #include "common/miscellaneous/textfactory.h"
 #include "definitions/definitions.h"
 #include "saurus/gui/dialogs/formmain.h"
+#include "saurus/gui/tab.h"
 #include "saurus/gui/tabbar.h"
 #include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
@@ -107,12 +108,33 @@ bool TabWidget::removeTab(int index, bool clear_from_memory) {
   return closed;
 }
 
+int TabWidget::indexOfEditor(TextEditor* editor) const {
+  int i = 0;
+
+  for (Tab* tab : tabs()) {
+    if (tab->primaryEditor() == editor) {
+      return i;
+    }
+    else {
+      i++;
+    }
+  }
+
+  return -1;
+}
+
 TextEditor* TabWidget::textEditorAt(int index) const {
+  Tab* tab = tabAt(index);
+
+  return tab != nullptr ? tab->primaryEditor() : nullptr;
+}
+
+Tab* TabWidget::tabAt(int index) const {
   if (index < 0 || index >= count()) {
     return nullptr;
   }
   else {
-    return qobject_cast<TextEditor*>(widget(index));
+    return qobject_cast<Tab*>(widget(index));
   }
 }
 
@@ -130,7 +152,21 @@ QList<TextEditor*> TabWidget::editors() const {
   return editors;
 }
 
-int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, TabType type) {
+QList<Tab*> TabWidget::tabs() const {
+  QList<Tab*> editors;
+
+  for (int i = 0; i < count(); i++) {
+    Tab* edit = tabAt(i);
+
+    if (edit != nullptr) {
+      editors.append(edit);
+    }
+  }
+
+  return editors;
+}
+
+int TabWidget::addTab(Tab* widget, const QIcon& icon, const QString& label, TabType type) {
   const int index = QTabWidget::addTab(widget, icon, label);
 
   tabBar()->setTabType(index, type);
@@ -139,7 +175,7 @@ int TabWidget::addTab(QWidget* widget, const QIcon& icon, const QString& label, 
   return index;
 }
 
-int TabWidget::addTab(QWidget* widget, const QString& label, TabType type) {
+int TabWidget::addTab(Tab* widget, const QString& label, TabType type) {
   const int index = QTabWidget::addTab(widget, label);
 
   tabBar()->setTabType(index, type);
@@ -148,7 +184,7 @@ int TabWidget::addTab(QWidget* widget, const QString& label, TabType type) {
   return index;
 }
 
-int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QString& label, TabType type) {
+int TabWidget::insertTab(int index, Tab* widget, const QIcon& icon, const QString& label, TabType type) {
   const int tab_index = QTabWidget::insertTab(index, widget, icon, label);
 
   tabBar()->setTabType(tab_index, type);
@@ -157,7 +193,7 @@ int TabWidget::insertTab(int index, QWidget* widget, const QIcon& icon, const QS
   return tab_index;
 }
 
-int TabWidget::insertTab(int index, QWidget* widget, const QString& label, TabType type) {
+int TabWidget::insertTab(int index, Tab* widget, const QString& label, TabType type) {
   const int tab_index = QTabWidget::insertTab(index, widget, label);
 
   tabBar()->setTabType(tab_index, type);

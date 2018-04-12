@@ -2,18 +2,22 @@
 
 #include "saurus/gui/editortab.h"
 
+#include "saurus/gui/tabwidget.h"
 #include "saurus/miscellaneous/textapplication.h"
 
 #include <QLayout>
 
-EditorTab::EditorTab(TextApplication* text_app, QWidget* parent)
-  : Tab(text_app->tabWidget(), parent), m_editor(new TextEditor(text_app, this)) {
+EditorTab::EditorTab(TextApplication* text_app, TextEditor* editor)
+  : Tab(text_app->tabWidget()), m_editor(editor) {
   QVBoxLayout* lay = new QVBoxLayout(this);
 
   lay->setMargin(0);
   lay->setSpacing(0);
   lay->addWidget(m_editor, 1);
 }
+
+EditorTab::EditorTab(TextApplication* text_app)
+  : EditorTab(text_app, new TextEditor(text_app, this)) {}
 
 TextEditor* EditorTab::primaryEditor() const {
   return m_editor;
@@ -29,4 +33,17 @@ int EditorTab::countOfEditors() const {
 
 TabTyp EditorTab::tabType() const {
   return TabTyp::TextEditor;
+}
+
+void EditorTab::closeEvent(QCloseEvent* event) {
+  bool ok = false;
+
+  m_editor->closeEditor(&ok);
+
+  if (!ok) {
+    event->ignore();
+  }
+  else {
+    Tab::closeEvent(event);
+  }
 }

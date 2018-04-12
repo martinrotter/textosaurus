@@ -307,19 +307,6 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
   }
 }
 
-void TextEditor::closeEvent(QCloseEvent* event) {
-  bool ok = false;
-
-  closeEditor(&ok);
-
-  if (!ok) {
-    event->ignore();
-  }
-  else {
-    ScintillaEdit::closeEvent(event);
-  }
-}
-
 void TextEditor::appendSessionFile(const QString& file_name, bool is_nonexistent) {
   QString file_n = is_nonexistent ? (QL1S("#") + file_name) : file_name;
 

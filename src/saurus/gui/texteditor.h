@@ -86,7 +86,6 @@ class TextEditor : public ScintillaEdit {
   protected:
     virtual void contextMenuEvent(QContextMenuEvent* event) override;
     virtual void wheelEvent(QWheelEvent* event) override;
-    virtual void closeEvent(QCloseEvent* event) override;
 
   signals:
     void readOnlyChanged(bool read_only);

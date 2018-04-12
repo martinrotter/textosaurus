@@ -10,6 +10,7 @@
 #include "saurus/external-tools/externaltools.h"
 #include "saurus/gui/dialogs/formfindreplace.h"
 #include "saurus/gui/dialogs/formmain.h"
+#include "saurus/gui/editortab.h"
 #include "saurus/gui/sidebars/findresultssidebar.h"
 #include "saurus/gui/sidebars/outputsidebar.h"
 #include "saurus/gui/statusbar.h"
@@ -91,7 +92,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
 }
 
 int TextApplication::addTextEditor(TextEditor* editor) {
-  return m_tabEditors->addTab(editor, QIcon(), tr("New text file"), TabType::TextEditor);
+  return m_tabEditors->addTab(new EditorTab(this, editor), QIcon(), tr("New text file"), TabType::TextEditor);
 }
 
 void TextApplication::attachTextEditor(TextEditor* editor) {
@@ -147,7 +148,7 @@ void TextApplication::saveAllEditors() {
 void TextApplication::closeAllUnmodifiedEditors() {
   foreach (TextEditor* editor, m_tabEditors->editors()) {
     if (!editor->modify()) {
-      m_tabEditors->closeTab(m_tabEditors->indexOf(editor));
+      m_tabEditors->closeTab(m_tabEditors->indexOfEditor(editor));
     }
   }
 }
@@ -269,7 +270,7 @@ void TextApplication::onEditorRequestedVisibility() {
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
   Q_UNUSED(modified)
 
-  if (m_tabEditors->indexOf(editor) >= 0) {
+  if (m_tabEditors->indexOfEditor(editor) >= 0) {
     updateToolBarFromEditor(editor, true);
   }
 }
@@ -363,7 +364,7 @@ void TextApplication::onEditorReloaded() {
   TextEditor* sndr = qobject_cast<TextEditor*>(sender());
 
   if (sndr == currentEditor()) {
-    onEditorTabSwitched(m_tabEditors->indexOf(sndr));
+    onEditorTabSwitched(m_tabEditors->indexOfEditor(sndr));
   }
 }
 
@@ -763,7 +764,7 @@ void TextApplication::reopenTextFile(QAction* action) {
   if (editor != nullptr && !editor->modify()) {
     const QString file_path = editor->filePath();
 
-    if (!file_path.isEmpty() && m_tabEditors->closeTab(m_tabEditors->indexOf(editor))) {
+    if (!file_path.isEmpty() && m_tabEditors->closeTab(m_tabEditors->indexOfEditor(editor))) {
       loadTextEditorFromFile(file_path, action->data().toString());
     }
   }
@@ -931,7 +932,7 @@ void TextApplication::restoreSession() {
           editor->insertText(0, rng);
           editor->deleteRange(0, 1);
           editor->setFilePath(QString());
-          m_tabEditors->setTabText(m_tabEditors->indexOf(editor), tr("New text file"));
+          m_tabEditors->setTabText(m_tabEditors->indexOfEditor(editor), tr("New text file"));
           editors_added++;
         }
         else {
@@ -984,7 +985,7 @@ void TextApplication::updateEditorIcon(int index, bool modified, bool read_only)
 }
 
 void TextApplication::renameEditor(TextEditor* editor) {
-  int index = m_tabEditors->indexOf(editor);
+  int index = m_tabEditors->indexOfEditor(editor);
 
   if (index >= 0) {
     updateEditorIcon(index, editor->modify(), editor->readOnly());
@@ -998,7 +999,7 @@ void TextApplication::renameEditor(TextEditor* editor) {
 
 void TextApplication::onEditorReadOnlyChanged(bool read_only) {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
-  int index = m_tabEditors->indexOf(editor);
+  int index = m_tabEditors->indexOfEditor(editor);
 
   if (index >= 0) {
     updateEditorIcon(index, editor->modify(), read_only);

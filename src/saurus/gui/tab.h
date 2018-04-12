@@ -18,7 +18,7 @@ class Tab : public QWidget {
   Q_OBJECT
 
   public:
-    explicit Tab(TabWidget* tab_widget, QWidget* parent = nullptr);
+    explicit Tab(TabWidget* tab_widget);
 
     // Returns primary editor.
     virtual TextEditor* primaryEditor() const = 0;
