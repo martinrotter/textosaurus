@@ -3,6 +3,7 @@
 #include "saurus/gui/tabbar.h"
 
 #include "common/gui/plaintoolbutton.h"
+#include "common/miscellaneous/iconfactory.h"
 #include "common/miscellaneous/settings.h"
 #include "definitions/definitions.h"
 #include "saurus/miscellaneous/application.h"

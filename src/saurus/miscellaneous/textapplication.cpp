@@ -4,6 +4,7 @@
 
 #include "common/gui/messagebox.h"
 #include "common/gui/toolbar.h"
+#include "common/miscellaneous/iconfactory.h"
 #include "common/miscellaneous/textfactory.h"
 #include "definitions/definitions.h"
 #include "saurus/external-tools/externaltool.h"

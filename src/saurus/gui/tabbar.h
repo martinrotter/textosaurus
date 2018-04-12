@@ -3,12 +3,7 @@
 #ifndef TABBAR_H
 #define TABBAR_H
 
-#include "common/miscellaneous/iconfactory.h"
-
-#include "saurus/gui/tab.h"
-
 #include <QTabBar>
-#include <QVariant>
 
 class TabBar : public QTabBar {
   Q_OBJECT
