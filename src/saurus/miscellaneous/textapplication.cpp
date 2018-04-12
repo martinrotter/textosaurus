@@ -290,6 +290,10 @@ int TextApplication::tabCount() const {
   return m_tabEditors->count();
 }
 
+TabWidget* TextApplication::tabWidget() const {
+  return m_tabEditors;
+}
+
 void TextApplication::loadFilesFromArgs(const QList<QString>& files) {
   foreach (const QString& file_path, files) {
     QTimer::singleShot(0, this, [this, file_path] {

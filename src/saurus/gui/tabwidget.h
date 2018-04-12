@@ -12,6 +12,7 @@
 class QMenu;
 class PlainToolButton;
 class TextEditor;
+class Tab;
 
 class TabWidget : public QTabWidget {
   Q_OBJECT

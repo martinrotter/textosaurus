@@ -254,7 +254,9 @@ HEADERS +=  src/definitions/definitions.h \
             src/saurus/plugin-system/filesystem/filesystemmodel.h \
             src/saurus/gui/settings/syntaxcolorthemeeditor.h \
             src/saurus/miscellaneous/macro.h \
-            src/saurus/gui/sidebars/macrossidebar.h
+            src/saurus/gui/sidebars/macrossidebar.h \
+    src/saurus/gui/tab.h \
+    src/saurus/gui/editortab.h
 
 SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -327,7 +329,9 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/plugin-system/filesystem/filesystemmodel.cpp \
             src/saurus/gui/settings/syntaxcolorthemeeditor.cpp \
             src/saurus/miscellaneous/macro.cpp \
-            src/saurus/gui/sidebars/macrossidebar.cpp
+            src/saurus/gui/sidebars/macrossidebar.cpp \
+    src/saurus/gui/tab.cpp \
+    src/saurus/gui/editortab.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/common/miscellaneous/disablewindowtabbing.mm

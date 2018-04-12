@@ -38,6 +38,8 @@ class TextApplication : public QObject {
     TextApplicationSettings* settings() const;
 
     int tabCount() const;
+    TabWidget* tabWidget() const;
+
     QList<QAction*> userActions() const;
 
     void setMainForm(FormMain* main_form);
