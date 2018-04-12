@@ -1,5 +1,8 @@
 2018.04.XX
 ----------
+Changed:
+* Overall application refactoring.
+
 Fixed:
 * Store file path to recent files when saved.
 
