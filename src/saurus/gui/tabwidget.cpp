@@ -166,37 +166,37 @@ QList<Tab*> TabWidget::tabs() const {
   return editors;
 }
 
-int TabWidget::addTab(Tab* widget, const QIcon& icon, const QString& label, TabType type) {
+int TabWidget::addTab(Tab* widget, const QIcon& icon, const QString& label) {
   const int index = QTabWidget::addTab(widget, icon, label);
 
-  tabBar()->setTabType(index, type);
+  tabBar()->setupTabControls(index);
   indentTabText(index);
 
   return index;
 }
 
-int TabWidget::addTab(Tab* widget, const QString& label, TabType type) {
+int TabWidget::addTab(Tab* widget, const QString& label) {
   const int index = QTabWidget::addTab(widget, label);
 
-  tabBar()->setTabType(index, type);
+  tabBar()->setupTabControls(index);
   indentTabText(index);
 
   return index;
 }
 
-int TabWidget::insertTab(int index, Tab* widget, const QIcon& icon, const QString& label, TabType type) {
+int TabWidget::insertTab(int index, Tab* widget, const QIcon& icon, const QString& label) {
   const int tab_index = QTabWidget::insertTab(index, widget, icon, label);
 
-  tabBar()->setTabType(tab_index, type);
+  tabBar()->setupTabControls(tab_index);
   indentTabText(index);
 
   return tab_index;
 }
 
-int TabWidget::insertTab(int index, Tab* widget, const QString& label, TabType type) {
+int TabWidget::insertTab(int index, Tab* widget, const QString& label) {
   const int tab_index = QTabWidget::insertTab(index, widget, label);
 
-  tabBar()->setTabType(tab_index, type);
+  tabBar()->setupTabControls(tab_index);
   indentTabText(index);
 
   return tab_index;

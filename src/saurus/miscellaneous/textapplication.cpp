@@ -92,7 +92,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
 }
 
 int TextApplication::addTextEditor(TextEditor* editor) {
-  return m_tabEditors->addTab(new EditorTab(this, editor), QIcon(), tr("New text file"), TabType::TextEditor);
+  return m_tabEditors->addTab(new EditorTab(this, editor), QIcon(), tr("New text file"));
 }
 
 void TextApplication::attachTextEditor(TextEditor* editor) {

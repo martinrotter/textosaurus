@@ -5,12 +5,10 @@
 
 #include "common/miscellaneous/iconfactory.h"
 
+#include "saurus/gui/tab.h"
+
 #include <QTabBar>
 #include <QVariant>
-
-enum class TabType {
-  TextEditor = 1
-};
 
 class TabBar : public QTabBar {
   Q_OBJECT
@@ -20,8 +18,7 @@ class TabBar : public QTabBar {
     virtual ~TabBar() = default;
 
     // Getter/setter for tab type.
-    void setTabType(int index, TabType type = TabType::TextEditor);
-    TabType tabType(int index) const;
+    void setupTabControls(int index);
 
   private slots:
     void closeTabViaButton();
@@ -34,11 +31,5 @@ class TabBar : public QTabBar {
   signals:
     void emptySpaceDoubleClicked();
 };
-
-inline TabType TabBar::tabType(int index) const {
-  return static_cast<TabType>(tabData(index).value<int>());
-}
-
-Q_DECLARE_METATYPE(TabType)
 
 #endif // TABBAR_H

@@ -22,14 +22,10 @@ class TabWidget : public QTabWidget {
     virtual ~TabWidget() = default;
 
     // Manimulators for tabs.
-    int addTab(Tab* widget, const QString&,
-               TabType type = TabType::TextEditor);
-    int addTab(Tab* widget, const QIcon& icon,
-               const QString& label, TabType type = TabType::TextEditor);
-    int insertTab(int index, Tab* widget, const QString& label,
-                  TabType type = TabType::TextEditor);
-    int insertTab(int index, Tab* widget, const QIcon& icon,
-                  const QString& label, TabType type = TabType::TextEditor);
+    int addTab(Tab* widget, const QString& label);
+    int addTab(Tab* widget, const QIcon& icon, const QString& label);
+    int insertTab(int index, Tab* widget, const QString& label);
+    int insertTab(int index, Tab* widget, const QIcon& icon, const QString& label);
     bool removeTab(int index, bool clear_from_memory);
 
     int indexOfEditor(TextEditor* editor) const;

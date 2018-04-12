@@ -14,33 +14,20 @@ TabBar::TabBar(QWidget* parent) : QTabBar(parent) {
   setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
-void TabBar::setTabType(int index, TabType type) {
+void TabBar::setupTabControls(int index) {
   const QTabBar::ButtonPosition button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
                                                                                                  nullptr,
                                                                                                  this));
+  PlainToolButton* close_button = new PlainToolButton(this);
 
-  switch (type) {
-    case TabType::TextEditor: {
-      PlainToolButton* close_button = new PlainToolButton(this);
+  close_button->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
+  close_button->setToolTip(tr("Close this tab"));
+  close_button->setText(tr("Close tab"));
+  close_button->setFixedSize(iconSize());
 
-      close_button->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
-      close_button->setToolTip(tr("Close this tab"));
-      close_button->setText(tr("Close tab"));
-      close_button->setFixedSize(iconSize());
-
-      // Close underlying tab when button is clicked.
-      connect(close_button, &PlainToolButton::clicked, this, &TabBar::closeTabViaButton);
-      setTabButton(index, button_position, close_button);
-
-      break;
-    }
-
-    default:
-      setTabButton(index, button_position, nullptr);
-      break;
-  }
-
-  setTabData(index, QVariant::fromValue(type));
+  // Close underlying tab when button is clicked.
+  connect(close_button, &PlainToolButton::clicked, this, &TabBar::closeTabViaButton);
+  setTabButton(index, button_position, close_button);
 }
 
 void TabBar::closeTabViaButton() {
@@ -91,10 +78,8 @@ void TabBar::mousePressEvent(QMouseEvent* event) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
     if (event->button() & Qt::MiddleButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseMiddleClick)).toBool()) {
-      if (tabType(tab_index) == TabType::TextEditor) {
-        // This tab is closable, so we can close it.
-        emit tabCloseRequested(tab_index);
-      }
+      // This tab is closable, so we can close it.
+      emit tabCloseRequested(tab_index);
     }
   }
 }
@@ -109,10 +94,8 @@ void TabBar::mouseDoubleClickEvent(QMouseEvent* event) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
     if (event->button() & Qt::MouseButton::LeftButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
-      if (tabType(tab_index) == TabType::TextEditor) {
-        // This tab is closable, so we can close it.
-        emit tabCloseRequested(tab_index);
-      }
+      // This tab is closable, so we can close it.
+      emit tabCloseRequested(tab_index);
     }
   }
   else if (event->button() == Qt::MouseButton::LeftButton) {

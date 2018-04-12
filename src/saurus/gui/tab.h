@@ -39,4 +39,6 @@ class Tab : public QWidget {
     TabWidget* m_tabWidget;
 };
 
+Q_DECLARE_METATYPE(TabTyp)
+
 #endif // TAB_H
