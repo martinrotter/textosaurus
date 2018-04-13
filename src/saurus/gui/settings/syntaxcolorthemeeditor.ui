@@ -126,6 +126,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="m_btnDelete">
+       <property name="text">
+        <string>&amp;Delete</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -199,6 +206,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
  <tabstops>
   <tabstop>m_cmbThemes</tabstop>
   <tabstop>m_btnCopy</tabstop>
+  <tabstop>m_btnDelete</tabstop>
   <tabstop>m_listComponents</tabstop>
   <tabstop>m_gbCustomizer</tabstop>
   <tabstop>m_btnForegroundSample</tabstop>

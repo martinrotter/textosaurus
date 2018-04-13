@@ -75,6 +75,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   connect(m_ui.m_btnForeground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearForegroundColor);
   connect(m_ui.m_btnBackground, &QPushButton::clicked, this, &SyntaxColorThemeEditor::clearBackgroundColor);
   connect(m_ui.m_gbCustomizer, &QGroupBox::clicked, this, &SyntaxColorThemeEditor::updateCurrentComponent);
+  connect(m_ui.m_btnDelete, &QPushButton::clicked, this, &SyntaxColorThemeEditor::deleteSelectedTheme);
 }
 
 void SyntaxColorThemeEditor::loadColorThemes(const QList<SyntaxColorTheme>& themes, const QString& current_theme_name) {
@@ -107,6 +108,11 @@ SyntaxColorTheme& SyntaxColorThemeEditor::currentColorTheme() {
 
 int SyntaxColorThemeEditor::currentColorThemeIndex() const {
   return m_ui.m_cmbThemes->currentIndex();
+}
+
+void SyntaxColorThemeEditor::deleteSelectedTheme() {
+  m_colorThemes.removeAt(m_ui.m_cmbThemes->currentIndex());
+  m_ui.m_cmbThemes->removeItem(m_ui.m_cmbThemes->currentIndex());
 }
 
 void SyntaxColorThemeEditor::editForegroundColor() {
@@ -177,6 +183,7 @@ void SyntaxColorThemeEditor::onThemeSwitched(int row) {
 
   m_ui.m_listComponents->setCurrentRow(-1);
   m_ui.m_listComponents->setCurrentRow(0);
+  m_ui.m_btnDelete->setEnabled(!currentColorTheme().predefined());
 
   emit colorThemesEdited();
 }

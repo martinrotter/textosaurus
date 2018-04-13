@@ -27,6 +27,7 @@ class SyntaxColorThemeEditor : public QWidget {
     void colorThemesEdited();
 
   private slots:
+    void deleteSelectedTheme();
     void editForegroundColor();
     void clearForegroundColor();
     void editBackgroundColor();
