@@ -7,6 +7,7 @@
 #include "saurus/external-tools/externaltool.h"
 #include "saurus/external-tools/predefinedtools.h"
 #include "saurus/gui/sidebars/outputsidebar.h"
+#include "saurus/gui/tabwidget.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
@@ -166,7 +167,7 @@ void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
 }
 
 void ExternalTools::runSelectedExternalTool() {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();

@@ -6,7 +6,6 @@
 #include <QObject>
 
 #include "definitions/definitions.h"
-
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
 class TextEditor;
@@ -32,12 +31,9 @@ class TextApplication : public QObject {
     explicit TextApplication(QObject* parent = nullptr);
     virtual ~TextApplication() = default;
 
-    TextEditor* currentEditor() const;
     OutputSidebar* outputSidebar() const;
     FindResultsSidebar* findResultsSidebar() const;
     TextApplicationSettings* settings() const;
-
-    int tabCount() const;
     TabWidget* tabWidget() const;
 
     QList<QAction*> userActions() const;

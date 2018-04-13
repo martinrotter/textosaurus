@@ -10,6 +10,7 @@
 #include "saurus/gui/dialogs/formabout.h"
 #include "saurus/gui/dialogs/formmain.h"
 #include "saurus/gui/dialogs/formupdate.h"
+#include "saurus/gui/tabwidget.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
@@ -92,7 +93,7 @@ int main(int argc, char* argv[]) {
   if (application.arguments().size() > 1) {
     qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
   }
-  else if (qApp->textApplication()->tabCount() == 0) {
+  else if (qApp->textApplication()->tabWidget()->count() == 0) {
     qApp->textApplication()->newFile();
   }
 

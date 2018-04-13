@@ -46,10 +46,6 @@ TextApplication::TextApplication(QObject* parent)
   settings()->pluginFactory()->loadPlugins(this);
 }
 
-TextEditor* TextApplication::currentEditor() const {
-  return m_tabEditors->textEditorAt(m_tabEditors->currentIndex());
-}
-
 void TextApplication::loadTextEditorFromString(const QString& contents) {
   TextEditor* new_editor = new TextEditor(this, m_tabEditors);
 
@@ -108,7 +104,7 @@ void TextApplication::attachTextEditor(TextEditor* editor) {
 }
 
 void TextApplication::saveCurrentEditor() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     bool ok;
@@ -118,7 +114,7 @@ void TextApplication::saveCurrentEditor() {
 }
 
 void TextApplication::saveCurrentEditorAs() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     bool ok;
@@ -128,7 +124,7 @@ void TextApplication::saveCurrentEditorAs() {
 }
 
 void TextApplication::saveCurrentEditorAsWithEncoding(QAction* action) {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     bool ok;
@@ -155,7 +151,7 @@ void TextApplication::closeAllUnmodifiedEditors() {
 }
 
 void TextApplication::reloadCurrentEditor() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->reloadFromDisk();
@@ -179,7 +175,7 @@ void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, boo
     }
   }
   else if (reload_visible) {
-    TextEditor* visible = currentEditor();
+    TextEditor* visible = tabWidget()->currentEditor();
 
     if (visible != nullptr) {
       visible->reloadSettings();
@@ -215,7 +211,7 @@ void TextApplication::showTabContextMenu(const QPoint& point) {
 }
 
 void TextApplication::setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled) {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->setAutoIndentEnabled(auto_indent_enabled);
@@ -225,7 +221,7 @@ void TextApplication::setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled
 }
 
 void TextApplication::setupEolMenu() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     updateEolMenu(editor->eOLMode());
@@ -288,10 +284,6 @@ TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
 }
 
-int TextApplication::tabCount() const {
-  return m_tabEditors->count();
-}
-
 TabWidget* TextApplication::tabWidget() const {
   return m_tabEditors;
 }
@@ -305,7 +297,7 @@ void TextApplication::loadFilesFromArgs(const QList<QString>& files) {
 }
 
 void TextApplication::undo() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->undo();
@@ -313,7 +305,7 @@ void TextApplication::undo() {
 }
 
 void TextApplication::redo() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->redo();
@@ -364,7 +356,7 @@ void TextApplication::onEditorSaved() {
 void TextApplication::onEditorReloaded() {
   TextEditor* sndr = qobject_cast<TextEditor*>(sender());
 
-  if (sndr == currentEditor()) {
+  if (sndr == tabWidget()->currentEditor()) {
     onEditorTabSwitched(m_tabEditors->indexOfEditor(sndr));
   }
 }
@@ -609,7 +601,7 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
 }
 
 void TextApplication::printPreviewCurrentEditor() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->printPreview();
@@ -617,7 +609,7 @@ void TextApplication::printPreviewCurrentEditor() {
 }
 
 void TextApplication::printCurrentEditor() {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->print();
@@ -633,7 +625,7 @@ void TextApplication::showFindReplaceDialog() {
 }
 
 void TextApplication::changeEolMode(QAction* act) {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
   int new_mode = act->data().toInt();
 
   if (editor != nullptr) {
@@ -654,7 +646,7 @@ void TextApplication::changeEolMode(QAction* act) {
 }
 
 void TextApplication::changeLexer(QAction* act) {
-  TextEditor* cur_editor = currentEditor();
+  TextEditor* cur_editor = tabWidget()->currentEditor();
 
   if (cur_editor != nullptr) {
     Lexer lexer_act = act->data().value<Lexer>();
@@ -710,7 +702,7 @@ void TextApplication::loadLexersMenu() {
     }
   }
 
-  TextEditor* current_editor = currentEditor();
+  TextEditor* current_editor = tabWidget()->currentEditor();
 
   if (current_editor != nullptr) {
     Lexer lexer = current_editor->lexer();
@@ -732,7 +724,7 @@ void TextApplication::loadEncodingMenu() {
   }
 
   // Check current.
-  TextEditor* curr_editor = currentEditor();
+  TextEditor* curr_editor = tabWidget()->currentEditor();
 
   if (curr_editor != nullptr) {
     // There is some editor, load its encoding.
@@ -760,7 +752,7 @@ void TextApplication::loadEncodingMenu() {
 }
 
 void TextApplication::reopenTextFile(QAction* action) {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr && !editor->modify()) {
     const QString file_path = editor->filePath();
@@ -803,7 +795,7 @@ void TextApplication::onEditorTabSwitched(int index) {
 
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
   if (editor != nullptr) {
-    if (editor == currentEditor()) {
+    if (editor == tabWidget()->currentEditor()) {
       // Current editor changed.
       m_actionEditBack->setEnabled(editor->canUndo());
       m_actionEditForward->setEnabled(editor->canRedo());
@@ -841,7 +833,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 }
 
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
-  if (editor == currentEditor()) {
+  if (editor == tabWidget()->currentEditor()) {
     if (editor != nullptr) {
       m_statusBar->setEol(editor->eOLMode());
       m_statusBar->setEncoding(editor->encoding());
@@ -861,7 +853,7 @@ bool TextApplication::shouldSaveSession() const {
 
 void TextApplication::convertEols(QAction* action) {
   int new_mode = action->data().toInt();
-  TextEditor* current_editor = currentEditor();
+  TextEditor* current_editor = tabWidget()->currentEditor();
 
   if (current_editor != nullptr) {
     current_editor->convertEOLs(new_mode);
@@ -1008,7 +1000,7 @@ void TextApplication::onEditorReadOnlyChanged(bool read_only) {
 }
 
 void TextApplication::changeEncoding(QAction* act) {
-  TextEditor* editor = currentEditor();
+  TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->setEncoding(act->data().toString().toUtf8());

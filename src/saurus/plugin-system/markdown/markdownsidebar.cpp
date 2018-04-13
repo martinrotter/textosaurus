@@ -4,6 +4,7 @@
 
 #include "common/miscellaneous/iconfactory.h"
 #include "common/network-web/webfactory.h"
+#include "saurus/gui/tabwidget.h"
 #include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
@@ -44,7 +45,7 @@ void MarkdownSidebar::refreshPreview() {
   show();
   raise();
 
-  TextEditor* editor = m_textApp->currentEditor();
+  TextEditor* editor = m_textApp->tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     m_txtPreview->setMarkdownDocument(QFileInfo(editor->filePath()).absolutePath(),

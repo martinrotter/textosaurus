@@ -28,6 +28,9 @@ class TabWidget : public QTabWidget {
     int insertTab(int index, Tab* widget, const QIcon& icon, const QString& label);
     bool removeTab(int index, bool clear_from_memory);
 
+    TextEditor* currentEditor() const;
+    Tab* currentTab() const;
+
     int indexOfEditor(TextEditor* editor) const;
     TextEditor* textEditorAt(int index) const;
     Tab* tabAt(int index) const;

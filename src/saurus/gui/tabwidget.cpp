@@ -108,6 +108,14 @@ bool TabWidget::removeTab(int index, bool clear_from_memory) {
   return closed;
 }
 
+TextEditor* TabWidget::currentEditor() const {
+  return textEditorAt(currentIndex());
+}
+
+Tab* TabWidget::currentTab() const {
+  return tabAt(currentIndex());
+}
+
 int TabWidget::indexOfEditor(TextEditor* editor) const {
   int i = 0;
 

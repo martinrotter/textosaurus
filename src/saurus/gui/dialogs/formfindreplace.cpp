@@ -4,6 +4,7 @@
 
 #include "common/network-web/webfactory.h"
 #include "saurus/gui/sidebars/findresultssidebar.h"
+#include "saurus/gui/tabwidget.h"
 #include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
@@ -39,7 +40,7 @@ void FormFindReplace::display() {
 }
 
 void FormFindReplace::clearTargetRange() {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor != nullptr) {
     editor->setTargetRange(-1, -1);
@@ -47,7 +48,7 @@ void FormFindReplace::clearTargetRange() {
 }
 
 void FormFindReplace::displayCount() {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     m_ui.m_lblResult->setText("Either no input or no text editor active.");
@@ -91,7 +92,7 @@ void FormFindReplace::searchPrevious() {
 }
 
 void FormFindReplace::replaceAll() {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     m_ui.m_lblResult->setText("Either no input or no text editor active.");
@@ -141,7 +142,7 @@ void FormFindReplace::searchReplaceNext() {
 }
 
 void FormFindReplace::searchAll() {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     m_ui.m_lblResult->setText("Either no input or no text editor active.");
@@ -186,7 +187,7 @@ int FormFindReplace::extractFlags() {
 }
 
 void FormFindReplace::searchReplaceOne(bool reverse) {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     m_ui.m_lblResult->setText("Either no input or no text editor active.");
@@ -237,7 +238,7 @@ void FormFindReplace::searchReplaceOne(bool reverse) {
 }
 
 void FormFindReplace::searchOne(bool reverse) {
-  TextEditor* editor = m_application->currentEditor();
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor == nullptr || m_ui.m_txtSearchPhrase->text().isEmpty()) {
     m_ui.m_lblResult->setText("Either no input or no text editor active.");
