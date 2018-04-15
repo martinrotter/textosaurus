@@ -153,6 +153,11 @@ else {
   clang:QMAKE_CXXFLAGS_DEBUG *= -Wall
 }
 
+CONFIG(FLATPAK_MODE) {
+  message($$MSG_PREFIX: Enabling Flatpak-specific code.)
+  DEFINES *= FLATPAK_MODE=1
+}
+
 DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
 
 MOC_DIR = $$OUT_PWD/moc

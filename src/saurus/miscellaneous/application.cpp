@@ -123,6 +123,8 @@ QString Application::userDataFolder() {
 QString Application::userDataHomeFolder() {
 #if defined (Q_OS_ANDROID)
   return IOFactory::getSystemFolder(QStandardPaths::GenericDataLocation) + QDir::separator() + QSL(APP_NAME);
+#elif defined (FLATPAK_MODE)
+  return configFolder() + QDir::separator();
 #else
   return configFolder() + QDir::separator() + QSL(APP_NAME);
 #endif
