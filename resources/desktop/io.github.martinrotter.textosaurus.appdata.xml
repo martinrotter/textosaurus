@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2017 Martin Rotter <rotter.martinos@gmail.com> -->
 <component type="desktop-application">
-  <id>com.github.textosaurus.desktop</id>
+  <id>io.github.martinrotter.textosaurus.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <name>Textosaurus</name>
@@ -13,7 +13,7 @@
       Textosaurus is simple cross-platform text editor based on Qt and QScintilla. Textosaurus aims to provide similar workflow as Notepad++ does.
     </p>
   </description>
-  <launchable type="desktop-id">com.github.textosaurus.desktop</launchable>
+  <launchable type="desktop-id">io.github.martinrotter.textosaurus.desktop</launchable>
   <url type="homepage">https://github.com/martinrotter/textosaurus</url>
   <provides>
     <binary>textosaurus</binary>

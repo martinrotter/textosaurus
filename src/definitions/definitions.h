@@ -79,7 +79,7 @@ constexpr auto APP_THEME_SUFFIX = ".png";
 #if defined(Q_OS_LINUX)
 constexpr auto OS_ID = "Linux";
 constexpr auto OS_ID_LOW = "linux";
-constexpr auto APP_DESKTOP_ENTRY_FILE = "com.github.textosaurus.desktop";
+constexpr auto APP_DESKTOP_ENTRY_FILE = "io.github.martinrotter.textosaurus.desktop";
 constexpr auto APP_DESKTOP_ENTRY_PATH = ":/desktop";
 
 #elif defined(Q_OS_OSX)
