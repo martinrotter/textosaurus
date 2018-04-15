@@ -1,6 +1,7 @@
 2018.04.XX
 ----------
 Added:
+* Couple of fixes related to Flatpak deployment.
 * Allow to remove user-defined color schemes.
 
 Changed:
