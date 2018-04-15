@@ -18,4 +18,14 @@
   <provides>
     <binary>textosaurus</binary>
   </provides>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Linux version</caption>
+      <image>https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/screenshots/textosaurus-linux.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Windows version</caption>
+      <image>https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/screenshots/textosaurus.png</image>
+    </screenshot>
+  </screenshots>
 </component>
