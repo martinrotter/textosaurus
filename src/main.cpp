@@ -1,17 +1,18 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
+#include "common/dynamic-shortcuts/dynamicshortcuts.h"
+#include "common/gui/messagebox.h"
+#include "common/miscellaneous/debugging.h"
+#include "common/miscellaneous/iconfactory.h"
+#include "common/network-web/silentnetworkaccessmanager.h"
+#include "common/network-web/webfactory.h"
 #include "definitions/definitions.h"
-#include "dynamic-shortcuts/dynamicshortcuts.h"
-#include "gui/dialogs/formabout.h"
-#include "gui/dialogs/formmain.h"
-#include "gui/dialogs/formupdate.h"
-#include "gui/messagebox.h"
-#include "miscellaneous/application.h"
-#include "miscellaneous/debugging.h"
-#include "miscellaneous/iconfactory.h"
-#include "miscellaneous/textapplication.h"
-#include "network-web/silentnetworkaccessmanager.h"
-#include "network-web/webfactory.h"
+#include "saurus/gui/dialogs/formabout.h"
+#include "saurus/gui/dialogs/formmain.h"
+#include "saurus/gui/dialogs/formupdate.h"
+#include "saurus/gui/tabwidget.h"
+#include "saurus/miscellaneous/application.h"
+#include "saurus/miscellaneous/textapplication.h"
 
 // Needed for setting ini file format on Mac OS.
 #ifdef Q_OS_MAC
@@ -86,11 +87,13 @@ int main(int argc, char* argv[]) {
     });
   }
 
+  qApp->textApplication()->restoreSession();
+
   // We load any documents passed as parameters.
   if (application.arguments().size() > 1) {
     qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
   }
-  else {
+  else if (qApp->textApplication()->tabWidget()->count() == 0) {
     qApp->textApplication()->newFile();
   }
 

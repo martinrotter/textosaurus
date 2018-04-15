@@ -1,9 +1,31 @@
-2018.03.XX
+2018.04.XX
 ----------
 Added:
+* Allow to remove user-defined color schemes.
+
+Changed:
+* Overall application refactoring.
+
+Fixed:
+* Store file path to recent files when saved.
+
+2018.04.11
+----------
+Fixed:
+* Correctly activate last active tab when restoring session. (#24)
+* Restored "temporary" session documents are now "modified" on startup.
+
+2018.04.09
+----------
+Added:
+* Saving/restoring of session.
 * Substyles for Pascal lexer.
 * Monokai Neo color scheme.
 * Base16 Light color scheme.
+
+Fixed:
+* Broken rendering of occurrences highlighting for bigger files.
+* Some minor fixes and polishments.
 
 2018.03.26
 ----------
