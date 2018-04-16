@@ -14,8 +14,8 @@ cd flathub
 git checkout new-version
 
 # Replace old commit hash and branch.
-cat "$json_file" | sed -e "s@\"branch\": \".\+\"@\"branch\": \"$tag\"@g" > "$json_file_new"
-cat "$json_file_new" | sed -e "s@\"commit\": \".\+\"@\"commit\": \"$commit_hash\"@g" > "$json_file"
+cat "$json_file" | sed -e "s@\"branch\": \".\*\"@\"branch\": \"$tag\"@g" > "$json_file_new"
+cat "$json_file_new" | sed -e "s@\"commit\": \".\*\"@\"commit\": \"$commit_hash\"@g" > "$json_file"
 
 cat "$json_file"
 
