@@ -10,3 +10,6 @@ versionstring="${datestring//-/.}"
 
 cat "$appdata_file" | sed -e "s@release version\=\"[0-9.]*\"@release version\=\"$versionstring\"@g" | sed -e "s@ date\=\"[0-9\-]*\"@ date\=\"$datestring\"@g" > "$appdata_file_n"
 mv "$appdata_file_n" "$appdata_file"
+
+git add "$appdata_file"
+exit 0
