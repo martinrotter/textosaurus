@@ -20,4 +20,5 @@ cat "$json_file_new" | sed -e "s@\"commit\": \".\+\"@\"commit\": \"$commit_hash\
 cat "$json_file"
 
 git commit -a -m "New version for commit $commit_hash."
+git pull origin new-version
 git push origin new-version
