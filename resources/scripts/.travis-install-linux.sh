@@ -4,18 +4,6 @@
 source /opt/qt59/bin/qt59-env.sh
 mkdir textosaurus-build && cd textosaurus-build
 
-#################
-echo "Current git commit has is $(git rev-parse HEAD)."
-echo "Travis branch $TRAVIS_BRANCH and Travis tag $TRAVIS_TAG."
-
-#if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then
-if [[ true ]]; then
-  # We will trigger stuff for Flathub.
-  chmod +x ../resources/scripts/.flathub-release.sh
-  ../resources/scripts/.flathub-release.sh
-fi
-#################
-
 # Build application.
 #lrelease -compress ../textosaurus.pro
 qmake -spec linux-g++ "WITH_UBUNTU=true" ../textosaurus.pro 
@@ -72,3 +60,13 @@ git pull origin master
 git push origin master
 
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
+echo "Current git commit has is $(git rev-parse HEAD)."
+echo "Travis branch $TRAVIS_BRANCH and Travis tag $TRAVIS_TAG."
+
+if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then
+#if [[ true ]]; then
+  # We will trigger stuff for Flathub.
+  chmod +x ../resources/scripts/.flathub-release.sh
+  ../resources/scripts/.flathub-release.sh
+fi
