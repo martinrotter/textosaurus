@@ -102,7 +102,7 @@ void Application::setMainForm(FormMain* main_form) {
 }
 
 QString Application::configFolder() {
-  return IOFactory::getSystemFolder(QStandardPaths::GenericConfigLocation);
+  return IOFactory::getSystemFolder(QStandardPaths::AppConfigLocation);
 }
 
 QString Application::userDataAppFolder() {
@@ -122,9 +122,9 @@ QString Application::userDataFolder() {
 
 QString Application::userDataHomeFolder() {
 #if defined (Q_OS_ANDROID)
-  return IOFactory::getSystemFolder(QStandardPaths::GenericDataLocation) + QDir::separator() + QSL(APP_NAME);
+  return IOFactory::getSystemFolder(QStandardPaths::AppDataLocation);
 #else
-  return configFolder() + QDir::separator() + QSL(APP_NAME);
+  return configFolder();
 #endif
 }
 

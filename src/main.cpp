@@ -37,6 +37,12 @@ int main(int argc, char* argv[]) {
   // Setup debug output system.
   qInstallMessageHandler(Debugging::debugHandler);
 
+  Application::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  Application::setAttribute(Qt::AA_EnableHighDpiScaling);
+  Application::setApplicationName(APP_NAME);
+  Application::setApplicationVersion(APP_VERSION);
+  Application::setOrganizationDomain(APP_URL);
+
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
 
@@ -48,11 +54,6 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
-  Application::setAttribute(Qt::AA_UseHighDpiPixmaps);
-  Application::setAttribute(Qt::AA_EnableHighDpiScaling);
-  Application::setApplicationName(APP_NAME);
-  Application::setApplicationVersion(APP_VERSION);
-  Application::setOrganizationDomain(APP_URL);
   Application::setWindowIcon(QIcon(APP_ICON_PATH));
 
 #if defined (Q_OS_MAC)
