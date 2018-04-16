@@ -67,6 +67,7 @@ echo "Travis branch $TRAVIS_BRANCH and Travis tag $TRAVIS_TAG."
 if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then
 #if [[ true ]]; then
   # We will trigger stuff for Flathub.
+  cd ..
   chmod +x ../resources/scripts/.flathub-release.sh
   ../resources/scripts/.flathub-release.sh
 fi
