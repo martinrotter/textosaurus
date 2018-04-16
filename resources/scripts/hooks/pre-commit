@@ -1,10 +1,15 @@
 #!/bin/sh
-#
-# An example hook script to verify what is about to be committed.
-# Called by "git commit" with no arguments.  The hook should
-# exit with non-zero status after issuing an appropriate message if
-# it wants to stop the commit.
-#
-# To enable this hook, rename this file to "pre-commit".
 
-echo "aaa"
+set -- resources/desktop/*.appdata.xml
+appdata_file="$1"
+appdata_file_n="${1}.n"
+
+# Set version and date.
+datestring="$(date +%F)"
+versionstring="${datestring//-/.}"
+
+
+release version="2018.04.17"
+
+cat "$appdata_file" | sed -e "s@release version\=\".{,12}\"@release version\=\"$versionstring\"@g" | sed -e "s@ date\=\".*\"@ date\=\"$datestring\"@g" > "$appdata_file_n"
+mv "$appdata_file_n" "$appdata_file"
