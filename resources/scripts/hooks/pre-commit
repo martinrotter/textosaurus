@@ -8,5 +8,5 @@ appdata_file_n="${1}.n"
 datestring="$(date +%F)"
 versionstring="${datestring//-/.}"
 
-cat "$appdata_file" | sed -e "s@release version\=\".{,12}\"@release version\=\"$versionstring\"@g" | sed -e "s@ date\=\".*\"@ date\=\"$datestring\"@g" > "$appdata_file_n"
+cat "$appdata_file" | sed -e "s@release version\=\"[0-9.]*\"@release version\=\"$versionstring\"@g" | sed -e "s@ date\=\"[0-9\-]*\"@ date\=\"$datestring\"@g" > "$appdata_file_n"
 mv "$appdata_file_n" "$appdata_file"
