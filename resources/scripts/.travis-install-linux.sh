@@ -17,8 +17,8 @@ chmod a+x linuxdeployqt-continuous-x86_64.AppImage
 # Create AppImage.
 find . -type f
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textosaurus.desktop" -bundle-non-qt-libs -no-translations
-./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/com.github.textosaurus.desktop" -appimage -no-translations
+./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -bundle-non-qt-libs -no-translations
+./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -appimage -no-translations
 
 # Upload image.
 git config --global user.email "rotter.martinos@gmail.com"
