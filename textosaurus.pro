@@ -43,7 +43,7 @@ APP_URL_ISSUES                = "https://github.com/martinrotter/textosaurus/iss
 APP_URL_ISSUES_NEW            = "https://github.com/martinrotter/textosaurus/issues/new"
 APP_URL_WIKI                  = "https://github.com/martinrotter/textosaurus/wiki"
 APP_USERAGENT                 = "Textosaurus/$$APP_VERSION (io.github.martinrotter.textosaurus)"
-APP_DONATE_URL                = "https://liberapay.com/martinrotter"
+APP_DONATE_URL                = "https://martinrotter.github.io/donate/"
 APP_WIN_ARCH                  = "win64"
 
 message($$MSG_PREFIX: Welcome to $$APP_NAME qmake script.)
