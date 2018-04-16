@@ -69,5 +69,5 @@ if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then
   # We will trigger stuff for Flathub.
   cd ..
   chmod +x ../resources/scripts/.flathub-release.sh
-  ../resources/scripts/.flathub-release.sh
+  ../resources/scripts/.flathub-release.sh $TRAVIS_TAG $(git rev-parse HEAD)
 fi

@@ -4,8 +4,8 @@
 # and push new appdata/flatpak-json to new branch.
 echo "flathub"
 
-commit_hash=$(git rev-parse HEAD)
-tag=$TRAVIS_TAG
+commit_hash=$2
+tag=$1
 json_file="io.github.martinrotter.textosaurus.json"
 json_file_new="${json_file}.new"
 
