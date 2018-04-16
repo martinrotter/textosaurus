@@ -18,3 +18,6 @@ cat "$json_file" | sed -e "s@\"branch\": \".\+\"@\"branch\": \"$tag\"@g" > "$jso
 cat "$json_file_new" | sed -e "s@\"commit\": \".\+\"@\"commit\": \"$commit_hash\"@g" > "$json_file"
 
 cat "$json_file"
+
+git commit -a -m 'New version for commit $commit_hash.'
+git push origin new-version
