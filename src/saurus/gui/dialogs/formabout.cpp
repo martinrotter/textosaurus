@@ -80,7 +80,12 @@ void FormAbout::loadLicenseAndInformation() {
                              "<b>Revision:</b> %4<br/>"
                              "<b>Build date:</b> %5<br/>"
                              "<b>Qt:</b> %6 (compiled against %7)").arg(
-                            qApp->applicationVersion(), APP_SYSTEM_NAME, APP_SYSTEM_VERSION, APP_REVISION,
+                          #if defined(FLATPAK_MODE)
+                            qApp->applicationVersion() + QL1S(" (Flatpak) "),
+                          #else
+                            qApp->applicationVersion(),
+                          #endif
+                            APP_SYSTEM_NAME, APP_SYSTEM_VERSION, APP_REVISION,
                             TextFactory::parseDateTime(QString("%1 %2").arg(__DATE__,
                                                                             __TIME__)).toString(Qt::DefaultLocaleShortDate),
                             qVersion(), QT_VERSION_STR,

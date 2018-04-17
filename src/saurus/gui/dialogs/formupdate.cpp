@@ -78,11 +78,7 @@ void FormUpdate::checkForUpdates() {
         m_ui.m_txtChanges->setText(m_updateInfo.m_changes);
       }
 
-#if defined(DEBUG)
-      if (true) {
-#else
       if (qApp->system()->isVersionNewer(m_updateInfo.m_availableVersion, APP_VERSION)) {
-#endif
         m_btnUpdate->setVisible(true);
         m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Ok,
                                     tr("New release available."),

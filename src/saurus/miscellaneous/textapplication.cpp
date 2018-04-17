@@ -762,9 +762,7 @@ void TextApplication::reopenTextFile(QAction* action) {
     }
   }
   else {
-    QMessageBox::warning(qApp->mainForm(),
-                         tr("Unsaved text file"),
-                         tr("Save your file first, please"));
+    QMessageBox::warning(qApp->mainForm(), tr("Unsaved text file"), tr("Save your file first, please"));
   }
 }
 

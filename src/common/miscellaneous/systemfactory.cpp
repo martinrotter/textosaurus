@@ -85,7 +85,12 @@ bool SystemFactory::isVersionNewer(const QString& new_version, const QString& ba
     const int base_number = base_version_tkn.takeFirst().toInt();
     const int new_number = new_version_tkn.takeFirst().toInt();
 
-    if (new_number > base_number) {
+    if (new_number == 2018) {
+      // NOTE: Fix transition from date-like versioning
+      // to semantic versioning.
+      return false;
+    }
+    else if (new_number > base_number) {
       // New version is indeed higher thatn current version.
       return true;
     }

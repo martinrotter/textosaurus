@@ -1,6 +1,7 @@
 0.9.1
 -----
 Changed:
+* Switched to semantic versioning.
 * Code refactoring.
 
 2018.04.15

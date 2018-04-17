@@ -54,6 +54,10 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
+#if defined (FLATPAK_MODE)
+  qDebug("Flatpak mode enabled.");
+#endif
+
   Application::setWindowIcon(QIcon(APP_ICON_PATH));
 
 #if defined (Q_OS_MAC)
