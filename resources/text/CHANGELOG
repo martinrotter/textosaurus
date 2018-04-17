@@ -1,5 +1,8 @@
 0.9.1
 -----
+Added:
+* Main window can stay on top. (#31)
+
 Changed:
 * File save dialog does not append ".txt".
 * Switched to semantic versioning.

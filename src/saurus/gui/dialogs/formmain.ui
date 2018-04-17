@@ -122,6 +122,7 @@
     <addaction name="m_menuDockWidgets"/>
     <addaction name="m_menuShowHide"/>
     <addaction name="m_menuViewInvisibles"/>
+    <addaction name="m_actionStayOnTop"/>
     <addaction name="m_actionWordWrap"/>
     <addaction name="m_actionLineNumbers"/>
    </widget>
@@ -512,6 +513,17 @@
    </property>
    <property name="text">
     <string>&amp;Enable Auto-Indent</string>
+   </property>
+  </action>
+  <action name="m_actionStayOnTop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Stay On Top</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+T</string>
    </property>
   </action>
  </widget>

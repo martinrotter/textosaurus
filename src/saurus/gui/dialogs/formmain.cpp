@@ -89,6 +89,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionFindReplace;
   actions << m_ui.m_actionLineNumbers;
   actions << m_ui.m_actionWordWrap;
+  actions << m_ui.m_actionStayOnTop;
   actions << m_ui.m_actionViewEols;
   actions << m_ui.m_actionViewWhitespaces;
   actions << m_ui.m_actionAutoIndentEnabled;
@@ -158,6 +159,15 @@ void FormMain::switchVisibility() {
   }
 }
 
+void FormMain::switchStayOnTop() {
+  bool enable = (windowFlags() & Qt::WindowStaysOnTopHint) == 0;
+
+  setWindowFlag(Qt::WindowStaysOnTopHint, enable);
+  show();
+  m_ui.m_actionStayOnTop->setChecked(enable);
+  qApp->settings()->setValue(GROUP(GUI), GUI::StayOnTop, enable);
+}
+
 void FormMain::display() {
   setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
   show();
@@ -217,6 +227,10 @@ void FormMain::loadSize() {
 
   restoreGeometry(settings->value(GROUP(GUI), GUI::MainWindowGeometry).toByteArray());
   restoreState(settings->value(GROUP(GUI), GUI::MainWindowState).toByteArray());
+
+  if (settings->value(GROUP(GUI), SETTING(GUI::StayOnTop)).toBool()) {
+    switchStayOnTop();
+  }
 }
 
 void FormMain::saveSize() {
@@ -254,6 +268,7 @@ void FormMain::createConnections() {
   connect(m_ui.m_actionSwitchMainWindow, &QAction::triggered, this, &FormMain::switchVisibility);
   connect(m_ui.m_actionSwitchToolBar, &QAction::triggered, toolBar(), &ToolBar::setIsActive);
   connect(m_ui.m_actionSwitchStatusBar, &QAction::triggered, statusBar(), &StatusBar::setIsActive);
+  connect(m_ui.m_actionStayOnTop, &QAction::triggered, this, &FormMain::switchStayOnTop);
 
   // Menu "Tools" connections.
   connect(m_ui.m_actionSettings, &QAction::triggered, this, [this]() {

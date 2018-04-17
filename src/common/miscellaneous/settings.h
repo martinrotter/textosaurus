@@ -79,6 +79,8 @@ namespace GUI {
   constexpr auto ToolbarsVisibleDef = true;
   constexpr auto StatusBarVisible = "enable_statusbar";
   constexpr auto StatusBarVisibleDef = true;
+  constexpr auto StayOnTop = "stay_on_top";
+  constexpr auto StayOnTopDef = false;
   constexpr auto TabCloseMiddleClick = "tab_close_mid_button";
   constexpr auto TabCloseMiddleClickDef = true;
   constexpr auto TabCloseDoubleClick = "tab_close_double_button";
