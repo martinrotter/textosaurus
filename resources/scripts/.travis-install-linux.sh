@@ -2,6 +2,10 @@
 
 # Setup Qt build environment.
 source /opt/qt59/bin/qt59-env.sh
+
+git_revision=$(git rev-parse --short HEAD)
+git_tag_name=$(git describe --abbrev=0 --tags)
+
 mkdir textosaurus-build && cd textosaurus-build
 
 # Build application.
@@ -30,8 +34,6 @@ set -- T*.AppImage
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 imagename="$1"
-git_revision=$(git rev-parse --short HEAD)
-git_tag_name=$(git describe --tags $(git rev-list --tags --max-count=1))
 imagenamenospace="textosaurus-${git_tag_name}-${git_revision}-linux64.AppImage"
 
 mv "$imagename" "$imagenamenospace"
