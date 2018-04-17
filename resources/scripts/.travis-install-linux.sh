@@ -3,8 +3,10 @@
 # Setup Qt build environment.
 source /opt/qt59/bin/qt59-env.sh
 
+env
+
 git_revision=$(git rev-parse --short HEAD)
-git_tag_name=$(git describe --abbrev=0 --tags)
+git_tag_name=$(git describe --tags $(git rev-list --tags --max-count=1))
 
 mkdir textosaurus-build && cd textosaurus-build
 
