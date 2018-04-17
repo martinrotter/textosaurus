@@ -6,7 +6,7 @@ source /opt/qt59/bin/qt59-env.sh
 env
 
 git_revision=$(git rev-parse --short HEAD)
-git_tag_name=$(git describe --tags $(git rev-list --tags --max-count=1))
+git_tag_name=$TRAVIS_BRANCH
 
 mkdir textosaurus-build && cd textosaurus-build
 
