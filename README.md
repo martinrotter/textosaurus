@@ -34,6 +34,8 @@ Features
     - changeable icon themes and styles,
     - main window remembers its location and size,
     - hideable toolbar and statusbar,
+    - main window can stay on top,
+    - **tray icon**,
     - simple interface,
     - **movable dock sidebars**:
         * "Output" sidebar - can display output of external tools and other information,
