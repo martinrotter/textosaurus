@@ -2,6 +2,7 @@
 
 #include "saurus/gui/settings/settingsgui.h"
 
+#include "common/gui/systemtrayicon.h"
 #include "common/gui/toolbar.h"
 #include "common/gui/toolbareditor.h"
 #include "common/miscellaneous/iconfactory.h"
@@ -25,6 +26,9 @@ SettingsGui::SettingsGui(Settings* settings, QWidget* parent) : SettingsPanel(se
   connect(m_ui.m_checkCloseTabsDoubleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_checkCloseTabsMiddleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_checkNewTabDoubleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
+  connect(m_ui.m_checkBalloonNotifications, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
+  connect(m_ui.m_checkHideWhenMinimized, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
+  connect(m_ui.m_grpTrayIcon, &QGroupBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_grbCloseTabs, &QGroupBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_cmbToolbarButtonStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
           &SettingsGui::dirtifySettings);
@@ -73,6 +77,19 @@ void SettingsGui::loadSettings() {
     m_ui.m_cmbIconTheme->setCurrentText(current_theme);
   }
 
+  // Load settings of tray icon.
+  if (SystemTrayIcon::isSystemTrayAvailable()) {
+    m_ui.m_grpTrayIcon->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::UseTrayIcon)).toBool());
+    m_ui.m_checkBalloonNotifications->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::EnableNotifications)).toBool());
+    m_ui.m_checkHideWhenMinimized->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::HideMainWindowWhenMinimized)).toBool());
+  }
+  else {
+    // Tray icon is not supported on this machine.
+    m_ui.m_grpTrayIcon->setTitle(m_ui.m_grpTrayIcon->title() + QL1C(' ') + tr("(Tray icon is not available.)"));
+    m_ui.m_grpTrayIcon->setChecked(false);
+    m_ui.m_grpTrayIcon->setEnabled(false);
+  }
+
   // Load styles.
   foreach (const QString& style_name, QStyleFactory::keys()) {
     m_ui.m_listStyles->addItem(style_name);
@@ -111,6 +128,20 @@ void SettingsGui::saveSettings() {
   // Save toolbar.
   settings()->setValue(GROUP(GUI), GUI::ToolbarStyle,
                        m_ui.m_cmbToolbarButtonStyle->itemData(m_ui.m_cmbToolbarButtonStyle->currentIndex()));
+
+  // Save tray icon.
+  if (SystemTrayIcon::isSystemTrayAvailable()) {
+    settings()->setValue(GROUP(GUI), GUI::UseTrayIcon, m_ui.m_grpTrayIcon->isChecked());
+    settings()->setValue(GROUP(GUI), GUI::EnableNotifications, m_ui.m_checkBalloonNotifications->isChecked());
+    settings()->setValue(GROUP(GUI), GUI::HideMainWindowWhenMinimized, m_ui.m_checkHideWhenMinimized->isChecked());
+
+    if (m_ui.m_grpTrayIcon->isChecked()) {
+      qApp->showTrayIcon();
+    }
+    else {
+      qApp->deleteTrayIcon();
+    }
+  }
 
   // Save selected icon theme.
   QString selected_icon_theme = m_ui.m_cmbIconTheme->itemData(m_ui.m_cmbIconTheme->currentIndex()).toString();

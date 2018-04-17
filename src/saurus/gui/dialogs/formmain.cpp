@@ -4,6 +4,7 @@
 
 #include "common/gui/messagebox.h"
 #include "common/gui/plaintoolbutton.h"
+#include "common/gui/systemtrayicon.h"
 #include "common/gui/toolbar.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "common/miscellaneous/settings.h"
@@ -134,25 +135,54 @@ void FormMain::switchFullscreenMode() {
   }
 }
 
+void FormMain::changeEvent(QEvent* event) {
+  switch (event->type()) {
+    case QEvent::WindowStateChange: {
+      if (windowState() & Qt::WindowMinimized &&
+          SystemTrayIcon::isSystemTrayActivated() &&
+          qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideMainWindowWhenMinimized)).toBool()) {
+        event->ignore();
+        QTimer::singleShot(CHANGE_EVENT_DELAY, this, [this]() {
+          switchVisibility();
+        });
+      }
+
+      break;
+    }
+
+    default:
+      break;
+  }
+
+  QMainWindow::changeEvent(event);
+}
+
 void FormMain::dragEnterEvent(QDragEnterEvent* event) {
   event->accept();
 }
 
 void FormMain::closeEvent(QCloseEvent* event) {
-  bool should_stop = true;
-  emit closeRequested(&should_stop);
+  /*bool should_stop = true;
+     emit closeRequested(&should_stop);
 
-  if (should_stop) {
-    event->accept();
-  }
-  else {
-    event->ignore();
-  }
+     if (should_stop) {
+     event->accept();
+     }
+     else {
+     event->ignore();
+     }*/
+  QMainWindow::closeEvent(event);
 }
 
-void FormMain::switchVisibility() {
-  if (isVisible()) {
-    showMinimized();
+void FormMain::switchVisibility(bool force_hide) {
+  if (force_hide || isVisible()) {
+    if (SystemTrayIcon::isSystemTrayActivated()) {
+      hide();
+    }
+    else {
+      // Window gets minimized in single-window mode.
+      showMinimized();
+    }
   }
   else {
     display();
@@ -251,7 +281,7 @@ void FormMain::saveSize() {
 
 void FormMain::createConnections() {
   // Menu "File" connections.
-  connect(m_ui.m_actionQuit, &QAction::triggered, qApp, &Application::quitApplication);
+  connect(m_ui.m_actionQuit, &QAction::triggered, qApp, &Application::quit);
   connect(m_ui.m_actionRestart, &QAction::triggered, this, [this]() {
     if (close()) {
       qApp->restart();

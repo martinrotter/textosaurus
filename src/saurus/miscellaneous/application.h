@@ -27,6 +27,7 @@ class FormMain;
 class IconFactory;
 class QAction;
 class WebFactory;
+class SystemTrayIcon;
 class TextApplication;
 
 class Application : public QtSingleApplication {
@@ -53,6 +54,7 @@ class Application : public QtSingleApplication {
     Settings* settings() const;
     FormMain* mainForm();
     QWidget* mainFormWidget();
+    SystemTrayIcon* trayIcon();
 
     QString tempFolder();
     QString documentsFolder();
@@ -77,8 +79,10 @@ class Application : public QtSingleApplication {
     // Returns pointer to "GOD" application singleton.
     static Application* instance();
 
+    void showTrayIcon();
+    void deleteTrayIcon();
+
   public slots:
-    void quitApplication();
     void restart();
 
     // Processes incoming message from another RSS Guard instance.
@@ -104,6 +108,7 @@ class Application : public QtSingleApplication {
     SystemFactory* m_system;
     Localization* m_localization;
     IconFactory* m_icons;
+    SystemTrayIcon* m_trayIcon;
     bool m_shouldRestart;
 };
 

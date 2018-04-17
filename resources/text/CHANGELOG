@@ -1,6 +1,7 @@
 0.9.0
 -----
 Added:
+* Tray icon support. (#13)
 * Main window can stay on top. (#31)
 
 Changed:

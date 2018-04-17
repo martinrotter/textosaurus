@@ -4,6 +4,7 @@
 
 #include "common/exceptions/applicationexception.h"
 #include "common/gui/messagebox.h"
+#include "common/gui/systemtrayicon.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "common/miscellaneous/iofactory.h"
 #include "common/network-web/webfactory.h"
@@ -97,6 +98,37 @@ QWidget* Application::mainFormWidget() {
   return m_mainForm;
 }
 
+void Application::showTrayIcon() {
+  qDebug("Showing tray icon.");
+  trayIcon()->show();
+}
+
+void Application::deleteTrayIcon() {
+  if (m_trayIcon != nullptr) {
+    qDebug("Disabling tray icon, deleting it and raising main application window.");
+    m_mainForm->display();
+    delete m_trayIcon;
+    m_trayIcon = nullptr;
+
+    // Make sure that application quits when last window is closed.
+    setQuitOnLastWindowClosed(true);
+  }
+}
+
+SystemTrayIcon* Application::trayIcon() {
+  if (m_trayIcon == nullptr) {
+    m_trayIcon = new SystemTrayIcon(
+      APP_ICON_PATH,
+      nullptr,
+      [this]() {
+      m_mainForm->switchVisibility();
+    },
+      m_mainForm);
+  }
+
+  return m_trayIcon;
+}
+
 void Application::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
 }
@@ -149,7 +181,7 @@ void Application::processExecutionMessage(const QString& message) {
   const QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
 
   if (messages.contains(APP_QUIT_INSTANCE)) {
-    quitApplication();
+    quit();
   }
   else {
     if (messages.contains(APP_IS_RUNNING)) {
@@ -167,15 +199,6 @@ void Application::showGuiMessage(const QString& message, QMessageBox::Icon messa
 
 Application* Application::instance() {
   return static_cast<Application*>(QCoreApplication::instance());
-}
-
-void Application::quitApplication() {
-  if (m_mainForm != nullptr) {
-    m_mainForm->close();
-  }
-  else {
-    Application::quit();
-  }
 }
 
 void Application::onCommitData(QSessionManager& manager) {
@@ -202,6 +225,10 @@ void Application::onSaveState(QSessionManager& manager) {
 }
 
 void Application::onAboutToQuit() {
+  bool ok;
+
+  m_textApplication->quit(&ok);
+
   eliminateFirstRun();
   eliminateFirstRun(APP_VERSION);
   processEvents();
@@ -232,6 +259,5 @@ void Application::onAboutToQuit() {
 
 void Application::restart() {
   m_shouldRestart = true;
-
-  quitApplication();
+  quit();
 }

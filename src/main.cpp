@@ -2,6 +2,7 @@
 
 #include "common/dynamic-shortcuts/dynamicshortcuts.h"
 #include "common/gui/messagebox.h"
+#include "common/gui/systemtrayicon.h"
 #include "common/miscellaneous/debugging.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "common/network-web/silentnetworkaccessmanager.h"
@@ -104,6 +105,11 @@ int main(int argc, char* argv[]) {
 
   // Now is a good time to initialize dynamic keyboard shortcuts.
   DynamicShortcuts::load(qApp->userActions());
+
+  // Display tray icon if it is enabled and available.
+  if (SystemTrayIcon::isSystemTrayActivated()) {
+    qApp->showTrayIcon();
+  }
 
   // Enter global event loop.
   return Application::exec();

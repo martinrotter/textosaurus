@@ -77,6 +77,12 @@ namespace GUI {
   constexpr auto MainWindowState = "main_window_state";
   constexpr auto ToolbarsVisible = "enable_toolbars";
   constexpr auto ToolbarsVisibleDef = true;
+  constexpr auto UseTrayIcon = "use_tray_icon";
+  constexpr auto UseTrayIconDef = false;
+  constexpr auto EnableNotifications = "enable_tray_notifications";
+  constexpr auto EnableNotificationsDef = true;
+  constexpr auto HideMainWindowWhenMinimized = "hide_main_window_when_minimized";
+  constexpr auto HideMainWindowWhenMinimizedDef = true;
   constexpr auto StatusBarVisible = "enable_statusbar";
   constexpr auto StatusBarVisibleDef = true;
   constexpr auto StayOnTop = "stay_on_top";

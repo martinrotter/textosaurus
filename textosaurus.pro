@@ -261,7 +261,8 @@ HEADERS +=  src/definitions/definitions.h \
             src/saurus/miscellaneous/macro.h \
             src/saurus/gui/sidebars/macrossidebar.h \
     src/saurus/gui/tab.h \
-    src/saurus/gui/editortab.h
+    src/saurus/gui/editortab.h \
+    src/common/gui/systemtrayicon.h
 
 SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -336,7 +337,8 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/miscellaneous/macro.cpp \
             src/saurus/gui/sidebars/macrossidebar.cpp \
     src/saurus/gui/tab.cpp \
-    src/saurus/gui/editortab.cpp
+    src/saurus/gui/editortab.cpp \
+    src/common/gui/systemtrayicon.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/common/miscellaneous/disablewindowtabbing.mm

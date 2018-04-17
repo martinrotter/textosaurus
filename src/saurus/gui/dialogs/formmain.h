@@ -42,7 +42,7 @@ class FormMain : public QMainWindow {
     void display();
 
     // Switches visibility of main window.
-    void switchVisibility();
+    void switchVisibility(bool force_hide = false);
 
     void switchStayOnTop();
 
@@ -50,6 +50,7 @@ class FormMain : public QMainWindow {
     void switchFullscreenMode();
 
   protected:
+    virtual void changeEvent(QEvent* event) override;
     virtual void dragEnterEvent(QDragEnterEvent* event) override;
     virtual void closeEvent(QCloseEvent* event) override;
 

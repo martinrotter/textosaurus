@@ -69,7 +69,7 @@
            <property name="fieldGrowthPolicy">
             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
            </property>
-           <item row="0" column="0">
+           <item row="1" column="0">
             <widget class="QLabel" name="m_lblIconTheme">
              <property name="text">
               <string>Icon theme</string>
@@ -79,10 +79,10 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="1" column="1">
             <widget class="QComboBox" name="m_cmbIconTheme"/>
            </item>
-           <item row="1" column="0">
+           <item row="2" column="0">
             <widget class="QLabel" name="m_lblStyle">
              <property name="text">
               <string>Style</string>
@@ -92,8 +92,34 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="2" column="1">
             <widget class="QListWidget" name="m_listStyles"/>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QGroupBox" name="m_grpTrayIcon">
+             <property name="title">
+              <string>Enable Tray Icon</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <layout class="QFormLayout" name="formLayout_2">
+              <item row="1" column="0" colspan="2">
+               <widget class="QCheckBox" name="m_checkHideWhenMinimized">
+                <property name="text">
+                 <string>Hide main window when minimized</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QCheckBox" name="m_checkBalloonNotifications">
+                <property name="text">
+                 <string>Enable tray icon balloon notifications</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -228,8 +254,11 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>m_tabUi</tabstop>
   <tabstop>m_scrollIconSkins</tabstop>
+  <tabstop>m_tabUi</tabstop>
+  <tabstop>m_grpTrayIcon</tabstop>
+  <tabstop>m_checkBalloonNotifications</tabstop>
+  <tabstop>m_checkHideWhenMinimized</tabstop>
   <tabstop>m_cmbIconTheme</tabstop>
   <tabstop>m_listStyles</tabstop>
   <tabstop>m_checkCloseTabsDoubleClick</tabstop>

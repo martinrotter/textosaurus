@@ -215,7 +215,7 @@ void FormUpdate::startUpdate() {
       QMessageBox::critical(this, tr("Cannot start installer"), tr("Cannot launch external updater. Update application manually."));
     }
     else {
-      qApp->quitApplication();
+      qApp->quit();
     }
 #endif
   }
