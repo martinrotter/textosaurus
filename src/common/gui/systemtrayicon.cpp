@@ -31,7 +31,11 @@ SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
   qDebug("Creating SystemTrayIcon instance.");
 
   QSystemTrayIcon::setIcon(m_normalIcon);
-  setContextMenu(menu);
+
+  if (menu != nullptr) {
+    menu->setParent(parent);
+    setContextMenu(menu);
+  }
 
   // Create necessary connections.
   connect(this, &SystemTrayIcon::activated, this, &SystemTrayIcon::onActivated);

@@ -117,9 +117,17 @@ void Application::deleteTrayIcon() {
 
 SystemTrayIcon* Application::trayIcon() {
   if (m_trayIcon == nullptr) {
+#if defined(Q_OS_WIN)
+    TrayIconMenu* tray_menu = new TrayIconMenu(APP_NAME, m_mainForm);
+#else
+    QMenu* tray_menu = new QMenu(APP_NAME, m_mainForm);
+#endif
+
+    tray_menu->addAction(icons()->fromTheme(QSL("application-exit")), tr("&Quit"), this, &Application::quit);
+
     m_trayIcon = new SystemTrayIcon(
       APP_ICON_PATH,
-      nullptr,
+      tray_menu,
       [this]() {
       m_mainForm->switchVisibility();
     },
@@ -194,7 +202,12 @@ void Application::processExecutionMessage(const QString& message) {
 void Application::showGuiMessage(const QString& message, QMessageBox::Icon message_type, const QUrl& url, std::function<void()> handler) {
   Q_UNUSED(message_type)
 
-  m_textApplication->outputSidebar()->displayOutput(OutputSource::Application, message, message_type, url, handler);
+  if (SystemTrayIcon::isSystemTrayActivated()) {
+    trayIcon()->showMessage(APP_NAME, message, (QSystemTrayIcon::MessageIcon) message_type, TRAY_ICON_BUBBLE_TIMEOUT, handler);
+  }
+  else {
+    m_textApplication->outputSidebar()->displayOutput(OutputSource::Application, message, message_type, url, handler);
+  }
 }
 
 Application* Application::instance() {
