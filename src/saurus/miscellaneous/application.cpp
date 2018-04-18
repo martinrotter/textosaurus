@@ -25,6 +25,7 @@ Application::Application(const QString& id, int& argc, char** argv)
   m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
+  m_trayIcon(nullptr),
   m_shouldRestart(false) {
   connect(this, &Application::aboutToQuit, this, &Application::onAboutToQuit);
   connect(this, &Application::commitDataRequest, this, &Application::onCommitData);
