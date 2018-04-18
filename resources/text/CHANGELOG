@@ -6,7 +6,10 @@ Added:
 
 Changed:
 * File save dialog does not append ".txt".
-* Switched to semantic versioning.
+* Switched to semantic versioning. Versioning now uses MAJOR.MINOR.PATCH scheme, which means:
+    * MAJOR number is changed if major breaking feature is added,
+    * MINOR number is changed if less important feature is added,
+    * PATCH number is changed when bugs are fixed and tiny new features are added.
 * Code refactoring.
 
 2018.04.15

@@ -107,7 +107,7 @@
               <item row="1" column="0" colspan="2">
                <widget class="QCheckBox" name="m_checkHideWhenMinimized">
                 <property name="text">
-                 <string>Hide main window when minimized</string>
+                 <string>Hide main window to tray area when minimized</string>
                 </property>
                </widget>
               </item>
