@@ -3,6 +3,9 @@
 Added:
 * Automatically display main window when running commands from tray icon context menu.
 * Tray icon context menu enhanced.
+* FS sidebar is enhanced:
+    * New combobox with know file filters at the bottom.
+    * Text box with path is now multiline.
 
 0.9.0
 -----

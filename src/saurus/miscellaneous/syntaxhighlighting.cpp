@@ -18,9 +18,7 @@ QStringList SyntaxHighlighting::bareFileFilters() {
   if (m_bareFileFilters.isEmpty()) {
     for (const Lexer& lex : lexers()) {
       for (const QString& suffix : lex.m_suffices) {
-        if (!suffix.isEmpty()) {
-          m_bareFileFilters << QSL("*") + suffix;
-        }
+        m_bareFileFilters << QSL("*") + suffix;
       }
     }
   }
@@ -196,7 +194,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
   if (m_lexers.isEmpty()) {
     m_lexers
       << Lexer(tr("Plain text"), QStringList {
-      QSL("txt"), QString()
+      QString(), QSL("txt")
     }, SCLEX_NULL)
       << Lexer(QSL("A68k"), QStringList {
       QSL("doxygen")

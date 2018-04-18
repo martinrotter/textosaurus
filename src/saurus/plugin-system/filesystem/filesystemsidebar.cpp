@@ -2,7 +2,7 @@
 
 #include "saurus/plugin-system/filesystem/filesystemsidebar.h"
 
-#include "common/gui/baselineedit.h"
+#include "common/gui/basetextedit.h"
 #include "common/gui/plaintoolbutton.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "definitions/definitions.h"
@@ -40,7 +40,7 @@ bool FilesystemSidebar::initiallyVisible() const {
 }
 
 int FilesystemSidebar::initialWidth() const {
-  return 200;
+  return 250;
 }
 
 void FilesystemSidebar::openDrive(int index) {
@@ -58,8 +58,11 @@ void FilesystemSidebar::load() {
     m_fsModel = new FilesystemModel(widget_browser);
     m_fsView = new FilesystemView(m_fsModel, widget_browser);
     m_lvFavorites = new FavoritesListWidget(m_tabWidget);
-    m_txtPath = new BaseLineEdit(widget_browser);
+    m_txtPath = new BaseTextEdit(widget_browser);
     m_txtPath->setReadOnly(true);
+
+    // Decide the height.
+    m_txtPath->setFixedHeight(QFontMetrics(m_txtPath->font()).lineSpacing() * FS_SIDEBAR_PATH_LINES);
 
     m_tabWidget->setTabPosition(QTabWidget::TabPosition::South);
     layout_browser->setMargin(0);
@@ -80,13 +83,29 @@ void FilesystemSidebar::load() {
     tool_bar->setIconSize(QSize(16, 16));
 
     // Initialize FS browser.
+    m_cmbFilters = new QComboBox(widget_browser);
+    m_cmbFilters->setEditable(true);
+
+    connect(m_cmbFilters, &QComboBox::currentTextChanged, this, [this](const QString& filter) {
+      m_fsModel->setNameFilters({filter});
+    });
+
+    QStringList fltrs = m_textApp->settings()->syntaxHighlighting()->bareFileFilters();
+
+    std::sort(fltrs.begin(), fltrs.end(), [](const QString& lhs, const QString& rhs) {
+      return QString::compare(lhs, rhs, Qt::CaseSensitivity::CaseInsensitive) < 0;
+    });
+
+    m_cmbFilters->addItems(fltrs);
+
     m_cmbDrives = new QComboBox(widget_browser);
     m_cmbDrives->setModel(m_fsModel);
     connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &FilesystemSidebar::openDrive);
 
     m_fsModel->setNameFilterDisables(false);
     m_fsModel->setFilter(QDir::Filter::Files | QDir::Filter::Hidden | QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDot);
-    m_fsModel->setNameFilters(m_textApp->settings()->syntaxHighlighting()->bareFileFilters());
+
+    //m_fsModel->setNameFilters(m_textApp->settings()->syntaxHighlighting()->bareFileFilters());
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
@@ -114,10 +133,11 @@ void FilesystemSidebar::load() {
 
     m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
 
-    layout_browser->addWidget(tool_bar, 0);
-    layout_browser->addWidget(m_cmbDrives, 0);
-    layout_browser->addWidget(m_txtPath, 0);
+    layout_browser->addWidget(tool_bar);
+    layout_browser->addWidget(m_cmbDrives);
+    layout_browser->addWidget(m_txtPath);
     layout_browser->addWidget(m_fsView, 1);
+    layout_browser->addWidget(m_cmbFilters);
 
     m_tabWidget->addTab(widget_browser, tr("Explorer"));
     m_tabWidget->addTab(m_lvFavorites, tr("Favorites"));
@@ -133,7 +153,7 @@ void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
   auto idx_root = m_fsModel->index(file_drive.rootPath()).row();
 
   m_cmbDrives->setCurrentIndex(idx_root);
-  m_txtPath->setText(path);
+  m_txtPath->setPlainText(path);
   m_txtPath->setToolTip(path);
   qApp->settings()->setValue(m_settingsSection, QL1S("current_folder_") + OS_ID_LOW, path);
 }

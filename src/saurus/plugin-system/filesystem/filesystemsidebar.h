@@ -6,7 +6,7 @@
 #include "saurus/gui/sidebars/basesidebar.h"
 
 class TextApplication;
-class BaseLineEdit;
+class BaseTextEdit;
 class FilesystemModel;
 class FilesystemView;
 class FavoritesListWidget;
@@ -43,12 +43,13 @@ class FilesystemSidebar : public BaseSidebar {
 
   private:
     const QString m_settingsSection = "filesystem";
-    BaseLineEdit* m_txtPath;
+    BaseTextEdit* m_txtPath;
     QComboBox* m_cmbDrives;
     FilesystemModel* m_fsModel;
     FilesystemView* m_fsView;
     FavoritesListWidget* m_lvFavorites;
     QTabWidget* m_tabWidget;
+    QComboBox* m_cmbFilters;
 };
 
 #endif // FILESYSTEMSIDEBAR_H
