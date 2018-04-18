@@ -320,7 +320,8 @@ void TextApplication::newFile() {
   m_tabEditors->setCurrentIndex(addTextEditor(editor));
 }
 
-void TextApplication::onEditorModified(int type, int position, int length, int linesAdded, const QByteArray& text,
+void TextApplication::onEditorModified(int type, int position, int length,
+                                       int linesAdded, const QByteArray& text,
                                        int line, int foldNow, int foldPrev) {
   Q_UNUSED(position)
   Q_UNUSED(length)

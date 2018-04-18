@@ -15,6 +15,7 @@ class FormMain : public QMainWindow {
   Q_OBJECT
 
   friend class TabWidget;
+  friend class Application;
   friend class TextApplication;
 
   public:

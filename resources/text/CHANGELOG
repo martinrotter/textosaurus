@@ -1,5 +1,8 @@
 0.9.1
 -----
+Added:
+* Automatically display main window when running commands from tray icon context menu.
+* Tray icon context menu enhanced.
 
 0.9.0
 -----

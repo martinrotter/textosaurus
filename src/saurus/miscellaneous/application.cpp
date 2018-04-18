@@ -123,7 +123,22 @@ SystemTrayIcon* Application::trayIcon() {
     QMenu* tray_menu = new QMenu(APP_NAME, m_mainForm);
 #endif
 
-    tray_menu->addAction(icons()->fromTheme(QSL("application-exit")), tr("&Quit"), this, &Application::quit);
+    // Ensure that main window is shown before the command
+    // from tray icon menu is ran.
+    connect(tray_menu, &QMenu::triggered, this, [this]() {
+      m_mainForm->show();
+    });
+
+    auto* separator = new QAction(tray_menu);
+
+    separator->setSeparator(true);
+
+    tray_menu->addActions(QList<QAction*> {
+      m_mainForm->m_ui.m_actionFileNew,
+      m_mainForm->m_ui.m_actionFileOpen,
+      separator,
+      m_mainForm->m_ui.m_actionQuit
+    });
 
     m_trayIcon = new SystemTrayIcon(
       APP_ICON_PATH,
