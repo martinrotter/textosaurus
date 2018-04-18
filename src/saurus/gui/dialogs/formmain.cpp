@@ -191,9 +191,26 @@ void FormMain::switchVisibility(bool force_hide) {
 
 void FormMain::switchStayOnTop() {
   bool enable = (windowFlags() & Qt::WindowStaysOnTopHint) == 0;
+  bool was_maximized = isMaximized();
+  QRect geom;
+
+  if (was_maximized) {
+    showNormal();
+    qApp->processEvents();
+
+    // We store unmaximized geometry.
+    geom = geometry();
+  }
 
   setWindowFlag(Qt::WindowStaysOnTopHint, enable);
   show();
+
+  if (was_maximized) {
+    setGeometry(geom);
+    qApp->processEvents();
+    showMaximized();
+  }
+
   m_ui.m_actionStayOnTop->setChecked(enable);
   qApp->settings()->setValue(GROUP(GUI), GUI::StayOnTop, enable);
 }
