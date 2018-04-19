@@ -269,6 +269,7 @@ void Application::quitApplication() {
     }
     else {
       m_isQuitting = false;
+      m_shouldRestart = false;
     }
   }
 }
