@@ -154,6 +154,7 @@ SystemTrayIcon* Application::trayIcon() {
       m_mainForm->switchVisibility();
     },
       m_mainForm);
+    m_trayIcon->setToolTip(APP_LONG_NAME);
   }
 
   return m_trayIcon;
