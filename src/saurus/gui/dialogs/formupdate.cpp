@@ -78,7 +78,11 @@ void FormUpdate::checkForUpdates() {
         m_ui.m_txtChanges->setText(m_updateInfo.m_changes);
       }
 
+#if defined(DEBUG)
+      if (true) {
+#else
       if (qApp->system()->isVersionNewer(m_updateInfo.m_availableVersion, APP_VERSION)) {
+#endif
         m_btnUpdate->setVisible(true);
         m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Ok,
                                     tr("New release available."),
@@ -203,19 +207,30 @@ void FormUpdate::startUpdate() {
     close();
     qDebug("Preparing to launch external installer '%s'.", qPrintable(QDir::toNativeSeparators(m_updateFilePath)));
 #if defined(Q_OS_WIN)
-    HINSTANCE exec_result = ShellExecute(nullptr,
-                                         nullptr,
-                                         reinterpret_cast<const WCHAR*>(QDir::toNativeSeparators(m_updateFilePath).utf16()),
-                                         nullptr,
-                                         nullptr,
-                                         SW_NORMAL);
+    if (m_updateFilePath.endsWith(QL1S("exe"))) {
+      HINSTANCE exec_result = ShellExecute(nullptr,
+                                           nullptr,
+                                           reinterpret_cast<const WCHAR*>(QDir::toNativeSeparators(m_updateFilePath).utf16()),
+                                           nullptr,
+                                           nullptr,
+                                           SW_NORMAL);
 
-    if (exec_result <= (HINSTANCE)32) {
-      qDebug("External updater was not launched due to error.");
-      QMessageBox::critical(this, tr("Cannot start installer"), tr("Cannot launch external updater. Update application manually."));
+      if (exec_result <= (HINSTANCE)32) {
+        qDebug("External updater was not launched due to error.");
+        QMessageBox::critical(this, tr("Cannot Start Installer"), tr("Cannot launch external updater. Update application manually."));
+      }
+      else {
+        qApp->quitApplication();
+      }
     }
     else {
-      qApp->quitApplication();
+      if (!qApp->system()->openFolderFile(m_updateFilePath)) {
+        qDebug("External updater was not launched due to error.");
+        QMessageBox::critical(this, tr("Cannot Open Update File"), tr("Cannot open application update file. Update application manually."));
+      }
+      else {
+        qApp->quitApplication();
+      }
     }
 #endif
   }
