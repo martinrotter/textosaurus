@@ -6,6 +6,9 @@ Added:
 * FS sidebar is enhanced:
     * New combobox with know file filters at the bottom.
     * Text box with path is now multiline.
+    
+Fixed:
+* Fixed behavior of #13 and #31.
 
 0.9.0
 -----
