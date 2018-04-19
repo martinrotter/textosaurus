@@ -162,16 +162,17 @@ void FormMain::dragEnterEvent(QDragEnterEvent* event) {
 }
 
 void FormMain::closeEvent(QCloseEvent* event) {
-  /*bool should_stop = true;
-     emit closeRequested(&should_stop);
+  if (qApp->isQuitting() || qApp->quitOnLastWindowClosed()) {
+    bool should_stop = true;
+    emit closeRequested(&should_stop);
 
-     if (should_stop) {
-     event->accept();
-     }
-     else {
-     event->ignore();
-     }*/
-  QMainWindow::closeEvent(event);
+    if (should_stop) {
+      event->accept();
+    }
+    else {
+      event->ignore();
+    }
+  }
 }
 
 void FormMain::switchVisibility(bool force_hide) {
@@ -298,7 +299,7 @@ void FormMain::saveSize() {
 
 void FormMain::createConnections() {
   // Menu "File" connections.
-  connect(m_ui.m_actionQuit, &QAction::triggered, qApp, &Application::quit);
+  connect(m_ui.m_actionQuit, &QAction::triggered, qApp, &Application::quitApplication);
   connect(m_ui.m_actionRestart, &QAction::triggered, this, [this]() {
     if (close()) {
       qApp->restart();

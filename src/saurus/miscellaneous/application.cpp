@@ -26,7 +26,8 @@ Application::Application(const QString& id, int& argc, char** argv)
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
   m_trayIcon(nullptr),
-  m_shouldRestart(false) {
+  m_shouldRestart(false),
+  m_isQuitting(false) {
   connect(this, &Application::aboutToQuit, this, &Application::onAboutToQuit);
   connect(this, &Application::commitDataRequest, this, &Application::onCommitData);
   connect(this, &Application::saveStateRequest, this, &Application::onSaveState);
@@ -81,6 +82,11 @@ void Application::eliminateFirstRun() {
 
 void Application::eliminateFirstRun(const QString& version) {
   settings()->setValue(GROUP(General), QString(General::FirstRun) + QL1C('_') + version, false);
+}
+
+bool Application::isQuitting() const
+{
+  return m_isQuitting;
 }
 
 IconFactory* Application::icons() {
@@ -205,7 +211,7 @@ void Application::processExecutionMessage(const QString& message) {
   const QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
 
   if (messages.contains(APP_QUIT_INSTANCE)) {
-    quit();
+    quitApplication();
   }
   else {
     if (messages.contains(APP_IS_RUNNING)) {
@@ -253,11 +259,21 @@ void Application::onSaveState(QSessionManager& manager) {
   manager.setRestartHint(QSessionManager::RestartNever);
 }
 
+void Application::quitApplication() {
+  if (m_mainForm != nullptr) {
+    m_isQuitting = true;
+    bool closed = m_mainForm->close();
+
+    if (closed) {
+      quit();
+    }
+    else {
+      m_isQuitting = false;
+    }
+  }
+}
+
 void Application::onAboutToQuit() {
-  bool ok;
-
-  m_textApplication->quit(&ok);
-
   eliminateFirstRun();
   eliminateFirstRun(APP_VERSION);
   processEvents();
@@ -288,5 +304,5 @@ void Application::onAboutToQuit() {
 
 void Application::restart() {
   m_shouldRestart = true;
-  quit();
+  quitApplication();
 }

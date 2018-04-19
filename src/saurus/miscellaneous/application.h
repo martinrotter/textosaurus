@@ -82,7 +82,10 @@ class Application : public QtSingleApplication {
     void showTrayIcon();
     void deleteTrayIcon();
 
+    bool isQuitting() const;
+
   public slots:
+    void quitApplication();
     void restart();
 
     // Processes incoming message from another RSS Guard instance.
@@ -110,6 +113,7 @@ class Application : public QtSingleApplication {
     IconFactory* m_icons;
     SystemTrayIcon* m_trayIcon;
     bool m_shouldRestart;
+    bool m_isQuitting;
 };
 
 #endif // APPLICATION_H
