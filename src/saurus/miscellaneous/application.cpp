@@ -133,7 +133,7 @@ SystemTrayIcon* Application::trayIcon() {
     // Ensure that main window is shown before the command
     // from tray icon menu is ran.
     connect(tray_menu, &QMenu::triggered, this, [this]() {
-      m_mainForm->show();
+      m_mainForm->display();
     });
 
     auto* separator = new QAction(tray_menu);
