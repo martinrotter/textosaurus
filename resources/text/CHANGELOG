@@ -8,6 +8,9 @@ Changed:
 * Using hoextdown instead of hoedown for Markdown preview.
 * Scintilla component updated to latest master (4.0.4).
 
+Fixed:
+* Some smaller FS sidebar-related fixes.
+
 0.9.2
 -----
 Fixed:

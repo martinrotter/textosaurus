@@ -85,6 +85,7 @@ void FilesystemSidebar::load() {
     // Initialize FS browser.
     m_cmbFilters = new QComboBox(widget_browser);
     m_cmbFilters->setEditable(true);
+    m_cmbFilters->setToolTip(tr("Filter displayed files"));
 
     connect(m_cmbFilters, &QComboBox::currentTextChanged, this, [this](const QString& filter) {
       m_fsModel->setNameFilters({filter});
@@ -163,11 +164,10 @@ void FilesystemSidebar::addToFavorites() {
 
   if (file_info.isFile() || file_info.isDir()) {
     m_lvFavorites->loadFileItem(QDir::toNativeSeparators(file_info.absoluteFilePath()));
+    m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
+    saveFavorites();
+    makeFavoritesVisible();
   }
-
-  m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
-  saveFavorites();
-  makeFavoritesVisible();
 }
 
 void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
