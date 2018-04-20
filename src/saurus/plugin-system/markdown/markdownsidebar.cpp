@@ -88,20 +88,25 @@ void MarkdownSidebar::load() {
 }
 
 QString MarkdownSidebar::convertMarkdownToHtml(const uint8_t* raw_utf8_data) {
-  size_t delka = strlen((const char*)raw_utf8_data);
+  size_t delka = strlen(reinterpret_cast<const char*>(raw_utf8_data));
 
   if (delka <= 0) {
     return QString();
   }
   else {
     hoedown_renderer* renderer = hoedown_html_renderer_new(hoedown_html_flags::HOEDOWN_HTML_USE_XHTML, 0);
-    hoedown_document* document = hoedown_document_new(renderer, hoedown_extensions::HOEDOWN_EXT_MATH, 16);
+    hoedown_document* document = hoedown_document_new(renderer,
+                                                      hoedown_extensions(4194303), // Enable all flags.
+                                                      16,
+                                                      0,
+                                                      hoedown_user_block(),
+                                                      nullptr);
     hoedown_buffer* html = hoedown_buffer_new(delka);
 
     // We render Markdown into buffer.
     hoedown_document_render(document, html, raw_utf8_data, delka);
 
-    QString arr = QString::fromUtf8((const char*)html->data, int(html->size));
+    QString arr = QString::fromUtf8(reinterpret_cast<const char*>(html->data), int(html->size));
 
     hoedown_buffer_free(html);
     hoedown_document_free(document);

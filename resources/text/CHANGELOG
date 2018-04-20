@@ -5,6 +5,7 @@ Added:
 * Switchable behavior when closing main window via "X" with tray icon enabled. Now user can decide whether the window is hidden or app should quit.
 
 Changed:
+* Using hoextdown instead of hoedown for Markdown preview.
 * Scintilla component updated to latest master (4.0.4).
 
 0.9.2
