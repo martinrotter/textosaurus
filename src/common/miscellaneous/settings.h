@@ -83,6 +83,8 @@ namespace GUI {
   constexpr auto EnableNotificationsDef = true;
   constexpr auto HideMainWindowWhenMinimized = "hide_main_window_when_minimized";
   constexpr auto HideMainWindowWhenMinimizedDef = true;
+  constexpr auto HideMainWindowWhenClosed = "hide_main_window_when_closed";
+  constexpr auto HideMainWindowWhenClosedDef = true;
   constexpr auto StatusBarVisible = "enable_statusbar";
   constexpr auto StatusBarVisibleDef = true;
   constexpr auto StayOnTop = "stay_on_top";

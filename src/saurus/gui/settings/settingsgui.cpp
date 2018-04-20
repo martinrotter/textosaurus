@@ -26,6 +26,7 @@ SettingsGui::SettingsGui(Settings* settings, QWidget* parent) : SettingsPanel(se
   connect(m_ui.m_checkCloseTabsDoubleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_checkCloseTabsMiddleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_checkNewTabDoubleClick, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
+  connect(m_ui.m_checkHideOnClose, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_checkBalloonNotifications, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_checkHideWhenMinimized, &QCheckBox::toggled, this, &SettingsGui::dirtifySettings);
   connect(m_ui.m_grpTrayIcon, &QGroupBox::toggled, this, &SettingsGui::dirtifySettings);
@@ -82,6 +83,7 @@ void SettingsGui::loadSettings() {
     m_ui.m_grpTrayIcon->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::UseTrayIcon)).toBool());
     m_ui.m_checkBalloonNotifications->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::EnableNotifications)).toBool());
     m_ui.m_checkHideWhenMinimized->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::HideMainWindowWhenMinimized)).toBool());
+    m_ui.m_checkHideOnClose->setChecked(settings()->value(GROUP(GUI), SETTING(GUI::HideMainWindowWhenClosed)).toBool());
   }
   else {
     // Tray icon is not supported on this machine.
@@ -134,6 +136,7 @@ void SettingsGui::saveSettings() {
     settings()->setValue(GROUP(GUI), GUI::UseTrayIcon, m_ui.m_grpTrayIcon->isChecked());
     settings()->setValue(GROUP(GUI), GUI::EnableNotifications, m_ui.m_checkBalloonNotifications->isChecked());
     settings()->setValue(GROUP(GUI), GUI::HideMainWindowWhenMinimized, m_ui.m_checkHideWhenMinimized->isChecked());
+    settings()->setValue(GROUP(GUI), GUI::HideMainWindowWhenClosed, m_ui.m_checkHideOnClose->isChecked());
 
     if (m_ui.m_grpTrayIcon->isChecked()) {
       qApp->showTrayIcon();

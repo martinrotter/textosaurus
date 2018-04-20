@@ -162,11 +162,20 @@ void FormMain::dragEnterEvent(QDragEnterEvent* event) {
 }
 
 void FormMain::closeEvent(QCloseEvent* event) {
-  if (qApp->isQuitting() || qApp->quitOnLastWindowClosed()) {
+  // 1) "Quit" is triggered or main window is closed via "X" in non-tray mode.
+  // 2) Main window is closed via "X" in tray mode and user wants to quit app when this happens.
+  bool quiting_or_non_tray = qApp->isQuitting() || qApp->quitOnLastWindowClosed();
+  bool quit_on_close_tray = !qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideMainWindowWhenClosed)).toBool();
+
+  if (quiting_or_non_tray || quit_on_close_tray) { /* 2) */
     bool should_stop = true;
     emit closeRequested(&should_stop);
 
     if (should_stop) {
+      if (quit_on_close_tray) {
+        qApp->setQuitOnLastWindowClosed(true);
+      }
+
       event->accept();
     }
     else {
