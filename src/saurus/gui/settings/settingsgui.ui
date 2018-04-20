@@ -106,6 +106,9 @@
              <layout class="QFormLayout" name="formLayout_2">
               <item row="1" column="0" colspan="2">
                <widget class="QCheckBox" name="m_checkHideWhenMinimized">
+                <property name="toolTip">
+                 <string>If enabled, then main window completely hidden when minimized. User can restore window visibility only via tray icon interaction.</string>
+                </property>
                 <property name="text">
                  <string>Hide main window when minimized</string>
                 </property>
@@ -120,6 +123,9 @@
               </item>
               <item row="2" column="0" colspan="2">
                <widget class="QCheckBox" name="m_checkHideOnClose">
+                <property name="toolTip">
+                 <string>If enabled, then main window completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</string>
+                </property>
                 <property name="text">
                  <string>Hide main window when closed (do not quit application)</string>
                 </property>
