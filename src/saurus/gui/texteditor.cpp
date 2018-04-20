@@ -56,6 +56,10 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   indicSetStyle(INDICATOR_FIND, INDIC_FULLBOX);
   indicSetHoverStyle(INDICATOR_FIND, INDIC_FULLBOX);
 
+#if defined(Q_OS_WIN)
+  setFontQuality(SC_EFF_QUALITY_LCD_OPTIMIZED);
+#endif
+
   // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
 
