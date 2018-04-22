@@ -103,7 +103,7 @@ exists(.git) {
 }
 
 isEmpty(APP_REVISION) {
-  APP_REVISION = ""
+  APP_REVISION = "-"
 }
 
 DEFINES += APP_REVISION='"\\\"$$APP_REVISION\\\""'
