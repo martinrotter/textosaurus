@@ -1,5 +1,7 @@
 0.9.4
 -----
+Fixed:
+* Fixed build on ARM platform.
 
 0.9.3
 -----
