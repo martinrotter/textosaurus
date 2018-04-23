@@ -211,6 +211,35 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       << Lexer(QSL("AVS"), QStringList {
       QSL("avs")
     }, SCLEX_AVS)
+      << Lexer(QSL("AWK"), QStringList {
+      QSL("awk")
+    }, SCLEX_CPP, {
+      {SCE_C_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_C_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTDOC, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTDOCKEYWORD, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTDOCKEYWORDERROR, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_C_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_COMMENTLINEDOC, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_C_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_WORD2, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_STRINGEOL, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_STRINGRAW, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_C_PREPROCESSOR, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_C_OPERATOR, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_C_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_C_VERBATIM, SyntaxColorTheme::StyleComponents::PlainData},
+      {SCE_C_REGEX, SyntaxColorTheme::StyleComponents::Regex},
+      {SCE_C_GLOBALCLASS, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_C_PREPROCESSORCOMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_C_PREPROCESSORCOMMENTDOC, SyntaxColorTheme::StyleComponents::Keyword}
+    }, "break case continue do else exit function for if in next return switch while "
+       "@include delete nextfile BEGIN END"
+       "ARGC ARGIND ARGV FILENAME FNR FS NF NR OFMT OFS ORS RLENGTH RS RSTART SUBSEP "
+       "BINMODE CONVFMT FIELDWIDTHS FPAT IGNORECASE LINT TEXTDOMAiN ENVIRON ERRNO PROCINFO RT")
       << Lexer(QSL("Bash"), QStringList {
       QSL("bash"), QSL("sh"), QSL("zsh"), QSL("bashrc"), QSL("zshrc"), QSL("_profile"), QSL("PKGBUILD")
     }, SCLEX_BASH, {

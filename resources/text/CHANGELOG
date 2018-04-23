@@ -1,6 +1,7 @@
 0.9.3
 -----
 Added:
+* AWK lexer. (#33)
 * LCD-optimized fonts on Windows.
 * Switchable behavior when closing main window via "X" with tray icon enabled. Now user can decide whether the window is hidden or app should quit.
 
