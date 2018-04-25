@@ -1,6 +1,6 @@
 ls
 
-$qt_stub = "qt-5.10-static-ltcg-msvc2017-x86_64"
+$qt_stub = "qt-5.10.1-static-ltcg-msvc2017-x86_64"
 
 cd "C:\textosaurus"
 
