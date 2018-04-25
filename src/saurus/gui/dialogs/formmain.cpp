@@ -186,7 +186,10 @@ void FormMain::closeEvent(QCloseEvent* event) {
 
 void FormMain::switchVisibility(bool force_hide) {
   if (force_hide || isVisible()) {
-    if (SystemTrayIcon::isSystemTrayActivated()) {
+    if (isMinimized()) {
+      display();
+    }
+    else if (SystemTrayIcon::isSystemTrayActivated()) {
       hide();
     }
     else {

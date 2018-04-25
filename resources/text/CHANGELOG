@@ -1,5 +1,8 @@
 0.9.4
 -----
+Added:
+* Show main window (instead of hiding it from main panel) when minimized and tray icon is clicked.
+
 Changed:
 * Qt 5.10.1 for Windows builds.
 
