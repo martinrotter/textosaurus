@@ -1,4 +1,4 @@
-$qt_stub = "qt-5.10-static-ltcg-msvc2017-x86_64"
+$qt_stub = "qt-5.10.1-static-ltcg-msvc2017-x86_64"
 
 $url = "https://bitbucket.org/skunkos/qt5-minimalistic-builds/downloads/$qt_stub.7z"
 $output = "qt.7z"

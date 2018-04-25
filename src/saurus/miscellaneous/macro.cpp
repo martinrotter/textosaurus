@@ -89,4 +89,6 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
   m_macroSteps.append(m);
 }
 
-void Macro::fromString(const QString& str) {}
+void Macro::fromString(const QString& str) {
+  Q_UNUSED(str)
+}
