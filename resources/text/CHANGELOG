@@ -1,5 +1,8 @@
 0.9.4
 -----
+Changed:
+* Qt 5.10.1 for Windows builds.
+
 Fixed:
 * Fixed build on ARM platform.
 
