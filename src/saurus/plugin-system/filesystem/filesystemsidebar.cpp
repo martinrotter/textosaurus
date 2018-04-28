@@ -115,19 +115,19 @@ void FilesystemSidebar::load() {
     //connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
     //        this, &FilesystemSidebar::openDrive);
 
+    m_lvFavorites->setIconSize(QSize(12, 12));
+    m_lvFavorites->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setNameFilterDisables(false);
     m_fsModel->setFilter(QDir::Filter::Files | QDir::Filter::Hidden | QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDot);
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
-    m_lvFavorites->setIconSize(QSize(12, 12));
-    m_lvFavorites->setFrameShape(QFrame::Shape::NoFrame);
     m_fsView->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setRootPath(QString());
-    m_fsView->setRootIndex(m_fsModel->index(qApp->settings()->value(m_settingsSection,
-                                                                    QL1S("current_folder_") + OS_ID_LOW,
-                                                                    qApp->documentsFolder()).toString()));
-    saveCurrentFolder(m_fsView->rootIndex());
+
+    openFolder(qApp->settings()->value(m_settingsSection,
+                                       QL1S("current_folder_") + OS_ID_LOW,
+                                       qApp->documentsFolder()).toString());
 
     connect(m_fsView, &QListView::activated, this, &FilesystemSidebar::openFileFolder);
     connect(m_fsView, &FilesystemView::rootIndexChanged, this, &FilesystemSidebar::saveCurrentFolder);
@@ -208,7 +208,7 @@ void FilesystemSidebar::openFolder(const QString& path) {
 }
 
 void FilesystemSidebar::openFolder(const QModelIndex& idx) {
-  m_fsView->setRootIndex(m_fsModel->index(m_fsModel->filePath(idx)));
+  openFolder(m_fsModel->filePath(idx));
 }
 
 void FilesystemSidebar::goToParentFolder() {
