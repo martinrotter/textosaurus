@@ -44,9 +44,9 @@ int FilesystemSidebar::initialWidth() const {
 }
 
 void FilesystemSidebar::openDrive(int index) {
-  QModelIndex idx = m_fsModel->index(index, 0, QModelIndex());
+  QString drive = m_cmbDrives->itemData(index, Qt::ItemDataRole::EditRole).toString();
 
-  m_fsView->setRootIndex(idx);
+  openFolder(drive);
 }
 
 void FilesystemSidebar::load() {
@@ -100,13 +100,23 @@ void FilesystemSidebar::load() {
     m_cmbFilters->addItems(fltrs);
 
     m_cmbDrives = new QComboBox(widget_browser);
-    m_cmbDrives->setModel(m_fsModel);
-    connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &FilesystemSidebar::openDrive);
+
+    auto storages = QStorageInfo::mountedVolumes();
+
+    std::sort(storages.begin(), storages.end(), [](const QStorageInfo& lhs, const QStorageInfo& rhs) {
+      return QString::compare(lhs.rootPath(), rhs.rootPath(), Qt::CaseSensitivity::CaseInsensitive) < 0;
+    });
+
+    for (const QStorageInfo& strg : storages) {
+      m_cmbDrives->addItem(QString("%1 (%2)").arg(strg.rootPath(), QString(strg.fileSystemType())));
+    }
+
+    //m_cmbDrives->setModel(m_fsModel);
+    //connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    //        this, &FilesystemSidebar::openDrive);
 
     m_fsModel->setNameFilterDisables(false);
     m_fsModel->setFilter(QDir::Filter::Files | QDir::Filter::Hidden | QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDot);
-
-    //m_fsModel->setNameFilters(m_textApp->settings()->syntaxHighlighting()->bareFileFilters());
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
@@ -153,7 +163,7 @@ void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
   QStorageInfo file_drive(path);
   auto idx_root = m_fsModel->index(file_drive.rootPath()).row();
 
-  m_cmbDrives->setCurrentIndex(idx_root);
+  //m_cmbDrives->setCurrentIndex(idx_root);
   m_txtPath->setPlainText(path);
   m_txtPath->setToolTip(path);
   qApp->settings()->setValue(m_settingsSection, QL1S("current_folder_") + OS_ID_LOW, path);
@@ -191,6 +201,14 @@ void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
   else {
     emit openFileRequested(m_fsModel->filePath(idx));
   }
+}
+
+void FilesystemSidebar::openFolder(const QString& path) {
+  m_fsView->setRootIndex(m_fsModel->index(path));
+}
+
+void FilesystemSidebar::openFolder(const QModelIndex& idx) {
+  m_fsView->setRootIndex(m_fsModel->index(m_fsModel->filePath(idx)));
 }
 
 void FilesystemSidebar::goToParentFolder() {

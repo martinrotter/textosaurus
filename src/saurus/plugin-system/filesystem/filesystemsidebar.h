@@ -26,11 +26,15 @@ class FilesystemSidebar : public BaseSidebar {
 
   private slots:
     void openDrive(int index);
-    void addToFavorites();
     void openFavoriteItem(const QModelIndex& idx);
     void openFileFolder(const QModelIndex& idx);
+    void openFolder(const QString& path);
+    void openFolder(const QModelIndex& idx);
+
     void goToParentFolder();
     void saveCurrentFolder(const QModelIndex& idx);
+
+    void addToFavorites();
     void saveFavorites() const;
 
   signals:
