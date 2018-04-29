@@ -169,13 +169,13 @@ void FilesystemSidebar::saveCurrentFolder(const QString& path) {
 }
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
-  auto path = QDir::toNativeSeparators((m_fsModel->fileInfo(idx).canonicalFilePath()));
+  auto path = QDir::toNativeSeparators(QDir(m_fsModel->filePath(idx)).canonicalPath());
 
   saveCurrentFolder(path);
 }
 
 void FilesystemSidebar::addToFavorites() {
-  const QFileInfo file_info = m_fsModel->fileInfo(m_fsView->currentIndex());
+  const QFileInfo file_info = currentFolder();
 
   if (file_info.isFile() || file_info.isDir()) {
     m_lvFavorites->loadFileItem(QDir::toNativeSeparators(file_info.absoluteFilePath()));
@@ -189,7 +189,7 @@ void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
   const auto file_folder = QFileInfo(m_lvFavorites->item(idx.row())->data(Qt::UserRole).toString());
 
   if (file_folder.isDir()) {
-    m_fsView->setRootIndex(m_fsModel->index(file_folder.absoluteFilePath()));
+    openFolder(file_folder.absoluteFilePath());
     makeExplorerVisible();
   }
   else {
@@ -209,7 +209,7 @@ void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
 }
 
 void FilesystemSidebar::openFolder(const QString& path) {
-  auto can_path = QFileInfo(path).canonicalFilePath();
+  auto can_path = QDir(QDir::cleanPath(path)).canonicalPath();
 
   qDebug("Opening folder \"%s\" (canonical), \"%s\" (non-canonical).", qPrintable(can_path), qPrintable(path));
   m_fsView->setRootIndex(m_fsModel->index(can_path));
