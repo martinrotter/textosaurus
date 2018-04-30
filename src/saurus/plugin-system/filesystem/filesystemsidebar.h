@@ -29,8 +29,6 @@ class FilesystemSidebar : public BaseSidebar {
     void openDrive(int index);
     void openFavoriteItem(const QModelIndex& idx);
     void openFileFolder(const QModelIndex& idx);
-    void openFolder(const QString& path);
-    void openFolder(const QModelIndex& idx);
 
     void saveCurrentFolder(const QModelIndex& idx);
     void saveCurrentFolder(const QString& path);
@@ -42,8 +40,6 @@ class FilesystemSidebar : public BaseSidebar {
     void openFileRequested(const QString& file_path);
 
   private:
-    QString currentFolder() const;
-
     void makeExplorerVisible() const;
     void makeFavoritesVisible() const;
     virtual void load() override;

@@ -70,7 +70,7 @@ void FilesystemSidebar::reloadDrives() {
 void FilesystemSidebar::openDrive(int index) {
   QString drive = m_cmbDrives->itemData(index, Qt::ItemDataRole::EditRole).toString();
 
-  openFolder(drive);
+  m_fsView->openFolder(drive);
 }
 
 void FilesystemSidebar::load() {
@@ -87,7 +87,6 @@ void FilesystemSidebar::load() {
 
     // Decide the height.
     m_txtPath->setFixedHeight(QFontMetrics(m_txtPath->font()).lineSpacing() * FS_SIDEBAR_PATH_LINES);
-
     m_tabWidget->setTabPosition(QTabWidget::TabPosition::South);
     layout_browser->setMargin(0);
 
@@ -141,11 +140,11 @@ void FilesystemSidebar::load() {
     m_fsView->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setRootPath(QString());
 
-    openFolder(qApp->settings()->value(m_settingsSection,
-                                       QL1S("current_folder_") + OS_ID_LOW,
-                                       qApp->documentsFolder()).toString());
+    m_fsView->openFolder(qApp->settings()->value(m_settingsSection,
+                                                 QL1S("current_folder_") + OS_ID_LOW,
+                                                 qApp->documentsFolder()).toString());
 
-    saveCurrentFolder(currentFolder());
+    saveCurrentFolder(m_fsView->currentFolder());
 
     connect(m_fsView, &QListView::activated, this, &FilesystemSidebar::openFileFolder);
     connect(m_fsView, &FilesystemView::rootIndexChanged, this, [this](const QModelIndex& idx) {
@@ -185,13 +184,13 @@ void FilesystemSidebar::saveCurrentFolder(const QString& path) {
 }
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
-  auto path = QDir::toNativeSeparators(QDir(m_fsModel->filePath(idx)).canonicalPath());
+  auto path = QDir::toNativeSeparators(m_fsView->normalizePath(m_fsModel->filePath(idx)));
 
   saveCurrentFolder(path);
 }
 
 void FilesystemSidebar::addToFavorites() {
-  const QFileInfo file_info = currentFolder();
+  const QFileInfo file_info = m_fsView->selectedFileFolder();
 
   if (file_info.isFile() || file_info.isDir()) {
     m_lvFavorites->loadFileItem(QDir::toNativeSeparators(file_info.absoluteFilePath()));
@@ -205,7 +204,7 @@ void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
   const auto file_folder = QFileInfo(m_lvFavorites->item(idx.row())->data(Qt::UserRole).toString());
 
   if (file_folder.isDir()) {
-    openFolder(file_folder.absoluteFilePath());
+    m_fsView->openFolder(file_folder.absoluteFilePath());
     makeExplorerVisible();
   }
   else {
@@ -217,22 +216,11 @@ void FilesystemSidebar::openFileFolder(const QModelIndex& idx) {
   if (m_fsModel->isDir(idx)) {
     // NOTE: This goes from index -> path -> index to properly
     // resolve ".." parent item.
-    openFolder(idx);
+    m_fsView->openFolder(idx);
   }
   else {
     emit openFileRequested(m_fsModel->filePath(idx));
   }
-}
-
-void FilesystemSidebar::openFolder(const QString& path) {
-  auto can_path = QDir(QDir::cleanPath(path)).canonicalPath();
-
-  qDebug("Opening folder \"%s\" (canonical), \"%s\" (non-canonical).", qPrintable(can_path), qPrintable(path));
-  m_fsView->setRootIndex(m_fsModel->index(can_path));
-}
-
-void FilesystemSidebar::openFolder(const QModelIndex& idx) {
-  openFolder(m_fsModel->filePath(idx));
 }
 
 void FilesystemSidebar::saveFavorites() const {
@@ -243,10 +231,6 @@ void FilesystemSidebar::saveFavorites() const {
   }
 
   qApp->settings()->setValue(m_settingsSection, QSL("favorites"), favorites);
-}
-
-QString FilesystemSidebar::currentFolder() const {
-  return m_fsModel->filePath(m_fsView->rootIndex());
 }
 
 void FilesystemSidebar::makeExplorerVisible() const {

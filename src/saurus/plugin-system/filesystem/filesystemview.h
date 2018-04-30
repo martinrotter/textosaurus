@@ -16,10 +16,16 @@ class FilesystemView : public QListView {
     virtual ~FilesystemView() = default;
 
     FilesystemModel* model() const;
+
+    QString normalizePath(const QString& path) const;
+    QString currentFolder() const;
+    QString selectedFileFolder() const;
     virtual void setRootIndex(const QModelIndex& index) override;
 
   public slots:
     void cdUp();
+    void openFolder(const QModelIndex& idx);
+    void openFolder(const QString& path);
 
   protected:
     virtual void keyPressEvent(QKeyEvent* event) override;

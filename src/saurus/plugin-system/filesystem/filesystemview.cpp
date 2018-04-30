@@ -26,8 +26,36 @@ FilesystemModel* FilesystemView::model() const {
   return m_model;
 }
 
+QString FilesystemView::normalizePath(const QString& path) const {
+  return path.isEmpty() ? path : QDir(QDir::cleanPath(path)).canonicalPath();
+}
+
+QString FilesystemView::currentFolder() const {
+  return m_model->filePath(rootIndex());
+}
+
+QString FilesystemView::selectedFileFolder() const {
+  return m_model->filePath(currentIndex());
+}
+
 void FilesystemView::cdUp() {
   QModelIndex prnt = rootIndex().parent();
 
-  setRootIndex(prnt.isValid() ? prnt : m_model->index(m_model->rootPath()));
+  if (prnt.isValid()) {
+    openFolder(prnt);
+  }
+  else {
+    openFolder(QString());
+  }
+}
+
+void FilesystemView::openFolder(const QModelIndex& idx) {
+  openFolder(m_model->filePath(idx));
+}
+
+void FilesystemView::openFolder(const QString& path) {
+  auto can_path = normalizePath(path);
+
+  qDebug("Opening folder \"%s\" (canonical), \"%s\" (non-canonical).", qPrintable(can_path), qPrintable(path));
+  setRootIndex(m_model->index(can_path));
 }
