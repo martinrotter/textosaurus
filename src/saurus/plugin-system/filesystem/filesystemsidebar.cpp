@@ -51,7 +51,7 @@ void FilesystemSidebar::reloadDrives() {
   });
 
   for (const QStorageInfo& strg : storages) {
-    QString name_drive = strg.rootPath();
+    QString name_drive = QDir::toNativeSeparators(strg.rootPath());
 
     if (!strg.name().isEmpty()) {
       name_drive += QString(" (%1)").arg(strg.name());
@@ -63,7 +63,7 @@ void FilesystemSidebar::reloadDrives() {
 
     m_cmbDrives->addItem(!strg.isReady() ?
                          qApp->icons()->fromTheme(QSL("lock")) :
-                         qApp->icons()->fromTheme(QSL("media-flash")), name_drive, strg.rootPath());
+                         qApp->icons()->fromTheme(QSL("media-flash")), name_drive, QDir::toNativeSeparators(strg.rootPath()));
   }
 }
 
@@ -149,11 +149,9 @@ void FilesystemSidebar::load() {
     connect(m_fsView, &QListView::activated, this, &FilesystemSidebar::openFileFolder);
     connect(m_fsView, &FilesystemView::rootIndexChanged, this, [this](const QModelIndex& idx) {
       saveCurrentFolder(idx);
-    });
-    connect(m_lvFavorites, &QListWidget::activated, this, &FilesystemSidebar::openFavoriteItem);
-    connect(m_fsView, &FilesystemView::rootIndexChanged, this, [this]() {
       m_fsView->setFocus();
     });
+    connect(m_lvFavorites, &QListWidget::activated, this, &FilesystemSidebar::openFavoriteItem);
 
     QStringList saved_files = qApp->settings()->value(m_settingsSection, QSL("favorites"), QStringList()).toStringList();
 
@@ -180,6 +178,13 @@ void FilesystemSidebar::load() {
 void FilesystemSidebar::saveCurrentFolder(const QString& path) {
   m_txtPath->setPlainText(path);
   m_txtPath->setToolTip(path);
+
+  int index_drive = m_cmbDrives->findData(QDir::toNativeSeparators(QStorageInfo(path).rootPath()));
+
+  m_cmbDrives->blockSignals(true);
+  m_cmbDrives->setCurrentIndex(index_drive);
+  m_cmbDrives->blockSignals(false);
+
   qApp->settings()->setValue(m_settingsSection, QL1S("current_folder_") + OS_ID_LOW, path);
 }
 

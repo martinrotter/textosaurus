@@ -31,7 +31,7 @@ QString FilesystemView::normalizePath(const QString& path) const {
 }
 
 QString FilesystemView::currentFolder() const {
-  return m_model->filePath(rootIndex());
+  return QDir::toNativeSeparators(m_model->filePath(rootIndex()));
 }
 
 QString FilesystemView::selectedFileFolder() const {
