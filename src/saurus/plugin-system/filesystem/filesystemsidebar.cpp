@@ -68,7 +68,7 @@ void FilesystemSidebar::reloadDrives() {
 }
 
 void FilesystemSidebar::openDrive(int index) {
-  QString drive = m_cmbDrives->itemData(index, Qt::ItemDataRole::EditRole).toString();
+  QString drive = m_cmbDrives->itemData(index).toString();
 
   m_fsView->openFolder(drive);
 }
@@ -126,14 +126,14 @@ void FilesystemSidebar::load() {
 
     reloadDrives();
 
-    //m_cmbDrives->setModel(m_fsModel);
-    //connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-    //        this, &FilesystemSidebar::openDrive);
+    connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &FilesystemSidebar::openDrive);
 
     m_lvFavorites->setIconSize(QSize(12, 12));
     m_lvFavorites->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setNameFilterDisables(false);
-    m_fsModel->setFilter(QDir::Filter::Files | QDir::Filter::Hidden | QDir::Filter::System | QDir::Filter::AllDirs | QDir::Filter::NoDot);
+    m_fsModel->setFilter(QDir::Filter::Files | QDir::Filter::Hidden | QDir::Filter::System |
+                         QDir::Filter::AllDirs | QDir::Filter::NoDotAndDotDot);
     m_fsView->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
     m_fsView->setIconSize(QSize(12, 12));
     m_fsView->setModel(m_fsModel);
@@ -161,9 +161,9 @@ void FilesystemSidebar::load() {
 
     m_lvFavorites->sortItems(Qt::SortOrder::AscendingOrder);
 
-    layout_browser->addWidget(tool_bar);
     layout_browser->addWidget(m_cmbDrives);
     layout_browser->addWidget(m_txtPath);
+    layout_browser->addWidget(tool_bar);
     layout_browser->addWidget(m_fsView, 1);
     layout_browser->addWidget(m_cmbFilters);
 
