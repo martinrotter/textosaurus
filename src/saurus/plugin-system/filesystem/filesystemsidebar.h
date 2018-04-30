@@ -25,6 +25,7 @@ class FilesystemSidebar : public BaseSidebar {
     virtual int initialWidth() const override;
 
   private slots:
+    void reloadDrives();
     void openDrive(int index);
     void openFavoriteItem(const QModelIndex& idx);
     void openFileFolder(const QModelIndex& idx);

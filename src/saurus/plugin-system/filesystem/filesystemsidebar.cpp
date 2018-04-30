@@ -43,6 +43,30 @@ int FilesystemSidebar::initialWidth() const {
   return 250;
 }
 
+void FilesystemSidebar::reloadDrives() {
+  auto storages = QStorageInfo::mountedVolumes();
+
+  std::sort(storages.begin(), storages.end(), [](const QStorageInfo& lhs, const QStorageInfo& rhs) {
+    return QString::compare(lhs.rootPath(), rhs.rootPath(), Qt::CaseSensitivity::CaseInsensitive) < 0;
+  });
+
+  for (const QStorageInfo& strg : storages) {
+    QString name_drive = strg.rootPath();
+
+    if (!strg.name().isEmpty()) {
+      name_drive += QString(" (%1)").arg(strg.name());
+    }
+
+    if (!strg.fileSystemType().isEmpty()) {
+      name_drive += QString(" [%1]").arg(QString(strg.fileSystemType()));
+    }
+
+    m_cmbDrives->addItem(!strg.isReady() ?
+                         qApp->icons()->fromTheme(QSL("lock")) :
+                         qApp->icons()->fromTheme(QSL("media-flash")), name_drive, strg.rootPath());
+  }
+}
+
 void FilesystemSidebar::openDrive(int index) {
   QString drive = m_cmbDrives->itemData(index, Qt::ItemDataRole::EditRole).toString();
 
@@ -70,9 +94,9 @@ void FilesystemSidebar::load() {
     // Initialize toolbar.
     QToolBar* tool_bar = new QToolBar(widget_browser);
     QAction* btn_parent = new QAction(qApp->icons()->fromTheme(QSL("go-up")),
-                                      tr("Go to parent folder"), widget_browser);
+                                      tr("Go to Parent Folder"), widget_browser);
     QAction* btn_add_favorites = new QAction(qApp->icons()->fromTheme(QSL("folder-favorites")),
-                                             tr("Add selected item to favorites"), widget_browser);
+                                             tr("Add Selected Item to Favorites"), widget_browser);
 
     connect(btn_parent, &QAction::triggered, m_fsView, &FilesystemView::cdUp);
     connect(btn_add_favorites, &QAction::triggered, this, &FilesystemSidebar::addToFavorites);
@@ -101,15 +125,7 @@ void FilesystemSidebar::load() {
 
     m_cmbDrives = new QComboBox(widget_browser);
 
-    auto storages = QStorageInfo::mountedVolumes();
-
-    std::sort(storages.begin(), storages.end(), [](const QStorageInfo& lhs, const QStorageInfo& rhs) {
-      return QString::compare(lhs.rootPath(), rhs.rootPath(), Qt::CaseSensitivity::CaseInsensitive) < 0;
-    });
-
-    for (const QStorageInfo& strg : storages) {
-      m_cmbDrives->addItem(QString("%1 (%2)").arg(strg.rootPath(), QString(strg.fileSystemType())));
-    }
+    reloadDrives();
 
     //m_cmbDrives->setModel(m_fsModel);
     //connect(m_cmbDrives, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
