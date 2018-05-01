@@ -108,7 +108,7 @@ void FilesystemSidebar::load() {
     // Initialize FS browser.
     m_cmbFilters = new QComboBox(widget_browser);
     m_cmbFilters->setEditable(true);
-    m_cmbFilters->setToolTip(tr("Filter displayed files"));
+    m_cmbFilters->setToolTip(tr("Filter Displayed Files"));
 
     connect(m_cmbFilters, &QComboBox::currentTextChanged, this, [this](const QString& filter) {
       m_fsModel->setNameFilters({filter});

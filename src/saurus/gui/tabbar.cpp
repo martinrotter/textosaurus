@@ -22,8 +22,8 @@ void TabBar::setupTabControls(int index) {
   PlainToolButton* close_button = new PlainToolButton(this);
 
   close_button->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
-  close_button->setToolTip(tr("Close this tab"));
-  close_button->setText(tr("Close tab"));
+  close_button->setToolTip(tr("Close This Tab"));
+  close_button->setText(tr("Close Tab"));
   close_button->setFixedSize(iconSize());
 
   // Close underlying tab when button is clicked.
