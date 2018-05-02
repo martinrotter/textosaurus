@@ -31,7 +31,8 @@ parts:
     qt-version: qt5
     project-files: [textosaurus.pro]
     source: https://github.com/martinrotter/textosaurus.git
-    source-tag: 0.9.4
+    source-branch: master
+    #source-tag: 0.9.4
     build-packages:
       - build-essential
       - qtbase5-dev

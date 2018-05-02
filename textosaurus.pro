@@ -48,8 +48,8 @@ APP_WIN_ARCH                  = "win64"
 
 message($$MSG_PREFIX: Welcome to $$APP_NAME qmake script.)
 
-lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 7) {
-  error($$MSG_PREFIX: At least Qt \"5.7.0\" is required!!!)
+lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 5) {
+  error($$MSG_PREFIX: At least Qt \"5.5.0\" is required!!!)
 }
 
 isEmpty(PREFIX) {
