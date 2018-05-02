@@ -1,10 +1,16 @@
 0.9.4
 -----
 Added:
-* Show main window (instead of hiding it from main panel) when minimized and tray icon is clicked.
+* Show main window (instead of hiding it to tray area) when minimized and tray icon is clicked.
 
 Changed:
-* Qt 5.10.1 for Windows builds.
+* Changed "About Application" dialog initial size.
+* FS sidebar hugely refactored:
+    * Shows all mountpoints on Linux.
+    * Fixed couple of random bugs when some folder could not be entered.
+    * Some GUI elements reordered.
+    * Fixed behavior of "Go To Parent Folder" button.
+* Used custom LTS Qt 5.10.1 static build for Windows builds.
 
 Fixed:
 * Fixed build on ARM platform.
