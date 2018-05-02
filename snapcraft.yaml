@@ -1,21 +1,50 @@
 name: textosaurus
 version: 0.9.4
-summary: Simple cross-platform text editor based on Qt and Scintilla
-description: Textosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textosaurus aims to provide similar workflow as Notepad++ does.
+summary: Simple cross-platform text editor based on Qt and Scintilla.
+description: |
+  Textosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textosaurus aims to
+  provide similar workflow as Notepad++ does.
+confinement: strict
+type: app
+icon: resources/graphics/textosaurus.png
+grade: stable
 
 apps:
-  application:
-    command: qt5-launch textosaurus
+  textosaurus:
+    command: desktop-launch textosaurus
+    desktop: usr/share/applications/textosaurus.desktop
     plugs:
       - unity7
+      - network
+      - network-bind
+      - desktop
+      - content
+      - optical-drive
+      - removable-media
+      - cups-control
       - home
 
 parts:
-  application:
+  textosaurus:
     plugin: qmake
-    source: ./
+    options: [CONFIG+=release, PREFIX=/usr]
+    qt-version: qt5
+    project-files: [textosaurus.pro]
+    source: https://github.com/martinrotter/textosaurus.git
+    source-tag: 0.9.4
     build-packages:
-      - qtbase5-dev
+      - build-essential
+      - qttools5-dev
+      - qttools5-dev-tools
+      - libqt5gui5-dev
+      - libqt5widgets5-dev
+      - libqt5svg5-dev
+      - libqt5network5-dev
+      - libqt5printsupport5-dev
     stage-packages:
       - libqt5gui5
-after: [qt5conf]
+      - libqt5widgets5
+      - libqt5svg5
+      - libqt5network5
+      - libqt5printsupport5
+    after: [desktop-qt5]
