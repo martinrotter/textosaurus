@@ -531,6 +531,31 @@ void TextApplication::quit(bool* ok) {
     settings()->setRestoredSessionTabIndex(m_tabEditors->currentIndex());
   }
 
+  bool cancel_closing = false;
+
+  // Ask for agreements first.
+  for (int i = 0; i < m_tabEditors->count(); i++) {
+    Tab* tab = m_tabEditors->tabAt(i);
+
+    if (cancel_closing) {
+      tab->primaryEditor()->resetSaveAgreement();
+    }
+    else {
+      tab->primaryEditor()->askForSaveAgreement();
+
+      if (tab->primaryEditor()->currentSaveAgreement() == QMessageBox::StandardButton::Cancel) {
+        // Well, cancel closing now.
+        cancel_closing = true;
+        i = -1;
+      }
+    }
+  }
+
+  if (cancel_closing) {
+    *ok = false;
+    return;
+  }
+
   while (m_tabEditors->count() > 0) {
     if (!m_tabEditors->closeTab(0)) {
       // User aborted.

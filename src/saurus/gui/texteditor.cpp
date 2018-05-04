@@ -38,7 +38,8 @@
 #include <QTimer>
 
 TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
-  : ScintillaEdit(parent), m_fileWatcher(nullptr), m_settingsDirty(true), m_textApp(text_app),
+  : ScintillaEdit(parent), m_saveAgreement(QMessageBox::StandardButton::NoButton), m_isLog(false),
+  m_fileWatcher(nullptr), m_settingsDirty(true), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()),
   m_autoIndentEnabled(text_app->settings()->autoIndentEnabled()) {
@@ -330,6 +331,37 @@ QString TextEditor::getSessionFile() {
   } while (dir_data.exists(file_name));
 
   return file_name;
+}
+
+QMessageBox::StandardButton TextEditor::currentSaveAgreement() const {
+  return m_saveAgreement;
+}
+
+void TextEditor::resetSaveAgreement() {
+  m_saveAgreement = QMessageBox::StandardButton::NoButton;
+}
+
+void TextEditor::askForSaveAgreement() {
+  // We determine if there is any dialog to be shown,
+  // when this text editor is about to be closed:
+  //  - unsaved file confirmation.
+  if (!(m_textApp->shouldSaveSession() && filePath().isEmpty()) &&
+      !(m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) &&
+      (modify() || (!filePath().isEmpty() && !QFile::exists(filePath())))) {
+    m_saveAgreement = MessageBox::show(qApp->mainFormWidget(),
+                                       QMessageBox::Icon::Question,
+                                       tr("Unsaved Changes"),
+                                       tr("This document has unsaved changes, do you want to save them?"),
+                                       QString(),
+                                       filePath(),
+                                       QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+                                       QMessageBox::Save);
+  }
+  else {
+    // This editor does not need save agreement, no "save/discard"
+    // dialog is needed.
+    m_saveAgreement = QMessageBox::StandardButton::Save;
+  }
 }
 
 void TextEditor::setFilePath(const QString& file_path) {
@@ -901,9 +933,10 @@ void TextEditor::closeEditor(bool* ok) {
         appendSessionFile(session_file, true);
       }
     }
-    else {
-      *ok = true;
-    }
+
+    /*else {
+     * ok = true;
+       }*/
   }
   else if (m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) {
     // No need to save, just mark to session if needed.
@@ -913,15 +946,13 @@ void TextEditor::closeEditor(bool* ok) {
   else if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
     emit requestedVisibility();
 
+    if (currentSaveAgreement() == QMessageBox::StandardButton::NoButton) {
+      // We have no agreement, request it.
+      askForSaveAgreement();
+    }
+
     // We need to save.
-    QMessageBox::StandardButton response = MessageBox::show(qApp->mainFormWidget(),
-                                                            QMessageBox::Icon::Question,
-                                                            tr("Unsaved Changes"),
-                                                            tr("This document has unsaved changes, do you want to save them?"),
-                                                            QString(),
-                                                            !filePath().isEmpty() ? filePath() : QString(),
-                                                            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
-                                                            QMessageBox::Save);
+    QMessageBox::StandardButton response = currentSaveAgreement();
 
     switch (response) {
       case QMessageBox::StandardButton::Save: {
@@ -954,6 +985,8 @@ void TextEditor::closeEditor(bool* ok) {
         *ok = false;
         break;
     }
+
+    resetSaveAgreement();
   }
   else {
     *ok = true;

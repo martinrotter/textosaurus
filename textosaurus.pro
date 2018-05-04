@@ -187,26 +187,45 @@ mac|win32|android {
   message($$MSG_PREFIX: Adding resources for default icon theme.)
 }
 
-HEADERS +=  src/definitions/definitions.h \
-            src/common/dynamic-shortcuts/dynamicshortcuts.h \
+HEADERS +=  src/common/dynamic-shortcuts/dynamicshortcuts.h \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.h \
             src/common/dynamic-shortcuts/shortcutcatcher.h \
             src/common/exceptions/applicationexception.h \
             src/common/exceptions/ioexception.h \
+            src/common/gui/baselineedit.h \
+            src/common/gui/basetextedit.h \
+            src/common/gui/basetoolbar.h \
+            src/common/gui/guiutilities.h \
+            src/common/gui/labelwithstatus.h \
+            src/common/gui/messagebox.h \
+            src/common/gui/plaintoolbutton.h \
+            src/common/gui/systemtrayicon.h \
+            src/common/gui/toolbar.h \
+            src/common/gui/toolbareditor.h \
+            src/common/gui/widgetwithstatus.h \
+            src/common/miscellaneous/debugging.h \
+            src/common/miscellaneous/iconfactory.h \
+            src/common/miscellaneous/iofactory.h \
+            src/common/miscellaneous/localization.h \
+            src/common/miscellaneous/settings.h \
+            src/common/miscellaneous/settingsproperties.h \
+            src/common/miscellaneous/systemfactory.h \
+            src/common/miscellaneous/textfactory.h \
+            src/common/network-web/basenetworkaccessmanager.h \
+            src/common/network-web/downloader.h \
+            src/common/network-web/networkfactory.h \
+            src/common/network-web/silentnetworkaccessmanager.h \
+            src/common/network-web/webfactory.h \
+            src/definitions/definitions.h \
             src/saurus/external-tools/externaltool.h \
             src/saurus/external-tools/externaltools.h \
             src/saurus/external-tools/predefinedtools.h \
-            src/common/gui/baselineedit.h \
-            src/common/gui/basetoolbar.h \
             src/saurus/gui/dialogs/formabout.h \
             src/saurus/gui/dialogs/formfindreplace.h \
             src/saurus/gui/dialogs/formmain.h \
             src/saurus/gui/dialogs/formsettings.h \
             src/saurus/gui/dialogs/formupdate.h \
-            src/common/gui/guiutilities.h \
-            src/common/gui/labelwithstatus.h \
-            src/common/gui/messagebox.h \
-            src/common/gui/plaintoolbutton.h \
+            src/saurus/gui/editortab.h \
             src/saurus/gui/settings/settingsbrowsermail.h \
             src/saurus/gui/settings/settingseditor.h \
             src/saurus/gui/settings/settingsexternaltools.h \
@@ -215,76 +234,76 @@ HEADERS +=  src/definitions/definitions.h \
             src/saurus/gui/settings/settingslocalization.h \
             src/saurus/gui/settings/settingspanel.h \
             src/saurus/gui/settings/settingsshortcuts.h \
-            src/saurus/gui/statusbar.h \
-            src/saurus/gui/tabbar.h \
-            src/saurus/gui/tabwidget.h \
-            src/saurus/gui/texteditor.h \
-            src/saurus/gui/texteditorprinter.h \
-            src/common/gui/toolbar.h \
-            src/common/gui/toolbareditor.h \
-            src/common/gui/widgetwithstatus.h \
-            src/saurus/miscellaneous/application.h \
-            src/common/miscellaneous/debugging.h \
-            src/common/miscellaneous/iconfactory.h \
-            src/common/miscellaneous/iofactory.h \
-            src/common/miscellaneous/localization.h \
-            src/common/miscellaneous/settings.h \
-            src/common/miscellaneous/settingsproperties.h \
-            src/saurus/miscellaneous/syntaxhighlighting.h \
-            src/common/miscellaneous/systemfactory.h \
-            src/saurus/miscellaneous/textapplication.h \
-            src/saurus/miscellaneous/textapplicationsettings.h \
-            src/common/miscellaneous/textfactory.h \
-            src/common/network-web/basenetworkaccessmanager.h \
-            src/common/network-web/downloader.h \
-            src/common/network-web/networkfactory.h \
-            src/common/network-web/silentnetworkaccessmanager.h \
-            src/common/network-web/webfactory.h \
-            src/saurus/gui/sidebars/outputsidebar.h \
-            src/saurus/gui/sidebars/findresultssidebar.h \
+            src/saurus/gui/settings/syntaxcolorthemeeditor.h \
+            src/saurus/gui/sidebars/basesidebar.h \
             src/saurus/gui/sidebars/findresultsmodel.h \
             src/saurus/gui/sidebars/findresultsmodelitem.h \
             src/saurus/gui/sidebars/findresultsmodelitemeditor.h \
             src/saurus/gui/sidebars/findresultsmodelitemresult.h \
-            src/saurus/plugin-system/markdown/markdownsidebar.h \
-            src/saurus/plugin-system/pluginfactory.h \
-            src/saurus/plugin-system/pluginbase.h \
-            src/saurus/plugin-system/markdown/markdownplugin.h \
-            src/saurus/plugin-system/filesystem/filesystemsidebar.h \
-            src/saurus/plugin-system/filesystem/filesystemplugin.h \
-            src/saurus/gui/sidebars/basesidebar.h \
-            src/saurus/plugin-system/markdown/markdowntextbrowser.h \
-            src/saurus/plugin-system/filesystem/filesystemview.h \
-            src/saurus/plugin-system/filesystem/favoriteslistwidget.h \
-            src/saurus/miscellaneous/syntaxcolortheme.h \
-            src/saurus/plugin-system/filesystem/filesystemmodel.h \
-            src/saurus/gui/settings/syntaxcolorthemeeditor.h \
-            src/saurus/miscellaneous/macro.h \
+            src/saurus/gui/sidebars/findresultssidebar.h \
             src/saurus/gui/sidebars/macrossidebar.h \
-    src/saurus/gui/tab.h \
-    src/saurus/gui/editortab.h \
-    src/common/gui/systemtrayicon.h \
-    src/common/gui/basetextedit.h
+            src/saurus/gui/sidebars/outputsidebar.h \
+            src/saurus/gui/statusbar.h \
+            src/saurus/gui/tab.h \
+            src/saurus/gui/tabbar.h \
+            src/saurus/gui/tabwidget.h \
+            src/saurus/gui/texteditor.h \
+            src/saurus/gui/texteditorprinter.h \
+            src/saurus/miscellaneous/application.h \
+            src/saurus/miscellaneous/macro.h \
+            src/saurus/miscellaneous/syntaxcolortheme.h \
+            src/saurus/miscellaneous/syntaxhighlighting.h \
+            src/saurus/miscellaneous/textapplication.h \
+            src/saurus/miscellaneous/textapplicationsettings.h \
+            src/saurus/plugin-system/filesystem/favoriteslistwidget.h \
+            src/saurus/plugin-system/filesystem/filesystemmodel.h \
+            src/saurus/plugin-system/filesystem/filesystemplugin.h \
+            src/saurus/plugin-system/filesystem/filesystemsidebar.h \
+            src/saurus/plugin-system/filesystem/filesystemview.h \
+            src/saurus/plugin-system/markdown/markdownplugin.h \
+            src/saurus/plugin-system/markdown/markdownsidebar.h \
+            src/saurus/plugin-system/markdown/markdowntextbrowser.h \
+            src/saurus/plugin-system/pluginbase.h \
+            src/saurus/plugin-system/pluginfactory.h
 
 SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
             src/common/dynamic-shortcuts/shortcutcatcher.cpp \
             src/common/exceptions/applicationexception.cpp \
             src/common/exceptions/ioexception.cpp \
+            src/common/gui/baselineedit.cpp \
+            src/common/gui/basetextedit.cpp \
+            src/common/gui/basetoolbar.cpp \
+            src/common/gui/guiutilities.cpp \
+            src/common/gui/labelwithstatus.cpp \
+            src/common/gui/messagebox.cpp \
+            src/common/gui/plaintoolbutton.cpp \
+            src/common/gui/systemtrayicon.cpp \
+            src/common/gui/toolbar.cpp \
+            src/common/gui/toolbareditor.cpp \
+            src/common/gui/widgetwithstatus.cpp \
+            src/common/miscellaneous/debugging.cpp \
+            src/common/miscellaneous/iconfactory.cpp \
+            src/common/miscellaneous/iofactory.cpp \
+            src/common/miscellaneous/localization.cpp \
+            src/common/miscellaneous/settings.cpp \
+            src/common/miscellaneous/systemfactory.cpp \
+            src/common/miscellaneous/textfactory.cpp \
+            src/common/network-web/basenetworkaccessmanager.cpp \
+            src/common/network-web/downloader.cpp \
+            src/common/network-web/networkfactory.cpp \
+            src/common/network-web/silentnetworkaccessmanager.cpp \
+            src/common/network-web/webfactory.cpp \
+            src/main.cpp \
             src/saurus/external-tools/externaltool.cpp \
             src/saurus/external-tools/externaltools.cpp \
             src/saurus/external-tools/predefinedtools.cpp \
-            src/common/gui/baselineedit.cpp \
-            src/common/gui/basetoolbar.cpp \
             src/saurus/gui/dialogs/formabout.cpp \
             src/saurus/gui/dialogs/formfindreplace.cpp \
             src/saurus/gui/dialogs/formmain.cpp \
             src/saurus/gui/dialogs/formsettings.cpp \
             src/saurus/gui/dialogs/formupdate.cpp \
-            src/common/gui/guiutilities.cpp \
-            src/common/gui/labelwithstatus.cpp \
-            src/common/gui/messagebox.cpp \
-            src/common/gui/plaintoolbutton.cpp \
+            src/saurus/gui/editortab.cpp \
             src/saurus/gui/settings/settingsbrowsermail.cpp \
             src/saurus/gui/settings/settingseditor.cpp \
             src/saurus/gui/settings/settingsexternaltools.cpp \
@@ -293,75 +312,57 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/gui/settings/settingslocalization.cpp \
             src/saurus/gui/settings/settingspanel.cpp \
             src/saurus/gui/settings/settingsshortcuts.cpp \
-            src/saurus/gui/statusbar.cpp \
-            src/saurus/gui/tabbar.cpp \
-            src/saurus/gui/tabwidget.cpp \
-            src/saurus/gui/texteditor.cpp \
-            src/saurus/gui/texteditorprinter.cpp \
-            src/common/gui/toolbar.cpp \
-            src/common/gui/toolbareditor.cpp \
-            src/common/gui/widgetwithstatus.cpp \
-            src/main.cpp \
-            src/saurus/miscellaneous/application.cpp \
-            src/common/miscellaneous/debugging.cpp \
-            src/common/miscellaneous/iconfactory.cpp \
-            src/common/miscellaneous/iofactory.cpp \
-            src/common/miscellaneous/localization.cpp \
-            src/common/miscellaneous/settings.cpp \
-            src/saurus/miscellaneous/syntaxhighlighting.cpp \
-            src/common/miscellaneous/systemfactory.cpp \
-            src/saurus/miscellaneous/textapplication.cpp \
-            src/saurus/miscellaneous/textapplicationsettings.cpp \
-            src/common/miscellaneous/textfactory.cpp \
-            src/common/network-web/basenetworkaccessmanager.cpp \
-            src/common/network-web/downloader.cpp \
-            src/common/network-web/networkfactory.cpp \
-            src/common/network-web/silentnetworkaccessmanager.cpp \
-            src/common/network-web/webfactory.cpp \
-            src/saurus/gui/sidebars/outputsidebar.cpp \
-            src/saurus/gui/sidebars/findresultssidebar.cpp \
+            src/saurus/gui/settings/syntaxcolorthemeeditor.cpp \
+            src/saurus/gui/sidebars/basesidebar.cpp \
             src/saurus/gui/sidebars/findresultsmodel.cpp \
             src/saurus/gui/sidebars/findresultsmodelitem.cpp \
             src/saurus/gui/sidebars/findresultsmodelitemeditor.cpp \
             src/saurus/gui/sidebars/findresultsmodelitemresult.cpp \
-            src/saurus/plugin-system/markdown/markdownsidebar.cpp \
-            src/saurus/plugin-system/pluginfactory.cpp \
-            src/saurus/plugin-system/markdown/markdownplugin.cpp \
-            src/saurus/plugin-system/filesystem/filesystemsidebar.cpp \
-            src/saurus/plugin-system/filesystem/filesystemplugin.cpp \
-            src/saurus/gui/sidebars/basesidebar.cpp \
-            src/saurus/plugin-system/markdown/markdowntextbrowser.cpp \
-            src/saurus/plugin-system/filesystem/filesystemview.cpp \
-            src/saurus/plugin-system/filesystem/favoriteslistwidget.cpp \
-            src/saurus/miscellaneous/syntaxcolortheme.cpp \
-            src/saurus/plugin-system/filesystem/filesystemmodel.cpp \
-            src/saurus/gui/settings/syntaxcolorthemeeditor.cpp \
-            src/saurus/miscellaneous/macro.cpp \
+            src/saurus/gui/sidebars/findresultssidebar.cpp \
             src/saurus/gui/sidebars/macrossidebar.cpp \
-    src/saurus/gui/tab.cpp \
-    src/saurus/gui/editortab.cpp \
-    src/common/gui/systemtrayicon.cpp \
-    src/common/gui/basetextedit.cpp
+            src/saurus/gui/sidebars/outputsidebar.cpp \
+            src/saurus/gui/statusbar.cpp \
+            src/saurus/gui/tab.cpp \
+            src/saurus/gui/tabbar.cpp \
+            src/saurus/gui/tabwidget.cpp \
+            src/saurus/gui/texteditor.cpp \
+            src/saurus/gui/texteditorprinter.cpp \
+            src/saurus/miscellaneous/application.cpp \
+            src/saurus/miscellaneous/macro.cpp \
+            src/saurus/miscellaneous/syntaxcolortheme.cpp \
+            src/saurus/miscellaneous/syntaxhighlighting.cpp \
+            src/saurus/miscellaneous/textapplication.cpp \
+            src/saurus/miscellaneous/textapplicationsettings.cpp \
+            src/saurus/plugin-system/filesystem/favoriteslistwidget.cpp \
+            src/saurus/plugin-system/filesystem/filesystemmodel.cpp \
+            src/saurus/plugin-system/filesystem/filesystemplugin.cpp \
+            src/saurus/plugin-system/filesystem/filesystemsidebar.cpp \
+            src/saurus/plugin-system/filesystem/filesystemview.cpp \
+            src/saurus/plugin-system/markdown/markdownplugin.cpp \
+            src/saurus/plugin-system/markdown/markdownsidebar.cpp \
+            src/saurus/plugin-system/markdown/markdowntextbrowser.cpp \
+            src/saurus/plugin-system/pluginfactory.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/common/miscellaneous/disablewindowtabbing.mm
 }
 
-FORMS +=    src/saurus/gui/dialogs/formabout.ui \
-            src/saurus/gui/dialogs/formmain.ui \
-            src/saurus/gui/dialogs/formsettings.ui \
-            src/saurus/gui/dialogs/formupdate.ui \
-            src/saurus/gui/dialogs/formfindreplace.ui \
-            src/saurus/gui/settings/settingsbrowsermail.ui \
-            src/saurus/gui/settings/settingsgeneral.ui \
-            src/saurus/gui/settings/settingsgui.ui \
-            src/saurus/gui/settings/settingsexternaltools.ui \
-            src/saurus/gui/settings/settingslocalization.ui \
-            src/saurus/gui/settings/settingsshortcuts.ui \
-            src/common/gui/toolbareditor.ui \
-            src/saurus/gui/settings/settingseditor.ui \
-            src/saurus/gui/settings/syntaxcolorthemeeditor.ui \
-            src/saurus/gui/sidebars/macrossidebar.ui
+FORMS +=  src/common/gui/toolbareditor.ui \
+          src/saurus/gui/dialogs/formabout.ui \
+          src/saurus/gui/dialogs/formfindreplace.ui \
+          src/saurus/gui/dialogs/formmain.ui \
+          src/saurus/gui/dialogs/formsettings.ui \
+          src/saurus/gui/dialogs/formupdate.ui \
+          src/saurus/gui/settings/settingsbrowsermail.ui \
+          src/saurus/gui/settings/settingseditor.ui \
+          src/saurus/gui/settings/settingsexternaltools.ui \
+          src/saurus/gui/settings/settingsgeneral.ui \
+          src/saurus/gui/settings/settingsgui.ui \
+          src/saurus/gui/settings/settingslocalization.ui \
+          src/saurus/gui/settings/settingsshortcuts.ui \
+          src/saurus/gui/settings/syntaxcolorthemeeditor.ui \
+          src/saurus/gui/sidebars/macrossidebar.ui
+
 
 # Add qtsingleapplication.
 SOURCES += $$files(src/3rd-party/qtsingleapplication/*.cpp, false)

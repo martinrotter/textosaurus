@@ -9,6 +9,7 @@
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 
 #include <QFile>
+#include <QMessageBox>
 
 #define QCOLOR_TO_SPRT(col) ((col.blue()) << 16) | ((col.green()) << 8) | (col.red())
 #define RGB_TO_SPRT(b, g, r) ((r) << 16) | ((g) << 8) | (b)
@@ -50,7 +51,12 @@ class TextEditor : public ScintillaEdit {
     void setAutoIndentEnabled(bool auto_indent_enabled);
     void setFilePath(const QString& file_path);
 
+    QMessageBox::StandardButton currentSaveAgreement() const;
+
   public slots:
+    void resetSaveAgreement();
+    void askForSaveAgreement();
+
     void reloadFromDisk();
     void toggleFolding(int position, int modifiers, int margin);
     void printPreview();
@@ -109,6 +115,7 @@ class TextEditor : public ScintillaEdit {
     QString getSessionFile();
 
   private:
+    QMessageBox::StandardButton m_saveAgreement;
     bool m_isLog;
     QFileSystemWatcher* m_fileWatcher;
     bool m_settingsDirty;
