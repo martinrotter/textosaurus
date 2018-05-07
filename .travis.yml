@@ -26,10 +26,7 @@ deploy:
 before_install: "./resources/scripts/.travis-before-install.sh"
 install: true
 script:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  ./resources/scripts/.travis-install-linux.sh
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./resources/scripts/.travis-install-linux.sh
   ; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-  chmod +x ./resources/scripts/.travis-install-osx.sh
-  ./resources/scripts/.travis-install-osx.sh
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then chmod +x ./resources/scripts/.travis-install-osx.sh && ./resources/scripts/.travis-install-osx.sh
   ; fi
