@@ -1,5 +1,8 @@
 0.9.5
 -----
+Added:
+* Experimental Mac OS X build.
+
 Changed:
 * When closing app with some modified documents, then application asks for all "Save/Discard" confirmations first and exits only when everything is confimed by the user.
 
