@@ -3,6 +3,8 @@ sudo: required
 dist: trusty
 os:
 - linux
+- osx
+osx_image: xcode9.2
 notifications:
   email: false
 compiler:
@@ -18,10 +20,13 @@ deploy:
     secure: i+bdzcqqAoeaT6ipHjijO0UubXhPhSbArq+pZqAZNbq1MeOORxqZ0lS6RaDcrJVPvBjAcKt9BdYdeEaoUqI9o1LBsIw3ukSfgb811C8/4FfgaxbCKjtFjUsOQQFEpZDziuhpu3WzijHQhMmQxR3aEvyKMgRqWmVRa6YSCmLH57+hmv/IL8Kx2agTIenubndC6X2Nl+hcm/b4ZCz2Yf5ybQPG1pp2JkPksRHY8L/W6TjMZOswq2DJPvUtXHGnl8i8knwGbDI/oAdg7M+EYx52W8FR8wU05Je72FXpur0FErIU4KwVeSVY30lN9p0JllW9cc8KEIjTivCExoo8M/BZ2tMdHDcugx7iJGFuTXXywApQjkUThk+vSAfKj9Ws/gkBkvDIMw7rOeS2Cug0CwZlBa9Jp24UTdh09ceDukL94hMUK5O5JtwFvqKGiNr/xtBCaw4P+lcgBeqt+U9yv7wLmqjcSHOGEF4LTPt9Wr3zi8Mi80ylAhPXN96WanQBly8jVtYcswJssbsWGSAmoUed0tqs4edEv7NWsjzK0AK+cbD+Z/BHjVqnfCZ10zGHG/tdKm57q4OI6nxkau3fsTbyY6/Gq2QToDFlHAJ0t+69BV2etYDGIYTDU+f29uRACUGXtGBnIdceN+unSfnekXyBe3yJdXlfEbFoLK6JXWHMZJQ=
   file:
   - textosaurus-build/textosaurus*.AppImage
+  - textosaurus-build/textosaurus*.dmg
   on:
     tags: true
 before_install: "./resources/scripts/.travis-before-install.sh"
 install: true
 script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./resources/scripts/.travis-install-linux.sh
+  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./resources/scripts/.travis-install-osx.sh
   ; fi
