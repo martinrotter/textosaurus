@@ -552,9 +552,9 @@ android {
 }
 
 mac {
-  IDENTIFIER = org.$${TARGET}.textosaurus
+  IDENTIFIER = $$APP_REVERSE_NAME
   CONFIG -= app_bundle
-  ICON = resources/macosx/$${TARGET}.icns
+  ICON = resources/graphics/$${TARGET}.icns
   QMAKE_MAC_SDK = macosx10.12
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
   LIBS += -framework AppKit
@@ -562,7 +562,7 @@ mac {
   target.path = $$quote($$PREFIX/Contents/MacOS/)
 
   # Install app icon.
-  icns_icon.files = resources/macosx/$${TARGET}.icns
+  icns_icon.files = resources/graphics/$${TARGET}.icns
   icns_icon.path = $$quote($$PREFIX/Contents/Resources/)
 
   # Install Info.plist.
