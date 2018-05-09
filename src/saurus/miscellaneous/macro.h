@@ -34,8 +34,8 @@ class Macro : public QObject {
     void fromString(const QString& str);
 
     struct MacroStep {
-      unsigned int m_msg;
-      unsigned long m_wParam;
+      int m_msg;
+      uptr_t m_wParam;
       QByteArray m_text;
     };
 

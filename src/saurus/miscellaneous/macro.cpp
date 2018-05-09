@@ -63,7 +63,7 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
   // Special handling of some commands.
   switch (msg) {
     case SCI_ADDTEXT:
-      m.m_text = QByteArray(reinterpret_cast<const char*>(lParam), wParam);
+      m.m_text = QByteArray(reinterpret_cast<const char*>(lParam), int(wParam));
       break;
 
     case SCI_REPLACESEL:
@@ -76,7 +76,7 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
         return;
       }
 
-    /* Drop through. */
+      [[fallthrough]];
 
     case SCI_INSERTTEXT:
     case SCI_APPENDTEXT:
