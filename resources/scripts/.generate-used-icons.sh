@@ -9,7 +9,10 @@
 echo_formatted_qrc() {
   printf "<RCC>\n  <qresource prefix=\"/\">\n"
   
-  for ICON_FILE in $@; do
+  # Sort icons first.
+  readarray -t sorted < <(for a in "$@"; do echo "$a"; done | sort)
+  
+  for ICON_FILE in "${sorted[@]}"; do
     # We find icon.
     echo "    <file>$ICON_FILE</file>"
   done
@@ -32,14 +35,11 @@ discover_used_icons() {
   for ICON_NAME in $ICON_NAMES; do
     # We find icon.
     local ICON_FILE="$(find . -name "${ICON_NAME}.svg")"
-    
     ICON_FILES+=("$ICON_FILE")
   done
   
   ICON_FILES+=("$INDEX_FILE")
-  
   cd "$ROOT_SRC_FOLDER"
-  
   echo_formatted_qrc ${ICON_FILES[@]}
 }
 

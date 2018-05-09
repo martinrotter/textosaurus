@@ -1,22 +1,33 @@
+// For license of this file, see <project-root-folder>/LICENSE.md.
+
 #ifndef MACROSSIDEBAR_H
 #define MACROSSIDEBAR_H
 
-#include <QWidget>
+#include "saurus/gui/sidebars/basesidebar.h"
 
-namespace Ui {
-  class MacrosSidebar;
-}
+class TextApplication;
+class MacrosWidget;
 
-class MacrosSidebar : public QWidget
-{
-    Q_OBJECT
+class MacrosSidebar : public BaseSidebar {
+  Q_OBJECT
 
   public:
-    explicit MacrosSidebar(QWidget *parent = 0);
-    ~MacrosSidebar();
+    explicit MacrosSidebar(TextApplication* app, QWidget* parent = nullptr);
+    virtual ~MacrosSidebar();
+
+    Qt::DockWidgetArea initialArea() const;
+    bool initiallyVisible() const;
+    int initialWidth() const;
+
+  public slots:
+    void load();
 
   private:
-    Ui::MacrosSidebar *ui;
+    MacrosWidget* m_widget = nullptr;
+    QAction* m_actionRecordStart;
+    QAction* m_actionRecordStop;
+    QAction* m_actionPlay;
+    QAction* m_actionSave;
 };
 
 #endif // MACROSSIDEBAR_H

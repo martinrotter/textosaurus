@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MacrosSidebar</class>
- <widget class="QWidget" name="MacrosSidebar">
+ <class>MacrosWidget</class>
+ <widget class="QWidget" name="MacrosWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,9 +11,9 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Macros</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -26,39 +26,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="m_btnStart">
-       <property name="text">
-        <string>&amp;Start Record</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnStop">
-       <property name="text">
-        <string>&amp;Stop Recording</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnPlay">
-       <property name="text">
-        <string>&amp;Play</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_btnSave">
-       <property name="text">
-        <string>Save</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="0" colspan="2">
+   <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -83,18 +51,17 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QListWidget" name="m_listSteps"/>
+       <widget class="QListWidget" name="m_listSteps">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>m_btnStart</tabstop>
-  <tabstop>m_btnStop</tabstop>
-  <tabstop>m_btnPlay</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

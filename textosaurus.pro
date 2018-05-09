@@ -264,7 +264,8 @@ HEADERS +=  src/common/dynamic-shortcuts/dynamicshortcuts.h \
             src/saurus/plugin-system/markdown/markdownsidebar.h \
             src/saurus/plugin-system/markdown/markdowntextbrowser.h \
             src/saurus/plugin-system/pluginbase.h \
-            src/saurus/plugin-system/pluginfactory.h
+            src/saurus/plugin-system/pluginfactory.h \
+    src/saurus/gui/sidebars/macroswidget.h
 
 SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -341,7 +342,8 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/plugin-system/markdown/markdownplugin.cpp \
             src/saurus/plugin-system/markdown/markdownsidebar.cpp \
             src/saurus/plugin-system/markdown/markdowntextbrowser.cpp \
-            src/saurus/plugin-system/pluginfactory.cpp
+            src/saurus/plugin-system/pluginfactory.cpp \
+    src/saurus/gui/sidebars/macroswidget.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/common/miscellaneous/disablewindowtabbing.mm
@@ -361,7 +363,7 @@ FORMS +=  src/common/gui/toolbareditor.ui \
           src/saurus/gui/settings/settingslocalization.ui \
           src/saurus/gui/settings/settingsshortcuts.ui \
           src/saurus/gui/settings/syntaxcolorthemeeditor.ui \
-          src/saurus/gui/sidebars/macrossidebar.ui
+    src/saurus/gui/sidebars/macroswidget.ui
 
 
 # Add qtsingleapplication.
