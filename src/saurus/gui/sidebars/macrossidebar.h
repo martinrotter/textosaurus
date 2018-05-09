@@ -21,6 +21,10 @@ class MacrosSidebar : public BaseSidebar {
 
   public slots:
     void load();
+    void startRecording();
+    void stopRecording();
+    void saveMacroAs();
+    void playMacro();
 
   private:
     MacrosWidget* m_widget = nullptr;

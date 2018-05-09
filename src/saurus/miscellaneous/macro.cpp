@@ -2,6 +2,8 @@
 
 #include "saurus/miscellaneous/macro.h"
 
+#include "definitions/definitions.h"
+
 Macro::Macro(const QString& saved_form, QObject* parent) : Macro(parent) {
   fromString(saved_form);
 }
@@ -29,7 +31,7 @@ void Macro::play(ScintillaEdit* editor) {
 
   if (editor != nullptr) {
     for (const MacroStep& stp : m_macroSteps) {
-      m_attachedEditor->send(stp.m_msg, stp.m_wParam, reinterpret_cast<sptr_t>(stp.m_text.data()));
+      m_attachedEditor->send(static_cast<unsigned int>(stp.m_msg), stp.m_wParam, reinterpret_cast<sptr_t>(stp.m_text.data()));
     }
   }
 }
@@ -89,6 +91,6 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
   m_macroSteps.append(m);
 }
 
-void Macro::fromString(const QString& str) {
-  Q_UNUSED(str)
+void Macro::fromString(const QString& asc) {
+  clear();
 }

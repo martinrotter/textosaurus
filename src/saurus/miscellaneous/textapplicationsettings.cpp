@@ -7,6 +7,7 @@
 #include "saurus/gui/dialogs/formmain.h"
 #include "saurus/gui/sidebars/outputsidebar.h"
 #include "saurus/miscellaneous/application.h"
+#include "saurus/miscellaneous/macros.h"
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/plugin-system/pluginfactory.h"
@@ -19,7 +20,8 @@
 
 TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
-  m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)) {}
+  m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)),
+  m_macros(new Macros(this)) {}
 
 bool TextApplicationSettings::restorePreviousSession() const {
   return qApp->settings()->value(GROUP(General), SETTING(General::RestoreSession)).toBool();
@@ -212,6 +214,10 @@ SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
 
 PluginFactory* TextApplicationSettings::pluginFactory() const {
   return m_pluginFactory;
+}
+
+Macros* TextApplicationSettings::macros() const {
+  return m_macros;
 }
 
 void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form, const QList<BaseSidebar*>& dock_widgets) const {

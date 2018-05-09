@@ -31,7 +31,7 @@ class Macro : public QObject {
     void recordStep(int msg, uptr_t wParam, sptr_t lParam);
 
   private:
-    void fromString(const QString& str);
+    void fromString(const QString& asc);
 
     struct MacroStep {
       int m_msg;

@@ -265,7 +265,8 @@ HEADERS +=  src/common/dynamic-shortcuts/dynamicshortcuts.h \
             src/saurus/plugin-system/markdown/markdowntextbrowser.h \
             src/saurus/plugin-system/pluginbase.h \
             src/saurus/plugin-system/pluginfactory.h \
-    src/saurus/gui/sidebars/macroswidget.h
+    src/saurus/gui/sidebars/macroswidget.h \
+    src/saurus/miscellaneous/macros.h
 
 SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -343,7 +344,8 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/plugin-system/markdown/markdownsidebar.cpp \
             src/saurus/plugin-system/markdown/markdowntextbrowser.cpp \
             src/saurus/plugin-system/pluginfactory.cpp \
-    src/saurus/gui/sidebars/macroswidget.cpp
+    src/saurus/gui/sidebars/macroswidget.cpp \
+    src/saurus/miscellaneous/macros.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/common/miscellaneous/disablewindowtabbing.mm

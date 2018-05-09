@@ -45,5 +45,45 @@ void MacrosSidebar::load() {
     m_widget->m_ui.verticalLayout->insertWidget(0, tool_bar, 1);
 
     setWidget(m_widget);
+
+    connect(m_actionPlay, &QAction::triggered, this, &MacrosSidebar::playMacro);
+    connect(m_actionSave, &QAction::triggered, this, &MacrosSidebar::saveMacroAs);
+    connect(m_actionRecordStart, &QAction::triggered, this, &MacrosSidebar::startRecording);
+    connect(m_actionRecordStop, &QAction::triggered, this, &MacrosSidebar::stopRecording);
+
+    m_actionRecordStart->setEnabled(true);
+    m_actionRecordStop->setEnabled(false);
+    m_actionPlay->setEnabled(false);
+    m_actionSave->setEnabled(false);
   }
+}
+
+void MacrosSidebar::startRecording() {
+  m_actionRecordStart->setEnabled(false);
+  m_actionRecordStop->setEnabled(true);
+  m_actionPlay->setEnabled(false);
+  m_actionSave->setEnabled(false);
+}
+
+void MacrosSidebar::stopRecording() {
+  m_actionRecordStart->setEnabled(true);
+  m_actionRecordStop->setEnabled(false);
+  m_actionPlay->setEnabled(true);
+  m_actionSave->setEnabled(true);
+}
+
+void MacrosSidebar::saveMacroAs() {}
+
+void MacrosSidebar::playMacro() {
+  m_actionRecordStart->setEnabled(false);
+  m_actionRecordStop->setEnabled(false);
+  m_actionPlay->setEnabled(false);
+  m_actionSave->setEnabled(false);
+
+  // TODO: teď se přehraje makro.
+
+  m_actionRecordStart->setEnabled(true);
+  m_actionRecordStop->setEnabled(false);
+  m_actionPlay->setEnabled(true);
+  m_actionSave->setEnabled(true);
 }
