@@ -60,6 +60,7 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
   MacroStep m;
 
   m.m_msg = msg;
+  m.m_cmd = static_cast<ScintillaCommand>(msg);
   m.m_wParam = wParam;
 
   // Special handling of some commands.
@@ -89,8 +90,13 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
   }
 
   m_macroSteps.append(m);
+  emit newStepRecorded(m);
 }
 
 void Macro::fromString(const QString& asc) {
   clear();
+}
+
+QList<Macro::MacroStep> Macro::macroSteps() const {
+  return m_macroSteps;
 }

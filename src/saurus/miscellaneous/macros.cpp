@@ -2,7 +2,11 @@
 
 #include "saurus/miscellaneous/macros.h"
 
-Macros::Macros(QObject* parent) : QObject(parent) {}
+#include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
+#include "common/miscellaneous/settings.h"
+#include "saurus/miscellaneous/macro.h"
+
+Macros::Macros(Settings* settings, QObject* parent) : QObject(parent), m_settings(settings) {}
 
 Macros::~Macros() {
   clearAllMacros();
@@ -18,8 +22,36 @@ void Macros::clearAllMacros() {
   m_storedMacros.clear();
 }
 
-void Macros::loadMacrosFromSettings(const Settings* settings) {
+void Macros::recordNewMacro(ScintillaEdit* editor) {
+  stopMacroRecording();
+
+  if (m_recordingMacro != nullptr) {
+    m_recordingMacro->deleteLater();
+  }
+
+  m_recordingMacro = new Macro(this);
+
+  connect(m_recordingMacro, &Macro::newStepRecorded, this, &Macros::newStepRecorded);
+
+  m_recordingMacro->startRecording(editor);
+  emit recordingStarted();
+}
+
+void Macros::stopMacroRecording() {
+  if (m_recordingMacro != nullptr) {
+    m_recordingMacro->endRecording();
+    m_recordingMacro->disconnect(this);
+
+    emit recordingFinished(m_recordingMacro);
+  }
+}
+
+void Macros::loadMacrosFromSettings() {
   clearAllMacros();
 
   // TODO: dodělat
+}
+
+Macro* Macros::recordedMacro() const {
+  return m_recordingMacro;
 }

@@ -5,6 +5,8 @@
 
 #include "saurus/gui/sidebars/basesidebar.h"
 
+#include "saurus/miscellaneous/macros.h"
+
 class TextApplication;
 class MacrosWidget;
 
@@ -25,6 +27,9 @@ class MacrosSidebar : public BaseSidebar {
     void stopRecording();
     void saveMacroAs();
     void playMacro();
+
+  private slots:
+    void loadNewRecordedMacroStep(Macro::MacroStep step);
 
   private:
     MacrosWidget* m_widget = nullptr;

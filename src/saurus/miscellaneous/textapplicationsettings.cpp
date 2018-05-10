@@ -21,7 +21,7 @@
 TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
   m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)),
-  m_macros(new Macros(this)) {}
+  m_macros(new Macros(qApp->settings(), this)) {}
 
 bool TextApplicationSettings::restorePreviousSession() const {
   return qApp->settings()->value(GROUP(General), SETTING(General::RestoreSession)).toBool();
