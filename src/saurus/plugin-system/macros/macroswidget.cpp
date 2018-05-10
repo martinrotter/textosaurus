@@ -1,6 +1,6 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "saurus/gui/sidebars/macroswidget.h"
+#include "saurus/plugin-system/macros/macroswidget.h"
 
 #include <QToolBar>
 

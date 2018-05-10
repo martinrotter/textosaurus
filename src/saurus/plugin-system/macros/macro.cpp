@@ -1,6 +1,6 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "saurus/miscellaneous/macro.h"
+#include "saurus/plugin-system/macros/macro.h"
 
 #include "definitions/definitions.h"
 

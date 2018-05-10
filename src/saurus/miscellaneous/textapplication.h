@@ -34,7 +34,6 @@ class TextApplication : public QObject {
 
     OutputSidebar* outputSidebar() const;
     FindResultsSidebar* findResultsSidebar() const;
-    MacrosSidebar* macrosSidebar() const;
     TextApplicationSettings* settings() const;
     TabWidget* tabWidget() const;
 
@@ -137,7 +136,6 @@ class TextApplication : public QObject {
     StatusBar* m_statusBar;
     OutputSidebar* m_outputSidebar;
     FindResultsSidebar* m_findResultsSidebar;
-    MacrosSidebar* m_macrosSidebar;
     FormFindReplace* m_findReplaceDialog;
     FormMain* m_mainForm;
 
@@ -169,7 +167,6 @@ class TextApplication : public QObject {
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
     QAction* m_actionShowOutputSidebar;
-    QAction* m_actionShowMacrosSidebar;
     QAction* m_actionShowFindResultsSidebar;
     QAction* m_actionAutoIndentEnabled;
     QMenu* m_menuDockWidgets;

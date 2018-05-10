@@ -12,7 +12,7 @@ class MarkdownSidebar;
 class MarkdownPlugin : public QObject, public PluginBase {
   Q_OBJECT
 
-  //Q_PLUGIN_METADATA(IID "com.github.textosaurus.markdown")
+  //Q_PLUGIN_METADATA(IID "io.github.martinrotter.textosaurus.markdownsimple")
 
   public:
     explicit MarkdownPlugin(QObject* parent = nullptr);

@@ -5,7 +5,7 @@
 
 #include <QObject>
 
-#include "saurus/miscellaneous/macro.h"
+#include "saurus/plugin-system/macros/macro.h"
 
 class Settings;
 class ScintillaEdit;

@@ -1,20 +1,21 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "saurus/gui/sidebars/macrossidebar.h"
+#include "saurus/plugin-system/macros/macrossidebar.h"
 
 #include "common/miscellaneous/iconfactory.h"
-#include "saurus/gui/sidebars/macroswidget.h"
 #include "saurus/gui/tabwidget.h"
 #include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
-#include "saurus/miscellaneous/macro.h"
-#include "saurus/miscellaneous/macros.h"
 #include "saurus/miscellaneous/textapplication.h"
+#include "saurus/plugin-system/macros/macro.h"
+#include "saurus/plugin-system/macros/macros.h"
+#include "saurus/plugin-system/macros/macroswidget.h"
 
 #include <QMetaEnum>
 #include <QToolBar>
 
-MacrosSidebar::MacrosSidebar(TextApplication* app, QWidget* parent) : BaseSidebar(app, parent) {
+MacrosSidebar::MacrosSidebar(TextApplication* text_app, Macros* macros_factory, QWidget* parent)
+  : BaseSidebar(text_app, parent), m_macrosFactory(macros_factory) {
   setObjectName(QSL("m_macrosSidebar"));
   setWindowTitle(tr("Macros"));
 }
@@ -55,7 +56,7 @@ void MacrosSidebar::load() {
     connect(m_actionSave, &QAction::triggered, this, &MacrosSidebar::saveMacroAs);
     connect(m_actionRecordStart, &QAction::triggered, this, &MacrosSidebar::startRecording);
     connect(m_actionRecordStop, &QAction::triggered, this, &MacrosSidebar::stopRecording);
-    connect(m_textApp->settings()->macros(), &Macros::newStepRecorded, this, &MacrosSidebar::loadNewRecordedMacroStep);
+    connect(m_macrosFactory, &Macros::newStepRecorded, this, &MacrosSidebar::loadNewRecordedMacroStep);
 
     m_actionRecordStart->setEnabled(true);
     m_actionRecordStop->setEnabled(false);
@@ -71,7 +72,7 @@ void MacrosSidebar::startRecording() {
   m_actionSave->setEnabled(false);
   m_widget->m_ui.m_listSteps->clear();
 
-  m_textApp->settings()->macros()->recordNewMacro(m_textApp->tabWidget()->currentEditor());
+  m_macrosFactory->recordNewMacro(m_textApp->tabWidget()->currentEditor());
 }
 
 void MacrosSidebar::stopRecording() {
@@ -80,7 +81,7 @@ void MacrosSidebar::stopRecording() {
   m_actionPlay->setEnabled(true);
   m_actionSave->setEnabled(true);
 
-  m_textApp->settings()->macros()->stopMacroRecording();
+  m_macrosFactory->stopMacroRecording();
 }
 
 void MacrosSidebar::saveMacroAs() {}
@@ -92,10 +93,10 @@ void MacrosSidebar::playMacro() {
   m_actionSave->setEnabled(false);
 
   // TODO: teď se přehraje makro.
-  auto recorded_macro = m_textApp->settings()->macros()->recordedMacro();
+  auto recorded_macro = m_macrosFactory->recordedMacro();
 
   if (recorded_macro != nullptr) {
-    m_textApp->settings()->macros()->recordedMacro()->play(m_textApp->tabWidget()->currentEditor());
+    m_macrosFactory->recordedMacro()->play(m_textApp->tabWidget()->currentEditor());
   }
 
   m_actionRecordStart->setEnabled(true);
@@ -105,7 +106,7 @@ void MacrosSidebar::playMacro() {
 }
 
 void MacrosSidebar::loadNewRecordedMacroStep(Macro::MacroStep step) {
-  auto recorded_macro = m_textApp->settings()->macros()->recordedMacro();
+  auto recorded_macro = m_macrosFactory->recordedMacro();
 
   if (recorded_macro->macroSteps().size() > m_widget->m_ui.m_listSteps->count()) {
     // New macro step.

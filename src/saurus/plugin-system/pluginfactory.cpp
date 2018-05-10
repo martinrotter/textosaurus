@@ -7,6 +7,7 @@
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 #include "saurus/plugin-system/filesystem/filesystemplugin.h"
+#include "saurus/plugin-system/macros/macrosplugin.h"
 #include "saurus/plugin-system/markdown/markdownplugin.h"
 #include "saurus/plugin-system/pluginbase.h"
 
@@ -21,7 +22,7 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
     // NOTE: If we decide to separate optional plugins
     // into separate assemblies, then we load them here
     // via QPluginLoader instead of these hardcoded references.
-    m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this);
+    m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
 
     for (PluginBase* plugin : m_plugins) {
       plugin->setTextApp(text_app);

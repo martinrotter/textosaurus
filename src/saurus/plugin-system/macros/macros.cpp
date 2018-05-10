@@ -1,10 +1,10 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
-#include "saurus/miscellaneous/macros.h"
+#include "saurus/plugin-system/macros/macros.h"
 
 #include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
 #include "common/miscellaneous/settings.h"
-#include "saurus/miscellaneous/macro.h"
+#include "saurus/plugin-system/macros/macro.h"
 
 Macros::Macros(Settings* settings, QObject* parent) : QObject(parent), m_settings(settings) {}
 

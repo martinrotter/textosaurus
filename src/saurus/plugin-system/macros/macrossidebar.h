@@ -5,7 +5,7 @@
 
 #include "saurus/gui/sidebars/basesidebar.h"
 
-#include "saurus/miscellaneous/macros.h"
+#include "saurus/plugin-system/macros/macros.h"
 
 class TextApplication;
 class MacrosWidget;
@@ -14,7 +14,7 @@ class MacrosSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:
-    explicit MacrosSidebar(TextApplication* app, QWidget* parent = nullptr);
+    explicit MacrosSidebar(TextApplication* text_app, Macros* macros_factory, QWidget* parent = nullptr);
     virtual ~MacrosSidebar();
 
     Qt::DockWidgetArea initialArea() const;
@@ -32,6 +32,7 @@ class MacrosSidebar : public BaseSidebar {
     void loadNewRecordedMacroStep(Macro::MacroStep step);
 
   private:
+    Macros* m_macrosFactory;
     MacrosWidget* m_widget = nullptr;
     QAction* m_actionRecordStart;
     QAction* m_actionRecordStop;

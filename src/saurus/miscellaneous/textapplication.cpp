@@ -13,7 +13,6 @@
 #include "saurus/gui/dialogs/formmain.h"
 #include "saurus/gui/editortab.h"
 #include "saurus/gui/sidebars/findresultssidebar.h"
-#include "saurus/gui/sidebars/macrossidebar.h"
 #include "saurus/gui/sidebars/outputsidebar.h"
 #include "saurus/gui/statusbar.h"
 #include "saurus/gui/tabwidget.h"
@@ -41,9 +40,6 @@ TextApplication::TextApplication(QObject* parent)
 
   m_findResultsSidebar = new FindResultsSidebar(this, nullptr);
   m_actionShowFindResultsSidebar = m_findResultsSidebar->generateAction();
-
-  m_macrosSidebar = new MacrosSidebar(this, nullptr);
-  m_actionShowMacrosSidebar = m_macrosSidebar->generateAction();
 
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
@@ -284,10 +280,6 @@ FindResultsSidebar* TextApplication::findResultsSidebar() const {
   return m_findResultsSidebar;
 }
 
-MacrosSidebar* TextApplication::macrosSidebar() const {
-  return m_macrosSidebar;
-}
-
 TextApplicationSettings* TextApplication::settings() const {
   return m_settings;
 }
@@ -499,7 +491,6 @@ void TextApplication::setMainForm(FormMain* main_form) {
 QList<QAction*> TextApplication::userActions() const {
   return QList<QAction*>() << m_actionShowFindResultsSidebar
                            << m_actionShowOutputSidebar
-                           << m_actionShowMacrosSidebar
                            << settings()->pluginFactory()->assignableActions()
                            << settings()->externalTools()->predefinedToolsActions();
 }
@@ -527,7 +518,6 @@ void TextApplication::loadState() {
 
   // We add built-in sidebars.
   m_menuDockWidgets->addAction(m_actionShowFindResultsSidebar);
-  m_menuDockWidgets->addAction(m_actionShowMacrosSidebar);
   m_menuDockWidgets->addAction(m_actionShowOutputSidebar);
 
   auto dock_actions = m_menuDockWidgets->actions();
@@ -540,7 +530,7 @@ void TextApplication::loadState() {
 
   // We load GUI state of all sidebars.
   QList<BaseSidebar*> sidebars;
-  sidebars << m_outputSidebar << m_findResultsSidebar << m_macrosSidebar << settings()->pluginFactory()->sidebars();
+  sidebars << m_outputSidebar << m_findResultsSidebar << settings()->pluginFactory()->sidebars();
   settings()->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
 }
 

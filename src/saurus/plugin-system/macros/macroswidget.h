@@ -5,7 +5,7 @@
 
 #include <QWidget>
 
-#include "saurus/gui/sidebars/macrossidebar.h"
+#include "saurus/plugin-system/macros/macrossidebar.h"
 
 #include "ui_macroswidget.h"
 

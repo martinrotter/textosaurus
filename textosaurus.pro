@@ -241,7 +241,7 @@ HEADERS +=  src/common/dynamic-shortcuts/dynamicshortcuts.h \
             src/saurus/gui/sidebars/findresultsmodelitemeditor.h \
             src/saurus/gui/sidebars/findresultsmodelitemresult.h \
             src/saurus/gui/sidebars/findresultssidebar.h \
-            src/saurus/gui/sidebars/macrossidebar.h \
+            src/saurus/plugin-system/macros/macrossidebar.h \
             src/saurus/gui/sidebars/outputsidebar.h \
             src/saurus/gui/statusbar.h \
             src/saurus/gui/tab.h \
@@ -250,7 +250,7 @@ HEADERS +=  src/common/dynamic-shortcuts/dynamicshortcuts.h \
             src/saurus/gui/texteditor.h \
             src/saurus/gui/texteditorprinter.h \
             src/saurus/miscellaneous/application.h \
-            src/saurus/miscellaneous/macro.h \
+            src/saurus/plugin-system/macros/macro.h \
             src/saurus/miscellaneous/syntaxcolortheme.h \
             src/saurus/miscellaneous/syntaxhighlighting.h \
             src/saurus/miscellaneous/textapplication.h \
@@ -265,8 +265,9 @@ HEADERS +=  src/common/dynamic-shortcuts/dynamicshortcuts.h \
             src/saurus/plugin-system/markdown/markdowntextbrowser.h \
             src/saurus/plugin-system/pluginbase.h \
             src/saurus/plugin-system/pluginfactory.h \
-    src/saurus/gui/sidebars/macroswidget.h \
-    src/saurus/miscellaneous/macros.h
+            src/saurus/plugin-system/macros/macroswidget.h \
+            src/saurus/plugin-system/macros/macros.h \
+    src/saurus/plugin-system/macros/macrosplugin.h
 
 SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -321,7 +322,7 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/gui/sidebars/findresultsmodelitemeditor.cpp \
             src/saurus/gui/sidebars/findresultsmodelitemresult.cpp \
             src/saurus/gui/sidebars/findresultssidebar.cpp \
-            src/saurus/gui/sidebars/macrossidebar.cpp \
+            src/saurus/plugin-system/macros/macrossidebar.cpp \
             src/saurus/gui/sidebars/outputsidebar.cpp \
             src/saurus/gui/statusbar.cpp \
             src/saurus/gui/tab.cpp \
@@ -330,7 +331,7 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/gui/texteditor.cpp \
             src/saurus/gui/texteditorprinter.cpp \
             src/saurus/miscellaneous/application.cpp \
-            src/saurus/miscellaneous/macro.cpp \
+            src/saurus/plugin-system/macros/macro.cpp \
             src/saurus/miscellaneous/syntaxcolortheme.cpp \
             src/saurus/miscellaneous/syntaxhighlighting.cpp \
             src/saurus/miscellaneous/textapplication.cpp \
@@ -344,8 +345,9 @@ SOURCES +=  src/common/dynamic-shortcuts/dynamicshortcuts.cpp \
             src/saurus/plugin-system/markdown/markdownsidebar.cpp \
             src/saurus/plugin-system/markdown/markdowntextbrowser.cpp \
             src/saurus/plugin-system/pluginfactory.cpp \
-    src/saurus/gui/sidebars/macroswidget.cpp \
-    src/saurus/miscellaneous/macros.cpp
+            src/saurus/plugin-system/macros/macroswidget.cpp \
+            src/saurus/plugin-system/macros/macros.cpp \
+    src/saurus/plugin-system/macros/macrosplugin.cpp
 
 mac {
   OBJECTIVE_SOURCES += src/common/miscellaneous/disablewindowtabbing.mm
@@ -365,7 +367,7 @@ FORMS +=  src/common/gui/toolbareditor.ui \
           src/saurus/gui/settings/settingslocalization.ui \
           src/saurus/gui/settings/settingsshortcuts.ui \
           src/saurus/gui/settings/syntaxcolorthemeeditor.ui \
-    src/saurus/gui/sidebars/macroswidget.ui
+          src/saurus/plugin-system/macros/macroswidget.ui
 
 
 # Add qtsingleapplication.

@@ -1,3 +1,5 @@
+// For license of this file, see <project-root-folder>/LICENSE.md.
+
 #ifndef FAVORITESLISTWIDGET_H
 #define FAVORITESLISTWIDGET_H
 
