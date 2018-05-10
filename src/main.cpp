@@ -111,6 +111,21 @@ int main(int argc, char* argv[]) {
     qApp->showTrayIcon();
   }
 
+  QObject::connect(qApp->system(), &SystemFactory::updatesChecked,
+                   qApp, [&main_window](QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> updates) {
+    if (!updates.first.isEmpty() && !qApp->system()->isVersionNewer(updates.first.first().m_availableVersion, APP_VERSION)) {
+      qApp->showGuiMessage(QObject::tr("Newer version %1 is available."
+                                       " Click on me to download the update.").arg(updates.first.first().m_availableVersion),
+                           QMessageBox::Icon::Information,
+                           QUrl("http://update.textosaurus"), [&main_window]() {
+        FormUpdate(&main_window).exec();
+      });
+    }
+
+    qApp->system()->disconnect(qApp);
+  });
+  qApp->system()->checkForUpdates();
+
   // Enter global event loop.
   return Application::exec();
 }
