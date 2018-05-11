@@ -39,6 +39,10 @@ void Macros::addMacro(Macro* macro) {
 }
 
 void Macros::clearAllMacros() {
+  if (m_recordingMacro != nullptr) {
+    m_recordingMacro->deleteLater();
+  }
+
   qDeleteAll(m_storedMacros);
   m_storedMacros.clear();
 }
