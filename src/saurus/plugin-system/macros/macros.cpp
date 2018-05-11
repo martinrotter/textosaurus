@@ -45,6 +45,11 @@ void Macros::saveMacroAs(Macro* macro) {
   }
 }
 
+void Macros::deleteMacro(Macro* macro) {
+  m_storedMacros.removeAll(macro);
+  m_settings->remove(GROUP(StoredMacros), macro->name());
+}
+
 void Macros::recordNewMacro(ScintillaEdit* editor) {
   stopMacroRecording();
   m_recordingMacro = new Macro(this);

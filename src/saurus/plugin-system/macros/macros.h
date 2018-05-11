@@ -25,6 +25,7 @@ class Macros : public QObject {
     void addMacro(Macro* macro);
     void clearAllMacros();
     void saveMacroAs(Macro* macro);
+    void deleteMacro(Macro* macro);
 
     void recordNewMacro(ScintillaEdit* editor);
     void stopMacroRecording();

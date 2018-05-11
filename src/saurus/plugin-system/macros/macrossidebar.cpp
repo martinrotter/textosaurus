@@ -135,6 +135,12 @@ void MacrosSidebar::playStoredMacro() {
 
 void MacrosSidebar::deleteStoredMacro() {
   if (m_widget->m_ui.m_listStoredMacros->currentRow() >= 0) {
+    m_macrosFactory->deleteMacro(
+      m_widget->m_ui.m_listStoredMacros->item(
+        m_widget->m_ui.m_listStoredMacros->currentRow())->data(Qt::
+                                                               ItemDataRole
+                                                               ::UserRole).value<
+        Macro*>());
     delete m_widget->m_ui.m_listStoredMacros->takeItem(m_widget->m_ui.m_listStoredMacros->currentRow());
   }
 }

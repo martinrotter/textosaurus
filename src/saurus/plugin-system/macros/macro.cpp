@@ -111,7 +111,7 @@ void Macro::fromString(const QString& asc) {
 
   setName(QByteArray::fromBase64(parts.first().toUtf8()));
 
-  for (int i = 1; i < parts.size(); i += 3) {
+  for (int i = 1; i + 3 <= parts.size(); i += 3) {
     MacroStep step;
 
     step.m_msg = parts.at(i).toInt();
