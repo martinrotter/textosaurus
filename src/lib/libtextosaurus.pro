@@ -66,7 +66,7 @@ DEFINES += APP_SYSTEM_VERSION='"\\\"$$QMAKE_HOST.arch\\\""'
 CODECFORTR  = UTF-8
 CODECFORSRC = UTF-8
 
-exists(.git) {
+exists(../../.git) {
   APP_REVISION = $$system(git rev-parse --short HEAD)
 }
 
