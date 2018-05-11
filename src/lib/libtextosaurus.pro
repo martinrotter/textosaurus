@@ -442,117 +442,26 @@ qtPrepareTool(LRELEASE, lrelease) {
 }
 
 static {
-  message($$MSG_PREFIX: Building static version of application.)
-
-  QTPLUGIN.bearer = -
-  QTPLUGIN.generic = -
-  QTPLUGIN.sqldrivers = -
-  QTPLUGIN.iconengines = qsvgicon
-  QTPLUGIN.platforms = qwindows
-  QTPLUGIN.imageformats = qgif qico qjpeg qsvg qwbmp
-  QTPLUGIN.printsupport = windowsprintersupport
-  QTPLUGIN.styles = qwindowsvistastyle
+  message($$MSG_PREFIX: Building static version of library.)
 }
 else {
-  message($$MSG_PREFIX: Building shared version of application.)
+  message($$MSG_PREFIX: Building shared version of library.)
 }
 
-# Create new "make 7zip" target and "make zip" target.
-win32 {
-  seven_zip.target = 7zip
-  seven_zip.depends = install
-  seven_zip.commands = $$shell_path($$shell_quote($$PWD/../../resources/scripts/7za/7za.exe)) a -t7z $$TARGET-$$APP_VERSION-$$APP_REVISION-$${APP_WIN_ARCH}.7z $$shell_path($$PREFIX/*)
-
-  zip.target = zip
-  zip.depends = install
-  zip.commands = $$shell_path($$shell_quote($$PWD/../../resources/scripts/7za/7za.exe)) a -tzip $$TARGET-$$APP_VERSION-$$APP_REVISION-$${APP_WIN_ARCH}.zip $$shell_path($$PREFIX/*)
-
-  QMAKE_EXTRA_TARGETS += seven_zip zip
-}
-
-mac {
-  dmg.target = dmg
-  dmg.depends = install
-  dmg.commands = macdeployqt $$shell_quote($$shell_path($$PREFIX)) -dmg
-
-  QMAKE_EXTRA_TARGETS += dmg
-}
-
-# Create NSIS installer target on Windows.
-win32 {
-  nsis.target = nsis
-  nsis.depends = install
-  nsis.commands = \
-    $$shell_path($$shell_quote($$PWD/../../resources/scripts/sed/sed.exe)) -e \"s|@APP_VERSION@|$$APP_VERSION|g; s|@APP_WIN_ARCH@|$$APP_WIN_ARCH|g; s|@APP_REVISION@|$$APP_REVISION|g; s|@APP_NAME@|$$APP_NAME|g; s|@APP_LOW_NAME@|$$APP_LOW_NAME|g; s|@EXE_NAME@|$${APP_LOW_NAME}.exe|g; s|@PWD@|$$replace(PWD, /, \\\\\\\\\\\\\\\\)|g; s|@OUT_PWD@|$$replace(OUT_PWD, /, \\\\\\\\\\\\\\\\)|g\" $$shell_quote($$shell_path($$PWD/resources/nsis/NSIS.definitions.nsh.in)) > $$shell_quote($$shell_path($$OUT_PWD/NSIS.definitions.nsh)) && \
-    xcopy \"$$system_path($$PWD/../../resources/nsis/NSIS.template.in)\" \"$$system_path($$OUT_PWD/)\" /Y && \
-    $$shell_path($$shell_quote($$PWD/../../resources/scripts/nsis/makensis.exe)) \"$$system_path($$OUT_PWD/NSIS.template.in)\"
-
-  QMAKE_EXTRA_TARGETS += nsis
-}
-
-win32 {
-  windows_all.target = windows_all
-  windows_all.depends = seven_zip nsis
-  windows_all.commands = echo "windows_all done..."
-
-  QMAKE_EXTRA_TARGETS += windows_all
-}
-
-# Install all files on Windows.
 win32 {
   target.path = $$PREFIX
-
   INSTALLS += target
 }
 
-# Install all files on Linux.
 unix:!mac:!android {
-  target.path = $$PREFIX/bin
-
-  desktop_file.files = ../../resources/desktop/$${APP_REVERSE_NAME}.desktop
-  desktop_file.path = $$quote($$PREFIX/share/applications/)
-
-  appdata.files = ../../resources/desktop/$${APP_REVERSE_NAME}.appdata.xml
-  appdata.path = $$quote($$PREFIX/share/metainfo/)
-
-  desktop_icon.files = ../../resources/graphics/$${TARGET}.png
-  desktop_icon.path = $$quote($$PREFIX/share/icons/hicolor/512x512/apps/)
-
-  INSTALLS += target desktop_file desktop_icon appdata
-}
-
-android {
-  target.path = $$PREFIX
-
+  target.path = $$PREFIX/lib
   INSTALLS += target
 }
 
 mac {
   IDENTIFIER = $$APP_REVERSE_NAME
   CONFIG -= app_bundle
-  ICON = ../../resources/graphics/$${TARGET}.icns
   QMAKE_MAC_SDK = macosx10.12
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
   LIBS += -framework AppKit
-
-  target.path = $$quote($$PREFIX/Contents/MacOS/)
-
-  # Install app icon.
-  icns_icon.files = ../../resources/graphics/$${TARGET}.icns
-  icns_icon.path = $$quote($$PREFIX/Contents/Resources/)
-
-  # Install Info.plist.
-  info_plist.files = ../../resources/macosx/Info.plist.in
-  info_plist.path  = $$quote($$PREFIX/Contents/)
-
-  # Process the just installed Info.plist.
-  info_plist2.extra = @sed -e "s,@EXECUTABLE@,$$TARGET,g" -e "s,@SHORT_VERSION@,$$APP_VERSION,g" -e "s,@APP_NAME@,\"$$APP_NAME\",g" -e "s,@ICON@,$$basename(ICON),g"  -e "s,@TYPEINFO@,"????",g" $$shell_quote($$PREFIX/Contents/Info.plist.in) > $$shell_quote($$PREFIX/Contents/Info.plist) && \
-                      rm -f $$shell_quote($$PREFIX/Contents/Info.plist.in)
-  info_plist2.path = $$quote($$PREFIX/Contents/)
-
-  # Install PkgInfo
-  pkginfo.extra = @printf "APPL????" > $$shell_quote($$PREFIX/Contents/PkgInfo)
-  pkginfo.path = $$quote($$PREFIX/Contents/)
-
-  INSTALLS += target icns_icon info_plist info_plist2 pkginfo
 }
