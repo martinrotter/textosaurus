@@ -22,12 +22,14 @@ class Macros : public QObject {
   public slots:
     void addMacro(Macro* macro);
     void clearAllMacros();
+    void saveMacroAs(Macro* macro);
 
     void recordNewMacro(ScintillaEdit* editor);
     void stopMacroRecording();
 
   private:
     void loadMacrosFromSettings();
+    void sortStoredMacros();
 
   signals:
     void recordingStarted();

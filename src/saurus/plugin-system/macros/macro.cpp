@@ -19,7 +19,18 @@ void Macro::setName(const QString& name) {
 }
 
 QString Macro::toString() const {
-  return "";
+  // We serialize steps first.
+  QStringList lst;
+
+  lst.reserve(m_macroSteps.size());
+
+  for (const MacroStep& step : m_macroSteps) {
+    lst.append(QString("%1 %2 %3").arg(QString::number(step.m_msg),
+                                       QString::number(step.m_wParam),
+                                       step.m_text.isEmpty() ? QSL("nil") : step.m_text.toBase64()));
+  }
+
+  return QString("%1 %2").arg(m_name.toUtf8().toBase64(), lst.join(QL1C(' ')));
 }
 
 void Macro::clear() {

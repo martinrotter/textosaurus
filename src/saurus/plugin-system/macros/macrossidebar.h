@@ -36,8 +36,10 @@ class MacrosSidebar : public BaseSidebar {
     MacrosWidget* m_widget = nullptr;
     QAction* m_actionRecordStart;
     QAction* m_actionRecordStop;
-    QAction* m_actionPlay;
-    QAction* m_actionSave;
+    QAction* m_actionRecordPlay;
+    QAction* m_actionRecordSave;
+    QAction* m_actionStoredPlay;
+    QAction* m_actionStoredDelete;
 };
 
 #endif // MACROSSIDEBAR_H

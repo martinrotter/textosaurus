@@ -121,6 +121,10 @@ namespace Browser {
   constexpr auto CustomExternalEmailArguments = "external_email_arguments";
 }
 
+namespace StoredMacros {
+  constexpr auto ID = "macros";
+}
+
 namespace General {
   constexpr auto ID = "main";
   constexpr auto RemoveTrolltechJunk = "remove_trolltech_junk";

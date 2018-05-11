@@ -4,7 +4,10 @@
 
 #include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
 #include "common/miscellaneous/settings.h"
+#include "saurus/miscellaneous/application.h"
 #include "saurus/plugin-system/macros/macro.h"
+
+#include <QInputDialog>
 
 Macros::Macros(Settings* settings, QObject* parent) : QObject(parent), m_settings(settings) {}
 
@@ -20,6 +23,24 @@ void Macros::addMacro(Macro* macro) {
 void Macros::clearAllMacros() {
   qDeleteAll(m_storedMacros);
   m_storedMacros.clear();
+}
+
+void Macros::saveMacroAs(Macro* macro) {
+  bool ok;
+  QString macro_name = QInputDialog::getText(qApp->mainFormWidget(), tr("Save Macro"),
+                                             tr("Enter some name for your macro"), QLineEdit::EchoMode::Normal,
+                                             tr("My new macro"), &ok);
+
+  if (ok && !macro_name.isEmpty()) {
+    macro->setName(macro_name);
+    auto str_representation = macro->toString();
+
+    // Save macro to settings.
+    m_settings->setValue(GROUP(StoredMacros), macro->name(), str_representation);
+
+    addMacro(macro);
+    sortStoredMacros();
+  }
 }
 
 void Macros::recordNewMacro(ScintillaEdit* editor) {
@@ -50,6 +71,14 @@ void Macros::loadMacrosFromSettings() {
   clearAllMacros();
 
   // TODO: dodělat
+
+  sortStoredMacros();
+}
+
+void Macros::sortStoredMacros() {
+  std::sort(m_storedMacros.begin(), m_storedMacros.end(), [](Macro* lhs, Macro* rhs) {
+    return QString::compare(lhs->name(), rhs->name(), Qt::CaseSensitivity::CaseInsensitive);
+  });
 }
 
 Macro* Macros::recordedMacro() const {
