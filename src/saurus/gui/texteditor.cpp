@@ -42,7 +42,8 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   m_fileWatcher(nullptr), m_settingsDirty(true), m_textApp(text_app),
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()),
-  m_autoIndentEnabled(text_app->settings()->autoIndentEnabled()) {
+  m_autoIndentEnabled(text_app->settings()->autoIndentEnabled()),
+  m_filePathOnEditorQuit(QString()) {
 
   connect(this, &TextEditor::updateUi, this, &TextEditor::uiUpdated);
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
@@ -312,6 +313,16 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
   }
 }
 
+QString TextEditor::requestSaveFileName() const {
+  return MessageBox::getSaveFileName(qApp->mainFormWidget(),
+                                     tr("Save File as"),
+                                     m_filePath.isEmpty()
+                                     ? m_textApp->settings()->loadSaveDefaultDirectory()
+                                     : m_filePath,
+                                     m_textApp->settings()->syntaxHighlighting()->fileFilters(),
+                                     nullptr);
+}
+
 void TextEditor::appendSessionFile(const QString& file_name, bool is_nonexistent) {
   QString file_n = is_nonexistent ? (QL1S("#") + file_name) : file_name;
 
@@ -339,6 +350,7 @@ QMessageBox::StandardButton TextEditor::currentSaveAgreement() const {
 
 void TextEditor::resetSaveAgreement() {
   m_saveAgreement = QMessageBox::StandardButton::NoButton;
+  m_filePathOnEditorQuit.clear();
 }
 
 void TextEditor::askForSaveAgreement() {
@@ -356,6 +368,19 @@ void TextEditor::askForSaveAgreement() {
                                        filePath(),
                                        QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
                                        QMessageBox::Save);
+
+    if (m_saveAgreement == QMessageBox::StandardButton::Save) {
+      if (m_filePath.isEmpty()) {
+        m_filePathOnEditorQuit = requestSaveFileName();
+
+        if (m_filePathOnEditorQuit.isEmpty()) {
+          m_saveAgreement = QMessageBox::StandardButton::Cancel;
+        }
+      }
+    }
+    else {
+      m_filePathOnEditorQuit.clear();
+    }
   }
   else {
     // This editor does not need save agreement, no "save/discard"
@@ -896,13 +921,14 @@ void TextEditor::save(bool* ok) {
 
 void TextEditor::saveAs(bool* ok, const QString& encoding) {
   // We save this documents as new file.
-  QString file_path = MessageBox::getSaveFileName(qApp->mainFormWidget(),
-                                                  tr("Save File as"),
-                                                  m_filePath.isEmpty()
-                                                  ? m_textApp->settings()->loadSaveDefaultDirectory()
-                                                  : m_filePath,
-                                                  m_textApp->settings()->syntaxHighlighting()->fileFilters(),
-                                                  nullptr);
+  QString file_path;
+
+  if (m_filePathOnEditorQuit.isEmpty()) {
+    file_path = requestSaveFileName();
+  }
+  else {
+    file_path = m_filePathOnEditorQuit;
+  }
 
   if (!file_path.isEmpty()) {
     m_textApp->settings()->setLoadSaveDefaultDirectory(file_path);

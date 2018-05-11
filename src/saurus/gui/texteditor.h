@@ -101,6 +101,7 @@ class TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
+    QString requestSaveFileName() const;
     void appendSessionFile(const QString& file_name, bool is_nonexistent);
 
     void detachWatcher();
@@ -124,6 +125,7 @@ class TextEditor : public ScintillaEdit {
     QByteArray m_encoding;
     Lexer m_lexer;
     bool m_autoIndentEnabled;
+    QString m_filePathOnEditorQuit;
 };
 
 #endif // TEXTEDITOR_H
