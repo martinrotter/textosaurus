@@ -12,7 +12,7 @@
 #include <QIcon>
 #include <QString>
 
-class IconFactory : public QObject {
+class TEXTOSAURUS_DLLSPEC IconFactory : public QObject {
   Q_OBJECT
 
   public:

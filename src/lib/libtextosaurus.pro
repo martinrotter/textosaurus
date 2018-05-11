@@ -136,9 +136,8 @@ mac {
 
 # Make needed tweaks for RC file getting generated on Windows.
 win32 {
-  RC_ICONS = ../../resources/graphics/textosaurus.ico
   QMAKE_TARGET_COMPANY = $$APP_AUTHOR
-  QMAKE_TARGET_DESCRIPTION = $$APP_NAME
+  QMAKE_TARGET_DESCRIPTION = $$APP_NAME (core library)
   QMAKE_TARGET_COPYRIGHT = $$APP_COPYRIGHT
   QMAKE_TARGET_PRODUCT = $$APP_NAME
 }
@@ -146,7 +145,7 @@ win32 {
 CONFIG += resources_small
 RESOURCES += ../../resources/textosaurus.qrc
 
-mac|win32|android {
+mac|win32 {
   RESOURCES += ../../resources/icons.qrc
 
   message($$MSG_PREFIX: Adding resources for default icon theme.)
