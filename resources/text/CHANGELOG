@@ -2,6 +2,7 @@
 -----
 Added:
 * Experimental Mac OS X build.
+* Updates are checked automatically.
 
 Changed:
 * When closing app with some modified documents, then application asks for all "Save/Discard" confirmations first and exits only when everything is confimed by the user.
