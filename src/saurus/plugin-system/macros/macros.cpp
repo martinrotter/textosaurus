@@ -47,11 +47,6 @@ void Macros::saveMacroAs(Macro* macro) {
 
 void Macros::recordNewMacro(ScintillaEdit* editor) {
   stopMacroRecording();
-
-  if (m_recordingMacro != nullptr) {
-    m_recordingMacro->deleteLater();
-  }
-
   m_recordingMacro = new Macro(this);
 
   connect(m_recordingMacro, &Macro::newStepRecorded, this, &Macros::newStepRecorded);
