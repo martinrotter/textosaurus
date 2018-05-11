@@ -1,6 +1,7 @@
 0.9.5
 -----
 Added:
+* Macros sidebar which allows to record, play and save macros.
 * Experimental Mac OS X build.
 * Updates are checked automatically.
 

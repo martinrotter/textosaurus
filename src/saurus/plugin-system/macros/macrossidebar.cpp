@@ -61,11 +61,14 @@ void MacrosSidebar::load() {
 
     setWidget(m_widget);
 
-    connect(m_actionRecordPlay, &QAction::triggered, this, &MacrosSidebar::playMacro);
-    connect(m_actionRecordSave, &QAction::triggered, this, &MacrosSidebar::saveMacroAs);
+    connect(m_actionRecordPlay, &QAction::triggered, this, &MacrosSidebar::playRecordedMacro);
+    connect(m_actionRecordSave, &QAction::triggered, this, &MacrosSidebar::saveRecordedMacroAs);
     connect(m_actionRecordStart, &QAction::triggered, this, &MacrosSidebar::startRecording);
     connect(m_actionRecordStop, &QAction::triggered, this, &MacrosSidebar::stopRecording);
     connect(m_macrosFactory, &Macros::newStepRecorded, this, &MacrosSidebar::loadNewRecordedMacroStep);
+    connect(m_widget->m_ui.m_listStoredMacros, &QListWidget::currentRowChanged, this, &MacrosSidebar::onCurrentStoredMacroChanged);
+    connect(m_actionStoredPlay, &QAction::triggered, this, &MacrosSidebar::playStoredMacro);
+    connect(m_actionStoredDelete, &QAction::triggered, this, &MacrosSidebar::deleteStoredMacro);
 
     m_actionRecordStart->setEnabled(true);
     m_actionRecordStop->setEnabled(false);
@@ -73,6 +76,8 @@ void MacrosSidebar::load() {
     m_actionRecordSave->setEnabled(false);
     m_actionStoredPlay->setEnabled(false);
     m_actionStoredDelete->setEnabled(false);
+
+    reloadStoredMacros();
   }
 }
 
@@ -95,11 +100,13 @@ void MacrosSidebar::stopRecording() {
   m_macrosFactory->stopMacroRecording();
 }
 
-void MacrosSidebar::saveMacroAs() {
+void MacrosSidebar::saveRecordedMacroAs() {
   m_macrosFactory->saveMacroAs(m_macrosFactory->recordedMacro());
+  reloadStoredMacros();
+  m_widget->m_ui.m_tabsMacros->setCurrentIndex(0);
 }
 
-void MacrosSidebar::playMacro() {
+void MacrosSidebar::playRecordedMacro() {
   m_actionRecordStart->setEnabled(false);
   m_actionRecordStop->setEnabled(false);
   m_actionRecordPlay->setEnabled(false);
@@ -118,6 +125,25 @@ void MacrosSidebar::playMacro() {
   m_actionRecordSave->setEnabled(true);
 }
 
+void MacrosSidebar::playStoredMacro() {
+  auto it = m_widget->m_ui.m_listStoredMacros->currentItem();
+
+  if (it != nullptr) {
+    it->data(Qt::ItemDataRole::UserRole).value<Macro*>()->play(m_textApp->tabWidget()->currentEditor());
+  }
+}
+
+void MacrosSidebar::deleteStoredMacro() {
+  if (m_widget->m_ui.m_listStoredMacros->currentRow() >= 0) {
+    delete m_widget->m_ui.m_listStoredMacros->takeItem(m_widget->m_ui.m_listStoredMacros->currentRow());
+  }
+}
+
+void MacrosSidebar::onCurrentStoredMacroChanged(int row) {
+  m_actionStoredPlay->setEnabled(row >= 0);
+  m_actionStoredDelete->setEnabled(row >= 0);
+}
+
 void MacrosSidebar::loadNewRecordedMacroStep(Macro::MacroStep step) {
   auto recorded_macro = m_macrosFactory->recordedMacro();
 
@@ -132,4 +158,16 @@ void MacrosSidebar::loadNewRecordedMacroStep(Macro::MacroStep step) {
   }
 
   m_widget->m_ui.m_listRecordedSteps->scrollToBottom();
+}
+
+void MacrosSidebar::reloadStoredMacros() {
+  m_widget->m_ui.m_listStoredMacros->clear();
+
+  for (Macro* mac : m_macrosFactory->storedMacros()) {
+    auto it = new QListWidgetItem(mac->name(), m_widget->m_ui.m_listStoredMacros);
+
+    //m_widget->m_ui.m_listStoredMacros->addItem(it);
+
+    it->setData(Qt::ItemDataRole::UserRole, QVariant::fromValue(mac));
+  }
 }

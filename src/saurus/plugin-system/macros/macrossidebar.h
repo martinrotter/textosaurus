@@ -25,11 +25,17 @@ class MacrosSidebar : public BaseSidebar {
     void load();
     void startRecording();
     void stopRecording();
-    void saveMacroAs();
-    void playMacro();
+    void saveRecordedMacroAs();
+    void playRecordedMacro();
+    void playStoredMacro();
+    void deleteStoredMacro();
 
   private slots:
+    void onCurrentStoredMacroChanged(int row);
     void loadNewRecordedMacroStep(Macro::MacroStep step);
+
+  private:
+    void reloadStoredMacros();
 
   private:
     Macros* m_macrosFactory;

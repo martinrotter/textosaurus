@@ -18,21 +18,6 @@ void Macro::setName(const QString& name) {
   m_name = name;
 }
 
-QString Macro::toString() const {
-  // We serialize steps first.
-  QStringList lst;
-
-  lst.reserve(m_macroSteps.size());
-
-  for (const MacroStep& step : m_macroSteps) {
-    lst.append(QString("%1 %2 %3").arg(QString::number(step.m_msg),
-                                       QString::number(step.m_wParam),
-                                       step.m_text.isEmpty() ? QSL("nil") : step.m_text.toBase64()));
-  }
-
-  return QString("%1 %2").arg(m_name.toUtf8().toBase64(), lst.join(QL1C(' ')));
-}
-
 void Macro::clear() {
   m_macroSteps.clear();
 }
@@ -104,8 +89,36 @@ void Macro::recordStep(int msg, uptr_t wParam, sptr_t lParam) {
   emit newStepRecorded(m);
 }
 
+QString Macro::toString() const {
+  // We serialize steps first.
+  QStringList lst;
+
+  lst.reserve(m_macroSteps.size());
+
+  for (const MacroStep& step : m_macroSteps) {
+    lst.append(QString("%1 %2 %3").arg(QString::number(step.m_msg),
+                                       QString::number(step.m_wParam),
+                                       step.m_text.isEmpty() ? QSL("nil") : step.m_text.toBase64()));
+  }
+
+  return QString("%1 %2").arg(m_name.toUtf8().toBase64(), lst.join(QL1C(' ')));
+}
+
 void Macro::fromString(const QString& asc) {
   clear();
+
+  QStringList parts = asc.split(QL1C(' '));
+
+  setName(QByteArray::fromBase64(parts.first().toUtf8()));
+
+  for (int i = 1; i < parts.size(); i += 3) {
+    MacroStep step;
+
+    step.m_msg = parts.at(i).toInt();
+    step.m_wParam = parts.at(i + 1).toULong();
+    step.m_text = QByteArray::fromBase64(parts.at(i + 2).toUtf8());
+    m_macroSteps.append(step);
+  }
 }
 
 QList<Macro::MacroStep> Macro::macroSteps() const {

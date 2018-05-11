@@ -19,6 +19,8 @@ class Macros : public QObject {
 
     Macro* recordedMacro() const;
 
+    QList<Macro*> storedMacros() const;
+
   public slots:
     void addMacro(Macro* macro);
     void clearAllMacros();

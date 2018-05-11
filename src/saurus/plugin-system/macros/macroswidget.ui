@@ -27,7 +27,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="m_tabsMacros">
      <property name="tabPosition">
       <enum>QTabWidget::South</enum>
      </property>

@@ -9,7 +9,9 @@
 
 #include <QInputDialog>
 
-Macros::Macros(Settings* settings, QObject* parent) : QObject(parent), m_settings(settings) {}
+Macros::Macros(Settings* settings, QObject* parent) : QObject(parent), m_settings(settings) {
+  loadMacrosFromSettings();
+}
 
 Macros::~Macros() {
   clearAllMacros();
@@ -70,15 +72,29 @@ void Macros::stopMacroRecording() {
 void Macros::loadMacrosFromSettings() {
   clearAllMacros();
 
-  // TODO: dodělat
+  m_settings->beginGroup(GROUP(StoredMacros));
+
+  auto keys = m_settings->allKeys();
+
+  m_settings->endGroup();
+
+  for (const QString& key : keys) {
+    auto macr = new Macro(m_settings->value(GROUP(StoredMacros), key).toString());
+
+    addMacro(macr);
+  }
 
   sortStoredMacros();
 }
 
 void Macros::sortStoredMacros() {
   std::sort(m_storedMacros.begin(), m_storedMacros.end(), [](Macro* lhs, Macro* rhs) {
-    return QString::compare(lhs->name(), rhs->name(), Qt::CaseSensitivity::CaseInsensitive);
+    return QString::compare(lhs->name(), rhs->name(), Qt::CaseSensitivity::CaseInsensitive) < 0;
   });
+}
+
+QList<Macro*> Macros::storedMacros() const {
+  return m_storedMacros;
 }
 
 Macro* Macros::recordedMacro() const {
