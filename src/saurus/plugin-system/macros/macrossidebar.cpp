@@ -101,9 +101,10 @@ void MacrosSidebar::stopRecording() {
 }
 
 void MacrosSidebar::saveRecordedMacroAs() {
-  m_macrosFactory->saveMacroAs(m_macrosFactory->recordedMacro());
-  reloadStoredMacros();
-  m_widget->m_ui.m_tabsMacros->setCurrentIndex(0);
+  if (m_macrosFactory->saveMacroAs(m_macrosFactory->recordedMacro())) {
+    reloadStoredMacros();
+    m_widget->m_ui.m_tabsMacros->setCurrentIndex(0);
+  }
 }
 
 void MacrosSidebar::playRecordedMacro() {

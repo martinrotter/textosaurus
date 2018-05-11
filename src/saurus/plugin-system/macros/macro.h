@@ -336,7 +336,6 @@ class Macro : public QObject {
     void setName(const QString& name);
 
     QString toString() const;
-
     QList<MacroStep> macroSteps() const;
 
   public slots:

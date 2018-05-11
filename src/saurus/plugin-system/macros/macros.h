@@ -17,16 +17,16 @@ class Macros : public QObject {
     explicit Macros(Settings* settings, QObject* parent = nullptr);
     virtual ~Macros();
 
+    bool isMacroNameUniqueNonEmpty(const QString& macro_name);
+
     Macro* recordedMacro() const;
 
     QList<Macro*> storedMacros() const;
 
-  public slots:
+    bool saveMacroAs(Macro* macro);
+    void deleteMacro(Macro* macro);
     void addMacro(Macro* macro);
     void clearAllMacros();
-    void saveMacroAs(Macro* macro);
-    void deleteMacro(Macro* macro);
-
     void recordNewMacro(ScintillaEdit* editor);
     void stopMacroRecording();
 
