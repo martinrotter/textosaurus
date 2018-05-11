@@ -1,7 +1,7 @@
 TEMPLATE    = lib
 TARGET      = libtextosaurus
 
-MSG_PREFIX                    = "textosaurus"
+MSG_PREFIX                    = "libtextosaurus"
 APP_NAME                      = "Textosaurus"
 APP_LOW_NAME                  = "textosaurus"
 APP_REVERSE_NAME              = "io.github.martinrotter.textosaurus"
@@ -31,16 +31,12 @@ isEmpty(PREFIX) {
     PREFIX = $$OUT_PWD/app
   }
 
-  android {
-    PREFIX = $$OUT_PWD/app
-  }
-
   mac {
     PREFIX = $$quote($$OUT_PWD/$${APP_NAME}.app)
   }
 
   unix:!mac:!android {
-    PREFIX = $$OUT_PWD/AppDir/usr
+    PREFIX = $$OUT_PWD/AppDir/usr/lib
   }
 }
 
@@ -106,12 +102,6 @@ gcc|g++|clang* {
 CONFIG(release, debug|release) {
   message($$MSG_PREFIX: Building in "release" mode.)
 
-  msvc:static {
-    message($$MSG_PREFIX: Setting up LTCG.)
-
-    QMAKE_LFLAGS += /LTCG
-  }
-
   gcc:QMAKE_CXXFLAGS_RELEASE -= -O2
   clang:QMAKE_CXXFLAGS_RELEASE -= -O2
   gcc:QMAKE_CXXFLAGS_RELEASE *= -O3
@@ -121,7 +111,6 @@ else {
   message($$MSG_PREFIX: Building in "debug" mode.)
 
   DEFINES *= DEBUG=1
-
   gcc:QMAKE_CXXFLAGS_DEBUG *= -Wall
   clang:QMAKE_CXXFLAGS_DEBUG *= -Wall
 }
@@ -131,7 +120,7 @@ CONFIG(FLATPAK_MODE) {
   DEFINES *= FLATPAK_MODE=1
 }
 
-DISTFILES += resources/scripts/uncrustify/uncrustify.cfg
+DISTFILES += ../../resources/scripts/uncrustify/uncrustify.cfg
 
 MOC_DIR = $$OUT_PWD/moc
 RCC_DIR = $$OUT_PWD/rcc
@@ -143,7 +132,7 @@ mac {
 
 # Make needed tweaks for RC file getting generated on Windows.
 win32 {
-  RC_ICONS = resources/graphics/textosaurus.ico
+  RC_ICONS = ../../resources/graphics/textosaurus.ico
   QMAKE_TARGET_COMPANY = $$APP_AUTHOR
   QMAKE_TARGET_DESCRIPTION = $$APP_NAME
   QMAKE_TARGET_COPYRIGHT = $$APP_COPYRIGHT
@@ -340,7 +329,6 @@ FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/settings/syntaxcolorthemeeditor.ui \
           saurus/plugin-system/macros/macroswidget.ui
 
-
 # Add qtsingleapplication.
 SOURCES += $$files(3rd-party/qtsingleapplication/*.cpp, false)
 HEADERS  += $$files(3rd-party/qtsingleapplication/*.h, false)
@@ -404,7 +392,10 @@ HEADERS  += \
     3rd-party/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
     3rd-party/scintilla/qt/ScintillaEditBase/ScintillaQt.h
 
-INCLUDEPATH += 3rd-party/scintilla/qt/ScintillaEditBase 3rd-party/scintilla/include 3rd-party/scintilla/src 3rd-party/scintilla/lexlib
+INCLUDEPATH +=  3rd-party/scintilla/qt/ScintillaEditBase \
+                3rd-party/scintilla/include \
+                3rd-party/scintilla/src \
+                3rd-party/scintilla/lexlib
 
 DEFINES *= SCINTILLA_QT=1 MAKING_LIBRARY=1 SCI_LEXER=1 _CRT_SECURE_NO_DEPRECATE=1
 
