@@ -158,5 +158,8 @@ unix|win32: LIBS += -L$$OUT_PWD/../libtextosaurus/ -llibtextosaurus
 win32 {
   target.path = $$PREFIX
 
-  INSTALLS += target
+  lib.files = $$OUT_PWD/../libtextosaurus/*.dll
+  lib.path = $$PREFIX
+
+  INSTALLS += target lib
 }
