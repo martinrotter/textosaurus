@@ -27,7 +27,7 @@ struct UpdateInfo {
 
 Q_DECLARE_METATYPE(UpdateInfo)
 
-class SystemFactory : public QObject {
+class TEXTOSAURUS_DLLSPEC SystemFactory : public QObject {
   Q_OBJECT
 
   public:

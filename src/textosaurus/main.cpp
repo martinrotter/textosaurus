@@ -1,5 +1,9 @@
 // For license of this file, see <project-root-folder>/LICENSE.md.
 
+#ifdef MAKING_LIBRARY
+#undef MAKING_LIBRARY
+#endif
+
 #include "common/dynamic-shortcuts/dynamicshortcuts.h"
 #include "common/gui/messagebox.h"
 #include "common/gui/systemtrayicon.h"
@@ -24,11 +28,6 @@
 #include <QThread>
 #include <QTranslator>
 
-#if defined (Q_OS_MAC)
-extern void disableWindowTabbing();
-
-#endif
-
 int main(int argc, char* argv[]) {
   //: Abbreviation of language, e.g. en.
   //: Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code.
@@ -38,11 +37,11 @@ int main(int argc, char* argv[]) {
   // Setup debug output system.
   qInstallMessageHandler(Debugging::debugHandler);
 
-  Application::setAttribute(Qt::AA_UseHighDpiPixmaps);
-  Application::setAttribute(Qt::AA_EnableHighDpiScaling);
-  Application::setApplicationName(APP_NAME);
-  Application::setApplicationVersion(APP_VERSION);
-  Application::setOrganizationDomain(APP_URL);
+  QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  QApplication::setApplicationName(APP_NAME);
+  QApplication::setApplicationVersion(APP_VERSION);
+  QApplication::setOrganizationDomain(APP_URL);
 
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
@@ -50,7 +49,7 @@ int main(int argc, char* argv[]) {
   qDebug("Instantiated Application class.");
 
   // Check if another instance is running.
-  if (application.sendMessage((QStringList() << APP_IS_RUNNING << application.arguments().mid(1)).join(ARGUMENTS_LIST_SEPARATOR))) {
+  if (application.isRunning()) {
     qWarning("Another instance of the application is already running. Notifying it.");
     return EXIT_FAILURE;
   }
@@ -59,11 +58,10 @@ int main(int argc, char* argv[]) {
   qDebug("Flatpak mode enabled.");
 #endif
 
-  Application::setWindowIcon(QIcon(APP_ICON_PATH));
+  QApplication::setWindowIcon(QIcon(APP_ICON_PATH));
 
 #if defined (Q_OS_MAC)
-  Application::setAttribute(Qt::AA_DontShowIconsInMenus);
-  disableWindowTabbing();
+  QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
 
   qApp->localization()->loadActiveLanguage();
@@ -72,7 +70,7 @@ int main(int argc, char* argv[]) {
   qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
 
   // Setup single-instance behavior.
-  QObject::connect(&application, &Application::messageReceived, &application, &Application::processExecutionMessage);
+  application.activateQtSingleMsgProcessing();
   qDebug().nospace() << "Creating main application form in thread: \'" << QThread::currentThreadId() << "\'.";
 
   // Instantiate main application window.
@@ -124,6 +122,7 @@ int main(int argc, char* argv[]) {
 
     qApp->system()->disconnect(qApp);
   });
+
   qApp->system()->checkForUpdates();
 
   // Enter global event loop.

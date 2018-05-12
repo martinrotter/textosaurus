@@ -87,7 +87,7 @@ QT *= core gui widgets network printsupport svg
 
 CONFIG *= c++1z warn_on
 CONFIG -=  debug_and_release
-DEFINES *= QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
+DEFINES *= MAKING_LIBRARY=1 QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
 VERSION = $$APP_VERSION
 
 win32 {
@@ -311,10 +311,6 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/macros/macroswidget.cpp \
             saurus/plugin-system/macros/macros.cpp \
             saurus/plugin-system/macros/macrosplugin.cpp
-
-mac {
-  OBJECTIVE_SOURCES += common/miscellaneous/disablewindowtabbing.mm
-}
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \

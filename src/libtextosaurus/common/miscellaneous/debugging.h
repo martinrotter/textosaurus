@@ -5,7 +5,9 @@
 
 #include <QtGlobal>
 
-class Debugging {
+#include "definitions/definitions.h"
+
+class TEXTOSAURUS_DLLSPEC Debugging {
   public:
     Debugging() = delete;
     ~Debugging() = delete;

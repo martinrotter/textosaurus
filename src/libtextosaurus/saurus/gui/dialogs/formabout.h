@@ -5,9 +5,11 @@
 
 #include <QDialog>
 
+#include "definitions/definitions.h"
+
 #include "ui_formabout.h"
 
-class FormAbout : public QDialog {
+class TEXTOSAURUS_DLLSPEC FormAbout : public QDialog {
   Q_OBJECT
 
   public:

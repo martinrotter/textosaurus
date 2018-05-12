@@ -5,13 +5,15 @@
 
 #include <QMainWindow>
 
+#include "definitions/definitions.h"
+
 #include "ui_formmain.h"
 
 class StatusBar;
 class ToolBar;
 class TabWidget;
 
-class FormMain : public QMainWindow {
+class TEXTOSAURUS_DLLSPEC FormMain : public QMainWindow {
   Q_OBJECT
 
   friend class TabWidget;

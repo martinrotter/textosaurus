@@ -5,9 +5,11 @@
 
 #include <QList>
 
+#include "definitions/definitions.h"
+
 class QAction;
 
-class DynamicShortcuts {
+class TEXTOSAURUS_DLLSPEC DynamicShortcuts {
   public:
     DynamicShortcuts() = delete;
     ~DynamicShortcuts() = delete;

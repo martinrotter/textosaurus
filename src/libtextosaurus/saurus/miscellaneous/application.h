@@ -30,12 +30,16 @@ class WebFactory;
 class SystemTrayIcon;
 class TextApplication;
 
-class Application : public QtSingleApplication {
+class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
   Q_OBJECT
 
   public:
     explicit Application(const QString& id, int& argc, char** argv);
     virtual ~Application() = default;
+
+    void activateQtSingleMsgProcessing();
+
+    bool isRunning();
 
     // Globally accessible actions.
     QList<QAction*> userActions();

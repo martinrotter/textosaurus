@@ -5,6 +5,8 @@
 
 #include <QObject>
 
+#include "definitions/definitions.h"
+
 #include <QLocale>
 #include <QString>
 
@@ -13,7 +15,7 @@ struct Language {
   QString m_code;
 };
 
-class Localization : public QObject {
+class TEXTOSAURUS_DLLSPEC Localization : public QObject {
   Q_OBJECT
 
   public:

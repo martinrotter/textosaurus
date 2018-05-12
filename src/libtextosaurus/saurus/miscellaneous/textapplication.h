@@ -22,7 +22,7 @@ class QMenu;
 class QLineEdit;
 
 // Main class which ties text box functionality into GUI and gels all together.
-class TextApplication : public QObject {
+class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
   Q_OBJECT
 
   friend class PluginFactory;

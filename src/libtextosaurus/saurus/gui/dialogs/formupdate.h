@@ -13,7 +13,7 @@
 #include <QNetworkReply>
 #include <QPushButton>
 
-class FormUpdate : public QDialog {
+class TEXTOSAURUS_DLLSPEC FormUpdate : public QDialog {
   Q_OBJECT
 
   public:

@@ -2,6 +2,8 @@
 
 #include "saurus/gui/dialogs/formupdate.h"
 
+#include "ui_formupdate.h"
+
 #include "common/gui/guiutilities.h"
 #include "common/gui/messagebox.h"
 #include "common/miscellaneous/iconfactory.h"

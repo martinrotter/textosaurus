@@ -5,6 +5,7 @@
 
 #include <QTabWidget>
 
+#include "definitions/definitions.h"
 #include "saurus/gui/tabbar.h"
 
 #include <QUrl>

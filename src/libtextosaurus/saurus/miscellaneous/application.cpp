@@ -37,6 +37,14 @@ Application::Application(const QString& id, int& argc, char** argv)
                     "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
 }
 
+void Application::activateQtSingleMsgProcessing() {
+  connect(this, &Application::messageReceived, this, &Application::processExecutionMessage);
+}
+
+bool Application::isRunning() {
+  return sendMessage((QStringList() << APP_IS_RUNNING << arguments().mid(1)).join(ARGUMENTS_LIST_SEPARATOR));
+}
+
 QList<QAction*> Application::userActions() {
   if (m_mainForm != nullptr && m_userActions.isEmpty()) {
     m_userActions = m_mainForm->allActions();

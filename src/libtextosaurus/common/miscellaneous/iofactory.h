@@ -9,7 +9,7 @@
 
 #include <QStandardPaths>
 
-class IOFactory {
+class TEXTOSAURUS_DLLSPEC IOFactory {
   Q_DECLARE_TR_FUNCTIONS(IOFactory)
 
   public:

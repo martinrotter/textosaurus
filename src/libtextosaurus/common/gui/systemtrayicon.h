@@ -17,7 +17,7 @@ class QEvent;
 
 #if defined(Q_OS_WIN)
 
-class TrayIconMenu : public QMenu {
+class TEXTOSAURUS_DLLSPEC TrayIconMenu : public QMenu {
   Q_OBJECT
 
   public:
@@ -32,7 +32,7 @@ class TrayIconMenu : public QMenu {
 
 #endif
 
-class SystemTrayIcon : public QSystemTrayIcon {
+class TEXTOSAURUS_DLLSPEC SystemTrayIcon : public QSystemTrayIcon {
   Q_OBJECT
 
   public:
