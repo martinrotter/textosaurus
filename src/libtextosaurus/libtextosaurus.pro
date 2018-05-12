@@ -440,16 +440,6 @@ else {
   message($$MSG_PREFIX: Building shared version of library.)
 }
 
-win32 {
-  target.path = $$PREFIX
-  INSTALLS += target
-}
-
-unix:!mac:!android {
-  target.path = $$PREFIX/lib
-  INSTALLS += target
-}
-
 mac {
   IDENTIFIER = $$APP_REVERSE_NAME
   CONFIG -= app_bundle

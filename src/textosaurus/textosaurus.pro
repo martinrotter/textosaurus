@@ -36,7 +36,7 @@ isEmpty(PREFIX) {
   }
 
   unix:!mac:!android {
-    PREFIX = $$OUT_PWD/AppDir/usr/lib
+    PREFIX = $$OUT_PWD/AppDir/usr
   }
 }
 
@@ -153,3 +153,10 @@ INCLUDEPATH +=  ../libtextosaurus \
 DEPENDPATH += $$PWD/../libtextosaurus
 
 unix|win32: LIBS += -L$$OUT_PWD/../libtextosaurus/ -llibtextosaurus
+
+# Install all files on Windows.
+win32 {
+  target.path = $$PREFIX
+
+  INSTALLS += target
+}
