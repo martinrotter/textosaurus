@@ -163,3 +163,22 @@ win32 {
 
   INSTALLS += target lib
 }
+
+# Install all files on Linux.
+unix:!mac:!android {
+  target.path = $$PREFIX/bin
+
+  desktop_file.files = ../../resources/desktop/$${APP_REVERSE_NAME}.desktop
+  desktop_file.path = $$quote($$PREFIX/share/applications/)
+
+  appdata.files = ../../resources/desktop/$${APP_REVERSE_NAME}.appdata.xml
+  appdata.path = $$quote($$PREFIX/share/metainfo/)
+
+  lib.files = $$OUT_PWD/../libtextosaurus/*.so
+  lib.path = $$quote($$PREFIX/lib/)
+
+  desktop_icon.files = ../../resources/graphics/$${TARGET}.png
+  desktop_icon.path = $$quote($$PREFIX/share/icons/hicolor/512x512/apps/)
+
+  INSTALLS += target desktop_file desktop_icon appdata
+}
