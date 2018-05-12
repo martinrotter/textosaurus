@@ -83,7 +83,7 @@ message($$MSG_PREFIX: Prefix directory: \"$$PREFIX\".)
 message($$MSG_PREFIX: Build revision: \"$$APP_REVISION\".)
 message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
 
-QT *= core gui widgets network printsupport svg
+QT *= core gui widgets network svg
 
 CONFIG *= c++1z warn_on
 CONFIG -=  debug_and_release
@@ -152,4 +152,4 @@ INCLUDEPATH +=  ../libtextosaurus \
 
 DEPENDPATH += $$PWD/../libtextosaurus
 
-unix|win32: LIBS += -L$$OUT_PWD/../libtextosaurus/ -llibtextosaurus0
+unix|win32: LIBS += -L$$OUT_PWD/../libtextosaurus/ -llibtextosaurus
