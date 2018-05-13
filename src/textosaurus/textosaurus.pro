@@ -232,6 +232,8 @@ mac {
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
   LIBS += -framework AppKit
 
+  QMAKE_POST_LINK += $$system(install_name_tool -change "libtextosaurus.dylib" "@executable_path/libtextosaurus.dylib" $$PREFIX/Contents/MacOS/textosaurus)
+
   target.path = $$quote($$PREFIX/Contents/MacOS/)
 
   lib.files = $$OUT_PWD/../libtextosaurus/*.dylib
