@@ -143,7 +143,6 @@ win32 {
 
 CONFIG += resources_small
 
-
 SOURCES += main.cpp
 INCLUDEPATH +=  ../libtextosaurus \
                 ../libtextosaurus/common/gui \
@@ -152,7 +151,8 @@ INCLUDEPATH +=  ../libtextosaurus \
 
 DEPENDPATH += $$PWD/../libtextosaurus
 
-unix|win32: LIBS += -L$$OUT_PWD/../libtextosaurus/ -llibtextosaurus
+win32: LIBS += -L$$OUT_PWD/../libtextosaurus/ -llibtextosaurus
+unix: LIBS += -L$$OUT_PWD/../libtextosaurus/ -ltextosaurus
 
 # Install all files on Windows.
 win32 {
@@ -180,5 +180,5 @@ unix:!mac:!android {
   desktop_icon.files = ../../resources/graphics/$${TARGET}.png
   desktop_icon.path = $$quote($$PREFIX/share/icons/hicolor/512x512/apps/)
 
-  INSTALLS += target desktop_file desktop_icon appdata
+  INSTALLS += target desktop_file desktop_icon appdata lib
 }

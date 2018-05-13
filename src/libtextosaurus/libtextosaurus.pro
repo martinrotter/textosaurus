@@ -1,5 +1,11 @@
 TEMPLATE    = lib
+
+unix:!mac {
+TARGET      = textosaurus
+}
+else {
 TARGET      = libtextosaurus
+}
 
 MSG_PREFIX                    = "libtextosaurus"
 APP_NAME                      = "Textosaurus"
@@ -90,7 +96,7 @@ CONFIG -=  debug_and_release
 DEFINES *= TEXTOSAURUS_DLLSPEC=Q_DECL_EXPORT QT_USE_QSTRINGBUILDER QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS UNICODE _UNICODE
 VERSION = $$APP_VERSION
 
-CONFIG += unversioned_libname skip_target_version_ext
+CONFIG += unversioned_libname unversioned_soname skip_target_version_ext
 
 win32 {
   LIBS *= Shell32.lib
