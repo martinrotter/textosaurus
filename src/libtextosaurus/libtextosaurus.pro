@@ -1,10 +1,10 @@
 TEMPLATE    = lib
 
-unix:!mac {
-TARGET      = textosaurus
+unix|mac {
+  TARGET      = textosaurus
 }
 else {
-TARGET      = libtextosaurus
+  TARGET      = libtextosaurus
 }
 
 MSG_PREFIX                    = "libtextosaurus"
