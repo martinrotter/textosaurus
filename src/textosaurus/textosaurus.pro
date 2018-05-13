@@ -188,11 +188,11 @@ win32 {
 }
 
 mac {
-  dmg.target = dmg
-  dmg.depends = install
-  dmg.commands = macdeployqt $$shell_quote($$shell_path($$PREFIX)) -dmg
+  frameworks.target = frameworks
+  frameworks.depends = install
+  frameworks.commands = macdeployqt $$shell_quote($$shell_path($$PREFIX))
 
-  QMAKE_EXTRA_TARGETS += dmg
+  QMAKE_EXTRA_TARGETS += frameworks
 }
 
 # Install all files on Windows.
@@ -232,7 +232,7 @@ mac {
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
   LIBS += -framework AppKit
 
-  QMAKE_POST_LINK += $$system(install_name_tool -change "libtextosaurus.dylib" "@executable_path/libtextosaurus.dylib" $$PREFIX/Contents/MacOS/textosaurus)
+  QMAKE_POST_LINK += $$system(install_name_tool -change "libtextosaurus.dylib" "@executable_path/libtextosaurus.dylib" $$OUT_PWD/textosaurus)
 
   target.path = $$quote($$PREFIX/Contents/MacOS/)
 
