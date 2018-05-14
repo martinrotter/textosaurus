@@ -36,6 +36,7 @@ Features
     - hideable toolbar and statusbar,
     - main window can stay on top,
     - **tray icon**,
+    - can record/save/play **macros**,
     - simple interface,
     - **movable dock sidebars**:
         * "Output" sidebar - can display output of external tools and other information,
