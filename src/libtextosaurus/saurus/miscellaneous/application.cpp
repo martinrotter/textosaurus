@@ -28,6 +28,11 @@ Application::Application(const QString& id, int& argc, char** argv)
   m_trayIcon(nullptr),
   m_shouldRestart(false),
   m_isQuitting(false) {
+  //: Abbreviation of language, e.g. en.
+  //: Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code.
+  //: Examples: "cs", "en", "it", "cs_CZ", "en_GB", "en_US".
+  QObject::tr("LANG_ABBREV");
+
   connect(this, &Application::aboutToQuit, this, &Application::onAboutToQuit);
   connect(this, &Application::commitDataRequest, this, &Application::onCommitData);
   connect(this, &Application::saveStateRequest, this, &Application::onSaveState);

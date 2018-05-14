@@ -19,21 +19,11 @@
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
-// Needed for setting ini file format on Mac OS.
-#ifdef Q_OS_MAC
-#include <QSettings>
-#endif
-
 #include <QDebug>
 #include <QThread>
 #include <QTranslator>
 
 int main(int argc, char* argv[]) {
-  //: Abbreviation of language, e.g. en.
-  //: Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code.
-  //: Examples: "cs", "en", "it", "cs_CZ", "en_GB", "en_US".
-  QObject::tr("LANG_ABBREV");
-
   // Setup debug output system.
   qInstallMessageHandler(Debugging::debugHandler);
 
@@ -108,22 +98,6 @@ int main(int argc, char* argv[]) {
   if (SystemTrayIcon::isSystemTrayActivated()) {
     qApp->showTrayIcon();
   }
-
-  QObject::connect(qApp->system(), &SystemFactory::updatesChecked,
-                   qApp, [&main_window](QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> updates) {
-    if (!updates.first.isEmpty() && !qApp->system()->isVersionNewer(updates.first.first().m_availableVersion, APP_VERSION)) {
-      qApp->showGuiMessage(QObject::tr("Newer version %1 is available."
-                                       " Click on me to download the update.").arg(updates.first.first().m_availableVersion),
-                           QMessageBox::Icon::Information,
-                           QUrl("http://update.textosaurus"), [&main_window]() {
-        FormUpdate(&main_window).exec();
-      });
-    }
-
-    qApp->system()->disconnect(qApp);
-  });
-
-  qApp->system()->checkForUpdates();
 
   // Enter global event loop.
   return Application::exec();
