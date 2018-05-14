@@ -219,6 +219,7 @@ unix:!mac:!android {
 
   lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.so
   lib.path = $$quote($$PREFIX/lib/)
+  lib.CONFIG = no_check_exist
 
   desktop_icon.files = ../../resources/graphics/$${TARGET}.png
   desktop_icon.path = $$quote($$PREFIX/share/icons/hicolor/512x512/apps/)
@@ -240,6 +241,7 @@ mac {
 
   lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.dylib
   lib.path = $$quote($$PREFIX/Contents/MacOS/)
+  lib.CONFIG = no_check_exist
 
   # Install app icon.
   icns_icon.files = ../../resources/graphics/$${TARGET}.icns

@@ -12,9 +12,11 @@ mkdir textosaurus-build && cd textosaurus-build
 
 # Build application.
 #lrelease -compress ../textosaurus.pro
-qmake -spec linux-g++ "WITH_UBUNTU=true" ../textosaurus.pro 
+qmake -spec linux-g++ -r "WITH_UBUNTU=true" ../build.pro 
 make
 make install
+
+cd src/textosaurus
 
 # Obtain linuxdeployqt.
 wget -c https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
