@@ -30,4 +30,6 @@ cd "app"
 & "C:\textosaurus\$qt_stub\bin\windeployqt.exe" --no-translations "textosaurus.exe" "libtextosaurus.dll"
 Copy-Item -Path C:\textosaurus\$qt_stub\bin\*eay* -Destination .\
 
+cd ..
+
 & "nmake" windows_all
