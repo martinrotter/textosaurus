@@ -9,20 +9,15 @@ qmake ../build.pro
 make
 make install
 
-cd textosaurus
+cd src/textosaurus
 
 # Make app directory (not DMG image).
 make frameworks
 otool -L "Textosaurus.app/Contents/MacOS/textosaurus"
 
-set -- *.dmg
+dmgnamenospace="textosaurus-${git_tag_name}-${git_revision}-mac64.7z"
 
-rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
-
-dmgname="$1"
-dmgnamenospace="textosaurus-${git_tag_name}-${git_revision}-mac64.dmg"
-
-mv $dmgname $dmgnamenospace
+7za a -t7z "$dmgnamenospace" "Textosaurus.app"
 
 echo "File to upload: $dmgnamenospace"
 
