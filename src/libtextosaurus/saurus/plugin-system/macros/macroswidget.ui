@@ -36,7 +36,7 @@
      </property>
      <widget class="QWidget" name="m_tabStoredMacros">
       <attribute name="title">
-       <string>Stored Macros</string>
+       <string>My Macros</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayoutStored">
        <property name="leftMargin">
@@ -62,7 +62,7 @@
      </widget>
      <widget class="QWidget" name="m_tabMacroRecorder">
       <attribute name="title">
-       <string>Macro Recorder</string>
+       <string>Recorder</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayoutRecorder">
        <property name="leftMargin">
