@@ -8,6 +8,8 @@
 #include "saurus/gui/sidebars/basesidebar.h"
 
 class TextApplication;
+class Settings;
+class IconFactory;
 
 class PluginBase {
   public:
@@ -17,7 +19,7 @@ class PluginBase {
     virtual QString name() const = 0;
     virtual QList<BaseSidebar*> sidebars() = 0;
     virtual QList<QAction*> userActions() = 0;
-    virtual void setTextApp(TextApplication* text_app) = 0;
+    virtual void setTextApp(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) = 0;
 };
 
 #endif // PLUGINBASE_H

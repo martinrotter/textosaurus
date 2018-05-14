@@ -156,7 +156,7 @@ namespace Keyboard {
   constexpr auto ID = "keyboard";
 }
 
-class Settings : public QSettings {
+class TEXTOSAURUS_DLLSPEC Settings : public QSettings {
   Q_OBJECT
 
   public:

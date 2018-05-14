@@ -22,7 +22,7 @@ QList<QAction*> MacrosPlugin::userActions() {
   return {};
 }
 
-void MacrosPlugin::setTextApp(TextApplication* text_app) {
+void MacrosPlugin::setTextApp(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
   m_textApp = text_app;
 }
 

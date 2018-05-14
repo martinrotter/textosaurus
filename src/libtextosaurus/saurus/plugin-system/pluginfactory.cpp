@@ -4,6 +4,7 @@
 
 #include "saurus/gui/sidebars/findresultssidebar.h"
 #include "saurus/gui/sidebars/outputsidebar.h"
+#include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 #include "saurus/plugin-system/filesystem/filesystemplugin.h"
@@ -25,7 +26,7 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
     m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
 
     for (PluginBase* plugin : m_plugins) {
-      plugin->setTextApp(text_app);
+      plugin->setTextApp(text_app, qApp->settings(), qApp->icons());
 
       auto plugin_sidebars = plugin->sidebars();
 

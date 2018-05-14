@@ -32,6 +32,6 @@ MarkdownSidebar* MarkdownPlugin::sidebar() {
   return m_sidebar;
 }
 
-void MarkdownPlugin::setTextApp(TextApplication* text_app) {
+void MarkdownPlugin::setTextApp(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
   m_textApp = text_app;
 }
