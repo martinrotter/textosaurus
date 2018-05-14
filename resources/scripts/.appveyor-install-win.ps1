@@ -15,6 +15,11 @@ $date = (Get-Date).ToUniversalTime().ToString("MM-dd-yyyy HH:mm:ss")
 $wikifile = 'C:\textosaurus-wiki\Development-builds.md'
 
 $file = (Get-ChildItem '*.7z').Name
+
+if (!$file) {
+  Break
+}
+
 echo "File to upload: $file"
 $url = curl.exe --upload-file "$file" "https://transfer.sh/$file" --silent
 echo "Obtained URL: $url"

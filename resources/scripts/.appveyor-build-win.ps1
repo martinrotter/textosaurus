@@ -14,7 +14,7 @@ ls
 #$mak_path = "C:\textosaurus\textosaurus-build\Makefile"
 $env:PATH = "C:\textosaurus\$qt_stub\bin\;" + $env:PATH
 
-& "C:\textosaurus\$qt_stub\bin\qmake.exe" "C:\textosaurus\textosaurus.pro" "-r" "CONFIG+=release"
+& "C:\textosaurus\$qt_stub\bin\qmake.exe" "C:\textosaurus\build.pro" "-r" "CONFIG+=release"
 
 #$mak_contents = [System.IO.File]::ReadAllText($mak_path).Replace(" qjp2.lib", "")
 #[System.IO.File]::WriteAllText($mak_path, $mak_contents)
