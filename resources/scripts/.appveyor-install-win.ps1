@@ -2,7 +2,7 @@ $OutputEncoding = New-Object -typename System.Text.UTF8Encoding
 chcp 65001
 $OutputEncoding
 
-cd C:\textosaurus\textosaurus-build
+cd C:\textosaurus\textosaurus-build\src\textosaurus
 
 git clone -q --depth=1 https://github.com/martinrotter/textosaurus.wiki.git C:\textosaurus-wiki
 git config --global credential.helper store

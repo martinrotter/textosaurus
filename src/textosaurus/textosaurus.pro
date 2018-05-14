@@ -79,6 +79,7 @@ DEFINES += APP_REVISION='"\\\"$$APP_REVISION\\\""'
 message($$MSG_PREFIX: $$APP_NAME version is: \"$$APP_VERSION\".)
 message($$MSG_PREFIX: Detected Qt version: \"$$QT_VERSION\".)
 message($$MSG_PREFIX: Build destination directory: \"$$DESTDIR\".)
+message($$MSG_PREFIX: OUT_PWD directory: \"$$OUT_PWD\".)
 message($$MSG_PREFIX: Prefix directory: \"$$PREFIX\".)
 message($$MSG_PREFIX: Build revision: \"$$APP_REVISION\".)
 message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
@@ -172,9 +173,9 @@ win32 {
   nsis.target = nsis
   nsis.depends = install
   nsis.commands = \
-    $$shell_path($$shell_quote($$PWD/resources/scripts/sed/sed.exe)) -e \"s|@APP_VERSION@|$$APP_VERSION|g; s|@APP_WIN_ARCH@|$$APP_WIN_ARCH|g; s|@APP_REVISION@|$$APP_REVISION|g; s|@APP_NAME@|$$APP_NAME|g; s|@APP_LOW_NAME@|$$APP_LOW_NAME|g; s|@EXE_NAME@|$${APP_LOW_NAME}.exe|g; s|@PWD@|$$replace(PWD, /, \\\\\\\\\\\\\\\\)|g; s|@OUT_PWD@|$$replace(OUT_PWD, /, \\\\\\\\\\\\\\\\)|g\" $$shell_quote($$shell_path($$PWD/resources/nsis/NSIS.definitions.nsh.in)) > $$shell_quote($$shell_path($$OUT_PWD/NSIS.definitions.nsh)) && \
-    xcopy \"$$system_path($$PWD/resources/nsis/NSIS.template.in)\" \"$$system_path($$OUT_PWD/)\" /Y && \
-    $$shell_path($$shell_quote($$PWD/resources/scripts/nsis/makensis.exe)) \"$$system_path($$OUT_PWD/NSIS.template.in)\"
+    $$shell_path($$shell_quote($$PWD/../../resources/scripts/sed/sed.exe)) -e \"s|@APP_VERSION@|$$APP_VERSION|g; s|@APP_WIN_ARCH@|$$APP_WIN_ARCH|g; s|@APP_REVISION@|$$APP_REVISION|g; s|@APP_NAME@|$$APP_NAME|g; s|@APP_LOW_NAME@|$$APP_LOW_NAME|g; s|@EXE_NAME@|$${APP_LOW_NAME}.exe|g; s|@PWD@|$$replace(PWD, /, \\\\\\\\\\\\\\\\)|g; s|@OUT_PWD@|$$replace(OUT_PWD, /, \\\\\\\\\\\\\\\\)|g\" $$shell_quote($$shell_path($$PWD/../../resources/nsis/NSIS.definitions.nsh.in)) > $$shell_quote($$shell_path($$OUT_PWD/NSIS.definitions.nsh)) && \
+    xcopy \"$$system_path($$PWD/../../resources/nsis/NSIS.template.in)\" \"$$system_path($$OUT_PWD/)\" /Y && \
+    $$shell_path($$shell_quote($$PWD/../../resources/scripts/nsis/makensis.exe)) \"$$system_path($$OUT_PWD/NSIS.template.in)\"
 
   QMAKE_EXTRA_TARGETS += nsis
 }
