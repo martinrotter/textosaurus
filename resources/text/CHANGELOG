@@ -1,11 +1,14 @@
 0.9.5
 -----
+Textosaurus application is now split into main executable (textosaurus) and core library (libtextosaurus). This is needed to allow for robust plugin architecture. That said, it is no longer possible to publish statically built Textosaurus (single executable file). Textosaurus will support plugins (C++/Qt, dll/so/dylib files, loaded at runtime, simple API) in the future. The work on plugin API is already underway.
+
 Added:
 * Macros sidebar which allows to record, play and save macros.
 * Experimental Mac OS X build.
 * Updates are checked automatically.
 
 Changed:
+* Application is now split into two modules (executable + core library).
 * When closing app with some modified documents, then application asks for all "Save/Discard" confirmations first and exits only when everything is confimed by the user.
 
 0.9.4
