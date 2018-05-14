@@ -17,15 +17,7 @@ class PluginBase {
     virtual QString name() const = 0;
     virtual QList<BaseSidebar*> sidebars() = 0;
     virtual QList<QAction*> userActions() = 0;
-
-    void setTextApp(TextApplication* text_app);
-
-  protected:
-    TextApplication* m_textApp;
+    virtual void setTextApp(TextApplication* text_app) = 0;
 };
-
-inline void PluginBase::setTextApp(TextApplication* text_app) {
-  m_textApp = text_app;
-}
 
 #endif // PLUGINBASE_H

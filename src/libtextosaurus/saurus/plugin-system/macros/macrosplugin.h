@@ -21,6 +21,10 @@ class MacrosPlugin : public QObject, public PluginBase {
     virtual QString name() const override;
     virtual QList<BaseSidebar*> sidebars() override;
     virtual QList<QAction*> userActions() override;
+    virtual void setTextApp(TextApplication* text_app) override;
+
+  protected:
+    TextApplication* m_textApp;
 
   private:
     MacrosSidebar* sidebar();

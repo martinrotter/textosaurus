@@ -15,7 +15,7 @@ class PlainToolButton;
 class TextEditor;
 class Tab;
 
-class TabWidget : public QTabWidget {
+class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
   Q_OBJECT
 
   public:

@@ -13,7 +13,7 @@ class QAction;
 class PluginFactory;
 class BaseSidebar;
 
-class TextApplicationSettings : public QObject {
+class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
   Q_OBJECT
 
   public:

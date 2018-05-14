@@ -22,6 +22,10 @@ QList<QAction*> MacrosPlugin::userActions() {
   return {};
 }
 
+void MacrosPlugin::setTextApp(TextApplication* text_app) {
+  m_textApp = text_app;
+}
+
 MacrosSidebar* MacrosPlugin::sidebar() {
   if (m_sidebar == nullptr) {
     m_sidebar = new MacrosSidebar(m_textApp, m_macrosFactory, nullptr);

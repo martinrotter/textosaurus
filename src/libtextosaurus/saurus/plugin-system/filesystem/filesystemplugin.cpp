@@ -18,3 +18,7 @@ QList<BaseSidebar*> FilesystemPlugin::sidebars() {
 QList<QAction*> FilesystemPlugin::userActions() {
   return QList<QAction*>();
 }
+
+void FilesystemPlugin::setTextApp(TextApplication* text_app) {
+  m_textApp = text_app;
+}

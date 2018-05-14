@@ -17,13 +17,13 @@
 class TextApplication;
 class QFileSystemWatcher;
 
-struct FileInitialMetadata {
+struct TEXTOSAURUS_DLLSPEC FileInitialMetadata {
   QString m_encoding;
   Lexer m_lexer;
   int m_eolMode;
 };
 
-class TextEditor : public ScintillaEdit {
+class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
   Q_OBJECT
 
   public:

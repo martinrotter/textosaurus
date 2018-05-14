@@ -31,3 +31,7 @@ MarkdownSidebar* MarkdownPlugin::sidebar() {
 
   return m_sidebar;
 }
+
+void MarkdownPlugin::setTextApp(TextApplication* text_app) {
+  m_textApp = text_app;
+}
