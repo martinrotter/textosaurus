@@ -200,8 +200,9 @@ mac {
 win32 {
   target.path = $$PREFIX
 
-  lib.files = $$OUT_PWD/../libtextosaurus/*.dll
+  lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.dll
   lib.path = $$PREFIX
+  lib.CONFIG = no_check_exist
 
   INSTALLS += target lib
 }
@@ -216,7 +217,7 @@ unix:!mac:!android {
   appdata.files = ../../resources/desktop/$${APP_REVERSE_NAME}.appdata.xml
   appdata.path = $$quote($$PREFIX/share/metainfo/)
 
-  lib.files = $$OUT_PWD/../libtextosaurus/*.so
+  lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.so
   lib.path = $$quote($$PREFIX/lib/)
 
   desktop_icon.files = ../../resources/graphics/$${TARGET}.png
@@ -237,7 +238,7 @@ mac {
 
   target.path = $$quote($$PREFIX/Contents/MacOS/)
 
-  lib.files = $$OUT_PWD/../libtextosaurus/*.dylib
+  lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.dylib
   lib.path = $$quote($$PREFIX/Contents/MacOS/)
 
   # Install app icon.

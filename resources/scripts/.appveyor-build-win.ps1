@@ -23,4 +23,11 @@ $env:PATH = "C:\textosaurus\$qt_stub\bin\;" + $env:PATH
 
 cd "src\textosaurus"
 
+& "nmake" install
+
+cd "app"
+
+& "C:\textosaurus\$qt_stub\bin\windeployqt.exe" --no-translations "textosaurus.exe" "libtextosaurus.dll"
+Copy-Item -Path C:\textosaurus\$qt_stub\bin\*eay* -Destination .\
+
 & "nmake" windows_all
