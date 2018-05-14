@@ -243,6 +243,9 @@ mac {
   lib.path = $$quote($$PREFIX/Contents/MacOS/)
   lib.CONFIG = no_check_exist
 
+  readme.files = ../../resources/macosx/README_MACOSX
+  readme.path = $$quote($$PREFIX/)
+
   # Install app icon.
   icns_icon.files = ../../resources/graphics/$${TARGET}.icns
   icns_icon.path = $$quote($$PREFIX/Contents/Resources/)
@@ -260,5 +263,5 @@ mac {
   pkginfo.extra = @printf "APPL????" > $$shell_quote($$PREFIX/Contents/PkgInfo)
   pkginfo.path = $$quote($$PREFIX/Contents/)
 
-  INSTALLS += target lib icns_icon info_plist info_plist2 pkginfo
+  INSTALLS += target lib icns_icon info_plist info_plist2 pkginfo readme
 }

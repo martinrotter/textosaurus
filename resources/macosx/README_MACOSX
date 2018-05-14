@@ -1,0 +1,6 @@
+Textosaurus is automatically compiled for Mac OS X in a form of zipped Textosaurus.app package. Unfortunately, I am not skilled in creating Mac OS X bundles, so zipped app package have to be enough.
+
+The package depends on homebrew/qt5 package which must be installed and linked. Execute these:
+
+  brew install qt5
+  brew link --force qt5
