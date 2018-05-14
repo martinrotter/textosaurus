@@ -15,3 +15,7 @@ APP_DONATE_URL                = "https://martinrotter.github.io/donate/"
 APP_WIN_ARCH                  = "win64"
 
 message($$MSG_PREFIX: Welcome to $$MSG_PREFIX qmake script.)
+
+lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 7) {
+  error($$MSG_PREFIX: At least Qt \"5.7.0\" is required!!!)
+}

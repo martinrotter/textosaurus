@@ -6,10 +6,6 @@ APP_TYPE    = "executable"
 
 include(../../pri/vars.pri)
 
-lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 7) {
-  error($$MSG_PREFIX: At least Qt \"5.7.0\" is required!!!)
-}
-
 isEmpty(PREFIX) {
   message($$MSG_PREFIX: PREFIX variable is not set. This might indicate error.)
 
@@ -32,7 +28,6 @@ message($$MSG_PREFIX: Shadow copy build directory \"$$OUT_PWD\".)
 message($$MSG_PREFIX: $$APP_NAME version is: \"$$APP_VERSION\".)
 message($$MSG_PREFIX: Detected Qt version: \"$$QT_VERSION\".)
 message($$MSG_PREFIX: Build destination directory: \"$$DESTDIR\".)
-message($$MSG_PREFIX: OUT_PWD directory: \"$$OUT_PWD\".)
 message($$MSG_PREFIX: Prefix directory: \"$$PREFIX\".)
 message($$MSG_PREFIX: Build revision: \"$$APP_REVISION\".)
 

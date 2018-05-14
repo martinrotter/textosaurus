@@ -12,12 +12,6 @@ APP_TYPE    = "core library"
 
 include(../../pri/vars.pri)
 
-lessThan(QT_MAJOR_VERSION, 5)|lessThan(QT_MINOR_VERSION, 7) {
-  error($$MSG_PREFIX: At least Qt \"5.7.0\" is required!!!)
-}
-
-message($$MSG_PREFIX: Shadow copy build directory \"$$OUT_PWD\".)
-
 isEmpty(LRELEASE_EXECUTABLE) {
   LRELEASE_EXECUTABLE = lrelease
   message($$MSG_PREFIX: LRELEASE_EXECUTABLE variable is not set.)
@@ -25,6 +19,7 @@ isEmpty(LRELEASE_EXECUTABLE) {
 
 include(../../pri/defs.pri)
 
+message($$MSG_PREFIX: Shadow copy build directory \"$$OUT_PWD\".)
 message($$MSG_PREFIX: $$APP_NAME version is: \"$$APP_VERSION\".)
 message($$MSG_PREFIX: Detected Qt version: \"$$QT_VERSION\".)
 message($$MSG_PREFIX: Build destination directory: \"$$DESTDIR\".)
