@@ -54,13 +54,6 @@ constexpr auto APP_THEME_DEFAULT = "Papirus";
 constexpr auto APP_NO_THEME = "";
 constexpr auto APP_THEME_SUFFIX = ".png";
 
-/*
- #ifdef MAKING_LIBRARY
- #define TEXTOSAURUS_DLLSPEC Q_DECL_EXPORT
- #else
- #define TEXTOSAURUS_DLLSPEC Q_DECL_IMPORT
- #endif
- */
 #ifndef QSL
 
 // Thin macro wrapper for literal strings.

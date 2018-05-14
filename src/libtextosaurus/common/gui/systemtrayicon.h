@@ -17,7 +17,7 @@ class QEvent;
 
 #if defined(Q_OS_WIN)
 
-class TEXTOSAURUS_DLLSPEC TrayIconMenu : public QMenu {
+class TrayIconMenu : public QMenu {
   Q_OBJECT
 
   public:

@@ -138,7 +138,7 @@ void Application::deleteTrayIcon() {
 SystemTrayIcon* Application::trayIcon() {
   if (m_trayIcon == nullptr) {
 #if defined(Q_OS_WIN)
-    TrayIconMenu* tray_menu = new TrayIconMenu(APP_NAME, m_mainForm);
+    QMenu* tray_menu = new TrayIconMenu(APP_NAME, m_mainForm);
 #else
     QMenu* tray_menu = new QMenu(APP_NAME, m_mainForm);
 #endif
