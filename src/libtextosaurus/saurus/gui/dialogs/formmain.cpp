@@ -55,6 +55,9 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
       FormAbout(this).exec();
     });
   }
+
+  // Display main window.
+  qDebug("Showing the main window when the application is starting.");
 }
 
 TabWidget* FormMain::tabWidget() const {

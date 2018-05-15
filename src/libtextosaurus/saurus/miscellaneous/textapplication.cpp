@@ -103,6 +103,16 @@ void TextApplication::attachTextEditor(TextEditor* editor) {
   connect(editor, &TextEditor::readOnlyChanged, this, &TextApplication::onEditorReadOnlyChanged);
 }
 
+void TextApplication::openPassedFilesOrNewDocument() {
+  // We load any documents passed as parameters.
+  if (qApp->arguments().size() > 1) {
+    loadFilesFromArgs(qApp->arguments().mid(1));
+  }
+  else if (tabWidget()->count() == 0) {
+    newFile();
+  }
+}
+
 void TextApplication::saveCurrentEditor() {
   TextEditor* editor = tabWidget()->currentEditor();
 

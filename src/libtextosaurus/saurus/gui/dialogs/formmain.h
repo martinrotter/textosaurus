@@ -21,8 +21,6 @@ class TEXTOSAURUS_DLLSPEC FormMain : public QMainWindow {
   friend class TextApplication;
 
   public:
-
-    // Constructors and destructors.
     explicit FormMain(QWidget* parent = nullptr);
     virtual ~FormMain() = default;
 

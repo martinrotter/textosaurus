@@ -6,8 +6,7 @@ Microsoft Visual C++ redistributable must be installed. It is bundled in Textosa
 
 Added:
 * Macros sidebar which allows to record, play and save macros.
-* Experimental Mac OS X build.
-* Updates are checked automatically.
+* Experimental Mac OS X build. There was some effor to make good DMG bundles but I failed. Therefore "app dir" is generated instead and Textosaurus core library is placed in the same folder as main Textosaurus executable.
 
 Changed:
 * Application is now split into two modules (executable + core library).

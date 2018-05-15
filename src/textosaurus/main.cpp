@@ -68,28 +68,18 @@ int main(int argc, char* argv[]) {
 
   // Set correct information for main window.
   main_window.setWindowTitle(APP_LONG_NAME);
-
-  // Display main window.
-  qDebug("Showing the main window when the application is starting.");
   main_window.show();
 
   qApp->textApplication()->restoreSession();
-
-  // We load any documents passed as parameters.
-  if (application.arguments().size() > 1) {
-    qApp->textApplication()->loadFilesFromArgs(application.arguments().mid(1));
-  }
-  else if (qApp->textApplication()->tabWidget()->count() == 0) {
-    qApp->textApplication()->newFile();
-  }
-
-  // Now is a good time to initialize dynamic keyboard shortcuts.
-  DynamicShortcuts::load(qApp->userActions());
+  qApp->textApplication()->openPassedFilesOrNewDocument();
 
   // Display tray icon if it is enabled and available.
   if (SystemTrayIcon::isSystemTrayActivated()) {
     qApp->showTrayIcon();
   }
+
+  // Now is a good time to initialize dynamic keyboard shortcuts.
+  DynamicShortcuts::load(qApp->userActions());
 
   // Enter global event loop.
   return Application::exec();
