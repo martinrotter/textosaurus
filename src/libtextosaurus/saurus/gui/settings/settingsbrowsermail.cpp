@@ -138,7 +138,9 @@ void SettingsBrowserMail::loadSettings() {
 
   // Load the settings.
   QNetworkProxy::ProxyType selected_proxy_type = static_cast<QNetworkProxy::ProxyType>(settings()->value(GROUP(Proxy),
-                                                                                                         SETTING(Proxy::Type)).toInt());
+                                                                                                         Proxy::Type,
+                                                                                                         QNetworkProxy::ProxyType::NoProxy).
+                                                                                       toInt());
   m_ui.m_cmbProxyType->setCurrentIndex(m_ui.m_cmbProxyType->findData(selected_proxy_type));
   m_ui.m_txtProxyHost->setText(settings()->value(GROUP(Proxy), Proxy::Host).toString());
   m_ui.m_txtProxyUsername->setText(settings()->value(GROUP(Proxy), Proxy::Username).toString());

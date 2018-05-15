@@ -12,7 +12,9 @@
 #include "saurus/plugin-system/markdown/markdownplugin.h"
 #include "saurus/plugin-system/pluginbase.h"
 
+#include <QDir>
 #include <QMenu>
+#include <QPluginLoader>
 
 PluginFactory::PluginFactory(QObject* parent)
   : QObject(parent), m_plugins(QList<PluginBase*>()), m_sidebars(QList<BaseSidebar*>()),
@@ -20,12 +22,23 @@ PluginFactory::PluginFactory(QObject* parent)
 
 void PluginFactory::loadPlugins(TextApplication* text_app) {
   if (m_plugins.isEmpty()) {
-    // NOTE: If we decide to separate optional plugins
-    // into separate assemblies, then we load them here
-    // via QPluginLoader instead of these hardcoded references.
+    // Some hardcoded "plugins".
     m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
 
+    for (const QString& plugin_lib_file : QDir(pluginsLibPath()).entryList({QSL("libtextosaurus-*")})) {
+      QPluginLoader loader(plugin_lib_file);
+      QObject* plugin_instance = loader.instance();
+      PluginBase* plugin = qobject_cast<PluginBase*>(plugin_instance);
+
+      if (plugin != nullptr && !plugin->name().isEmpty()) {
+        m_plugins << plugin;
+      }
+    }
+
     for (PluginBase* plugin : m_plugins) {
+      // TODO: doladit, protože když se to volá tady,
+      // tak část property v text_app ani icons() není inicializovany,
+      // asi dát do hookPluginsIntoApplication
       plugin->setTextApp(text_app, qApp->settings(), qApp->icons());
 
       auto plugin_sidebars = plugin->sidebars();
@@ -41,6 +54,16 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
       }
     }
   }
+}
+
+QString PluginFactory::pluginsLibPath() const {
+#if defined(Q_OS_WIN)
+  return qApp->applicationDirPath();
+#elif defined(Q_OS_LINUX)
+  return qApp->applicationDirPath() + QL1S("../lib");
+#else
+  return qApp->applicationDirPath();
+#endif
 }
 
 QList<PluginBase*> PluginFactory::plugins() const {
@@ -77,5 +100,9 @@ QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) const {
 }
 
 void PluginFactory::hookPluginsIntoApplication(TextApplication* text_app) {
+  /*for (PluginBase* plugin : m_plugins) {
+     plugin->setTextApp(text_app, qApp->settings(), qApp->icons());
+     }*/
+
   text_app->m_menuDockWidgets->addActions(sidebarActions());
 }

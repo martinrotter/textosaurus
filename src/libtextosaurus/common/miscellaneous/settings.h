@@ -15,7 +15,7 @@
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
-#include <QNetworkProxy>
+#include <QLocale>
 #include <QStandardPaths>
 #include <QStringList>
 
@@ -144,7 +144,6 @@ namespace General {
 namespace Proxy {
   constexpr auto ID = "proxy";
   constexpr auto Type = "proxy_type";
-  constexpr QNetworkProxy::ProxyType TypeDef = QNetworkProxy::NoProxy;
   constexpr auto Host = "host";
   constexpr auto Username = "username";
   constexpr auto Password = "password";

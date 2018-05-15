@@ -11,6 +11,7 @@ class FilesystemPlugin : public QObject, public PluginBase {
   Q_OBJECT
 
   //Q_PLUGIN_METADATA(IID "io.github.martinrotter.textosaurus.filesystem")
+  Q_INTERFACES(PluginBase)
 
   public:
     explicit FilesystemPlugin(QObject* parent = nullptr);

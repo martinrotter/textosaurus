@@ -28,6 +28,9 @@ class PluginFactory : public QObject {
     void loadPlugins(TextApplication* text_app);
 
   private:
+    QString pluginsLibPath() const;
+
+  private:
     QList<PluginBase*> m_plugins;
     QList<BaseSidebar*> m_sidebars;
     QList<QAction*> m_assignableActions;
