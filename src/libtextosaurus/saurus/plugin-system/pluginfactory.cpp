@@ -25,8 +25,10 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
     // Some hardcoded "plugins".
     m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
 
-    for (const QString& plugin_lib_file : QDir(pluginsLibPath()).entryList({QSL("libtextosaurus-*")})) {
-      QPluginLoader loader(plugin_lib_file);
+    const QString plugins_path = pluginsLibPath();
+
+    for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*")})) {
+      QPluginLoader loader(plugin_lib_file.absoluteFilePath());
       QObject* plugin_instance = loader.instance();
       PluginBase* plugin = qobject_cast<PluginBase*>(plugin_instance);
 
@@ -61,7 +63,7 @@ QString PluginFactory::pluginsLibPath() const {
 #if defined(Q_OS_WIN)
   return qApp->applicationDirPath();
 #elif defined(Q_OS_LINUX)
-  return qApp->applicationDirPath() + QL1S("../lib");
+  return qApp->applicationDirPath() + QDir::separator() + QL1S("..") + QDir::separator() + QL1S("lib");
 #else
   return qApp->applicationDirPath();
 #endif
