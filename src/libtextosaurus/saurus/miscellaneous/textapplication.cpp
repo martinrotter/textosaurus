@@ -43,7 +43,8 @@ TextApplication::TextApplication(QObject* parent)
 
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
-  settings()->pluginFactory()->loadPlugins(this);
+
+  //settings()->pluginFactory()->loadPlugins(this);
 }
 
 void TextApplication::loadTextEditorFromString(const QString& contents) {
@@ -373,6 +374,9 @@ void TextApplication::onEditorReloaded() {
 }
 
 void TextApplication::createConnections() {
+  connect(m_tabEditors->tabBar(), &TabBar::customContextMenuRequested, this, &TextApplication::showTabContextMenu);
+  connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
+
   // Misc connections.
   connect(qApp, &Application::dataSaveRequested, this, &TextApplication::quit);
   connect(m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
@@ -491,11 +495,8 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionEolConvertUnix->setData(SC_EOL_LF);
   m_actionEolConvertWindows->setData(SC_EOL_CRLF);
 
-  connect(m_tabEditors->tabBar(), &TabBar::customContextMenuRequested, this, &TextApplication::showTabContextMenu);
-  connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
-
-  loadState();
   createConnections();
+  loadState();
 }
 
 QList<QAction*> TextApplication::userActions() const {
@@ -513,7 +514,6 @@ void TextApplication::loadState() {
 
   m_actionEditBack->setEnabled(false);
   m_actionEditForward->setEnabled(false);
-  m_settings->externalTools()->reloadTools();
 
   // Load size/position/visibility of dock widgets.
   m_mainForm->setDockOptions(QMainWindow::DockOption::AnimatedDocks |
@@ -524,9 +524,10 @@ void TextApplication::loadState() {
   m_mainForm->setCorner(Qt::Corner::TopRightCorner, Qt::DockWidgetArea::RightDockWidgetArea);
 
   // We load plugins etc.
-  settings()->pluginFactory()->hookPluginsIntoApplication(this);
+  settings()->pluginFactory()->loadPlugins(this);
 
-  // We add built-in sidebars.
+  // We hook actions for showing sidebars and add built-in sidebars.
+  m_menuDockWidgets->addActions(settings()->pluginFactory()->sidebarActions());
   m_menuDockWidgets->addAction(m_actionShowFindResultsSidebar);
   m_menuDockWidgets->addAction(m_actionShowOutputSidebar);
 
@@ -542,6 +543,10 @@ void TextApplication::loadState() {
   QList<BaseSidebar*> sidebars;
   sidebars << m_outputSidebar << m_findResultsSidebar << settings()->pluginFactory()->sidebars();
   settings()->loadInitialSidebarGuiSettings(m_mainForm, sidebars);
+
+  // Reload external tools, this also reloads
+  // "Tools" menu with submenus for plugins.
+  m_settings->externalTools()->reloadTools();
 }
 
 void TextApplication::quit(bool* ok) {
@@ -587,6 +592,8 @@ void TextApplication::quit(bool* ok) {
   *ok = true;
 
   endSavingSession();
+
+  settings()->pluginFactory()->quit();
 }
 
 bool TextApplication::eventFilter(QObject* obj, QEvent* event) {

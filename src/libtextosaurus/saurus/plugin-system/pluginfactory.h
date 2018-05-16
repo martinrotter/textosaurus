@@ -22,9 +22,8 @@ class PluginFactory : public QObject {
     QList<QAction*> sidebarActions() const;
     QList<QAction*> generateMenusForPlugins(QWidget* parent) const;
 
-    void hookPluginsIntoApplication(TextApplication* text_app);
-
   public slots:
+    void quit();
     void loadPlugins(TextApplication* text_app);
 
   private:

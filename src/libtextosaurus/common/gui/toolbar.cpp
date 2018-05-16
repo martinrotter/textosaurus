@@ -12,7 +12,6 @@ ToolBar::ToolBar(const QString& title, QWidget* parent) : BaseToolBar(title, par
   setFloatable(false);
   setMovable(false);
   refreshVisualProperties();
-  loadSavedActions();
 }
 
 ToolBar::~ToolBar() {}

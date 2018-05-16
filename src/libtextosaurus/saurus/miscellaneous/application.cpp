@@ -21,7 +21,7 @@
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
   m_settings(Settings::setupSettings(this, qApp->userDataAppFolder(), qApp->userDataHomeFolder())),
-  m_userActions(QList<QAction*>()), m_textApplication(new TextApplication(this)), m_mainForm(nullptr),
+  m_textApplication(new TextApplication(this)), m_mainForm(nullptr),
   m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
@@ -53,12 +53,17 @@ bool Application::isRunning() {
 }
 
 QList<QAction*> Application::userActions() {
-  if (m_mainForm != nullptr && m_userActions.isEmpty()) {
-    m_userActions = m_mainForm->allActions();
-    m_userActions.append(m_textApplication->userActions());
+  QList<QAction*> user_actions;
+
+  if (m_mainForm != nullptr) {
+    user_actions = m_mainForm->allActions();
   }
 
-  return m_userActions;
+  if (m_textApplication != nullptr) {
+    user_actions.append(m_textApplication->userActions());
+  }
+
+  return user_actions;
 }
 
 bool Application::isFirstRun() const {

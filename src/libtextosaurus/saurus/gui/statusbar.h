@@ -7,7 +7,7 @@
 
 #include <QLabel>
 
-class StatusBar : public QStatusBar {
+class TEXTOSAURUS_DLLSPEC StatusBar : public QStatusBar {
   Q_OBJECT
 
   public:

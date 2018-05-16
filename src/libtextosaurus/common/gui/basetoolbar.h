@@ -5,7 +5,7 @@
 
 #include <QToolBar>
 
-class BaseBar {
+class TEXTOSAURUS_DLLSPEC BaseBar {
   public:
 
     // Returns all actions which can be added to the toolbar.
@@ -32,7 +32,7 @@ class BaseBar {
     QAction* findMatchingAction(const QString& action, const QList<QAction*>& actions) const;
 };
 
-class BaseToolBar : public QToolBar, public BaseBar {
+class TEXTOSAURUS_DLLSPEC BaseToolBar : public QToolBar, public BaseBar {
   Q_OBJECT
 
   public:

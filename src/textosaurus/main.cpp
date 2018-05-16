@@ -6,10 +6,12 @@
 
 #include "common/dynamic-shortcuts/dynamicshortcuts.h"
 #include "common/gui/systemtrayicon.h"
+#include "common/gui/toolbar.h"
 #include "common/miscellaneous/debugging.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "definitions/definitions.h"
 #include "saurus/gui/dialogs/formmain.h"
+#include "saurus/gui/statusbar.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
@@ -54,6 +56,18 @@ int main(int argc, char* argv[]) {
 
   // Instantiate main application window.
   FormMain main_window;
+
+  qApp->textApplication()->setMainForm(&main_window);
+
+  // Load saved actions, this needs to be called AFTER
+  // plugins are loaded, because plugins
+  // can contain actions too.
+  main_window.toolBar()->loadSavedActions();
+
+  // Load state of main window, this includes visible sidebars etc.
+  // This also needs to be loaded AFTER plugins are
+  // loaded because plugins can contain sidebars.
+  main_window.loadSize();
 
   // Set correct information for main window.
   main_window.show();

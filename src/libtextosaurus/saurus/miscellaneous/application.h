@@ -108,8 +108,6 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     void eliminateFirstRun(const QString& version);
 
     Settings* m_settings;
-
-    QList<QAction*> m_userActions;
     TextApplication* m_textApplication;
     FormMain* m_mainForm;
     WebFactory* m_webFactory;

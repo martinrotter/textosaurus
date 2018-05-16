@@ -37,26 +37,15 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   setWindowTitle(APP_LONG_NAME);
   setCentralWidget(m_tabEditors = new TabWidget(this));
   setStatusBar(m_statusBar = new StatusBar(this));
-  addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
+  addToolBar(m_toolBar = new ToolBar(tr("Main Toolbar"), this));
 
   m_statusBar->setObjectName(QSL("m_statusBar"));
   m_tabEditors->setObjectName(QSL("m_tabEditors"));
   m_toolBar->setObjectName(QSL("m_toolBar"));
 
-  qApp->textApplication()->setMainForm(this);
-
   prepareMenus();
   createConnections();
   setupIcons();
-  loadSize();
-
-  if (qApp->isFirstRun(APP_VERSION)) {
-    qApp->showGuiMessage(QObject::tr("Welcome to %1. Click on me to check out NEW features.").arg(APP_LONG_NAME),
-                         QMessageBox::Icon::Information, QUrl("http://update.textosaurus"),
-                         [this]() {
-      FormAbout(this).exec();
-    });
-  }
 
   qDebug().nospace() << "Creating main application form in thread: \'" << QThread::currentThreadId() << "\'.";
 }

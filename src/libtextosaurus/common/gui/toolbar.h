@@ -5,7 +5,7 @@
 
 #include "common/gui/basetoolbar.h"
 
-class ToolBar : public BaseToolBar {
+class TEXTOSAURUS_DLLSPEC ToolBar : public BaseToolBar {
   Q_OBJECT
 
   public:

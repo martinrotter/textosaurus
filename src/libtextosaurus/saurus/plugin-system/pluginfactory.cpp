@@ -102,10 +102,8 @@ QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) const {
   return menus;
 }
 
-void PluginFactory::hookPluginsIntoApplication(TextApplication* text_app) {
-  /*for (PluginBase* plugin : m_plugins) {
-     plugin->setTextApp(text_app, qApp->settings(), qApp->icons());
-     }*/
-
-  text_app->m_menuDockWidgets->addActions(sidebarActions());
+void PluginFactory::quit() {
+  for (PluginBase* plugin : m_plugins) {
+    plugin->stop();
+  }
 }
