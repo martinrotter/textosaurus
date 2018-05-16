@@ -27,12 +27,14 @@
 #include <QMetaObject>
 #include <QRect>
 #include <QScopedPointer>
+#include <QThread>
 #include <QTimer>
 
 FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   m_ui.setupUi(this);
   qApp->setMainForm(this);
 
+  setWindowTitle(APP_LONG_NAME);
   setCentralWidget(m_tabEditors = new TabWidget(this));
   setStatusBar(m_statusBar = new StatusBar(this));
   addToolBar(m_toolBar = new ToolBar(tr("Main toolbar"), this));
@@ -56,8 +58,7 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
     });
   }
 
-  // Display main window.
-  qDebug("Showing the main window when the application is starting.");
+  qDebug().nospace() << "Creating main application form in thread: \'" << QThread::currentThreadId() << "\'.";
 }
 
 TabWidget* FormMain::tabWidget() const {

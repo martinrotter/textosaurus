@@ -12,16 +12,11 @@
 #include "common/network-web/silentnetworkaccessmanager.h"
 #include "common/network-web/webfactory.h"
 #include "definitions/definitions.h"
-#include "saurus/gui/dialogs/formabout.h"
 #include "saurus/gui/dialogs/formmain.h"
-#include "saurus/gui/dialogs/formupdate.h"
-#include "saurus/gui/tabwidget.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
 #include <QDebug>
-#include <QThread>
-#include <QTranslator>
 
 int main(int argc, char* argv[]) {
   // Setup debug output system.
@@ -35,8 +30,6 @@ int main(int argc, char* argv[]) {
 
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
-
-  qDebug("Instantiated Application class.");
 
   // Check if another instance is running.
   if (application.isRunning()) {
@@ -54,22 +47,22 @@ int main(int argc, char* argv[]) {
   QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
 
-  qApp->localization()->loadActiveLanguage();
   qApp->icons()->setupSearchPaths();
   qApp->icons()->loadIconTheme(qApp->settings()->value(GROUP(GUI), SETTING(GUI::IconTheme)).toString());
+  qApp->localization()->loadActiveLanguage();
   qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
 
   // Setup single-instance behavior.
   application.activateQtSingleMsgProcessing();
-  qDebug().nospace() << "Creating main application form in thread: \'" << QThread::currentThreadId() << "\'.";
 
   // Instantiate main application window.
   FormMain main_window;
 
   // Set correct information for main window.
-  main_window.setWindowTitle(APP_LONG_NAME);
   main_window.show();
 
+  // Restore opened documents and open passed documents
+  // if any.
   qApp->textApplication()->restoreSession();
   qApp->textApplication()->openPassedFilesOrNewDocument();
 

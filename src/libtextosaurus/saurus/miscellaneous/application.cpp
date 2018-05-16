@@ -40,6 +40,8 @@ Application::Application(const QString& id, int& argc, char** argv)
   setQuitOnLastWindowClosed(true);
   setStyleSheet(QSL("QStatusBar::item { border: none; } "
                     "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
+
+  qDebug("Instantiated Application class.");
 }
 
 void Application::activateQtSingleMsgProcessing() {
