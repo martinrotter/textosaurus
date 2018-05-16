@@ -31,7 +31,13 @@ class PluginBase {
     //
     // NOTE: This method gets called when all passed compoents are initialized and
     // could be called later than methods name(), sidebars() and userActions().
-    virtual void setTextApp(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) = 0;
+    virtual void start(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) = 0;
+
+    // Stops the plugin.
+    //
+    // NOTE: Stopping of plugin must be done synchronously.
+    // NOTE: Stopping and starting is done on main GUI thread.
+    virtual void stop() = 0;
 };
 
 Q_DECLARE_INTERFACE(PluginBase, "io.github.martinrotter.textosaurus.pluginbase")

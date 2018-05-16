@@ -19,6 +19,8 @@ QList<QAction*> FilesystemPlugin::userActions() {
   return QList<QAction*>();
 }
 
-void FilesystemPlugin::setTextApp(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
+void FilesystemPlugin::start(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
   m_textApp = text_app;
 }
+
+void FilesystemPlugin::stop() {}

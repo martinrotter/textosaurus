@@ -42,7 +42,7 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
       // tak část property v text_app ani icons() není inicializovany,
       // asi dát do hookPluginsIntoApplication
       // A CELKOVE VYRESIT PORADI inicializace různých komponent
-      plugin->setTextApp(text_app, qApp->settings(), qApp->icons());
+      plugin->start(text_app, qApp->settings(), qApp->icons());
 
       auto plugin_sidebars = plugin->sidebars();
 

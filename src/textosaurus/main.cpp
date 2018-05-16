@@ -5,12 +5,9 @@
 #endif
 
 #include "common/dynamic-shortcuts/dynamicshortcuts.h"
-#include "common/gui/messagebox.h"
 #include "common/gui/systemtrayicon.h"
 #include "common/miscellaneous/debugging.h"
 #include "common/miscellaneous/iconfactory.h"
-#include "common/network-web/silentnetworkaccessmanager.h"
-#include "common/network-web/webfactory.h"
 #include "definitions/definitions.h"
 #include "saurus/gui/dialogs/formmain.h"
 #include "saurus/miscellaneous/application.h"
@@ -22,11 +19,11 @@ int main(int argc, char* argv[]) {
   // Setup debug output system.
   qInstallMessageHandler(Debugging::debugHandler);
 
-  QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-  QApplication::setApplicationName(APP_NAME);
-  QApplication::setApplicationVersion(APP_VERSION);
-  QApplication::setOrganizationDomain(APP_URL);
+  QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  QCoreApplication::setApplicationName(APP_NAME);
+  QCoreApplication::setApplicationVersion(APP_VERSION);
+  QCoreApplication::setOrganizationDomain(APP_URL);
 
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
@@ -44,7 +41,7 @@ int main(int argc, char* argv[]) {
   QApplication::setWindowIcon(QIcon(APP_ICON_PATH));
 
 #if defined (Q_OS_MAC)
-  QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
 
   qApp->icons()->setupSearchPaths();
@@ -75,5 +72,5 @@ int main(int argc, char* argv[]) {
   DynamicShortcuts::load(qApp->userActions());
 
   // Enter global event loop.
-  return Application::exec();
+  return QApplication::exec();
 }

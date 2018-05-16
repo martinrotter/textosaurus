@@ -2,8 +2,9 @@
 
 #include "common/miscellaneous/debugging.h"
 
-#include "saurus/miscellaneous/application.h"
+#include "definitions/definitions.h"
 
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDir>
 
