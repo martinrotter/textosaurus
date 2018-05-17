@@ -15,6 +15,7 @@
 #include "saurus/gui/settings/settingsgeneral.h"
 #include "saurus/gui/settings/settingsgui.h"
 #include "saurus/gui/settings/settingslocalization.h"
+#include "saurus/gui/settings/settingsplugins.h"
 #include "saurus/gui/settings/settingsshortcuts.h"
 
 #include <QTimer>
@@ -34,6 +35,7 @@ FormSettings::FormSettings(QWidget& parent)
   connect(m_btnApply, &QPushButton::clicked, this, &FormSettings::applySettings);
 
   addSettingsPanel(new SettingsGeneral(&m_settings, this));
+  addSettingsPanel(new SettingsPlugins(&m_settings, this));
   addSettingsPanel(new SettingsGui(&m_settings, this));
   addSettingsPanel(new SettingsLocalization(&m_settings, this));
   addSettingsPanel(new SettingsShortcuts(&m_settings, this));

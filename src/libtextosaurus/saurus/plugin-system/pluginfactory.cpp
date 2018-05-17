@@ -121,8 +121,9 @@ PluginState::PluginState(PluginBase* builtin_plugin) {
   m_isLoaded = true;
   m_isRemovable = false;
   m_plugin = builtin_plugin;
-  m_lastError = QString();
+  m_lastError = m_pluginAuthor = QString();
   m_pluginId = m_plugin->id();
+  m_pluginName = m_plugin->name();
 }
 
 PluginState::PluginState(const QString& library_file) {
@@ -133,6 +134,8 @@ PluginState::PluginState(const QString& library_file) {
   m_pluginLibraryFile = library_file;
   m_plugin = qobject_cast<PluginBase*>(plugin_instance);
   m_pluginId = loader.metaData()["IID"].toString();
+  m_pluginName = loader.metaData()["MetaData"].toObject()["name"].toString();
+  m_pluginAuthor = loader.metaData()["MetaData"].toObject()["author"].toString();
   m_isRemovable = true;
 
   if (m_plugin != nullptr && !m_plugin->name().isEmpty() && !m_plugin->id().isEmpty()) {
@@ -165,12 +168,18 @@ PluginBase* PluginState::plugin() const {
   return m_plugin;
 }
 
-QString PluginState::pluginLibraryFile() const
-{
+QString PluginState::pluginAuthor() const {
+  return m_pluginAuthor;
+}
+
+QString PluginState::pluginName() const {
+  return m_pluginName;
+}
+
+QString PluginState::pluginLibraryFile() const {
   return m_pluginLibraryFile;
 }
 
-QString PluginState::pluginId() const
-{
+QString PluginState::pluginId() const {
   return m_pluginId;
 }

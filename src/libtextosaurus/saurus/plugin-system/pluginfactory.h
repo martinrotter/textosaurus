@@ -20,6 +20,8 @@ class PluginState {
     bool isRemovable() const;
     QString lastError() const;
     QString pluginId() const;
+    QString pluginName() const;
+    QString pluginAuthor() const;
     QString pluginLibraryFile() const;
     PluginBase* plugin() const;
 
@@ -28,6 +30,8 @@ class PluginState {
     bool m_isRemovable;
     QString m_lastError;
     QString m_pluginId;
+    QString m_pluginName;
+    QString m_pluginAuthor;
     QString m_pluginLibraryFile;
     PluginBase* m_plugin;
 };
