@@ -2,7 +2,7 @@
 win32 {
   target.path = $$PREFIX
 
-  lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.dll
+  lib.files = $$OUT_PWD/../libtextosaurus/libtextosaurus.dll $$OUT_PWD/../libtextosaurus/libtextosaurus.lib
   lib.path = $$PREFIX
   lib.CONFIG = no_check_exist
 
