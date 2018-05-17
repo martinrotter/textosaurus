@@ -17,6 +17,8 @@
 #include "saurus/gui/settings/settingslocalization.h"
 #include "saurus/gui/settings/settingsshortcuts.h"
 
+#include <QTimer>
+
 FormSettings::FormSettings(QWidget& parent)
   : QDialog(&parent), m_panels(QList<SettingsPanel*>()), m_settings(*qApp->settings()) {
   m_ui.setupUi(this);
@@ -77,7 +79,8 @@ void FormSettings::applySettings() {
                                                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
     if (clicked_button == QMessageBox::Yes) {
-      qApp->restart();
+      close();
+      QTimer::singleShot(200, qApp, &Application::restart);
     }
   }
 
