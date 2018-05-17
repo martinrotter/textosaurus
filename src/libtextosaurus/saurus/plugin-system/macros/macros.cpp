@@ -5,12 +5,12 @@
 #include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
 #include "common/gui/messagebox.h"
 #include "common/miscellaneous/settings.h"
-#include "saurus/miscellaneous/application.h"
 #include "saurus/plugin-system/macros/macro.h"
+#include "saurus/plugin-system/macros/macrosplugin.h"
 
 #include <QInputDialog>
 
-Macros::Macros(Settings* settings, QObject* parent) : QObject(parent), m_settings(settings) {
+Macros::Macros(MacrosPlugin* plugin, QObject* parent) : QObject(parent), m_plugin(plugin) {
   loadMacrosFromSettings();
 }
 
@@ -49,7 +49,7 @@ void Macros::clearAllMacros() {
 
 bool Macros::saveMacroAs(Macro* macro) {
   bool ok;
-  QString macro_name = QInputDialog::getText(qApp->mainFormWidget(), tr("Save Macro"),
+  QString macro_name = QInputDialog::getText(m_plugin->mainForm(), tr("Save Macro"),
                                              tr("Enter some name for your macro"), QLineEdit::EchoMode::Normal,
                                              tr("My new macro"), &ok);
 
@@ -59,14 +59,14 @@ bool Macros::saveMacroAs(Macro* macro) {
       auto str_representation = macro->toString();
 
       // Save macro to settings.
-      m_settings->setValue(GROUP(StoredMacros), macro->name(), str_representation);
+      m_plugin->settings()->setValue(GROUP(StoredMacros), macro->name(), str_representation);
 
       addMacro(macro);
       sortStoredMacros();
       return true;
     }
     else {
-      MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Critical, tr("Macro Name Already Used"),
+      MessageBox::show(m_plugin->mainForm(), QMessageBox::Icon::Critical, tr("Macro Name Already Used"),
                        tr("Selected macro name is already in use, please select non-empty unique name for each macro."),
                        QString(), macro_name);
     }
@@ -77,7 +77,7 @@ bool Macros::saveMacroAs(Macro* macro) {
 
 void Macros::deleteMacro(Macro* macro) {
   m_storedMacros.removeAll(macro);
-  m_settings->remove(GROUP(StoredMacros), macro->name());
+  m_plugin->settings()->remove(GROUP(StoredMacros), macro->name());
 }
 
 void Macros::recordNewMacro(ScintillaEdit* editor) {
@@ -102,14 +102,14 @@ void Macros::stopMacroRecording() {
 void Macros::loadMacrosFromSettings() {
   clearAllMacros();
 
-  m_settings->beginGroup(GROUP(StoredMacros));
+  m_plugin->settings()->beginGroup(GROUP(StoredMacros));
 
-  auto keys = m_settings->allKeys();
+  auto keys = m_plugin->settings()->allKeys();
 
-  m_settings->endGroup();
+  m_plugin->settings()->endGroup();
 
   for (const QString& key : keys) {
-    auto macr = new Macro(m_settings->value(GROUP(StoredMacros), key).toString());
+    auto macr = new Macro(m_plugin->settings()->value(GROUP(StoredMacros), key).toString());
 
     addMacro(macr);
   }

@@ -17,7 +17,7 @@
 #include <QPluginLoader>
 
 PluginFactory::PluginFactory(QObject* parent)
-  : QObject(parent), m_plugins(QList<PluginBase*>()), m_sidebars(QList<BaseSidebar*>()),
+  : QObject(parent), m_plugins(QList<PluginState>()), m_sidebars(QList<BaseSidebar*>()),
   m_assignableActions(QList<QAction*>()), m_sidebarActions(QList<QAction*>()) {}
 
 void PluginFactory::loadPlugins(TextApplication* text_app) {
@@ -28,21 +28,18 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
     const QString plugins_path = pluginsLibPath();
 
     for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*")})) {
-      QPluginLoader loader(plugin_lib_file.absoluteFilePath());
-      QObject* plugin_instance = loader.instance();
-      PluginBase* plugin = qobject_cast<PluginBase*>(plugin_instance);
-
-      if (plugin != nullptr && !plugin->name().isEmpty()) {
-        m_plugins << plugin;
-      }
+      m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
     }
 
-    for (PluginBase* plugin : m_plugins) {
-      // TODO: doladit, protože když se to volá tady,
-      // tak část property v text_app ani icons() není inicializovany,
-      // asi dát do hookPluginsIntoApplication
-      // A CELKOVE VYRESIT PORADI inicializace různých komponent
-      plugin->start(text_app, qApp->settings(), qApp->icons());
+    for (PluginState& plugin_state : m_plugins) {
+      auto plugin = plugin_state.plugin();
+
+      if (plugin == nullptr) {
+        qCritical("Cannot hook plugin '%s' into application.", qPrintable(plugin_state.pluginLibraryFile()));
+        continue;
+      }
+
+      plugin->start(qApp->mainFormWidget(), text_app, qApp->settings(), qApp->icons());
 
       auto plugin_sidebars = plugin->sidebars();
 
@@ -69,7 +66,7 @@ QString PluginFactory::pluginsLibPath() const {
 #endif
 }
 
-QList<PluginBase*> PluginFactory::plugins() const {
+QList<PluginState> PluginFactory::plugins() const {
   return m_plugins;
 }
 
@@ -85,10 +82,17 @@ QList<QAction*> PluginFactory::sidebarActions() const {
   return m_sidebarActions;
 }
 
-QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) const {
+QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) {
   QList<QAction*> menus;
 
-  for (PluginBase* plugin : m_plugins) {
+  for (PluginState& plugin_state : m_plugins) {
+    auto plugin = plugin_state.plugin();
+
+    if (plugin == nullptr) {
+      qCritical("Cannot hook plugin '%s' into application.", qPrintable(plugin_state.pluginLibraryFile()));
+      continue;
+    }
+
     auto plugin_actions = plugin->userActions();
 
     if (!plugin_actions.isEmpty()) {
@@ -103,7 +107,70 @@ QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) const {
 }
 
 void PluginFactory::quit() {
-  for (PluginBase* plugin : m_plugins) {
-    plugin->stop();
+  for (PluginState& plugin_state : m_plugins) {
+    auto plugin = plugin_state.plugin();
+
+    if (plugin != nullptr) {
+      plugin->stop();
+    }
   }
+}
+
+PluginState::PluginState(PluginBase* builtin_plugin) {
+  // We load built-in plugin.
+  m_isLoaded = true;
+  m_isRemovable = false;
+  m_plugin = builtin_plugin;
+  m_lastError = QString();
+  m_pluginId = m_plugin->id();
+}
+
+PluginState::PluginState(const QString& library_file) {
+  // We have to load plugin from library.
+  QPluginLoader loader(library_file);
+  QObject* plugin_instance = loader.instance();
+
+  m_pluginLibraryFile = library_file;
+  m_plugin = qobject_cast<PluginBase*>(plugin_instance);
+  m_pluginId = loader.metaData()["IID"].toString();
+  m_isRemovable = true;
+
+  if (m_plugin != nullptr && !m_plugin->name().isEmpty() && !m_plugin->id().isEmpty()) {
+    m_isLoaded = true;
+    m_lastError = QString();
+
+    qDebug("Successfully loaded plugin '%s'.", qPrintable(m_pluginLibraryFile));
+  }
+  else {
+    m_isLoaded = false;
+    m_lastError = loader.errorString();
+
+    qCritical("Cannot load plugin '%s', error is: '%s'", qPrintable(m_pluginLibraryFile), qPrintable(m_lastError));
+  }
+}
+
+bool PluginState::isLoaded() const {
+  return m_isLoaded;
+}
+
+bool PluginState::isRemovable() const {
+  return m_isRemovable;
+}
+
+QString PluginState::lastError() const {
+  return m_lastError;
+}
+
+PluginBase* PluginState::plugin() const {
+  return m_plugin;
+}
+
+QString PluginState::pluginLibraryFile() const
+{
+  return m_pluginLibraryFile;
+}
+
+QString PluginState::pluginId() const
+{
+  return m_pluginId;
 }

@@ -7,14 +7,14 @@
 
 #include "saurus/plugin-system/macros/macros.h"
 
-class TextApplication;
 class MacrosWidget;
+class MacrosPlugin;
 
 class MacrosSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:
-    explicit MacrosSidebar(TextApplication* text_app, Macros* macros_factory, QWidget* parent = nullptr);
+    explicit MacrosSidebar(MacrosPlugin* plugin, Macros* macros_factory, QWidget* parent = nullptr);
     virtual ~MacrosSidebar();
 
     Qt::DockWidgetArea initialArea() const;
@@ -38,6 +38,7 @@ class MacrosSidebar : public BaseSidebar {
     void reloadStoredMacros();
 
   private:
+    MacrosPlugin* m_plugin;
     Macros* m_macrosFactory;
     MacrosWidget* m_widget = nullptr;
     QAction* m_actionRecordStart;

@@ -17,9 +17,10 @@ class FilesystemPlugin : public QObject, public PluginBase {
     explicit FilesystemPlugin(QObject* parent = nullptr);
 
     virtual QString name() const override;
+    virtual QString id() const override;
     virtual QList<BaseSidebar*> sidebars() override;
     virtual QList<QAction*> userActions() override;
-    virtual void start(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) override;
+    virtual void start(QWidget* main_form_widget, TextApplication* text_app, Settings* settings, IconFactory* icon_factory) override;
     virtual void stop() override;
     TextApplication* textApp() const;
     Settings* settings() const;

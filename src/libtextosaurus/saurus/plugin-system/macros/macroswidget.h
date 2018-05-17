@@ -9,10 +9,6 @@
 
 #include "ui_macroswidget.h"
 
-namespace Ui {
-  class MacrosWidget;
-}
-
 class MacrosWidget : public QWidget {
   Q_OBJECT
 

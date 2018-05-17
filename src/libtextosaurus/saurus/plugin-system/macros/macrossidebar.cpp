@@ -5,17 +5,17 @@
 #include "common/miscellaneous/iconfactory.h"
 #include "saurus/gui/tabwidget.h"
 #include "saurus/gui/texteditor.h"
-#include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/plugin-system/macros/macro.h"
 #include "saurus/plugin-system/macros/macros.h"
+#include "saurus/plugin-system/macros/macrosplugin.h"
 #include "saurus/plugin-system/macros/macroswidget.h"
 
 #include <QMetaEnum>
 #include <QToolBar>
 
-MacrosSidebar::MacrosSidebar(TextApplication* text_app, Macros* macros_factory, QWidget* parent)
-  : BaseSidebar(text_app, parent), m_macrosFactory(macros_factory) {
+MacrosSidebar::MacrosSidebar(MacrosPlugin* plugin, Macros* macros_factory, QWidget* parent)
+  : BaseSidebar(plugin->textApp(), parent), m_plugin(plugin), m_macrosFactory(macros_factory) {
   setObjectName(QSL("m_macrosSidebar"));
   setWindowTitle(tr("Macros"));
 }
@@ -44,10 +44,10 @@ void MacrosSidebar::load() {
     tool_bar->setFixedHeight(26);
     tool_bar->setIconSize(QSize(16, 16));
 
-    m_actionRecordStart = tool_bar->addAction(qApp->icons()->fromTheme(QSL("gtk-media-record")), tr("Start Recording"));
-    m_actionRecordStop = tool_bar->addAction(qApp->icons()->fromTheme(QSL("gtk-media-stop")), tr("Stop Recording"));
-    m_actionRecordPlay = tool_bar->addAction(qApp->icons()->fromTheme(QSL("media-playback-start")), tr("Play Recorded Macro"));
-    m_actionRecordSave = tool_bar->addAction(qApp->icons()->fromTheme(QSL("document-save-as")), tr("Save Macro as..."));
+    m_actionRecordStart = tool_bar->addAction(m_plugin->iconFactory()->fromTheme(QSL("gtk-media-record")), tr("Start Recording"));
+    m_actionRecordStop = tool_bar->addAction(m_plugin->iconFactory()->fromTheme(QSL("gtk-media-stop")), tr("Stop Recording"));
+    m_actionRecordPlay = tool_bar->addAction(m_plugin->iconFactory()->fromTheme(QSL("media-playback-start")), tr("Play Recorded Macro"));
+    m_actionRecordSave = tool_bar->addAction(m_plugin->iconFactory()->fromTheme(QSL("document-save-as")), tr("Save Macro as..."));
     m_widget->m_ui.verticalLayoutRecorder->insertWidget(0, tool_bar, 1);
 
     auto tool_bar_stored = new QToolBar(tr("Stored Macros Toolbar"), m_widget);
@@ -55,8 +55,9 @@ void MacrosSidebar::load() {
     tool_bar_stored->setFixedHeight(26);
     tool_bar_stored->setIconSize(QSize(16, 16));
 
-    m_actionStoredPlay = tool_bar_stored->addAction(qApp->icons()->fromTheme(QSL("media-playback-start")), tr("Play Stored Macro"));
-    m_actionStoredDelete = tool_bar_stored->addAction(qApp->icons()->fromTheme(QSL("list-remove")), tr("Remove Selected Macro"));
+    m_actionStoredPlay =
+      tool_bar_stored->addAction(m_plugin->iconFactory()->fromTheme(QSL("media-playback-start")), tr("Play Stored Macro"));
+    m_actionStoredDelete = tool_bar_stored->addAction(m_plugin->iconFactory()->fromTheme(QSL("list-remove")), tr("Remove Selected Macro"));
     m_widget->m_ui.verticalLayoutStored->insertWidget(0, tool_bar_stored, 1);
 
     setWidget(m_widget);
@@ -113,7 +114,6 @@ void MacrosSidebar::playRecordedMacro() {
   m_actionRecordPlay->setEnabled(false);
   m_actionRecordSave->setEnabled(false);
 
-  // TODO: teď se přehraje makro.
   auto recorded_macro = m_macrosFactory->recordedMacro();
 
   if (recorded_macro != nullptr) {
@@ -172,8 +172,6 @@ void MacrosSidebar::reloadStoredMacros() {
 
   for (Macro* mac : m_macrosFactory->storedMacros()) {
     auto it = new QListWidgetItem(mac->name(), m_widget->m_ui.m_listStoredMacros);
-
-    //m_widget->m_ui.m_listStoredMacros->addItem(it);
 
     it->setData(Qt::ItemDataRole::UserRole, QVariant::fromValue(mac));
   }

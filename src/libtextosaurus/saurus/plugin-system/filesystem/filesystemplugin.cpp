@@ -11,6 +11,10 @@ QString FilesystemPlugin::name() const {
   return tr("Filesystem");
 }
 
+QString FilesystemPlugin::id() const {
+  return QSL("io.github.martinrotter.textosaurus.fs");
+}
+
 QList<BaseSidebar*> FilesystemPlugin::sidebars() {
   if (m_sidebar == nullptr) {
     m_sidebar = new FilesystemSidebar(this, nullptr);
@@ -23,7 +27,7 @@ QList<QAction*> FilesystemPlugin::userActions() {
   return QList<QAction*>();
 }
 
-void FilesystemPlugin::start(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
+void FilesystemPlugin::start(QWidget* main_form_widget, TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
   m_textApp = text_app;
   m_settings = settings;
   m_iconFactory = icon_factory;

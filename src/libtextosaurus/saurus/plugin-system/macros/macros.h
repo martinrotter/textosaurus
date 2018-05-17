@@ -7,14 +7,14 @@
 
 #include "saurus/plugin-system/macros/macro.h"
 
-class Settings;
 class ScintillaEdit;
+class MacrosPlugin;
 
 class Macros : public QObject {
   Q_OBJECT
 
   public:
-    explicit Macros(Settings* settings, QObject* parent = nullptr);
+    explicit Macros(MacrosPlugin* plugin, QObject* parent = nullptr);
     virtual ~Macros();
 
     bool isMacroNameUniqueNonEmpty(const QString& macro_name);
@@ -40,7 +40,7 @@ class Macros : public QObject {
     void recordingFinished(Macro* finished_macro);
 
   private:
-    Settings* m_settings;
+    MacrosPlugin* m_plugin;
 
     QList<Macro*> m_storedMacros = QList<Macro*>();
 
