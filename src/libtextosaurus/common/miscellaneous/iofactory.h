@@ -3,10 +3,9 @@
 #ifndef IOFACTORY_H
 #define IOFACTORY_H
 
-#include <QCoreApplication>
-
 #include "definitions/definitions.h"
 
+#include <QCoreApplication>
 #include <QStandardPaths>
 
 class TEXTOSAURUS_DLLSPEC IOFactory {

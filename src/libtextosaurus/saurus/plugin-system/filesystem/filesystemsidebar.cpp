@@ -11,6 +11,7 @@
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/plugin-system/filesystem/favoriteslistwidget.h"
 #include "saurus/plugin-system/filesystem/filesystemmodel.h"
+#include "saurus/plugin-system/filesystem/filesystemplugin.h"
 #include "saurus/plugin-system/filesystem/filesystemview.h"
 
 #include <QComboBox>
@@ -22,12 +23,13 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-FilesystemSidebar::FilesystemSidebar(TextApplication* text_app, QWidget* parent) : BaseSidebar(text_app, parent), m_fsModel(nullptr) {
+FilesystemSidebar::FilesystemSidebar(FilesystemPlugin* plugin, QWidget* parent)
+  : BaseSidebar(plugin->textApp(), parent), m_plugin(plugin), m_fsModel(nullptr) {
   setWindowTitle(tr("Filesystem"));
   setObjectName(QSL("m_sidebarFilesystem"));
 
   connect(this, &FilesystemSidebar::openFileRequested, this, [this](const QString& file_path) {
-    m_textApp->loadTextEditorFromFile(file_path);
+    m_plugin->textApp()->loadTextEditorFromFile(file_path);
   });
 }
 
@@ -62,8 +64,8 @@ void FilesystemSidebar::reloadDrives() {
     }
 
     m_cmbDrives->addItem(!strg.isReady() ?
-                         qApp->icons()->fromTheme(QSL("lock")) :
-                         qApp->icons()->fromTheme(QSL("media-flash")), name_drive, QDir::toNativeSeparators(strg.rootPath()));
+                         m_plugin->iconFactory()->fromTheme(QSL("lock")) :
+                         m_plugin->iconFactory()->fromTheme(QSL("media-flash")), name_drive, QDir::toNativeSeparators(strg.rootPath()));
   }
 }
 
@@ -79,9 +81,9 @@ void FilesystemSidebar::load() {
     QWidget* widget_browser = new QWidget(this);
     QVBoxLayout* layout_browser = new QVBoxLayout(widget_browser);
 
-    m_fsModel = new FilesystemModel(widget_browser);
+    m_fsModel = new FilesystemModel(m_plugin, widget_browser);
     m_fsView = new FilesystemView(m_fsModel, widget_browser);
-    m_lvFavorites = new FavoritesListWidget(m_tabWidget);
+    m_lvFavorites = new FavoritesListWidget(m_plugin, m_tabWidget);
     m_txtPath = new BaseTextEdit(widget_browser);
     m_txtPath->setReadOnly(true);
 
@@ -92,9 +94,9 @@ void FilesystemSidebar::load() {
 
     // Initialize toolbar.
     QToolBar* tool_bar = new QToolBar(widget_browser);
-    QAction* btn_parent = new QAction(qApp->icons()->fromTheme(QSL("go-up")),
+    QAction* btn_parent = new QAction(m_plugin->iconFactory()->fromTheme(QSL("go-up")),
                                       tr("Go to Parent Folder"), widget_browser);
-    QAction* btn_add_favorites = new QAction(qApp->icons()->fromTheme(QSL("folder-favorites")),
+    QAction* btn_add_favorites = new QAction(m_plugin->iconFactory()->fromTheme(QSL("folder-favorites")),
                                              tr("Add Selected Item to Favorites"), widget_browser);
 
     connect(btn_parent, &QAction::triggered, m_fsView, &FilesystemView::cdUp);
@@ -140,9 +142,9 @@ void FilesystemSidebar::load() {
     m_fsView->setFrameShape(QFrame::Shape::NoFrame);
     m_fsModel->setRootPath(QString());
 
-    m_fsView->openFolder(qApp->settings()->value(m_settingsSection,
-                                                 QL1S("current_folder_") + OS_ID_LOW,
-                                                 qApp->documentsFolder()).toString());
+    m_fsView->openFolder(m_plugin->settings()->value(m_settingsSection,
+                                                     QL1S("current_folder_") + OS_ID_LOW,
+                                                     IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation)).toString());
 
     saveCurrentFolder(m_fsView->currentFolder());
 
@@ -153,7 +155,7 @@ void FilesystemSidebar::load() {
     });
     connect(m_lvFavorites, &QListWidget::activated, this, &FilesystemSidebar::openFavoriteItem);
 
-    QStringList saved_files = qApp->settings()->value(m_settingsSection, QSL("favorites"), QStringList()).toStringList();
+    QStringList saved_files = m_plugin->settings()->value(m_settingsSection, QSL("favorites"), QStringList()).toStringList();
 
     foreach (const QString& file, saved_files) {
       m_lvFavorites->loadFileItem(file);
@@ -185,7 +187,7 @@ void FilesystemSidebar::saveCurrentFolder(const QString& path) {
   m_cmbDrives->setCurrentIndex(index_drive);
   m_cmbDrives->blockSignals(false);
 
-  qApp->settings()->setValue(m_settingsSection, QL1S("current_folder_") + OS_ID_LOW, path);
+  m_plugin->settings()->setValue(m_settingsSection, QL1S("current_folder_") + OS_ID_LOW, path);
 }
 
 void FilesystemSidebar::saveCurrentFolder(const QModelIndex& idx) {
@@ -235,7 +237,7 @@ void FilesystemSidebar::saveFavorites() const {
     favorites.append(m_lvFavorites->item(i)->data(Qt::UserRole).toString());
   }
 
-  qApp->settings()->setValue(m_settingsSection, QSL("favorites"), favorites);
+  m_plugin->settings()->setValue(m_settingsSection, QSL("favorites"), favorites);
 }
 
 void FilesystemSidebar::makeExplorerVisible() const {

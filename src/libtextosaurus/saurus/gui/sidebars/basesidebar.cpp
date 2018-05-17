@@ -13,10 +13,6 @@ BaseSidebar::BaseSidebar(TextApplication* text_app, QWidget* parent) : QDockWidg
   setFeatures(QDockWidget::DockWidgetFeature::DockWidgetClosable | QDockWidget::DockWidgetFeature::DockWidgetMovable);
 }
 
-void BaseSidebar::setTextApplication(TextApplication* text_app) {
-  m_textApp = text_app;
-}
-
 QAction* BaseSidebar::generateAction() {
   QAction* act_show = new QAction(windowTitle(), this);
 

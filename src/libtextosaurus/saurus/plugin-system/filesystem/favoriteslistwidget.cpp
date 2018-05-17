@@ -3,11 +3,13 @@
 #include "saurus/plugin-system/filesystem/favoriteslistwidget.h"
 
 #include "common/miscellaneous/iconfactory.h"
-#include "saurus/miscellaneous/application.h"
+#include "saurus/plugin-system/filesystem/filesystemplugin.h"
+#include "saurus/plugin-system/filesystem/filesystemsidebar.h"
 
 #include <QFileInfo>
+#include <QKeyEvent>
 
-FavoritesListWidget::FavoritesListWidget(QWidget* parent) : QListWidget(parent) {
+FavoritesListWidget::FavoritesListWidget(FilesystemPlugin* plugin, QWidget* parent) : QListWidget(parent), m_plugin(plugin) {
   setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
 }
 
@@ -19,10 +21,10 @@ void FavoritesListWidget::loadFileItem(const QString& file_path) {
   item->setToolTip(file_path);
 
   if (info.isDir()) {
-    item->setIcon(qApp->icons()->fromTheme(QSL("folder")));
+    item->setIcon(m_plugin->iconFactory()->fromTheme(QSL("folder")));
   }
   else {
-    item->setIcon(qApp->icons()->fromTheme(QSL("gtk-file")));
+    item->setIcon(m_plugin->iconFactory()->fromTheme(QSL("gtk-file")));
   }
 
   if (!info.exists()) {
@@ -42,6 +44,7 @@ void FavoritesListWidget::keyPressEvent(QKeyEvent* event) {
 
     if (row >= 0) {
       delete takeItem(row);
+      m_plugin->sidebar()->saveFavorites();
     }
   }
   else {

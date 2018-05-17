@@ -3,17 +3,17 @@
 #include "saurus/plugin-system/filesystem/filesystemmodel.h"
 
 #include "common/miscellaneous/iconfactory.h"
-#include "saurus/miscellaneous/application.h"
+#include "saurus/plugin-system/filesystem/filesystemplugin.h"
 
-FilesystemModel::FilesystemModel(QObject* parent) : QFileSystemModel(parent) {}
+FilesystemModel::FilesystemModel(FilesystemPlugin* plugin, QObject* parent) : QFileSystemModel(parent), m_plugin(plugin) {}
 
 QVariant FilesystemModel::data(const QModelIndex& index, int role) const {
   if (role == Qt::ItemDataRole::DecorationRole) {
     if (isDir(index)) {
-      return qApp->icons()->fromTheme(QSL("folder"));
+      return m_plugin->iconFactory()->fromTheme(QSL("folder"));
     }
     else {
-      return qApp->icons()->fromTheme(QSL("gtk-file"));
+      return m_plugin->iconFactory()->fromTheme(QSL("gtk-file"));
     }
   }
   else {

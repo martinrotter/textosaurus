@@ -7,10 +7,10 @@
 
 #include "saurus/plugin-system/pluginbase.h"
 
+class FilesystemSidebar;
+
 class FilesystemPlugin : public QObject, public PluginBase {
   Q_OBJECT
-
-  //Q_PLUGIN_METADATA(IID "io.github.martinrotter.textosaurus.filesystem")
   Q_INTERFACES(PluginBase)
 
   public:
@@ -21,9 +21,16 @@ class FilesystemPlugin : public QObject, public PluginBase {
     virtual QList<QAction*> userActions() override;
     virtual void start(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) override;
     virtual void stop() override;
+    TextApplication* textApp() const;
+    Settings* settings() const;
+    IconFactory* iconFactory() const;
+    FilesystemSidebar* sidebar() const;
 
   protected:
     TextApplication* m_textApp;
+    Settings* m_settings;
+    IconFactory* m_iconFactory;
+    FilesystemSidebar* m_sidebar = nullptr;
 };
 
 #endif // FILESYSTEMPLUGIN_H

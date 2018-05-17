@@ -5,24 +5,27 @@
 
 #include "saurus/gui/sidebars/basesidebar.h"
 
-class TextApplication;
 class BaseTextEdit;
 class FilesystemModel;
 class FilesystemView;
 class FavoritesListWidget;
 class QTabWidget;
 class QComboBox;
+class FilesystemPlugin;
 
 class FilesystemSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:
-    explicit FilesystemSidebar(TextApplication* text_app, QWidget* parent = nullptr);
+    explicit FilesystemSidebar(FilesystemPlugin* plugin, QWidget* parent = nullptr);
     virtual ~FilesystemSidebar() = default;
 
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;
     virtual int initialWidth() const override;
+
+  public slots:
+    void saveFavorites() const;
 
   private slots:
     void reloadDrives();
@@ -34,7 +37,6 @@ class FilesystemSidebar : public BaseSidebar {
     void saveCurrentFolder(const QString& path);
 
     void addToFavorites();
-    void saveFavorites() const;
 
   signals:
     void openFileRequested(const QString& file_path);
@@ -46,6 +48,7 @@ class FilesystemSidebar : public BaseSidebar {
 
   private:
     const QString m_settingsSection = "filesystem";
+    FilesystemPlugin* m_plugin;
     BaseTextEdit* m_txtPath;
     QComboBox* m_cmbDrives;
     FilesystemModel* m_fsModel;

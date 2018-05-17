@@ -5,11 +5,13 @@
 
 #include <QListWidget>
 
+class FilesystemPlugin;
+
 class FavoritesListWidget : public QListWidget {
   Q_OBJECT
 
   public:
-    explicit FavoritesListWidget(QWidget* parent = nullptr);
+    explicit FavoritesListWidget(FilesystemPlugin* plugin, QWidget* parent = nullptr);
     virtual ~FavoritesListWidget() = default;
 
   public slots:
@@ -17,6 +19,9 @@ class FavoritesListWidget : public QListWidget {
 
   protected:
     virtual void keyPressEvent(QKeyEvent* event) override;
+
+  private:
+    FilesystemPlugin* m_plugin;
 };
 
 #endif // FAVORITESLISTWIDGET_H

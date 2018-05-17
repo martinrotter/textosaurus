@@ -8,11 +8,15 @@
 FilesystemPlugin::FilesystemPlugin(QObject* parent) : QObject(parent) {}
 
 QString FilesystemPlugin::name() const {
-  return QSL("Filesystem");
+  return tr("Filesystem");
 }
 
 QList<BaseSidebar*> FilesystemPlugin::sidebars() {
-  return QList<BaseSidebar*>() << new FilesystemSidebar(m_textApp, nullptr);
+  if (m_sidebar == nullptr) {
+    m_sidebar = new FilesystemSidebar(this, nullptr);
+  }
+
+  return QList<BaseSidebar*>() << m_sidebar;
 }
 
 QList<QAction*> FilesystemPlugin::userActions() {
@@ -21,6 +25,25 @@ QList<QAction*> FilesystemPlugin::userActions() {
 
 void FilesystemPlugin::start(TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
   m_textApp = text_app;
+  m_settings = settings;
+  m_iconFactory = icon_factory;
 }
 
 void FilesystemPlugin::stop() {}
+
+TextApplication* FilesystemPlugin::textApp() const {
+  return m_textApp;
+}
+
+Settings* FilesystemPlugin::settings() const {
+  return m_settings;
+}
+
+IconFactory* FilesystemPlugin::iconFactory() const {
+  return m_iconFactory;
+}
+
+FilesystemSidebar* FilesystemPlugin::sidebar() const
+{
+  return m_sidebar;
+}

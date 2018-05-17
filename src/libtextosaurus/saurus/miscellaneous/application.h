@@ -60,8 +60,6 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     QWidget* mainFormWidget();
     SystemTrayIcon* trayIcon();
 
-    QString tempFolder();
-    QString documentsFolder();
     QString homeFolder();
     QString configFolder();
 

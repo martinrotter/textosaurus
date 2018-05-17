@@ -211,20 +211,8 @@ QString Application::userDataHomeFolder() {
 #endif
 }
 
-QString Application::tempFolder() {
-  return IOFactory::getSystemFolder(QStandardPaths::TempLocation);
-}
-
-QString Application::documentsFolder() {
-  return IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation);
-}
-
 QString Application::homeFolder() {
-#if defined (Q_OS_ANDROID)
-  return IOFactory::getSystemFolder(QStandardPaths::GenericDataLocation);
-#else
   return IOFactory::getSystemFolder(QStandardPaths::HomeLocation);
-#endif
 }
 
 void Application::processExecutionMessage(const QString& message) {

@@ -4,7 +4,6 @@
 
 #include "common/exceptions/ioexception.h"
 #include "definitions/definitions.h"
-#include "saurus/miscellaneous/application.h"
 
 #include <QDataStream>
 #include <QDir>
@@ -88,7 +87,7 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
   QTemporaryFile tmp_file;
 
   tmp_file.setAutoRemove(false);
-  tmp_file.setFileTemplate(qApp->tempFolder() + QDir::separator() + QSL("tool_output_XXXXXX.txt"));
+  tmp_file.setFileTemplate(getSystemFolder(QStandardPaths::TempLocation) + QDir::separator() + QSL("tool_output_XXXXXX.txt"));
 
   if (tmp_file.open()) {
     tmp_file.write(data);

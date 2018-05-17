@@ -14,8 +14,6 @@ class BaseSidebar : public QDockWidget {
     explicit BaseSidebar(TextApplication* text_app, QWidget* parent = nullptr);
     virtual ~BaseSidebar() = default;
 
-    void setTextApplication(TextApplication* text_app);
-
     QAction* generateAction();
     virtual Qt::DockWidgetArea initialArea() const = 0;
     virtual bool initiallyVisible() const = 0;
