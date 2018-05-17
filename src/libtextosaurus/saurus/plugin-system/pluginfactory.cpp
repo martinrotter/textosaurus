@@ -28,7 +28,9 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
     const QString plugins_path = pluginsLibPath();
 
     for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*")})) {
-      m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
+      if (QLibrary::isLibrary(plugin_lib_file.absoluteFilePath())) {
+        m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
+      }
     }
 
     for (PluginState& plugin_state : m_plugins) {
@@ -145,8 +147,11 @@ PluginState::PluginState(const QString& library_file) {
     qDebug("Successfully loaded plugin '%s'.", qPrintable(m_pluginLibraryFile));
   }
   else {
+    m_plugin = nullptr;
     m_isLoaded = false;
     m_lastError = loader.errorString();
+
+    loader.unload();
 
     qCritical("Cannot load plugin '%s', error is: '%s'", qPrintable(m_pluginLibraryFile), qPrintable(m_lastError));
   }

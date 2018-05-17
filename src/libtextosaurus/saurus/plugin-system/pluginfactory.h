@@ -33,7 +33,7 @@ class PluginState {
     QString m_pluginName;
     QString m_pluginAuthor;
     QString m_pluginLibraryFile;
-    PluginBase* m_plugin;
+    PluginBase* m_plugin = nullptr;
 };
 
 class PluginFactory : public QObject {

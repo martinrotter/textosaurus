@@ -26,7 +26,10 @@ unix:!mac:!android {
   desktop_icon.files = ../../resources/graphics/$${TARGET}.png
   desktop_icon.path = $$quote($$PREFIX/share/icons/hicolor/512x512/apps/)
 
-  INSTALLS += target desktop_file desktop_icon appdata lib
+  headerss.files = $$HEADERS
+  headerss.path = $$quote($$PREFIX/include/)
+
+  INSTALLS += target desktop_file desktop_icon appdata lib headerss
 }
 
 mac {
