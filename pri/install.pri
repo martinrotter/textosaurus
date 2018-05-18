@@ -1,3 +1,7 @@
+# Setup all public headers, this needs to be kept in
+# sync with truly used headers.
+INSTALL_HEADERS = ../libtextosaurus/common/dynamic-shortcuts/dynamicshortcuts.h
+
 # Install all files on Windows.
 win32 {
   target.path = $$PREFIX
@@ -6,6 +10,7 @@ win32 {
   lib.path = $$PREFIX
   lib.CONFIG = no_check_exist
 
+  INSTALL_HEADERS_PREFIX = $$quote($$PREFIX/include/libtextosaurus/)
   INSTALLS += target lib
 }
 
@@ -26,10 +31,8 @@ unix:!mac:!android {
   desktop_icon.files = ../../resources/graphics/$${TARGET}.png
   desktop_icon.path = $$quote($$PREFIX/share/icons/hicolor/512x512/apps/)
 
-  #headerss.files = $$HEADERS
-  #headerss.path = $$quote($$PREFIX/include/)
-
-  INSTALLS += target desktop_file desktop_icon appdata lib #headerss
+  INSTALL_HEADERS_PREFIX = $$quote($$PREFIX/include/libtextosaurus/)
+  INSTALLS += target desktop_file desktop_icon appdata lib
 }
 
 mac {
@@ -68,5 +71,17 @@ mac {
   pkginfo.extra = @printf "APPL????" > $$shell_quote($$PREFIX/Contents/PkgInfo)
   pkginfo.path = $$quote($$PREFIX/Contents/)
 
+  INSTALL_HEADERS_PREFIX = $$quote($$PREFIX/Contents/Resources/Include/libtextosaurus/)
   INSTALLS += target lib icns_icon info_plist info_plist2 pkginfo readme
+}
+
+# Create install step for each folder of public headers.
+for(header, INSTALL_HEADERS) {
+  path = $${INSTALL_HEADERS_PREFIX}/$${dirname(header)}
+
+  message($$MSG_PREFIX: Adding header \"$$header\" to \"make install\" step.)
+
+  eval(headers_$${dirname(header)}.files += $$header)
+  eval(headers_$${dirname(header)}.path = $$path)
+  eval(INSTALLS *= headers_$${dirname(header)})
 }
