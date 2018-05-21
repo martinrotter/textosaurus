@@ -23,6 +23,10 @@
 #define SETTING(x) x, x ## Def
 #define DEFAULT_VALUE(x) x ## Def
 
+namespace DisabledPlugins {
+  constexpr auto ID = "disabled_plugins";
+}
+
 namespace Editor {
   constexpr auto ID = "editor";
   constexpr auto LogTimestampFormat = "log_timestamp_format";

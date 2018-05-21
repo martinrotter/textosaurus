@@ -53,8 +53,36 @@
      </column>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnGoToWebsite">
+       <property name="text">
+        <string>Go to &amp;Website</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_treePlugins</tabstop>
+  <tabstop>m_btnGoToWebsite</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

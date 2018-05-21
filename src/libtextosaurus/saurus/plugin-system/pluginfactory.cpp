@@ -118,14 +118,18 @@ void PluginFactory::quit() {
   }
 }
 
+PluginState::PluginState() {}
+
 PluginState::PluginState(PluginBase* builtin_plugin) {
   // We load built-in plugin.
   m_isLoaded = true;
-  m_isRemovable = false;
+  m_isBuiltin = true;
   m_plugin = builtin_plugin;
   m_lastError = m_pluginAuthor = QString();
   m_pluginId = m_plugin->id();
   m_pluginName = m_plugin->name();
+  m_pluginWebsite = APP_URL;
+  m_pluginAuthor = QSL("Martin Rotter");
 }
 
 PluginState::PluginState(const QString& library_file) {
@@ -137,8 +141,9 @@ PluginState::PluginState(const QString& library_file) {
   m_plugin = qobject_cast<PluginBase*>(plugin_instance);
   m_pluginId = loader.metaData()["IID"].toString();
   m_pluginName = loader.metaData()["MetaData"].toObject()["name"].toString();
+  m_pluginWebsite = loader.metaData()["MetaData"].toObject()["website"].toString();
   m_pluginAuthor = loader.metaData()["MetaData"].toObject()["author"].toString();
-  m_isRemovable = true;
+  m_isBuiltin = false;
 
   if (m_plugin != nullptr && !m_plugin->name().isEmpty() && !m_plugin->id().isEmpty()) {
     m_isLoaded = true;
@@ -157,12 +162,20 @@ PluginState::PluginState(const QString& library_file) {
   }
 }
 
+void PluginState::enable() {
+  qApp->settings()->remove(GROUP(DisabledPlugins), pluginId());
+}
+
+void PluginState::disable() {
+  qApp->settings()->setValue(GROUP(DisabledPlugins), pluginId(), true);
+}
+
 bool PluginState::isLoaded() const {
   return m_isLoaded;
 }
 
-bool PluginState::isRemovable() const {
-  return m_isRemovable;
+bool PluginState::isBuiltin() const {
+  return m_isBuiltin;
 }
 
 QString PluginState::lastError() const {
@@ -171,6 +184,10 @@ QString PluginState::lastError() const {
 
 PluginBase* PluginState::plugin() const {
   return m_plugin;
+}
+
+QString PluginState::pluginWebsite() const {
+  return m_pluginWebsite;
 }
 
 QString PluginState::pluginAuthor() const {
