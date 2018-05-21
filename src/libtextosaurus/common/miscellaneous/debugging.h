@@ -1,4 +1,4 @@
-// For license of this file, see <project-root-folder>/LICENSE.md.
+// This file is distributed under GNU GPLv3 license. For full license text, see <project-git-repository-root-folder>/LICENSE.md.
 
 #ifndef DEBUGGING_H
 #define DEBUGGING_H
