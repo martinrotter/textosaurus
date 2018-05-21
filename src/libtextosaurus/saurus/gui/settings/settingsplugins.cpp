@@ -20,6 +20,8 @@ SettingsPlugins::SettingsPlugins(Settings* settings, QWidget* parent) : Settings
     Q_UNUSED(previous)
     m_ui.m_btnGoToWebsite->setEnabled(current != nullptr);
   });
+
+  m_ui.m_btnGoToWebsite->setEnabled(false);
 }
 
 QString SettingsPlugins::title() const {
