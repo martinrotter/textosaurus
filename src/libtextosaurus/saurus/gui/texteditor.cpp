@@ -611,31 +611,43 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
 
   setKeyWords(0, qstrdup(m_lexer.m_keywords.toLocal8Bit().constData()));
 
-  // TODO: Setup folding, enable if some lexer is active, disable otherwise.
+/*
+   // TODO: Setup folding, enable if some lexer is active, disable otherwise.
+   if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER && propertyNames().contains("fold")) {
+    // We activate folding.
+    setProperty("fold", "1");
+    setProperty("fold.compact", "1");
+    setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
+   }
+   else {
+    setProperty("fold", "0");
+    setProperty("fold.compact", "0");
+    setMarginWidthN(MARGIN_FOLDING, 0);
+   }
 
-  /*if (m_lexer.m_code != SCLEX_NULL && m_lexer.m_code != SCLEX_CONTAINER) {
-     // We activate folding.
-     setProperty("fold", "1");
-     setProperty("fold.compact", "1");
-     setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
-     }
-     else {
-     setProperty("fold", "0");
-     setProperty("fold.compact", "0");
-     setMarginWidthN(MARGIN_FOLDING, 0);
-     }
+   setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED);
+   setMarginSensitiveN(MARGIN_FOLDING, true);
+   setMarginMaskN(MARGIN_FOLDING, SC_MASK_FOLDERS);
+   markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
+   markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
+   markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
+   markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
+   markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
+   markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
+   markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
 
-     setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED);
-     setMarginSensitiveN(MARGIN_FOLDING, true);
-     setMarginMaskN(MARGIN_FOLDING, SC_MASK_FOLDERS);
-     markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
-     markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
-     markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
-     markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
-     markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
-     markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
-     markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
-   */
+   if (color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaCurrentLine).m_colorBackground.isValid()) {
+    setFoldMarginHiColour(true,
+                          QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaCurrentLine).m_colorBackground));
+   }
+   else {
+    setFoldMarginHiColour(true,
+                          QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).m_colorBackground));
+   }
+
+   setFoldMarginColour(true,
+                      QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).m_colorBackground));
+ */
   colourise(0, -1);
 }
 
