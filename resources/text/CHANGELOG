@@ -1,3 +1,17 @@
+0.9.6
+-----
+Added:
+* Overview of installed plugins in "Settings" dialog.
+* Some enhancements to plugin API.
+* Public headers are installed too.
+* Deploy .lib file on Windows too.
+
+Changed:
+* Some code refactorings.
+
+Fixed:
+* Favorite folders/files can be deleted from list of favorite items in FS sidebar.
+
 0.9.5
 -----
 Textosaurus application is now split into main executable (textosaurus) and core library (libtextosaurus). This is needed to allow for robust plugin architecture. That said, it is no longer possible to publish statically built Textosaurus (single executable file). Textosaurus will support plugins (C++/Qt, dll/so/dylib files, loaded at runtime, simple API) in the future. The work on plugin API is already underway.
