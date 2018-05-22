@@ -23,7 +23,7 @@ Downloads
 
 How to build
 ------------
-See main [project file](textosaurus.pro) for instructions.
+See main [project file](build.pro) for instructions.
 
 Features
 --------
@@ -84,6 +84,7 @@ Features
 		* get output of your script (as new file, replace selection/document, copy to clipboard, ...),
 		* **settings of external tools is completely portable** (*).
 * Misc:
+    - cross-platform easy-to-use **plugin API**,
     - can **save/restore session** in platform independent way,
     - **all user data (settings, external tools definitions, ...) are fully portable** (You can use the same user data shared via Dropbox on all supported platforms.),
     - depends only on Qt (Scintilla is bundled),
