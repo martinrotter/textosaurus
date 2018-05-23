@@ -1,3 +1,11 @@
+0.9.7
+-----
+Added:
+* All sidebars can now be shrinked to very minimum width/height.
+
+Fixed:
+* Fixed find results sidebar resetting its contents when moved to other dock area.
+
 0.9.6
 -----
 Added:
