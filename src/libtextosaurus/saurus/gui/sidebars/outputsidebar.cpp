@@ -135,6 +135,8 @@ void OutputSidebar::load() {
     });
 
     setWidget(m_txtOutput);
+
+    BaseSidebar::load();
   }
 }
 

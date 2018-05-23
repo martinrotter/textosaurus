@@ -29,6 +29,14 @@ void BaseSidebar::switchVisibility() {
   isVisible() ? hide() : show();
 }
 
+void BaseSidebar::load() {
+  setSizePolicy(QSizePolicy::Policy::Ignored, QSizePolicy::Policy::Ignored);
+
+  if (widget() != nullptr) {
+    widget()->setSizePolicy(QSizePolicy::Policy::Ignored, QSizePolicy::Policy::Ignored);
+  }
+}
+
 void BaseSidebar::showEvent(QShowEvent* event) {
   load();
   QDockWidget::showEvent(event);

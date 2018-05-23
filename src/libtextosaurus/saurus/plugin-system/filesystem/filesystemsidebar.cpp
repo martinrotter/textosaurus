@@ -174,6 +174,8 @@ void FilesystemSidebar::load() {
 
     setWidget(m_tabWidget);
     setFocusProxy(m_fsView);
+
+    BaseSidebar::load();
   }
 }
 

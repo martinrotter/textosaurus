@@ -84,6 +84,8 @@ void MarkdownSidebar::load() {
     layout->addWidget(m_txtPreview, 1);
 
     setWidget(widget);
+
+    BaseSidebar::load();
   }
 }
 

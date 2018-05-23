@@ -10,7 +10,7 @@
 #include <QTreeView>
 
 FindResultsSidebar::FindResultsSidebar(TextApplication* app, QWidget* parent)
-  : BaseSidebar(app, parent) {
+  : BaseSidebar(app, parent), m_viewResults(nullptr), m_model(nullptr) {
   setWindowTitle(tr("Find Results"));
   setObjectName(QSL("m_sidebarFindResults"));
 }
@@ -28,17 +28,21 @@ int FindResultsSidebar::initialWidth() const {
 }
 
 void FindResultsSidebar::load() {
-  m_model = new FindResultsModel(this);
+  if (m_model == nullptr) {
+    m_model = new FindResultsModel(this);
 
-  m_viewResults = new QTreeView(this);
-  m_viewResults->setHeaderHidden(true);
-  m_viewResults->setModel(m_model);
-  m_viewResults->setIndentation(10);
-  m_viewResults->setAlternatingRowColors(true);
-  m_viewResults->setItemDelegate(new HtmlDelegate(m_viewResults));
+    m_viewResults = new QTreeView(this);
+    m_viewResults->setHeaderHidden(true);
+    m_viewResults->setModel(m_model);
+    m_viewResults->setIndentation(10);
+    m_viewResults->setAlternatingRowColors(true);
+    m_viewResults->setItemDelegate(new HtmlDelegate(m_viewResults));
 
-  setWidget(m_viewResults);
-  connect(m_viewResults, &QTreeView::activated, this, &FindResultsSidebar::navigateToResult);
+    setWidget(m_viewResults);
+    connect(m_viewResults, &QTreeView::activated, this, &FindResultsSidebar::navigateToResult);
+
+    BaseSidebar::load();
+  }
 }
 
 void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {

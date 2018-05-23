@@ -79,6 +79,8 @@ void MacrosSidebar::load() {
     m_actionStoredDelete->setEnabled(false);
 
     reloadStoredMacros();
+
+    BaseSidebar::load();
   }
 }
 

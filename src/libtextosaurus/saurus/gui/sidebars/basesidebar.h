@@ -21,9 +21,9 @@ class BaseSidebar : public QDockWidget {
 
   public slots:
     void switchVisibility();
-    virtual void load() = 0;
 
   protected:
+    virtual void load();
     virtual void showEvent(QShowEvent* event) override;
 
   protected:
