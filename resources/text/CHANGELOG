@@ -1,9 +1,12 @@
 0.9.7
 -----
 Added:
+* Code folding (see menu "View" -> "Code Folding") for all supported languages/lexers.
+* Added notification to "Output" sidebar (or tray icon) when document gets reloaded upon external change.
 * All sidebars can now be shrinked to very minimum width/height.
 
 Fixed:
+* Some minor glitches.
 * Fixed find results sidebar resetting its contents when moved to other dock area.
 
 0.9.6

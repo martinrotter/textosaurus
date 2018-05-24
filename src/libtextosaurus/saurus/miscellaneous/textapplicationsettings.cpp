@@ -21,6 +21,10 @@ TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
   m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)) {}
 
+bool TextApplicationSettings::codeFoldingEnabled() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::CodeFolding)).toBool();
+}
+
 bool TextApplicationSettings::restorePreviousSession() const {
   return qApp->settings()->value(GROUP(General), SETTING(General::RestoreSession)).toBool();
 }
@@ -113,6 +117,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setCodeFoldingEnabled(bool enabled) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::CodeFolding, enabled);
+  emit settingsChanged(true, false);
 }
 
 void TextApplicationSettings::setRestoredSessionTabIndex(int index) {

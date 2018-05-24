@@ -171,7 +171,7 @@ void TextApplication::reloadCurrentEditor() {
 
 void TextApplication::makeEditorVisible(TextEditor* editor) {
   if (editor != nullptr) {
-    m_tabEditors->setCurrentWidget(editor);
+    m_tabEditors->setCurrentIndex(m_tabEditors->indexOfEditor(editor));
   }
 }
 
@@ -399,6 +399,7 @@ void TextApplication::createConnections() {
     openTextFile();
   });
   connect(m_actionWordWrap, &QAction::triggered, m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionCodeFolding, &QAction::triggered, m_settings, &TextApplicationSettings::setCodeFoldingEnabled);
   connect(m_actionLineNumbers, &QAction::triggered, m_settings, &TextApplicationSettings::setLineNumbersEnabled);
   connect(m_actionViewEols, &QAction::triggered, m_settings, &TextApplicationSettings::setViewEols);
   connect(m_actionViewWhitespaces, &QAction::triggered, m_settings, &TextApplicationSettings::setViewWhitespaces);
@@ -463,6 +464,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionEolConvertMac = m_mainForm->m_ui.m_actionEolConvertMac;
   m_actionFindReplace = m_mainForm->m_ui.m_actionFindReplace;
   m_actionWordWrap = m_mainForm->m_ui.m_actionWordWrap;
+  m_actionCodeFolding = m_mainForm->m_ui.m_actionCodeFolding;
   m_actionLineNumbers = m_mainForm->m_ui.m_actionLineNumbers;
   m_actionTabsCloseAllUnmodified = m_mainForm->m_ui.m_actionTabsCloseAllUnmodified;
   m_actionEditBack = m_mainForm->m_ui.m_actionEditBack;
@@ -509,6 +511,7 @@ QList<QAction*> TextApplication::userActions() const {
 void TextApplication::loadState() {
   m_actionWordWrap->setChecked(m_settings->wordWrapEnabled());
   m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
+  m_actionCodeFolding->setChecked(m_settings->codeFoldingEnabled());
   m_actionViewEols->setChecked(m_settings->viewEols());
   m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 

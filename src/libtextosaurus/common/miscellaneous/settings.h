@@ -57,6 +57,8 @@ namespace Editor {
   constexpr auto WordWrapDef = true;
   constexpr auto LineNumbers = "line_numbers";
   constexpr auto LineNumbersDef = false;
+  constexpr auto CodeFolding = "code_folding";
+  constexpr auto CodeFoldingDef = false;
   constexpr auto AutoIndent = "auto_indent";
   constexpr auto AutoIndentDef = true;
   constexpr auto RecentFiles = "recent_files";

@@ -68,9 +68,11 @@ QVariant FindResultsModel::data(const QModelIndex& index, int role) const {
 }
 
 void FindResultsModel::clear() {
-  beginRemoveRows(QModelIndex(), 0, rowCount(QModelIndex()));
-  m_rootItem->clearChildren();
-  endRemoveRows();
+  if (rowCount(QModelIndex()) > 0) {
+    beginRemoveRows(QModelIndex(), 0, rowCount(QModelIndex()));
+    m_rootItem->clearChildren();
+    endRemoveRows();
+  }
 }
 
 void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {

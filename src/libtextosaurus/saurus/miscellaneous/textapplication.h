@@ -159,6 +159,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     QAction* m_actionFindReplace;
     QAction* m_actionTabsCloseAllUnmodified;
     QAction* m_actionWordWrap;
+    QAction* m_actionCodeFolding;
     QAction* m_actionLineNumbers;
     QAction* m_actionEditBack;
     QAction* m_actionEditForward;

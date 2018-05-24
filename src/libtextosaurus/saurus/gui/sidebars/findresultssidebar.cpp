@@ -60,6 +60,7 @@ void FindResultsSidebar::navigateToResult(const QModelIndex& index) {
   if (result_item != nullptr && result_item->editor() != nullptr) {
     m_textApp->makeEditorVisible(result_item->editor());
 
+    result_item->editor()->ensureVisible(result_item->editor()->lineFromPosition(result_item->range().first));
     result_item->editor()->setSel(result_item->range().first, result_item->range().second);
   }
 }

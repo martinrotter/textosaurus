@@ -232,8 +232,8 @@ void FormFindReplace::searchReplaceOne(bool reverse) {
     }
 
     // We highlight and scroll.
-    editor->setSelection(found_range.first, found_range.first + replacement_length);
-    editor->scrollCaret();
+    editor->ensureVisible(editor->lineFromPosition(found_range.first));
+    editor->setSel(found_range.first, found_range.first + replacement_length);
   }
 }
 
@@ -269,7 +269,7 @@ void FormFindReplace::searchOne(bool reverse) {
   }
   else {
     m_ui.m_lblResult->clear();
-    editor->setSelection(found_range.first, found_range.second);
-    editor->scrollCaret();
+    editor->ensureVisible(editor->lineFromPosition(found_range.first));
+    editor->setSel(found_range.first, found_range.second);
   }
 }

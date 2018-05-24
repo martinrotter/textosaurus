@@ -38,7 +38,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -124,6 +124,7 @@
     <addaction name="m_menuViewInvisibles"/>
     <addaction name="m_actionStayOnTop"/>
     <addaction name="m_actionWordWrap"/>
+    <addaction name="m_actionCodeFolding"/>
     <addaction name="m_actionLineNumbers"/>
    </widget>
    <widget class="QMenu" name="m_menuTools">
@@ -512,6 +513,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="m_actionCodeFolding">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Code &amp;Folding</string>
    </property>
   </action>
  </widget>

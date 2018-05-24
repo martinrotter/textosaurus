@@ -60,6 +60,9 @@
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
+          <property name="buddy">
+           <cstring>m_rbModeRegex</cstring>
+          </property>
          </widget>
         </item>
        </layout>
@@ -102,6 +105,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="m_btnReplaceNext">
+       <property name="toolTip">
+        <string>Searches for next occurrence and then replaces it.</string>
+       </property>
        <property name="text">
         <string>&amp;Replace Next</string>
        </property>
