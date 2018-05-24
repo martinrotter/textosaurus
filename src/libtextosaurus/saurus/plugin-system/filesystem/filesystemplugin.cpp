@@ -28,6 +28,8 @@ QList<QAction*> FilesystemPlugin::userActions() {
 }
 
 void FilesystemPlugin::start(QWidget* main_form_widget, TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
+  Q_UNUSED(main_form_widget)
+
   m_textApp = text_app;
   m_settings = settings;
   m_iconFactory = icon_factory;
@@ -47,7 +49,6 @@ IconFactory* FilesystemPlugin::iconFactory() const {
   return m_iconFactory;
 }
 
-FilesystemSidebar* FilesystemPlugin::sidebar() const
-{
+FilesystemSidebar* FilesystemPlugin::sidebar() const {
   return m_sidebar;
 }

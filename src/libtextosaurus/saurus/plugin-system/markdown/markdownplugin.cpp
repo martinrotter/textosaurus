@@ -36,7 +36,9 @@ MarkdownSidebar* MarkdownPlugin::sidebar() {
   return m_sidebar;
 }
 
-void MarkdownPlugin::start(QWidget* main_form_widget, TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
+void MarkdownPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
+                           Settings* settings, IconFactory* icon_factory) {
+
   m_textApp = text_app;
 }
 

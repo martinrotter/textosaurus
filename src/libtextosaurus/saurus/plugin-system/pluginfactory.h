@@ -65,6 +65,7 @@ class PluginFactory : public QObject {
     void loadPlugins(TextApplication* text_app);
 
   private:
+    QString pluginSuffix() const;
     QString pluginsLibPath() const;
 
   private:

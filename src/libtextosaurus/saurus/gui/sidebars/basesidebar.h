@@ -23,8 +23,14 @@ class BaseSidebar : public QDockWidget {
     void switchVisibility();
 
   protected:
-    virtual void load();
     virtual void showEvent(QShowEvent* event) override;
+
+    // Performs some last-minute GUI tweaks just before sidebar is shown
+    // for the first time.
+    // NOTE: Always call this base class implementation in your subclasses.
+    // NOTE: It is good to construct all your GUI in this method call,
+    // not in class constructor (to avoid application startup slowdowns).
+    virtual void load();
 
   protected:
     TextApplication* m_textApp;

@@ -27,7 +27,7 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
 
     const QString plugins_path = pluginsLibPath();
 
-    for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*")})) {
+    for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*") + pluginSuffix()})) {
       if (QLibrary::isLibrary(plugin_lib_file.absoluteFilePath())) {
         m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
       }
@@ -58,13 +58,23 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
   }
 }
 
+QString PluginFactory::pluginSuffix() const {
+#if defined(Q_OS_LINUX)
+  return QSL(".so");
+#elif defined(Q_OS_WIN)
+  return QSL(".dll");
+#elif defined(Q_OS_MACOS)
+  return QSL(".dylib");
+#else
+  return QSL("");
+#endif
+}
+
 QString PluginFactory::pluginsLibPath() const {
-#if defined(Q_OS_WIN)
-  return qApp->applicationDirPath();
-#elif defined(Q_OS_LINUX)
+#if defined(Q_OS_LINUX)
   return qApp->applicationDirPath() + QDir::separator() + QL1S("..") + QDir::separator() + QL1S("lib");
 #else
-  return qApp->applicationDirPath();
+  return qApp->applicationDirPath() + QDir::separator() + QL1S("plugins");
 #endif
 }
 
