@@ -74,7 +74,7 @@ namespace GUI {
   constexpr Qt::ToolButtonStyle ToolbarStyleDef = Qt::ToolButtonIconOnly;
   constexpr auto ToolbarActions = "toolbar";
   constexpr auto ToolbarActionsDef = "m_actionFileNew,m_actionFileOpen,m_actionFileSave,separator,"
-                                     "m_actionEditBack,m_actionEditForward,separator,spacer,m_actionTabsCloseAllUnmodified";
+                                     "m_actionEditBack,m_actionEditForward,spacer,m_actionTabsCloseAllUnmodified";
   constexpr auto MainWindowGeometry = "main_window_geometry";
   constexpr auto IsMainWindowMaximizedBeforeFullscreen = "is_window_maximized_before_fullscreen";
   constexpr auto IsMainWindowMaximizedBeforeFullscreenDef = false;
