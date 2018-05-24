@@ -1,7 +1,10 @@
 0.9.7
 -----
 Added:
-* Code folding (see menu "View" -> "Code Folding") for all supported languages/lexers.
+* Code folding (see menu "View" -> "Code Folding"):
+    * supports many languages/lexers,
+    * respects active editor color theme (uses paper background color and primary text color),
+    * fold column is automatically hidden if used language/lexer is not supported.
 * Added notification to "Output" sidebar (or tray icon) when document gets reloaded upon external change.
 * All sidebars can now be shrinked to very minimum width/height.
 
