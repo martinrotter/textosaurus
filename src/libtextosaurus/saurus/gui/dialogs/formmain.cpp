@@ -89,6 +89,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionEolUnix;
   actions << m_ui.m_actionEolWindows;
   actions << m_ui.m_actionFindReplace;
+  actions << m_ui.m_actionCodeFolding;
   actions << m_ui.m_actionLineNumbers;
   actions << m_ui.m_actionWordWrap;
   actions << m_ui.m_actionStayOnTop;
