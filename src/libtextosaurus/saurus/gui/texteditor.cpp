@@ -625,16 +625,31 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     setProperty("fold.compact", "1");
     setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
 
-    setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED);
+    setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED | SC_FOLDFLAG_LINEBEFORE_CONTRACTED);
     setMarginSensitiveN(MARGIN_FOLDING, true);
     setMarginMaskN(MARGIN_FOLDING, SC_MASK_FOLDERS);
+
     markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
     markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
     markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
-    markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
     markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
-    markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
-    markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
+    markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_VLINE);
+    markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_TCORNER);
+    markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_LCORNER);
+
+    auto default_thm_comp = color_theme.component(SyntaxColorTheme::StyleComponents::Default);
+    auto paper_thm_comp = color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper);
+
+    // Frame and inner part.
+    markerSetFore(SC_MARKNUM_FOLDER, QCOLOR_TO_SPRT(default_thm_comp.m_colorForeground));
+    markerSetBack(SC_MARKNUM_FOLDER, QCOLOR_TO_SPRT(paper_thm_comp.m_colorBackground));
+    markerSetFore(SC_MARKNUM_FOLDEROPEN, QCOLOR_TO_SPRT(default_thm_comp.m_colorForeground));
+    markerSetBack(SC_MARKNUM_FOLDEROPEN, QCOLOR_TO_SPRT(paper_thm_comp.m_colorBackground));
+
+    // Lines.
+    markerSetBack(SC_MARKNUM_FOLDERSUB, QCOLOR_TO_SPRT(default_thm_comp.m_colorForeground));
+    markerSetBack(SC_MARKNUM_FOLDERMIDTAIL, QCOLOR_TO_SPRT(default_thm_comp.m_colorForeground));
+    markerSetBack(SC_MARKNUM_FOLDERTAIL, QCOLOR_TO_SPRT(default_thm_comp.m_colorForeground));
 
     if (color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaCurrentLine).m_colorBackground.isValid()) {
       setFoldMarginHiColour(true,
