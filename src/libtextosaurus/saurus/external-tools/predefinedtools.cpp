@@ -74,58 +74,6 @@ QString PredefinedTools::sendToIxio(const QString& data, bool* ok) {
   }
 }
 
-QString PredefinedTools::sendToSprunge(const QString& data, bool* ok) {
-  QByteArray output;
-  QString content = QString("sprunge=%1").arg(data);
-  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_SPRUNGE,
-                                                                 DOWNLOAD_TIMEOUT,
-                                                                 content.toUtf8(),
-                                                                 output,
-                                                                 QNetworkAccessManager::Operation::PostOperation);
-
-  if (result.first == QNetworkReply::NetworkError::NoError) {
-    *ok = true;
-    return QString(output).remove(QRegularExpression(QSL("\\s")));
-  }
-  else {
-    *ok = false;
-    return NetworkFactory::networkErrorText(result.first);
-  }
-}
-
-QString PredefinedTools::sendToGithub(const QString& data, bool* ok) {
-  QByteArray output;
-  QJsonDocument content_doc;
-  QJsonObject files_obj;
-
-  files_obj["file.txt"] = QJsonObject {
-    {QSL("content"), data}
-  };
-  content_doc.setObject(QJsonObject {
-    {"public", true},
-    {"files", QJsonObject {
-       {"file.cpp", QJsonObject {
-          {"content", data}
-        }}
-     }}
-  });
-
-  NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_GITHUB,
-                                                                 DOWNLOAD_TIMEOUT,
-                                                                 content_doc.toJson(QJsonDocument::JsonFormat::Compact),
-                                                                 output,
-                                                                 QNetworkAccessManager::Operation::PostOperation);
-
-  if (result.first == QNetworkReply::NetworkError::NoError) {
-    *ok = true;
-    return QJsonDocument::fromJson(output).object()["html_url"].toString().remove(QRegularExpression(QSL("\\s")));
-  }
-  else {
-    *ok = false;
-    return NetworkFactory::networkErrorText(result.first);
-  }
-}
-
 QString PredefinedTools::jsonBeautify(const QString& data, bool* ok) {
   QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
 

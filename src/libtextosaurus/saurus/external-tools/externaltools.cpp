@@ -433,16 +433,6 @@ void ExternalTools::loadPredefinedTools() {
 
   m_predefinedTools.append(send_to_haste);
 
-  PredefinedTool* send_to_github = new PredefinedTool(&PredefinedTools::sendToGithub, this);
-
-  send_to_github->setActionObjectName(QSL("m_actionPredefSendGithub"));
-  send_to_github->setCategory(tr("&Upload to..."));
-  send_to_github->setName(tr("Upload to &github.com"));
-  send_to_github->setInput(ToolInput::SelectionDocument);
-  send_to_github->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_predefinedTools.append(send_to_github);
-
   PredefinedTool* send_to_ixio = new PredefinedTool(&PredefinedTools::sendToIxio, this);
 
   send_to_ixio->setActionObjectName(QSL("m_actionPredefSendIxio"));
@@ -452,16 +442,6 @@ void ExternalTools::loadPredefinedTools() {
   send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
 
   m_predefinedTools.append(send_to_ixio);
-
-  PredefinedTool* send_to_sprunge = new PredefinedTool(&PredefinedTools::sendToSprunge, this);
-
-  send_to_sprunge->setActionObjectName(QSL("m_actionPredefSendSprunge"));
-  send_to_sprunge->setCategory(tr("&Upload to..."));
-  send_to_sprunge->setName(tr("Upload to &sprunge.us"));
-  send_to_sprunge->setInput(ToolInput::SelectionDocument);
-  send_to_sprunge->setOutput(ToolOutput::DumpToOutputWindow);
-
-  m_predefinedTools.append(send_to_sprunge);
 
   // We pre-generate actions for built-in tools.
   foreach (ExternalTool* tool, m_predefinedTools) {

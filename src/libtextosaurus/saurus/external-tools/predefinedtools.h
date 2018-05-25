@@ -14,8 +14,6 @@ class PredefinedTools {
     static QString sendToHastebin(const QString& data, bool* ok);
     static QString sendToClbin(const QString& data, bool* ok);
     static QString sendToIxio(const QString& data, bool* ok);
-    static QString sendToSprunge(const QString& data, bool* ok);
-    static QString sendToGithub(const QString& data, bool* ok);
 
     // JSON.
     static QString jsonBeautify(const QString& data, bool* ok);
