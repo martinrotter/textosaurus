@@ -1,6 +1,7 @@
 0.9.8
 -----
 Added:
+* Tomorrow color scheme.
 * Print preview grayscale mode (no syntax highlighting).
 
 Fixed:

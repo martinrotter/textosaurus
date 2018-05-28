@@ -48,6 +48,19 @@
 #define BASE16_L_COMMENT    184, 184, 184
 #define BASE16_L_OCCURR     184, 184, 184
 
+#define TOMORROW_PAPER      250, 250, 250
+#define TOMORROW_TEXT       77, 77, 76
+#define TOMORROW_CUR_LINE   239, 239, 239
+#define TOMORROW_LIN_NUM    169, 169, 169
+#define TOMORROW_NUMBERS    245, 135, 31
+#define TOMORROW_STRINGS    113, 140, 0
+#define TOMORROW_KEYWORDS   200, 40, 41
+#define TOMORROW_OPERATORS  62, 153, 159
+#define TOMORROW_PREPROC    137, 89, 168
+#define TOMORROW_WHITESP    169, 169, 169
+#define TOMORROW_COMMENT    142, 144, 140
+#define TOMORROW_OCCURR     142, 144, 140
+
 #include <QObject>
 
 #include "saurus/miscellaneous/syntaxcolortheme.h"

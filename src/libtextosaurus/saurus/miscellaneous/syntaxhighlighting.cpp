@@ -100,7 +100,7 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(SOLAR_RED), QColor(), true)}
   }));
 
-  // Monokai Neo - http://ethanschoonover.com/solarized
+  // Monokai Neo - https://github.com/skylerlee/monokai-neo-syntax
   m_colorThemes.append(SyntaxColorTheme(QSL("Monokai Neo"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(MONOKAI_DARK))},
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(MONOKAI_DARK_L), QColor(MONOKAI_DARK))},
@@ -108,28 +108,46 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(MONOKAI_GREEN))},
     {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(MONOKAI_YELLOW))},
     {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(MONOKAI_LIGHT))},
-    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(MONOKAI_CYAN), QColor())},
-    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(MONOKAI_DARK_L), QColor())},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(MONOKAI_CYAN))},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(MONOKAI_DARK_L))},
     {SyntaxColorTheme::StyleComponents::Error, SyntaxColorThemeComponent(QColor(MONOKAI_RED))},
     {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(MONOKAI_RED))},
     {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(MONOKAI_PURPLE))},
-    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(MONOKAI_YELLOW), QColor())}
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(MONOKAI_YELLOW))}
   }));
 
-  // Base16 Light - http://chriskempson.com/projects/base16/
+  // Base16 Light - http://chriskempson.com/projects/base16
   m_colorThemes.append(SyntaxColorTheme(QSL("Base16 Light"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(BASE16_L_PAPER))},
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(BASE16_L_WHITESP), QColor(BASE16_L_PAPER))},
     {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(BASE16_L_LIN_NUM), QColor(BASE16_L_PAPER))},
     {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(BASE16_L_STRINGS))},
     {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(BASE16_L_OCCURR))},
+    {SyntaxColorTheme::StyleComponents::ScintillaCurrentLine, SyntaxColorThemeComponent(QColor(), QColor(BASE16_L_CUR_LINE))},
     {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(BASE16_L_TEXT))},
-    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(BASE16_L_KEYWORDS), QColor())},
-    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(BASE16_L_COMMENT), QColor())},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(BASE16_L_KEYWORDS))},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(BASE16_L_COMMENT))},
     {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(BASE16_L_OPERATORS))},
     {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(BASE16_L_NUMBERS))},
-    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(BASE16_L_STRINGS), QColor())},
-    {SyntaxColorTheme::StyleComponents::Preprocessor, SyntaxColorThemeComponent(QColor(BASE16_L_PREPROC), QColor())}
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(BASE16_L_STRINGS))},
+    {SyntaxColorTheme::StyleComponents::Preprocessor, SyntaxColorThemeComponent(QColor(BASE16_L_PREPROC))}
+  }));
+
+  // Tomorrow - https://github.com/chriskempson/tomorrow-theme
+  m_colorThemes.append(SyntaxColorTheme(QSL("Tomorrow"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
+    {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(TOMORROW_PAPER))},
+    {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(TOMORROW_WHITESP), QColor(TOMORROW_PAPER))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(TOMORROW_LIN_NUM), QColor(TOMORROW_PAPER))},
+    {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(TOMORROW_STRINGS))},
+    {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(TOMORROW_OCCURR))},
+    {SyntaxColorTheme::StyleComponents::ScintillaCurrentLine, SyntaxColorThemeComponent(QColor(), QColor(TOMORROW_CUR_LINE))},
+    {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(TOMORROW_TEXT))},
+    {SyntaxColorTheme::StyleComponents::Keyword, SyntaxColorThemeComponent(QColor(TOMORROW_KEYWORDS))},
+    {SyntaxColorTheme::StyleComponents::Comment, SyntaxColorThemeComponent(QColor(TOMORROW_COMMENT))},
+    {SyntaxColorTheme::StyleComponents::Operator, SyntaxColorThemeComponent(QColor(TOMORROW_OPERATORS))},
+    {SyntaxColorTheme::StyleComponents::Number, SyntaxColorThemeComponent(QColor(TOMORROW_NUMBERS))},
+    {SyntaxColorTheme::StyleComponents::String, SyntaxColorThemeComponent(QColor(TOMORROW_STRINGS))},
+    {SyntaxColorTheme::StyleComponents::Preprocessor, SyntaxColorThemeComponent(QColor(TOMORROW_PREPROC))}
   }));
 
   const QString current_theme_name = qApp->settings()->value(GROUP(Editor), Editor::ColorTheme).toString();
