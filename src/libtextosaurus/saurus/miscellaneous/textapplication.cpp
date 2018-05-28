@@ -875,6 +875,8 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
         m_actionPrintCurrentEditor->setEnabled(true);
         m_actionPrintPreviewCurrentEditor->setEnabled(true);
         m_actionPrintPreviewCurrentEditorBlackWhite->setEnabled(true);
+        m_actionFindReplace->setEnabled(true);
+        m_menuEolConversion->setEnabled(true);
       }
     }
     else {
@@ -895,6 +897,8 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     m_actionPrintCurrentEditor->setEnabled(false);
     m_actionPrintPreviewCurrentEditor->setEnabled(false);
     m_actionPrintPreviewCurrentEditorBlackWhite->setEnabled(false);
+    m_actionFindReplace->setEnabled(false);
+    m_menuEolConversion->setEnabled(false);
   }
 }
 
