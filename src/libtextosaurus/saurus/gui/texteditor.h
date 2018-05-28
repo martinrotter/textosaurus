@@ -59,8 +59,8 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
 
     void reloadFromDisk();
     void toggleFolding(int position, int modifiers, int margin);
-    void printPreview();
-    void print();
+    void printPreview(bool black_on_white);
+    void print(bool black_on_white);
     void save(bool* ok);
     void saveAs(bool* ok, const QString& encoding = QString());
 

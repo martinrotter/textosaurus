@@ -79,6 +79,7 @@
     <addaction name="m_actionFileReload"/>
     <addaction name="m_actionPrint"/>
     <addaction name="m_actionPrintPreview"/>
+    <addaction name="m_actionPrintPreviewBlackWhite"/>
     <addaction name="separator"/>
     <addaction name="m_actionRestart"/>
     <addaction name="m_actionQuit"/>
@@ -521,6 +522,11 @@
    </property>
    <property name="text">
     <string>Code &amp;Folding</string>
+   </property>
+  </action>
+  <action name="m_actionPrintPreviewBlackWhite">
+   <property name="text">
+    <string>&amp;Print Preview (Grayscale)</string>
    </property>
   </action>
  </widget>

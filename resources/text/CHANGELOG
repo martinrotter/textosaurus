@@ -1,3 +1,11 @@
+0.9.8
+-----
+Added:
+* Print preview grayscale mode (no syntax highlighting).
+
+Fixed:
+* Minor GUI polishments (disabled actions when unavailable etc.).
+
 0.9.7
 -----
 Added:

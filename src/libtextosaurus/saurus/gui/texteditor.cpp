@@ -915,8 +915,15 @@ void TextEditor::toggleFolding(int position, int modifiers, int margin) {
   }
 }
 
-void TextEditor::printPreview() {
+void TextEditor::printPreview(bool black_on_white) {
   TextEditorPrinter printer;
+
+  if (black_on_white) {
+    setPrintColourMode(SC_PRINT_BLACKONWHITE);
+  }
+  else {
+    setPrintColourMode(SC_PRINT_NORMAL);
+  }
 
   printer.setZoom(-2);
 
@@ -930,8 +937,15 @@ void TextEditor::printPreview() {
   dialog.exec();
 }
 
-void TextEditor::print() {
+void TextEditor::print(bool black_on_white) {
   TextEditorPrinter printer;
+
+  if (black_on_white) {
+    setPrintColourMode(SC_PRINT_BLACKONWHITE);
+  }
+  else {
+    setPrintColourMode(SC_PRINT_NORMAL);
+  }
 
   printer.setZoom(-2);
 

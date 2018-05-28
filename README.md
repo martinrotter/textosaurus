@@ -52,6 +52,7 @@ Features
     - can load relatively big files (100 MB file should not be a problem),
     - can **print files including syntax highlighting**,
     - can print to PDF,
+    - **code folding**,
     - hideable line numbers,
     - **configurable color schemes**,
     - URL highlights (fast on big files, only currently visible lines),

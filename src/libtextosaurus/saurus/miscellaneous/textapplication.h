@@ -80,6 +80,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     virtual bool eventFilter(QObject* obj, QEvent* event) override;
 
   private slots:
+    void printPreviewCurrentEditorBlackWhite();
     void printPreviewCurrentEditor();
     void printCurrentEditor();
     void showFindReplaceDialog();
@@ -168,6 +169,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     QAction* m_actionViewEols;
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
+    QAction* m_actionPrintPreviewCurrentEditorBlackWhite;
     QAction* m_actionShowOutputSidebar;
     QAction* m_actionShowFindResultsSidebar;
     QAction* m_actionAutoIndentEnabled;

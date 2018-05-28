@@ -388,6 +388,7 @@ void TextApplication::createConnections() {
   // Actions.
   connect(m_actionPrintCurrentEditor, &QAction::triggered, this, &TextApplication::printCurrentEditor);
   connect(m_actionPrintPreviewCurrentEditor, &QAction::triggered, this, &TextApplication::printPreviewCurrentEditor);
+  connect(m_actionPrintPreviewCurrentEditorBlackWhite, &QAction::triggered, this, &TextApplication::printPreviewCurrentEditorBlackWhite);
   connect(m_actionFindReplace, &QAction::triggered, this, &TextApplication::showFindReplaceDialog);
   connect(m_actionTabsCloseAllUnmodified, &QAction::triggered, this, &TextApplication::closeAllUnmodifiedEditors);
   connect(m_actionFileSave, &QAction::triggered, this, &TextApplication::saveCurrentEditor);
@@ -474,6 +475,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionViewEols = m_mainForm->m_ui.m_actionViewEols;
   m_actionPrintCurrentEditor = m_mainForm->m_ui.m_actionPrint;
   m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
+  m_actionPrintPreviewCurrentEditorBlackWhite = m_mainForm->m_ui.m_actionPrintPreviewBlackWhite;
   m_actionAutoIndentEnabled = m_mainForm->m_ui.m_actionAutoIndentEnabled;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
@@ -656,11 +658,19 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   return false;
 }
 
+void TextApplication::printPreviewCurrentEditorBlackWhite() {
+  TextEditor* editor = tabWidget()->currentEditor();
+
+  if (editor != nullptr) {
+    editor->printPreview(true);
+  }
+}
+
 void TextApplication::printPreviewCurrentEditor() {
   TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    editor->printPreview();
+    editor->printPreview(false);
   }
 }
 
@@ -668,7 +678,7 @@ void TextApplication::printCurrentEditor() {
   TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    editor->print();
+    editor->print(false);
   }
 }
 
@@ -864,6 +874,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
         m_actionFileSaveAll->setEnabled(true);
         m_actionPrintCurrentEditor->setEnabled(true);
         m_actionPrintPreviewCurrentEditor->setEnabled(true);
+        m_actionPrintPreviewCurrentEditorBlackWhite->setEnabled(true);
       }
     }
     else {
@@ -883,6 +894,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     m_actionFileSaveAll->setEnabled(false);
     m_actionPrintCurrentEditor->setEnabled(false);
     m_actionPrintPreviewCurrentEditor->setEnabled(false);
+    m_actionPrintPreviewCurrentEditorBlackWhite->setEnabled(false);
   }
 }
 
