@@ -15,7 +15,7 @@ class MarkdownSidebar : public BaseSidebar {
   friend class MarkdownPlugin;
 
   public:
-    explicit MarkdownSidebar(TextApplication* text_app, QWidget* parent = nullptr);
+    explicit MarkdownSidebar(MarkdownPlugin* plugin, QWidget* parent = nullptr);
 
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;
@@ -31,6 +31,7 @@ class MarkdownSidebar : public BaseSidebar {
 
   private:
     MarkdownTextBrowser* m_txtPreview;
+    MarkdownPlugin* m_plugin;
     QAction* m_actionRefreshPreview;
 };
 

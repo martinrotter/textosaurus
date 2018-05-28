@@ -8,6 +8,7 @@
 #include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
+#include "saurus/plugin-system/markdown/markdownplugin.h"
 #include "saurus/plugin-system/markdown/markdowntextbrowser.h"
 
 #include "3rd-party/hoedown/hdocument.h"
@@ -17,12 +18,12 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-MarkdownSidebar::MarkdownSidebar(TextApplication* text_app, QWidget* parent)
-  : BaseSidebar(text_app, parent), m_txtPreview(nullptr) {
+MarkdownSidebar::MarkdownSidebar(MarkdownPlugin* plugin, QWidget* parent)
+  : BaseSidebar(plugin->m_textApp, parent), m_txtPreview(nullptr), m_plugin(plugin) {
   setWindowTitle(tr("Markdown Preview"));
   setObjectName(QSL("m_sidebarMarkdown"));
 
-  m_actionRefreshPreview = new QAction(qApp->icons()->fromTheme(QSL("view-refresh")),
+  m_actionRefreshPreview = new QAction(m_plugin->m_iconFactory->fromTheme(QSL("view-refresh")),
                                        tr("Refresh Markdown Preview"),
                                        this);
   m_actionRefreshPreview->setObjectName(QSL("m_actionRefreshMarkdownPreview"));
@@ -68,8 +69,8 @@ void MarkdownSidebar::load() {
     m_txtPreview->setOpenExternalLinks(false);
     m_txtPreview->setOpenLinks(false);
 
-    connect(m_txtPreview, &QTextBrowser::anchorClicked, this, [](const QUrl& url) {
-      qApp->web()->openUrlInExternalBrowser(url.toString());
+    connect(m_txtPreview, &QTextBrowser::anchorClicked, this, [this](const QUrl& url) {
+      m_plugin->m_webFactory->openUrlInExternalBrowser(url.toString());
     });
 
     QWidget* widget = new QWidget(this);

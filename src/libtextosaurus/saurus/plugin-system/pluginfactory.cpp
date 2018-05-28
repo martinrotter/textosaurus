@@ -41,7 +41,7 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
         continue;
       }
 
-      plugin->start(qApp->mainFormWidget(), text_app, qApp->settings(), qApp->icons());
+      plugin->start(qApp->mainFormWidget(), text_app, qApp->settings(), qApp->icons(), qApp->web());
 
       auto plugin_sidebars = plugin->sidebars();
 

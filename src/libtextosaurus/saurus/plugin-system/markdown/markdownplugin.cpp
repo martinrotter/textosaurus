@@ -30,16 +30,18 @@ QList<QAction*> MarkdownPlugin::userActions() {
 
 MarkdownSidebar* MarkdownPlugin::sidebar() {
   if (m_sidebar == nullptr) {
-    m_sidebar = new MarkdownSidebar(m_textApp, nullptr);
+    m_sidebar = new MarkdownSidebar(this, nullptr);
   }
 
   return m_sidebar;
 }
 
 void MarkdownPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
-                           Settings* settings, IconFactory* icon_factory) {
+                           Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
 
   m_textApp = text_app;
+  m_iconFactory = icon_factory;
+  m_webFactory = web_factory;
 }
 
 void MarkdownPlugin::stop() {}

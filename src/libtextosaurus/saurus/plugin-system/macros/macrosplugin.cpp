@@ -26,7 +26,10 @@ QList<QAction*> MacrosPlugin::userActions() {
   return {};
 }
 
-void MacrosPlugin::start(QWidget* main_form_widget, TextApplication* text_app, Settings* settings, IconFactory* icon_factory) {
+void MacrosPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
+                         Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
+  Q_UNUSED(web_factory)
+
   m_mainForm = main_form_widget;
   m_textApp = text_app;
   m_iconFactory = icon_factory;
@@ -44,8 +47,7 @@ MacrosSidebar* MacrosPlugin::sidebar() {
   return m_sidebar;
 }
 
-Settings* MacrosPlugin::settings() const
-{
+Settings* MacrosPlugin::settings() const {
   return m_settings;
 }
 
