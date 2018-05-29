@@ -38,10 +38,6 @@ int TextFactory::stringWidth(const QString& string, const QFontMetrics& metrics)
   return width;
 }
 
-bool TextFactory::isCharUrlValid(char chr) {
-  return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#@!$&'*+,;=`.").contains(chr);
-}
-
 QDateTime TextFactory::parseDateTime(const QString& date_time) {
   const QString input_date = date_time.simplified();
   QDateTime dt;
@@ -227,13 +223,4 @@ QString TextFactory::eolDescriptionFromCode(int eol_code) {
 
 QDateTime TextFactory::parseDateTime(qint64 milis_from_epoch) {
   return QDateTime::fromMSecsSinceEpoch(milis_from_epoch);
-}
-
-QString TextFactory::shorten(const QString& input, int text_length_limit) {
-  if (input.size() > text_length_limit) {
-    return input.left(text_length_limit - ELLIPSIS_LENGTH) + QString(ELLIPSIS_LENGTH, QL1C('.'));
-  }
-  else {
-    return input;
-  }
 }

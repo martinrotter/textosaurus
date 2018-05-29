@@ -10,7 +10,7 @@
 class TextEditor;
 class TabWidget;
 
-enum class TabTyp {
+enum class TabType {
   TextEditor = 1
 };
 
@@ -26,7 +26,7 @@ class Tab : public QWidget {
     // Returns list of all editors, sorted from
     // most significant to less significant.
     virtual QList<TextEditor*> allEditors() const = 0;
-    virtual TabTyp tabType() const = 0;
+    virtual TabType tabType() const = 0;
 
     // Return count of editors.
     virtual int countOfEditors() const = 0;
@@ -39,6 +39,6 @@ class Tab : public QWidget {
     TabWidget* m_tabWidget;
 };
 
-Q_DECLARE_METATYPE(TabTyp)
+Q_DECLARE_METATYPE(TabType)
 
 #endif // TAB_H

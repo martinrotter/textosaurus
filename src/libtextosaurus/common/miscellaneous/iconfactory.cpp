@@ -10,10 +10,6 @@ QIcon IconFactory::fromTheme(const QString& name) {
   return QIcon::fromTheme(name);
 }
 
-QPixmap IconFactory::miscPixmap(const QString& name) {
-  return QPixmap(QString(APP_THEME_PATH) + QDir::separator() + "misc" + QDir::separator() + name + ".png");
-}
-
 QIcon IconFactory::miscIcon(const QString& name) {
   return QIcon(QString(APP_THEME_PATH) + QDir::separator() + "misc" + QDir::separator() + name + ".png");
 }

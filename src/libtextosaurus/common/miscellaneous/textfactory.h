@@ -17,7 +17,6 @@ class TextFactory {
 
     static int stringHeight(const QString& string, const QFontMetrics& metrics);
     static int stringWidth(const QString& string, const QFontMetrics& metrics);
-    static bool isCharUrlValid(char chr);
 
     // Tries to parse input textual date/time representation.
     // Returns invalid date/time if processing fails.
@@ -31,9 +30,6 @@ class TextFactory {
     // Converts 1970-epoch miliseconds to date/time.
     // NOTE: This apparently returns date/time in localtime.
     static QDateTime parseDateTime(qint64 milis_from_epoch);
-
-    // Shortens input string according to given length limit.
-    static QString shorten(const QString& input, int text_length_limit);
 };
 
 #endif // TEXTFACTORY_H

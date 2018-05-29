@@ -23,25 +23,6 @@ bool IOFactory::isFolderWritable(const QString& folder) {
   return QTemporaryFile(real_file).open();
 }
 
-QString IOFactory::getSystemFolder(QStandardPaths::StandardLocation location) {
-  return QStandardPaths::writableLocation(location);
-}
-
-QString IOFactory::filterBadCharsFromFilename(const QString& name) {
-  QString value = name;
-
-  value.replace(QL1C('/'), QL1C('-'));
-  value.remove(QL1C('\\'));
-  value.remove(QL1C(':'));
-  value.remove(QL1C('*'));
-  value.remove(QL1C('?'));
-  value.remove(QL1C('"'));
-  value.remove(QL1C('<'));
-  value.remove(QL1C('>'));
-  value.remove(QL1C('|'));
-  return value;
-}
-
 QByteArray IOFactory::readFileRawChunk(const QString& file_path, int length) {
   QFile input_file(file_path);
 
@@ -87,7 +68,9 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
   QTemporaryFile tmp_file;
 
   tmp_file.setAutoRemove(false);
-  tmp_file.setFileTemplate(getSystemFolder(QStandardPaths::TempLocation) + QDir::separator() + QSL("tool_output_XXXXXX.txt"));
+  tmp_file.setFileTemplate(QStandardPaths::writableLocation(QStandardPaths::TempLocation) +
+                           QDir::separator() +
+                           QSL("tool_output_XXXXXX.txt"));
 
   if (tmp_file.open()) {
     tmp_file.write(data);
@@ -98,14 +81,4 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
   else {
     throw IOException(tr("Cannot open temporary file for writting."));
   }
-}
-
-bool IOFactory::copyFile(const QString& source, const QString& destination) {
-  if (QFile::exists(destination)) {
-    if (!QFile::remove(destination)) {
-      return false;
-    }
-  }
-
-  return QFile::copy(source, destination);
 }

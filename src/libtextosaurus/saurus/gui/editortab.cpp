@@ -31,8 +31,8 @@ int EditorTab::countOfEditors() const {
   return 1;
 }
 
-TabTyp EditorTab::tabType() const {
-  return TabTyp::TextEditor;
+TabType EditorTab::tabType() const {
+  return TabType::TextEditor;
 }
 
 void EditorTab::closeEvent(QCloseEvent* event) {

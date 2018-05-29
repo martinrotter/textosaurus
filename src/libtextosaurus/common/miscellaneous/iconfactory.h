@@ -22,8 +22,6 @@ class TEXTOSAURUS_DLLSPEC IconFactory : public QObject {
     // Returns icon from active theme or invalid icon if
     // "no icon theme" is set.
     QIcon fromTheme(const QString& name);
-
-    QPixmap miscPixmap(const QString& name);
     QIcon miscIcon(const QString& name);
 
     // Adds custom application path to be search for icons.

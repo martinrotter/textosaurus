@@ -144,7 +144,7 @@ void FilesystemSidebar::load() {
 
     m_fsView->openFolder(m_plugin->settings()->value(m_settingsSection,
                                                      QL1S("current_folder_") + OS_ID_LOW,
-                                                     IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation)).toString());
+                                                     QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)).toString());
 
     saveCurrentFolder(m_fsView->currentFolder());
 

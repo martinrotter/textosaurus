@@ -16,7 +16,7 @@ class EditorTab : public Tab {
     virtual TextEditor* primaryEditor() const override;
     virtual QList<TextEditor*> allEditors() const override;
     virtual int countOfEditors() const override;
-    virtual TabTyp tabType() const override;
+    virtual TabType tabType() const override;
 
   protected:
     virtual void closeEvent(QCloseEvent* event) override;

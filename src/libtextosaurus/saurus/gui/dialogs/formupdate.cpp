@@ -123,7 +123,7 @@ void FormUpdate::updateProgress(qint64 bytes_received, qint64 bytes_total) {
 
 void FormUpdate::saveUpdateFile(const QByteArray& file_contents) {
   const QString url_file = m_ui.m_listFiles->currentItem()->data(Qt::UserRole).toString();
-  const QString temp_directory = IOFactory::getSystemFolder(QStandardPaths::TempLocation);
+  const QString temp_directory = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
   if (!temp_directory.isEmpty()) {
     const QString output_file_name = url_file.mid(url_file.lastIndexOf('/') + 1);

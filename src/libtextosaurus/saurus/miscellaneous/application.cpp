@@ -185,7 +185,7 @@ void Application::setMainForm(FormMain* main_form) {
 }
 
 QString Application::configFolder() {
-  return IOFactory::getSystemFolder(QStandardPaths::AppConfigLocation);
+  return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
 }
 
 QString Application::userDataAppFolder() {
@@ -212,7 +212,7 @@ QString Application::userDataHomeFolder() {
 }
 
 QString Application::homeFolder() {
-  return IOFactory::getSystemFolder(QStandardPaths::HomeLocation);
+  return QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
 }
 
 void Application::processExecutionMessage(const QString& message) {

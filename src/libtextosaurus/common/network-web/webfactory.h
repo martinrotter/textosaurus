@@ -16,10 +16,6 @@ class WebFactory : public QObject {
 
   public slots:
     bool openUrlInExternalBrowser(const QString& url) const;
-
-  private:
-    QMap<QString, QString> m_escapes;
-    QMap<QString, QString> m_deEscapes;
 };
 
 #endif // WEBFACTORY_H

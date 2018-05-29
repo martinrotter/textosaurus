@@ -67,7 +67,7 @@ namespace Editor {
   constexpr auto ViewWhitespaces = "view_whitespaces";
   constexpr auto ViewWhitespacesDef = false;
   constexpr auto DefaultLoadSaveDirectory = "load_save_directory";
-  const QString DefaultLoadSaveDirectoryDef = IOFactory::getSystemFolder(QStandardPaths::DocumentsLocation);
+  const QString DefaultLoadSaveDirectoryDef = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
 }
 
 namespace GUI {
