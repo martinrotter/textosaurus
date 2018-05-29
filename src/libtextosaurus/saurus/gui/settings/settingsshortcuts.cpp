@@ -20,6 +20,6 @@ void SettingsShortcuts::loadSettings() {
 void SettingsShortcuts::saveSettings() {
   onBeginSaveSettings();
   m_ui.m_shortcuts->updateShortcuts();
-  DynamicShortcuts::save(qApp->userActions());
+  DynamicShortcuts::save(qApp->userActions(), qApp->settings());
   onEndSaveSettings();
 }

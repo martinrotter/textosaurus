@@ -9,7 +9,6 @@
 #include <QHBoxLayout>
 #include <QKeySequenceEdit>
 
-// TODO: vymyslet co se závislostí na saurus application
 ShortcutCatcher::ShortcutCatcher(QWidget* parent) : QWidget(parent) {
   // Setup layout of the control
   m_layout = new QHBoxLayout(this);

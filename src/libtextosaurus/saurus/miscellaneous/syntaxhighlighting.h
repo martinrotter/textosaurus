@@ -103,8 +103,6 @@ class SyntaxHighlighting : public QObject {
     void setCurrentColorTheme(const QString& theme_name);
     void saveColorThemes(const QList<SyntaxColorTheme>& themes, int curr_theme_index);
 
-    // Returns lexer suitable for syntax highlighting of given file and filter.
-    // NOTE: Caller takes ownership of the lexer.
     Lexer lexerForFile(const QString& file_name);
     Lexer lexerForSuffix(const QString& suffix);
     Lexer lexerForName(const QString& name);

@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
   }
 
   // Now is a good time to initialize dynamic keyboard shortcuts.
-  DynamicShortcuts::load(qApp->userActions());
+  DynamicShortcuts::load(qApp->userActions(), qApp->settings());
 
   // Enter global event loop.
   return QApplication::exec();

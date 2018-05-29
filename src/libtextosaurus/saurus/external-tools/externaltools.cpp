@@ -727,7 +727,6 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
       // NOTE: We do not probably have to do this.
       // FS watcher will reload automatically.
-      //editor->reloadFromDisk();
       break;
 
     case ToolOutput::ReplaceSelectionDocument:

@@ -62,7 +62,6 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   setFontQuality(SC_EFF_QUALITY_LCD_OPTIMIZED);
 #endif
 
-  // TODO: idenntační linky
   //setIndentationGuides(SC_IV_REAL);
 
   // Set initial settings.

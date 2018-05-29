@@ -8,6 +8,7 @@
 #include "definitions/definitions.h"
 
 class QAction;
+class Settings;
 
 class TEXTOSAURUS_DLLSPEC DynamicShortcuts {
   public:
@@ -16,11 +17,11 @@ class TEXTOSAURUS_DLLSPEC DynamicShortcuts {
 
     // Checks the application settings and then initializes shortcut of
     // each action from actions from the settings.
-    static void load(const QList<QAction*>& actions);
+    static void load(const QList<QAction*>& actions, Settings* settings);
 
     // Stores shortcut of each action from actions into the application
     // settings.
-    static void save(const QList<QAction*>& actions);
+    static void save(const QList<QAction*>& actions, Settings* settings);
 };
 
 #endif // DYNAMICSHORTCUTS_H

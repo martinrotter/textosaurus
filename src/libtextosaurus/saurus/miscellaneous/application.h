@@ -63,10 +63,6 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     QString homeFolder();
     QString configFolder();
 
-    // These return user ready folders.
-    QString userDataAppFolder();
-    QString userDataHomeFolder();
-
     // Returns the base folder to which store user data, the "data" folder.
     // NOTE: Use this to get correct path under which store user data.
     QString userDataFolder();
@@ -105,6 +101,11 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     void eliminateFirstRun();
     void eliminateFirstRun(const QString& version);
 
+    // These return user ready folders.
+    QString userDataAppFolder();
+    QString userDataHomeFolder();
+
+  private:
     Settings* m_settings;
     TextApplication* m_textApplication;
     FormMain* m_mainForm;
