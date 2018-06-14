@@ -134,7 +134,8 @@ QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
 
     if (!reader.isWhitespace() &&
         reader.tokenType() != QXmlStreamReader::TokenType::Invalid &&
-        reader.tokenType() != QXmlStreamReader::TokenType::NoToken) {
+        reader.tokenType() != QXmlStreamReader::TokenType::NoToken &&
+        reader.tokenType() != QXmlStreamReader::TokenType::StartDocument) {
       writer.writeCurrentToken(reader);
     }
   }
@@ -166,6 +167,7 @@ QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
 
   QXmlStreamReader reader(&file);
   QXmlStreamWriter writer(&file_out);
+  QString xml_encoding;
 
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);
@@ -175,6 +177,17 @@ QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
 
     if (reader.error() != QXmlStreamReader::Error::NoError) {
       break;
+    }
+
+    if (reader.tokenType() == QXmlStreamReader::TokenType::StartDocument) {
+      xml_encoding = reader.documentEncoding().toString();
+
+      if (xml_encoding.isEmpty()) {
+        qWarning("No XML encoding detected when beautifying XML file.");
+      }
+      else {
+        writer.setCodec(xml_encoding.toUtf8().data());
+      }
     }
 
     if (!reader.isWhitespace() &&
