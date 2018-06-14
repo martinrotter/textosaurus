@@ -12,7 +12,7 @@ mkdir textosaurus-build && cd textosaurus-build
 
 # Build application.
 qmake -spec linux-clang -r "WITH_UBUNTU=true" ../build.pro 
-make
+make -j
 make install
 
 cd src/textosaurus

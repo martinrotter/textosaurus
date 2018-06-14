@@ -13,5 +13,5 @@ else
   # Linux.
   sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y
   sudo apt-get update
-  sudo apt-get -y install clang qt59tools qt59base qt59svg
+  sudo apt-get -y install qt59tools qt59base qt59svg
 fi
