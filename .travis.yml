@@ -9,6 +9,7 @@ notifications:
   email: false
 compiler:
 - gcc
+- clang
 git:
   submodules: true
   depth: 1
