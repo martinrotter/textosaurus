@@ -11,6 +11,7 @@ git_tag_name=$TRAVIS_BRANCH
 mkdir textosaurus-build && cd textosaurus-build
 
 # Build application.
+clang++ -v
 qmake -spec linux-clang -r "WITH_UBUNTU=true" ../build.pro 
 make -j
 make install

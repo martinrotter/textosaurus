@@ -11,6 +11,10 @@ gcc|g++|clang* {
   QMAKE_CXXFLAGS += -std=c++17
 }
 
+clang* {
+  DEFINES *= CLANG=1
+}
+
 # Setup specific compiler options.
 CONFIG(release, debug|release) {
   message($$MSG_PREFIX: Building in "release" mode.)
