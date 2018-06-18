@@ -26,11 +26,10 @@ find . -type f
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -bundle-non-qt-libs -no-translations
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -appimage -no-translations
-checkrt
 
 # Workaround to increase compatibility with older systems; see https://github.com/darealshinji/AppImageKit-checkrt for details
 mkdir -p AppDir/usr/optional/
-wget -c https://github.com/darealshinji/AppImageKit-/releases/download/continuous/exec-x86_64.so -O ./AppDir/usr/optional/exec.so
+wget -c https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so -O ./AppDir/usr/optional/exec.so
 mkdir -p AppDir/usr/optional/libstdc++/
 cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./AppDir/usr/optional/libstdc++/
 ( cd AppDir ; rm AppRun ; wget -c https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64 -O AppRun ; chmod a+x AppRun)
@@ -40,13 +39,14 @@ cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./AppDir/usr/optional/libstdc++/
 export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
 ./squashfs-root/usr/bin/appimagetool -g ./AppDir/ Textosaurus.AppImage
 
-
 # Upload image.
 git config --global user.email "rotter.martinos@gmail.com"
 git config --global user.name "martinrotter"
 git clone https://martinrotter:${GH_TOKEN}@github.com/martinrotter/textosaurus.wiki.git ./build-wiki
 
 set -- T*.AppImage
+
+ls
 
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
