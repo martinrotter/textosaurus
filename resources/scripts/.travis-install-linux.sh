@@ -27,6 +27,11 @@ unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -bundle-non-qt-libs -no-translations
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -appimage -no-translations
 
+set -- T*.AppImage
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
+imagename="$1"
+
 # Workaround to increase compatibility with older systems; see https://github.com/darealshinji/AppImageKit-checkrt for details
 mkdir -p AppDir/usr/optional/
 wget -c https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so -O ./AppDir/usr/optional/exec.so
@@ -37,20 +42,14 @@ cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./AppDir/usr/optional/libstdc++/
 # Manually invoke appimagetool so that libstdc++ gets bundled and the modified AppRun stays intact
 ./linuxdeployqt*.AppImage --appimage-extract
 export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
-./squashfs-root/usr/bin/appimagetool -g ./AppDir/ Textosaurus.AppImage
+./squashfs-root/usr/bin/appimagetool -g ./AppDir/ $imagename
 
 # Upload image.
 git config --global user.email "rotter.martinos@gmail.com"
 git config --global user.name "martinrotter"
 git clone https://martinrotter:${GH_TOKEN}@github.com/martinrotter/textosaurus.wiki.git ./build-wiki
 
-set -- T*.AppImage
-
 ls
-
-rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
-
-imagename="$1"
 imagenamenospace="textosaurus-${git_tag_name}-${git_revision}-linux64.AppImage"
 
 mv "$imagename" "$imagenamenospace"
