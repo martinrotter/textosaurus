@@ -27,6 +27,20 @@ unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -bundle-non-qt-libs -no-translations
 ./linuxdeployqt-continuous-x86_64.AppImage "./AppDir/usr/share/applications/io.github.martinrotter.textosaurus.desktop" -appimage -no-translations
 
+
+# Workaround to increase compatibility with older systems; see https://github.com/darealshinji/AppImageKit-checkrt for details
+mkdir -p AppDir/usr/optional/
+wget -c https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so -O ./AppDir/usr/optional/exec.so
+mkdir -p AppDir/usr/optional/libstdc++/
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./AppDir/usr/optional/libstdc++/
+( cd AppDir ; rm AppRun ; wget -c https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64 -O AppRun ; chmod a+x AppRun)
+.
+# Manually invoke appimagetool so that libstdc++ gets bundled and the modified AppRun stays intact
+./linuxdeployqt*.AppImage --appimage-extract
+export PATH=$(readlink -f ./squashfs-root/usr/bin):$PATH
+./squashfs-root/usr/bin/appimagetool -g ./AppDir/ Textosaurus.AppImage
+
+
 # Upload image.
 git config --global user.email "rotter.martinos@gmail.com"
 git config --global user.name "martinrotter"
