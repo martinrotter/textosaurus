@@ -4,6 +4,9 @@ Added:
 * Tomorrow color scheme.
 * Print preview grayscale mode (no syntax highlighting).
 
+Changed:
+* Updated Scintilla editing component to 4.1.0.
+
 Fixed:
 * Functions for beautyfying XMLs now take document encoding into account in a better way.
 * Minor GUI polishments (disabled actions when unavailable etc.).
