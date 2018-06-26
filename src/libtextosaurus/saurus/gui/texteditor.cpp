@@ -870,10 +870,17 @@ void TextEditor::reloadFromDisk() {
     // and show no warnings, makes no sense in this use-case.
     QFile file(filePath());
     FileInitialMetadata metadata = getInitialMetadata(filePath());
+    auto current_line = lineFromPosition(currentPos());
 
     if (!metadata.m_encoding.isEmpty() && file.open(QIODevice::OpenModeFlag::ReadOnly)) {
       loadFromFile(file, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
       emit editorReloaded();
+
+      if (IS_IN_ARRAY(current_line, lineCount())) {
+        auto position_new_document = positionFromLine(current_line);
+
+        setSel(position_new_document, position_new_document);
+      }
     }
   }
 }
