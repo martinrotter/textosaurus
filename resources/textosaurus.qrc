@@ -12,7 +12,6 @@
     <file>graphics/misc/flags/en_GB.png</file>
     <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
     <file>../localization/textosaurus_en.qm</file>
-    <file>../localization/textosaurus_en_GB.qm</file>
     <file>../localization/qt_en.qm</file>
   </qresource>
 </RCC>
