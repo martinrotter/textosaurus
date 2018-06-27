@@ -29,7 +29,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="224"/>
       <source>Insert &amp;DateTime (Custom Format)</source>
-      <translation type="unfinished">Insert &amp;DateTime (Custom Format)</translation>
+      <translation>Vložit &amp;datum/čas (vlastní formát)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="234"/>
@@ -40,12 +40,12 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="235"/>
       <source>JSON &amp;Beautify</source>
-      <translation type="unfinished">JSON &amp;Beautify</translation>
+      <translation>&amp;Zkrášlit JSON</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="245"/>
       <source>JSON &amp;Minify</source>
-      <translation type="unfinished">JSON &amp;Minify</translation>
+      <translation>&amp;Minifikovat JSON</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="254"/>
@@ -58,22 +58,22 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="255"/>
       <source>&amp;Check XML syntax</source>
-      <translation type="unfinished">&amp;Check XML syntax</translation>
+      <translation>&amp;Zkontrolovat syntax XML</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="265"/>
       <source>XML &amp;Beautify (Selected String)</source>
-      <translation type="unfinished">XML &amp;Beautify (Selected String)</translation>
+      <translation>&amp;Zkrášlit XML (vybraný text)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="275"/>
       <source>XML &amp;Beautify (File)</source>
-      <translation type="unfinished">XML &amp;Beautify (File)</translation>
+      <translation>&amp;Zkrášlit XML (celý soubor)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="285"/>
       <source>XML &amp;Linearize/Minfy</source>
-      <translation type="unfinished">XML &amp;Linearize/Minfy</translation>
+      <translation>&amp;Linearizovat XML</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="294"/>
@@ -84,7 +84,7 @@
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="399"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="409"/>
       <source>&amp;MIME Tools</source>
-      <translation type="unfinished">&amp;MIME Tools</translation>
+      <translation>&amp;Nástroje MIME</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
