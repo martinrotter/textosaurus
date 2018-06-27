@@ -1,5 +1,6 @@
 Textosaurus
 =============
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/textosaurus/localized.svg)](https://crowdin.com/project/textosaurus)
 [![AppVeyor](https://img.shields.io/appveyor/ci/martinrotter/textosaurus.svg?maxAge=360)](https://ci.appveyor.com/project/martinrotter/textosaurus)
 [![Travis CI](https://img.shields.io/travis/martinrotter/textosaurus.svg?maxAge=360)](https://travis-ci.org/martinrotter/textosaurus)
 [![Total downloads](https://img.shields.io/github/downloads/martinrotter/textosaurus/total.svg?maxAge=360)](http://www.somsubhra.com/github-release-stats/?username=martinrotter&repository=textosaurus)
