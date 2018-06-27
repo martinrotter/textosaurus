@@ -5,7 +5,7 @@
     <name>Application</name>
     <message>
       <source>Application is already running.</source>
-      <translation type="unfinished">Application is already running.</translation>
+      <translation>Aplikace již běží.</translation>
     </message>
   </context>
   <context>
