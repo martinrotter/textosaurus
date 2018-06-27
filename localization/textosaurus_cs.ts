@@ -9,22 +9,22 @@
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="213"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="223"/>
       <source>&amp;DateTime</source>
-      <translation type="unfinished">&amp;DateTime</translation>
+      <translation>&amp;Datum/čas</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="194"/>
       <source>Insert &amp;DateTime</source>
-      <translation type="unfinished">Insert &amp;DateTime</translation>
+      <translation>Vložit &amp;datum/čas</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="204"/>
       <source>Insert &amp;Date</source>
-      <translation type="unfinished">Insert &amp;Date</translation>
+      <translation>Vložit &amp;datum</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="214"/>
       <source>Insert &amp;Time</source>
-      <translation type="unfinished">Insert &amp;Time</translation>
+      <translation>Vložit &amp;čas</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="224"/>
