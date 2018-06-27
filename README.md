@@ -5,8 +5,6 @@ Textosaurus
 [![Travis CI](https://img.shields.io/travis/martinrotter/textosaurus.svg?maxAge=360)](https://travis-ci.org/martinrotter/textosaurus)
 [![Total downloads](https://img.shields.io/github/downloads/martinrotter/textosaurus/total.svg?maxAge=360)](http://www.somsubhra.com/github-release-stats/?username=martinrotter&repository=textosaurus)
 [![Version](https://img.shields.io/github/release/martinrotter/textosaurus.svg?maxAge=360)](https://github.com/martinrotter/textosaurus/releases)
-[![Commits since](https://img.shields.io/github/commits-since/martinrotter/textosaurus/latest.svg?maxAge=360)](https://github.com/martinrotter/textosaurus/commits/master)
-[![GitHub issues](https://img.shields.io/github/issues/martinrotter/textosaurus.svg?maxAge=360)](https://github.com/martinrotter/textosaurus/issues)
 [![License](https://img.shields.io/github/license/martinrotter/textosaurus.svg?maxAge=360000)](https://github.com/martinrotter/textosaurus/blob/master/LICENSE.md)
 
 <img align="left" src="https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/graphics/textosaurus.png" alt="Textosaurus" height="100px" />
