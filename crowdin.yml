@@ -1,0 +1,3 @@
+files:
+  - source: /localization/textosaurus_en.ts
+    translation: /localization/textosaurus_%osx_locale%.ts
