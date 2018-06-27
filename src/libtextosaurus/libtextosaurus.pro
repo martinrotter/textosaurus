@@ -319,8 +319,7 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/saurus/plugin-system
 
 # Localizations.
-TRANSLATIONS += $$PWD/../../localization/textosaurus_en_GB.ts \
-                $$PWD/../../localization/textosaurus_en.ts
+TRANSLATIONS += $$PWD/../../localization/textosaurus_en.ts
 
 # Create new "make lupdate" target.
 lupdate.target = lupdate
