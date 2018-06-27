@@ -167,16 +167,8 @@ Click here to open parent directory.</translation>
       <translation type="unfinished">&amp;Check XML syntax</translation>
     </message>
     <message>
-      <source>XML &amp;Beautify</source>
-      <translation type="unfinished">XML &amp;Beautify</translation>
-    </message>
-    <message>
       <source>XML &amp;Linearize/Minfy</source>
       <translation type="unfinished">XML &amp;Linearize/Minfy</translation>
-    </message>
-    <message>
-      <source>&amp;MIME tools</source>
-      <translation type="unfinished">&amp;MIME tools</translation>
     </message>
     <message>
       <source>Text → &amp;Base64</source>
@@ -243,16 +235,8 @@ Click here to open parent directory.</translation>
       <translation type="unfinished">Upload to &amp;hastebin.com</translation>
     </message>
     <message>
-      <source>Upload to &amp;github.com</source>
-      <translation type="unfinished">Upload to &amp;github.com</translation>
-    </message>
-    <message>
       <source>Upload to &amp;ix.io</source>
       <translation type="unfinished">Upload to &amp;ix.io</translation>
-    </message>
-    <message>
-      <source>Upload to &amp;sprunge.us</source>
-      <translation type="unfinished">Upload to &amp;sprunge.us</translation>
     </message>
     <message>
       <source>Bash (external tool examples)</source>
@@ -330,6 +314,18 @@ Click here to open parent directory.</translation>
       <source>Tool &apos;%1&apos; finished successfully...</source>
       <translation type="unfinished">Tool &apos;%1&apos; finished successfully...</translation>
     </message>
+    <message>
+      <source>XML &amp;Beautify (Selected String)</source>
+      <translation type="unfinished">XML &amp;Beautify (Selected String)</translation>
+    </message>
+    <message>
+      <source>XML &amp;Beautify (File)</source>
+      <translation type="unfinished">XML &amp;Beautify (File)</translation>
+    </message>
+    <message>
+      <source>&amp;MIME Tools</source>
+      <translation type="unfinished">&amp;MIME Tools</translation>
+    </message>
   </context>
   <context>
     <name>FavoritesListWidget</name>
@@ -339,26 +335,41 @@ Click here to open parent directory.</translation>
     </message>
   </context>
   <context>
+    <name>FilesystemPlugin</name>
+    <message>
+      <source>Filesystem</source>
+      <translation type="unfinished">Filesystem</translation>
+    </message>
+  </context>
+  <context>
     <name>FilesystemSidebar</name>
     <message>
       <source>Filesystem</source>
       <translation type="unfinished">Filesystem</translation>
     </message>
     <message>
-      <source>Go to parent folder</source>
-      <translation type="unfinished">Go to parent folder</translation>
+      <source>Go to Parent Folder</source>
+      <translation type="unfinished">Go to Parent Folder</translation>
     </message>
     <message>
-      <source>Add selected item to favorites</source>
-      <translation type="unfinished">Add selected item to favorites</translation>
+      <source>Add Selected Item to Favorites</source>
+      <translation type="unfinished">Add Selected Item to Favorites</translation>
+    </message>
+    <message>
+      <source>Filter Displayed Files</source>
+      <translation type="unfinished">Filter Displayed Files</translation>
+    </message>
+    <message>
+      <source>Explorer</source>
+      <translation type="unfinished">Explorer</translation>
+    </message>
+    <message>
+      <source>Favorites</source>
+      <translation type="unfinished">Favorites</translation>
     </message>
   </context>
   <context>
     <name>FindResultsModelItemEditor</name>
-    <message>
-      <source>&lt;editor-closed&gt;</source>
-      <translation type="unfinished">&lt;editor-closed&gt;</translation>
-    </message>
     <message numerus="yes">
       <source>%n result(s) - </source>
       <translation type="unfinished">
@@ -371,8 +382,12 @@ Click here to open parent directory.</translation>
       </translation>
     </message>
     <message>
-      <source>&lt;unnamed-document</source>
-      <translation type="unfinished">&lt;unnamed-document</translation>
+      <source>editor-closed</source>
+      <translation type="unfinished">editor-closed</translation>
+    </message>
+    <message>
+      <source>unnamed-document</source>
+      <translation type="unfinished">unnamed-document</translation>
     </message>
   </context>
   <context>
@@ -457,16 +472,20 @@ Click here to open parent directory.</translation>
       <translation type="unfinished">Mozilla Public License (uchardet source code)</translation>
     </message>
     <message>
-      <source>ISC License (Hoedown source code)</source>
-      <translation type="unfinished">ISC License (Hoedown source code)</translation>
-    </message>
-    <message>
       <source>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)</source>
       <translation type="unfinished">&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)</translation>
     </message>
     <message>
       <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and Scintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</source>
       <translation type="unfinished">&lt;body&gt;%5 is simple cross-platform text editor based on Qt and Scintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</translation>
+    </message>
+    <message>
+      <source>GNU LGPL License (Qt library source code)</source>
+      <translation type="unfinished">GNU LGPL License (Qt library source code)</translation>
+    </message>
+    <message>
+      <source>MIT License (Hoextdown source code)</source>
+      <translation type="unfinished">MIT License (Hoextdown source code)</translation>
     </message>
   </context>
   <context>
@@ -565,6 +584,10 @@ Click here to open parent directory.</translation>
     <message>
       <source>Cannot find the text &quot;%1&quot;.</source>
       <translation type="unfinished">Cannot find the text &quot;%1&quot;.</translation>
+    </message>
+    <message>
+      <source>Searches for next occurrence and then replaces it.</source>
+      <translation type="unfinished">Searches for next occurrence and then replaces it.</translation>
     </message>
   </context>
   <context>
@@ -700,10 +723,6 @@ Click here to open parent directory.</translation>
     <message>
       <source>&amp;Edit</source>
       <translation type="unfinished">&amp;Edit</translation>
-    </message>
-    <message>
-      <source>Main toolbar</source>
-      <translation type="unfinished">Main toolbar</translation>
     </message>
     <message>
       <source>&amp;Save File with Encoding...</source>
@@ -909,6 +928,82 @@ Click here to open parent directory.</translation>
       <source>&amp;Close Current Tab</source>
       <translation type="unfinished">&amp;Close Current Tab</translation>
     </message>
+    <message>
+      <source>&amp;?</source>
+      <translation type="unfinished">&amp;?</translation>
+    </message>
+    <message>
+      <source>Ctrl+Q</source>
+      <translation type="unfinished">Ctrl+Q</translation>
+    </message>
+    <message>
+      <source>Ctrl+N</source>
+      <translation type="unfinished">Ctrl+N</translation>
+    </message>
+    <message>
+      <source>Ctrl+O</source>
+      <translation type="unfinished">Ctrl+O</translation>
+    </message>
+    <message>
+      <source>Ctrl+S</source>
+      <translation type="unfinished">Ctrl+S</translation>
+    </message>
+    <message>
+      <source>Ctrl+Alt+S</source>
+      <translation type="unfinished">Ctrl+Alt+S</translation>
+    </message>
+    <message>
+      <source>Ctrl+Z</source>
+      <translation type="unfinished">Ctrl+Z</translation>
+    </message>
+    <message>
+      <source>Ctrl+Y</source>
+      <translation type="unfinished">Ctrl+Y</translation>
+    </message>
+    <message>
+      <source>Ctrl+F</source>
+      <translation type="unfinished">Ctrl+F</translation>
+    </message>
+    <message>
+      <source>Ctrl+P</source>
+      <translation type="unfinished">Ctrl+P</translation>
+    </message>
+    <message>
+      <source>Ctrl+Shift+P</source>
+      <translation type="unfinished">Ctrl+Shift+P</translation>
+    </message>
+    <message>
+      <source>Ctrl+R</source>
+      <translation type="unfinished">Ctrl+R</translation>
+    </message>
+    <message>
+      <source>Ctrl+W</source>
+      <translation type="unfinished">Ctrl+W</translation>
+    </message>
+    <message>
+      <source>&amp;Enable Auto-Indent</source>
+      <translation type="unfinished">&amp;Enable Auto-Indent</translation>
+    </message>
+    <message>
+      <source>&amp;Stay On Top</source>
+      <translation type="unfinished">&amp;Stay On Top</translation>
+    </message>
+    <message>
+      <source>Ctrl+T</source>
+      <translation type="unfinished">Ctrl+T</translation>
+    </message>
+    <message>
+      <source>Code &amp;Folding</source>
+      <translation type="unfinished">Code &amp;Folding</translation>
+    </message>
+    <message>
+      <source>&amp;Print Preview (Grayscale)</source>
+      <translation type="unfinished">&amp;Print Preview (Grayscale)</translation>
+    </message>
+    <message>
+      <source>Main Toolbar</source>
+      <translation type="unfinished">Main Toolbar</translation>
+    </message>
   </context>
   <context>
     <name>FormSettings</name>
@@ -925,10 +1020,6 @@ Click here to open parent directory.</translation>
 %1.</source>
       <translation type="unfinished">Changed categories of settings:
 %1.</translation>
-    </message>
-    <message>
-      <source>Some settings are changed and will be lost</source>
-      <translation type="unfinished">Some settings are changed and will be lost</translation>
     </message>
     <message>
       <source>Some settings were changed and by cancelling this dialog, you would lose these changes.</source>
@@ -949,6 +1040,14 @@ You have to restart manually.</translation>
     <message>
       <source>Do you want to restart now?</source>
       <translation type="unfinished">Do you want to restart now?</translation>
+    </message>
+    <message>
+      <source>Critical Settings Were Changed</source>
+      <translation type="unfinished">Critical Settings Were Changed</translation>
+    </message>
+    <message>
+      <source>Some Settings are Changed and Will be Lost</source>
+      <translation type="unfinished">Some Settings are Changed and Will be Lost</translation>
     </message>
   </context>
   <context>
@@ -1061,10 +1160,6 @@ downloaded.</translation>
       <translation type="unfinished">Go to application website to get update packages manually.</translation>
     </message>
     <message>
-      <source> (size </source>
-      <translation type="unfinished"> (size </translation>
-    </message>
-    <message>
       <source>Available update files</source>
       <translation type="unfinished">Available update files</translation>
     </message>
@@ -1079,8 +1174,16 @@ You can install it now.</translation>
       <translation type="unfinished">Available Files</translation>
     </message>
     <message>
-      <source>Cannot start installer</source>
-      <translation type="unfinished">Cannot start installer</translation>
+      <source>Cannot Start Installer</source>
+      <translation type="unfinished">Cannot Start Installer</translation>
+    </message>
+    <message>
+      <source>Cannot Open Update File</source>
+      <translation type="unfinished">Cannot Open Update File</translation>
+    </message>
+    <message>
+      <source>Cannot open application update file. Update application manually.</source>
+      <translation type="unfinished">Cannot open application update file. Update application manually.</translation>
     </message>
   </context>
   <context>
@@ -1096,6 +1199,94 @@ You can install it now.</translation>
     <message>
       <source>Cannot open temporary file for writting.</source>
       <translation type="unfinished">Cannot open temporary file for writting.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Macros</name>
+    <message>
+      <source>Save Macro</source>
+      <translation type="unfinished">Save Macro</translation>
+    </message>
+    <message>
+      <source>Enter some name for your macro</source>
+      <translation type="unfinished">Enter some name for your macro</translation>
+    </message>
+    <message>
+      <source>My new macro</source>
+      <translation type="unfinished">My new macro</translation>
+    </message>
+    <message>
+      <source>Macro Name Already Used</source>
+      <translation type="unfinished">Macro Name Already Used</translation>
+    </message>
+    <message>
+      <source>Selected macro name is already in use, please select non-empty unique name for each macro.</source>
+      <translation type="unfinished">Selected macro name is already in use, please select non-empty unique name for each macro.</translation>
+    </message>
+  </context>
+  <context>
+    <name>MacrosPlugin</name>
+    <message>
+      <source>Macros</source>
+      <translation type="unfinished">Macros</translation>
+    </message>
+  </context>
+  <context>
+    <name>MacrosSidebar</name>
+    <message>
+      <source>Macros</source>
+      <translation type="unfinished">Macros</translation>
+    </message>
+    <message>
+      <source>Macro Recorder Toolbar</source>
+      <translation type="unfinished">Macro Recorder Toolbar</translation>
+    </message>
+    <message>
+      <source>Start Recording</source>
+      <translation type="unfinished">Start Recording</translation>
+    </message>
+    <message>
+      <source>Stop Recording</source>
+      <translation type="unfinished">Stop Recording</translation>
+    </message>
+    <message>
+      <source>Play Recorded Macro</source>
+      <translation type="unfinished">Play Recorded Macro</translation>
+    </message>
+    <message>
+      <source>Save Macro as...</source>
+      <translation type="unfinished">Save Macro as...</translation>
+    </message>
+    <message>
+      <source>Stored Macros Toolbar</source>
+      <translation type="unfinished">Stored Macros Toolbar</translation>
+    </message>
+    <message>
+      <source>Play Stored Macro</source>
+      <translation type="unfinished">Play Stored Macro</translation>
+    </message>
+    <message>
+      <source>Remove Selected Macro</source>
+      <translation type="unfinished">Remove Selected Macro</translation>
+    </message>
+  </context>
+  <context>
+    <name>MacrosWidget</name>
+    <message>
+      <source>Macros</source>
+      <translation type="unfinished">Macros</translation>
+    </message>
+    <message>
+      <source>My Macros</source>
+      <translation type="unfinished">My Macros</translation>
+    </message>
+    <message>
+      <source>Recorder</source>
+      <translation type="unfinished">Recorder</translation>
+    </message>
+    <message>
+      <source>Recorded Actions</source>
+      <translation type="unfinished">Recorded Actions</translation>
     </message>
   </context>
   <context>
@@ -1261,10 +1452,6 @@ version by clicking this popup notification.</translation>
     <message>
       <source>XML is well-formed.</source>
       <translation type="unfinished">XML is well-formed.</translation>
-    </message>
-    <message>
-      <source>Welcome to %1. Click on me to check out NEW features.</source>
-      <translation type="unfinished">Welcome to %1. Click on me to check out NEW features.</translation>
     </message>
   </context>
   <context>
@@ -1551,6 +1738,22 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Editor</source>
       <translation type="unfinished">Editor</translation>
     </message>
+    <message>
+      <source>General</source>
+      <translation type="unfinished">General</translation>
+    </message>
+    <message>
+      <source>Reload externally edited files automatically</source>
+      <translation type="unfinished">Reload externally edited files automatically</translation>
+    </message>
+    <message>
+      <source>Fonts &amp;&amp; Colors</source>
+      <translation type="unfinished">Fonts &amp;&amp; Colors</translation>
+    </message>
+    <message>
+      <source>Colors</source>
+      <translation type="unfinished">Colors</translation>
+    </message>
   </context>
   <context>
     <name>SettingsExternalTools</name>
@@ -1701,6 +1904,14 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</source>
       <translation type="unfinished">Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</translation>
     </message>
+    <message>
+      <source>Restore previous session</source>
+      <translation type="unfinished">Restore previous session</translation>
+    </message>
+    <message>
+      <source>Every unsaved text will get remembered until next launch and all files will be reopened too.</source>
+      <translation type="unfinished">Every unsaved text will get remembered until next launch and all files will be reopened too.</translation>
+    </message>
   </context>
   <context>
     <name>SettingsGui</name>
@@ -1804,6 +2015,34 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>User Interface</source>
       <translation type="unfinished">User Interface</translation>
     </message>
+    <message>
+      <source>Enable Tray Icon</source>
+      <translation type="unfinished">Enable Tray Icon</translation>
+    </message>
+    <message>
+      <source>If enabled, then main window completely hidden when minimized. User can restore window visibility only via tray icon interaction.</source>
+      <translation type="unfinished">If enabled, then main window completely hidden when minimized. User can restore window visibility only via tray icon interaction.</translation>
+    </message>
+    <message>
+      <source>Hide main window when minimized</source>
+      <translation type="unfinished">Hide main window when minimized</translation>
+    </message>
+    <message>
+      <source>Enable tray icon balloon notifications</source>
+      <translation type="unfinished">Enable tray icon balloon notifications</translation>
+    </message>
+    <message>
+      <source>If enabled, then main window completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</source>
+      <translation type="unfinished">If enabled, then main window completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</translation>
+    </message>
+    <message>
+      <source>Hide main window when closed (do not quit application)</source>
+      <translation type="unfinished">Hide main window when closed (do not quit application)</translation>
+    </message>
+    <message>
+      <source>(Tray icon is not available.)</source>
+      <translation type="unfinished">(Tray icon is not available.)</translation>
+    </message>
   </context>
   <context>
     <name>SettingsLocalization</name>
@@ -1822,6 +2061,37 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <source>Localization</source>
       <translation type="unfinished">Localization</translation>
+    </message>
+  </context>
+  <context>
+    <name>SettingsPlugins</name>
+    <message>
+      <source>Form</source>
+      <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+      <source>Go to &amp;Website</source>
+      <translation type="unfinished">Go to &amp;Website</translation>
+    </message>
+    <message>
+      <source>Name</source>
+      <translation type="unfinished">Name</translation>
+    </message>
+    <message>
+      <source>Author</source>
+      <translation type="unfinished">Author</translation>
+    </message>
+    <message>
+      <source>Website</source>
+      <translation type="unfinished">Website</translation>
+    </message>
+    <message>
+      <source>Plugins</source>
+      <translation type="unfinished">Plugins</translation>
+    </message>
+    <message>
+      <source>no plugin selected</source>
+      <translation type="unfinished">no plugin selected</translation>
     </message>
   </context>
   <context>
@@ -1874,6 +2144,157 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
   </context>
   <context>
+    <name>SyntaxColorThemeEditor</name>
+    <message>
+      <source>Form</source>
+      <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+      <source>Customize Substyle</source>
+      <translation type="unfinished">Customize Substyle</translation>
+    </message>
+    <message>
+      <source>Make &amp;Foreground Transparent</source>
+      <translation type="unfinished">Make &amp;Foreground Transparent</translation>
+    </message>
+    <message>
+      <source>Make &amp;Background Transparent</source>
+      <translation type="unfinished">Make &amp;Background Transparent</translation>
+    </message>
+    <message>
+      <source>Bold</source>
+      <translation type="unfinished">Bold</translation>
+    </message>
+    <message>
+      <source>Italic</source>
+      <translation type="unfinished">Italic</translation>
+    </message>
+    <message>
+      <source>Underline</source>
+      <translation type="unfinished">Underline</translation>
+    </message>
+    <message>
+      <source>&amp;Create New Theme...</source>
+      <translation type="unfinished">&amp;Create New Theme...</translation>
+    </message>
+    <message>
+      <source>&amp;Delete</source>
+      <translation type="unfinished">&amp;Delete</translation>
+    </message>
+    <message>
+      <source>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
+
+Customizing too many substyles may lead to bad performance when handling big files.</source>
+      <translation type="unfinished">If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
+
+Customizing too many substyles may lead to bad performance when handling big files.</translation>
+    </message>
+    <message>
+      <source>Base color (fg color only)</source>
+      <translation type="unfinished">Base color (fg color only)</translation>
+    </message>
+    <message>
+      <source>Comments (both oneline and multiline)</source>
+      <translation type="unfinished">Comments (both oneline and multiline)</translation>
+    </message>
+    <message>
+      <source>Numbers</source>
+      <translation type="unfinished">Numbers</translation>
+    </message>
+    <message>
+      <source>Strings and character literals</source>
+      <translation type="unfinished">Strings and character literals</translation>
+    </message>
+    <message>
+      <source>Operators</source>
+      <translation type="unfinished">Operators</translation>
+    </message>
+    <message>
+      <source>Identifiers</source>
+      <translation type="unfinished">Identifiers</translation>
+    </message>
+    <message>
+      <source>Keywords</source>
+      <translation type="unfinished">Keywords</translation>
+    </message>
+    <message>
+      <source>Secondary keywords</source>
+      <translation type="unfinished">Secondary keywords</translation>
+    </message>
+    <message>
+      <source>Preprocessor directives</source>
+      <translation type="unfinished">Preprocessor directives</translation>
+    </message>
+    <message>
+      <source>Regular expressions</source>
+      <translation type="unfinished">Regular expressions</translation>
+    </message>
+    <message>
+      <source>Foreign scripts</source>
+      <translation type="unfinished">Foreign scripts</translation>
+    </message>
+    <message>
+      <source>Plain data</source>
+      <translation type="unfinished">Plain data</translation>
+    </message>
+    <message>
+      <source>Errors</source>
+      <translation type="unfinished">Errors</translation>
+    </message>
+    <message>
+      <source>Margin (line numbers, etc.)</source>
+      <translation type="unfinished">Margin (line numbers, etc.)</translation>
+    </message>
+    <message>
+      <source>Control characters (newline placeholder)</source>
+      <translation type="unfinished">Control characters (newline placeholder)</translation>
+    </message>
+    <message>
+      <source>Indent guides</source>
+      <translation type="unfinished">Indent guides</translation>
+    </message>
+    <message>
+      <source>URL highlighting</source>
+      <translation type="unfinished">URL highlighting</translation>
+    </message>
+    <message>
+      <source>Occurrences highlighting</source>
+      <translation type="unfinished">Occurrences highlighting</translation>
+    </message>
+    <message>
+      <source>Paper background (bg color only)</source>
+      <translation type="unfinished">Paper background (bg color only)</translation>
+    </message>
+    <message>
+      <source>Current line background (bg color only</source>
+      <translation type="unfinished">Current line background (bg color only</translation>
+    </message>
+    <message>
+      <source>%1 (built-in theme)</source>
+      <translation type="unfinished">%1 (built-in theme)</translation>
+    </message>
+    <message>
+      <source>%1 (custom theme)</source>
+      <translation type="unfinished">%1 (custom theme)</translation>
+    </message>
+    <message>
+      <source>Select Foreground Color</source>
+      <translation type="unfinished">Select Foreground Color</translation>
+    </message>
+    <message>
+      <source>Select Background Color</source>
+      <translation type="unfinished">Select Background Color</translation>
+    </message>
+    <message>
+      <source>Enter name for new theme</source>
+      <translation type="unfinished">Enter name for new theme</translation>
+    </message>
+    <message>
+      <source>Enter name for new color theme</source>
+      <translation type="unfinished">Enter name for new color theme</translation>
+    </message>
+  </context>
+  <context>
     <name>SyntaxHighlighting</name>
     <message>
       <source> files (*</source>
@@ -1902,8 +2323,12 @@ File filter for external e-mail selection dialog.</extracomment>
       <translation type="unfinished">Close tab</translation>
     </message>
     <message>
-      <source>Close this tab</source>
-      <translation type="unfinished">Close this tab</translation>
+      <source>Close This Tab</source>
+      <translation type="unfinished">Close This Tab</translation>
+    </message>
+    <message>
+      <source>Close Tab</source>
+      <translation type="unfinished">Close Tab</translation>
     </message>
   </context>
   <context>
@@ -1959,14 +2384,6 @@ File filter for external e-mail selection dialog.</extracomment>
   <context>
     <name>TextEditor</name>
     <message>
-      <source>File externally modified</source>
-      <translation type="unfinished">File externally modified</translation>
-    </message>
-    <message>
-      <source>File &apos;%1&apos; was modified outside of %2.</source>
-      <translation type="unfinished">File &apos;%1&apos; was modified outside of %2.</translation>
-    </message>
-    <message>
       <source>Do you want to reload file now? This will discard all unsaved changes.</source>
       <translation type="unfinished">Do you want to reload file now? This will discard all unsaved changes.</translation>
     </message>
@@ -1991,32 +2408,8 @@ File filter for external e-mail selection dialog.</extracomment>
       <translation type="unfinished">File &apos;%1&apos; cannot be opened for reading. Insufficient permissions.</translation>
     </message>
     <message>
-      <source>Opening big file</source>
-      <translation type="unfinished">Opening big file</translation>
-    </message>
-    <message>
-      <source>You want to open big text file in encoding which is different from %1. This operation might take quite some time.</source>
-      <translation type="unfinished">You want to open big text file in encoding which is different from %1. This operation might take quite some time.</translation>
-    </message>
-    <message>
-      <source>Do you really want to open the file?</source>
-      <translation type="unfinished">Do you really want to open the file?</translation>
-    </message>
-    <message>
-      <source>Loading big file</source>
-      <translation type="unfinished">Loading big file</translation>
-    </message>
-    <message>
-      <source>File &apos;%1&apos; is big. %2 will switch some features (for example &apos;Word wrap&apos;) off to make sure that file loading is not horribly slow.</source>
-      <translation type="unfinished">File &apos;%1&apos; is big. %2 will switch some features (for example &apos;Word wrap&apos;) off to make sure that file loading is not horribly slow.</translation>
-    </message>
-    <message>
       <source>Unsaved Changes</source>
       <translation type="unfinished">Unsaved Changes</translation>
-    </message>
-    <message>
-      <source>File &apos;%1&apos; was externally changed, do you want to reload it from disk and discard any unsaved changes?</source>
-      <translation type="unfinished">File &apos;%1&apos; was externally changed, do you want to reload it from disk and discard any unsaved changes?</translation>
     </message>
     <message>
       <source>Save File as</source>
@@ -2025,6 +2418,58 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <source>This document has unsaved changes, do you want to save them?</source>
       <translation type="unfinished">This document has unsaved changes, do you want to save them?</translation>
+    </message>
+    <message>
+      <source>No other occurrences of &quot;%1&quot; found.</source>
+      <translation type="unfinished">No other occurrences of &quot;%1&quot; found.</translation>
+    </message>
+    <message>
+      <source>File Externally Modified</source>
+      <translation type="unfinished">File Externally Modified</translation>
+    </message>
+    <message>
+      <source>This file was modified outside of %1.</source>
+      <translation type="unfinished">This file was modified outside of %1.</translation>
+    </message>
+    <message>
+      <source>File &apos;%1&apos; was reloaded from disk.</source>
+      <translation type="unfinished">File &apos;%1&apos; was reloaded from disk.</translation>
+    </message>
+    <message>
+      <source>&amp;Find All</source>
+      <translation type="unfinished">&amp;Find All</translation>
+    </message>
+    <message>
+      <source>&amp;Select All</source>
+      <translation type="unfinished">&amp;Select All</translation>
+    </message>
+    <message>
+      <source>&amp;Cut</source>
+      <translation type="unfinished">&amp;Cut</translation>
+    </message>
+    <message>
+      <source>&amp;Copy</source>
+      <translation type="unfinished">&amp;Copy</translation>
+    </message>
+    <message>
+      <source>&amp;Paste</source>
+      <translation type="unfinished">&amp;Paste</translation>
+    </message>
+    <message>
+      <source>Cannot Open File</source>
+      <translation type="unfinished">Cannot Open File</translation>
+    </message>
+    <message>
+      <source>Loading Big File</source>
+      <translation type="unfinished">Loading Big File</translation>
+    </message>
+    <message>
+      <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
+      <translation type="unfinished">This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</translation>
+    </message>
+    <message>
+      <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
+      <translation type="unfinished">This document has unsaved changes, do you want to ignore the changes and reload file?</translation>
     </message>
   </context>
   <context>
@@ -2098,6 +2543,13 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <source>Available Actions</source>
       <translation type="unfinished">Available Actions</translation>
+    </message>
+  </context>
+  <context>
+    <name>TrayIconMenu</name>
+    <message>
+      <source>Close opened modal dialogs first.</source>
+      <translation type="unfinished">Close opened modal dialogs first.</translation>
     </message>
   </context>
 </TS>
