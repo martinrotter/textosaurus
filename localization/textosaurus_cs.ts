@@ -35,7 +35,7 @@
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="234"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="244"/>
       <source>&amp;JSON</source>
-      <translation type="unfinished">&amp;JSON</translation>
+      <translation>&amp;JSON</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="235"/>
@@ -53,7 +53,7 @@
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="274"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="284"/>
       <source>&amp;XML</source>
-      <translation type="unfinished">&amp;XML</translation>
+      <translation>&amp;XML</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="255"/>
@@ -89,22 +89,22 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
       <source>Text → &amp;Base64</source>
-      <translation type="unfinished">Text → &amp;Base64</translation>
+      <translation>Text → &amp;Base64</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="305"/>
       <source>Text → &amp;Base64Url</source>
-      <translation type="unfinished">Text → &amp;Base64Url</translation>
+      <translation>Text → &amp;Base64Url</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
       <source>Text → &amp;HTML escaped</source>
-      <translation type="unfinished">Text → &amp;HTML escaped</translation>
+      <translation>Text → &amp;HTML (eskapované)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
       <source>Text → &amp;URL encoded</source>
-      <translation type="unfinished">Text → &amp;URL encoded</translation>
+      <translation>Text → &amp;URL kódování</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="334"/>
@@ -113,59 +113,59 @@
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="367"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="378"/>
       <source>&amp;Text Case Conversion</source>
-      <translation type="unfinished">&amp;Text Case Conversion</translation>
+      <translation>&amp;Změna velikosti písma</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="335"/>
       <source>to &amp;lower case</source>
-      <translation type="unfinished">to &amp;lower case</translation>
+      <translation>na &amp;malá písmena</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="346"/>
       <source>TO &amp;UPPER CASE</source>
-      <translation type="unfinished">TO &amp;UPPER CASE</translation>
+      <translation>NA &amp;VELKÁ PÍSMENA</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="357"/>
       <source>To &amp;sentence case</source>
-      <translation type="unfinished">To &amp;sentence case</translation>
+      <translation>&amp;První písmeno velké</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="368"/>
       <source>To &amp;Title Case</source>
-      <translation type="unfinished">To &amp;Title Case</translation>
+      <translation>&amp;Kapitálky</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="379"/>
       <source>&amp;Invert case</source>
-      <translation type="unfinished">&amp;Invert case</translation>
+      <translation>&amp;Invertovat velikost písmen</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="390"/>
       <source>&amp;Base64 → text</source>
-      <translation type="unfinished">&amp;Base64 → text</translation>
+      <translation>&amp;Base64 → text</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="400"/>
       <source>&amp;Base64Url → text</source>
-      <translation type="unfinished">&amp;Base64Url → text</translation>
+      <translation>&amp;Base64Url → text</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="410"/>
       <source>&amp;URL encoded → text</source>
-      <translation type="unfinished">&amp;URL encoded → text</translation>
+      <translation>&amp;URL kódované → text</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="419"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="429"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="439"/>
       <source>&amp;Upload to...</source>
-      <translation type="unfinished">&amp;Upload to...</translation>
+      <translation>&amp;Nahrát na web...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="420"/>
       <source>Upload to &amp;clbin.com</source>
-      <translation type="unfinished">Upload to &amp;clbin.com</translation>
+      <translation>Nahrát na &amp;clbin.com</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="430"/>
