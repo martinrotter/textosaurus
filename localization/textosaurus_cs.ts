@@ -170,12 +170,12 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="430"/>
       <source>Upload to &amp;hastebin.com</source>
-      <translation type="unfinished">Upload to &amp;hastebin.com</translation>
+      <translation>Nahrát na &amp;hastebin.com</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="440"/>
       <source>Upload to &amp;ix.io</source>
-      <translation type="unfinished">Upload to &amp;ix.io</translation>
+      <translation>Nahrát na &amp;ix.io</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="495"/>
@@ -184,19 +184,19 @@
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="574"/>
       <source>Bash (external tool examples)</source>
-      <translation type="unfinished">Bash (external tool examples)</translation>
+      <translation>Bash (příklady užití ext. nástrojů)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="505"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="527"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="548"/>
       <source>Python (external tool examples)</source>
-      <translation type="unfinished">Python (external tool examples)</translation>
+      <translation>Python (příklady užití ext. nástrojů)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="519"/>
       <source>SHA256 sum of selected/all text</source>
-      <translation type="unfinished">SHA256 sum of selected/all text</translation>
+      <translation>SHA256 součet vybraného/všeho textu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="530"/>
@@ -216,7 +216,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
       <source>Enter Python code:</source>
-      <translation type="unfinished">Enter Python code:</translation>
+      <translation>Zadejte kód Pythonu:</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="553"/>
@@ -236,7 +236,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="575"/>
       <source>Enter Bash code:</source>
-      <translation type="unfinished">Enter Bash code:</translation>
+      <translation>Zadejte kód Bash:</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="578"/>
@@ -246,7 +246,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="604"/>
       <source>Tool &apos;%1&apos; is already running.</source>
-      <translation type="unfinished">Tool &apos;%1&apos; is already running.</translation>
+      <translation>Nástroj &apos;%1&apos; již běží.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="619"/>
@@ -284,7 +284,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/favoriteslistwidget.cpp" line="31"/>
       <source> (N/A)</source>
-      <translation type="unfinished"> (N/A)</translation>
+      <translation> (N/A)</translation>
     </message>
   </context>
   <context>
