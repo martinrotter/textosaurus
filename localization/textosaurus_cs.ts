@@ -99,7 +99,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
       <source>Text → &amp;HTML escaped</source>
-      <translation>Text → &amp;HTML (eskapované)</translation>
+      <translation type="unfinished">Text → &amp;HTML escaped</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
@@ -216,7 +216,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
       <source>Enter Python code:</source>
-      <translation>Zadejte kód Pythonu:</translation>
+      <translation>Zadejte kód v jazyce Python:</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="553"/>
