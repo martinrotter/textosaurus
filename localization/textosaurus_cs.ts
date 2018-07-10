@@ -256,27 +256,27 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="664"/>
       <source>Cannot deliver output of external tool, assigned text editor no longer exists.</source>
-      <translation type="unfinished">Cannot deliver output of external tool, assigned text editor no longer exists.</translation>
+      <translation>Výstup z externího nástroje nelze doručit do daného textového editoru, protože ten již byl zavřen.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="701"/>
       <source>Tool &apos;%1&apos; finished, output copied to clipboard.</source>
-      <translation type="unfinished">Tool &apos;%1&apos; finished, output copied to clipboard.</translation>
+      <translation>Nástroj &apos;%1&apos; dokončil svoji činnost, výstup byl zkopírován do textové schránky.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="717"/>
       <source>Tool &apos;%1&apos; finished, opening output in new tab.</source>
-      <translation type="unfinished">Tool &apos;%1&apos; finished, opening output in new tab.</translation>
+      <translation>Nástroj &apos;%1&apos; dokončil svoji činnost, otevírám výstup v novém panelu.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="752"/>
       <source>Tool &apos;%1&apos; finished with error(s)...</source>
-      <translation type="unfinished">Tool &apos;%1&apos; finished with error(s)...</translation>
+      <translation>Nástroj &apos;%1&apos; skončil s chybou...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="757"/>
       <source>Tool &apos;%1&apos; finished successfully...</source>
-      <translation type="unfinished">Tool &apos;%1&apos; finished successfully...</translation>
+      <translation>Nástroj &apos;%1&apos; úspěšně dokončil svoji činnost...</translation>
     </message>
   </context>
   <context>
@@ -292,7 +292,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemplugin.cpp" line="11"/>
       <source>Filesystem</source>
-      <translation type="unfinished">Filesystem</translation>
+      <translation>Souborový systém</translation>
     </message>
   </context>
   <context>
@@ -300,32 +300,32 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="28"/>
       <source>Filesystem</source>
-      <translation type="unfinished">Filesystem</translation>
+      <translation>Souborový systém</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="98"/>
       <source>Go to Parent Folder</source>
-      <translation type="unfinished">Go to Parent Folder</translation>
+      <translation>Přejít k nadřazené složce</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="100"/>
       <source>Add Selected Item to Favorites</source>
-      <translation type="unfinished">Add Selected Item to Favorites</translation>
+      <translation>Přidat vybranou položku do Oblíbených</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="113"/>
       <source>Filter Displayed Files</source>
-      <translation type="unfinished">Filter Displayed Files</translation>
+      <translation>Filtrovat zobrazené soubory</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="172"/>
       <source>Explorer</source>
-      <translation type="unfinished">Explorer</translation>
+      <translation>Průzkumník</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="173"/>
       <source>Favorites</source>
-      <translation type="unfinished">Favorites</translation>
+      <translation>Oblíbené</translation>
     </message>
   </context>
   <context>
@@ -339,8 +339,8 @@
       <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
       <source>%n result(s) - </source>
       <translation type="unfinished">
-        <numerusform>%n result(s) - </numerusform>
-        <numerusform>%n result(s) - </numerusform>
+        <numerusform>%n výsledků - </numerusform>
+        <numerusform>%n výsledků - </numerusform>
         <numerusform>%n result(s) - </numerusform>
         <numerusform>%n result(s) - </numerusform>
       </translation>
