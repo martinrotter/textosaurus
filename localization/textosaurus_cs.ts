@@ -356,7 +356,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultssidebar.cpp" line="14"/>
       <source>Find Results</source>
-      <translation type="unfinished">Find Results</translation>
+      <translation>Výsledky hledání</translation>
     </message>
   </context>
   <context>
@@ -364,42 +364,42 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="99"/>
       <source>Information</source>
-      <translation type="unfinished">Information</translation>
+      <translation>Informace</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="149"/>
       <source>Licenses</source>
-      <translation type="unfinished">Licenses</translation>
+      <translation>Použité licence</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="170"/>
       <source>GNU GPL License (Textosaurus source code)</source>
-      <translation type="unfinished">GNU GPL License (Textosaurus source code)</translation>
+      <translation>Licence GNU GPL (zdrojový kód Textosaura)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="173"/>
       <source>GNU GPL License</source>
-      <translation type="unfinished">GNU GPL License</translation>
+      <translation>Licence GNU GPL</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="243"/>
       <source>GNU LGPL License (Qt library source code)</source>
-      <translation type="unfinished">GNU LGPL License (Qt library source code)</translation>
+      <translation>Licence GNU LGPL (zdrojový kód knihovny Qt)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="313"/>
       <source>Mozilla Public License (uchardet source code)</source>
-      <translation type="unfinished">Mozilla Public License (uchardet source code)</translation>
+      <translation>Licence Mozilla Public (zdrojový kód knihovny uchardet)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="383"/>
       <source>MIT License (Hoextdown source code)</source>
-      <translation type="unfinished">MIT License (Hoextdown source code)</translation>
+      <translation>Licence MIT (zdrojový kód knihovny Hoextdown)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="448"/>
       <source>Licenses page is available only in English language.</source>
-      <translation type="unfinished">Licenses page is available only in English language.</translation>
+      <translation>Stránka "Použité Licence" je k dispozici pouze v angličtině.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="456"/>
