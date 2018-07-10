@@ -99,7 +99,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
       <source>Text → &amp;HTML escaped</source>
-      <translation type="unfinished">Text → &amp;HTML escaped</translation>
+      <translation>Text → &amp;Eskapované HTML</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
@@ -201,17 +201,17 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="530"/>
       <source>Reverse current line</source>
-      <translation type="unfinished">Reverse current line</translation>
+      <translation>Převrátit aktivní řádek</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="538"/>
       <source>Enter sequence bounds (for example &quot;0 10&quot;):</source>
-      <translation type="unfinished">Enter sequence bounds (for example &quot;0 10&quot;):</translation>
+      <translation>Zadejte hraniční hodnoty řady (např. &quot;0 10&quot;):</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="541"/>
       <source>Generate sequence</source>
-      <translation type="unfinished">Generate sequence</translation>
+      <translation>Vygenerovat řadu čísel</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
@@ -221,17 +221,17 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="553"/>
       <source>Run Python code</source>
-      <translation type="unfinished">Run Python code</translation>
+      <translation>Spustit kód v jazyce Python</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="562"/>
       <source>Enter number of lines:</source>
-      <translation type="unfinished">Enter number of lines:</translation>
+      <translation>Zadejte počet řádků:</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="565"/>
       <source>Generate garbage text</source>
-      <translation type="unfinished">Generate garbage text</translation>
+      <translation>Vygenerovat odpadní text</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="575"/>
@@ -241,7 +241,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="578"/>
       <source>Run Bash code</source>
-      <translation type="unfinished">Run Bash code</translation>
+      <translation>Spustit kód v jazyce Bash</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="604"/>
@@ -251,7 +251,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="619"/>
       <source>Enter input for external tool</source>
-      <translation type="unfinished">Enter input for external tool</translation>
+      <translation>Zadejte vstup pro externí nástroj</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="664"/>
