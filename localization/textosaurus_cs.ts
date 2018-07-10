@@ -404,42 +404,42 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="456"/>
       <source>Changelog</source>
-      <translation type="unfinished">Changelog</translation>
+      <translation>Seznam změn</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="493"/>
       <source>Changelog page is available only in English language.</source>
-      <translation type="unfinished">Changelog page is available only in English language.</translation>
+      <translation>Stránka "Seznam změn" je k dispozici pouze v angličtině.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="501"/>
       <source>Resources</source>
-      <translation type="unfinished">Resources</translation>
+      <translation>Zdroje</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="510"/>
       <source>Settings type</source>
-      <translation type="unfinished">Settings type</translation>
+      <translation>Typ nastavení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="524"/>
       <source>Settings file</source>
-      <translation type="unfinished">Settings file</translation>
+      <translation>Soubor nastavení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="20"/>
       <source>About %1</source>
-      <translation type="unfinished">About %1</translation>
+      <translation>O programu %1</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="27"/>
       <source>FULLY portable</source>
-      <translation type="unfinished">FULLY portable</translation>
+      <translation>PLNĚ přenositelné</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="30"/>
       <source>NOT portable</source>
-      <translation type="unfinished">NOT portable</translation>
+      <translation>NEpřenositelné</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="42"/>
@@ -447,12 +447,12 @@
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="58"/>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="66"/>
       <source>License not found.</source>
-      <translation type="unfinished">License not found.</translation>
+      <translation>Soubor licence nenalezen.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="74"/>
       <source>Changelog not found.</source>
-      <translation type="unfinished">Changelog not found.</translation>
+      <translation>Soubor seznamu změn nenalezen.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="78"/>
