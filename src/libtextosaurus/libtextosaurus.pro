@@ -323,11 +323,11 @@ TRANSLATIONS += $$PWD/../../localization/textosaurus_en.ts
 
 # Create new "make lupdate" target.
 lupdate.target = lupdate
-lupdate.commands = lupdate $$shell_path($$PWD/libtextosaurus.pro)
+lupdate.commands = lupdate -no-obsolete $$shell_path($$PWD/libtextosaurus.pro)
 
 QMAKE_EXTRA_TARGETS += lupdate
 
-# Make sure QM translations are nerated.
+# Make sure QM translations are created.
 qtPrepareTool(LRELEASE, lrelease) {
   message($$MSG_PREFIX: Running: $$LRELEASE_EXECUTABLE -compress $$shell_quote($$shell_path($$PWD/libtextosaurus.pro)))
   system($$LRELEASE_EXECUTABLE -compress libtextosaurus.pro)
