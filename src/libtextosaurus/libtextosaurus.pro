@@ -325,6 +325,9 @@ TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
 TRANSLATIONS += $$TRANSLATIONS_WO_QT \
                 $$PWD/../../localization/qtbase_cs.ts \
 
+load(uic)
+uic.commands -= -no-stringliteral
+
 # Create new "make lupdate" target.
 lupdate.target = lupdate
 lupdate.commands = lupdate -no-obsolete -pro $$shell_path($$PWD/libtextosaurus.pro) -ts $$TRANSLATIONS_WO_QT

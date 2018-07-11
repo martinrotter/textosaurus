@@ -38,7 +38,7 @@
      <x>0</x>
      <y>0</y>
      <width>1296</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">
@@ -127,6 +127,7 @@
     <addaction name="m_actionWordWrap"/>
     <addaction name="m_actionCodeFolding"/>
     <addaction name="m_actionLineNumbers"/>
+    <addaction name="m_actionContextAwareHighlighting"/>
    </widget>
    <widget class="QMenu" name="m_menuTools">
     <property name="title">
@@ -206,7 +207,7 @@
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -233,7 +234,7 @@
     <string>View &amp;Fullscreen</string>
    </property>
    <property name="shortcut">
-    <string>F11</string>
+    <string notr="true">F11</string>
    </property>
   </action>
   <action name="m_actionNoActions">
@@ -330,7 +331,7 @@
     <string>&amp;New File</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+N</string>
+    <string notr="true">Ctrl+N</string>
    </property>
   </action>
   <action name="m_actionFileOpen">
@@ -338,7 +339,7 @@
     <string>&amp;Open File...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string notr="true">Ctrl+O</string>
    </property>
   </action>
   <action name="m_actionFileSave">
@@ -346,7 +347,7 @@
     <string>&amp;Save File</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string notr="true">Ctrl+S</string>
    </property>
   </action>
   <action name="m_actionFileSaveAs">
@@ -354,7 +355,7 @@
     <string>&amp;Save File as...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Alt+S</string>
+    <string notr="true">Ctrl+Alt+S</string>
    </property>
   </action>
   <action name="m_actionFileSaveAll">
@@ -362,7 +363,7 @@
     <string>&amp;Save All Files</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string notr="true">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="m_actionTabsCloseAllUnmodified">
@@ -407,7 +408,7 @@
     <string>&amp;Undo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Z</string>
+    <string notr="true">Ctrl+Z</string>
    </property>
   </action>
   <action name="m_actionEditForward">
@@ -415,7 +416,7 @@
     <string>&amp;Redo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Y</string>
+    <string notr="true">Ctrl+Y</string>
    </property>
   </action>
   <action name="m_actionEolConvertMac">
@@ -454,7 +455,7 @@
     <string>&amp;Find and Replace</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+F</string>
+    <string notr="true">Ctrl+F</string>
    </property>
   </action>
   <action name="m_actionLineNumbers">
@@ -470,7 +471,7 @@
     <string>&amp;Print...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string notr="true">Ctrl+P</string>
    </property>
   </action>
   <action name="m_actionPrintPreview">
@@ -478,7 +479,7 @@
     <string>Print Pre&amp;view</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+P</string>
+    <string notr="true">Ctrl+Shift+P</string>
    </property>
   </action>
   <action name="m_actionFileReload">
@@ -486,7 +487,7 @@
     <string>&amp;Reload From Disk</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string notr="true">Ctrl+R</string>
    </property>
   </action>
   <action name="m_actionTabsCloseCurrent">
@@ -494,7 +495,7 @@
     <string>&amp;Close Current Tab</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+W</string>
+    <string notr="true">Ctrl+W</string>
    </property>
   </action>
   <action name="m_actionAutoIndentEnabled">
@@ -513,7 +514,7 @@
     <string>&amp;Stay On Top</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+T</string>
+    <string notr="true">Ctrl+T</string>
    </property>
   </action>
   <action name="m_actionCodeFolding">
@@ -527,6 +528,14 @@
   <action name="m_actionPrintPreviewBlackWhite">
    <property name="text">
     <string>&amp;Print Preview (Grayscale)</string>
+   </property>
+  </action>
+  <action name="m_actionContextAwareHighlighting">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Context-aware Occurrences Highlighting</string>
    </property>
   </action>
  </widget>
