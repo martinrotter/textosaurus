@@ -1476,7 +1476,7 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="20"/>
       <source>Output</source>
-      <translation type="unfinished">Output</translation>
+      <translation>Výstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="118"/>
@@ -1863,7 +1863,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="160"/>
       <source>Output</source>
-      <translation type="unfinished">Output</translation>
+      <translation>Výstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="173"/>
@@ -1933,7 +1933,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="30"/>
       <source>Dump to output window</source>
-      <translation type="unfinished">Dump to output window</translation>
+      <translation>Vložit do postranního panelu "Výstup"</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="31"/>
@@ -1953,7 +1953,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="34"/>
       <source>No output</source>
-      <translation type="unfinished">No output</translation>
+      <translation>Žádný výstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="106"/>
