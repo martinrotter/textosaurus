@@ -23,7 +23,7 @@ void Localization::loadActiveLanguage() {
 
   qDebug("Starting to load active localization. Desired localization is '%s'.", qPrintable(desired_localization));
 
-  if (app_translator->load(QLocale(desired_localization), "rssguard", QSL("_"), APP_LANG_PATH)) {
+  if (app_translator->load(QLocale(desired_localization), "textosaurus", QSL("_"), APP_LANG_PATH)) {
     const QString real_loaded_locale = app_translator->translate("QObject", "LANG_ABBREV");
 
     Application::installTranslator(app_translator);
@@ -55,10 +55,11 @@ void Localization::loadActiveLanguage() {
 QList<Language> Localization::installedLanguages() const {
   QList<Language> languages;
   const QDir file_dir(APP_LANG_PATH);
-  QTranslator translator;
 
   // Iterate all found language files.
   foreach (const QFileInfo& file, file_dir.entryInfoList(QStringList() << "textosaurus_*.qm", QDir::Files, QDir::Name)) {
+    QTranslator translator;
+
     if (translator.load(file.absoluteFilePath())) {
       Language new_language;
 
