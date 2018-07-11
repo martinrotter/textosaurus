@@ -490,7 +490,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="54"/>
       <source>Regular expression</source>
-      <translation type="unfinished">Regular expression</translation>
+      <translation>Regulární výraz</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="61"/>
@@ -500,42 +500,42 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="81"/>
       <source>&amp;Find Next</source>
-      <translation type="unfinished">&amp;Find Next</translation>
+      <translation>Najít &amp;další</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="88"/>
       <source>Find &amp;Previous</source>
-      <translation type="unfinished">Find &amp;Previous</translation>
+      <translation>Najít předchozí</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="95"/>
       <source>Find &amp;All</source>
-      <translation type="unfinished">Find &amp;All</translation>
+      <translation>Najít &amp;vše</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="102"/>
       <source>&amp;Count</source>
-      <translation type="unfinished">&amp;Count</translation>
+      <translation>&amp;Počet</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="109"/>
       <source>Searches for next occurrence and then replaces it.</source>
-      <translation type="unfinished">Searches for next occurrence and then replaces it.</translation>
+      <translation>Vyhledá další výskyt a nahradí jej.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="112"/>
       <source>&amp;Replace Next</source>
-      <translation type="unfinished">&amp;Replace Next</translation>
+      <translation>&amp;Nahradit další</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="119"/>
       <source>Replace &amp;All</source>
-      <translation type="unfinished">Replace &amp;All</translation>
+      <translation>N&amp;ahradit vše</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="126"/>
       <source>&amp;Close</source>
-      <translation type="unfinished">&amp;Close</translation>
+      <translation>&amp;Zavřít</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="158"/>
@@ -545,27 +545,27 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
       <source>Search for</source>
-      <translation type="unfinished">Search for</translation>
+      <translation>Hledat</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="203"/>
       <source>Phrase to search for</source>
-      <translation type="unfinished">Phrase to search for</translation>
+      <translation>Text k vyhledání</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="210"/>
       <source>Replace with</source>
-      <translation type="unfinished">Replace with</translation>
+      <translation>Nahradit textem</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="220"/>
       <source>Replace string</source>
-      <translation type="unfinished">Replace string</translation>
+      <translation>Nahradit za</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="80"/>
       <source>Count: %1 matches.</source>
-      <translation type="unfinished">Count: %1 matches.</translation>
+      <translation>Počet: %1 výsledků.</translation>
     </message>
     <message numerus="yes">
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="136"/>
