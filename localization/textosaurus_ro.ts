@@ -1205,6 +1205,9 @@ You can install it now.</translation>
       <source>Cannot Open Update File</source>
       <translation type="unfinished">Cannot Open Update File</translation>
     </message>
+  </context>
+  <context>
+    <name>FormSettings</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="231"/>
       <source>Cannot open application update file. Update application manually.</source>
@@ -1292,6 +1295,9 @@ You can install it now.</translation>
       <source>Stop Recording</source>
       <translation type="unfinished">Stop Recording</translation>
     </message>
+  </context>
+  <context>
+    <name>IOFactory</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="49"/>
       <source>Play Recorded Macro</source>
@@ -1307,6 +1313,9 @@ You can install it now.</translation>
       <source>Stored Macros Toolbar</source>
       <translation type="unfinished">Stored Macros Toolbar</translation>
     </message>
+  </context>
+  <context>
+    <name>Macros</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="59"/>
       <source>Play Stored Macro</source>
@@ -1335,6 +1344,9 @@ You can install it now.</translation>
       <source>Recorder</source>
       <translation type="unfinished">Recorder</translation>
     </message>
+  </context>
+  <context>
+    <name>MacrosPlugin</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="83"/>
       <source>Recorded Actions</source>
@@ -1805,6 +1817,9 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Select new text editor main font</source>
       <translation type="unfinished">Select new text editor main font</translation>
     </message>
+  </context>
+  <context>
+    <name>SettingsEditor</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.h" line="29"/>
       <source>Editor</source>
@@ -1933,6 +1948,9 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Dump to output window</source>
       <translation type="unfinished">Dump to output window</translation>
     </message>
+  </context>
+  <context>
+    <name>SettingsGeneral</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="31"/>
       <source>Copy to clipboard</source>
@@ -2089,6 +2107,9 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>(Tray icon is not available.)</source>
       <translation type="unfinished">(Tray icon is not available.)</translation>
     </message>
+  </context>
+  <context>
+    <name>SettingsLocalization</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="113"/>
       <source>Icon only</source>
@@ -2104,6 +2125,9 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Text beside icon</source>
       <translation type="unfinished">Text beside icon</translation>
     </message>
+  </context>
+  <context>
+    <name>SettingsPlugins</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="116"/>
       <source>Text under icon</source>
@@ -2155,6 +2179,9 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Name</source>
       <translation type="unfinished">Name</translation>
     </message>
+  </context>
+  <context>
+    <name>ShortcutCatcher</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
       <source>Author</source>
@@ -2170,6 +2197,9 @@ File filter for external e-mail selection dialog.</extracomment>
       <source>Plugins</source>
       <translation type="unfinished">Plugins</translation>
     </message>
+  </context>
+  <context>
+    <name>SyntaxColorThemeEditor</name>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="72"/>
       <source>no plugin selected</source>
