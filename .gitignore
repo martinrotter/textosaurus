@@ -24,4 +24,4 @@
 *.autosave
 *.user*
 resources/localizations/textosaurus*
-localization/textosaurus*qm
+localization/*qm
