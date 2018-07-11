@@ -487,9 +487,9 @@
         <translation type="unfinished">Match whole words only</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="54"/>
-        <source>Regular expression</source>
-        <translation type="unfinished">Regular expression</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="54"/>
+      <source>Regular expression</source>
+      <translation>Regulární výraz</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="61"/>
@@ -497,44 +497,44 @@
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="81"/>
-        <source>&amp;Find Next</source>
-        <translation type="unfinished">&amp;Find Next</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="81"/>
+      <source>&amp;Find Next</source>
+      <translation>Najít &amp;další</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="88"/>
-        <source>Find &amp;Previous</source>
-        <translation type="unfinished">Find &amp;Previous</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="88"/>
+      <source>Find &amp;Previous</source>
+      <translation>Najít předchozí</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="95"/>
-        <source>Find &amp;All</source>
-        <translation type="unfinished">Find &amp;All</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="95"/>
+      <source>Find &amp;All</source>
+      <translation>Najít &amp;vše</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="102"/>
-        <source>&amp;Count</source>
-        <translation type="unfinished">&amp;Count</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="102"/>
+      <source>&amp;Count</source>
+      <translation>&amp;Počet</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="109"/>
-        <source>Searches for next occurrence and then replaces it.</source>
-        <translation type="unfinished">Searches for next occurrence and then replaces it.</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="109"/>
+      <source>Searches for next occurrence and then replaces it.</source>
+      <translation>Vyhledá další výskyt a nahradí jej.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="112"/>
-        <source>&amp;Replace Next</source>
-        <translation type="unfinished">&amp;Replace Next</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="112"/>
+      <source>&amp;Replace Next</source>
+      <translation>&amp;Nahradit další</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="119"/>
-        <source>Replace &amp;All</source>
-        <translation type="unfinished">Replace &amp;All</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="119"/>
+      <source>Replace &amp;All</source>
+      <translation>N&amp;ahradit vše</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="126"/>
-        <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Close</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="126"/>
+      <source>&amp;Close</source>
+      <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="158"/>
@@ -542,29 +542,29 @@
         <translation type="unfinished">Case-sensitive search</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
-        <source>Search for</source>
-        <translation type="unfinished">Search for</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
+      <source>Search for</source>
+      <translation>Hledat</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="203"/>
-        <source>Phrase to search for</source>
-        <translation type="unfinished">Phrase to search for</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="203"/>
+      <source>Phrase to search for</source>
+      <translation>Text k vyhledání</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="210"/>
-        <source>Replace with</source>
-        <translation type="unfinished">Replace with</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="210"/>
+      <source>Replace with</source>
+      <translation>Nahradit textem</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="220"/>
-        <source>Replace string</source>
-        <translation type="unfinished">Replace string</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="220"/>
+      <source>Replace string</source>
+      <translation>Nahradit za</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="80"/>
-        <source>Count: %1 matches.</source>
-        <translation type="unfinished">Count: %1 matches.</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="80"/>
+      <source>Count: %1 matches.</source>
+      <translation>Počet: %1 výsledků.</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="136"/>
@@ -1485,12 +1485,12 @@ You can install it now.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="27"/>
-        <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="66"/>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/application.cpp" line="34"/>
-        <source>LANG_ABBREV</source>
-        <extracomment>Abbreviation of language, e.g. en. Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code. Examples: &quot;cs&quot;, &quot;en&quot;, &quot;it&quot;, &quot;cs_CZ&quot;, &quot;en_GB&quot;, &quot;en_US&quot;.</extracomment>
-        <translation>cs</translation>
+      <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="27"/>
+      <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="66"/>
+      <location filename="../src/libtextosaurus/saurus/miscellaneous/application.cpp" line="34"/>
+      <source>LANG_ABBREV</source>
+      <extracomment>Abbreviation of language, e.g. en. Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code. Examples: &quot;cs&quot;, &quot;en&quot;, &quot;it&quot;, &quot;cs_CZ&quot;, &quot;en_GB&quot;, &quot;en_US&quot;.</extracomment>
+      <translation>cs</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="82"/>
