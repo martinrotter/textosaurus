@@ -319,13 +319,15 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/saurus/plugin-system
 
 # Localizations.
-TRANSLATIONS += $$PWD/../../localization/textosaurus_en.ts \
-                $$PWD/../../localization/textosaurus_cs.ts \
+TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
+                      $$PWD/../../localization/textosaurus_cs.ts
+
+TRANSLATIONS += $$TRANSLATIONS_WO_QT \
                 $$PWD/../../localization/qtbase_cs.ts \
 
 # Create new "make lupdate" target.
 lupdate.target = lupdate
-lupdate.commands = lupdate -no-obsolete $$shell_path($$PWD/libtextosaurus.pro)
+lupdate.commands = lupdate -no-obsolete -pro $$shell_path($$PWD/libtextosaurus.pro) -ts $$TRANSLATIONS_WO_QT
 
 QMAKE_EXTRA_TARGETS += lupdate
 
