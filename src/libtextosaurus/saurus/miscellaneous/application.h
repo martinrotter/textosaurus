@@ -50,6 +50,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     // Check whether GIVEN VERSION of the application starts for the first time.
     bool isFirstRun(const QString& version) const;
 
+    void setTextApplication(TextApplication* text_application);
     TextApplication* textApplication() const;
     WebFactory* web() const;
     SystemFactory* system();

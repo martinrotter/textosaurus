@@ -51,6 +51,10 @@ int main(int argc, char* argv[]) {
   qApp->localization()->loadActiveLanguage();
   qApp->setStyle(qApp->settings()->value(GROUP(GUI), SETTING(GUI::Style)).toString());
 
+  // Initialize "text application" core object after all supporting facilities (localizations, icons, ...)
+  // are ready.
+  qApp->setTextApplication(new TextApplication(qApp));
+
   // Setup single-instance behavior.
   application.activateQtSingleMsgProcessing();
 

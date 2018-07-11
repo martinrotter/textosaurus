@@ -21,7 +21,7 @@
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
   m_settings(Settings::setupSettings(this, qApp->userDataAppFolder(), qApp->userDataHomeFolder())),
-  m_textApplication(new TextApplication(this)), m_mainForm(nullptr),
+  m_textApplication(nullptr), m_mainForm(nullptr),
   m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
   m_localization(new Localization(this)), m_icons(new IconFactory(this)),
@@ -209,6 +209,10 @@ QString Application::userDataHomeFolder() {
 #else
   return configFolder();
 #endif
+}
+
+void Application::setTextApplication(TextApplication* text_application) {
+  m_textApplication = text_application;
 }
 
 QString Application::homeFolder() {
