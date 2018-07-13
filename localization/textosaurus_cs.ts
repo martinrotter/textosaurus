@@ -1021,37 +1021,37 @@
       <source>Some critical settings were changed and will be applied after the application gets restarted. 
 
 You have to restart manually.</source>
-      <translation type="unfinished">Some critical settings were changed and will be applied after the application gets restarted. 
+      <translation>Některá důležitá nastavení byla změněna a budou použita po restartování aplikace. 
 
-You have to restart manually.</translation>
+Aplikaci můžete restartovat ručně.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="78"/>
       <source>Do you want to restart now?</source>
-      <translation type="unfinished">Do you want to restart now?</translation>
+      <translation>Chcete aplikaci restartovat nyní?</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="79"/>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="112"/>
       <source>Changed categories of settings:
 %1.</source>
-      <translation type="unfinished">Changed categories of settings:
+      <translation>Změněno nastavení v sekcích:
 %1.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="109"/>
       <source>Some Settings are Changed and Will be Lost</source>
-      <translation type="unfinished">Some Settings are Changed and Will be Lost</translation>
+      <translation>Některá nastavení jsou změněna a tyto změny se ztratí</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="110"/>
       <source>Some settings were changed and by cancelling this dialog, you would lose these changes.</source>
-      <translation type="unfinished">Some settings were changed and by cancelling this dialog, you would lose these changes.</translation>
+      <translation>Některá nastavení byla změněna. Tím, že zrušíte tento dialog, by tyto změny byly ztraceny.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="111"/>
       <source>Do you really want to close this dialog without saving any settings?</source>
-      <translation type="unfinished">Do you really want to close this dialog without saving any settings?</translation>
+      <translation>Opravdu chcete zavřít toto dialogové okno bez uložení nastavení?</translation>
     </message>
   </context>
   <context>
@@ -1059,75 +1059,74 @@ You have to restart manually.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="14"/>
       <source>Check for updates</source>
-      <translation type="unfinished">Check for updates</translation>
+      <translation>Zkontrolovat aktualizace</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="22"/>
       <source>Current release</source>
-      <translation type="unfinished">Current release</translation>
+      <translation>Aktuální vydání</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="36"/>
       <source>Available release</source>
-      <translation type="unfinished">Available release</translation>
+      <translation>Nejnovější vydání</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="50"/>
       <source>Status</source>
-      <translation type="unfinished">Status</translation>
+      <translation>Stav</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="71"/>
       <source>Changelog</source>
-      <translation type="unfinished">Changelog</translation>
+      <translation>Seznam změn</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="124"/>
       <source>Available Files</source>
-      <translation type="unfinished">Available Files</translation>
+      <translation>Dostupné soubory</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="36"/>
       <source>Download selected update</source>
-      <translation type="unfinished">Download selected update</translation>
+      <translation>Stáhnout vybranou aktualizaci</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="37"/>
       <source>Download new installation files.</source>
-      <translation type="unfinished">Download new installation files.</translation>
+      <translation>Stáhněte nové instalační soubory.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="40"/>
       <source>Go to application website</source>
-      <translation type="unfinished">Go to application website</translation>
+      <translation>Přejít na web aplikace</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="41"/>
       <source>Go to application website to get update packages manually.</source>
-      <translation type="unfinished">Go to application website to get update packages manually.</translation>
+      <translation>Přejít na web aplikace a získat balíčky aktualizací ručně.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="67"/>
       <source>unknown</source>
       <extracomment>Unknown release.</extracomment>
-      <translation type="unfinished">unknown</translation>
+      <translation>nezjištěno</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="70"/>
       <source>Error: &apos;%1&apos;.</source>
-      <translation type="unfinished">Error: &apos;%1&apos;.</translation>
+      <translation>Chyba: &apos;%1&apos;.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="71"/>
       <source>List with updates was not
 downloaded successfully.</source>
-      <translation type="unfinished">List with updates was not
-downloaded successfully.</translation>
+      <translation>Seznam s aktualizacemi nebyl úspěšně stažen.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="90"/>
       <source>New release available.</source>
-      <translation type="unfinished">New release available.</translation>
+      <translation>Nové aktualizace jsou k dispozici.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="91"/>
@@ -1317,7 +1316,7 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="60"/>
       <source>Remove Selected Macro</source>
-      <translation type="unfinished">Remove Selected Macro</translation>
+      <translation>Odstranit vybrané makro</translation>
     </message>
   </context>
   <context>
@@ -1325,22 +1324,22 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="14"/>
       <source>Macros</source>
-      <translation type="unfinished">Macros</translation>
+      <translation>Makra</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="39"/>
       <source>My Macros</source>
-      <translation type="unfinished">My Macros</translation>
+      <translation>Moje makra</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="65"/>
       <source>Recorder</source>
-      <translation type="unfinished">Recorder</translation>
+      <translation>Rekordér</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="83"/>
       <source>Recorded Actions</source>
-      <translation type="unfinished">Recorded Actions</translation>
+      <translation>Zaznamenané akce</translation>
     </message>
   </context>
   <context>
@@ -1348,17 +1347,17 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="23"/>
       <source>Markdown Preview</source>
-      <translation type="unfinished">Markdown Preview</translation>
+      <translation>Náhled Markdownu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="27"/>
       <source>Refresh Markdown Preview</source>
-      <translation type="unfinished">Refresh Markdown Preview</translation>
+      <translation>Obnovit náhled Markdownu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="63"/>
       <source>This sidebar displays simple HTML preview of your Markdown source...</source>
-      <translation type="unfinished">This sidebar displays simple HTML preview of your Markdown source...</translation>
+      <translation>Tento postranní panel zobrazuje jednoduchý HTML náhled Markdown zdroje...</translation>
     </message>
   </context>
   <context>
@@ -1366,7 +1365,7 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/common/gui/messagebox.cpp" line="104"/>
       <source>Do not show this dialog again.</source>
-      <translation type="unfinished">Do not show this dialog again.</translation>
+      <translation>Tento dialog příště nezobrazovat.</translation>
     </message>
   </context>
   <context>
@@ -1375,100 +1374,100 @@ You can install it now.</translation>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="22"/>
       <source>protocol error</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">protocol error</translation>
+      <translation>chyba protokolu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="25"/>
       <source>access to content was denied</source>
-      <translation type="unfinished">access to content was denied</translation>
+      <translation>byl odepřen přístup k obsahu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="30"/>
       <source>host not found</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">host not found</translation>
+      <translation>hostitel nebyl nalezen</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="34"/>
       <source>connection timed out or was cancelled</source>
-      <translation type="unfinished">connection timed out or was cancelled</translation>
+      <translation>připojení vypršel časový limit nebo bylo zrušeno</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="40"/>
       <source>connection refused</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">connection refused</translation>
+      <translation>spojení odmítnuto</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="45"/>
       <source>connection timed out</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">connection timed out</translation>
+      <translation>vypršel časový limit připojení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="50"/>
       <source>SSL handshake failed</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">SSL handshake failed</translation>
+      <translation>SSH handshake selhal</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="56"/>
       <source>proxy server connection refused</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">proxy server connection refused</translation>
+      <translation>proxy server spojení odmítnuto</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="61"/>
       <source>temporary failure</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">temporary failure</translation>
+      <translation>dočasné selhání</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="66"/>
       <source>authentication failed</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">authentication failed</translation>
+      <translation>autentizace selhala</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="71"/>
       <source>proxy authentication required</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">proxy authentication required</translation>
+      <translation>vyžadováno ověření proxy</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="76"/>
       <source>proxy server not found</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">proxy server not found</translation>
+      <translation>proxy server nebyl nalezen</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="81"/>
       <source>no errors</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">no errors</translation>
+      <translation>žádné chyby</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="86"/>
       <source>unknown content</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">unknown content</translation>
+      <translation>neznámý obsah</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="91"/>
       <source>content not found</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">content not found</translation>
+      <translation>obsah nebyl nalezen</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="94"/>
       <source>invalid operation, maybe input is too big</source>
-      <translation type="unfinished">invalid operation, maybe input is too big</translation>
+      <translation>neplatná operace, možná je vstup příliš velký</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="99"/>
       <source>unknown error</source>
       <extracomment>Network status.</extracomment>
-      <translation type="unfinished">unknown error</translation>
+      <translation>neznámá chyba</translation>
     </message>
   </context>
   <context>
@@ -1481,7 +1480,7 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="118"/>
       <source>This sidebar displays output of external tools and some other critical information...</source>
-      <translation type="unfinished">This sidebar displays output of external tools and some other critical information...</translation>
+      <translation>Tento postranní panel zobrazuje výstup z externích nástrojů a některé další důležité informace...</translation>
     </message>
   </context>
   <context>
@@ -1498,12 +1497,12 @@ You can install it now.</translation>
       <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="82"/>
       <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="95"/>
       <source>Parsing of JSON document failed.</source>
-      <translation type="unfinished">Parsing of JSON document failed.</translation>
+      <translation>Analýza dokumentu JSON se nezdařila.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="116"/>
       <source>XML is well-formed.</source>
-      <translation type="unfinished">XML is well-formed.</translation>
+      <translation>XML má správný formát.</translation>
     </message>
   </context>
   <context>
@@ -1511,7 +1510,7 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="33"/>
       <source>External Web Browser</source>
-      <translation type="unfinished">External Web Browser</translation>
+      <translation>Externí webový prohlížeč</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="39"/>
