@@ -12,11 +12,11 @@ QVariant FindResultsModelItemEditor::data(int role) const {
   switch (role) {
     case Qt::ItemDataRole::DisplayRole:
       if (m_editor.isNull()) {
-        return tr("editor-closed");
+        return "editor-closed";
       }
       else {
         QString res = tr("%n result(s) - ", "", childCount()) + (m_editor->filePath().isEmpty() ?
-                                                                 tr("unnamed-document") :
+                                                                 "unnamed-document" :
                                                                  m_editor->filePath());
 
         return res;
