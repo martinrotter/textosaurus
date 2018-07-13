@@ -1063,77 +1063,75 @@ downloaded.</source>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="100"/>
       <source>This release is not newer than
 currently installed one.</source>
-      <translation type="unfinished">This release is not newer than
-currently installed one.</translation>
+      <translation>Tato verze není novější než aktuálně nainstalovaná.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="110"/>
       <source>Downloaded %1% (update size is %2 kB).</source>
-      <translation type="unfinished">Downloaded %1% (update size is %2 kB).</translation>
+      <translation>Staženo %1% (velikost balíčku aktualizace je %2 kB).</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="118"/>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="241"/>
       <source>Downloading update...</source>
-      <translation type="unfinished">Downloading update...</translation>
+      <translation>Stahování aktualizace...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="172"/>
       <source>Available update files</source>
-      <translation type="unfinished">Available update files</translation>
+      <translation>Dostupné aktualizační soubory</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="182"/>
       <source>Downloaded successfully</source>
-      <translation type="unfinished">Downloaded successfully</translation>
+      <translation>Úspěšně staženo</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="183"/>
       <source>Package was downloaded successfully.
 You can install it now.</source>
-      <translation type="unfinished">Package was downloaded successfully.
-You can install it now.</translation>
+      <translation>Balíček byl úspěšně stažen. Můžete jej nainstalovat nyní.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="184"/>
       <source>Install</source>
-      <translation type="unfinished">Install</translation>
+      <translation>Instalovat</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="189"/>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="191"/>
       <source>Error occured</source>
-      <translation type="unfinished">Error occured</translation>
+      <translation>Došlo k chybě</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="190"/>
       <source>Error occured during downloading of the package.</source>
-      <translation type="unfinished">Error occured during downloading of the package.</translation>
+      <translation>Při stahování balíčku došlo k chybě.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="222"/>
       <source>Cannot Start Installer</source>
-      <translation type="unfinished">Cannot Start Installer</translation>
+      <translation>Nelze spustit instalátor</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="222"/>
       <source>Cannot launch external updater. Update application manually.</source>
-      <translation type="unfinished">Cannot launch external updater. Update application manually.</translation>
+      <translation>Nelze spustit instalátor. Aktualizujte aplikaci ručně.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="231"/>
       <source>Cannot Open Update File</source>
-      <translation type="unfinished">Cannot Open Update File</translation>
+      <translation>Nelze otevřít soubor aktualizace</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="231"/>
       <source>Cannot open application update file. Update application manually.</source>
-      <translation type="unfinished">Cannot open application update file. Update application manually.</translation>
+      <translation>Nelze otevřít soubor aktualizace aplikace. Aktualizujte aplikaci ručně.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="248"/>
       <source>Cannot navigate to installation file. Check new installation downloads manually on project website.</source>
-      <translation type="unfinished">Cannot navigate to installation file. Check new installation downloads manually on project website.</translation>
+      <translation>Nelze přejít na instalační soubor. Podívejte se na nové aktualizace ke stažení na stránkách projektu.</translation>
     </message>
   </context>
   <context>
@@ -1141,17 +1139,17 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="51"/>
       <source>Cannot open file &apos;%1&apos; for reading.</source>
-      <translation type="unfinished">Cannot open file &apos;%1&apos; for reading.</translation>
+      <translation>Nelze otevřít soubor &apos;%1&apos; pro čtení.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="63"/>
       <source>Cannot open file &apos;%1&apos; for writting.</source>
-      <translation type="unfinished">Cannot open file &apos;%1&apos; for writting.</translation>
+      <translation>Nelze otevřít soubor &apos;%1&apos; pro zápis.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="82"/>
       <source>Cannot open temporary file for writting.</source>
-      <translation type="unfinished">Cannot open temporary file for writting.</translation>
+      <translation>Nelze otevřít dočasný soubor pro zápis.</translation>
     </message>
   </context>
   <context>
@@ -1159,27 +1157,27 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="52"/>
       <source>Save Macro</source>
-      <translation type="unfinished">Save Macro</translation>
+      <translation>Uložit makro</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="53"/>
       <source>Enter some name for your macro</source>
-      <translation type="unfinished">Enter some name for your macro</translation>
+      <translation>Zadejte název pro makro</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="54"/>
       <source>My new macro</source>
-      <translation type="unfinished">My new macro</translation>
+      <translation>Moje nové makro</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="69"/>
       <source>Macro Name Already Used</source>
-      <translation type="unfinished">Macro Name Already Used</translation>
+      <translation>Toto jméno se již pro nějaké makro používá</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="70"/>
       <source>Selected macro name is already in use, please select non-empty unique name for each macro.</source>
-      <translation type="unfinished">Selected macro name is already in use, please select non-empty unique name for each macro.</translation>
+      <translation>Zvolené jméno makra se již používá, vyberte jiné.</translation>
     </message>
   </context>
   <context>
@@ -1187,7 +1185,7 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="14"/>
       <source>Macros</source>
-      <translation type="unfinished">Macros</translation>
+      <translation>Makra</translation>
     </message>
   </context>
   <context>
@@ -1195,42 +1193,42 @@ You can install it now.</translation>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="20"/>
       <source>Macros</source>
-      <translation type="unfinished">Macros</translation>
+      <translation>Makra</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="42"/>
       <source>Macro Recorder Toolbar</source>
-      <translation type="unfinished">Macro Recorder Toolbar</translation>
+      <translation>Nástrojový panel rekordéru maker</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="47"/>
       <source>Start Recording</source>
-      <translation type="unfinished">Start Recording</translation>
+      <translation>Spustit nahrávání</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="48"/>
       <source>Stop Recording</source>
-      <translation type="unfinished">Stop Recording</translation>
+      <translation>Zastavit nahrávání</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="49"/>
       <source>Play Recorded Macro</source>
-      <translation type="unfinished">Play Recorded Macro</translation>
+      <translation>Přehrát nahrané makro</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="50"/>
       <source>Save Macro as...</source>
-      <translation type="unfinished">Save Macro as...</translation>
+      <translation>Uložit makro jako...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="53"/>
       <source>Stored Macros Toolbar</source>
-      <translation type="unfinished">Stored Macros Toolbar</translation>
+      <translation>Nástrojový panel uložených maker</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="59"/>
       <source>Play Stored Macro</source>
-      <translation type="unfinished">Play Stored Macro</translation>
+      <translation>Přehrát uložené makro</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="60"/>
