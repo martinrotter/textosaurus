@@ -560,7 +560,7 @@
     <message numerus="yes">
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="136"/>
       <source>Replaced %n occurrence(s).</source>
-      <translation>
+      <translation type="unfinished">
         <numerusform>Nahrazeno %n výskytů.</numerusform>
         <numerusform>Nahrazeno %n výskytů.</numerusform>
         <numerusform>Nahrazeno %n výskytů.</numerusform>
@@ -684,7 +684,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="538"/>
       <source>Context-aware Occurrences Highlighting</source>
-      <translation type="unfinished">Context-aware Occurrences Highlighting</translation>
+      <translation>Zvýraznění výskytů založené na kontextu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="218"/>
@@ -1052,13 +1052,12 @@ downloaded successfully.</source>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="91"/>
       <source>This is new version which can be
 downloaded.</source>
-      <translation type="unfinished">This is new version which can be
-downloaded.</translation>
+      <translation>Toto je nová verze, kterou lze stáhnout.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="99"/>
       <source>No new release available.</source>
-      <translation type="unfinished">No new release available.</translation>
+      <translation>Nejsou dostupné novější verze.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="100"/>
