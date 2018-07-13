@@ -724,77 +724,77 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="247"/>
       <source>No actions are available right now.</source>
-      <translation type="unfinished">No actions are available right now.</translation>
+      <translation>Nyní nejsou k dispozici žádné akce.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="255"/>
       <source>Switch Visibility of Main &amp;Window</source>
-      <translation type="unfinished">Switch Visibility of Main &amp;Window</translation>
+      <translation>Přepnout &amp;viditelnost hlavního okna</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="258"/>
       <source>Hides main window if it is visible and shows it if it is hidden.</source>
-      <translation type="unfinished">Hides main window if it is visible and shows it if it is hidden.</translation>
+      <translation>Skryje hlavní okno, je-li viditelné a zobrazí jej, pokud je právě skryto.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="263"/>
       <source>Check for &amp;Updates</source>
-      <translation type="unfinished">Check for &amp;Updates</translation>
+      <translation>Zkontrolovat &amp;aktualizace</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="268"/>
       <source>Report a &amp;Bug...</source>
-      <translation type="unfinished">Report a &amp;Bug...</translation>
+      <translation>Nahlásit &amp;chybu...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="279"/>
       <source>View &amp;Toolbar</source>
-      <translation type="unfinished">View &amp;Toolbar</translation>
+      <translation>Zobrazit panel &amp;nástrojů</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="284"/>
       <source>&amp;Donate...</source>
-      <translation type="unfinished">&amp;Donate...</translation>
+      <translation>&amp;Podpořit autora...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="289"/>
       <source>Display &amp;Wiki</source>
-      <translation type="unfinished">Display &amp;Wiki</translation>
+      <translation>Zobrazit &amp;wiki</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="294"/>
       <source>&amp;Restart</source>
-      <translation type="unfinished">&amp;Restart</translation>
+      <translation>&amp;Restartovat</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="305"/>
       <source>View &amp;Statusbar</source>
-      <translation type="unfinished">View &amp;Statusbar</translation>
+      <translation>Zobrazit &amp;stavový řádek</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="310"/>
       <source>Close &amp;All Tabs</source>
-      <translation type="unfinished">Close &amp;All Tabs</translation>
+      <translation>Zavřít &amp;všechny panely</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="315"/>
       <source>Close All Tabs &amp;Except Current</source>
-      <translation type="unfinished">Close All Tabs &amp;Except Current</translation>
+      <translation>Zavřít všechny panely &amp;kromě aktuálního</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="320"/>
       <source>Go to &amp;Next Tab</source>
-      <translation type="unfinished">Go to &amp;Next Tab</translation>
+      <translation>Přejít na &amp;další panel</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="325"/>
       <source>Go to &amp;Previous Tab</source>
-      <translation type="unfinished">Go to &amp;Previous Tab</translation>
+      <translation>Přejít na &amp;předchozí panel</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="330"/>
       <source>&amp;New File</source>
-      <translation type="unfinished">&amp;New File</translation>
+      <translation>&amp;Nový soubor</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="333"/>
@@ -804,7 +804,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="338"/>
       <source>&amp;Open File...</source>
-      <translation type="unfinished">&amp;Open File...</translation>
+      <translation>&amp;Otevřít soubor...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="341"/>
@@ -814,7 +814,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="346"/>
       <source>&amp;Save File</source>
-      <translation type="unfinished">&amp;Save File</translation>
+      <translation>&amp;Uložit soubor</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="349"/>
@@ -824,7 +824,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="354"/>
       <source>&amp;Save File as...</source>
-      <translation type="unfinished">&amp;Save File as...</translation>
+      <translation>&amp;Uložit soubor jako...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="357"/>
@@ -834,7 +834,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="362"/>
       <source>&amp;Save All Files</source>
-      <translation type="unfinished">&amp;Save All Files</translation>
+      <translation>&amp;Uložit všechny soubory</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="365"/>
@@ -844,32 +844,32 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="370"/>
       <source>Close All &amp;Unmodified Editors</source>
-      <translation type="unfinished">Close All &amp;Unmodified Editors</translation>
+      <translation>Zavřít všechny &amp;nezměněné dokumenty</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="378"/>
       <source>Use &amp;Unix (LF)</source>
-      <translation type="unfinished">Use &amp;Unix (LF)</translation>
+      <translation>&amp;Unixové konce řádků (LF)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="386"/>
       <source>Use &amp;Windows (CRLF)</source>
-      <translation type="unfinished">Use &amp;Windows (CRLF)</translation>
+      <translation>&amp;Windowsové konce řádků (CRLF)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="394"/>
       <source>Use &amp;Mac (CR)</source>
-      <translation type="unfinished">Use &amp;Mac (CR)</translation>
+      <translation>&amp;Mac OS (CR)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="402"/>
       <source>&amp;Word Wrap</source>
-      <translation type="unfinished">&amp;Word Wrap</translation>
+      <translation>Zalo&amp;mit dlouhé řádky</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="407"/>
       <source>&amp;Undo</source>
-      <translation type="unfinished">&amp;Undo</translation>
+      <translation>&amp;Zpět</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="410"/>
@@ -879,7 +879,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="415"/>
       <source>&amp;Redo</source>
-      <translation type="unfinished">&amp;Redo</translation>
+      <translation>&amp;Vpřed</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="418"/>
@@ -889,32 +889,32 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="423"/>
       <source>Convert to &amp;Mac (CR)</source>
-      <translation type="unfinished">Convert to &amp;Mac (CR)</translation>
+      <translation>Převést na &amp;Mac (CR)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="428"/>
       <source>Convert to &amp;Unix (LF)</source>
-      <translation type="unfinished">Convert to &amp;Unix (LF)</translation>
+      <translation>Převést na &amp;Unix (LF)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="433"/>
       <source>Convert to &amp;Windows (CRLF)</source>
-      <translation type="unfinished">Convert to &amp;Windows (CRLF)</translation>
+      <translation>Převést na &amp;Windows (CRLF)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="441"/>
       <source>Display &amp;EOLs</source>
-      <translation type="unfinished">Display &amp;EOLs</translation>
+      <translation>Zobrazit &amp;konce řádků</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="449"/>
       <source>Display &amp;Whitespaces</source>
-      <translation type="unfinished">Display &amp;Whitespaces</translation>
+      <translation>Zobrazit &amp;netisknutelné znaky</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="454"/>
       <source>&amp;Find and Replace</source>
-      <translation type="unfinished">&amp;Find and Replace</translation>
+      <translation>&amp;Najít a nahradit</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="457"/>
@@ -924,12 +924,12 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="465"/>
       <source>&amp;Line Numbers</source>
-      <translation type="unfinished">&amp;Line Numbers</translation>
+      <translation>&amp;Čísla řádků</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="470"/>
       <source>&amp;Print...</source>
-      <translation type="unfinished">&amp;Print...</translation>
+      <translation>&amp;Tisknout...</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="473"/>
@@ -939,7 +939,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="478"/>
       <source>Print Pre&amp;view</source>
-      <translation type="unfinished">Print Pre&amp;view</translation>
+      <translation>Tiskový &amp;náhled</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="481"/>
@@ -949,7 +949,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="486"/>
       <source>&amp;Reload From Disk</source>
-      <translation type="unfinished">&amp;Reload From Disk</translation>
+      <translation>&amp;Opětovně nahrát z disku</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="489"/>
@@ -959,7 +959,7 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="494"/>
       <source>&amp;Close Current Tab</source>
-      <translation type="unfinished">&amp;Close Current Tab</translation>
+      <translation>Zavřít &amp;aktuální panel</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="497"/>
@@ -969,12 +969,12 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="505"/>
       <source>&amp;Enable Auto-Indent</source>
-      <translation type="unfinished">&amp;Enable Auto-Indent</translation>
+      <translation>Povolit &amp;auto-odsazení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="513"/>
       <source>&amp;Stay On Top</source>
-      <translation type="unfinished">&amp;Stay On Top</translation>
+      <translation>&amp;Vždy navrchu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="516"/>
@@ -984,24 +984,24 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="524"/>
       <source>Code &amp;Folding</source>
-      <translation type="unfinished">Code &amp;Folding</translation>
+      <translation>&amp;Skládání kódu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="529"/>
       <source>&amp;Print Preview (Grayscale)</source>
-      <translation type="unfinished">&amp;Print Preview (Grayscale)</translation>
+      <translation>Tiskový &amp;náhled (černobílý)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="40"/>
       <source>Main Toolbar</source>
-      <translation type="unfinished">Main Toolbar</translation>
+      <translation>Hlavní panel nástrojů</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="361"/>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="368"/>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="375"/>
       <source>Cannot open external browser. Navigate to application website manually.</source>
-      <translation type="unfinished">Cannot open external browser. Navigate to application website manually.</translation>
+      <translation>Nelze otevřít externí prohlížeč. Přejděte na web aplikace ručně.</translation>
     </message>
   </context>
   <context>
@@ -1009,12 +1009,12 @@
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.ui" line="14"/>
       <source>Settings</source>
-      <translation type="unfinished">Settings</translation>
+      <translation>Nastavení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="74"/>
       <source>Critical Settings Were Changed</source>
-      <translation type="unfinished">Critical Settings Were Changed</translation>
+      <translation>Důležitá nastavení byla změněna</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="75"/>
