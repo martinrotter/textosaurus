@@ -1522,63 +1522,63 @@ You can install it now.</source>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="227"/>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.h" line="34"/>
       <source>Proxy</source>
-      <translation type="unfinished">Proxy</translation>
+      <translation>Proxy</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="233"/>
       <source>Type</source>
       <extracomment>Proxy server type.</extracomment>
-      <translation type="unfinished">Type</translation>
+      <translation>Typ</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="249"/>
       <source>Host</source>
-      <translation type="unfinished">Host</translation>
+      <translation>Hostitel</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="267"/>
       <source>Hostname or IP of your proxy server</source>
-      <translation type="unfinished">Hostname or IP of your proxy server</translation>
+      <translation>Název hostitele nebo IP serveru proxy</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="274"/>
       <source>Port</source>
-      <translation type="unfinished">Port</translation>
+      <translation>Port</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="302"/>
       <source>Username</source>
-      <translation type="unfinished">Username</translation>
+      <translation>Uživatelské jméno</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="318"/>
       <source>Your username for proxy server authentication</source>
-      <translation type="unfinished">Your username for proxy server authentication</translation>
+      <translation>Vaše uživatelské jméno pro ověřování proxy serveru</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="325"/>
       <source>Password</source>
-      <translation type="unfinished">Password</translation>
+      <translation>Heslo</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="344"/>
       <source>Your password for proxy server authentication</source>
-      <translation type="unfinished">Your password for proxy server authentication</translation>
+      <translation>Heslo pro ověření serveru proxy</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="354"/>
       <source>Display password</source>
-      <translation type="unfinished">Display password</translation>
+      <translation>Zobrazit heslo</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="361"/>
       <source>Note that these settings are applied only on newly established connections.</source>
-      <translation type="unfinished">Note that these settings are applied only on newly established connections.</translation>
+      <translation>Tato nastavení platí pouze na nově vytvořená spojení.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="54"/>
       <source>Select web browser executable</source>
-      <translation type="unfinished">Select web browser executable</translation>
+      <translation>Vybrat spouštěč webového prohlížeče</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="59"/>
@@ -1587,48 +1587,48 @@ You can install it now.</source>
       <extracomment>File filter for external browser selection dialog.
 ----------
 File filter for external e-mail selection dialog.</extracomment>
-      <translation type="unfinished">Executables (*)</translation>
+      <translation>Spustitelné soubory (*)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="61"/>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="109"/>
       <source>Executables (*.*)</source>
-      <translation type="unfinished">Executables (*.*)</translation>
+      <translation>Spustitelné soubory (*. *)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="102"/>
       <source>Select e-mail executable</source>
-      <translation type="unfinished">Select e-mail executable</translation>
+      <translation>Vybrat spouštěč e-mailového prohlížeče</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="121"/>
       <source>Opera 12 or older</source>
-      <translation type="unfinished">Opera 12 or older</translation>
+      <translation>Opera 12 nebo starší</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="129"/>
       <source>Mozilla Thunderbird</source>
-      <translation type="unfinished">Mozilla Thunderbird</translation>
+      <translation>Mozilla Thunderbird</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="134"/>
       <source>No proxy</source>
-      <translation type="unfinished">No proxy</translation>
+      <translation>Nepoužívat proxy server</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="135"/>
       <source>System proxy</source>
-      <translation type="unfinished">System proxy</translation>
+      <translation>Systémový proxy server</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="136"/>
       <source>Socks5</source>
-      <translation type="unfinished">Socks5</translation>
+      <translation>Socks5</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="137"/>
       <source>Http</source>
-      <translation type="unfinished">Http</translation>
+      <translation>Http</translation>
     </message>
   </context>
   <context>
@@ -1636,82 +1636,82 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="33"/>
       <source>General</source>
-      <translation type="unfinished">General</translation>
+      <translation>Obecné</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="54"/>
       <source>Reload externally edited files automatically</source>
-      <translation type="unfinished">Reload externally edited files automatically</translation>
+      <translation>Znovu načíst externě upravené soubory automaticky</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="61"/>
       <source>Line spacing</source>
-      <translation type="unfinished">Line spacing</translation>
+      <translation>Řádkování</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="98"/>
       <source>Indentation</source>
-      <translation type="unfinished">Indentation</translation>
+      <translation>Odsazení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="104"/>
       <source>Tab size</source>
-      <translation type="unfinished">Tab size</translation>
+      <translation>Šířka tabulátoru</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="114"/>
       <source>Indent size</source>
-      <translation type="unfinished">Indent size</translation>
+      <translation>Šířka odsazení</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="144"/>
       <source>Indent with</source>
-      <translation type="unfinished">Indent with</translation>
+      <translation>Odsadit pomocí</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="170"/>
       <source>.LOG Feature</source>
-      <translation type="unfinished">.LOG Feature</translation>
+      <translation>Funkce .LOG</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="176"/>
       <source>Timestamp format</source>
-      <translation type="unfinished">Timestamp format</translation>
+      <translation>Formát časového razítka</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="213"/>
       <source>Fonts &amp;&amp; Colors</source>
-      <translation type="unfinished">Fonts &amp;&amp; Colors</translation>
+      <translation>Písma &amp;&amp; barvy</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="219"/>
       <source>Colors</source>
-      <translation type="unfinished">Colors</translation>
+      <translation>Barvy</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="231"/>
       <source>Fonts</source>
-      <translation type="unfinished">Fonts</translation>
+      <translation>Písma</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="237"/>
       <source>&amp;Change</source>
-      <translation type="unfinished">&amp;Change</translation>
+      <translation>&amp;Změnit</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="244"/>
       <source>Text editor font</source>
-      <translation type="unfinished">Text editor font</translation>
+      <translation>Písmo pro text editoru</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="18"/>
       <source>pixels</source>
-      <translation type="unfinished">pixels</translation>
+      <translation>pixelů</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="20"/>
       <source>Spaces</source>
-      <translation type="unfinished">Spaces</translation>
+      <translation>Mezery</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="21"/>
