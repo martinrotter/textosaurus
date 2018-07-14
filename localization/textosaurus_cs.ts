@@ -1482,32 +1482,32 @@ You can install it now.</source>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="115"/>
       <source>Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</source>
-      <translation type="unfinished">Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</translation>
+      <translation>Všimněte si, že &quot;%1&quot; (bez uvozovek) je zástupný symbol pro předané adresy URL.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="129"/>
       <source>External E-mail Client</source>
-      <translation type="unfinished">External E-mail Client</translation>
+      <translation>Externí e-mailový klient</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="138"/>
       <source>Use Custom External E-mail Client</source>
-      <translation type="unfinished">Use Custom External E-mail Client</translation>
+      <translation>Použít vlastní externí e-mailový klient</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="150"/>
       <source>E-mail client executable</source>
-      <translation type="unfinished">E-mail client executable</translation>
+      <translation>Spouštěč e-mailového klienta</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="162"/>
       <source>Executable file of e-mail client</source>
-      <translation type="unfinished">Executable file of e-mail client</translation>
+      <translation>Spouštěč e-mailového klienta</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="203"/>
       <source>Select client</source>
-      <translation type="unfinished">Select client</translation>
+      <translation>Vyberte klienta</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="211"/>
