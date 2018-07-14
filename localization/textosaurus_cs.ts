@@ -1794,57 +1794,57 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="190"/>
       <source>It is generally better to have your interpreters available via your PATH environment variable, so that simply typing in &quot;bash&quot; or &quot;python&quot; could work.</source>
-      <translation type="unfinished">It is generally better to have your interpreters available via your PATH environment variable, so that simply typing in &quot;bash&quot; or &quot;python&quot; could work.</translation>
+      <translation>Je to obecně lepší mít vaše interprety skriptů dostupné prostřednictvím proměnné prostředí PATH, a pak stačí jednoduše zadat &quot;bash&quot; nebo &quot;pythony&quot; a vše bude fungovat.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="203"/>
       <source>Optional prompt text for input</source>
-      <translation type="unfinished">Optional prompt text for input</translation>
+      <translation>Volitelný text výzvy pro vstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="210"/>
       <source>Prompt</source>
-      <translation type="unfinished">Prompt</translation>
+      <translation>Výzva</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="21"/>
       <source>Current selection/document</source>
-      <translation type="unfinished">Current selection/document</translation>
+      <translation>Aktuální výběr/dokument</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="22"/>
       <source>Current line</source>
-      <translation type="unfinished">Current line</translation>
+      <translation>Aktuální řádek</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="23"/>
       <source>Saved file path</source>
-      <translation type="unfinished">Saved file path</translation>
+      <translation>Cesta k (před)uloženému souboru</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="24"/>
       <source>Ask user for input</source>
-      <translation type="unfinished">Ask user for input</translation>
+      <translation>Zeptat se uživatele na vstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="25"/>
       <source>No input</source>
-      <translation type="unfinished">No input</translation>
+      <translation>Žádný vstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="27"/>
       <source>Replace current selection/document</source>
-      <translation type="unfinished">Replace current selection/document</translation>
+      <translation>Nahradit aktuální výběr/dokument</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="28"/>
       <source>Replace current line</source>
-      <translation type="unfinished">Replace current line</translation>
+      <translation>Nahradit aktuální řádek</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="29"/>
       <source>Insert at cursor position</source>
-      <translation type="unfinished">Insert at cursor position</translation>
+      <translation>Vložit na pozici kurzoru</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="30"/>
@@ -1854,17 +1854,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="31"/>
       <source>Copy to clipboard</source>
-      <translation type="unfinished">Copy to clipboard</translation>
+      <translation>Kopírovat do schránky</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="32"/>
       <source>New file</source>
-      <translation type="unfinished">New file</translation>
+      <translation>Nový soubor</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="33"/>
       <source>Reload file</source>
-      <translation type="unfinished">Reload file</translation>
+      <translation>Znovu načíst soubor</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="34"/>
@@ -1874,12 +1874,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="106"/>
       <source>New tool</source>
-      <translation type="unfinished">New tool</translation>
+      <translation>Nový externí nástroj</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.h" line="38"/>
       <source>External Tools</source>
-      <translation type="unfinished">External Tools</translation>
+      <translation>Externí nástroje</translation>
     </message>
   </context>
   <context>
@@ -1887,22 +1887,22 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="29"/>
       <source>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</source>
-      <translation type="unfinished">Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</translation>
+      <translation>Odebrat odpadní klíč registru Trolltech (HKCU\Software\Trolltech) při ukončení aplikace</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="36"/>
       <source>Restore previous session</source>
-      <translation type="unfinished">Restore previous session</translation>
+      <translation>Obnovit předchozí relaci</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="43"/>
       <source>Every unsaved text will get remembered until next launch and all files will be reopened too.</source>
-      <translation type="unfinished">Every unsaved text will get remembered until next launch and all files will be reopened too.</translation>
+      <translation>Každý neuložený dokument bude uložen do dalšího spuštění aplikace a rovněž všechny soubor budou opětovně otevřeny.</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.h" line="26"/>
       <source>General</source>
-      <translation type="unfinished">General</translation>
+      <translation>Obecné</translation>
     </message>
   </context>
   <context>
@@ -1910,22 +1910,22 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="36"/>
       <source>Icons &amp;&amp; Skins</source>
-      <translation type="unfinished">Icons &amp;&amp; Skins</translation>
+      <translation>Ikony &amp;&amp; skiny</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="75"/>
       <source>Icon theme</source>
-      <translation type="unfinished">Icon theme</translation>
+      <translation>Motiv ikon</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="88"/>
       <source>Style</source>
-      <translation type="unfinished">Style</translation>
+      <translation>Styl</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="101"/>
       <source>Enable Tray Icon</source>
-      <translation type="unfinished">Enable Tray Icon</translation>
+      <translation>Povolit tray ikonu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="110"/>
