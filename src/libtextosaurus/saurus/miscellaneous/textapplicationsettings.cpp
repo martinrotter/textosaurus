@@ -21,6 +21,10 @@ TextApplicationSettings::TextApplicationSettings(TextApplication* parent)
   : QObject(parent), m_textApplication(parent), m_externalTools(new ExternalTools(parent)),
   m_syntaxHighlighting(new SyntaxHighlighting(this)), m_pluginFactory(new PluginFactory(this)) {}
 
+bool TextApplicationSettings::contextAwareHighlightingEnabled() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::ContextAwareHighlights)).toBool();
+}
+
 bool TextApplicationSettings::codeFoldingEnabled() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::CodeFolding)).toBool();
 }
@@ -117,6 +121,11 @@ void TextApplicationSettings::decreaseFontSize() {
 
   font_old.setPointSize(font_old.pointSize() - 1);
   setMainFont(font_old);
+}
+
+void TextApplicationSettings::setContextAwareHighlightingEnabled(bool enabled) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::ContextAwareHighlights, enabled);
+  emit settingsChanged(true, false);
 }
 
 void TextApplicationSettings::setCodeFoldingEnabled(bool enabled) {
@@ -228,7 +237,6 @@ void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form,
     dock->setParent(main_form);
 
     int size = dock->initialWidth();
-
     Qt::DockWidgetArea area = dock->initialArea();
 
     if (area == Qt::DockWidgetArea::NoDockWidgetArea) {

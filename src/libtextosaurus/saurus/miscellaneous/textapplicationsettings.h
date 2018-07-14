@@ -20,6 +20,7 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
     virtual ~TextApplicationSettings() = default;
 
+    bool contextAwareHighlightingEnabled() const;
     bool codeFoldingEnabled() const;
     bool restorePreviousSession() const;
     int restoredSessionTabIndex() const;
@@ -53,6 +54,7 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     void increaseFontSize();
     void decreaseFontSize();
 
+    void setContextAwareHighlightingEnabled(bool enabled);
     void setCodeFoldingEnabled(bool enabled);
     void setRestoredSessionTabIndex(int index);
     void setRestorePreviousSession(bool restore);

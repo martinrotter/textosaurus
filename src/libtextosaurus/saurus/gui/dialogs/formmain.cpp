@@ -95,6 +95,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionStayOnTop;
   actions << m_ui.m_actionViewEols;
   actions << m_ui.m_actionViewWhitespaces;
+  actions << m_ui.m_actionContextAwareHighlighting;
   actions << m_ui.m_actionAutoIndentEnabled;
 
   actions << m_ui.m_actionAboutGuard;

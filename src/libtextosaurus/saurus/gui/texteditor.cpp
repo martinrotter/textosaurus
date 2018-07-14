@@ -451,8 +451,13 @@ void TextEditor::updateOccurrencesHighlights() {
    qDebug("pocet radku %d, prvni pozice %d (radek %d), posledni pozice %d (radek %d)", visible_lines_count, first_visible_position,
          first_visible_line, end_position, lineFromPosition(end_position));
  */
+#if defined(DEBUG)
+  qDebug("Occurrences highlights updated.");
+#endif
+
   if (!sel_text.isEmpty()) {
-    int search_flags = 0;
+    bool context_aware = m_textApp->settings()->contextAwareHighlightingEnabled();
+    int search_flags = context_aware ? SCFIND_WHOLEWORD : 0;
 
     while (true) {
       QPair<int, int> found_range = findText(search_flags, sel_text.constData(), first_visible_position, end_position);

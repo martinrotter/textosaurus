@@ -66,7 +66,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
+  TextEditor* new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
     if (!restoring_session && m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() &&
@@ -400,6 +400,8 @@ void TextApplication::createConnections() {
     openTextFile();
   });
   connect(m_actionWordWrap, &QAction::triggered, m_settings, &TextApplicationSettings::setWordWrapEnabled);
+  connect(m_actionContextAwareHighlighting, &QAction::triggered,
+          m_settings, &TextApplicationSettings::setContextAwareHighlightingEnabled);
   connect(m_actionCodeFolding, &QAction::triggered, m_settings, &TextApplicationSettings::setCodeFoldingEnabled);
   connect(m_actionLineNumbers, &QAction::triggered, m_settings, &TextApplicationSettings::setLineNumbersEnabled);
   connect(m_actionViewEols, &QAction::triggered, m_settings, &TextApplicationSettings::setViewEols);
@@ -477,6 +479,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionPrintPreviewCurrentEditor = m_mainForm->m_ui.m_actionPrintPreview;
   m_actionPrintPreviewCurrentEditorBlackWhite = m_mainForm->m_ui.m_actionPrintPreviewBlackWhite;
   m_actionAutoIndentEnabled = m_mainForm->m_ui.m_actionAutoIndentEnabled;
+  m_actionContextAwareHighlighting = m_mainForm->m_ui.m_actionContextAwareHighlighting;
 
   m_menuView = m_mainForm->m_ui.m_menuView;
   m_menuEdit = m_mainForm->m_ui.m_menuEdit;
@@ -515,6 +518,7 @@ void TextApplication::loadState() {
   m_actionLineNumbers->setChecked(m_settings->lineNumbersEnabled());
   m_actionCodeFolding->setChecked(m_settings->codeFoldingEnabled());
   m_actionViewEols->setChecked(m_settings->viewEols());
+  m_actionContextAwareHighlighting->setChecked(m_settings->contextAwareHighlightingEnabled());
   m_actionViewWhitespaces->setChecked(m_settings->viewWhitespaces());
 
   m_actionEditBack->setEnabled(false);

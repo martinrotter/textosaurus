@@ -1,6 +1,7 @@
 0.9.8
 -----
 Added:
+* Context-aware occurrences highlighting with bindable action. (#38)
 * Caret is moved on the same line when document gets reloaded from disk.
 * Tomorrow color scheme.
 * Print preview grayscale mode (no syntax highlighting).

@@ -167,6 +167,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     QAction* m_actionSettings;
     QAction* m_actionViewWhitespaces;
     QAction* m_actionViewEols;
+    QAction* m_actionContextAwareHighlighting;
     QAction* m_actionPrintCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditor;
     QAction* m_actionPrintPreviewCurrentEditorBlackWhite;
