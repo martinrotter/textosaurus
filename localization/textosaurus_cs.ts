@@ -1744,37 +1744,37 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="93"/>
       <source>Full-blown script goes here</source>
-      <translation type="unfinished">Full-blown script goes here</translation>
+      <translation>Sem napište celý obsah skriptu</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="100"/>
       <source>Title</source>
-      <translation type="unfinished">Title</translation>
+      <translation>Název</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="110"/>
       <source>External tool title</source>
-      <translation type="unfinished">External tool title</translation>
+      <translation>Název externího nástroje</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="117"/>
       <source>Category</source>
-      <translation type="unfinished">Category</translation>
+      <translation>Kategorie</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="127"/>
       <source>Optional category name</source>
-      <translation type="unfinished">Optional category name</translation>
+      <translation>Volitelný název kategorie</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="134"/>
       <source>Shortcut</source>
-      <translation type="unfinished">Shortcut</translation>
+      <translation>Klávesová zkratka</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="147"/>
       <source>Input</source>
-      <translation type="unfinished">Input</translation>
+      <translation>Vstup</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="160"/>
@@ -1784,12 +1784,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="173"/>
       <source>Interpreter</source>
-      <translation type="unfinished">Interpreter</translation>
+      <translation>Interpret pro skript</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="183"/>
       <source>Interpreter for the script</source>
-      <translation type="unfinished">Interpreter for the script</translation>
+      <translation>Interpret pro skript</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="190"/>
