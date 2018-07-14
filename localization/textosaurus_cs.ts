@@ -1716,17 +1716,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="21"/>
       <source>Tabs</source>
-      <translation type="unfinished">Tabs</translation>
+      <translation>Tabulátory</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="89"/>
       <source>Select new text editor main font</source>
-      <translation type="unfinished">Select new text editor main font</translation>
+      <translation>Vybrat nové hlavní písmo textového editoru</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.h" line="29"/>
       <source>Editor</source>
-      <translation type="unfinished">Editor</translation>
+      <translation>Editor</translation>
     </message>
   </context>
   <context>
@@ -1734,12 +1734,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="47"/>
       <source>Add new external tool</source>
-      <translation type="unfinished">Add new external tool</translation>
+      <translation>Přidat nový externí nástroj</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="57"/>
       <source>Remove selected external tool</source>
-      <translation type="unfinished">Remove selected external tool</translation>
+      <translation>Odstranit vybraný externí nástroj</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="93"/>
@@ -2005,27 +2005,27 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="90"/>
       <source>(Tray icon is not available.)</source>
-      <translation type="unfinished">(Tray icon is not available.)</translation>
+      <translation>(Tray ikona není dostupná.)</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="113"/>
       <source>Icon only</source>
-      <translation type="unfinished">Icon only</translation>
+      <translation>Pouze ikona</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="114"/>
       <source>Text only</source>
-      <translation type="unfinished">Text only</translation>
+      <translation>Pouze text</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="115"/>
       <source>Text beside icon</source>
-      <translation type="unfinished">Text beside icon</translation>
+      <translation>Text vedle ikony</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="116"/>
       <source>Text under icon</source>
-      <translation type="unfinished">Text under icon</translation>
+      <translation>Text pod ikonou</translation>
     </message>
     <message>
       <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="117"/>
