@@ -2,7 +2,7 @@
 
 You can contribute to Textosaurus project in a several different ways:
 
-- by translating Textosaurus to some [other languages](https://crowdin.com/project/textosaurus),
+- by translating Textosaurus to some [other languages](https://www.transifex.com/martinrotter/textosaurus),
 - by submitting patches and pull requests (see [here](https://github.com/martinrotter/textosaurus/pulls)),
 - by reporting [bugs](https://github.com/martinrotter/textosaurus/issues/new),
 - by donating some money to support and encourage developers (see below and [here](https://martinrotter.github.io/donate)).
