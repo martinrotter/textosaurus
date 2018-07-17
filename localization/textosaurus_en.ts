@@ -331,15 +331,15 @@
 <context>
     <name>FindResultsModelItemEditor</name>
     <message numerus="yes">
-        <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
-        <source>%n result(s) - </source>
-        <translation type="unfinished">
-            <numerusform>%n result(s) - </numerusform>
-            <numerusform>%n result(s) - </numerusform>
-        </translation>
+      <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
+      <source>%n result(s) - </source>
+      <translation type="unfinished">
+        <numerusform>%n result(s) - </numerusform>
+        <numerusform>%n result(s) - </numerusform>
+      </translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>FindResultsSidebar</name>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultssidebar.cpp" line="14"/>
@@ -578,334 +578,334 @@
 <context>
     <name>FormMain</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="46"/>
-        <source>&amp;File</source>
-        <translation type="unfinished">&amp;File</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="46"/>
+      <source>&amp;File</source>
+      <translation type="unfinished">&amp;File</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="50"/>
-        <source>&amp;Save File with Encoding...</source>
-        <translation type="unfinished">&amp;Save File with Encoding...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="50"/>
+      <source>&amp;Save File with Encoding...</source>
+      <translation type="unfinished">&amp;Save File with Encoding...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="55"/>
-        <source>&amp;Open File with Encoding...</source>
-        <translation type="unfinished">&amp;Open File with Encoding...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="55"/>
+      <source>&amp;Open File with Encoding...</source>
+      <translation type="unfinished">&amp;Open File with Encoding...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="60"/>
-        <source>&amp;Recent Files</source>
-        <translation type="unfinished">&amp;Recent Files</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="60"/>
+      <source>&amp;Recent Files</source>
+      <translation type="unfinished">&amp;Recent Files</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="65"/>
-        <source>&amp;Reopen File with Encoding...</source>
-        <translation type="unfinished">&amp;Reopen File with Encoding...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="65"/>
+      <source>&amp;Reopen File with Encoding...</source>
+      <translation type="unfinished">&amp;Reopen File with Encoding...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="89"/>
-        <source>&amp;?</source>
-        <translation type="unfinished">&amp;?</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="89"/>
+      <source>&amp;?</source>
+      <translation type="unfinished">&amp;?</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="99"/>
-        <source>&amp;View</source>
-        <translation type="unfinished">&amp;View</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="99"/>
+      <source>&amp;View</source>
+      <translation type="unfinished">&amp;View</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="103"/>
-        <source>&amp;UI Elements</source>
-        <translation type="unfinished">&amp;UI Elements</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="103"/>
+      <source>&amp;UI Elements</source>
+      <translation type="unfinished">&amp;UI Elements</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="113"/>
-        <source>&amp;Invisible Characters</source>
-        <translation type="unfinished">&amp;Invisible Characters</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="113"/>
+      <source>&amp;Invisible Characters</source>
+      <translation type="unfinished">&amp;Invisible Characters</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="120"/>
-        <source>&amp;Sidebars</source>
-        <translation type="unfinished">&amp;Sidebars</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="120"/>
+      <source>&amp;Sidebars</source>
+      <translation type="unfinished">&amp;Sidebars</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="134"/>
-        <source>&amp;Tools</source>
-        <translation type="unfinished">&amp;Tools</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="134"/>
+      <source>&amp;Tools</source>
+      <translation type="unfinished">&amp;Tools</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="140"/>
-        <source>&amp;Tabs</source>
-        <translation type="unfinished">&amp;Tabs</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="140"/>
+      <source>&amp;Tabs</source>
+      <translation type="unfinished">&amp;Tabs</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="152"/>
-        <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Edit</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="152"/>
+      <source>&amp;Edit</source>
+      <translation type="unfinished">&amp;Edit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="156"/>
-        <source>Converts existing EOLs and sets mode for new EOLs.</source>
-        <translation type="unfinished">Converts existing EOLs and sets mode for new EOLs.</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="156"/>
+      <source>Converts existing EOLs and sets mode for new EOLs.</source>
+      <translation type="unfinished">Converts existing EOLs and sets mode for new EOLs.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="159"/>
-        <source>&amp;EOL Conversion</source>
-        <translation type="unfinished">&amp;EOL Conversion</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="159"/>
+      <source>&amp;EOL Conversion</source>
+      <translation type="unfinished">&amp;EOL Conversion</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="167"/>
-        <source>This does not convert existing EOLs.</source>
-        <translation type="unfinished">This does not convert existing EOLs.</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="167"/>
+      <source>This does not convert existing EOLs.</source>
+      <translation type="unfinished">This does not convert existing EOLs.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="170"/>
-        <source>&amp;EOL Mode (does not convert existing EOLs)</source>
-        <translation type="unfinished">&amp;EOL Mode (does not convert existing EOLs)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="170"/>
+      <source>&amp;EOL Mode (does not convert existing EOLs)</source>
+      <translation type="unfinished">&amp;EOL Mode (does not convert existing EOLs)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="188"/>
-        <source>&amp;Language</source>
-        <translation type="unfinished">&amp;Language</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="188"/>
+      <source>&amp;Language</source>
+      <translation type="unfinished">&amp;Language</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="193"/>
-        <source>&amp;Encoding</source>
-        <translation type="unfinished">&amp;Encoding</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="193"/>
+      <source>&amp;Encoding</source>
+      <translation type="unfinished">&amp;Encoding</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="207"/>
-        <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Quit</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="207"/>
+      <source>&amp;Quit</source>
+      <translation type="unfinished">&amp;Quit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="538"/>
-        <source>Context-aware Occurrences Highlighting</source>
-        <translation type="unfinished"></translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="538"/>
+      <source>Context-aware Occurrences Highlighting</source>
+      <translation type="unfinished">Context-aware Occurrences Highlighting</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="218"/>
-        <source>&amp;Settings</source>
-        <translation type="unfinished">&amp;Settings</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="218"/>
+      <source>&amp;Settings</source>
+      <translation type="unfinished">&amp;Settings</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="223"/>
-        <source>&amp;About Application</source>
-        <translation type="unfinished">&amp;About Application</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="223"/>
+      <source>&amp;About Application</source>
+      <translation type="unfinished">&amp;About Application</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="234"/>
-        <source>View &amp;Fullscreen</source>
-        <translation type="unfinished">View &amp;Fullscreen</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="234"/>
+      <source>View &amp;Fullscreen</source>
+      <translation type="unfinished">View &amp;Fullscreen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="245"/>
-        <source>No Actions Available</source>
-        <translation type="unfinished">No Actions Available</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="245"/>
+      <source>No Actions Available</source>
+      <translation type="unfinished">No Actions Available</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="248"/>
-        <source>No actions are available right now.</source>
-        <translation type="unfinished">No actions are available right now.</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="248"/>
+      <source>No actions are available right now.</source>
+      <translation type="unfinished">No actions are available right now.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="256"/>
-        <source>Switch Visibility of Main &amp;Window</source>
-        <translation type="unfinished">Switch Visibility of Main &amp;Window</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="256"/>
+      <source>Switch Visibility of Main &amp;Window</source>
+      <translation type="unfinished">Switch Visibility of Main &amp;Window</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="259"/>
-        <source>Hides main window if it is visible and shows it if it is hidden.</source>
-        <translation type="unfinished">Hides main window if it is visible and shows it if it is hidden.</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="259"/>
+      <source>Hides main window if it is visible and shows it if it is hidden.</source>
+      <translation type="unfinished">Hides main window if it is visible and shows it if it is hidden.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="264"/>
-        <source>Check for &amp;Updates</source>
-        <translation type="unfinished">Check for &amp;Updates</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="264"/>
+      <source>Check for &amp;Updates</source>
+      <translation type="unfinished">Check for &amp;Updates</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="269"/>
-        <source>Report a &amp;Bug...</source>
-        <translation type="unfinished">Report a &amp;Bug...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="269"/>
+      <source>Report a &amp;Bug...</source>
+      <translation type="unfinished">Report a &amp;Bug...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="280"/>
-        <source>View &amp;Toolbar</source>
-        <translation type="unfinished">View &amp;Toolbar</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="280"/>
+      <source>View &amp;Toolbar</source>
+      <translation type="unfinished">View &amp;Toolbar</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="285"/>
-        <source>&amp;Donate...</source>
-        <translation type="unfinished">&amp;Donate...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="285"/>
+      <source>&amp;Donate...</source>
+      <translation type="unfinished">&amp;Donate...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="290"/>
-        <source>Display &amp;Wiki</source>
-        <translation type="unfinished">Display &amp;Wiki</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="290"/>
+      <source>Display &amp;Wiki</source>
+      <translation type="unfinished">Display &amp;Wiki</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="295"/>
-        <source>&amp;Restart</source>
-        <translation type="unfinished">&amp;Restart</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="295"/>
+      <source>&amp;Restart</source>
+      <translation type="unfinished">&amp;Restart</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="306"/>
-        <source>View &amp;Statusbar</source>
-        <translation type="unfinished">View &amp;Statusbar</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="306"/>
+      <source>View &amp;Statusbar</source>
+      <translation type="unfinished">View &amp;Statusbar</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="311"/>
-        <source>Close &amp;All Tabs</source>
-        <translation type="unfinished">Close &amp;All Tabs</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="311"/>
+      <source>Close &amp;All Tabs</source>
+      <translation type="unfinished">Close &amp;All Tabs</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="316"/>
-        <source>Close All Tabs &amp;Except Current</source>
-        <translation type="unfinished">Close All Tabs &amp;Except Current</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="316"/>
+      <source>Close All Tabs &amp;Except Current</source>
+      <translation type="unfinished">Close All Tabs &amp;Except Current</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="321"/>
-        <source>Go to &amp;Next Tab</source>
-        <translation type="unfinished">Go to &amp;Next Tab</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="321"/>
+      <source>Go to &amp;Next Tab</source>
+      <translation type="unfinished">Go to &amp;Next Tab</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="326"/>
-        <source>Go to &amp;Previous Tab</source>
-        <translation type="unfinished">Go to &amp;Previous Tab</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="326"/>
+      <source>Go to &amp;Previous Tab</source>
+      <translation type="unfinished">Go to &amp;Previous Tab</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="331"/>
-        <source>&amp;New File</source>
-        <translation type="unfinished">&amp;New File</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="331"/>
+      <source>&amp;New File</source>
+      <translation type="unfinished">&amp;New File</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="339"/>
-        <source>&amp;Open File...</source>
-        <translation type="unfinished">&amp;Open File...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="339"/>
+      <source>&amp;Open File...</source>
+      <translation type="unfinished">&amp;Open File...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="347"/>
-        <source>&amp;Save File</source>
-        <translation type="unfinished">&amp;Save File</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="347"/>
+      <source>&amp;Save File</source>
+      <translation type="unfinished">&amp;Save File</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="355"/>
-        <source>&amp;Save File as...</source>
-        <translation type="unfinished">&amp;Save File as...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="355"/>
+      <source>&amp;Save File as...</source>
+      <translation type="unfinished">&amp;Save File as...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="363"/>
-        <source>&amp;Save All Files</source>
-        <translation type="unfinished">&amp;Save All Files</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="363"/>
+      <source>&amp;Save All Files</source>
+      <translation type="unfinished">&amp;Save All Files</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="371"/>
-        <source>Close All &amp;Unmodified Editors</source>
-        <translation type="unfinished">Close All &amp;Unmodified Editors</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="371"/>
+      <source>Close All &amp;Unmodified Editors</source>
+      <translation type="unfinished">Close All &amp;Unmodified Editors</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="379"/>
-        <source>Use &amp;Unix (LF)</source>
-        <translation type="unfinished">Use &amp;Unix (LF)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="379"/>
+      <source>Use &amp;Unix (LF)</source>
+      <translation type="unfinished">Use &amp;Unix (LF)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="387"/>
-        <source>Use &amp;Windows (CRLF)</source>
-        <translation type="unfinished">Use &amp;Windows (CRLF)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="387"/>
+      <source>Use &amp;Windows (CRLF)</source>
+      <translation type="unfinished">Use &amp;Windows (CRLF)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="395"/>
-        <source>Use &amp;Mac (CR)</source>
-        <translation type="unfinished">Use &amp;Mac (CR)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="395"/>
+      <source>Use &amp;Mac (CR)</source>
+      <translation type="unfinished">Use &amp;Mac (CR)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="403"/>
-        <source>&amp;Word Wrap</source>
-        <translation type="unfinished">&amp;Word Wrap</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="403"/>
+      <source>&amp;Word Wrap</source>
+      <translation type="unfinished">&amp;Word Wrap</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="408"/>
-        <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Undo</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="408"/>
+      <source>&amp;Undo</source>
+      <translation type="unfinished">&amp;Undo</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="416"/>
-        <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Redo</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="416"/>
+      <source>&amp;Redo</source>
+      <translation type="unfinished">&amp;Redo</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="424"/>
-        <source>Convert to &amp;Mac (CR)</source>
-        <translation type="unfinished">Convert to &amp;Mac (CR)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="424"/>
+      <source>Convert to &amp;Mac (CR)</source>
+      <translation type="unfinished">Convert to &amp;Mac (CR)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="429"/>
-        <source>Convert to &amp;Unix (LF)</source>
-        <translation type="unfinished">Convert to &amp;Unix (LF)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="429"/>
+      <source>Convert to &amp;Unix (LF)</source>
+      <translation type="unfinished">Convert to &amp;Unix (LF)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="434"/>
-        <source>Convert to &amp;Windows (CRLF)</source>
-        <translation type="unfinished">Convert to &amp;Windows (CRLF)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="434"/>
+      <source>Convert to &amp;Windows (CRLF)</source>
+      <translation type="unfinished">Convert to &amp;Windows (CRLF)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="442"/>
-        <source>Display &amp;EOLs</source>
-        <translation type="unfinished">Display &amp;EOLs</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="442"/>
+      <source>Display &amp;EOLs</source>
+      <translation type="unfinished">Display &amp;EOLs</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="450"/>
-        <source>Display &amp;Whitespaces</source>
-        <translation type="unfinished">Display &amp;Whitespaces</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="450"/>
+      <source>Display &amp;Whitespaces</source>
+      <translation type="unfinished">Display &amp;Whitespaces</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="455"/>
-        <source>&amp;Find and Replace</source>
-        <translation type="unfinished">&amp;Find and Replace</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="455"/>
+      <source>&amp;Find and Replace</source>
+      <translation type="unfinished">&amp;Find and Replace</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="466"/>
-        <source>&amp;Line Numbers</source>
-        <translation type="unfinished">&amp;Line Numbers</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="466"/>
+      <source>&amp;Line Numbers</source>
+      <translation type="unfinished">&amp;Line Numbers</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="471"/>
-        <source>&amp;Print...</source>
-        <translation type="unfinished">&amp;Print...</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="471"/>
+      <source>&amp;Print...</source>
+      <translation type="unfinished">&amp;Print...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="479"/>
-        <source>Print Pre&amp;view</source>
-        <translation type="unfinished">Print Pre&amp;view</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="479"/>
+      <source>Print Pre&amp;view</source>
+      <translation type="unfinished">Print Pre&amp;view</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="487"/>
-        <source>&amp;Reload From Disk</source>
-        <translation type="unfinished">&amp;Reload From Disk</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="487"/>
+      <source>&amp;Reload From Disk</source>
+      <translation type="unfinished">&amp;Reload From Disk</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="495"/>
-        <source>&amp;Close Current Tab</source>
-        <translation type="unfinished">&amp;Close Current Tab</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="495"/>
+      <source>&amp;Close Current Tab</source>
+      <translation type="unfinished">&amp;Close Current Tab</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="506"/>
-        <source>&amp;Enable Auto-Indent</source>
-        <translation type="unfinished">&amp;Enable Auto-Indent</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="506"/>
+      <source>&amp;Enable Auto-Indent</source>
+      <translation type="unfinished">&amp;Enable Auto-Indent</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="514"/>
-        <source>&amp;Stay On Top</source>
-        <translation type="unfinished">&amp;Stay On Top</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="514"/>
+      <source>&amp;Stay On Top</source>
+      <translation type="unfinished">&amp;Stay On Top</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="525"/>
-        <source>Code &amp;Folding</source>
-        <translation type="unfinished">Code &amp;Folding</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="525"/>
+      <source>Code &amp;Folding</source>
+      <translation type="unfinished">Code &amp;Folding</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="530"/>
-        <source>&amp;Print Preview (Grayscale)</source>
-        <translation type="unfinished">&amp;Print Preview (Grayscale)</translation>
+      <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="530"/>
+      <source>&amp;Print Preview (Grayscale)</source>
+      <translation type="unfinished">&amp;Print Preview (Grayscale)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="40"/>
