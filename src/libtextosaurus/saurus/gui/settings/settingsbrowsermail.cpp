@@ -16,7 +16,6 @@ SettingsBrowserMail::SettingsBrowserMail(Settings* settings, QWidget* parent)
   m_ui.setupUi(this);
 
   GuiUtilities::setLabelAsNotice(*m_ui.label, false);
-  GuiUtilities::setLabelAsNotice(*m_ui.m_lblExternalEmailInfo, false);
   GuiUtilities::setLabelAsNotice(*m_ui.m_lblProxyInfo, false);
 
   connect(m_ui.m_cmbProxyType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
@@ -141,6 +140,7 @@ void SettingsBrowserMail::loadSettings() {
                                                                                                          Proxy::Type,
                                                                                                          QNetworkProxy::ProxyType::NoProxy).
                                                                                        toInt());
+
   m_ui.m_cmbProxyType->setCurrentIndex(m_ui.m_cmbProxyType->findData(selected_proxy_type));
   m_ui.m_txtProxyHost->setText(settings()->value(GROUP(Proxy), Proxy::Host).toString());
   m_ui.m_txtProxyUsername->setText(settings()->value(GROUP(Proxy), Proxy::Username).toString());

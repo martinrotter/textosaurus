@@ -205,18 +205,6 @@
             </item>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="m_lblExternalEmailInfo">
-            <property name="text">
-             <string>Placeholders:
- • %1 - title of selected message,
- • %2 - body of selected message.</string>
-            </property>
-            <property name="indent">
-             <number>20</number>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
