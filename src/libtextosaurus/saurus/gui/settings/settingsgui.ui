@@ -107,7 +107,7 @@
               <item row="1" column="0" colspan="2">
                <widget class="QCheckBox" name="m_checkHideWhenMinimized">
                 <property name="toolTip">
-                 <string>If enabled, then main window completely hidden when minimized. User can restore window visibility only via tray icon interaction.</string>
+                 <string>If enabled, then main window is completely hidden when minimized. User can restore window visibility only via tray icon interaction.</string>
                 </property>
                 <property name="text">
                  <string>Hide main window when minimized</string>
