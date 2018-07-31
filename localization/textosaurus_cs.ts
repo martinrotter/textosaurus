@@ -331,7 +331,7 @@
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
         <source>%n result(s) - </source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n výsledek</numerusform><numerusform>%n výsledky</numerusform><numerusform>%n výsledků</numerusform><numerusform>%n výsledků</numerusform></translation>
     </message>
 </context>
 <context>
@@ -553,7 +553,7 @@
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="136"/>
         <source>Replaced %n occurrence(s).</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>Replaced %n výskyt.</numerusform><numerusform>Replaced %n výskyty.</numerusform><numerusform>Replaced %n výskytů.</numerusform><numerusform>Replaced %n výskytů.</numerusform></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="171"/>
@@ -1420,7 +1420,7 @@ You can install it now.</source>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Není-li zaškrtnuto, pak je použit výchozí systémový webový prohlížeč.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="42"/>
@@ -1430,7 +1430,7 @@ You can install it now.</source>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="39"/>
         <source>If unchecked, then default system-wide web browser is used</source>
-        <translation type="unfinished"/>
+        <translation>Není-li zaškrtnuto, pak je použit výchozí systémový webový prohlížeč</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="54"/>
@@ -1918,12 +1918,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="113"/>
         <source>Hide main window when minimized</source>
-        <translation type="unfinished"/>
+        <translation>Skrýt hlavní okno při minimalizaci</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="120"/>
         <source>Enable tray icon balloon notifications</source>
-        <translation type="unfinished"/>
+        <translation>Povolit notifikace tray ikony</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="127"/>
@@ -1933,57 +1933,57 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
         <source>Hide main window when closed (do not quit application)</source>
-        <translation type="unfinished"/>
+        <translation>Skrýt hlavní okno při zavření (neukončovat aplikaci)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="145"/>
         <source>Tabs</source>
-        <translation type="unfinished"/>
+        <translation>Panely</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="154"/>
         <source>Close Tabs with</source>
-        <translation type="unfinished"/>
+        <translation>Zavírat panely pomocí</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="160"/>
         <source>Left mouse button double-click</source>
-        <translation type="unfinished"/>
+        <translation>Dvojkliku levého tlač. myši</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="167"/>
         <source>Middle mouse button single-click</source>
-        <translation type="unfinished"/>
+        <translation>Prostředního tlačítka myši</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="177"/>
         <source>Open new tabs with left mouse button double-click on tab bar</source>
-        <translation type="unfinished"/>
+        <translation>Otevírat nové panely poklepáním levého tlačítka myši</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="185"/>
         <source>Toolbars</source>
-        <translation type="unfinished"/>
+        <translation>Panely nástrojů</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="198"/>
         <source>Main toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Hlavní panel nástrojů</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="238"/>
         <source>Toolbar button style</source>
-        <translation type="unfinished"/>
+        <translation>Styl tlačítek panelu nástrojů</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="248"/>
         <source>Select toolbar to edit</source>
-        <translation type="unfinished"/>
+        <translation>Zvolit panel nástrojů na editaci</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="65"/>
         <source>no icon theme/system icon theme</source>
-        <translation type="unfinished"/>
+        <translation>žádné téma ikon nebo systémové téma ikon</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="90"/>
@@ -2013,12 +2013,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="117"/>
         <source>Follow OS style</source>
-        <translation type="unfinished"/>
+        <translation>Respektovat styl operačního systému</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.h" line="29"/>
         <source>User Interface</source>
-        <translation type="unfinished"/>
+        <translation>Uživatelské rozhraní</translation>
     </message>
 </context>
 <context>
@@ -2026,17 +2026,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.cpp" line="16"/>
         <source>Language</source>
-        <translation type="unfinished"/>
+        <translation>Jazyk</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.cpp" line="17"/>
         <source>Code</source>
-        <translation type="unfinished"/>
+        <translation>Kód</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.h" line="26"/>
         <source>Localization</source>
-        <translation type="unfinished"/>
+        <translation>Lokalizace</translation>
     </message>
 </context>
 <context>
@@ -2049,32 +2049,32 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.ui" line="74"/>
         <source>Go to &amp;Website</source>
-        <translation type="unfinished"/>
+        <translation>Přejít na &amp;web</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Jméno</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Author</source>
-        <translation type="unfinished"/>
+        <translation>Autor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Website</source>
-        <translation type="unfinished"/>
+        <translation>Web</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="28"/>
         <source>Plugins</source>
-        <translation type="unfinished"/>
+        <translation>Zásuvné moduly</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="72"/>
         <source>no plugin selected</source>
-        <translation type="unfinished"/>
+        <translation>není vybrán zásuvný modul</translation>
     </message>
 </context>
 <context>
