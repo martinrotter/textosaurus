@@ -8,13 +8,11 @@
 
 #include <QWidgetAction>
 
-ToolBar::ToolBar(const QString& title, QWidget* parent) : BaseToolBar(title, parent) {
+ToolBar::ToolBar(const QString& title, QWidget* parent) : BaseToolBar(title, parent), m_isActive(false) {
   setFloatable(false);
   setMovable(false);
   refreshVisualProperties();
 }
-
-ToolBar::~ToolBar() {}
 
 QList<QAction*> ToolBar::availableActions() const {
   return qApp->userActions();

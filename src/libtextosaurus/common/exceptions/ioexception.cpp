@@ -2,4 +2,4 @@
 
 #include "common/exceptions/ioexception.h"
 
-IOException::IOException(const QString& message) : ApplicationException(message) {}
+IOException::IOException(QString message) : ApplicationException(std::move(message)) {}

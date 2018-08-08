@@ -12,8 +12,6 @@
 #if defined(Q_OS_WIN)
 TrayIconMenu::TrayIconMenu(const QString& title, QWidget* parent) : QMenu(title, parent) {}
 
-TrayIconMenu::~TrayIconMenu() {}
-
 bool TrayIconMenu::event(QEvent* event) {
   if (event->type() == QEvent::Show && Application::activeModalWidget() != nullptr) {
     QTimer::singleShot(0, this, SLOT(hide()));
@@ -27,8 +25,8 @@ bool TrayIconMenu::event(QEvent* event) {
 
 SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
                                std::function<void()> visibility_switcher, QWidget* parent)
-  : QSystemTrayIcon(parent), m_normalIcon(normal_icon), m_visibilitySwitcher(visibility_switcher) {
-  qDebug("Creating SystemTrayIcon instance.");
+  : QSystemTrayIcon(parent), m_normalIcon(normal_icon), m_visibilitySwitcher(std::move(visibility_switcher)) {
+  qDebug() << "Creating SystemTrayIcon instance.";
 
   QSystemTrayIcon::setIcon(m_normalIcon);
 
@@ -42,7 +40,7 @@ SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
-  qDebug("Destroying SystemTrayIcon instance.");
+  qDebug() << "Destroying SystemTrayIcon instance.";
   hide();
 }
 
@@ -81,25 +79,25 @@ void SystemTrayIcon::showPrivate() {
   QSystemTrayIcon::show();
   emit shown();
 
-  qDebug("Tray icon displayed.");
+  qDebug() << "Tray icon displayed.";
 }
 
 void SystemTrayIcon::show() {
 #if defined(Q_OS_WIN)
 
   // Show immediately.
-  qDebug("Showing tray icon immediately.");
+  qDebug() << "Showing tray icon immediately.";
   showPrivate();
 #else
 
   // Delay avoids race conditions and tray icon is properly displayed.
-  qDebug("Showing tray icon with 1000 ms delay.");
+  qDebug() << "Showing tray icon with 1000 ms delay.";
   QTimer::singleShot(1000, this, SLOT(showPrivate()));
 #endif
 }
 
 void SystemTrayIcon::showMessage(const QString& title, const QString& message, QSystemTrayIcon::MessageIcon icon,
-                                 int milliseconds_timeout_hint, std::function<void()> functor) {
+                                 int milliseconds_timeout_hint, const std::function<void()>& functor) {
   if (m_connection) {
     // Disconnect previous bubble click signalling.
     disconnect(m_connection);

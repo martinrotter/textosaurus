@@ -25,7 +25,7 @@ void MessageBox::setIcon(QMessageBox::Icon icon) {
 
 void MessageBox::setCheckBox(QMessageBox* msg_box, const QString& text, bool* data) {
   // Add "don't show this again checkbox.
-  QCheckBox* check_box = new QCheckBox(msg_box);
+  auto* check_box = new QCheckBox(msg_box);
 
   check_box->setChecked(*data);
   check_box->setText(text);

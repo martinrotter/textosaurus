@@ -7,7 +7,7 @@
 
 class ApplicationException {
   public:
-    explicit ApplicationException(const QString& message = QString());
+    explicit ApplicationException(QString message = QString());
     virtual ~ApplicationException() = default;
 
     QString message() const;

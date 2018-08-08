@@ -24,7 +24,7 @@ class TrayIconMenu : public QMenu {
 
     // Constructors and destructors.
     explicit TrayIconMenu(const QString& title, QWidget* parent);
-    virtual ~TrayIconMenu();
+    ~TrayIconMenu() = default;
 
   protected:
     virtual bool event(QEvent* event) override;
@@ -36,14 +36,12 @@ class TEXTOSAURUS_DLLSPEC SystemTrayIcon : public QSystemTrayIcon {
   Q_OBJECT
 
   public:
-
-    // Constructors and destructors.
     explicit SystemTrayIcon(const QString& normal_icon, QMenu* menu,
                             std::function<void()> visibility_switcher, QWidget* parent = nullptr);
     virtual ~SystemTrayIcon();
 
     void showMessage(const QString& title, const QString& message, MessageIcon icon = Information,
-                     int milliseconds_timeout_hint = TRAY_ICON_BUBBLE_TIMEOUT, std::function<void()> functor = nullptr);
+                     int milliseconds_timeout_hint = TRAY_ICON_BUBBLE_TIMEOUT, const std::function<void()>& functor = nullptr);
 
     // Returns true if tray icon CAN be constructed on this machine.
     static bool isSystemTrayAvailable();

@@ -14,7 +14,7 @@ class TEXTOSAURUS_DLLSPEC IOFactory {
   public:
     IOFactory() = delete;
     ~IOFactory() = delete;
-
+    IOFactory& operator=(const IOFactory&) = delete;
     static bool isFolderWritable(const QString& folder);
     static QByteArray readFileRawChunk(const QString& file_path, int length);
 

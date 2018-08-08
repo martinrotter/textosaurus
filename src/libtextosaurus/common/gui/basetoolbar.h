@@ -7,6 +7,11 @@
 
 class TEXTOSAURUS_DLLSPEC BaseBar {
   public:
+    BaseBar() = default;
+    BaseBar(const BaseBar&) = delete;
+    BaseBar& operator=(const BaseBar&) = delete;
+
+    virtual ~BaseBar() = default;
 
     // Returns all actions which can be added to the toolbar.
     virtual QList<QAction*> availableActions() const = 0;

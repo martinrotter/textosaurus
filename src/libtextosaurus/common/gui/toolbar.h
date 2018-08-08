@@ -10,7 +10,7 @@ class TEXTOSAURUS_DLLSPEC ToolBar : public BaseToolBar {
 
   public:
     explicit ToolBar(const QString& title, QWidget* parent = nullptr);
-    virtual ~ToolBar() override;
+    virtual ~ToolBar() override = default;
 
     virtual QList<QAction*> availableActions() const override;
     virtual QList<QAction*> changeableActions() const override;

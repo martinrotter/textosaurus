@@ -25,9 +25,8 @@ bool DynamicShortcutsWidget::areShortcutsUnique() const {
       // Problem, two identical non-empty shortcuts found.
       return false;
     }
-    else {
-      all_shortcuts.append(binding.second->shortcut());
-    }
+
+    all_shortcuts.append(binding.second->shortcut());
   }
 
   return true;
@@ -46,7 +45,7 @@ void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
 
   foreach (QAction* action, actions) {
     // Create shortcut catcher for this action and set default shortcut.
-    ShortcutCatcher* catcher = new ShortcutCatcher(this);
+    auto* catcher = new ShortcutCatcher(this);
 
     catcher->setDefaultShortcut(action->shortcut());
 
@@ -59,13 +58,13 @@ void DynamicShortcutsWidget::populate(QList<QAction*> actions) {
     m_actionBindings << new_binding;
 
     // Add new catcher to our control.
-    QLabel* action_label = new QLabel(this);
+    auto* action_label = new QLabel(this);
 
     action_label->setText(action->text().remove(QSL("&")));
     action_label->setToolTip(action->toolTip());
     action_label->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
 
-    QLabel* action_icon = new QLabel(this);
+    auto* action_icon = new QLabel(this);
 
     action_icon->setPixmap(action->icon().pixmap(ICON_SIZE_SETTINGS, ICON_SIZE_SETTINGS));
     action_icon->setToolTip(action->toolTip());
