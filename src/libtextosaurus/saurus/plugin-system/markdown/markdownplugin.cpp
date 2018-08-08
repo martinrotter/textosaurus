@@ -38,6 +38,8 @@ MarkdownSidebar* MarkdownPlugin::sidebar() {
 
 void MarkdownPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
                            Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
+  Q_UNUSED(main_form_widget)
+  Q_UNUSED(settings)
 
   m_textApp = text_app;
   m_iconFactory = icon_factory;
