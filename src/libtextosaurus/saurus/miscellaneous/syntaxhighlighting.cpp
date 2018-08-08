@@ -451,7 +451,36 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_POV)
       << Lexer(QSL("PowerShell"), QStringList {
       QSL("ps1")
-    }, SCLEX_POWERSHELL)
+    }, SCLEX_POWERSHELL, {
+      {SCE_POWERSHELL_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_POWERSHELL_KEYWORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_POWERSHELL_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_POWERSHELL_CHARACTER, SyntaxColorTheme::StyleComponents::String},
+      {SCE_POWERSHELL_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_POWERSHELL_HERE_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_POWERSHELL_ALIAS, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_POWERSHELL_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_POWERSHELL_COMMENTDOCKEYWORD, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_POWERSHELL_COMMENTSTREAM, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_POWERSHELL_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_POWERSHELL_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    }, "assembly exit process"
+       "base filter public"
+       "begin finally return"
+       "break for sequence"
+       "catch foreach static"
+       "class from switch"
+       "command function throw"
+       "configuration hidden trap"
+       "continue if try"
+       "data in type"
+       "define inlinescript until"
+       "do interface using"
+       "dynamicparam module  var"
+       "else namespace while"
+       "elseif parallel workflow"
+       "end param"
+       "enum private")
       << Lexer(QSL("Properties/INI"), QStringList {
       QSL("properties"), QSL("ini"), QSL("conf"), QSL("theme")
     }, SCLEX_PROPERTIES)
