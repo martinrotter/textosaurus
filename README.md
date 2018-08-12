@@ -12,6 +12,8 @@ Textosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla
 
 You can support author of Textosaurus [here](https://martinrotter.github.io/donate). Textosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
 
+### [Translations](https://www.transifex.com/martinrotter/textosaurus/dashboard/) are welcomed!!!
+
 ![Textosaurus](resources/screenshots/textosaurus-linux.png)
 
 Downloads
