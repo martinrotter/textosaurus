@@ -6,7 +6,7 @@ Textosaurus
 [![Version](https://img.shields.io/github/release/martinrotter/textosaurus.svg?maxAge=360)](https://github.com/martinrotter/textosaurus/releases)
 [![License](https://img.shields.io/github/license/martinrotter/textosaurus.svg?maxAge=360000)](https://github.com/martinrotter/textosaurus/blob/master/LICENSE.md)
 
-<img align="left" src="https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/graphics/textosaurus.png" alt="Textosaurus" height="100px" />
+<img align="left" src="https://raw.githubusercontent.com/martinrotter/textosaurus/master/resources/graphics/textosaurus.png" alt="Textosaurus" height="150px" />
 
 Textosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
