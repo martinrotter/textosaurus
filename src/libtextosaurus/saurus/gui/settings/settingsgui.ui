@@ -124,7 +124,7 @@
               <item row="2" column="0" colspan="2">
                <widget class="QCheckBox" name="m_checkHideOnClose">
                 <property name="toolTip">
-                 <string>If enabled, then main window completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</string>
+                 <string>If enabled, then main window is completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</string>
                 </property>
                 <property name="text">
                  <string>Hide main window when closed (do not quit application)</string>

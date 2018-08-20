@@ -47,7 +47,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   //labels[SyntaxColorTheme::StyleComponents::ScintillaCallTip] = tr("Calltips");
   //labels[SyntaxColorTheme::StyleComponents::ScintillaFoldDisplayText] = tr("Fold display text");
   labels[SyntaxColorTheme::StyleComponents::ScintillaPaper] = tr("Paper background (bg color only)");
-  labels[SyntaxColorTheme::StyleComponents::ScintillaCurrentLine] = tr("Current line background (bg color only");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaCurrentLine] = tr("Current line background (bg color only)");
 
   QMetaEnum enums = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
 
