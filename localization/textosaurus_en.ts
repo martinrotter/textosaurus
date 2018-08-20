@@ -330,6 +330,11 @@
 </context>
 <context>
     <name>FindResultsModelItemEditor</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="15"/>
+        <source>editor-closed</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
         <source>%n result(s) - </source>
@@ -337,6 +342,11 @@
             <numerusform>%n result(s) - </numerusform>
             <numerusform>%n result(s) - </numerusform>
         </translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="19"/>
+        <source>unnamed-document</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1923,11 +1933,6 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation type="unfinished">Enable Tray Icon</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="110"/>
-        <source>If enabled, then main window completely hidden when minimized. User can restore window visibility only via tray icon interaction.</source>
-        <translation type="unfinished">If enabled, then main window completely hidden when minimized. User can restore window visibility only via tray icon interaction.</translation>
-    </message>
-    <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="113"/>
         <source>Hide main window when minimized</source>
         <translation type="unfinished">Hide main window when minimized</translation>
@@ -1938,9 +1943,14 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation type="unfinished">Enable tray icon balloon notifications</translation>
     </message>
     <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="110"/>
+        <source>If enabled, then main window is completely hidden when minimized. User can restore window visibility only via tray icon interaction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="127"/>
-        <source>If enabled, then main window completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</source>
-        <translation type="unfinished">If enabled, then main window completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</translation>
+        <source>If enabled, then main window is completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
@@ -2268,8 +2278,8 @@ Customizing too many substyles may lead to bad performance when handling big fil
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="50"/>
-        <source>Current line background (bg color only</source>
-        <translation type="unfinished">Current line background (bg color only</translation>
+        <source>Current line background (bg color only)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="97"/>
@@ -2487,7 +2497,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>ToolBar</name>
     <message>
-        <location filename="../src/libtextosaurus/common/gui/toolbar.cpp" line="61"/>
+        <location filename="../src/libtextosaurus/common/gui/toolbar.cpp" line="59"/>
         <source>Toolbar spacer</source>
         <translation type="unfinished">Toolbar spacer</translation>
     </message>
@@ -2563,7 +2573,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>TrayIconMenu</name>
     <message>
-        <location filename="../src/libtextosaurus/common/gui/systemtrayicon.cpp" line="20"/>
+        <location filename="../src/libtextosaurus/common/gui/systemtrayicon.cpp" line="18"/>
         <source>Close opened modal dialogs first.</source>
         <translation type="unfinished">Close opened modal dialogs first.</translation>
     </message>
