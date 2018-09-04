@@ -62,6 +62,11 @@ class PluginFactory : public QObject {
 
   public slots:
     void quit();
+
+    // Adds the instance of plugin to list of plugins:
+    // WARNING: This needs to be called before loadPlugins(...)
+    // gets called.
+    void addPlugin(PluginBase* plugin);
     void loadPlugins(TextApplication* text_app);
 
   private:

@@ -21,39 +21,37 @@ PluginFactory::PluginFactory(QObject* parent)
   m_assignableActions(QList<QAction*>()), m_sidebarActions(QList<QAction*>()) {}
 
 void PluginFactory::loadPlugins(TextApplication* text_app) {
-  if (m_plugins.isEmpty()) {
-    // Some hardcoded "plugins".
-    m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
+  // Some hardcoded "plugins".
+  m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
 
-    const QString plugins_path = pluginsLibPath();
+  const QString plugins_path = pluginsLibPath();
 
-    for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*") + pluginSuffix()})) {
-      if (QLibrary::isLibrary(plugin_lib_file.absoluteFilePath())) {
-        m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
-      }
+  for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*") + pluginSuffix()})) {
+    if (QLibrary::isLibrary(plugin_lib_file.absoluteFilePath())) {
+      m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
+    }
+  }
+
+  for (PluginState& plugin_state : m_plugins) {
+    auto plugin = plugin_state.plugin();
+
+    if (plugin == nullptr) {
+      qCritical("Cannot hook plugin '%s' into application.", qPrintable(plugin_state.pluginLibraryFile()));
+      continue;
     }
 
-    for (PluginState& plugin_state : m_plugins) {
-      auto plugin = plugin_state.plugin();
+    plugin->start(qApp->mainFormWidget(), text_app, qApp->settings(), qApp->icons(), qApp->web());
 
-      if (plugin == nullptr) {
-        qCritical("Cannot hook plugin '%s' into application.", qPrintable(plugin_state.pluginLibraryFile()));
-        continue;
-      }
+    auto plugin_sidebars = plugin->sidebars();
 
-      plugin->start(qApp->mainFormWidget(), text_app, qApp->settings(), qApp->icons(), qApp->web());
+    m_sidebars << plugin_sidebars;
+    m_assignableActions << plugin->userActions();
 
-      auto plugin_sidebars = plugin->sidebars();
+    for (BaseSidebar* sidebar : plugin_sidebars) {
+      QAction* act_show = sidebar->generateAction();
 
-      m_sidebars << plugin_sidebars;
-      m_assignableActions << plugin->userActions();
-
-      for (BaseSidebar* sidebar : plugin_sidebars) {
-        QAction* act_show = sidebar->generateAction();
-
-        m_assignableActions << act_show;
-        m_sidebarActions << act_show;
-      }
+      m_assignableActions << act_show;
+      m_sidebarActions << act_show;
     }
   }
 }
@@ -126,6 +124,10 @@ void PluginFactory::quit() {
       plugin->stop();
     }
   }
+}
+
+void PluginFactory::addPlugin(PluginBase* plugin) {
+  m_plugins.append(plugin);
 }
 
 PluginState::PluginState() {}
