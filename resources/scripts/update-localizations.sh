@@ -9,7 +9,7 @@ read -p "Password: " PASSWORD
 
 # Setup parameters.
 RESOURCE=../../../localization/textosaurus_en.ts
-CODES="cs"
+CODES="cs fr"
 TRANSLATION='../../../localization/textosaurus_$CODE.ts'
 
 declare PARAMS
