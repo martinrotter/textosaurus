@@ -1011,6 +1011,7 @@ void TextApplication::restoreSession() {
       else {
         // Real file.
         loadTextEditorFromFile(session_file, QString(), QString(), true);
+        editors_added++;
       }
     }
 
@@ -1019,6 +1020,7 @@ void TextApplication::restoreSession() {
     }
   }
 
+  qApp->settings()->setValue(GROUP(General), General::RestoreSessionFiles, QStringList());
   removeSessionFiles();
 }
 

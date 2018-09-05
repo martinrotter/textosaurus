@@ -6,11 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>459</width>
-    <height>157</height>
+    <width>582</width>
+    <height>358</height>
    </rect>
   </property>
-  <layout class="QFormLayout" name="formLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -23,21 +23,21 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="0" column="0">
+   <item>
     <widget class="QCheckBox" name="m_checkRemoveTrolltechJunk">
      <property name="text">
       <string>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item>
     <widget class="QCheckBox" name="m_checkRestoreSession">
      <property name="text">
       <string>Restore previous session</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item>
     <widget class="QLabel" name="m_lblRestoreSession">
      <property name="text">
       <string>Every unsaved text will get remembered until next launch and all files will be reopened too.</string>
@@ -49,6 +49,19 @@
       <cstring>m_checkRestoreSession</cstring>
      </property>
     </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>255</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
