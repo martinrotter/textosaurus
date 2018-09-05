@@ -331,7 +331,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="15"/>
         <source>editor-closed</source>
-        <translation type="unfinished"/>
+        <translation>editor-zavřen</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
@@ -341,7 +341,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="19"/>
         <source>unnamed-document</source>
-        <translation type="unfinished"/>
+        <translation>nepojmenovaný-dokument</translation>
     </message>
 </context>
 <context>
@@ -1933,12 +1933,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="110"/>
         <source>If enabled, then main window is completely hidden when minimized. User can restore window visibility only via tray icon interaction.</source>
-        <translation type="unfinished"/>
+        <translation>Je-li povoleno, pak je hlavní okno automaticky skryto při jeho minimalizaci. Uživatel může hlavní okno obnovit klepnutím na tray ikonu.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="127"/>
         <source>If enabled, then main window is completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</source>
-        <translation type="unfinished"/>
+        <translation>Je-li povoleno, tak se hlavní okno automaticky skryje při klepnutí na &quot;X&quot; a aplikace nebude ukončena.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
@@ -2267,7 +2267,7 @@ Kustomizace příliš mnoha substylů může vést ke zhoršenému výkonu aplik
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="50"/>
         <source>Current line background (bg color only)</source>
-        <translation type="unfinished"/>
+        <translation>Pozadí aktuálního řádku (pouze barva pozadí)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="97"/>
@@ -2563,7 +2563,7 @@ Kustomizace příliš mnoha substylů může vést ke zhoršenému výkonu aplik
     <message>
         <location filename="../src/libtextosaurus/common/gui/systemtrayicon.cpp" line="18"/>
         <source>Close opened modal dialogs first.</source>
-        <translation type="unfinished"/>
+        <translation>Nejdříve zavřete všechny modální dialogy.</translation>
     </message>
 </context>
 </TS>
