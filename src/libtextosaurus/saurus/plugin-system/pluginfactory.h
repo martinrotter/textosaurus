@@ -10,7 +10,7 @@ class BaseSidebar;
 class TextApplication;
 class QAction;
 
-class PluginState {
+class TEXTOSAURUS_DLLSPEC PluginState {
 
   public:
     PluginState();
@@ -48,7 +48,7 @@ class PluginState {
 
 Q_DECLARE_METATYPE(PluginState)
 
-class PluginFactory : public QObject {
+class TEXTOSAURUS_DLLSPEC PluginFactory : public QObject {
   Q_OBJECT
 
   public:
