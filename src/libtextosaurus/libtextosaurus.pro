@@ -320,10 +320,12 @@ INCLUDEPATH +=  $$PWD/. \
 
 # Localizations.
 TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
-                      $$PWD/../../localization/textosaurus_cs.ts
+                      $$PWD/../../localization/textosaurus_cs.ts \
+                      $$PWD/../../localization/textosaurus_sk.ts
 
 TRANSLATIONS += $$TRANSLATIONS_WO_QT \
                 $$PWD/../../localization/qtbase_cs.ts \
+                $$PWD/../../localization/qtbase_sk.ts
 
 load(uic)
 uic.commands -= -no-stringliteral

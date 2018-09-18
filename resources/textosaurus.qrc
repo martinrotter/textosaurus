@@ -13,6 +13,8 @@
     <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
     <file>../localization/textosaurus_en.qm</file>
     <file>../localization/textosaurus_cs.qm</file>
+    <file>../localization/textosaurus_sk.qm</file>
     <file>../localization/qtbase_cs.qm</file>
+    <file>../localization/qtbase_sk.qm</file>
   </qresource>
 </RCC>
