@@ -25,7 +25,8 @@ bool TrayIconMenu::event(QEvent* event) {
 
 SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
                                std::function<void()> visibility_switcher, QWidget* parent)
-  : QSystemTrayIcon(parent), m_normalIcon(normal_icon), m_visibilitySwitcher(std::move(visibility_switcher)) {
+  : QSystemTrayIcon(parent), m_normalIcon(normal_icon), m_visibilitySwitcher(std::move(visibility_switcher)),
+  m_messageTarget(nullptr) {
   qDebug() << "Creating SystemTrayIcon instance.";
 
   QSystemTrayIcon::setIcon(m_normalIcon);
@@ -34,6 +35,13 @@ SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
     menu->setParent(parent);
     setContextMenu(menu);
   }
+
+  // Establish new connection for bubble click.
+  m_connection = connect(this, &SystemTrayIcon::messageClicked, [this]() {
+    if (m_messageTarget.data() != nullptr) {
+      QMetaObject::invokeMethod(m_messageTarget.data(), "requestVisibility");
+    }
+  });
 
   // Create necessary connections.
   connect(this, &SystemTrayIcon::activated, this, &SystemTrayIcon::onActivated);
@@ -97,15 +105,11 @@ void SystemTrayIcon::show() {
 }
 
 void SystemTrayIcon::showMessage(const QString& title, const QString& message, QSystemTrayIcon::MessageIcon icon,
-                                 int milliseconds_timeout_hint, const std::function<void()>& functor) {
-  if (m_connection) {
-    // Disconnect previous bubble click signalling.
-    disconnect(m_connection);
-  }
+                                 int milliseconds_timeout_hint, QObject* obj) {
+  m_messageTarget.clear();
 
-  if (functor) {
-    // Establish new connection for bubble click.
-    m_connection = connect(this, &SystemTrayIcon::messageClicked, functor);
+  if (obj != nullptr) {
+    m_messageTarget = obj;
   }
 
   // NOTE: If connections do not work, then use QMetaObject::invokeMethod(...).

@@ -9,6 +9,7 @@
 
 #include <QMenu>
 #include <QPixmap>
+#include <QPointer>
 
 #include <functional>
 
@@ -41,7 +42,7 @@ class TEXTOSAURUS_DLLSPEC SystemTrayIcon : public QSystemTrayIcon {
     virtual ~SystemTrayIcon();
 
     void showMessage(const QString& title, const QString& message, MessageIcon icon = Information,
-                     int milliseconds_timeout_hint = TRAY_ICON_BUBBLE_TIMEOUT, const std::function<void()>& functor = nullptr);
+                     int milliseconds_timeout_hint = TRAY_ICON_BUBBLE_TIMEOUT, QObject* obj = nullptr);
 
     // Returns true if tray icon CAN be constructed on this machine.
     static bool isSystemTrayAvailable();
@@ -68,6 +69,7 @@ class TEXTOSAURUS_DLLSPEC SystemTrayIcon : public QSystemTrayIcon {
 
     std::function<void()> m_visibilitySwitcher;
     QMetaObject::Connection m_connection;
+    QPointer<QObject> m_messageTarget;
 };
 
 #endif // SYSTEMTRAYICON_H

@@ -5,6 +5,7 @@
 #include "common/gui/plaintoolbutton.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "common/network-web/webfactory.h"
+#include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
 
 #include <QFontDatabase>
@@ -22,7 +23,7 @@ OutputSidebar::OutputSidebar(TextApplication* text_app, QWidget* parent)
 }
 
 void OutputSidebar::displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level,
-                                  const QUrl& url, std::function<void()> handler) {
+                                  const QUrl& url, QObject* target) {
   Q_UNUSED(source)
 
   show();
@@ -50,8 +51,8 @@ void OutputSidebar::displayOutput(OutputSource source, const QString& message, Q
   QString text_to_insert;
 
   if (url.isValid()) {
-    if (handler) {
-      m_handlers.insert(url, handler);
+    if (target != nullptr) {
+      m_handlers.insert(url, QPointer<QObject>(target));
     }
 
     text_to_insert = QString("<a href=\"%1\">%2</a>").arg(url.toString(), message);
@@ -127,11 +128,18 @@ void OutputSidebar::load() {
 
     connect(m_txtOutput, &QTextBrowser::anchorClicked, this, [this](const QUrl& url) {
       if (m_handlers.contains(url)) {
-        m_handlers.value(url)();
+        QObject* target = m_handlers.value(url).data();
+
+        if (target != nullptr) {
+          QMetaObject::invokeMethod(target, "requestVisibility");
+          return;
+        }
+        else {
+          m_handlers.remove(url);
+        }
       }
-      else {
-        qApp->web()->openUrlInExternalBrowser(url.toString());
-      }
+
+      qApp->web()->openUrlInExternalBrowser(url.toString());
     });
 
     setWidget(m_txtOutput);

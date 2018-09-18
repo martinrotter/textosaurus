@@ -29,6 +29,7 @@ class QAction;
 class WebFactory;
 class SystemTrayIcon;
 class TextApplication;
+class TextEditor;
 
 class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
   Q_OBJECT
@@ -73,7 +74,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     // Displays given simple message in tray icon bubble or OSD
     // or in message box if tray icon is disabled.
     void showGuiMessage(const QString& message, QMessageBox::Icon message_type = QMessageBox::Icon::NoIcon,
-                        const QUrl& url = QUrl(), const std::function<void()>& handler = {});
+                        const QUrl& url = QUrl(), QObject* target = nullptr);
 
     // Returns pointer to "GOD" application singleton.
     static Application* instance();

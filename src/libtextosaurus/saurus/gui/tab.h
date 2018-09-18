@@ -41,6 +41,9 @@ class Tab : public QWidget {
     // NOTE: Returns value < 0 if this tab is not in tab widget.
     int index() const;
 
+  public slots:
+    void requestVisibility();
+
   signals:
     void iconChanged(QIcon icon);
     void titleChanged(QString title, QString tool_tip);

@@ -146,7 +146,6 @@ SystemTrayIcon* Application::trayIcon() {
   if (m_trayIcon == nullptr) {
 #if defined(Q_OS_WIN)
     QMenu* tray_menu = new TrayIconMenu(APP_NAME, m_mainForm);
-
 #else
     QMenu* tray_menu = new QMenu(APP_NAME, m_mainForm);
 #endif
@@ -238,14 +237,16 @@ void Application::processExecutionMessage(const QString& message) {
 void Application::showGuiMessage(const QString& message,
                                  QMessageBox::Icon message_type,
                                  const QUrl& url,
-                                 const std::function<void()>& handler) {
+                                 QObject* target) {
   Q_UNUSED(message_type)
 
   if (SystemTrayIcon::isSystemTrayActivated()) {
-    trayIcon()->showMessage(APP_NAME, message, (QSystemTrayIcon::MessageIcon) message_type, TRAY_ICON_BUBBLE_TIMEOUT, handler);
+    trayIcon()->showMessage(APP_NAME, message, QSystemTrayIcon::MessageIcon(message_type),
+                            TRAY_ICON_BUBBLE_TIMEOUT, target);
   }
   else {
-    m_textApplication->outputSidebar()->displayOutput(OutputSource::Application, message, message_type, url, handler);
+    m_textApplication->outputSidebar()->displayOutput(OutputSource::Application, message,
+                                                      message_type, url, target);
   }
 }
 

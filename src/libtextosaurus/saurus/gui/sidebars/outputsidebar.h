@@ -6,6 +6,7 @@
 #include "saurus/gui/sidebars/basesidebar.h"
 
 #include <QMessageBox>
+#include <QPointer>
 #include <QUrl>
 
 #include <functional>
@@ -30,7 +31,7 @@ class OutputSidebar : public BaseSidebar {
 
   public slots:
     void displayOutput(OutputSource source, const QString& message, QMessageBox::Icon level = QMessageBox::Icon::NoIcon,
-                       const QUrl& url = QUrl(), std::function<void()> handler = {});
+                       const QUrl& url = QUrl(), QObject* target = nullptr);
 
   private:
     virtual void load() override;
@@ -38,7 +39,7 @@ class OutputSidebar : public BaseSidebar {
     QColor colorForLevel(QMessageBox::Icon level);
 
   private:
-    QHash<QUrl, std::function<void()>> m_handlers;
+    QHash<QUrl, QPointer<QObject>> m_handlers;
     QMessageBox::Icon m_currentLevel;
     QTextBrowser* m_txtOutput;
 };

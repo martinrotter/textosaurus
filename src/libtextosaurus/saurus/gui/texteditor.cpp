@@ -230,9 +230,7 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
 
       qApp->showGuiMessage(tr("File '%1' was reloaded from disk.").arg(QDir::toNativeSeparators(file_path)),
                            QMessageBox::Icon::Warning,
-                           QUrl::fromLocalFile(file_path), [this]() {
-        emit visibilityRequested();
-      });
+                           QUrl::fromLocalFile(file_path), this);
 
       if (not_again) {
         m_textApp->settings()->setReloadModifiedDocumentsAutomatically(true);
@@ -392,6 +390,10 @@ void TextEditor::askForSaveAgreement() {
     // dialog is needed.
     m_saveAgreement = QMessageBox::StandardButton::Save;
   }
+}
+
+void TextEditor::requestVisibility() {
+  emit visibilityRequested();
 }
 
 void TextEditor::setFilePath(const QString& file_path) {
