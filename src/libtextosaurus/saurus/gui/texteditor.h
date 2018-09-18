@@ -96,7 +96,7 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
   signals:
     void readOnlyChanged(bool read_only);
     void editorReloaded();
-    void requestedVisibility();
+    void visibilityRequested();
     void loadedFromFile(QString source_file_path);
     void savedToFile(QString destination_file_path);
 

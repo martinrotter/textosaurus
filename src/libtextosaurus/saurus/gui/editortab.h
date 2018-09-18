@@ -6,6 +6,8 @@
 #include "saurus/gui/tab.h"
 #include "saurus/gui/texteditor.h"
 
+#include <QIcon>
+
 class TextApplication;
 
 class EditorTab : public Tab {
@@ -17,12 +19,22 @@ class EditorTab : public Tab {
     virtual QList<TextEditor*> allEditors() const override;
     virtual int countOfEditors() const override;
     virtual TabType tabType() const override;
+    virtual QIcon icon() const override;
+    virtual QString title() const override;
+    virtual QString toolTip() const override;
 
   protected:
     virtual void closeEvent(QCloseEvent* event) override;
 
+  private slots:
+    void updateIcon(bool read_only);
+    void updateTitleFromEditor();
+
   private:
     TextEditor* m_editor;
+    QIcon m_icon;
+    QString m_title;
+    QString m_toolTip;
 };
 
 #endif // EDITORTAB_H

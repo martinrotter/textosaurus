@@ -2,18 +2,35 @@
 
 #include "saurus/gui/editortab.h"
 
+#include "common/miscellaneous/iconfactory.h"
 #include "saurus/gui/tabwidget.h"
+#include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
 #include <QLayout>
 
 EditorTab::EditorTab(TextApplication* text_app, TextEditor* editor)
-  : Tab(text_app->tabWidget()), m_editor(editor) {
+  : Tab(text_app->tabWidget()), m_editor(editor), m_icon(QIcon()), m_title(QString()), m_toolTip(QString()) {
   QVBoxLayout* lay = new QVBoxLayout(this);
 
   lay->setMargin(0);
   lay->setSpacing(0);
   lay->addWidget(m_editor, 1);
+
+  updateTitleFromEditor();
+
+  connect(m_editor, &TextEditor::visibilityRequested, this, &Tab::visibilityRequested);
+  connect(m_editor, &TextEditor::readOnlyChanged, this, [this](bool read_only) {
+    updateIcon(read_only);
+
+    emit iconChanged(m_icon);
+  });
+  connect(m_editor, &TextEditor::savePointChanged, this, [this]() {
+    updateIcon(m_editor->readOnly());
+    updateTitleFromEditor();
+
+    emit titleChanged(m_title, m_toolTip);
+  });
 }
 
 EditorTab::EditorTab(TextApplication* text_app)
@@ -46,4 +63,35 @@ void EditorTab::closeEvent(QCloseEvent* event) {
   else {
     Tab::closeEvent(event);
   }
+}
+
+void EditorTab::updateIcon(bool read_only) {
+  if (read_only) {
+    m_icon = qApp->icons()->fromTheme(QSL("lock"));
+  }
+  else {
+    m_icon = m_editor->modify() ?
+             qApp->icons()->fromTheme(QSL("dialog-warning")) :
+             QIcon();
+  }
+}
+
+void EditorTab::updateTitleFromEditor() {
+  m_title = m_editor ==
+            nullptr ?
+            QString() :
+            (m_editor->filePath().isEmpty() ? tr("New text file") : QFileInfo(m_editor->filePath()).fileName());
+  m_toolTip = m_editor == nullptr ? QString() : m_editor->filePath();
+}
+
+QString EditorTab::title() const {
+  return m_title;
+}
+
+QString EditorTab::toolTip() const {
+  return m_toolTip;
+}
+
+QIcon EditorTab::icon() const {
+  return m_icon;
 }

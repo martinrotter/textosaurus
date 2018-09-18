@@ -8,6 +8,8 @@
 #include "definitions/definitions.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
+#include <QIcon>
+
 class TextEditor;
 class TabWidget;
 class OutputSidebar;
@@ -17,6 +19,7 @@ class FormMain;
 class StatusBar;
 class FormFindReplace;
 class ExternalTool;
+class Tab;
 class QAction;
 class QMenu;
 class QLineEdit;
@@ -69,6 +72,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     void closeAllUnmodifiedEditors();
     void reloadCurrentEditor();
 
+    void makeTabVisible(Tab* tab);
     void makeEditorVisible(TextEditor* editor);
 
     void restoreSession();
@@ -97,14 +101,15 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     void loadLexersMenu();
     void fillRecentFiles();
 
-    void onSavePointChanged();
     void onEditorSaved();
     void onEditorReloaded();
-    void onEditorRequestedVisibility();
+    void onTabRequestedVisibility();
 
+    void onTabIconChanged(QIcon icon);
+    void onTabTitleChanged(const QString& title, const QString& tool_tip);
     void onEditorModified(int type, int position, int length, int linesAdded,
                           const QByteArray& text, int line, int foldNow, int foldPrev);
-    void onEditorTabSwitched(int index = -1);
+    void onTabSwitched(int index = -1);
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
     void showTabContextMenu(const QPoint& point);
     void setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled);
@@ -124,9 +129,6 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     void loadState();
 
     void createConnections();
-    void renameEditor(TextEditor* editor);
-    void onEditorReadOnlyChanged(bool read_only);
-    void updateEditorIcon(int index, bool modified, bool read_only);
     void markEditorModified(TextEditor* editor, bool modified);
     void updateToolBarFromEditor(TextEditor* editor, bool only_modified);
     void updateStatusBarFromEditor(TextEditor* editor);

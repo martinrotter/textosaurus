@@ -26,6 +26,7 @@
 #include <QClipboard>
 #include <QDockWidget>
 #include <QFileDialog>
+#include <QIcon>
 #include <QLineEdit>
 #include <QPointer>
 #include <QTemporaryFile>
@@ -66,7 +67,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  TextEditor* new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
+  TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
     if (!restoring_session && m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() &&
@@ -90,7 +91,13 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
 }
 
 int TextApplication::addTextEditor(TextEditor* editor) {
-  return m_tabEditors->addTab(new EditorTab(this, editor), QIcon(), tr("New text file"));
+  Tab* tab = new EditorTab(this, editor);
+
+  connect(tab, &Tab::iconChanged, this, &TextApplication::onTabIconChanged);
+  connect(tab, &Tab::titleChanged, this, &TextApplication::onTabTitleChanged);
+  connect(tab, &Tab::visibilityRequested, this, &TextApplication::onTabRequestedVisibility);
+
+  return m_tabEditors->addTab(tab, QIcon(), tab->title());
 }
 
 void TextApplication::attachTextEditor(TextEditor* editor) {
@@ -98,10 +105,7 @@ void TextApplication::attachTextEditor(TextEditor* editor) {
 
   connect(editor, &TextEditor::editorReloaded, this, &TextApplication::onEditorReloaded);
   connect(editor, &TextEditor::savedToFile, this, &TextApplication::onEditorSaved);
-  connect(editor, &TextEditor::savePointChanged, this, &TextApplication::onSavePointChanged);
   connect(editor, &TextEditor::modified, this, &TextApplication::onEditorModified);
-  connect(editor, &TextEditor::requestedVisibility, this, &TextApplication::onEditorRequestedVisibility);
-  connect(editor, &TextEditor::readOnlyChanged, this, &TextApplication::onEditorReadOnlyChanged);
 }
 
 void TextApplication::openPassedFilesOrNewDocument() {
@@ -167,6 +171,10 @@ void TextApplication::reloadCurrentEditor() {
   if (editor != nullptr) {
     editor->reloadFromDisk();
   }
+}
+
+void TextApplication::makeTabVisible(Tab* tab) {
+  m_tabEditors->setCurrentWidget(tab);
 }
 
 void TextApplication::makeEditorVisible(TextEditor* editor) {
@@ -269,10 +277,10 @@ void TextApplication::updateEolMenu(int eol_mode) {
   }
 }
 
-void TextApplication::onEditorRequestedVisibility() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+void TextApplication::onTabRequestedVisibility() {
+  Tab* tab = qobject_cast<Tab*>(sender());
 
-  makeEditorVisible(editor);
+  makeTabVisible(tab);
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
@@ -349,12 +357,6 @@ void TextApplication::onEditorModified(int type, int position, int length,
   }
 }
 
-void TextApplication::onSavePointChanged() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
-
-  renameEditor(editor);
-}
-
 void TextApplication::onEditorSaved() {
   TextEditor* editor = qobject_cast<TextEditor*>(sender());
 
@@ -369,7 +371,7 @@ void TextApplication::onEditorReloaded() {
   TextEditor* sndr = qobject_cast<TextEditor*>(sender());
 
   if (sndr == tabWidget()->currentEditor()) {
-    onEditorTabSwitched(m_tabEditors->indexOfEditor(sndr));
+    onTabSwitched(m_tabEditors->indexOfEditor(sndr));
   }
 }
 
@@ -382,7 +384,7 @@ void TextApplication::createConnections() {
   connect(m_settings, &TextApplicationSettings::settingsChanged, this, &TextApplication::reloadEditorsAfterSettingsChanged);
 
   // Tab widget.
-  connect(m_tabEditors, &TabWidget::currentChanged, this, &TextApplication::onEditorTabSwitched);
+  connect(m_tabEditors, &TabWidget::currentChanged, this, &TextApplication::onTabSwitched);
   connect(m_tabEditors->tabBar(), &TabBar::emptySpaceDoubleClicked, this, &TextApplication::newFile);
 
   // Actions.
@@ -849,18 +851,6 @@ void TextApplication::openTextFile(QAction* action) {
   }
 }
 
-void TextApplication::onEditorTabSwitched(int index) {
-  TextEditor* editor = m_tabEditors->textEditorAt(index);
-
-  if (editor != nullptr) {
-    editor->reloadSettings();
-  }
-
-  renameEditor(editor);
-  updateToolBarFromEditor(editor, false);
-  updateStatusBarFromEditor(editor);
-}
-
 void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modified) {
   if (editor != nullptr) {
     if (editor == tabWidget()->currentEditor()) {
@@ -1042,36 +1032,39 @@ void TextApplication::endSavingSession() {
   m_shouldSaveSession = false;
 }
 
-void TextApplication::updateEditorIcon(int index, bool modified, bool read_only) {
-  if (read_only) {
-    m_tabEditors->tabBar()->setTabIcon(index, qApp->icons()->fromTheme(QSL("lock")));
+void TextApplication::onTabSwitched(int index) {
+  Tab* tab = m_tabEditors->tabAt(index);
+  TextEditor* editor = m_tabEditors->textEditorAt(index);
+
+  if (editor != nullptr) {
+    editor->reloadSettings();
   }
-  else {
-    m_tabEditors->tabBar()->setTabIcon(index, modified ?
-                                       qApp->icons()->fromTheme(QSL("dialog-warning")) :
-                                       QIcon());
+
+  if (tab != nullptr) {
+    onTabTitleChanged(tab->title(), tab->toolTip());
+  }
+
+  updateToolBarFromEditor(editor, false);
+  updateStatusBarFromEditor(editor);
+}
+
+void TextApplication::onTabIconChanged(QIcon icon) {
+  Tab* tab = qobject_cast<Tab*>(sender());
+  int index = m_tabEditors->indexOf(tab);
+
+  if (index >= 0) {
+    m_tabEditors->setTabIcon(index, icon);
   }
 }
 
-void TextApplication::renameEditor(TextEditor* editor) {
-  int index = m_tabEditors->indexOfEditor(editor);
+void TextApplication::onTabTitleChanged(const QString& title, const QString& tool_tip) {
+  Tab* tab = qobject_cast<Tab*>(sender());
+  int index = m_tabEditors->indexOf(tab);
 
   if (index >= 0) {
-    updateEditorIcon(index, editor->modify(), editor->readOnly());
-
-    if (!editor->filePath().isEmpty()) {
-      m_tabEditors->tabBar()->setTabText(index, QFileInfo(editor->filePath()).fileName());
-      m_tabEditors->tabBar()->setTabToolTip(index, editor->filePath());
-    }
-  }
-}
-
-void TextApplication::onEditorReadOnlyChanged(bool read_only) {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
-  int index = m_tabEditors->indexOfEditor(editor);
-
-  if (index >= 0) {
-    updateEditorIcon(index, editor->modify(), read_only);
+    m_tabEditors->setTabIcon(index, tab->icon());
+    m_tabEditors->setTabText(index, title);
+    m_tabEditors->setTabToolTip(index, tool_tip);
   }
 }
 

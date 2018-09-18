@@ -214,7 +214,7 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
 
   if (QFile::exists(file_path)) {
     // File is externally changed.
-    emit requestedVisibility();
+    emit visibilityRequested();
     auto not_again = false;
 
     // File exists and was externally modified.
@@ -231,7 +231,7 @@ void TextEditor::onFileExternallyChanged(const QString& file_path) {
       qApp->showGuiMessage(tr("File '%1' was reloaded from disk.").arg(QDir::toNativeSeparators(file_path)),
                            QMessageBox::Icon::Warning,
                            QUrl::fromLocalFile(file_path), [this]() {
-        emit requestedVisibility();
+        emit visibilityRequested();
       });
 
       if (not_again) {
@@ -1037,7 +1037,7 @@ void TextEditor::closeEditor(bool* ok) {
     *ok = true;
   }
   else if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
-    emit requestedVisibility();
+    emit visibilityRequested();
 
     if (currentSaveAgreement() == QMessageBox::StandardButton::NoButton) {
       // We have no agreement, request it.

@@ -5,6 +5,7 @@
 
 #include <QWidget>
 
+#include <QIcon>
 #include <QList>
 
 class TextEditor;
@@ -31,9 +32,19 @@ class Tab : public QWidget {
     // Return count of editors.
     virtual int countOfEditors() const = 0;
 
+    // Title and icon of a tab.
+    virtual QString title() const = 0;
+    virtual QIcon icon() const = 0;
+    virtual QString toolTip() const = 0;
+
     // Returns index of this tab in tab widget.
     // NOTE: Returns value < 0 if this tab is not in tab widget.
     int index() const;
+
+  signals:
+    void iconChanged(QIcon icon);
+    void titleChanged(QString title, QString tool_tip);
+    void visibilityRequested();
 
   private:
     TabWidget* m_tabWidget;
