@@ -128,8 +128,8 @@ QList<UpdateInfo> SystemFactory::parseUpdatesFile(const QByteArray& updates_file
   QList<UpdateInfo> updates;
   QJsonArray document = QJsonDocument::fromJson(updates_file).array();
 
-  for (int i = 0; i < document.size(); i++) {
-    QJsonObject release = document.at(i).toObject();
+  for (const QJsonValueRef val : document) {
+    QJsonObject release = val.toObject();
     UpdateInfo update;
 
     update.m_date = QDateTime::fromString(release["published_at"].toString(), QSL("yyyy-MM-ddTHH:mm:ssZ"));
@@ -137,8 +137,8 @@ QList<UpdateInfo> SystemFactory::parseUpdatesFile(const QByteArray& updates_file
     update.m_changes = release["body"].toString();
     QJsonArray assets = release["assets"].toArray();
 
-    for (int j = 0; j < assets.size(); j++) {
-      QJsonObject asset = assets.at(j).toObject();
+    for (const QJsonValueRef ass : assets) {
+      QJsonObject asset = ass.toObject();
       UpdateUrl url;
 
       url.m_fileUrl = asset["browser_download_url"].toString();

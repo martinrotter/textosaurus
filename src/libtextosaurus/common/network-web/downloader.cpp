@@ -9,10 +9,9 @@
 
 Downloader::Downloader(QObject* parent)
   : QObject(parent), m_activeReply(nullptr), m_downloadManager(new SilentNetworkAccessManager(this)),
-  m_timer(new QTimer(this)), m_customHeaders(QHash<QByteArray, QByteArray>()), m_inputData(QByteArray()),
+  m_timer(new QTimer(this)), m_inputData(QByteArray()),
   m_targetProtected(false), m_targetUsername(QString()), m_targetPassword(QString()),
-  m_lastOutputData(QByteArray()), m_lastOutputError(QNetworkReply::NoError),
-  m_lastContentType(QVariant()) {
+  m_lastOutputData(QByteArray()), m_lastOutputError(QNetworkReply::NoError) {
   m_timer->setInterval(DOWNLOAD_TIMEOUT);
   m_timer->setSingleShot(true);
   connect(m_timer, &QTimer::timeout, this, &Downloader::cancel);
@@ -37,7 +36,6 @@ void Downloader::manipulateData(const QString& url,
                                 const QString& username,
                                 const QString& password) {
   QNetworkRequest request;
-  QString non_const_url = url;
 
   QHashIterator<QByteArray, QByteArray> i(m_customHeaders);
 
@@ -56,7 +54,7 @@ void Downloader::manipulateData(const QString& url,
 
   // Set url for this request and fire it up.
   m_timer->setInterval(timeout);
-  request.setUrl(non_const_url);
+  request.setUrl(url);
 
   m_targetProtected = protected_contents;
   m_targetUsername = username;

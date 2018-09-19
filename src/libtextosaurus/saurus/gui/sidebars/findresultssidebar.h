@@ -24,7 +24,7 @@ class FindResultsSidebar : public BaseSidebar {
     virtual int initialWidth() const override;
 
   public slots:
-    void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
+    void addResults(TextEditor* editor, const QList<QPair<int, int>>& results);
 
   private slots:
     void navigateToResult(const QModelIndex& index);

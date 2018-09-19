@@ -45,7 +45,7 @@ void FindResultsSidebar::load() {
   }
 }
 
-void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {
+void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, int>>& results) {
   show();
   raise();
 

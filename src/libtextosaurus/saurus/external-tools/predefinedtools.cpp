@@ -369,9 +369,7 @@ QString PredefinedTools::invertCase(const QString& data, bool* ok) {
   else {
     QString result;
 
-    for (int i = 0; i < data.size(); i++) {
-      QChar chr = data[i];
-
+    for (QChar chr : data) {
       result += chr.isUpper() ? chr.toLower() : chr.toUpper();
     }
 

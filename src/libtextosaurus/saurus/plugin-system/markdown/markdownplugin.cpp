@@ -8,7 +8,8 @@
 
 #include <QAction>
 
-MarkdownPlugin::MarkdownPlugin(QObject* parent) : QObject(parent), m_sidebar(nullptr) {}
+MarkdownPlugin::MarkdownPlugin(QObject* parent)
+  : QObject(parent), m_textApp(nullptr), m_sidebar(nullptr), m_iconFactory(nullptr), m_webFactory(nullptr) {}
 
 QString MarkdownPlugin::name() const {
   return QSL("Markdown Preview");

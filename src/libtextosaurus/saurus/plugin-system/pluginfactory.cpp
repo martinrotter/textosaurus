@@ -16,9 +16,7 @@
 #include <QMenu>
 #include <QPluginLoader>
 
-PluginFactory::PluginFactory(QObject* parent)
-  : QObject(parent), m_plugins(QList<PluginState>()), m_sidebars(QList<BaseSidebar*>()),
-  m_assignableActions(QList<QAction*>()), m_sidebarActions(QList<QAction*>()) {}
+PluginFactory::PluginFactory(QObject* parent) : QObject(parent) {}
 
 void PluginFactory::loadPlugins(TextApplication* text_app) {
   // Some hardcoded "plugins".

@@ -15,7 +15,7 @@
 #include <QPushButton>
 
 SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
-  : QWidget(parent), m_colorThemes(QList<SyntaxColorTheme>()) {
+  : QWidget(parent) {
   m_ui.setupUi(this);
 
   GuiUtilities::setLabelAsNotice(*m_ui.m_lblInfo, true);

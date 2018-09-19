@@ -147,5 +147,3 @@ void OutputSidebar::load() {
     BaseSidebar::load();
   }
 }
-
-OutputSidebar::~OutputSidebar() {}

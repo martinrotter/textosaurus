@@ -9,7 +9,7 @@
 #include <QKeyEvent>
 
 ToolBarEditor::ToolBarEditor(QWidget* parent)
-  : QWidget(parent), m_ui(new Ui::ToolBarEditor) {
+  : QWidget(parent), m_ui(new Ui::ToolBarEditor), m_toolBar(nullptr) {
   m_ui->setupUi(this);
 
   // Create connections.
@@ -68,7 +68,7 @@ void ToolBarEditor::resetToolBar() {
   }
 }
 
-void ToolBarEditor::loadEditor(const QList<QAction*> activated_actions, const QList<QAction*> available_actions) {
+void ToolBarEditor::loadEditor(const QList<QAction*>& activated_actions, const QList<QAction*>& available_actions) {
   m_ui->m_listActivatedActions->clear();
   m_ui->m_listAvailableActions->clear();
 
@@ -134,7 +134,11 @@ BaseBar* ToolBarEditor::toolBar() const {
 bool ToolBarEditor::eventFilter(QObject* object, QEvent* event) {
   if (object == m_ui->m_listActivatedActions) {
     if (event->type() == QEvent::KeyPress) {
-      const QKeyEvent* key_event = static_cast<QKeyEvent*>(event);
+      const QKeyEvent* key_event = dynamic_cast<QKeyEvent*>(event);
+
+      if (key_event == nullptr) {
+        return false;
+      }
 
       if (key_event->key() == Qt::Key_Delete) {
         deleteSelectedAction();
@@ -161,7 +165,7 @@ void ToolBarEditor::updateActionsAvailability() {
                                       m_ui->m_listActivatedActions->currentRow() > 0);
   m_ui->m_btnMoveActionDown->setEnabled(m_ui->m_listActivatedActions->selectedItems().size() == 1 &&
                                         m_ui->m_listActivatedActions->currentRow() < m_ui->m_listActivatedActions->count() - 1);
-  m_ui->m_btnAddSelectedAction->setEnabled(m_ui->m_listAvailableActions->selectedItems().size() > 0);
+  m_ui->m_btnAddSelectedAction->setEnabled(!m_ui->m_listAvailableActions->selectedItems().empty());
 }
 
 void ToolBarEditor::insertSpacer() {
@@ -256,7 +260,7 @@ void ToolBarEditor::deleteAllActions() {
   QListWidgetItem* taken_item;
   QString data_item;
 
-  while ((taken_item = m_ui->m_listActivatedActions->takeItem(0)) != 0) {
+  while ((taken_item = m_ui->m_listActivatedActions->takeItem(0)) != nullptr) {
     data_item = taken_item->data(Qt::UserRole).toString();
 
     if (data_item != SEPARATOR_ACTION_NAME && data_item != SPACER_ACTION_NAME) {

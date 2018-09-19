@@ -8,7 +8,7 @@
 #include <QPainter>
 #include <QStack>
 
-TextEditorPrinter::TextEditorPrinter() : QPrinter(), m_zoom(0), m_wrapMode(SC_WRAP_WORD) {}
+TextEditorPrinter::TextEditorPrinter() : m_zoom(0), m_wrapMode(SC_WRAP_WORD) {}
 
 int TextEditorPrinter::printRange(TextEditor* editor, int from, int to) {
   // Sanity check.
@@ -33,11 +33,11 @@ int TextEditorPrinter::printRange(TextEditor* editor, int from, int to) {
   // Find the position range.
   long start_pos, end_pos;
 
-  end_pos = editor->length();
-  start_pos = from > 0 ? editor->positionFromLine(from) : 0;
+  end_pos = long(editor->length());
+  start_pos = from > 0 ? long(editor->positionFromLine(from)) : 0;
 
   if (to >= 0) {
-    long to_os = editor->positionFromLine(to + 1);
+    long to_os = long(editor->positionFromLine(to + 1));
 
     if (end_pos > to_os) {
       end_pos = to_os;

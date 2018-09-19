@@ -10,7 +10,7 @@
 #include <QLayout>
 
 EditorTab::EditorTab(TextApplication* text_app, TextEditor* editor)
-  : Tab(text_app->tabWidget()), m_editor(editor), m_icon(QIcon()), m_title(QString()), m_toolTip(QString()) {
+  : Tab(text_app->tabWidget()), m_editor(editor), m_title(QString()), m_toolTip(QString()) {
   QVBoxLayout* lay = new QVBoxLayout(this);
 
   lay->setMargin(0);

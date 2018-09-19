@@ -9,7 +9,7 @@
 #include <QHBoxLayout>
 
 WidgetWithStatus::WidgetWithStatus(QWidget* parent)
-  : QWidget(parent), m_wdgInput(nullptr) {
+  : QWidget(parent), m_status(StatusType::Ok), m_wdgInput(nullptr) {
   m_layout = new QHBoxLayout(this);
   m_btnStatus = new PlainToolButton(this);
   m_btnStatus->setFocusPolicy(Qt::NoFocus);

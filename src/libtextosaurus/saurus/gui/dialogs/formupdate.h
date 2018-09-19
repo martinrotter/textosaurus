@@ -31,7 +31,7 @@ class FormUpdate : public QDialog {
     void startUpdate();
 
     void updateProgress(qint64 bytes_received, qint64 bytes_total);
-    void updateCompleted(QNetworkReply::NetworkError status, QByteArray contents);
+    void updateCompleted(QNetworkReply::NetworkError status, const QByteArray& contents);
     void saveUpdateFile(const QByteArray& file_contents);
 
   private:

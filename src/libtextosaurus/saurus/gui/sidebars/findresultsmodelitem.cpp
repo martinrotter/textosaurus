@@ -5,7 +5,7 @@
 #include <QVariant>
 
 FindResultsModelItem::FindResultsModelItem(QObject* parent)
-  : QObject(parent), m_childItems(QList<FindResultsModelItem*>()), m_parentItem(nullptr) {}
+  : QObject(parent), m_parentItem(nullptr) {}
 
 FindResultsModelItem::~FindResultsModelItem() {
   qDeleteAll(m_childItems);

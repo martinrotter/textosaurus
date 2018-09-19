@@ -11,8 +11,7 @@
 #include <QSettings>
 
 SyntaxHighlighting::SyntaxHighlighting(QObject* parent)
-  : QObject(parent), m_bareFileFilters(QStringList()), m_fileFilters(QStringList()), m_lexers(QList<Lexer>()),
-  m_colorThemes(QList<SyntaxColorTheme>()), m_currentColorThemeIndex(0) {}
+  : QObject(parent), m_currentColorThemeIndex(0) {}
 
 QStringList SyntaxHighlighting::bareFileFilters() {
   if (m_bareFileFilters.isEmpty()) {
@@ -641,7 +640,7 @@ Lexer SyntaxHighlighting::defaultLexer() {
   return lexers().first();
 }
 
-Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL), m_suffices(QStringList()) {}
+Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL) {}
 
 Lexer::Lexer(const QString& name, const QStringList& suffices, int code,
              const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings,

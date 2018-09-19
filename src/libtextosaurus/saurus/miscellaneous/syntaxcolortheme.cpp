@@ -15,10 +15,11 @@ SyntaxColorTheme::SyntaxColorTheme(const QString& name, bool predefined, const Q
   : m_styleColors(styles), m_name(name), m_predefined(predefined) {}
 
 SyntaxColorTheme::SyntaxColorTheme(const SyntaxColorTheme& another) {
+  // FIXME: Is this okay?
   *this = another;
 }
 
-SyntaxColorTheme::SyntaxColorTheme(SyntaxColorTheme&& another)
+SyntaxColorTheme::SyntaxColorTheme(SyntaxColorTheme&& another) noexcept
   : m_styleColors(std::move(another.m_styleColors)), m_name(std::move(another.m_name)), m_predefined(another.predefined()) {}
 
 SyntaxColorThemeComponent SyntaxColorTheme::component(StyleComponents code) {
@@ -108,7 +109,7 @@ QList<SyntaxColorTheme> SyntaxColorTheme::fromSettings(QSettings& settings) {
         theme.setComponent(component, theme_component);
       }
       else {
-        qDebug("Failed to parse key \"%s\" when loading color scheme \"%s\".", qPrintable(key), qPrintable(group));
+        qDebug(R"(Failed to parse key "%s" when loading color scheme "%s".)", qPrintable(key), qPrintable(group));
       }
     }
 

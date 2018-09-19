@@ -9,7 +9,7 @@
 Tab::Tab(TabWidget* tab_widget) : QWidget(tab_widget), m_tabWidget(tab_widget) {}
 
 int Tab::index() const {
-  return m_tabWidget == nullptr ? -1 : m_tabWidget->indexOf(dynamic_cast<QWidget*>(const_cast<Tab*>(this)));
+  return m_tabWidget == nullptr ? -1 : m_tabWidget->indexOf(static_cast<QWidget*>(const_cast<Tab*>(this)));
 }
 
 void Tab::requestVisibility() {

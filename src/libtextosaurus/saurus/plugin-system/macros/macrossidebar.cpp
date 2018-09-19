@@ -20,8 +20,6 @@ MacrosSidebar::MacrosSidebar(MacrosPlugin* plugin, Macros* macros_factory, QWidg
   setWindowTitle(tr("Macros"));
 }
 
-MacrosSidebar::~MacrosSidebar() {}
-
 Qt::DockWidgetArea MacrosSidebar::initialArea() const {
   return Qt::DockWidgetArea::RightDockWidgetArea;
 }

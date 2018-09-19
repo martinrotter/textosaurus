@@ -43,9 +43,9 @@ bool SettingsGui::eventFilter(QObject* obj, QEvent* e) {
   Q_UNUSED(obj)
 
   if (e->type() == QEvent::Drop) {
-    QDropEvent* drop_event = static_cast<QDropEvent*>(e);
+    QDropEvent* drop_event = dynamic_cast<QDropEvent*>(e);
 
-    if (drop_event->keyboardModifiers() != Qt::NoModifier) {
+    if (drop_event != nullptr && drop_event->keyboardModifiers() != Qt::NoModifier) {
       drop_event->setDropAction(Qt::MoveAction);
     }
   }

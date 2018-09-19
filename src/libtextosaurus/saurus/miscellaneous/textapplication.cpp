@@ -611,7 +611,11 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   Q_UNUSED(obj)
 
   if (event->type() == QEvent::Type::Drop) {
-    QDropEvent* drop_event = static_cast<QDropEvent*>(event);
+    QDropEvent* drop_event = dynamic_cast<QDropEvent*>(event);
+
+    if (drop_event == nullptr) {
+      return false;
+    }
 
     if (obj->metaObject()->className() == QSL("FormMain")) {
       // We dropped something to some other widget, probably main window.
@@ -1048,7 +1052,7 @@ void TextApplication::onTabSwitched(int index) {
   updateStatusBarFromEditor(editor);
 }
 
-void TextApplication::onTabIconChanged(QIcon icon) {
+void TextApplication::onTabIconChanged(const QIcon& icon) {
   Tab* tab = qobject_cast<Tab*>(sender());
   int index = m_tabEditors->indexOf(tab);
 

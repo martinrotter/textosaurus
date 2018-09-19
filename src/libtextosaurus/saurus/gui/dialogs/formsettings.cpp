@@ -21,7 +21,7 @@
 #include <QTimer>
 
 FormSettings::FormSettings(QWidget& parent)
-  : QDialog(&parent), m_panels(QList<SettingsPanel*>()), m_settings(*qApp->settings()) {
+  : QDialog(&parent), m_settings(*qApp->settings()) {
   m_ui.setupUi(this);
 
   GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("document-properties")));

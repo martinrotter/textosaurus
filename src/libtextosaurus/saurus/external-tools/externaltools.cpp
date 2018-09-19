@@ -25,7 +25,7 @@
 #include <QRegularExpression>
 
 ExternalTools::ExternalTools(TextApplication* parent)
-  : QObject(parent), m_application(parent), m_predefinedTools(QList<ExternalTool*>()), m_customTools(QList<ExternalTool*>()) {
+  : QObject(parent), m_application(parent) {
   loadPredefinedTools();
 }
 

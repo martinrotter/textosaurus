@@ -17,7 +17,7 @@
 #include <QNetworkReply>
 
 #if defined(Q_OS_WIN)
-#include <windows.h>
+#include <Windows.h>
 #endif
 
 FormUpdate::FormUpdate(QWidget* parent)
@@ -80,11 +80,7 @@ void FormUpdate::checkForUpdates() {
         m_ui.m_txtChanges->setText(m_updateInfo.m_changes);
       }
 
-#if defined(DEBUG)
-      if (true) {
-#else
       if (qApp->system()->isVersionNewer(m_updateInfo.m_availableVersion, APP_VERSION)) {
-#endif
         m_btnUpdate->setVisible(true);
         m_ui.m_lblStatus->setStatus(WidgetWithStatus::StatusType::Ok,
                                     tr("New release available."),
@@ -112,7 +108,7 @@ void FormUpdate::updateProgress(qint64 bytes_received, qint64 bytes_total) {
                                                                                                  bytes_total,
                                                                                                  'f',
                                                                                                  2),
-                                                                                 QString::number(bytes_total / 1000,
+                                                                                 QString::number(bytes_total / 1000.0,
                                                                                                  'f',
                                                                                                  2)),
                                 tr("Downloading update..."));
@@ -173,7 +169,7 @@ void FormUpdate::loadAvailableFiles() {
   m_ui.m_tabInfo->setCurrentIndex(1);
 }
 
-void FormUpdate::updateCompleted(QNetworkReply::NetworkError status, QByteArray contents) {
+void FormUpdate::updateCompleted(QNetworkReply::NetworkError status, const QByteArray& contents) {
   qDebug("Download of application update file was completed with code '%d'.", status);
 
   switch (status) {
@@ -217,7 +213,7 @@ void FormUpdate::startUpdate() {
                                            nullptr,
                                            SW_NORMAL);
 
-      if (exec_result <= (HINSTANCE)32) {
+      if (exec_result <= HINSTANCE(32)) {
         qDebug("External updater was not launched due to error.");
         QMessageBox::critical(this, tr("Cannot Start Installer"), tr("Cannot launch external updater. Update application manually."));
       }

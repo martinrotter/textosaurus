@@ -5,7 +5,7 @@
 #include "definitions/definitions.h"
 #include "saurus/plugin-system/filesystem/filesystemsidebar.h"
 
-FilesystemPlugin::FilesystemPlugin(QObject* parent) : QObject(parent) {}
+FilesystemPlugin::FilesystemPlugin(QObject* parent) : QObject(parent), m_textApp(nullptr), m_settings(nullptr), m_iconFactory(nullptr) {}
 
 QString FilesystemPlugin::name() const {
   return tr("Filesystem");

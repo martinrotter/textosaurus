@@ -6,7 +6,7 @@
 #include "definitions/definitions.h"
 
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), m_lblInfo(new QLabel(this)), m_infoEncoding(QString()),
-  m_infoEol(QString()), m_infoLexer(QString()) {
+  m_infoEol(QString()), m_infoLexer(QString()), m_isActive(false) {
   setSizeGripEnabled(false);
 
   m_lblInfo->setStyleSheet(QSL("QLabel { margin-right: 16px; }"));

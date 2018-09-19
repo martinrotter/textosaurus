@@ -17,7 +17,7 @@ ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false
   m_output(ToolOutput::ReplaceSelectionDocument), m_prompt(QString()), m_shortcut(QString()), m_category(QString()),
   m_name(QString()), m_interpreter(EXT_TOOL_INTERPRETER), m_script(QString()) {}
 
-ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : QObject(parent) {
+ExternalTool::ExternalTool(const ExternalTool& other, QObject* parent) : ExternalTool(parent) {
   setCategory(other.category());
   setInput(other.input());
   setOutput(other.output());
@@ -211,7 +211,7 @@ void ExternalTool::setActionObjectName(const QString& action_obj_name) {
 }
 
 PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
-  : ExternalTool(parent), m_functor(functor) {}
+  : ExternalTool(parent), m_functor(std::move(functor)) {}
 
 void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)

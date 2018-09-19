@@ -15,7 +15,7 @@ class MacrosSidebar : public BaseSidebar {
 
   public:
     explicit MacrosSidebar(MacrosPlugin* plugin, Macros* macros_factory, QWidget* parent = nullptr);
-    virtual ~MacrosSidebar();
+    virtual ~MacrosSidebar() = default;
 
     Qt::DockWidgetArea initialArea() const;
     bool initiallyVisible() const;

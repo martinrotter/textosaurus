@@ -23,7 +23,7 @@ class OutputSidebar : public BaseSidebar {
 
   public:
     explicit OutputSidebar(TextApplication* text_app, QWidget* parent = nullptr);
-    virtual ~OutputSidebar() override;
+    virtual ~OutputSidebar() = default;
 
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;

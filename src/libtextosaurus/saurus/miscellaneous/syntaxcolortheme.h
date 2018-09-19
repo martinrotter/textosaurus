@@ -91,7 +91,7 @@ class SyntaxColorTheme : public QObject {
                               const QMap<StyleComponents,
                                          SyntaxColorThemeComponent>& styles = QMap<StyleComponents, SyntaxColorThemeComponent>());
     SyntaxColorTheme(const SyntaxColorTheme& another);
-    SyntaxColorTheme(SyntaxColorTheme&& another);
+    SyntaxColorTheme(SyntaxColorTheme&& another) noexcept;
     virtual ~SyntaxColorTheme() = default;
 
     SyntaxColorTheme& operator=(const SyntaxColorTheme& other);

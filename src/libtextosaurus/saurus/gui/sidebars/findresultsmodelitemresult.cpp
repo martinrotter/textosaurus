@@ -7,8 +7,8 @@
 #include <QColor>
 #include <QVariant>
 
-FindResultsModelItemResult::FindResultsModelItemResult(const QString& found_text, int line, const QPair<int, int> range, QObject* parent)
-  : FindResultsModelItem(parent), m_resultText(found_text), m_line(line), m_range(range) {}
+FindResultsModelItemResult::FindResultsModelItemResult(QString found_text, int line, const QPair<int, int> range, QObject* parent)
+  : FindResultsModelItem(parent), m_resultText(std::move(found_text)), m_line(line), m_range(range) {}
 
 QVariant FindResultsModelItemResult::data(int role) const {
   switch (role) {

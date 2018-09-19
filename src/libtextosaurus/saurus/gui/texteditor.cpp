@@ -943,8 +943,11 @@ void TextEditor::printPreview(bool black_on_white) {
   QPrintPreviewDialog dialog(&printer, qApp->mainFormWidget());
 
   connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this](QPrinter* prntr) {
-    TextEditorPrinter* sndr = static_cast<TextEditorPrinter*>(prntr);
-    sndr->printRange(this);
+    TextEditorPrinter* sndr = dynamic_cast<TextEditorPrinter*>(prntr);
+
+    if (sndr != nullptr) {
+      sndr->printRange(this);
+    }
   });
 
   dialog.exec();
