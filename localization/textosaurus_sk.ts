@@ -199,7 +199,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="530"/>
         <source>Reverse current line</source>
-        <translation>Obrátiť aktívny riadok</translation>
+        <translation>Obrátiť aktuálny riadok</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="538"/>
@@ -642,7 +642,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="152"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Upravit</translation>
+        <translation>&amp;Upraviť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="156"/>
@@ -1138,17 +1138,17 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="51"/>
         <source>Cannot open file &apos;%1&apos; for reading.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; sa nedá otvoriť na čítanie.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="63"/>
         <source>Cannot open file &apos;%1&apos; for writting.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; sa nedá otvoriť na zápis.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="82"/>
         <source>Cannot open temporary file for writting.</source>
-        <translation type="unfinished"/>
+        <translation>Dočasný súbor sa nedá otvoriť na zápis.</translation>
     </message>
 </context>
 <context>
@@ -1156,27 +1156,27 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="52"/>
         <source>Save Macro</source>
-        <translation type="unfinished"/>
+        <translation>Uložiť makro</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="53"/>
         <source>Enter some name for your macro</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte názov pre makro</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="54"/>
         <source>My new macro</source>
-        <translation type="unfinished"/>
+        <translation>Moje nové makro</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="69"/>
         <source>Macro Name Already Used</source>
-        <translation type="unfinished"/>
+        <translation>Tento názov sa už pre nejaké makro používa</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="70"/>
         <source>Selected macro name is already in use, please select non-empty unique name for each macro.</source>
-        <translation type="unfinished"/>
+        <translation>Zvolený názov makra se už používa, vyberte iné.</translation>
     </message>
 </context>
 <context>
@@ -1184,7 +1184,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="14"/>
         <source>Macros</source>
-        <translation type="unfinished"/>
+        <translation>Makrá</translation>
     </message>
 </context>
 <context>
@@ -1192,47 +1192,47 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="20"/>
         <source>Macros</source>
-        <translation type="unfinished"/>
+        <translation>Makrá</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="42"/>
         <source>Macro Recorder Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Panel nástrojov rekordéra makier</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="47"/>
         <source>Start Recording</source>
-        <translation type="unfinished"/>
+        <translation>Spustiť nahrávanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="48"/>
         <source>Stop Recording</source>
-        <translation type="unfinished"/>
+        <translation>Zastaviť nahrávanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="49"/>
         <source>Play Recorded Macro</source>
-        <translation type="unfinished"/>
+        <translation>Prehrať nahrané makro</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="50"/>
         <source>Save Macro as...</source>
-        <translation type="unfinished"/>
+        <translation>Uložiť makro ako...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="53"/>
         <source>Stored Macros Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Panel nástrojov uložených makier</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="59"/>
         <source>Play Stored Macro</source>
-        <translation type="unfinished"/>
+        <translation>Prehrať uložené makro</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="60"/>
         <source>Remove Selected Macro</source>
-        <translation type="unfinished"/>
+        <translation>Odstrániť vybrané makro</translation>
     </message>
 </context>
 <context>
@@ -1240,22 +1240,22 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="14"/>
         <source>Macros</source>
-        <translation type="unfinished"/>
+        <translation>Makrá</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="39"/>
         <source>My Macros</source>
-        <translation type="unfinished"/>
+        <translation>Moje makrá</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="65"/>
         <source>Recorder</source>
-        <translation type="unfinished"/>
+        <translation>Rekordér</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="83"/>
         <source>Recorded Actions</source>
-        <translation type="unfinished"/>
+        <translation>Nahrané činnosti</translation>
     </message>
 </context>
 <context>
@@ -1263,17 +1263,17 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="23"/>
         <source>Markdown Preview</source>
-        <translation type="unfinished"/>
+        <translation>Náhľad Markdownu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="27"/>
         <source>Refresh Markdown Preview</source>
-        <translation type="unfinished"/>
+        <translation>Obnoviť náhľad Markdownu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="63"/>
         <source>This sidebar displays simple HTML preview of your Markdown source...</source>
-        <translation type="unfinished"/>
+        <translation>Tento bočný panel zobrazuje jednoduchý HTML náhľad vášho Markdown zdrojáku...</translation>
     </message>
 </context>
 <context>
@@ -1281,7 +1281,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/common/gui/messagebox.cpp" line="104"/>
         <source>Do not show this dialog again.</source>
-        <translation type="unfinished"/>
+        <translation>Tento dialóg nabudúce nezobrazovať.</translation>
     </message>
 </context>
 <context>
@@ -1290,100 +1290,100 @@ Môžte ho teraz nainštalovať.</translation>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="22"/>
         <source>protocol error</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>chyba protokolu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="25"/>
         <source>access to content was denied</source>
-        <translation type="unfinished"/>
+        <translation>prístup k obsahu bol odmiestnutý</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="30"/>
         <source>host not found</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>hostiteľ nebol nájdený</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="34"/>
         <source>connection timed out or was cancelled</source>
-        <translation type="unfinished"/>
+        <translation>pripojeniu vypršal časový limit alebo bolo zrušeno</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="40"/>
         <source>connection refused</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>spojenie odmietnuté</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="45"/>
         <source>connection timed out</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>vypršal časový limit pripojenia</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="50"/>
         <source>SSL handshake failed</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>zlyhal handshake SSH</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="56"/>
         <source>proxy server connection refused</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>proxy server spojenia odmietnutý</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="61"/>
         <source>temporary failure</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>dočasné zlyhanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="66"/>
         <source>authentication failed</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>Autentizácia zlyhala</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="71"/>
         <source>proxy authentication required</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>vyžadované overenie proxy</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="76"/>
         <source>proxy server not found</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>proxy server nebol nájdený</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="81"/>
         <source>no errors</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>žiadne chyby</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="86"/>
         <source>unknown content</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>neznámy obsah</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="91"/>
         <source>content not found</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>obsah nebol nájdený</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="94"/>
         <source>invalid operation, maybe input is too big</source>
-        <translation type="unfinished"/>
+        <translation>neplatná operácia, možno je vstup príliš veľký</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="99"/>
         <source>unknown error</source>
         <extracomment>Network status.</extracomment>
-        <translation type="unfinished"/>
+        <translation>neznáma chyba</translation>
     </message>
 </context>
 <context>
@@ -1396,7 +1396,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="118"/>
         <source>This sidebar displays output of external tools and some other critical information...</source>
-        <translation type="unfinished"/>
+        <translation>Tento bočný panel zobrazuje výstup z externých nástrojov a niektoré ďalšie kritické informácie...</translation>
     </message>
 </context>
 <context>
@@ -1413,12 +1413,12 @@ Môžte ho teraz nainštalovať.</translation>
         <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="82"/>
         <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="95"/>
         <source>Parsing of JSON document failed.</source>
-        <translation type="unfinished"/>
+        <translation>Analýza JSON dokumentu se nepodarila.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="116"/>
         <source>XML is well-formed.</source>
-        <translation type="unfinished"/>
+        <translation>XML má správny formát.</translation>
     </message>
 </context>
 <context>
@@ -1426,7 +1426,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="33"/>
         <source>External Web Browser</source>
-        <translation type="unfinished"/>
+        <translation>Externý internetový prohliadač</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
@@ -1436,7 +1436,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="42"/>
         <source>Use Custom External Web Browser</source>
-        <translation type="unfinished"/>
+        <translation>Použiť vlastný externý webový prehliadač</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="39"/>
@@ -1446,41 +1446,41 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="54"/>
         <source>Web browser executable</source>
-        <translation type="unfinished"/>
+        <translation>Spúšťač prehliadača</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="66"/>
         <source>Executable file of web browser</source>
-        <translation type="unfinished"/>
+        <translation>Spustiteľný súbor internetového prehliadača</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="73"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="169"/>
         <source>&amp;Browse</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Prechádzať</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="82"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="178"/>
         <source>Executable parameters</source>
-        <translation type="unfinished"/>
+        <translation>Dodatočné parametre spúšťača</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="89"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="185"/>
         <source>Parameters to executable</source>
-        <translation type="unfinished"/>
+        <translation>Dodatočné parametre spúšťača</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="96"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="192"/>
         <source>Use sample arguments for</source>
-        <translation type="unfinished"/>
+        <translation>Použiť odporúčané argumenty pre</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="107"/>
         <source>Select browser</source>
-        <translation type="unfinished"/>
+        <translation>Vybrať prehliadač</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="115"/>
@@ -1490,27 +1490,27 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="129"/>
         <source>External E-mail Client</source>
-        <translation type="unfinished"/>
+        <translation>Externý e-mailový klient</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="138"/>
         <source>Use Custom External E-mail Client</source>
-        <translation type="unfinished"/>
+        <translation>Použiť vlastný externý e-mailový klient</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="150"/>
         <source>E-mail client executable</source>
-        <translation type="unfinished"/>
+        <translation>Spúšťač e-mailového klienta</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="162"/>
         <source>Executable file of e-mail client</source>
-        <translation type="unfinished"/>
+        <translation>Spúšťač e-mailového klienta</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="203"/>
         <source>Select client</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte klienta</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="215"/>
@@ -1527,12 +1527,12 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="237"/>
         <source>Host</source>
-        <translation type="unfinished"/>
+        <translation>Hostiteľ</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="255"/>
         <source>Hostname or IP of your proxy server</source>
-        <translation type="unfinished"/>
+        <translation>Názov hostiteľa alebo IP serveru proxy</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="262"/>
@@ -1542,12 +1542,12 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="290"/>
         <source>Username</source>
-        <translation type="unfinished"/>
+        <translation>Meno používateľa</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="306"/>
         <source>Your username for proxy server authentication</source>
-        <translation type="unfinished"/>
+        <translation>Vaše meno používateľa na overenie proxy servra</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="313"/>
@@ -1557,22 +1557,22 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="332"/>
         <source>Your password for proxy server authentication</source>
-        <translation type="unfinished"/>
+        <translation>Heslo na overenie proxy servra</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="342"/>
         <source>Display password</source>
-        <translation type="unfinished"/>
+        <translation>Zobraziť heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="349"/>
         <source>Note that these settings are applied only on newly established connections.</source>
-        <translation type="unfinished"/>
+        <translation>Tieto nastavenia platia len pre novovytvorené spojenia.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="53"/>
         <source>Select web browser executable</source>
-        <translation type="unfinished"/>
+        <translation>Vybrať spúšťač internetového prehliadača</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="58"/>
@@ -1581,23 +1581,23 @@ Môžte ho teraz nainštalovať.</translation>
         <extracomment>File filter for external browser selection dialog.
 ----------
 File filter for external e-mail selection dialog.</extracomment>
-        <translation type="unfinished"/>
+        <translation>Spustiteľné súbory (*)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="60"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="108"/>
         <source>Executables (*.*)</source>
-        <translation type="unfinished"/>
+        <translation>Spustiteľné súbory (*. *)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="101"/>
         <source>Select e-mail executable</source>
-        <translation type="unfinished"/>
+        <translation>Vybrať spúšťač e-mailového klienta</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="120"/>
         <source>Opera 12 or older</source>
-        <translation type="unfinished"/>
+        <translation>Opera 12 alebo staršia</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="128"/>
@@ -1607,12 +1607,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="133"/>
         <source>No proxy</source>
-        <translation type="unfinished"/>
+        <translation>Nepoužívať proxy server</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="134"/>
         <source>System proxy</source>
-        <translation type="unfinished"/>
+        <translation>Systémový proxy server</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="135"/>
@@ -1630,57 +1630,57 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="33"/>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation>Všeobecné</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="54"/>
         <source>Reload externally edited files automatically</source>
-        <translation type="unfinished"/>
+        <translation>Automaticky znovu načítavať externé upravované súbory </translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="61"/>
         <source>Line spacing</source>
-        <translation type="unfinished"/>
+        <translation>Riadkovanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="98"/>
         <source>Indentation</source>
-        <translation type="unfinished"/>
+        <translation>Odsadzovanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="104"/>
         <source>Tab size</source>
-        <translation type="unfinished"/>
+        <translation>Šírka tabelátora</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="114"/>
         <source>Indent size</source>
-        <translation type="unfinished"/>
+        <translation>Šírka odsadzovania</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="144"/>
         <source>Indent with</source>
-        <translation type="unfinished"/>
+        <translation>Odsadzovať pomocou</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="170"/>
         <source>.LOG Feature</source>
-        <translation type="unfinished"/>
+        <translation>Funkcia .LOG</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="176"/>
         <source>Timestamp format</source>
-        <translation type="unfinished"/>
+        <translation>Formát časovej pečiatky</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="213"/>
         <source>Fonts &amp;&amp; Colors</source>
-        <translation type="unfinished"/>
+        <translation>Písma &amp;&amp; farby</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="219"/>
         <source>Colors</source>
-        <translation type="unfinished"/>
+        <translation>Farby</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="231"/>
@@ -1690,32 +1690,32 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="237"/>
         <source>&amp;Change</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Zmeniť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="244"/>
         <source>Text editor font</source>
-        <translation type="unfinished"/>
+        <translation>Písmo textového editora</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="18"/>
         <source>pixels</source>
-        <translation type="unfinished"/>
+        <translation>pixelov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="20"/>
         <source>Spaces</source>
-        <translation type="unfinished"/>
+        <translation>Medzery</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="21"/>
         <source>Tabs</source>
-        <translation type="unfinished"/>
+        <translation>Tabelátor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="89"/>
         <source>Select new text editor main font</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte nové hlavné písmo textového editora</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.h" line="29"/>
@@ -1728,42 +1728,42 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="47"/>
         <source>Add new external tool</source>
-        <translation type="unfinished"/>
+        <translation>Pridať nový externý nástroj</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="57"/>
         <source>Remove selected external tool</source>
-        <translation type="unfinished"/>
+        <translation>Odstrániť vybratý externý nástroj</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="93"/>
         <source>Full-blown script goes here</source>
-        <translation type="unfinished"/>
+        <translation>Sem vložte celý obsah skriptu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="100"/>
         <source>Title</source>
-        <translation type="unfinished"/>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="110"/>
         <source>External tool title</source>
-        <translation type="unfinished"/>
+        <translation>Názov externého nástroja</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="117"/>
         <source>Category</source>
-        <translation type="unfinished"/>
+        <translation>Kategória</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="127"/>
         <source>Optional category name</source>
-        <translation type="unfinished"/>
+        <translation>Voliteľný názov kategórie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="134"/>
         <source>Shortcut</source>
-        <translation type="unfinished"/>
+        <translation>Klávesová skratka</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="147"/>
@@ -1778,22 +1778,22 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="173"/>
         <source>Interpreter</source>
-        <translation type="unfinished"/>
+        <translation>Interprét</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="183"/>
         <source>Interpreter for the script</source>
-        <translation type="unfinished"/>
+        <translation>Interpret pre skript</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="190"/>
         <source>It is generally better to have your interpreters available via your PATH environment variable, so that simply typing in &quot;bash&quot; or &quot;python&quot; could work.</source>
-        <translation type="unfinished"/>
+        <translation>Všeobecne je lepšie mať vaše interpréty skriptov dostupné prostredníctvom premennej prostredia PATH, takže stačí jednoducho zadať &quot;bash&quot; nebo &quot;python&quot; a všetko bude fungovať.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="203"/>
         <source>Optional prompt text for input</source>
-        <translation type="unfinished"/>
+        <translation>Voliteľný prompt text pre vstup</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="210"/>
@@ -1803,77 +1803,77 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="21"/>
         <source>Current selection/document</source>
-        <translation type="unfinished"/>
+        <translation>Aktuálny výber/dokument</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="22"/>
         <source>Current line</source>
-        <translation type="unfinished"/>
+        <translation>Aktuálny riadok</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="23"/>
         <source>Saved file path</source>
-        <translation type="unfinished"/>
+        <translation>Cesta k uloženému súboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="24"/>
         <source>Ask user for input</source>
-        <translation type="unfinished"/>
+        <translation>Opýtať sa používateľa na vstup</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="25"/>
         <source>No input</source>
-        <translation type="unfinished"/>
+        <translation>Žiadny vstup</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="27"/>
         <source>Replace current selection/document</source>
-        <translation type="unfinished"/>
+        <translation>Nahradiť aktuálny výber/dokument</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="28"/>
         <source>Replace current line</source>
-        <translation type="unfinished"/>
+        <translation>Nahradiť aktuálny riadok</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="29"/>
         <source>Insert at cursor position</source>
-        <translation type="unfinished"/>
+        <translation>Vložiť na pozíciu kurzoru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="30"/>
         <source>Dump to output window</source>
-        <translation type="unfinished"/>
+        <translation>Vložiť do bočného panelu &quot;Výstup&quot;</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="31"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"/>
+        <translation>Kopírovať do schránky</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="32"/>
         <source>New file</source>
-        <translation type="unfinished"/>
+        <translation>Nový súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="33"/>
         <source>Reload file</source>
-        <translation type="unfinished"/>
+        <translation>Znovu načítať súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="34"/>
         <source>No output</source>
-        <translation type="unfinished"/>
+        <translation>Žiadny výstup</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="106"/>
         <source>New tool</source>
-        <translation type="unfinished"/>
+        <translation>Nový externý nástroj</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.h" line="38"/>
         <source>External Tools</source>
-        <translation type="unfinished"/>
+        <translation>Externé nástroje</translation>
     </message>
 </context>
 <context>
@@ -1881,22 +1881,22 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="29"/>
         <source>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</source>
-        <translation type="unfinished"/>
+        <translation>Odstrániť zbytočný kľúč registra Trolltech (HKCU\Software\Trolltech) pri ukončení programu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="36"/>
         <source>Restore previous session</source>
-        <translation type="unfinished"/>
+        <translation>Obnoviť predchádzajúcu reláciu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="43"/>
         <source>Every unsaved text will get remembered until next launch and all files will be reopened too.</source>
-        <translation type="unfinished"/>
+        <translation>Každý neuložený dokument bude uložený do ďalšieho spustenia programu a všetky súbory budú opäť otvorené.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.h" line="26"/>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation>Všeobecné</translation>
     </message>
 </context>
 <context>
@@ -1904,32 +1904,32 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="36"/>
         <source>Icons &amp;&amp; Skins</source>
-        <translation type="unfinished"/>
+        <translation>Ikony &amp;&amp; skiny</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="75"/>
         <source>Icon theme</source>
-        <translation type="unfinished"/>
+        <translation>Téma ikon</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="88"/>
         <source>Style</source>
-        <translation type="unfinished"/>
+        <translation>Štýl</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="101"/>
         <source>Enable Tray Icon</source>
-        <translation type="unfinished"/>
+        <translation>Povoliť tray ikonu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="113"/>
         <source>Hide main window when minimized</source>
-        <translation type="unfinished"/>
+        <translation>Skryť hlavné okno pri minimalizácii</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="120"/>
         <source>Enable tray icon balloon notifications</source>
-        <translation type="unfinished"/>
+        <translation>Povoliť oznámenia z tray ikony</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="110"/>
@@ -1944,7 +1944,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
         <source>Hide main window when closed (do not quit application)</source>
-        <translation type="unfinished"/>
+        <translation>Skryť hlavné okno pri zatvorení (neukončovať program)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="145"/>
@@ -1954,82 +1954,82 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="154"/>
         <source>Close Tabs with</source>
-        <translation type="unfinished"/>
+        <translation>Zatvárať karty</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="160"/>
         <source>Left mouse button double-click</source>
-        <translation type="unfinished"/>
+        <translation>dvojklikom ľavého tlačidla myši</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="167"/>
         <source>Middle mouse button single-click</source>
-        <translation type="unfinished"/>
+        <translation>kliknutím stredného tlačidla myši</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="177"/>
         <source>Open new tabs with left mouse button double-click on tab bar</source>
-        <translation type="unfinished"/>
+        <translation>Otvárať nové karty dvojklikom ľavého tlačítka myši na panel kariet</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="185"/>
         <source>Toolbars</source>
-        <translation type="unfinished"/>
+        <translation>Panely nástrojov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="198"/>
         <source>Main toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Hlavný panel nástrojov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="238"/>
         <source>Toolbar button style</source>
-        <translation type="unfinished"/>
+        <translation>Štýl tlačidiel na paneli nástrojov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="248"/>
         <source>Select toolbar to edit</source>
-        <translation type="unfinished"/>
+        <translation>Vybrať panel nástrojov na úpravu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="65"/>
         <source>no icon theme/system icon theme</source>
-        <translation type="unfinished"/>
+        <translation>žiadna, alebo systémová téma ikon</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="90"/>
         <source>(Tray icon is not available.)</source>
-        <translation type="unfinished"/>
+        <translation>(Tray ikona nie je dostupná.)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="113"/>
         <source>Icon only</source>
-        <translation type="unfinished"/>
+        <translation>Len ikony</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="114"/>
         <source>Text only</source>
-        <translation type="unfinished"/>
+        <translation>Len text</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="115"/>
         <source>Text beside icon</source>
-        <translation type="unfinished"/>
+        <translation>Text vedľa ikon</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="116"/>
         <source>Text under icon</source>
-        <translation type="unfinished"/>
+        <translation>Text pod ikonami</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="117"/>
         <source>Follow OS style</source>
-        <translation type="unfinished"/>
+        <translation>Použiť štýl operačného systému</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.h" line="29"/>
         <source>User Interface</source>
-        <translation type="unfinished"/>
+        <translation>Používateľské rozhranie</translation>
     </message>
 </context>
 <context>
@@ -2047,7 +2047,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.h" line="26"/>
         <source>Localization</source>
-        <translation type="unfinished"/>
+        <translation>Lokalizácia</translation>
     </message>
 </context>
 <context>
@@ -2060,12 +2060,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.ui" line="74"/>
         <source>Go to &amp;Website</source>
-        <translation type="unfinished"/>
+        <translation>Prejsť na &amp;webstránku</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Meno</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
@@ -2080,12 +2080,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="28"/>
         <source>Plugins</source>
-        <translation>Zásuvné moduly</translation>
+        <translation>Pluginy</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="72"/>
         <source>no plugin selected</source>
-        <translation type="unfinished"/>
+        <translation>nie je vybratý žiadny plugin</translation>
     </message>
 </context>
 <context>
@@ -2093,7 +2093,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsshortcuts.h" line="26"/>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"/>
+        <translation>Klávesové skratky</translation>
     </message>
 </context>
 <context>
@@ -2101,17 +2101,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="22"/>
         <source>Reset to original shortcut.</source>
-        <translation type="unfinished"/>
+        <translation>Obnoviť pôvodnú klávesovú skratku.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="28"/>
         <source>Clear current shortcut.</source>
-        <translation type="unfinished"/>
+        <translation>Vymazať aktuálnu klávesovú skratku.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="33"/>
         <source>Click and hit new shortcut.</source>
-        <translation type="unfinished"/>
+        <translation>Kliknite a zvoľte novú skratku.</translation>
     </message>
 </context>
 <context>
@@ -2124,22 +2124,22 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="32"/>
         <source>Customize Substyle</source>
-        <translation type="unfinished"/>
+        <translation>Upraviť subštýl</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="48"/>
         <source>Make &amp;Foreground Transparent</source>
-        <translation type="unfinished"/>
+        <translation>Spraviť po&amp;predie priehľadné</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="62"/>
         <source>Make &amp;Background Transparent</source>
-        <translation type="unfinished"/>
+        <translation>Spraviť po&amp;zadie priehľadné</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="77"/>
         <source>Bold</source>
-        <translation type="unfinished"/>
+        <translation>Hrubé</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="89"/>
@@ -2149,34 +2149,36 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="101"/>
         <source>Underline</source>
-        <translation type="unfinished"/>
+        <translation>Podčiarknuté</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="124"/>
         <source>&amp;Create New Theme...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Vytvoriť vlastnú tému farieb...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="131"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Vymazať</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="169"/>
         <source>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
 
 Customizing too many substyles may lead to bad performance when handling big files.</source>
-        <translation type="unfinished"/>
+        <translation>Ak si neupravíte tento subštýl, potom budú jeho hodnoty odvodené ze základného subštýlu.
+
+Úprava príliš mnoho subštýlov môže viesť k zhoršenému výkonu programu.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="25"/>
         <source>Base color (fg color only)</source>
-        <translation type="unfinished"/>
+        <translation>Základná farba (len popredie)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="26"/>
         <source>Comments (both oneline and multiline)</source>
-        <translation type="unfinished"/>
+        <translation>Komentáre (jedno aj viacriadkové)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="27"/>
@@ -2186,7 +2188,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="28"/>
         <source>Strings and character literals</source>
-        <translation type="unfinished"/>
+        <translation>Reťazce a znakové literály</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="29"/>
@@ -2201,22 +2203,22 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="31"/>
         <source>Keywords</source>
-        <translation type="unfinished"/>
+        <translation>Kľúčové slová</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="32"/>
         <source>Secondary keywords</source>
-        <translation type="unfinished"/>
+        <translation>Sekundárne kľúčové slová</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="33"/>
         <source>Preprocessor directives</source>
-        <translation type="unfinished"/>
+        <translation>Direktívy preprocesora</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="34"/>
         <source>Regular expressions</source>
-        <translation type="unfinished"/>
+        <translation>Regulárne výrazy</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="35"/>
@@ -2226,7 +2228,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="36"/>
         <source>Plain data</source>
-        <translation type="unfinished"/>
+        <translation>Textové dáta</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="37"/>
@@ -2236,42 +2238,42 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="38"/>
         <source>Margin (line numbers, etc.)</source>
-        <translation type="unfinished"/>
+        <translation>Okraj (čísla riadkov, atď.)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="42"/>
         <source>Control characters (newline placeholder)</source>
-        <translation type="unfinished"/>
+        <translation>Ovládacie znaky (značky nových riadkov)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="43"/>
         <source>Indent guides</source>
-        <translation type="unfinished"/>
+        <translation>Odsadzovacie linky</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="44"/>
         <source>URL highlighting</source>
-        <translation type="unfinished"/>
+        <translation>Zvýrazňovanie URL adries</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="45"/>
         <source>Occurrences highlighting</source>
-        <translation type="unfinished"/>
+        <translation>Zvýrazňovanie výskytov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="49"/>
         <source>Paper background (bg color only)</source>
-        <translation type="unfinished"/>
+        <translation>Farba papiera (len farba pozadia)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="50"/>
         <source>Current line background (bg color only)</source>
-        <translation type="unfinished"/>
+        <translation>Pozadie aktuálneho riadka (len farba pozadia)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="97"/>
         <source>%1 (built-in theme)</source>
-        <translation type="unfinished"/>
+        <translation>%1 (zabudovaná téma)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="98"/>
@@ -2304,7 +2306,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="204"/>
         <source> files (*</source>
-        <translation type="unfinished"/>
+        <translation>súbory (*</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="214"/>
@@ -2339,7 +2341,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="93"/>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="1002"/>
         <source>New text file</source>
-        <translation type="unfinished"/>
+        <translation>Nový textový súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="202"/>
@@ -2359,7 +2361,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="835"/>
         <source>Unsaved text file</source>
-        <translation type="unfinished"/>
+        <translation>Neuložený textový súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="835"/>
@@ -2369,7 +2371,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="842"/>
         <source>Open file</source>
-        <translation type="unfinished"/>
+        <translation>Otvoriť súbor</translation>
     </message>
 </context>
 <context>
@@ -2432,7 +2434,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="323"/>
         <source>Save File as</source>
-        <translation type="unfinished"/>
+        <translation>Uložiť súbor ako</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="370"/>
@@ -2448,7 +2450,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="788"/>
         <source>Cannot Open File</source>
-        <translation type="unfinished"/>
+        <translation>Nedá sa otvoriť súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="789"/>
@@ -2458,7 +2460,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="797"/>
         <source>Cannot read file</source>
-        <translation type="unfinished"/>
+        <translation>Nedá sa prečítať súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="798"/>
@@ -2468,7 +2470,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
         <source>Loading Big File</source>
-        <translation type="unfinished"/>
+        <translation>Načítava sa veľký säbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="833"/>
@@ -2514,12 +2516,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="112"/>
         <source>Insert separator</source>
-        <translation type="unfinished"/>
+        <translation>Vložiť oddeľovač</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="125"/>
         <source>Insert spacer</source>
-        <translation type="unfinished"/>
+        <translation>Vložiť medzeru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="145"/>
