@@ -10,6 +10,7 @@
     <file>graphics/textosaurus.png</file>
     <file>graphics/misc/flags/cs.png</file>
     <file>graphics/misc/flags/en.png</file>
+    <file>graphics/misc/flags/sk.png</file>
     <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
     <file>../localization/textosaurus_en.qm</file>
     <file>../localization/textosaurus_cs.qm</file>

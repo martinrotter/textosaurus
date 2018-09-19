@@ -10,7 +10,7 @@ Textosaurus
 
 Textosaurus is simple cross-platform UTF-8 text editor based on Qt and Scintilla. Textosaurus aims to provide similar workflow as [Notepad++](https://notepad-plus-plus.org) does.
 
-You can support author of Textosaurus [here](https://martinrotter.github.io/donate). Textosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com).
+You can support author of Textosaurus [here](https://martinrotter.github.io/donate). Textosaurus icon was created by [http://www.fasticon.com](http://www.fasticon.com). Flag icons are provided by [IconDrawer](http://www.icondrawer.com/flag-icons.php).
 
 ### [Translations](https://www.transifex.com/martinrotter/textosaurus/dashboard/) are welcomed!!!
 
