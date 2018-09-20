@@ -15,6 +15,7 @@ class EditorTab : public Tab {
     explicit EditorTab(TextApplication* text_app, TextEditor* editor);
     explicit EditorTab(TextApplication* text_app);
 
+    virtual QMenu* contextMenu() const override;
     virtual TextEditor* primaryEditor() const override;
     virtual QList<TextEditor*> allEditors() const override;
     virtual int countOfEditors() const override;

@@ -36,6 +36,23 @@ EditorTab::EditorTab(TextApplication* text_app, TextEditor* editor)
 EditorTab::EditorTab(TextApplication* text_app)
   : EditorTab(text_app, new TextEditor(text_app, this)) {}
 
+QMenu* EditorTab::contextMenu() const {
+  QMenu* menu = new QMenu();
+  QAction* act_read_only = menu->addAction(qApp->icons()->fromTheme(QSL("lock")), tr("Read-Only Mode"), [this](bool toggle) {
+    m_editor->setReadOnly(toggle);
+  });
+
+  act_read_only->setCheckable(true);
+  act_read_only->setChecked(m_editor->readOnly());
+
+  menu->addAction(qApp->icons()->fromTheme(QSL("document-save")), tr("Save"), [this]() {
+    bool ok;
+    m_editor->save(&ok);
+  });
+
+  return menu;
+}
+
 TextEditor* EditorTab::primaryEditor() const {
   return m_editor;
 }

@@ -107,7 +107,6 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
                           const QByteArray& text, int line, int foldNow, int foldPrev);
     void onTabSwitched(int index = -1);
     void reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all);
-    void showTabContextMenu(const QPoint& point);
     void setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled);
 
     // External tools.

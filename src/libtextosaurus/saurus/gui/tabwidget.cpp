@@ -27,6 +27,8 @@ TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
 
 void TabWidget::createConnections() {
   connect(tabBar(), &TabBar::tabCloseRequested, this, &TabWidget::closeTab);
+  connect(tabBar(), &TabBar::customContextMenuRequested, this, &TabWidget::showTabContextMenu);
+
 }
 
 bool TabWidget::closeTab(int index) {
@@ -106,6 +108,24 @@ bool TabWidget::removeTab(int index, bool clear_from_memory) {
   }
 
   return closed;
+}
+
+void TabWidget::showTabContextMenu(const QPoint& point) {
+  const int tab_index = tabBar()->tabAt(point);
+
+  if (tab_index >= 0) {
+    QMenu* menu = tabAt(tab_index)->contextMenu();
+
+    if (menu != nullptr) {
+      // Add common menu items.
+      menu->addAction(qApp->icons()->fromTheme(QSL("window-close")), tr("Close"), [tab_index, this]() {
+        closeTab(tab_index);
+      });
+
+      menu->exec(tabBar()->mapToGlobal(point));
+      connect(menu, &QMenu::aboutToHide, menu, &QMenu::deleteLater);
+    }
+  }
 }
 
 void TabWidget::makeTabVisible(Tab* tab) {

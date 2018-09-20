@@ -7,6 +7,7 @@
 
 #include <QIcon>
 #include <QList>
+#include <QMenu>
 
 class TextEditor;
 class TabWidget;
@@ -20,6 +21,10 @@ class Tab : public QWidget {
 
   public:
     explicit Tab(TabWidget* tab_widget);
+
+    // Returns context menu.
+    // NOTE: Caller must take ownership of the menu.
+    virtual QMenu* contextMenu() const = 0;
 
     // Returns primary editor.
     virtual TextEditor* primaryEditor() const = 0;

@@ -189,33 +189,6 @@ void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, boo
   }
 }
 
-void TextApplication::showTabContextMenu(const QPoint& point) {
-  QMenu menu;
-  const int tab_index = m_tabEditors->tabBar()->tabAt(point);
-
-  if (tab_index >= 0) {
-    QAction* act_read_only = menu.addAction(qApp->icons()->fromTheme(QSL("lock")), tr("Read-Only Mode"), [tab_index, this](bool toggle) {
-      m_tabEditors->textEditorAt(tab_index)->setReadOnly(toggle);
-    });
-
-    act_read_only->setCheckable(true);
-    act_read_only->setChecked(m_tabEditors->textEditorAt(tab_index)->readOnly());
-
-    menu.addAction(qApp->icons()->fromTheme(QSL("document-save")), tr("Save"), [tab_index, this]() {
-      bool ok;
-      m_tabEditors->textEditorAt(tab_index)->save(&ok);
-    });
-    menu.addAction(qApp->icons()->fromTheme(QSL("window-close")), tr("Close"), [tab_index, this]() {
-      m_tabEditors->closeTab(tab_index);
-    });
-  }
-  else {
-    menu.addAction(m_actionNoAction);
-  }
-
-  menu.exec(m_tabEditors->tabBar()->mapToGlobal(point));
-}
-
 void TextApplication::setCurrentEditorAutoIndentEnabled(bool auto_indent_enabled) {
   TextEditor* editor = tabWidget()->currentEditor();
 
@@ -361,7 +334,6 @@ void TextApplication::onEditorReloaded() {
 }
 
 void TextApplication::createConnections() {
-  connect(m_tabEditors->tabBar(), &TabBar::customContextMenuRequested, this, &TextApplication::showTabContextMenu);
   connect(m_mainForm, &FormMain::closeRequested, this, &TextApplication::quit);
 
   // Misc connections.

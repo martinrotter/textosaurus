@@ -62,6 +62,7 @@ class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
     void createConnections();
 
   private slots:
+    void showTabContextMenu(const QPoint& point);
 
     // Changes icon/text of the tab.
     void changeTitle(int index, const QString& new_title);
