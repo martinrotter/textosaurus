@@ -43,6 +43,8 @@ class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
     QList<TextEditor*> editors()  const;
     QList<Tab*> tabs() const;
 
+    Tab* tabWithFile(const QString& file_path) const;
+
     // Returns tab bar.
     TabBar* tabBar() const;
 

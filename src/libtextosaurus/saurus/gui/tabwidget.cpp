@@ -211,6 +211,20 @@ QList<Tab*> TabWidget::tabs() const {
   return editors;
 }
 
+Tab* TabWidget::tabWithFile(const QString& file_path) const {
+  for (int i = 0; i < count(); i++) {
+    Tab* edit = tabAt(i);
+
+    if (edit != nullptr &&
+        edit->primaryEditor() != nullptr &&
+        QFileInfo(edit->primaryEditor()->filePath()) == QFileInfo(file_path)) {
+      return edit;
+    }
+  }
+
+  return nullptr;
+}
+
 void TabWidget::onTabRequestedVisibility() {
   makeTabVisible(qobject_cast<Tab*>(sender()));
 }

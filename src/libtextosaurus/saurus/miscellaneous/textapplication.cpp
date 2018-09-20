@@ -66,7 +66,15 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
+  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+
+  if (tab_already_opened_file != nullptr) {
+    m_tabEditors->setCurrentWidget(tab_already_opened_file);
+    tab_already_opened_file->primaryEditor()->viewport()->setFocus();
+    return tab_already_opened_file->primaryEditor();
+  }
+
+  TextEditor* new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
     if (!restoring_session && m_tabEditors->hasOnlyOneEmptyEditor()) {
