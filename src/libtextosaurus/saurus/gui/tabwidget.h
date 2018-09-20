@@ -62,6 +62,7 @@ class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
     void createConnections();
 
   private slots:
+    void onTabRequestedVisibility();
     void showTabContextMenu(const QPoint& point);
 
     // Changes icon/text of the tab.
@@ -70,6 +71,7 @@ class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
 
   private:
     void indentTabText(int index);
+    void prepareNewTab(int index);
 };
 
 inline TabBar* TabWidget::tabBar() const {

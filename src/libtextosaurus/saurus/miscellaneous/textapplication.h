@@ -99,7 +99,6 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
 
     void onEditorSaved();
     void onEditorReloaded();
-    void onTabRequestedVisibility();
 
     void onTabIconChanged(const QIcon& icon);
     void onTabTitleChanged(const QString& title, const QString& tool_tip);

@@ -92,7 +92,6 @@ int TextApplication::addTextEditor(TextEditor* editor) {
 
   connect(tab, &Tab::iconChanged, this, &TextApplication::onTabIconChanged);
   connect(tab, &Tab::titleChanged, this, &TextApplication::onTabTitleChanged);
-  connect(tab, &Tab::visibilityRequested, this, &TextApplication::onTabRequestedVisibility);
 
   return m_tabEditors->addTab(tab, QIcon(), tab->title());
 }
@@ -235,10 +234,6 @@ void TextApplication::updateEolMenu(int eol_mode) {
     default:
       break;
   }
-}
-
-void TextApplication::onTabRequestedVisibility() {
-  m_tabEditors->makeTabVisible(qobject_cast<Tab*>(sender()));
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {
@@ -860,7 +855,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
 void TextApplication::updateStatusBarFromEditor(TextEditor* editor) {
   if (editor == tabWidget()->currentEditor()) {
     if (editor != nullptr) {
-      m_statusBar->setEol(editor->eOLMode());
+      m_statusBar->setEol(int(editor->eOLMode()));
       m_statusBar->setEncoding(editor->encoding());
       m_statusBar->setFileType(editor->lexer().m_name);
     }

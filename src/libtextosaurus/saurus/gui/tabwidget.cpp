@@ -211,11 +211,20 @@ QList<Tab*> TabWidget::tabs() const {
   return editors;
 }
 
+void TabWidget::onTabRequestedVisibility() {
+  makeTabVisible(qobject_cast<Tab*>(sender()));
+}
+
+void TabWidget::prepareNewTab(int index) {
+  tabBar()->setupTabControls(index);
+  indentTabText(index);
+  connect(tabAt(index), &Tab::visibilityRequested, this, &TabWidget::onTabRequestedVisibility);
+}
+
 int TabWidget::addTab(Tab* widget, const QIcon& icon, const QString& label) {
   const int index = QTabWidget::addTab(widget, icon, label);
 
-  tabBar()->setupTabControls(index);
-  indentTabText(index);
+  prepareNewTab(index);
 
   return index;
 }
@@ -223,8 +232,7 @@ int TabWidget::addTab(Tab* widget, const QIcon& icon, const QString& label) {
 int TabWidget::addTab(Tab* widget, const QString& label) {
   const int index = QTabWidget::addTab(widget, label);
 
-  tabBar()->setupTabControls(index);
-  indentTabText(index);
+  prepareNewTab(index);
 
   return index;
 }
@@ -232,8 +240,7 @@ int TabWidget::addTab(Tab* widget, const QString& label) {
 int TabWidget::insertTab(int index, Tab* widget, const QIcon& icon, const QString& label) {
   const int tab_index = QTabWidget::insertTab(index, widget, icon, label);
 
-  tabBar()->setupTabControls(tab_index);
-  indentTabText(index);
+  prepareNewTab(index);
 
   return tab_index;
 }
@@ -241,8 +248,7 @@ int TabWidget::insertTab(int index, Tab* widget, const QIcon& icon, const QStrin
 int TabWidget::insertTab(int index, Tab* widget, const QString& label) {
   const int tab_index = QTabWidget::insertTab(index, widget, label);
 
-  tabBar()->setupTabControls(tab_index);
-  indentTabText(index);
+  prepareNewTab(index);
 
   return tab_index;
 }
