@@ -108,6 +108,23 @@ bool TabWidget::removeTab(int index, bool clear_from_memory) {
   return closed;
 }
 
+void TabWidget::makeTabVisible(Tab* tab) {
+  if (tab != nullptr) {
+    setCurrentWidget(tab);
+  }
+}
+
+void TabWidget::makeEditorVisible(TextEditor* editor) {
+  if (editor != nullptr) {
+    setCurrentIndex(indexOfEditor(editor));
+  }
+}
+
+bool TabWidget::hasOnlyOneEmptyEditor() const {
+  return count() == 1 && !textEditorAt(0)->modify() &&
+         textEditorAt(0)->length() == 0 && textEditorAt(0)->filePath().isEmpty();
+}
+
 TextEditor* TabWidget::currentEditor() const {
   return textEditorAt(currentIndex());
 }

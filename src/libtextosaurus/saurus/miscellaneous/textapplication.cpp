@@ -44,14 +44,12 @@ TextApplication::TextApplication(QObject* parent)
 
   // Hook ext. tools early.
   connect(m_settings->externalTools(), &ExternalTools::externalToolsChanged, this, &TextApplication::loadNewExternalTools);
-
-  //settings()->pluginFactory()->loadPlugins(this);
 }
 
 void TextApplication::loadTextEditorFromString(const QString& contents) {
   TextEditor* new_editor = new TextEditor(this, m_tabEditors);
 
-  if (m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
+  if (m_tabEditors->hasOnlyOneEmptyEditor()) {
     // We have one empty non modified editor already open, close it.
     m_tabEditors->closeTab(0);
   }
@@ -59,6 +57,7 @@ void TextApplication::loadTextEditorFromString(const QString& contents) {
   attachTextEditor(new_editor);
   m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
   new_editor->loadFromString(contents);
+  qobject_cast<QWidget*>(new_editor)->setFocus();
 }
 
 TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
@@ -70,8 +69,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
   TextEditor * new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
 
   if (new_editor != nullptr) {
-    if (!restoring_session && m_tabEditors->count() == 1 && !m_tabEditors->textEditorAt(0)->modify() &&
-        m_tabEditors->textEditorAt(0)->length() == 0 && m_tabEditors->textEditorAt(0)->filePath().isEmpty()) {
+    if (!restoring_session && m_tabEditors->hasOnlyOneEmptyEditor()) {
       // We have one empty non modified editor already open, close it.
       m_tabEditors->closeTab(0);
     }
@@ -83,7 +81,6 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
     }
 
     m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
-
     qobject_cast<QWidget*>(new_editor)->setFocus();
   }
 
@@ -173,16 +170,6 @@ void TextApplication::reloadCurrentEditor() {
   }
 }
 
-void TextApplication::makeTabVisible(Tab* tab) {
-  m_tabEditors->setCurrentWidget(tab);
-}
-
-void TextApplication::makeEditorVisible(TextEditor* editor) {
-  if (editor != nullptr) {
-    m_tabEditors->setCurrentIndex(m_tabEditors->indexOfEditor(editor));
-  }
-}
-
 void TextApplication::reloadEditorsAfterSettingsChanged(bool reload_visible, bool reload_all) {
   foreach (TextEditor* editor, m_tabEditors->editors()) {
     editor->setSettingsDirty(true);
@@ -243,7 +230,7 @@ void TextApplication::setupEolMenu() {
   TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    updateEolMenu(editor->eOLMode());
+    updateEolMenu(int(editor->eOLMode()));
   }
   else {
     updateEolMenu(settings()->eolMode());
@@ -278,9 +265,7 @@ void TextApplication::updateEolMenu(int eol_mode) {
 }
 
 void TextApplication::onTabRequestedVisibility() {
-  Tab* tab = qobject_cast<Tab*>(sender());
-
-  makeTabVisible(tab);
+  m_tabEditors->makeTabVisible(qobject_cast<Tab*>(sender()));
 }
 
 void TextApplication::markEditorModified(TextEditor* editor, bool modified) {

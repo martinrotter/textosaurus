@@ -71,10 +71,6 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     void saveAllEditors();
     void closeAllUnmodifiedEditors();
     void reloadCurrentEditor();
-
-    void makeTabVisible(Tab* tab);
-    void makeEditorVisible(TextEditor* editor);
-
     void restoreSession();
 
     // Closes all opened text documents (asks to save them if necessary).

@@ -29,6 +29,10 @@ class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
     int insertTab(int index, Tab* widget, const QIcon& icon, const QString& label);
     bool removeTab(int index, bool clear_from_memory);
 
+    // Returns true if there is only one tab visible and it has no contents and is in unmodified state
+    // and not bound to file.
+    bool hasOnlyOneEmptyEditor() const;
+
     TextEditor* currentEditor() const;
     Tab* currentTab() const;
 
@@ -50,6 +54,9 @@ class TEXTOSAURUS_DLLSPEC TabWidget : public QTabWidget {
 
     void gotoNextTab();
     void gotoPreviousTab();
+
+    void makeTabVisible(Tab* tab);
+    void makeEditorVisible(TextEditor* editor);
 
   protected:
     void createConnections();

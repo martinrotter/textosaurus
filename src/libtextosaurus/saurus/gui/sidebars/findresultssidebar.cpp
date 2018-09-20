@@ -5,6 +5,7 @@
 #include "saurus/gui/sidebars/findresultsmodel.h"
 #include "saurus/gui/sidebars/findresultsmodelitem.h"
 #include "saurus/gui/sidebars/findresultsmodelitemresult.h"
+#include "saurus/gui/tabwidget.h"
 #include "saurus/miscellaneous/textapplication.h"
 
 #include <QTreeView>
@@ -58,7 +59,7 @@ void FindResultsSidebar::navigateToResult(const QModelIndex& index) {
   FindResultsModelItemResult* result_item = qobject_cast<FindResultsModelItemResult*>(item);
 
   if (result_item != nullptr && result_item->editor() != nullptr) {
-    m_textApp->makeEditorVisible(result_item->editor());
+    m_textApp->tabWidget()->makeEditorVisible(result_item->editor());
 
     result_item->editor()->ensureVisible(result_item->editor()->lineFromPosition(result_item->range().first));
     result_item->editor()->setSel(result_item->range().first, result_item->range().second);
