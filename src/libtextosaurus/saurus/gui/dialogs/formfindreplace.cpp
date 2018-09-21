@@ -9,6 +9,8 @@
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
+#include <QClipboard>
+
 FormFindReplace::FormFindReplace(TextApplication* app, QWidget* parent) : QDialog(parent), m_application(app) {
   m_ui.setupUi(this);
   m_ui.m_lblResult->setStyleSheet(QSL("color: red;"));
@@ -30,6 +32,15 @@ void FormFindReplace::display() {
   show();
   activateWindow();
   raise();
+
+  TextEditor* editor = m_application->tabWidget()->currentEditor();
+
+  if (editor != nullptr && !editor->selectionEmpty()) {
+    m_ui.m_txtSearchPhrase->setText(editor->getSelText());
+  }
+  else if (!qApp->clipboard()->text().isEmpty()) {
+    m_ui.m_txtSearchPhrase->setText(qApp->clipboard()->text());
+  }
 
   m_ui.m_lblResult->clear();
   m_ui.m_txtSearchPhrase->setFocus();
