@@ -70,7 +70,9 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   setMultiPaste(SC_MULTIPASTE_EACH);
   setVirtualSpaceOptions(SCVS_RECTANGULARSELECTION);
   setCodePage(SC_CP_UTF8);
+  setMargins(SC_MAX_MARGIN + 2);
   setMarginWidthN(MARGIN_SYMBOLS, 0);
+  setMarginTypeN(MARGIN_LINE_NUMBERS_RIGHT_SPACE, SC_MARGIN_TEXT);
   setWrapVisualFlags(SC_WRAPVISUALFLAG_MARGIN);
   setEndAtLastLine(true);
   setEOLMode(m_textApp->settings()->eolMode());
@@ -85,6 +87,7 @@ void TextEditor::updateLineNumberMarginWidth(sptr_t zoom, QFont font, sptr_t lin
   int width = TextFactory::stringWidth(QString::number(line_count), metr) + MARGIN_PADDING_LINE_NUMBERS;
 
   setMarginWidthN(MARGIN_LINE_NUMBERS, qMax(MARGIN_LINE_NUMBERS_MIN_WIDTH + MARGIN_PADDING_LINE_NUMBERS, width));
+  setMarginWidthN(MARGIN_LINE_NUMBERS_RIGHT_SPACE, MARGIN_PADDING_LINE_NUMBERS);
 }
 
 void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {
@@ -629,6 +632,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     // We activate folding.
     setProperty("fold", "1");
     setProperty("fold.compact", "1");
+    setProperty("fold.html", "1");
     setMarginWidthN(MARGIN_FOLDING, MARGIN_WIDTH_FOLDING);
 
     setFoldFlags(SC_FOLDFLAG_LINEAFTER_CONTRACTED | SC_FOLDFLAG_LINEBEFORE_CONTRACTED);
@@ -910,6 +914,7 @@ void TextEditor::updateLineNumberMarginVisibility() {
   }
   else {
     setMarginWidthN(MARGIN_LINE_NUMBERS, 0);
+    setMarginWidthN(MARGIN_LINE_NUMBERS_RIGHT_SPACE, 0);
   }
 }
 
