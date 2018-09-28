@@ -1431,7 +1431,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ak nie je zaškrtnuté, tak sa použije východzí systémový internetový prehliadač.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="42"/>
@@ -1441,7 +1441,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="39"/>
         <source>If unchecked, then default system-wide web browser is used</source>
-        <translation type="unfinished"/>
+        <translation>Ak nie je zaškrtnuté, tak sa použije východzí systémový internetový prehliadač.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="54"/>
@@ -1485,7 +1485,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="115"/>
         <source>Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</source>
-        <translation type="unfinished"/>
+        <translation>Všimnite si, že &quot;%1&quot; (bez úvodzoviek) je zástupný symbol pre odovzdané URL adresy.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="129"/>
@@ -1798,7 +1798,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="210"/>
         <source>Prompt</source>
-        <translation type="unfinished"/>
+        <translation>Dotaz</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="21"/>
@@ -1934,12 +1934,12 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="110"/>
         <source>If enabled, then main window is completely hidden when minimized. User can restore window visibility only via tray icon interaction.</source>
-        <translation type="unfinished"/>
+        <translation>Ak je toto povolené, tak je hlavní okno automaticky skryté pri jeho minimalizácii. Používateľ môže hlavné okno obnoviť kliknutím na tray ikonu.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="127"/>
         <source>If enabled, then main window is completely hidden when &quot;X&quot; button is clicked and application does not quit. When disabled, then the behavior is the same as when application runs in non-tray mode, the application will quit.</source>
-        <translation type="unfinished"/>
+        <translation>Ak je toto povolené, tak se hlavné okno automaticky skryje pri kliknutí na &quot;X&quot; a program sa neukončí. Ak je toto zakázané, tak bude správanie rovnaké ako keď program nepoužíva tray ikonu, program sa ukončí.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
@@ -2278,27 +2278,27 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="98"/>
         <source>%1 (custom theme)</source>
-        <translation type="unfinished"/>
+        <translation>%1 (vlastná téma farieb)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="120"/>
         <source>Select Foreground Color</source>
-        <translation type="unfinished"/>
+        <translation>Zvoliť farbu popredia</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="135"/>
         <source>Select Background Color</source>
-        <translation type="unfinished"/>
+        <translation>Zvoliť farbu pozadia</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="166"/>
         <source>Enter name for new theme</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte názov pre novú tému</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="166"/>
         <source>Enter name for new color theme</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte názov pre novú tému farieb</translation>
     </message>
 </context>
 <context>
@@ -2319,7 +2319,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/systemfactory.cpp" line="146"/>
         <source> bytes</source>
-        <translation type="unfinished"/>
+        <translation>bajtov</translation>
     </message>
 </context>
 <context>
@@ -2327,12 +2327,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabbar.cpp" line="25"/>
         <source>Close This Tab</source>
-        <translation type="unfinished"/>
+        <translation>Zavrieť túto kartu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabbar.cpp" line="26"/>
         <source>Close Tab</source>
-        <translation type="unfinished"/>
+        <translation>Zavrieť kartu</translation>
     </message>
 </context>
 <context>
@@ -2346,17 +2346,17 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="202"/>
         <source>Read-Only Mode</source>
-        <translation type="unfinished"/>
+        <translation>Režim Len na čítanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="209"/>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="213"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Zatvoriť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="835"/>
@@ -2366,7 +2366,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="835"/>
         <source>Save your file first, please</source>
-        <translation type="unfinished"/>
+        <translation>Prosím, uložte najprv Váš súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="842"/>
@@ -2379,57 +2379,57 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="142"/>
         <source>No other occurrences of &quot;%1&quot; found.</source>
-        <translation type="unfinished"/>
+        <translation>Žiadne ďalšie výskyty &quot;%1&quot; neboli nájdené.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="222"/>
         <source>File Externally Modified</source>
-        <translation type="unfinished"/>
+        <translation>Súbor bol zmenený externe</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="223"/>
         <source>This file was modified outside of %1.</source>
-        <translation type="unfinished"/>
+        <translation>Tento súbor bol modifikovaný nejakým externým programom okrem %1.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="224"/>
         <source>Do you want to reload file now? This will discard all unsaved changes.</source>
-        <translation type="unfinished"/>
+        <translation>Chcete tento súbor znovu načítať z disku? Toto zahodí všetky neuložené zmeny.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="226"/>
         <source>Reload all files automatically (discard changes)</source>
-        <translation type="unfinished"/>
+        <translation>Znovu načítať modifikované súbory automaticky (tj. zahadzovať neuložené zmeny)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="231"/>
         <source>File &apos;%1&apos; was reloaded from disk.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; bol znovu načítaný z disku.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="262"/>
         <source>&amp;Find All</source>
-        <translation type="unfinished"/>
+        <translation>Nájsť &amp;všetko</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="268"/>
         <source>&amp;Select All</source>
-        <translation type="unfinished"/>
+        <translation>Vybrať &amp;všetko</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="271"/>
         <source>&amp;Cut</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Vystrihnúť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="274"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Kopírovať</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="277"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Vložiť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="323"/>
@@ -2440,12 +2440,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="370"/>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="860"/>
         <source>Unsaved Changes</source>
-        <translation type="unfinished"/>
+        <translation>Neuložené zmeny</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="371"/>
         <source>This document has unsaved changes, do you want to save them?</source>
-        <translation type="unfinished"/>
+        <translation>Tento dokument obsahuje neuložené zmeny. Chcete ho uložiť?</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="788"/>
@@ -2455,7 +2455,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="789"/>
         <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; je príliš veľký. %2 vie otvárať len súbory menšie ako %3 MB.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="797"/>
@@ -2465,7 +2465,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="798"/>
         <source>File &apos;%1&apos; cannot be opened for reading. Insufficient permissions.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; sa nedá otvoriť. Nemáte dostatočné oprávnenia.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
@@ -2475,12 +2475,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="833"/>
         <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
-        <translation type="unfinished"/>
+        <translation>Tento súbor je veľký. %2 vypne niektoré funkcie (napríklad zalamovanie riadkov, alebo zvýraznenie syntaxu), aby bolo načítanie súboru rýchlejšie.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="861"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
-        <translation type="unfinished"/>
+        <translation>Tento dokument obsahuje neuložené zmeny. Chcete ich ignorovať a súbor znovu načítať?</translation>
     </message>
 </context>
 <context>
@@ -2488,7 +2488,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbar.cpp" line="59"/>
         <source>Toolbar spacer</source>
-        <translation type="unfinished"/>
+        <translation>Medzera panelu nástrojov</translation>
     </message>
 </context>
 <context>
@@ -2496,22 +2496,22 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="32"/>
         <source>Activated Actions</source>
-        <translation type="unfinished"/>
+        <translation>Aktivované činnosti</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="42"/>
         <source>Available Actions</source>
-        <translation type="unfinished"/>
+        <translation>Dostupné činnosti</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="76"/>
         <source>Move action up</source>
-        <translation type="unfinished"/>
+        <translation>Posunúť činnosť hore</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="92"/>
         <source>Move action down</source>
-        <translation type="unfinished"/>
+        <translation>Posunúť činnosť dole</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="112"/>
@@ -2526,22 +2526,22 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="145"/>
         <source>Add selected action</source>
-        <translation type="unfinished"/>
+        <translation>Pridať vybratú činnosť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="158"/>
         <source>Delete selected action</source>
-        <translation type="unfinished"/>
+        <translation>Vymazať vybratú akciu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="171"/>
         <source>Delete all actions</source>
-        <translation type="unfinished"/>
+        <translation>Vymazať všetky činnosti</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="184"/>
         <source>Reset toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Obnoviť panel nástrojov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="85"/>
@@ -2551,12 +2551,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="180"/>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="183"/>
         <source>Separator</source>
-        <translation type="unfinished"/>
+        <translation>Oddeľovač</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="169"/>
         <source>Toolbar spacer</source>
-        <translation type="unfinished"/>
+        <translation>Medzera panelu nástrojov</translation>
     </message>
 </context>
 <context>
@@ -2564,7 +2564,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/systemtrayicon.cpp" line="18"/>
         <source>Close opened modal dialogs first.</source>
-        <translation type="unfinished"/>
+        <translation>Najprv zavrite všetky modálne dialógy.</translation>
     </message>
 </context>
 </TS>
