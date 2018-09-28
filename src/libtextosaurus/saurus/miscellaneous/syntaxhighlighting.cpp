@@ -70,7 +70,8 @@ void SyntaxHighlighting::loadColorThemes() {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(SOLAR_LIGHT_BASE_3))},
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_CONTROL),
                                                                                         QColor(SOLAR_LIGHT_BASE_3))},
-    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_1), QColor(SOLAR_LIGHT_BASE_2))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin,
+     SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_MAGENTA), QColor(SOLAR_LIGHT_BASE_2))},
     {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BLUE))},
     {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BLUE))},
     {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(SOLAR_LIGHT_BASE_00))},
@@ -87,7 +88,7 @@ void SyntaxHighlighting::loadColorThemes() {
   m_colorThemes.append(SyntaxColorTheme(QSL("Solarized Dark"), true, QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> {
     {SyntaxColorTheme::StyleComponents::ScintillaPaper, SyntaxColorThemeComponent(QColor(), QColor(SOLAR_BASE_3))},
     {SyntaxColorTheme::StyleComponents::ScintillaControlChar, SyntaxColorThemeComponent(QColor(SOLAR_CONTROL), QColor(SOLAR_BASE_3))},
-    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_BASE_1), QColor(SOLAR_BASE_2))},
+    {SyntaxColorTheme::StyleComponents::ScintillaMargin, SyntaxColorThemeComponent(QColor(SOLAR_BASE_01), QColor(SOLAR_BASE_2))},
     {SyntaxColorTheme::StyleComponents::ScintillaUrlHighlight, SyntaxColorThemeComponent(QColor(SOLAR_GREEN))},
     {SyntaxColorTheme::StyleComponents::ScintillaOccurrencesHighlight, SyntaxColorThemeComponent(QColor(SOLAR_GREEN))},
     {SyntaxColorTheme::StyleComponents::Default, SyntaxColorThemeComponent(QColor(SOLAR_BASE_00))},
