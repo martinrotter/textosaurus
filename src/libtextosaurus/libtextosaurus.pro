@@ -133,7 +133,8 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/plugin-system/macros/macrosplugin.h \
     saurus/gui/settings/settingsplugins.h \
     common/miscellaneous/cryptofactory.h \
-    saurus/miscellaneous/filemetadata.h
+    saurus/miscellaneous/filemetadata.h \
+    saurus/gui/dialogs/formdecryptpasswordprompt.h
 
 SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -215,7 +216,8 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/macros/macrosplugin.cpp \
     saurus/gui/settings/settingsplugins.cpp \
     common/miscellaneous/cryptofactory.cpp \
-    saurus/miscellaneous/filemetadata.cpp
+    saurus/miscellaneous/filemetadata.cpp \
+    saurus/gui/dialogs/formdecryptpasswordprompt.cpp
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \
@@ -232,7 +234,8 @@ FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/settings/settingsshortcuts.ui \
           saurus/gui/settings/syntaxcolorthemeeditor.ui \
           saurus/plugin-system/macros/macroswidget.ui \
-    saurus/gui/settings/settingsplugins.ui
+    saurus/gui/settings/settingsplugins.ui \
+    saurus/gui/dialogs/formdecryptpasswordprompt.ui
 
 # Add qtsingleapplication.
 SOURCES += $$files(3rd-party/qtsingleapplication/*.cpp, false)

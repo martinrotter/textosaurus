@@ -75,6 +75,10 @@ QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
   }
 
   if (file.size() <= 0) {
+    if (!was_open) {
+      file.close();
+    }
+
     return QByteArray();
   }
 
@@ -117,4 +121,44 @@ QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
   }
 
   throw ApplicationException("unspecified error when decrypting file");
+}
+
+bool CryptoFactory::isPasswordCorrect(QString password, QFile& file) {
+  if (password.isEmpty()) {
+    throw ApplicationException(QObject::tr("cannot decrypt file with empty password"));
+  }
+
+  bool was_open = file.isOpen();
+
+  if (!was_open && !file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+    throw IOException(QObject::tr("insufficient permissions"));
+  }
+
+  if (file.size() <= 0) {
+    if (!was_open) {
+      file.close();
+    }
+
+    return false;
+  }
+
+  bool correct_pw = false;
+
+  if (file.seek(1)) {
+    QByteArray hmachash = file.read(64);
+
+    if (file.seek(66)) {
+      QByteArray encpayload = file.readAll();
+      auto utfpass = password.toUtf8();
+      auto hmachash_check = QMessageAuthenticationCode::hash(encpayload, utfpass, QCryptographicHash::Algorithm::Sha3_512);
+
+      correct_pw = hmachash == hmachash_check;
+    }
+  }
+
+  if (!was_open) {
+    file.close();
+  }
+
+  return correct_pw;
 }

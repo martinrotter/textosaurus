@@ -6,12 +6,14 @@
 #include "common/gui/messagebox.h"
 #include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/textfactory.h"
+#include "saurus/gui/dialogs/formdecryptpasswordprompt.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
 #include <QDir>
 #include <QFile>
+#include <QInputDialog>
 #include <QTextCodec>
 
 FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QString& file_path, const QString& explicit_encoding) {
@@ -88,6 +90,10 @@ QByteArray FileMetadata::obtainRawFileData(const QString& file_path) {
   if (CryptoFactory::isEncrypted(file)) {
     // File is encrypted, decrypt it.
     // TODO: ask for password, throw ex if no pass provided.
+    bool ok;
+
+    FormDecryptPasswordPrompt::getPasswordFromUser(file, &ok);
+
     data = CryptoFactory::decryptData("123", file);
   }
   else {

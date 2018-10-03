@@ -48,6 +48,9 @@ class CryptoFactory {
     // problem appears.
     static QByteArray decryptData(QString password, QFile& file);
 
+    // Checks if provided password is correct one.
+    static bool isPasswordCorrect(QString password, QFile& file);
+
     // Decides whether file is highly probably encrypted or not.
     static bool isEncrypted(QFile& file);
 };
