@@ -7,6 +7,7 @@
 
 #include "3rd-party/scintilla/include/Scintilla.h"
 
+constexpr char CRYPTO_FORMAT_BOUNDARY = 30;
 constexpr auto FIND_RESULT_ENCLOSING_CHAR_COUNT = 8;
 constexpr auto INDICATOR_URL = 0;
 constexpr auto INDICATOR_FIND = 1;

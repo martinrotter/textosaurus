@@ -777,6 +777,11 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
     TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
 
     new_editor->loadFromFile(file, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+
+    if (file.isOpen()) {
+      file.close();
+    }
+
     return new_editor;
   }
   else {
@@ -817,6 +822,10 @@ void TextEditor::reloadFromDisk() {
         auto position_new_document = positionFromLine(current_line);
 
         setSel(position_new_document, position_new_document);
+      }
+
+      if (file.isOpen()) {
+        file.close();
       }
     }
   }

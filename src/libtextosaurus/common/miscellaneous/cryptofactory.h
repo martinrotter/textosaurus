@@ -3,19 +3,16 @@
 #ifndef CRYPTOFACTORY_H
 #define CRYPTOFACTORY_H
 
-#include <QString>
+#include <QFile>
 
-// Simple encryption for byte-arrays or files
-// based on AES
+// Simple encryption for byte-arrays or files based on AES-CBC.
 //
 // Layout of "encrypted file:
-//
 //  | 1 byte  | 64 bytes           | 1 byte  | X bytes                |
-//  |-----------------------------------------------------------------|
+//  |---------|--------------------|---------|------------------------|
 //  | dec(30) | HMAC SHA3-512 hash | dec(30) | AES-CBC-encrypted data |
 //
 // Encryption process:
-//
 //  1. User enter passphrase "pass".
 //  2. "pass" is converted to UTF-8 byte array "utfpass".
 //  3. Payload data byte array is encrypted with AES-CBC -> "encpayload":
@@ -25,7 +22,6 @@
 //  5. All parts are assembled into proper layout.
 //
 // Decryption process:
-//
 //  1. Extract HMAC hash "hmachash".
 //  2. Extract encrypted payload data "encpayload".
 //  3. User enters passphrase which is converted to UTF-8 byte array "utfpass".
@@ -36,9 +32,7 @@
 //    a. SHA3-512 hash "shahash" is made from "utfpass" - this hash is used as key.
 //    b. First 16 bytes of "shahash" are used as initialization vector.
 //
-//
 // Checking if file is encrypted:
-//
 //  1. Check if file[0] and file[65] equal do dec(30).
 //  2. If they do equal, file is probably "encrypted", otherwise it is surely not encrypted.
 class CryptoFactory {
@@ -46,12 +40,16 @@ class CryptoFactory {
     CryptoFactory() = delete;
     ~CryptoFactory() = delete;
 
-    static bool verifyPassword(QString password, QString file_path);
+    // Encrypts data with given password.
     static QByteArray encryptData(QString password, QByteArray data);
-    static QByteArray decryptData(QString password);
+
+    // Decrypts data with given password.
+    // Throws exception if password is invalid or other
+    // problem appears.
+    static QByteArray decryptData(QString password, QFile& file);
 
     // Decides whether file is highly probably encrypted or not.
-    static bool isEncrypted(QString file_path);
+    static bool isEncrypted(QFile& file);
 };
 
 #endif // CRYPTOFACTORY_H
