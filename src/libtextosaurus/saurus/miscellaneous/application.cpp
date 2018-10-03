@@ -221,13 +221,15 @@ QString Application::homeFolder() {
 
 void Application::processExecutionMessage(const QString& message) {
   qDebug("Received '%s' execution message from another application instance.", qPrintable(message));
-  const QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
+  QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
 
   if (messages.contains(APP_QUIT_INSTANCE)) {
     quitApplication();
   }
   else {
     if (messages.contains(APP_IS_RUNNING)) {
+      messages.removeAll(APP_IS_RUNNING);
+
       qApp->textApplication()->loadFilesFromArgs(messages);
       qApp->mainForm()->display();
     }
