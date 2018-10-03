@@ -71,7 +71,7 @@ QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
   bool was_open = file.isOpen();
 
   if (!was_open && !file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    throw IOException(QObject::tr("cannot open file for reading"));
+    throw IOException(QObject::tr("insufficient permissions"));
   }
 
   if (file.size() <= 0) {

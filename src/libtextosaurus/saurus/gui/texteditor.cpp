@@ -813,10 +813,10 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
       return nullptr;
     }
   }
-  catch (...) {
+  catch (const ApplicationException& ex) {
     QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
-                          QObject::tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(
-                            QDir::toNativeSeparators(file_path)));
+                          QObject::tr("File '%1' cannot be opened for reading, reason: '%2'.").arg(QDir::toNativeSeparators(file_path),
+                                                                                                   ex.message()));
     return nullptr;
   }
 }
