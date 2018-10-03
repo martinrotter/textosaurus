@@ -2,7 +2,7 @@
 #
 # This file is distributed under GNU GPLv3 license. For full license text, see <project-git-repository-root-folder>/LICENSE.md.
 #
-# This is Textosaurus compilation script for qmake.
+# This is Textosaurus compilation script for qmake. Make sure you have all Git submodules fetched and updated to their latest masters.
 #
 # Usage:
 #   cd ../build-dir

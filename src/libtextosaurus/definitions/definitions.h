@@ -10,12 +10,12 @@
 constexpr auto FIND_RESULT_ENCLOSING_CHAR_COUNT = 8;
 constexpr auto INDICATOR_URL = 0;
 constexpr auto INDICATOR_FIND = 1;
-constexpr auto MARGIN_LINE_NUMBERS_MIN_WIDTH = 22;
+constexpr auto MARGIN_LINE_NUMBERS_MIN_WIDTH = 10;
 constexpr auto MARGIN_LINE_NUMBERS = 0;
 constexpr auto MARGIN_SYMBOLS = 1;
 constexpr auto MARGIN_FOLDING = 2;
 constexpr auto MARGIN_LINE_NUMBERS_RIGHT_SPACE = SC_MAX_MARGIN + 1;
-constexpr auto MARGIN_PADDING_LINE_NUMBERS = 6;
+constexpr auto MARGIN_PADDING_LINE_NUMBERS = 4;
 constexpr auto MARGIN_WIDTH_FOLDING = 18;
 constexpr auto LINE_SPACING_MIN = -10;
 constexpr auto LINE_SPACING_MAX = 50;

@@ -682,6 +682,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
       // Folding was turned on and we are turning it off right now.
       setProperty("fold", "0");
       setProperty("fold.compact", "0");
+      setProperty("fold.html", "0");
       setMarginWidthN(MARGIN_FOLDING, 0);
 
       // Make sure everything is expanded.
