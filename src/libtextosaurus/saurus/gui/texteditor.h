@@ -69,7 +69,8 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     // Given parameter is used to indicate if closing was finished (true)
     // or user cancelled it (false).
     void closeEditor(bool* ok);
-    void loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode);
+    void loadFromFile(const QByteArray& file_data, const QString& file_path, const QString& encoding,
+                      const Lexer& default_lexer, int initial_eol_mode);
     void loadFromString(const QString& contents);
 
   private slots:

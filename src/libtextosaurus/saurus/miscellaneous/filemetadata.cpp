@@ -2,41 +2,29 @@
 
 #include "saurus/miscellaneous/filemetadata.h"
 
+#include "common/exceptions/ioexception.h"
+#include "common/gui/messagebox.h"
+#include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/textfactory.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
-#include "common/gui/messagebox.h"
-
 #include <QDir>
 #include <QFile>
+#include <QTextCodec>
 
-FileMetadata FileMetadata::getInitialMetadata(const QString& file_path, const QString& explicit_encoding) {
-  QFile file(file_path);
-
-  if (!file.exists()) {
-    qWarning("File '%s' does not exist and cannot be opened.", qPrintable(file_path));
-    return FileMetadata();
-  }
-
-  if (file.size() >= MAX_TEXT_FILE_SIZE) {
+FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QString& file_path, const QString& explicit_encoding) {
+  if (data.size() >= MAX_TEXT_FILE_SIZE) {
     QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot Open File"),
                           QObject::tr("File '%1' too big. %2 can only open files smaller than %3 MB.")
                           .arg(QDir::toNativeSeparators(file_path), QSL(APP_NAME), QString::number(MAX_TEXT_FILE_SIZE / 1000000.0)));
     return FileMetadata();
   }
 
-  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
-                          QObject::tr("File '%1' cannot be opened for reading. Insufficient permissions.")
-                          .arg(QDir::toNativeSeparators(file_path)));
-    return FileMetadata();
-  }
-
   QString encoding;
   Lexer default_lexer;
-  int eol_mode = TextFactory::detectEol(file_path);
+  int eol_mode = TextFactory::detectEol(data.left(FILE_CHUNK_LENGTH_FOR_EOL_DETECTION));
 
   if (eol_mode < 0) {
     qWarning("Auto-detection of EOL mode for file '%s' failed, using app default.", qPrintable(file_path));
@@ -49,7 +37,7 @@ FileMetadata FileMetadata::getInitialMetadata(const QString& file_path, const QS
   if (explicit_encoding.isEmpty()) {
     qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
 
-    if ((encoding = TextFactory::detectEncoding(file_path)).isEmpty()) {
+    if ((encoding = TextFactory::detectEncoding(data.left(FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION))).isEmpty()) {
       // No encoding auto-detected.
       encoding = DEFAULT_TEXT_FILE_ENCODING;
       qWarning("Auto-detection of encoding failed, using default encoding.");
@@ -62,7 +50,7 @@ FileMetadata FileMetadata::getInitialMetadata(const QString& file_path, const QS
     encoding = explicit_encoding;
   }
 
-  if (file.size() > BIG_TEXT_FILE_SIZE) {
+  if (data.size() > BIG_TEXT_FILE_SIZE) {
     // File is quite big, we turn some features off to make sure it loads faster.
     MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Warning, QObject::tr("Loading Big File"),
                      QObject::tr("This file is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
@@ -83,10 +71,30 @@ FileMetadata FileMetadata::getInitialMetadata(const QString& file_path, const QS
   metadata.m_encoding = encoding;
   metadata.m_eolMode = eol_mode;
   metadata.m_lexer = default_lexer;
-
-  if (file.isOpen()) {
-    file.close();
-  }
+  metadata.m_filePath = QDir::toNativeSeparators(file_path);
 
   return metadata;
+}
+
+QByteArray FileMetadata::obtainRawFileData(const QString& file_path) {
+  QFile file(file_path);
+
+  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
+    throw IOException(QObject::tr("cannot open file \"%1\" for reading").arg(file_path));
+  }
+
+  QByteArray data;
+
+  if (CryptoFactory::isEncrypted(file)) {
+    // File is encrypted, decrypt it.
+    // TODO: ask for password, throw ex if no pass provided.
+    data = CryptoFactory::decryptData("123", file);
+  }
+  else {
+    file.seek(0);
+    data = file.readAll();
+  }
+
+  file.close();
+  return data;
 }

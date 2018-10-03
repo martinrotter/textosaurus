@@ -166,11 +166,10 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
   }
 }
 
-QByteArray TextFactory::detectEncoding(const QString& file_path) {
+QByteArray TextFactory::detectEncoding(const QByteArray& file_head_chunk) {
   // We read first chunk of file and try to detect encoding.
-  QByteArray file_head_chunk = IOFactory::readFileRawChunk(file_path, FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION);
   int len = file_head_chunk.length();
-  char* buf = file_head_chunk.data();
+  const char* buf = file_head_chunk.data();
   uchardet_t ud = uchardet_new();
 
   uchardet_handle_data(ud, buf, size_t(len));
@@ -188,9 +187,7 @@ QByteArray TextFactory::detectEncoding(const QString& file_path) {
   }
 }
 
-int TextFactory::detectEol(const QString& file_path) {
-  QByteArray file_head_chunk = IOFactory::readFileRawChunk(file_path, FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION);
-
+int TextFactory::detectEol(const QByteArray& file_head_chunk) {
   if (file_head_chunk.contains(QString("\r\n").toLocal8Bit().constData())) {
     return SC_EOL_CRLF;
   }

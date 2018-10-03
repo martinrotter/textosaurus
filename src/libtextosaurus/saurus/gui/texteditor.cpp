@@ -4,6 +4,7 @@
 
 #include "common/exceptions/ioexception.h"
 #include "common/gui/messagebox.h"
+#include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "common/miscellaneous/iofactory.h"
 #include "common/miscellaneous/textfactory.h"
@@ -91,8 +92,9 @@ void TextEditor::updateLineNumberMarginWidth(sptr_t zoom, QFont font, sptr_t lin
   setMarginWidthN(MARGIN_LINE_NUMBERS_RIGHT_SPACE, MARGIN_PADDING_LINE_NUMBERS);
 }
 
-void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {
-  m_filePath = QDir::toNativeSeparators(file.fileName());
+void TextEditor::loadFromFile(const QByteArray& file_data, const QString& file_path,
+                              const QString& encoding, const Lexer& default_lexer, int initial_eol_mode) {
+  m_filePath = QDir::toNativeSeparators(file_path);
   m_encoding = encoding.toLocal8Bit();
   m_lexer = default_lexer;
 
@@ -106,7 +108,7 @@ void TextEditor::loadFromFile(QFile& file, const QString& encoding, const Lexer&
     m_encoding = codec_for_encoding->name();
   }
 
-  QTextStream str(&file); str.setCodec(codec_for_encoding);
+  QTextStream str(file_data); str.setCodec(codec_for_encoding);
 
   blockSignals(true);
   setText(str.readAll().toUtf8().constData());
@@ -710,15 +712,42 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
     m_encoding = encoding.toLocal8Bit();
   }
 
-  QTextStream str(&file);
+  if (true /* !password.isEmpty */) {
+    QByteArray utf_text = getText(length() + 1);
+    QByteArray converted_text;
+    QTextStream str(&converted_text);
 
-  str.setCodec(m_encoding.constData());
-  str << getText(length() + 1);
-  str.flush();
+    // We convert text to target encoding.
+    str.setCodec(m_encoding.constData());
+    str << QString::fromUtf8(utf_text);
+    str.flush();
+
+    // We encrypt text and save it.
+    try {
+      QByteArray encrypted = CryptoFactory::encryptData("123", converted_text);
+
+      file.write(encrypted);
+      file.flush();
+    }
+    catch (const ApplicationException& ex) {
+      QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot save file"),
+                            QObject::tr("File '%1' cannot be saved because %2.").arg(QDir::toNativeSeparators(file_path),
+                                                                                     ex.message()));
+      file.close();
+      *ok = true;
+    }
+  }
+  else {
+    QTextStream str(&file);
+    QByteArray text = getText(length() + 1);
+
+    str.setCodec(m_encoding.constData());
+    str << text;
+    str.flush();
+  }
+
   file.close();
-
   m_filePath = QDir::toNativeSeparators(file_path);
-
   reattachWatcher(m_filePath);
 
   setSavePoint();
@@ -770,21 +799,24 @@ void TextEditor::setReadOnly(bool read_only) {
 }
 
 TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding) {
-  QFile file(file_path);
-  FileMetadata metadata = FileMetadata::getInitialMetadata(file_path, explicit_encoding);
+  try {
+    QByteArray file_data = FileMetadata::obtainRawFileData(file_path);
+    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data, file_path, explicit_encoding);
 
-  if (!metadata.m_encoding.isEmpty() && file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
+    if (!metadata.m_encoding.isEmpty()) {
+      TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
 
-    new_editor->loadFromFile(file, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
-
-    if (file.isOpen()) {
-      file.close();
+      new_editor->loadFromFile(file_data, file_path, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+      return new_editor;
     }
-
-    return new_editor;
+    else {
+      return nullptr;
+    }
   }
-  else {
+  catch (...) {
+    QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
+                          QObject::tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(
+                            QDir::toNativeSeparators(file_path)));
     return nullptr;
   }
 }
@@ -810,23 +842,25 @@ void TextEditor::reloadFromDisk() {
     // We reload now.
     // When we reload, we automatically detect EOL and encoding
     // and show no warnings, makes no sense in this use-case.
-    QFile file(filePath());
-    FileMetadata metadata = FileMetadata::getInitialMetadata(filePath());
-    auto current_line = lineFromPosition(currentPos());
+    try {
+      QByteArray file_data = FileMetadata::obtainRawFileData(filePath());
+      FileMetadata metadata = FileMetadata::getInitialMetadata(file_data, filePath());
+      auto current_line = lineFromPosition(currentPos());
 
-    if (!metadata.m_encoding.isEmpty() && file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-      loadFromFile(file, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
-      emit editorReloaded();
+      if (!metadata.m_encoding.isEmpty()) {
+        loadFromFile(file_data, filePath(), metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+        emit editorReloaded();
 
-      if (IS_IN_ARRAY(current_line, lineCount())) {
-        auto position_new_document = positionFromLine(current_line);
+        if (IS_IN_ARRAY(current_line, lineCount())) {
+          auto position_new_document = positionFromLine(current_line);
 
-        setSel(position_new_document, position_new_document);
+          setSel(position_new_document, position_new_document);
+        }
       }
-
-      if (file.isOpen()) {
-        file.close();
-      }
+    } catch (...) {
+      QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
+                            QObject::tr("File '%1' cannot be opened for reading. Insufficient permissions.")
+                            .arg(QDir::toNativeSeparators(filePath())));
     }
   }
 }

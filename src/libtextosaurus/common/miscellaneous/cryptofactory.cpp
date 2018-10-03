@@ -26,7 +26,7 @@ bool CryptoFactory::isEncrypted(QFile& file) {
     border_1_found = !byte_0.isEmpty() && byte_0.at(0) == CRYPTO_FORMAT_BOUNDARY;
   }
 
-  if (file.seek(65)) {
+  if (border_1_found && file.seek(65)) {
     QByteArray byte_65 = file.read(1);
 
     border_2_found = !byte_65.isEmpty() && byte_65.at(0) == CRYPTO_FORMAT_BOUNDARY;
@@ -36,7 +36,7 @@ bool CryptoFactory::isEncrypted(QFile& file) {
     file.close();
   }
 
-  return false;
+  return border_1_found && border_2_found;
 }
 
 QByteArray CryptoFactory::encryptData(QString password, QByteArray data) {
@@ -51,7 +51,13 @@ QByteArray CryptoFactory::encryptData(QString password, QByteArray data) {
   auto utfpass = password.toUtf8();
   auto shahash = QCryptographicHash::hash(utfpass, QCryptographicHash::Algorithm::Sha3_512);
   auto iv = shahash.left(16);
-  auto encpayload = QAESEncryption::Crypt(QAESEncryption::AES_256, QAESEncryption::Mode::CBC, data, shahash, iv);
+  auto encpayload = QAESEncryption::Crypt(QAESEncryption::AES_256, QAESEncryption::Mode::CBC,
+                                          data, shahash, iv, QAESEncryption::Padding::ISO);
+
+  if (encpayload.isEmpty()) {
+    throw ApplicationException(QObject::tr("some weird error appeared when encrypting the file"));
+  }
+
   auto hmachash = QMessageAuthenticationCode::hash(encpayload, utfpass, QCryptographicHash::Algorithm::Sha3_512);
 
   return QByteArray(1, CRYPTO_FORMAT_BOUNDARY) + hmachash + QByteArray(1, CRYPTO_FORMAT_BOUNDARY) + encpayload;
@@ -85,7 +91,10 @@ QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
         // Decrypt payload.
         auto shahash = QCryptographicHash::hash(utfpass, QCryptographicHash::Algorithm::Sha3_512);
         auto iv = shahash.left(16);
-        auto payload = QAESEncryption::Decrypt(QAESEncryption::AES_256, QAESEncryption::Mode::CBC, encpayload, utfpass, iv);
+        auto payload = QAESEncryption::Decrypt(QAESEncryption::AES_256, QAESEncryption::Mode::CBC,
+                                               encpayload, shahash, iv, QAESEncryption::Padding::ISO);
+
+        payload = QAESEncryption::RemovePadding(payload, QAESEncryption::Padding::ISO);
 
         if (!was_open) {
           file.close();
