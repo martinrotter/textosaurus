@@ -131,7 +131,9 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/plugin-system/macros/macroswidget.h \
             saurus/plugin-system/macros/macros.h \
             saurus/plugin-system/macros/macrosplugin.h \
-    saurus/gui/settings/settingsplugins.h
+    saurus/gui/settings/settingsplugins.h \
+    common/miscellaneous/cryptofactory.h \
+    saurus/miscellaneous/filemetadata.h
 
 SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -211,7 +213,9 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/macros/macroswidget.cpp \
             saurus/plugin-system/macros/macros.cpp \
             saurus/plugin-system/macros/macrosplugin.cpp \
-    saurus/gui/settings/settingsplugins.cpp
+    saurus/gui/settings/settingsplugins.cpp \
+    common/miscellaneous/cryptofactory.cpp \
+    saurus/miscellaneous/filemetadata.cpp
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \
@@ -237,6 +241,10 @@ HEADERS  += $$files(3rd-party/qtsingleapplication/*.h, false)
 # Add uchardet.
 SOURCES += $$files(3rd-party/uchardet/*.cpp, false)
 HEADERS  += $$files(3rd-party/uchardet/*.h, false)
+
+# Add Qt-AES.
+SOURCES += $$files(3rd-party/qtaes/*.cpp, false)
+HEADERS  += $$files(3rd-party/qtaes/*.h, false)
 
 # Add Scintilla.
 SOURCES += \

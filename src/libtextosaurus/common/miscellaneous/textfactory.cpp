@@ -173,7 +173,7 @@ QByteArray TextFactory::detectEncoding(const QString& file_path) {
   char* buf = file_head_chunk.data();
   uchardet_t ud = uchardet_new();
 
-  uchardet_handle_data(ud, buf, len);
+  uchardet_handle_data(ud, buf, size_t(len));
   uchardet_data_end(ud);
   const char* cs = uchardet_get_charset(ud);
   QByteArray encoding_name = QByteArray(cs);

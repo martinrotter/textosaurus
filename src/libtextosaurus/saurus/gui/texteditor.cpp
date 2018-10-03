@@ -13,6 +13,7 @@
 #include "saurus/gui/sidebars/outputsidebar.h"
 #include "saurus/gui/texteditorprinter.h"
 #include "saurus/miscellaneous/application.h"
+#include "saurus/miscellaneous/filemetadata.h"
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
@@ -765,7 +766,7 @@ void TextEditor::setReadOnly(bool read_only) {
 
 TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding) {
   QFile file(file_path);
-  FileInitialMetadata metadata = getInitialMetadata(file_path, explicit_encoding);
+  FileMetadata metadata = FileMetadata::getInitialMetadata(file_path, explicit_encoding);
 
   if (!metadata.m_encoding.isEmpty() && file.open(QIODevice::OpenModeFlag::ReadOnly)) {
     TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
@@ -776,82 +777,6 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
   else {
     return nullptr;
   }
-}
-
-FileInitialMetadata TextEditor::getInitialMetadata(const QString& file_path, const QString& explicit_encoding) {
-  QFile file(file_path);
-
-  if (!file.exists()) {
-    qWarning("File '%s' does not exist and cannot be opened.", qPrintable(file_path));
-    return FileInitialMetadata();
-  }
-
-  if (file.size() >= MAX_TEXT_FILE_SIZE) {
-    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot Open File"),
-                          tr("File '%1' too big. %2 can only open files smaller than %3 MB.").arg(QDir::toNativeSeparators(file_path),
-                                                                                                  QSL(APP_NAME),
-                                                                                                  QString::number(MAX_TEXT_FILE_SIZE /
-                                                                                                                  1000000.0)));
-    return FileInitialMetadata();
-  }
-
-  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    QMessageBox::critical(qApp->mainFormWidget(), tr("Cannot read file"),
-                          tr("File '%1' cannot be opened for reading. Insufficient permissions.").arg(QDir::toNativeSeparators(file_path)));
-    return FileInitialMetadata();
-  }
-
-  QString encoding;
-  Lexer default_lexer;
-  int eol_mode = TextFactory::detectEol(file_path);
-
-  if (eol_mode < 0) {
-    qWarning("Auto-detection of EOL mode for file '%s' failed, using app default.", qPrintable(file_path));
-    eol_mode = qApp->textApplication()->settings()->eolMode();
-  }
-  else {
-    qDebug("Auto-detected EOL mode is '%d'.", eol_mode);
-  }
-
-  if (explicit_encoding.isEmpty()) {
-    qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
-
-    if ((encoding = TextFactory::detectEncoding(file_path)).isEmpty()) {
-      // No encoding auto-detected.
-      encoding = DEFAULT_TEXT_FILE_ENCODING;
-      qWarning("Auto-detection of encoding failed, using default encoding.");
-    }
-    else {
-      qDebug("Auto-detected encoding is '%s'.", qPrintable(encoding));
-    }
-  }
-  else {
-    encoding = explicit_encoding;
-  }
-
-  if (file.size() > BIG_TEXT_FILE_SIZE) {
-    // File is quite big, we turn some features off to make sure it loads faster.
-    MessageBox::show(qApp->mainFormWidget(), QMessageBox::Icon::Warning, tr("Loading Big File"),
-                     tr("This file is big. %2 will switch some features (for example 'Word Wrap' or syntax highlighting) off to "
-                        "make sure that file loading is not horribly slow.").arg(QSL(APP_NAME)),
-                     QString(),
-                     QDir::toNativeSeparators(file_path));
-
-    qApp->textApplication()->settings()->setWordWrapEnabled(false);
-    default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->defaultLexer();
-  }
-  else {
-    // We try to detect default lexer.
-    default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->lexerForFile(file_path);
-  }
-
-  FileInitialMetadata metadata;
-
-  metadata.m_encoding = encoding;
-  metadata.m_eolMode = eol_mode;
-  metadata.m_lexer = default_lexer;
-
-  return metadata;
 }
 
 void TextEditor::reloadFromDisk() {
@@ -876,7 +801,7 @@ void TextEditor::reloadFromDisk() {
     // When we reload, we automatically detect EOL and encoding
     // and show no warnings, makes no sense in this use-case.
     QFile file(filePath());
-    FileInitialMetadata metadata = getInitialMetadata(filePath());
+    FileMetadata metadata = FileMetadata::getInitialMetadata(filePath());
     auto current_line = lineFromPosition(currentPos());
 
     if (!metadata.m_encoding.isEmpty() && file.open(QIODevice::OpenModeFlag::ReadOnly)) {
