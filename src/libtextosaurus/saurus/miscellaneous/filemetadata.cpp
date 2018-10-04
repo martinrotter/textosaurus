@@ -3,6 +3,7 @@
 #include "saurus/miscellaneous/filemetadata.h"
 
 #include "common/exceptions/ioexception.h"
+#include "common/exceptions/operationcancelledexception.h"
 #include "common/gui/messagebox.h"
 #include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/textfactory.h"
@@ -88,13 +89,16 @@ QByteArray FileMetadata::obtainRawFileData(const QString& file_path) {
   QByteArray data;
 
   if (CryptoFactory::isEncrypted(file)) {
-    // File is encrypted, decrypt it.
-    // TODO: ask for password, throw ex if no pass provided.
+    // File is encrypted, decrypt it but ask for password first.
     bool ok;
+    QString password = FormDecryptPasswordPrompt::getPasswordFromUser(file, ok);
 
-    FormDecryptPasswordPrompt::getPasswordFromUser(file, &ok);
-
-    data = CryptoFactory::decryptData("123", file);
+    if (ok) {
+      data = CryptoFactory::decryptData(password, file);
+    }
+    else {
+      throw OperationCancelledException();
+    }
   }
   else {
     file.seek(0);

@@ -3,6 +3,7 @@
 #include "saurus/gui/texteditor.h"
 
 #include "common/exceptions/ioexception.h"
+#include "common/exceptions/operationcancelledexception.h"
 #include "common/gui/messagebox.h"
 #include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/iconfactory.h"
@@ -813,6 +814,10 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
       return nullptr;
     }
   }
+  catch (const OperationCancelledException&) {
+    qDebug("User cancelled decryption password prompt.");
+    return nullptr;
+  }
   catch (const ApplicationException& ex) {
     QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
                           QObject::tr("File '%1' cannot be opened for reading, reason: '%2'.").arg(QDir::toNativeSeparators(file_path),
@@ -857,10 +862,14 @@ void TextEditor::reloadFromDisk() {
           setSel(position_new_document, position_new_document);
         }
       }
-    } catch (...) {
+    }
+    catch (const OperationCancelledException&) {
+      qDebug("User cancelled decryption password prompt.");
+    }
+    catch (const ApplicationException& ex) {
       QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
-                            QObject::tr("File '%1' cannot be opened for reading. Insufficient permissions.")
-                            .arg(QDir::toNativeSeparators(filePath())));
+                            QObject::tr("File '%1' cannot be opened for reading, reason '%2'.").arg(QDir::toNativeSeparators(filePath()),
+                                                                                                    ex.message()));
     }
   }
 }
