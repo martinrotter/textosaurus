@@ -42,6 +42,7 @@
     <file>./graphics/Papirus/actions/window-close.svg</file>
     <file>./graphics/Papirus/devices/media-flash.svg</file>
     <file>./graphics/Papirus/index.theme</file>
+    <file>./graphics/Papirus/mimetypes/multipart-encrypted.svg</file>
     <file>./graphics/Papirus/places/folder-favorites.svg</file>
     <file>./graphics/Papirus/places/folder.svg</file>
     <file>./graphics/Papirus/status/gtk-dialog-error.svg</file>

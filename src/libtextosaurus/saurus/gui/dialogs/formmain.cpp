@@ -262,7 +262,7 @@ void FormMain::setupIcons() {
   m_ui.m_actionFileSaveAs->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
   m_ui.m_actionFileSaveAll->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));
   m_ui.m_menuFileSaveWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
-  m_ui.m_actionFileEncryption->setIcon(icon_theme_factory->fromTheme(QSL("document-encrypted")));
+  m_ui.m_actionFileEncryption->setIcon(icon_theme_factory->fromTheme(QSL("multipart-encrypted")));
 
   // Edit.
   m_ui.m_actionFindReplace->setIcon(icon_theme_factory->fromTheme(QSL("edit-find")));

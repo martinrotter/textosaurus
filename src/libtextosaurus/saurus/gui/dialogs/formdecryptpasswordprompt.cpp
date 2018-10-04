@@ -18,7 +18,7 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(QFile& file, QWidget* paren
   m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Error, tr("Entered password is incorrect."));
   m_ui.m_tbPassword->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
 
-  GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("document-encrypted")));
+  GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("multipart-encrypted")));
 
   connect(m_ui.m_cbShowPassword, &QCheckBox::toggled, this, [this](bool checked) {
     m_ui.m_tbPassword->lineEdit()->setEchoMode(checked ? QLineEdit::EchoMode::Normal : QLineEdit::EchoMode::Password);
