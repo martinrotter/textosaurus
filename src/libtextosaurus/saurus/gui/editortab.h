@@ -11,6 +11,8 @@
 class TextApplication;
 
 class EditorTab : public Tab {
+  Q_OBJECT
+
   public:
     explicit EditorTab(TextApplication* text_app, TextEditor* editor);
     explicit EditorTab(TextApplication* text_app);

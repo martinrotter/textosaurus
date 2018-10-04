@@ -60,16 +60,16 @@ QString MessageBox::getSaveFileName(QWidget* parent, const QString& caption, con
 QIcon MessageBox::iconForStatus(QMessageBox::Icon status) {
   switch (status) {
     case QMessageBox::Information:
-      return qApp->icons()->fromTheme(QSL("dialog-information"));
+      return qApp->icons()->fromTheme(QSL("gtk-dialog-info"));
 
     case QMessageBox::Warning:
-      return qApp->icons()->fromTheme(QSL("dialog-warning"));
+      return qApp->icons()->fromTheme(QSL("gtk-dialog-warning"));
 
     case QMessageBox::Critical:
-      return qApp->icons()->fromTheme(QSL("dialog-error"));
+      return qApp->icons()->fromTheme(QSL("gtk-dialog-error"));
 
     case QMessageBox::Question:
-      return qApp->icons()->fromTheme(QSL("dialog-question"));
+      return qApp->icons()->fromTheme(QSL("gtk-dialog-question"));
 
     default:
       return QIcon();

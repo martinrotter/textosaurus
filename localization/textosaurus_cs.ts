@@ -1,5 +1,23 @@
 <?xml version="1.0" ?><!DOCTYPE TS><TS language="cs" sourcelanguage="en" version="2.1">
 <context>
+    <name>EditorTab</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="41"/>
+        <source>Read-Only Mode</source>
+        <translation>Mód jen pro čtení</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="48"/>
+        <source>Save</source>
+        <translation>Uložit</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="100"/>
+        <source>New text file</source>
+        <translation>Nový textový soubor</translation>
+    </message>
+</context>
+<context>
     <name>ExternalTools</name>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="193"/>
@@ -347,7 +365,7 @@
 <context>
     <name>FindResultsSidebar</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultssidebar.cpp" line="14"/>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultssidebar.cpp" line="15"/>
         <source>Find Results</source>
         <translation>Výsledky hledání</translation>
     </message>
@@ -459,6 +477,40 @@
     </message>
 </context>
 <context>
+    <name>FormDecryptPasswordPrompt</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.ui" line="14"/>
+        <source>Enter Decryption Passphrase</source>
+        <translation>Zadejte dešifrovací heslo</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.ui" line="46"/>
+        <source>&amp;Show password</source>
+        <translation>&amp;Zobrazit heslo</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="14"/>
+        <source>Decrypt &amp;&amp; Open File</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="16"/>
+        <source>Enter decryption password</source>
+        <translation>Zadejte dešifrovací heslo</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="18"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="40"/>
+        <source>Entered password is incorrect.</source>
+        <translation>Zadané heslo není správné.</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="37"/>
+        <source>Nice! This is correct password.</source>
+        <translation>Super! Je zadáno správné heslo.</translation>
+    </message>
+</context>
+<context>
     <name>FormFindReplace</name>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="14"/>
@@ -556,23 +608,23 @@
         <translation>Nahradit za</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="80"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="91"/>
         <source>Count: %1 matches.</source>
         <translation>Počet: %1 výsledků.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="136"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="147"/>
         <source>Replaced %n occurrence(s).</source>
         <translation><numerusform>Replaced %n výskyt.</numerusform><numerusform>Replaced %n výskyty.</numerusform><numerusform>Replaced %n výskytů.</numerusform><numerusform>Replaced %n výskytů.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="171"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="182"/>
         <source>Nothing found.</source>
         <translation>Nic nenalezeno.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="217"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="268"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="228"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="279"/>
         <source>Cannot find the text &quot;%1&quot;.</source>
         <translation>Nelze najít text &quot;%1&quot;.</translation>
     </message>
@@ -1042,92 +1094,92 @@ downloaded successfully.</source>
         <translation>Seznam s aktualizacemi nebyl úspěšně stažen.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="90"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="86"/>
         <source>New release available.</source>
         <translation>Nové aktualizace jsou k dispozici.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="91"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="87"/>
         <source>This is new version which can be
 downloaded.</source>
         <translation>Toto je nová verze, kterou lze stáhnout.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="99"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="95"/>
         <source>No new release available.</source>
         <translation>Nejsou dostupné novější verze.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="100"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="96"/>
         <source>This release is not newer than
 currently installed one.</source>
         <translation>Tato verze není novější než aktuálně nainstalovaná.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="110"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="106"/>
         <source>Downloaded %1% (update size is %2 kB).</source>
         <translation>Staženo %1% (velikost balíčku aktualizace je %2 kB).</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="118"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="241"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="114"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="237"/>
         <source>Downloading update...</source>
         <translation>Stahování aktualizace...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="172"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="168"/>
         <source>Available update files</source>
         <translation>Dostupné aktualizační soubory</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="182"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="178"/>
         <source>Downloaded successfully</source>
         <translation>Úspěšně staženo</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="183"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="179"/>
         <source>Package was downloaded successfully.
 You can install it now.</source>
         <translation>Balíček byl úspěšně stažen. Můžete jej nainstalovat nyní.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="184"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="180"/>
         <source>Install</source>
         <translation>Instalovat</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="189"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="191"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="185"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="187"/>
         <source>Error occured</source>
         <translation>Došlo k chybě</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="190"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="186"/>
         <source>Error occured during downloading of the package.</source>
         <translation>Při stahování balíčku došlo k chybě.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="222"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="218"/>
         <source>Cannot Start Installer</source>
         <translation>Nelze spustit instalátor</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="222"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="218"/>
         <source>Cannot launch external updater. Update application manually.</source>
         <translation>Nelze spustit instalátor. Aktualizujte aplikaci ručně.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="231"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="227"/>
         <source>Cannot Open Update File</source>
         <translation>Nelze otevřít soubor aktualizace</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="231"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="227"/>
         <source>Cannot open application update file. Update application manually.</source>
         <translation>Nelze otevřít soubor aktualizace aplikace. Aktualizujte aplikaci ručně.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="248"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="244"/>
         <source>Cannot navigate to installation file. Check new installation downloads manually on project website.</source>
         <translation>Nelze přejít na instalační soubor. Podívejte se na nové aktualizace ke stažení na stránkách projektu.</translation>
     </message>
@@ -1194,42 +1246,42 @@ You can install it now.</source>
         <translation>Makra</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="42"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="40"/>
         <source>Macro Recorder Toolbar</source>
         <translation>Nástrojový panel rekordéru maker</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="47"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="45"/>
         <source>Start Recording</source>
         <translation>Spustit nahrávání</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="48"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="46"/>
         <source>Stop Recording</source>
         <translation>Zastavit nahrávání</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="49"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="47"/>
         <source>Play Recorded Macro</source>
         <translation>Přehrát nahrané makro</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="50"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="48"/>
         <source>Save Macro as...</source>
         <translation>Uložit makro jako...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="53"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="51"/>
         <source>Stored Macros Toolbar</source>
         <translation>Nástrojový panel uložených maker</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="59"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="57"/>
         <source>Play Stored Macro</source>
         <translation>Přehrát uložené makro</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="60"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="58"/>
         <source>Remove Selected Macro</source>
         <translation>Odstranit vybrané makro</translation>
     </message>
@@ -1388,12 +1440,12 @@ You can install it now.</source>
 <context>
     <name>OutputSidebar</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="20"/>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="21"/>
         <source>Output</source>
         <translation>Výstup</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="118"/>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="119"/>
         <source>This sidebar displays output of external tools and some other critical information...</source>
         <translation>Tento postranní panel zobrazuje výstup z externích nástrojů a některé další důležité informace...</translation>
     </message>
@@ -1418,6 +1470,75 @@ You can install it now.</source>
         <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="116"/>
         <source>XML is well-formed.</source>
         <translation>XML má správný formát.</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="48"/>
+        <source>cannot encrypt file with empty password</source>
+        <translation>soubor nelze šifrovat prázdným heslem</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="58"/>
+        <source>some weird error appeared when encrypting the file</source>
+        <translation>při šifrování souboru se vyskytla podivná chyba</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="68"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="128"/>
+        <source>cannot decrypt file with empty password</source>
+        <translation>soubor nelze dešifrovat prázdným heslem</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="74"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="134"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="86"/>
+        <source>insufficient permissions</source>
+        <translation>nedostatečná práva</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="734"/>
+        <source>Cannot save file</source>
+        <translation>Nelze uložit soubor</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="735"/>
+        <source>File &apos;%1&apos; cannot be saved because %2.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="822"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="870"/>
+        <source>Cannot read file</source>
+        <translation>Nelze číst soubor</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="823"/>
+        <source>File &apos;%1&apos; cannot be opened for reading, reason: &apos;%2&apos;.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="871"/>
+        <source>File &apos;%1&apos; cannot be opened for reading, reason &apos;%2&apos;.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="22"/>
+        <source>Cannot Open File</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="23"/>
+        <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
+        <translation>Soubor &apos;%1&apos; je příliš velký. %2 může otevírat pouze soubor, jež jsou menží než %3 MB.</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="58"/>
+        <source>Loading Big File</source>
+        <translation>Načítání velkého souboru</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="59"/>
+        <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
+        <translation>Tento soubor je velký. %2 vypne některé funkce (například &apos;Zalamování řádků&apos; nebo zvýraznění syntaxe), aby bylo načítání souboru rychlejší.</translation>
     </message>
 </context>
 <context>
@@ -2052,12 +2173,7 @@ File filter for external e-mail selection dialog.</extracomment>
 <context>
     <name>SettingsPlugins</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.ui" line="74"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.ui" line="71"/>
         <source>Go to &amp;Website</source>
         <translation>Přejít na &amp;web</translation>
     </message>
@@ -2116,52 +2232,47 @@ File filter for external e-mail selection dialog.</extracomment>
 <context>
     <name>SyntaxColorThemeEditor</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="32"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="29"/>
         <source>Customize Substyle</source>
         <translation>Upravit substyl</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="48"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="45"/>
         <source>Make &amp;Foreground Transparent</source>
         <translation>&amp;Průhledné popředí</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="62"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="59"/>
         <source>Make &amp;Background Transparent</source>
         <translation>&amp;Průhledné pozadí</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="77"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="74"/>
         <source>Bold</source>
         <translation>Tučně</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="89"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="86"/>
         <source>Italic</source>
         <translation>Kurzíva</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="101"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="98"/>
         <source>Underline</source>
         <translation>Podtržené</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="124"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="121"/>
         <source>&amp;Create New Theme...</source>
         <translation>&amp;Vytvořit vlastní téma barev...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="131"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="128"/>
         <source>&amp;Delete</source>
         <translation>&amp;Smazat</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="169"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="166"/>
         <source>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
 
 Customizing too many substyles may lead to bad performance when handling big files.</source>
@@ -2335,40 +2446,32 @@ Kustomizace příliš mnoha substylů může vést ke zhoršenému výkonu aplik
     </message>
 </context>
 <context>
+    <name>TabWidget</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/tabwidget.cpp" line="121"/>
+        <source>Close</source>
+        <translation>Zavřít</translation>
+    </message>
+</context>
+<context>
     <name>TextApplication</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="93"/>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="1002"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="956"/>
         <source>New text file</source>
         <translation>Nový textový soubor</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="202"/>
-        <source>Read-Only Mode</source>
-        <translation>Mód jen pro čtení</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="209"/>
-        <source>Save</source>
-        <translation>Uložit</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="213"/>
-        <source>Close</source>
-        <translation>Zavřít</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="835"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="801"/>
         <source>Unsaved text file</source>
         <translation>Neuložený textový soubor</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="835"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="801"/>
         <source>Save your file first, please</source>
         <translation>Uložte nejdříve Váš soubor, prosím</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="842"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="808"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
@@ -2376,108 +2479,78 @@ Kustomizace příliš mnoha substylů může vést ke zhoršenému výkonu aplik
 <context>
     <name>TextEditor</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="142"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="149"/>
         <source>No other occurrences of &quot;%1&quot; found.</source>
         <translation>Žádné další výskyty &quot;%1&quot; nebyly nalezeny.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="222"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="229"/>
         <source>File Externally Modified</source>
         <translation>Soubor externě modifikován</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="223"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="230"/>
         <source>This file was modified outside of %1.</source>
         <translation>Tento soubor byl modifikován nějakým externím programem mimo %1.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="224"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="231"/>
         <source>Do you want to reload file now? This will discard all unsaved changes.</source>
         <translation>Chcete tento soubor opětovně načíst z disku? Toto zahodí všechny neuložené změny.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="226"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="233"/>
         <source>Reload all files automatically (discard changes)</source>
         <translation>Opětovně načítat modifikované soubory automaticky (a zahazovat neuložené změny)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="231"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="238"/>
         <source>File &apos;%1&apos; was reloaded from disk.</source>
         <translation>Soubor &apos;%1&apos; byl opětovně načten z disku.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="262"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="267"/>
         <source>&amp;Find All</source>
         <translation>Najít &amp;vše</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="268"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="273"/>
         <source>&amp;Select All</source>
         <translation>Vybrat &amp;vše</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="271"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="276"/>
         <source>&amp;Cut</source>
         <translation>&amp;Vyjmout</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="274"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="279"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopírovat</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="277"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="282"/>
         <source>&amp;Paste</source>
         <translation>&amp;Vložit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="323"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="328"/>
         <source>Save File as</source>
         <translation>Uložit soubor jako</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="370"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="860"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="375"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="834"/>
         <source>Unsaved Changes</source>
         <translation>Neuložené změny</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="371"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="376"/>
         <source>This document has unsaved changes, do you want to save them?</source>
         <translation>Tento dokument obsahuje neuložené změny, chce jej nejprve uložit?</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="788"/>
-        <source>Cannot Open File</source>
-        <translation>Nelze otevřít soubor</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="789"/>
-        <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
-        <translation>Soubor &apos;%1&apos; je příliš velký. %2 může otevírat pouze soubor, jež jsou menží než %3 MB.</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="797"/>
-        <source>Cannot read file</source>
-        <translation>Nelze číst soubor</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="798"/>
-        <source>File &apos;%1&apos; cannot be opened for reading. Insufficient permissions.</source>
-        <translation>Soubor &apos;%1&apos; nelze otevřít. Nedostatečná oprávnění.</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
-        <source>Loading Big File</source>
-        <translation>Načítání velkého souboru</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="833"/>
-        <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
-        <translation>Tento soubor je velký. %2 vypne některé funkce (například &apos;Zalamování řádků&apos; nebo zvýraznění syntaxe), aby bylo načítání souboru rychlejší.</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="861"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="835"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
         <translation>Tento soubor obsahuje neuložené změny, chcete tyto změny zahodit a opětovně načíst soubor z disku?</translation>
     </message>
@@ -2547,13 +2620,13 @@ Kustomizace příliš mnoha substylů může vést ke zhoršenému výkonu aplik
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="86"/>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="109"/>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="110"/>
-        <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="180"/>
-        <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="183"/>
+        <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="184"/>
+        <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="187"/>
         <source>Separator</source>
         <translation>Oddělovač</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="169"/>
+        <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="173"/>
         <source>Toolbar spacer</source>
         <translation>Mezera nástrojové lišty</translation>
     </message>

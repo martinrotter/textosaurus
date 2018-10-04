@@ -4,6 +4,7 @@
 #define WIDGETWITHSTATUS_H
 
 #include <QIcon>
+#include <QTimer>
 #include <QWidget>
 
 class PlainToolButton;
@@ -31,6 +32,7 @@ class WidgetWithStatus : public QWidget {
 
   protected:
     StatusType m_status;
+    QTimer m_blinkTimer;
     QWidget* m_wdgInput;
     PlainToolButton* m_btnStatus;
     QHBoxLayout* m_layout;
@@ -39,6 +41,7 @@ class WidgetWithStatus : public QWidget {
     QIcon m_iconWarning;
     QIcon m_iconError;
     QIcon m_iconOk;
+    QIcon m_iconVisible;
 };
 
 inline WidgetWithStatus::StatusType WidgetWithStatus::status() const {

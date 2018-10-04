@@ -135,7 +135,8 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
     common/miscellaneous/cryptofactory.h \
     saurus/miscellaneous/filemetadata.h \
     saurus/gui/dialogs/formdecryptpasswordprompt.h \
-    common/exceptions/operationcancelledexception.h
+    common/exceptions/operationcancelledexception.h \
+    common/gui/lineeditwithstatus.h
 
 SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -219,7 +220,8 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
     common/miscellaneous/cryptofactory.cpp \
     saurus/miscellaneous/filemetadata.cpp \
     saurus/gui/dialogs/formdecryptpasswordprompt.cpp \
-    common/exceptions/operationcancelledexception.cpp
+    common/exceptions/operationcancelledexception.cpp \
+common/gui/lineeditwithstatus.cpp
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \

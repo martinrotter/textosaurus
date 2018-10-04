@@ -28,7 +28,7 @@ void PlainToolButton::paintEvent(QPaintEvent* e) {
     p.setOpacity(0.3);
   }
 
-  if (icon().isNull()) {
+  if (icon().isNull() && m_paintTransparentPlaceholder) {
     if (m_explicitColor.isValid()) {
       p.fillRect(rect, m_explicitColor);
     }
@@ -41,6 +41,14 @@ void PlainToolButton::paintEvent(QPaintEvent* e) {
   else {
     icon().paint(&p, rect);
   }
+}
+
+bool PlainToolButton::paintTransparentPlaceholder() const {
+  return m_paintTransparentPlaceholder;
+}
+
+void PlainToolButton::setPaintTransparentPlaceholder(bool paint_transparent_placeholder) {
+  m_paintTransparentPlaceholder = paint_transparent_placeholder;
 }
 
 QColor PlainToolButton::explicitColor() const {

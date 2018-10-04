@@ -88,7 +88,7 @@ void EditorTab::updateIcon(bool read_only) {
   }
   else {
     m_icon = m_editor->modify() ?
-             qApp->icons()->fromTheme(QSL("dialog-warning")) :
+             qApp->icons()->fromTheme(QSL("gtk-dialog-warning")) :
              QIcon();
   }
 }

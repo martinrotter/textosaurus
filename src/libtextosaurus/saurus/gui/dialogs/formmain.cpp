@@ -270,7 +270,7 @@ void FormMain::setupIcons() {
   // View.
   m_ui.m_actionSwitchMainWindow->setIcon(icon_theme_factory->fromTheme(QSL("window-close")));
   m_ui.m_actionFullscreen->setIcon(icon_theme_factory->fromTheme(QSL("view-fullscreen")));
-  m_ui.m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("dialog-information")));
+  m_ui.m_actionSwitchStatusBar->setIcon(icon_theme_factory->fromTheme(QSL("gtk-dialog-info")));
   m_ui.m_actionSwitchToolBar->setIcon(icon_theme_factory->fromTheme(QSL("configure-toolbars")));
 
   // Tabs & web browser.

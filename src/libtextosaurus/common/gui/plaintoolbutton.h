@@ -15,6 +15,9 @@ class PlainToolButton : public QToolButton {
     QColor explicitColor() const;
     void setExplicitColor(const QColor& explicit_color);
 
+    bool paintTransparentPlaceholder() const;
+    void setPaintTransparentPlaceholder(bool paint_transparent_placeholder);
+
   public slots:
     void setPadding(int left, int top, int right, int bottom);
     void setChecked(bool checked);
@@ -30,6 +33,7 @@ class PlainToolButton : public QToolButton {
     int m_paddingTop = 0;
     int m_paddingRight = 0;
     int m_paddingBottom = 0;
+    bool m_paintTransparentPlaceholder = true;
 };
 
 #endif // CLOSEBUTTON_H

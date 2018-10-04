@@ -18,7 +18,7 @@ class FormDecryptPasswordPrompt : public QDialog {
 
   public:
     explicit FormDecryptPasswordPrompt(QFile& file, QWidget* parent = nullptr);
-    virtual ~FormDecryptPasswordPrompt();
+    virtual ~FormDecryptPasswordPrompt() = default;
 
     QString password() const;
 
