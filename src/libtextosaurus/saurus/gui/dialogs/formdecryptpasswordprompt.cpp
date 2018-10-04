@@ -30,7 +30,15 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(QFile& file, QWidget* paren
     }
   });
   connect(m_ui.m_tbPassword->lineEdit(), &QLineEdit::textEdited, this, [this, &file](const QString& text) {
-    bool pass_correct = CryptoFactory::isPasswordCorrect(text, file);
+    bool pass_correct;
+
+    try {
+      pass_correct = CryptoFactory::isPasswordCorrect(text, file);
+    }
+    catch (...) {
+      pass_correct = false;
+    }
+
     m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(pass_correct);
 
     if (pass_correct) {
