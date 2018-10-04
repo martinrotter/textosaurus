@@ -46,7 +46,7 @@ TextEditor::TextEditor(TextApplication* text_app, QWidget* parent)
   m_filePath(QString()), m_encoding(DEFAULT_TEXT_FILE_ENCODING),
   m_lexer(text_app->settings()->syntaxHighlighting()->defaultLexer()),
   m_autoIndentEnabled(text_app->settings()->autoIndentEnabled()),
-  m_filePathOnEditorQuit(QString()) {
+  m_filePathOnEditorQuit(QString()), m_encryptionPassword(QString()) {
 
   connect(this, &TextEditor::updateUi, this, &TextEditor::uiUpdated);
   connect(this, &TextEditor::marginClicked, this, &TextEditor::toggleFolding);
@@ -352,6 +352,14 @@ QString TextEditor::getSessionFile() {
   } while (dir_data.exists(file_name));
 
   return file_name;
+}
+
+QString TextEditor::getEncryptionPassword() const {
+  return m_encryptionPassword;
+}
+
+void TextEditor::setEncryptionPassword(const QString& encryption_password) {
+  m_encryptionPassword = encryption_password;
 }
 
 QMessageBox::StandardButton TextEditor::currentSaveAgreement() const {
@@ -713,7 +721,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
     m_encoding = encoding.toLocal8Bit();
   }
 
-  if (true /* !password.isEmpty */) {
+  if (!m_encryptionPassword.isEmpty()) {
     QByteArray utf_text = getText(length() + 1);
     QByteArray converted_text;
     QTextStream str(&converted_text);
@@ -725,7 +733,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
 
     // We encrypt text and save it.
     try {
-      QByteArray encrypted = CryptoFactory::encryptData("123", converted_text);
+      QByteArray encrypted = CryptoFactory::encryptData(m_encryptionPassword, converted_text);
 
       file.write(encrypted);
       file.flush();
@@ -801,13 +809,14 @@ void TextEditor::setReadOnly(bool read_only) {
 
 TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding) {
   try {
-    QByteArray file_data = FileMetadata::obtainRawFileData(file_path);
-    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data, file_path, explicit_encoding);
+    auto file_data = FileMetadata::obtainRawFileData(file_path);
+    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, file_path, explicit_encoding);
 
     if (!metadata.m_encoding.isEmpty()) {
       TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
 
-      new_editor->loadFromFile(file_data, file_path, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+      new_editor->loadFromFile(file_data.first, file_path, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+      new_editor->setEncryptionPassword(file_data.second);
       return new_editor;
     }
     else {
@@ -848,12 +857,13 @@ void TextEditor::reloadFromDisk() {
     // When we reload, we automatically detect EOL and encoding
     // and show no warnings, makes no sense in this use-case.
     try {
-      QByteArray file_data = FileMetadata::obtainRawFileData(filePath());
-      FileMetadata metadata = FileMetadata::getInitialMetadata(file_data, filePath());
+      auto file_data = FileMetadata::obtainRawFileData(filePath());
+      FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, filePath());
       auto current_line = lineFromPosition(currentPos());
 
       if (!metadata.m_encoding.isEmpty()) {
-        loadFromFile(file_data, filePath(), metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+        loadFromFile(file_data.first, filePath(), metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+        setEncryptionPassword(file_data.second);
         emit editorReloaded();
 
         if (IS_IN_ARRAY(current_line, lineCount())) {

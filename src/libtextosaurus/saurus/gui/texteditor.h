@@ -46,6 +46,9 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
 
     QMessageBox::StandardButton currentSaveAgreement() const;
 
+    QString getEncryptionPassword() const;
+    void setEncryptionPassword(const QString& encryption_password);
+
   public slots:
     void resetSaveAgreement();
     void askForSaveAgreement();
@@ -121,6 +124,7 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     Lexer m_lexer;
     bool m_autoIndentEnabled;
     QString m_filePathOnEditorQuit;
+    QString m_encryptionPassword;
 };
 
 #endif // TEXTEDITOR_H

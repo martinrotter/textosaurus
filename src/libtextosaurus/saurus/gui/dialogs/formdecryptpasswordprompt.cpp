@@ -13,7 +13,7 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(QFile& file, QWidget* paren
   m_ui.setupUi(this);
   m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setText(tr("Decrypt && Open File"));
   m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(false);
-  m_ui.m_tbPassword->lineEdit()->setPlaceholderText(tr("Enter decryption password"));
+  m_ui.m_tbPassword->lineEdit()->setPlaceholderText(tr("Enter Decryption Password"));
   m_ui.m_tbPassword->lineEdit()->setEchoMode(QLineEdit::EchoMode::Password);
   m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Error, tr("Entered password is incorrect."));
   m_ui.m_tbPassword->setLayoutDirection(Qt::LayoutDirection::RightToLeft);

@@ -10,7 +10,7 @@
 
 struct TEXTOSAURUS_DLLSPEC FileMetadata {
   public:
-    static QByteArray obtainRawFileData(const QString& file_path);
+    static QPair<QByteArray, QString> obtainRawFileData(const QString& file_path);
     static FileMetadata getInitialMetadata(const QByteArray& data, const QString& file_path, const QString& explicit_encoding = QString());
 
   public:

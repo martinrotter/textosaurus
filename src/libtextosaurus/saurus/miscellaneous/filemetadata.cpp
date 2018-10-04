@@ -79,7 +79,7 @@ FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QStr
   return metadata;
 }
 
-QByteArray FileMetadata::obtainRawFileData(const QString& file_path) {
+QPair<QByteArray, QString> FileMetadata::obtainRawFileData(const QString& file_path) {
   QFile file(file_path);
 
   if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
@@ -87,11 +87,13 @@ QByteArray FileMetadata::obtainRawFileData(const QString& file_path) {
   }
 
   QByteArray data;
+  QString password;
 
   if (CryptoFactory::isEncrypted(file)) {
     // File is encrypted, decrypt it but ask for password first.
     bool ok;
-    QString password = FormDecryptPasswordPrompt::getPasswordFromUser(file, ok);
+
+    password = FormDecryptPasswordPrompt::getPasswordFromUser(file, ok);
 
     if (ok) {
       data = CryptoFactory::decryptData(password, file);
@@ -106,5 +108,5 @@ QByteArray FileMetadata::obtainRawFileData(const QString& file_path) {
   }
 
   file.close();
-  return data;
+  return QPair<QByteArray, QString>(data, password);
 }
