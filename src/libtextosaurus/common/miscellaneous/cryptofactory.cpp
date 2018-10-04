@@ -125,7 +125,7 @@ QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
 
 bool CryptoFactory::isPasswordCorrect(QString password, QFile& file) {
   if (password.isEmpty()) {
-    throw ApplicationException(QObject::tr("cannot decrypt file with empty password"));
+    return false;
   }
 
   bool was_open = file.isOpen();
