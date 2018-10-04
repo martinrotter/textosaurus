@@ -75,6 +75,7 @@ QList<QAction*> FormMain::allActions() const {
   actions << m_ui.m_actionFileSaveAll;
   actions << m_ui.m_actionFileSaveAs;
   actions << m_ui.m_actionFileReload;
+  actions << m_ui.m_actionFileEncryption;
 
 #if !defined(Q_OS_MAC)
   actions << m_ui.m_actionFullscreen;
@@ -261,6 +262,7 @@ void FormMain::setupIcons() {
   m_ui.m_actionFileSaveAs->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
   m_ui.m_actionFileSaveAll->setIcon(icon_theme_factory->fromTheme(QSL("document-save")));
   m_ui.m_menuFileSaveWithEncoding->setIcon(icon_theme_factory->fromTheme(QSL("document-save-as")));
+  m_ui.m_actionFileEncryption->setIcon(icon_theme_factory->fromTheme(QSL("document-encrypted")));
 
   // Edit.
   m_ui.m_actionFindReplace->setIcon(icon_theme_factory->fromTheme(QSL("edit-find")));
