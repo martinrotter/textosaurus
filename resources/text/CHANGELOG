@@ -1,3 +1,21 @@
+0.9.9
+-----
+Added:
+* Support for transparent file encryption, which is based on AES256-CBS. All hashes are SHA3-512. Encryption can be set in menu "File" -> "File Encryption".
+* Slovak translation, thanks to Ján Ďanovský.
+* Code folding for HTML/XML.
+
+Changed:
+* Updated some colors in Solarized color scheme.
+* Some tweaks for line numbers column width.
+* Powershell lexer styling enhanced.
+* Scintilla code updated.
+* Fixed #49.
+
+Fixed:
+* Fixed restoring of currently visible document when restoring session.
+* Fixed crash when navigating to already closed editor/tab via "Output" sidebar.
+
 0.9.8
 -----
 Added:
