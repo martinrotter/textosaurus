@@ -27,12 +27,12 @@ FormEncryptionSettings::FormEncryptionSettings(const QString& password, QWidget*
       m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->click();
     }
   });
-  connect(m_ui.m_gbEncryption, &QGroupBox::toggled, this, &FormEncryptionSettings::updateResults);
-  connect(m_ui.m_tbPassword->lineEdit(), &QLineEdit::textEdited, this, &FormEncryptionSettings::updateResults);
 
-  m_ui.m_tbPassword->lineEdit()->setText(password);
+  connect(m_ui.m_gbEncryption, &QGroupBox::toggled, this, &FormEncryptionSettings::updateResults);
+  connect(m_ui.m_tbPassword->lineEdit(), &QLineEdit::textChanged, this, &FormEncryptionSettings::updateResults);
+
   m_ui.m_gbEncryption->setChecked(!password.isEmpty());
-  m_ui.m_tbPassword->setFocus();
+  m_ui.m_tbPassword->lineEdit()->setText(password);
 }
 
 QString FormEncryptionSettings::encryptionPassword() const {
@@ -47,7 +47,7 @@ void FormEncryptionSettings::updateResults() {
                                                                              passwd_size > 0);
 
   if (encryption_enabled) {
-    if (passwd_size > CRYPTO_RECOMMENDED_PASS_LENGTH) {
+    if (passwd_size >= CRYPTO_RECOMMENDED_PASS_LENGTH) {
       m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Ok, tr("Nice! You are good to go."));
     }
     else if (passwd_size > 0) {
