@@ -7,6 +7,7 @@
 
 #include "3rd-party/scintilla/include/Scintilla.h"
 
+constexpr auto CRYPTO_RECOMMENDED_PASS_LENGTH = 8;
 constexpr char CRYPTO_FORMAT_BOUNDARY = 30;
 constexpr auto CRYPTED_FILE_ENCODING = "UTF-8";
 constexpr auto FIND_RESULT_ENCLOSING_CHAR_COUNT = 8;

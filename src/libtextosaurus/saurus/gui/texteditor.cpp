@@ -354,7 +354,7 @@ QString TextEditor::getSessionFile() {
   return file_name;
 }
 
-QString TextEditor::getEncryptionPassword() const {
+QString TextEditor::encryptionPassword() const {
   return m_encryptionPassword;
 }
 

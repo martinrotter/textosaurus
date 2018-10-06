@@ -136,7 +136,8 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
     saurus/miscellaneous/filemetadata.h \
     saurus/gui/dialogs/formdecryptpasswordprompt.h \
     common/exceptions/operationcancelledexception.h \
-    common/gui/lineeditwithstatus.h
+    common/gui/lineeditwithstatus.h \
+    saurus/gui/dialogs/formencryptionsettings.h
 
 SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -221,7 +222,8 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
     saurus/miscellaneous/filemetadata.cpp \
     saurus/gui/dialogs/formdecryptpasswordprompt.cpp \
     common/exceptions/operationcancelledexception.cpp \
-common/gui/lineeditwithstatus.cpp
+common/gui/lineeditwithstatus.cpp \
+    saurus/gui/dialogs/formencryptionsettings.cpp
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \
@@ -239,7 +241,8 @@ FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/settings/syntaxcolorthemeeditor.ui \
           saurus/plugin-system/macros/macroswidget.ui \
     saurus/gui/settings/settingsplugins.ui \
-    saurus/gui/dialogs/formdecryptpasswordprompt.ui
+    saurus/gui/dialogs/formdecryptpasswordprompt.ui \
+    saurus/gui/dialogs/formencryptionsettings.ui
 
 # Add qtsingleapplication.
 SOURCES += $$files(3rd-party/qtsingleapplication/*.cpp, false)

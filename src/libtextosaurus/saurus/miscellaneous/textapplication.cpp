@@ -9,6 +9,7 @@
 #include "definitions/definitions.h"
 #include "saurus/external-tools/externaltool.h"
 #include "saurus/external-tools/externaltools.h"
+#include "saurus/gui/dialogs/formencryptionsettings.h"
 #include "saurus/gui/dialogs/formfindreplace.h"
 #include "saurus/gui/dialogs/formmain.h"
 #include "saurus/gui/editortab.h"
@@ -66,7 +67,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -357,6 +358,7 @@ void TextApplication::createConnections() {
   connect(m_actionFileSaveAs, &QAction::triggered, this, &TextApplication::saveCurrentEditorAs);
   connect(m_actionFileSaveAll, &QAction::triggered, this, &TextApplication::saveAllEditors);
   connect(m_actionFileReload, &QAction::triggered, this, &TextApplication::reloadCurrentEditor);
+  connect(m_actionFileEncryption, &QAction::triggered, this, &TextApplication::setupFileEncryption);
   connect(m_actionFileNew, &QAction::triggered, this, &TextApplication::newFile);
   connect(m_actionFileOpen, &QAction::triggered, this, [this]() {
     openTextFile();
@@ -421,6 +423,7 @@ void TextApplication::setMainForm(FormMain* main_form) {
   m_actionFileSaveAs = m_mainForm->m_ui.m_actionFileSaveAs;
   m_actionFileSaveAll = m_mainForm->m_ui.m_actionFileSaveAll;
   m_actionFileReload = m_mainForm->m_ui.m_actionFileReload;
+  m_actionFileEncryption = m_mainForm->m_ui.m_actionFileEncryption;
   m_actionEolUnix = m_mainForm->m_ui.m_actionEolUnix;
   m_actionEolWindows = m_mainForm->m_ui.m_actionEolWindows;
   m_actionEolMac = m_mainForm->m_ui.m_actionEolMac;
@@ -628,6 +631,15 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   return false;
 }
 
+void TextApplication::setupFileEncryption() {
+  TextEditor* editor = tabWidget()->currentEditor();
+  FormEncryptionSettings form(editor->encryptionPassword(), qApp->mainFormWidget());
+
+  if (form.exec() == QDialog::DialogCode::Accepted) {
+    editor->setEncryptionPassword(form.encryptionPassword());
+  }
+}
+
 void TextApplication::printPreviewCurrentEditorBlackWhite() {
   TextEditor* editor = tabWidget()->currentEditor();
 
@@ -827,6 +839,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
         m_actionFileSave->setEnabled(true);
         m_actionFileSaveAs->setEnabled(true);
         m_actionFileReload->setEnabled(true);
+        m_actionFileEncryption->setEnabled(true);
         m_menuFileSaveWithEncoding->setEnabled(true);
         m_menuFileReopenWithEncoding->setEnabled(true);
         m_actionFileSaveAll->setEnabled(true);
@@ -857,6 +870,7 @@ void TextApplication::updateToolBarFromEditor(TextEditor* editor, bool only_modi
     m_actionPrintPreviewCurrentEditorBlackWhite->setEnabled(false);
     m_actionFindReplace->setEnabled(false);
     m_menuEolConversion->setEnabled(false);
+    m_actionFileEncryption->setEnabled(false);
   }
 }
 

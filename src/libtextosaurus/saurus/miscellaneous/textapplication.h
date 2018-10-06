@@ -80,6 +80,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     virtual bool eventFilter(QObject* obj, QEvent* event) override;
 
   private slots:
+    void setupFileEncryption();
     void printPreviewCurrentEditorBlackWhite();
     void printPreviewCurrentEditor();
     void printCurrentEditor();
@@ -147,6 +148,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     QAction* m_actionFileSaveAs;
     QAction* m_actionFileSaveAll;
     QAction* m_actionFileReload;
+    QAction* m_actionFileEncryption;
     QAction* m_actionEolUnix;
     QAction* m_actionEolWindows;
     QAction* m_actionEolMac;
