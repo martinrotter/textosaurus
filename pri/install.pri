@@ -236,8 +236,8 @@ mac {
   IDENTIFIER = $$APP_REVERSE_NAME
   CONFIG -= app_bundle
   ICON = ../../resources/graphics/$${TARGET}.icns
-  QMAKE_MAC_SDK = macosx10.12
-  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+  #QMAKE_MAC_SDK = macosx10.13
+  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
   LIBS += -framework AppKit
 
   QMAKE_POST_LINK += $$system(install_name_tool -change "libtextosaurus.dylib" "@executable_path/libtextosaurus.dylib" $$OUT_PWD/textosaurus)
