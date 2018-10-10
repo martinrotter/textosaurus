@@ -370,7 +370,6 @@ else {
 mac {
   IDENTIFIER = $$APP_REVERSE_NAME
   CONFIG -= app_bundle
-  #QMAKE_MAC_SDK = macosx10.13
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
   LIBS += -framework AppKit
 }
