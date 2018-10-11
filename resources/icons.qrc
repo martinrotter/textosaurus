@@ -4,7 +4,6 @@
     <file>./graphics/Papirus/actions/call-start.svg</file>
     <file>./graphics/Papirus/actions/configure-toolbars.svg</file>
     <file>./graphics/Papirus/actions/dialog-yes.svg</file>
-    <file>./graphics/Papirus/actions/document-encrypted.svg</file>
     <file>./graphics/Papirus/actions/document-new.svg</file>
     <file>./graphics/Papirus/actions/document-open.svg</file>
     <file>./graphics/Papirus/actions/document-properties.svg</file>
@@ -28,6 +27,8 @@
     <file>./graphics/Papirus/actions/gtk-file.svg</file>
     <file>./graphics/Papirus/actions/gtk-media-record.svg</file>
     <file>./graphics/Papirus/actions/gtk-media-stop.svg</file>
+    <file>./graphics/Papirus/actions/gtk-print-preview.svg</file>
+    <file>./graphics/Papirus/actions/gtk-print.svg</file>
     <file>./graphics/Papirus/actions/help-about.svg</file>
     <file>./graphics/Papirus/actions/insert-object.svg</file>
     <file>./graphics/Papirus/actions/list-add.svg</file>
