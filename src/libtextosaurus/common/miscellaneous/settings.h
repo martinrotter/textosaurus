@@ -111,7 +111,7 @@ namespace GUI {
   constexpr auto IconThemeDef = APP_THEME_DEFAULT;
 #endif
 
-  constexpr auto Style = "style";
+  const QString Style = QString("style_%1").arg(OS_ID_LOW);
   constexpr auto StyleDef = APP_STYLE_DEFAULT;
 }
 
