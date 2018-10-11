@@ -106,6 +106,7 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
   submenus["Big"] = new QMenu(QSL("&Big"), menu);
   submenus["IBM"] = new QMenu(QSL("&IBM"), menu);
   submenus["ISO"] = new QMenu(QSL("&ISO"), menu);
+  submenus["KOI8"] = new QMenu(QSL("&KOI8"), menu);
   submenus["UTF"] = new QMenu(QSL("&UTF"), menu);
   submenus["windows"] = new QMenu(QSL("&windows"), menu);
 
@@ -129,6 +130,7 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
   menu->addMenu(submenus["Big"]);
   menu->addMenu(submenus["IBM"]);
   menu->addMenu(submenus["ISO"]);
+  menu->addMenu(submenus["KOI8"]);
   menu->addMenu(submenus["UTF"]);
   menu->addMenu(submenus["windows"]);
 
@@ -137,6 +139,7 @@ void TextFactory::initializeEncodingMenu(QMenu* const menu, bool checkable) {
   submenus["Big"]->menuAction()->setActionGroup(grp_actions);
   submenus["IBM"]->menuAction()->setActionGroup(grp_actions);
   submenus["ISO"]->menuAction()->setActionGroup(grp_actions);
+  submenus["KOI8"]->menuAction()->setActionGroup(grp_actions);
   submenus["UTF"]->menuAction()->setActionGroup(grp_actions);
   submenus["windows"]->menuAction()->setActionGroup(grp_actions);
 
