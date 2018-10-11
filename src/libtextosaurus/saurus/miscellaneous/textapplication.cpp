@@ -967,7 +967,8 @@ void TextApplication::restoreSession() {
           editor->insertText(0, rng);
           editor->deleteRange(0, 1);
           editor->setFilePath(QString());
-          m_tabEditors->setTabText(m_tabEditors->indexOfEditor(editor), tr("New text file"));
+          m_tabEditors->changeTitle(m_tabEditors->indexOfEditor(editor), tr("New text file"));
+
           editors_added++;
         }
         else {
@@ -1041,8 +1042,7 @@ void TextApplication::onTabTitleChanged(const QString& title, const QString& too
 
   if (index >= 0) {
     m_tabEditors->setTabIcon(index, tab->icon());
-    m_tabEditors->setTabText(index, title);
-    m_tabEditors->setTabToolTip(index, tool_tip);
+    m_tabEditors->changeTitle(index, title, tool_tip);
   }
 }
 

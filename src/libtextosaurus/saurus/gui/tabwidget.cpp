@@ -272,8 +272,8 @@ void TabWidget::changeIcon(int index, const QIcon& new_icon) {
   indentTabText(index);
 }
 
-void TabWidget::changeTitle(int index, const QString& new_title) {
+void TabWidget::changeTitle(int index, const QString& new_title, const QString& tool_tip) {
   setTabText(index, new_title);
-  setTabToolTip(index, new_title);
+  setTabToolTip(index, tool_tip);
   indentTabText(index);
 }
