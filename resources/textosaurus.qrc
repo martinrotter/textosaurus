@@ -8,14 +8,22 @@
     <file>text/COPYING_MPL</file>
     <file>graphics/textosaurus.ico</file>
     <file>graphics/textosaurus.png</file>
+    <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
+    
     <file>graphics/misc/flags/cs.png</file>
     <file>graphics/misc/flags/en.png</file>
+    <file>graphics/misc/flags/es.png</file>
     <file>graphics/misc/flags/sk.png</file>
-    <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
+    
     <file>../localization/textosaurus_en.qm</file>
+    
     <file>../localization/textosaurus_cs.qm</file>
-    <file>../localization/textosaurus_sk.qm</file>
     <file>../localization/qtbase_cs.qm</file>
+    
+    <file>../localization/textosaurus_es.qm</file>
+    <file>../localization/qtbase_es.qm</file>
+    
+    <file>../localization/textosaurus_sk.qm</file>
     <file>../localization/qtbase_sk.qm</file>
   </qresource>
 </RCC>
