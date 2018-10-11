@@ -18,7 +18,7 @@ SettingsPlugins::SettingsPlugins(Settings* settings, QWidget* parent) : Settings
   connect(m_ui.m_btnGoToWebsite, &QPushButton::clicked, this, &SettingsPlugins::goToWebsite);
   connect(m_ui.m_treePlugins, &QTreeWidget::currentItemChanged, this, [this](QTreeWidgetItem* current, QTreeWidgetItem* previous) {
     Q_UNUSED(previous)
-    m_ui.m_btnGoToWebsite->setEnabled(current != nullptr);
+    m_ui.m_btnGoToWebsite->setEnabled(current != nullptr && !selectedPlugin().pluginWebsite().isEmpty());
   });
 
   m_ui.m_btnGoToWebsite->setEnabled(false);
