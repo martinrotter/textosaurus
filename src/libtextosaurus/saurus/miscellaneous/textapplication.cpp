@@ -1020,7 +1020,7 @@ void TextApplication::onTabSwitched(int index) {
   }
 
   if (tab != nullptr) {
-    onTabTitleChanged(tab->title(), tab->toolTip());
+    onTabWithIndexTitleChanged(tab, index, tab->title(), tab->toolTip());
   }
 
   updateToolBarFromEditor(editor, false);
@@ -1041,9 +1041,13 @@ void TextApplication::onTabTitleChanged(const QString& title, const QString& too
   int index = m_tabEditors->indexOf(tab);
 
   if (index >= 0) {
-    m_tabEditors->setTabIcon(index, tab->icon());
-    m_tabEditors->changeTitle(index, title, tool_tip);
+    onTabWithIndexTitleChanged(tab, index, title, tool_tip);
   }
+}
+
+void TextApplication::onTabWithIndexTitleChanged(Tab* tab, int index, const QString& title, const QString& tool_tip) {
+  m_tabEditors->setTabIcon(index, tab->icon());
+  m_tabEditors->changeTitle(index, title, tool_tip);
 }
 
 void TextApplication::changeEncoding(QAction* act) {

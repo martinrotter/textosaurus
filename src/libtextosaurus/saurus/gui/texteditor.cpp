@@ -789,6 +789,7 @@ void TextEditor::setIsLog(bool is_log) {
     insertText(currentPos(), date_str.toUtf8().constData());
     gotoPos(length());
     newLine();
+    setSavePoint();
   }
 }
 

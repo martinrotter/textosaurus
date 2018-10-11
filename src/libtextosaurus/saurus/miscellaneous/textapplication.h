@@ -103,6 +103,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
 
     void onTabIconChanged(const QIcon& icon);
     void onTabTitleChanged(const QString& title, const QString& tool_tip);
+    void onTabWithIndexTitleChanged(Tab* tab, int index, const QString& title, const QString& tool_tip);
     void onEditorModified(int type, int position, int length, int linesAdded,
                           const QByteArray& text, int line, int foldNow, int foldPrev);
     void onTabSwitched(int index = -1);
