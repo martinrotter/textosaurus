@@ -530,6 +530,8 @@ void TextEditor::reloadFont() {
     styleSetSize(STYLE_DEFAULT, new_font.pointSize());
   }
 
+  // Copy all font properties to all other styles.
+  // WARNING: All styles/highlighting stuff must be reloaded after reloading fonts too.
   styleClearAll();
   updateLineNumberMarginVisibility();
 }
