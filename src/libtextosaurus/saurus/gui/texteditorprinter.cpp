@@ -10,7 +10,7 @@
 
 TextEditorPrinter::TextEditorPrinter() : m_zoom(0), m_wrapMode(SC_WRAP_WORD) {}
 
-int TextEditorPrinter::printRange(TextEditor* editor, int from, int to) {
+bool TextEditorPrinter::printRange(TextEditor* editor, int from, int to) {
   // Sanity check.
   if (editor == nullptr) {
     return false;

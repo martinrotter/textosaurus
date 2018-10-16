@@ -104,7 +104,9 @@ void TextEditor::loadFromFile(const QByteArray& file_data, const QString& file_p
   QTextCodec* codec_for_encoding = QTextCodec::codecForName(m_encoding);
 
   if (codec_for_encoding == nullptr) {
-    qCritical("We do not have codec for encoding '%s' when opening file, using defaults.", qPrintable(encoding));
+    qCritical().noquote().nospace() << QSL("We do not have codec for encoding '")
+                                    << encoding
+                                    << QSL("' when opening file, using defaults.");
     codec_for_encoding = QTextCodec::codecForName(QString(DEFAULT_TEXT_FILE_ENCODING).toLocal8Bit());
     m_encoding = codec_for_encoding->name();
   }
@@ -292,11 +294,12 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
       event->ignore();
     }
     else {
+      // NOTE: Deliberately skipping ScintillaEdit implementation.
       QAbstractScrollArea::wheelEvent(event);
     }
   }
   else {
-    if (QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
+    if ((QGuiApplication::keyboardModifiers() & Qt::KeyboardModifier::ControlModifier) == Qt::KeyboardModifier::ControlModifier) {
       if (event->delta() > 0) {
         m_textApp->settings()->increaseFontSize();
       }
@@ -304,7 +307,7 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
         m_textApp->settings()->decreaseFontSize();
       }
     }
-    else if (QGuiApplication::keyboardModifiers() & Qt::ShiftModifier) {
+    else if ((QGuiApplication::keyboardModifiers() & Qt::KeyboardModifier::ShiftModifier) == Qt::KeyboardModifier::ShiftModifier) {
       if (event->delta() > 0) {
         m_textApp->settings()->increaseLineSpacing();
       }
@@ -313,10 +316,11 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
       }
     }
     else {
-      if (verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOff) {
+      if (verticalScrollBarPolicy() == Qt::ScrollBarPolicy::ScrollBarAlwaysOff) {
         event->ignore();
       }
       else {
+        // NOTE: Deliberately skipping ScintillaEdit implementation.
         QAbstractScrollArea::wheelEvent(event);
       }
     }
@@ -464,12 +468,8 @@ void TextEditor::updateOccurrencesHighlights() {
   setIndicatorCurrent(INDICATOR_FIND);
   indicatorClearRange(first_visible_position, end_position - first_visible_position);
 
-/*
-   qDebug("pocet radku %d, prvni pozice %d (radek %d), posledni pozice %d (radek %d)", visible_lines_count, first_visible_position,
-         first_visible_line, end_position, lineFromPosition(end_position));
- */
 #if defined(DEBUG)
-  qDebug("Occurrences highlights updated.");
+  qDebug().noquote() << QSL("Occurrences highlights updated.");
 #endif
 
   if (!sel_text.isEmpty()) {
@@ -816,7 +816,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
     FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, file_path, explicit_encoding);
 
     if (!metadata.m_encoding.isEmpty()) {
-      TextEditor* new_editor = new TextEditor(app, qApp->mainFormWidget());
+      auto* new_editor = new TextEditor(app, qApp->mainFormWidget());
 
       new_editor->loadFromFile(file_data.first, file_path, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
       new_editor->setEncryptionPassword(file_data.second);
@@ -827,7 +827,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
     }
   }
   catch (const OperationCancelledException&) {
-    qDebug("User cancelled decryption password prompt.");
+    qDebug().noquote() << QSL("User cancelled decryption password prompt.");
     return nullptr;
   }
   catch (const ApplicationException& ex) {
@@ -877,7 +877,7 @@ void TextEditor::reloadFromDisk() {
       }
     }
     catch (const OperationCancelledException&) {
-      qDebug("User cancelled decryption password prompt.");
+      qDebug().noquote() << QSL("User cancelled decryption password prompt.");
     }
     catch (const ApplicationException& ex) {
       QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
@@ -939,7 +939,7 @@ void TextEditor::printPreview(bool black_on_white) {
   QPrintPreviewDialog dialog(&printer, qApp->mainFormWidget());
 
   connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this](QPrinter* prntr) {
-    TextEditorPrinter* sndr = dynamic_cast<TextEditorPrinter*>(prntr);
+    auto* sndr = dynamic_cast<TextEditorPrinter*>(prntr);
 
     if (sndr != nullptr) {
       sndr->printRange(this);
@@ -1016,21 +1016,22 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 void TextEditor::closeEditor(bool* ok) {
   if (m_textApp->shouldSaveSession() && filePath().isEmpty()) {
     // Store even empty editors to session.
-    if (true /*length() > 0*/) {
-      // We save this editor "into" temporary session file.
-      QString session_file = getSessionFile();
+    //if (true /*length() > 0*/) {
+    // We save this editor "into" temporary session file.
+    QString session_file = getSessionFile();
 
-      saveToFile(qApp->userDataFolder() + QDir::separator() + session_file, ok, DEFAULT_TEXT_FILE_ENCODING);
+    saveToFile(qApp->userDataFolder() + QDir::separator() + session_file, ok, DEFAULT_TEXT_FILE_ENCODING);
 
-      // File is saved, we store the filename.
-      if (*ok) {
-        appendSessionFile(session_file, true);
-      }
+    // File is saved, we store the filename.
+    if (*ok) {
+      appendSessionFile(session_file, true);
     }
 
-    /*else {
-     * ok = true;
-       }*/
+    //}
+
+    //else {
+    // * ok = true;
+    //}*/
   }
   else if (m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) {
     // No need to save, just mark to session if needed.

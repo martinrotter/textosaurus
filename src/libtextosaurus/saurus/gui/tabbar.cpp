@@ -19,7 +19,7 @@ void TabBar::setupTabControls(int index) {
   auto button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
                                                                         nullptr,
                                                                         this));
-  PlainToolButton* close_button = new PlainToolButton(this);
+  auto* close_button = new PlainToolButton(this);
 
   close_button->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
   close_button->setToolTip(tr("Close This Tab"));
@@ -32,10 +32,10 @@ void TabBar::setupTabControls(int index) {
 }
 
 void TabBar::closeTabViaButton() {
-  const QAbstractButton* close_button = qobject_cast<QAbstractButton*>(sender());
-  const QTabBar::ButtonPosition button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
-                                                                                                 nullptr,
-                                                                                                 this));
+  auto* close_button = qobject_cast<QAbstractButton*>(sender());
+  auto button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
+                                                                        nullptr,
+                                                                        this));
 
   if (close_button != nullptr) {
     // Find index of tab for this close button.
@@ -78,7 +78,8 @@ void TabBar::mousePressEvent(QMouseEvent* event) {
   if (tab_index >= 0) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
-    if (event->button() & Qt::MiddleButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseMiddleClick)).toBool()) {
+    if ((event->button() & Qt::MouseButton::MiddleButton) == Qt::MouseButton::MiddleButton &&
+        qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseMiddleClick)).toBool()) {
       // This tab is closable, so we can close it.
       emit tabCloseRequested(tab_index);
     }
@@ -94,7 +95,8 @@ void TabBar::mouseDoubleClickEvent(QMouseEvent* event) {
   if (tab_index >= 0) {
     // Check if user clicked tab with middle button.
     // NOTE: This needs to be done here because destination does not know the original event.
-    if (event->button() & Qt::MouseButton::LeftButton && qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
+    if ((event->button() & Qt::MouseButton::LeftButton) == Qt::MouseButton::LeftButton &&
+        qApp->settings()->value(GROUP(GUI), SETTING(GUI::TabCloseDoubleClick)).toBool()) {
       // This tab is closable, so we can close it.
       emit tabCloseRequested(tab_index);
     }

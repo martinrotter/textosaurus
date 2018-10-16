@@ -41,7 +41,7 @@ Application::Application(const QString& id, int& argc, char** argv)
   setStyleSheet(QSL("QStatusBar::item { border: none; } "
                     "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
 
-  qDebug("Instantiated Application class.");
+  qDebug().noquote() << QSL("Instantiated Application class.");
 }
 
 void Application::activateQtSingleMsgProcessing() {
@@ -126,13 +126,13 @@ QWidget* Application::mainFormWidget() {
 }
 
 void Application::showTrayIcon() {
-  qDebug("Showing tray icon.");
+  qDebug().noquote() << QSL("Showing tray icon.");
   trayIcon()->show();
 }
 
 void Application::deleteTrayIcon() {
   if (m_trayIcon != nullptr) {
-    qDebug("Disabling tray icon, deleting it and raising main application window.");
+    qDebug().noquote() << QSL("Disabling tray icon, deleting it and raising main application window.");
     m_mainForm->display();
     delete m_trayIcon;
     m_trayIcon = nullptr;
@@ -220,7 +220,9 @@ QString Application::homeFolder() {
 }
 
 void Application::processExecutionMessage(const QString& message) {
-  qDebug("Received '%s' execution message from another application instance.", qPrintable(message));
+  qDebug().noquote().nospace() << QSL("Received '")
+                               << message
+                               << QSL("' execution message from another application instance.");
   QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
 
   if (messages.contains(APP_QUIT_INSTANCE)) {
@@ -257,7 +259,7 @@ Application* Application::instance() {
 }
 
 void Application::onCommitData(QSessionManager& manager) {
-  qDebug("OS asked application to commit its data.");
+  qDebug().noquote() << QSL("OS asked application to commit its data.");
   manager.setRestartHint(QSessionManager::RestartNever);
 
   // Now we need to ask user to save any unsaved documents.
@@ -275,7 +277,7 @@ void Application::onCommitData(QSessionManager& manager) {
 }
 
 void Application::onSaveState(QSessionManager& manager) {
-  qDebug("OS asked application to save its state.");
+  qDebug().noquote() << QSL("OS asked application to save its state.");
   manager.setRestartHint(QSessionManager::RestartNever);
 }
 
@@ -299,7 +301,7 @@ void Application::onAboutToQuit() {
   eliminateFirstRun(APP_VERSION);
   processEvents();
 
-  qDebug("Cleaning up resources and saving application state.");
+  qDebug().noquote() << QSL("Cleaning up resources and saving application state.");
 
 #if defined(Q_OS_WIN)
   system()->removeTrolltechJunkRegistryKeys();
@@ -312,13 +314,13 @@ void Application::onAboutToQuit() {
   // Now, we can check if application should just quit or restart itself.
   if (m_shouldRestart) {
     finish();
-    qDebug("Killing local peer connection to allow another instance to start.");
+    qDebug().noquote() << QSL("Killing local peer connection to allow another instance to start.");
 
     if (QProcess::startDetached(QString("\"") + QDir::toNativeSeparators(applicationFilePath()) + QString("\""))) {
-      qDebug("New application instance was started.");
+      qDebug().noquote() << QSL("New application instance was started.");
     }
     else {
-      qWarning("New application instance was not started successfully.");
+      qWarning().noquote() << QSL("New application instance was not started successfully.");
     }
   }
 }
