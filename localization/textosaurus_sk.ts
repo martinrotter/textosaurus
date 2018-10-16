@@ -4,17 +4,17 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="41"/>
         <source>Read-Only Mode</source>
-        <translation type="unfinished"/>
+        <translation>Režim Len na čítanie</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="48"/>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="100"/>
         <source>New text file</source>
-        <translation type="unfinished"/>
+        <translation>Nový textový súbor</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="399"/>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="409"/>
         <source>&amp;MIME Tools</source>
-        <translation>&amp;Nástroje MIME</translation>
+        <translation>Nás&amp;troje MIME</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
@@ -481,33 +481,33 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.ui" line="14"/>
         <source>Enter Decryption Passphrase</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte dešifrovacie heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.ui" line="46"/>
         <source>&amp;Show password</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Zobraziť heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="14"/>
         <source>Decrypt &amp;&amp; Open File</source>
-        <translation type="unfinished"/>
+        <translation>Dešifrovať a otvoriť súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="16"/>
         <source>Enter Decryption Password</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte dešifrovacie heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="18"/>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="48"/>
         <source>Entered password is incorrect.</source>
-        <translation type="unfinished"/>
+        <translation>Zadané heslo nie je správne.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="45"/>
         <source>Nice! This is correct password.</source>
-        <translation type="unfinished"/>
+        <translation>Výborne! Zadali ste správne heslo.</translation>
     </message>
 </context>
 <context>
@@ -515,27 +515,27 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="14"/>
         <source>File Encryption Settings</source>
-        <translation type="unfinished"/>
+        <translation>Nastavenia šifrovania súboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="20"/>
         <source>Use File Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Použiť šifrovanie súboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="32"/>
         <source>&amp;Show password</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Zobraziť heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="14"/>
         <source>Enter Encryption Password</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte dešifrovacie heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="16"/>
         <source>Entered password is incorrect.</source>
-        <translation type="unfinished"/>
+        <translation>Zadané heslo nie je správne.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="51"/>
@@ -550,7 +550,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="57"/>
         <source>Enter some password.</source>
-        <translation type="unfinished"/>
+        <translation>Zadajte nejaké heslo.</translation>
     </message>
 </context>
 <context>
@@ -682,17 +682,17 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="50"/>
         <source>&amp;Save File with Encoding...</source>
-        <translation>&amp;Uložiť súbor s kódovaním...</translation>
+        <translation>Uložiť súbor s kódovaní&amp;m...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="55"/>
         <source>&amp;Open File with Encoding...</source>
-        <translation>&amp;Otvoriť súbor s kódovaním...</translation>
+        <translation>Otvoriť súbor s &amp;kódovaním...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="60"/>
         <source>&amp;Recent Files</source>
-        <translation>&amp;Nedávno otvorené súbory</translation>
+        <translation>Nedávno otvorené &amp;súbory</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="65"/>
@@ -732,7 +732,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="141"/>
         <source>&amp;Tabs</source>
-        <translation>Kar&amp;ty</translation>
+        <translation>&amp;Karty</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="153"/>
@@ -747,7 +747,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="160"/>
         <source>&amp;EOL Conversion</source>
-        <translation>Konv&amp;ertovať konce riadkov</translation>
+        <translation>&amp;Konvertovať konce riadkov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="168"/>
@@ -772,7 +772,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="208"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Ukončiť</translation>
+        <translation>Ukonč&amp;iť</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="539"/>
@@ -852,17 +852,17 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="312"/>
         <source>Close &amp;All Tabs</source>
-        <translation>Z&amp;avrieť všetky karty</translation>
+        <translation>Zavrieť &amp;všetky karty</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="317"/>
         <source>Close All Tabs &amp;Except Current</source>
-        <translation>Zavri&amp;eť všetky karty, okrem aktuálnej</translation>
+        <translation>Zavrieť všetky karty, &amp;okrem aktuálnej</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="322"/>
         <source>Go to &amp;Next Tab</source>
-        <translation>Prejsť &amp;na ďalšiu kartu</translation>
+        <translation>Prejsť na ďalšiu &amp;kartu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="327"/>
@@ -887,12 +887,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="356"/>
         <source>&amp;Save File as...</source>
-        <translation>&amp;Uložiť súbor ako...</translation>
+        <translation>Uložiť súbor &amp;ako...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="364"/>
         <source>&amp;Save All Files</source>
-        <translation>&amp;Uložiť všetky súbory</translation>
+        <translation>Uložiť &amp;všetky súbory</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="372"/>
@@ -962,7 +962,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="467"/>
         <source>&amp;Line Numbers</source>
-        <translation>&amp;Čísla riadkov</translation>
+        <translation>Čísla &amp;riadkov</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="472"/>
@@ -977,7 +977,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="488"/>
         <source>&amp;Reload From Disk</source>
-        <translation>&amp;Znovu načítať z disku</translation>
+        <translation>Znovu načítať z &amp;disku</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="496"/>
@@ -1002,12 +1002,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="531"/>
         <source>&amp;Print Preview (Grayscale)</source>
-        <translation>&amp;Ukážka pred tlačou (čiernobiela)</translation>
+        <translation>Ukážka pred tlačou (čierno&amp;biela)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="544"/>
         <source>File &amp;Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Šifrovani&amp;e súboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="40"/>
@@ -1496,7 +1496,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="119"/>
         <source>This sidebar displays output of external tools and some other critical information...</source>
-        <translation>Tento bočný panel zobrazuje výstup z externých nástrojov a niektoré ďalšie kritické informácie...</translation>
+        <translation>Tento panel zobrazuje výstup z externých nástrojov a niektoré ďalšie kritické informácie...</translation>
     </message>
 </context>
 <context>
@@ -1523,70 +1523,70 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="48"/>
         <source>cannot encrypt file with empty password</source>
-        <translation type="unfinished"/>
+        <translation>súbor sa nedá zašifrovať prázdnym heslom</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="58"/>
         <source>some weird error appeared when encrypting the file</source>
-        <translation type="unfinished"/>
+        <translation>pri šifrovaní súboru sa vyskytla neznáma chyba</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="68"/>
         <source>cannot decrypt file with empty password</source>
-        <translation type="unfinished"/>
+        <translation>súbor sa nedá dešifrovať prázdnym heslom</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="74"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="134"/>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="86"/>
         <source>insufficient permissions</source>
-        <translation type="unfinished"/>
+        <translation>nedostatočné práva</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="742"/>
         <source>Cannot save file</source>
-        <translation type="unfinished"/>
+        <translation>Nedá sa uložriť súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="743"/>
         <source>File &apos;%1&apos; cannot be saved because %2.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; sa nedá uložiť, pretože &apos;%2&apos;.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="831"/>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="880"/>
         <source>Cannot read file</source>
-        <translation type="unfinished"/>
+        <translation>Nedá sa prečítať súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason: &apos;%2&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; sa nedá otvoriť pre čítanie, dôvod: &apos;%2&apos;.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="881"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason &apos;%2&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; sa nedá otvoriť pre čítanie, dôvod: &apos;%2&apos;.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="22"/>
         <source>Cannot Open File</source>
-        <translation type="unfinished"/>
+        <translation>Nedá sa otvoriť súbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="23"/>
         <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
-        <translation type="unfinished"/>
+        <translation>Súbor &apos;%1&apos; je príliš veľký. %2 vie otvárať len súbory menšie ako %3 MB.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="58"/>
         <source>Loading Big File</source>
-        <translation type="unfinished"/>
+        <translation>Načítava sa veľký säbor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="59"/>
         <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
-        <translation type="unfinished"/>
+        <translation>Tento súbor je veľký. %2 vypne niektoré funkcie (napríklad zalamovanie riadkov, alebo zvýraznenie syntaxu), aby bolo načítanie súboru rýchlejšie.</translation>
     </message>
 </context>
 <context>
@@ -1604,7 +1604,7 @@ Môžte ho teraz nainštalovať.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="42"/>
         <source>Use Custom External Web Browser</source>
-        <translation>Použiť vlastný externý webový prehliadač</translation>
+        <translation>Použiť vlastný externý internetový prehliadač</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="39"/>
@@ -2498,7 +2498,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabwidget.cpp" line="121"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Zatvoriť</translation>
     </message>
 </context>
 <context>
