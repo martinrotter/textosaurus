@@ -27,7 +27,7 @@ class SettingsBrowserMail : public SettingsPanel {
     void onProxyTypeChanged(int index);
 
   private:
-    Ui::SettingsBrowserMail m_ui;
+    Ui::SettingsBrowserMail m_ui = {};
 };
 
 inline QString SettingsBrowserMail::title() const {

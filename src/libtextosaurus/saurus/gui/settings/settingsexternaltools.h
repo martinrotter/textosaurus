@@ -30,7 +30,7 @@ class SettingsExternalTools : public SettingsPanel {
     void displayToolDetails(QListWidgetItem* current, QListWidgetItem* previous);
 
   private:
-    Ui::SettingsExternalTools m_ui;
+    Ui::SettingsExternalTools m_ui = {};
     bool m_isSwitchingSelectedTool;
 };
 

@@ -66,8 +66,8 @@ void SettingsExternalTools::loadSettings() {
   foreach (const ExternalTool* tool, tools) {
     if (!tool->isPredefined()) {
       // We create clone of our tool.
-      QListWidgetItem* work_item = new QListWidgetItem(tool->name(), m_ui.m_listTools);
-      ExternalTool* work_tool = new ExternalTool(*tool, this);
+      auto* work_item = new QListWidgetItem(tool->name(), m_ui.m_listTools);
+      auto* work_tool = new ExternalTool(*tool, this);
 
       work_item->setData(Qt::UserRole, QVariant::fromValue(work_tool));
       m_ui.m_listTools->addItem(work_item);
@@ -88,7 +88,7 @@ void SettingsExternalTools::saveSettings() {
   QList<ExternalTool*> custom_tools;
 
   for (int i = 0; i < m_ui.m_listTools->count(); i++) {
-    ExternalTool* tool = m_ui.m_listTools->item(i)->data(Qt::UserRole).value<ExternalTool*>();
+    auto* tool = m_ui.m_listTools->item(i)->data(Qt::UserRole).value<ExternalTool*>();
 
     if (!tool->isPredefined()) {
       custom_tools.append(tool);
@@ -103,8 +103,8 @@ void SettingsExternalTools::saveSettings() {
 }
 
 void SettingsExternalTools::addNewTool() {
-  QListWidgetItem* item = new QListWidgetItem(tr("New tool"), m_ui.m_listTools);
-  ExternalTool* ext_tool = new ExternalTool(this);
+  auto* item = new QListWidgetItem(tr("New tool"), m_ui.m_listTools);
+  auto* ext_tool = new ExternalTool(this);
 
   ext_tool->setName(item->text());
   item->setData(Qt::UserRole, QVariant::fromValue(ext_tool));
@@ -116,8 +116,8 @@ void SettingsExternalTools::addNewTool() {
 
 void SettingsExternalTools::removeSelectedTool() {
   if (m_ui.m_listTools->currentItem() != nullptr) {
-    QListWidgetItem* item = m_ui.m_listTools->currentItem();
-    ExternalTool* ext_tool = item->data(Qt::UserRole).value<ExternalTool*>();
+    auto* item = m_ui.m_listTools->currentItem();
+    auto* ext_tool = item->data(Qt::UserRole).value<ExternalTool*>();
 
     ext_tool->deleteLater();
     delete m_ui.m_listTools->takeItem(m_ui.m_listTools->currentRow());
@@ -138,7 +138,7 @@ void SettingsExternalTools::updateToolListNames(const QString& name) {
 
 void SettingsExternalTools::saveToolChanges(QListWidgetItem* item) {
   if (item != nullptr) {
-    ExternalTool* ext_tool = item->data(Qt::UserRole).value<ExternalTool*>();
+    auto* ext_tool = item->data(Qt::UserRole).value<ExternalTool*>();
 
     ext_tool->setInterpreter(m_ui.m_txtInterpreter->text());
     ext_tool->setScript(m_ui.m_txtFullScript->toPlainText());
@@ -165,7 +165,7 @@ void SettingsExternalTools::displayToolDetails(QListWidgetItem* current, QListWi
     m_ui.m_toolDetails->setEnabled(true);
 
     // We display new tool.
-    ExternalTool* new_tool = current->data(Qt::UserRole).value<ExternalTool*>();
+    auto* new_tool = current->data(Qt::UserRole).value<ExternalTool*>();
 
     m_ui.m_txtInterpreter->setText(new_tool->interpreter());
     m_ui.m_txtTitle->setText(new_tool->name());

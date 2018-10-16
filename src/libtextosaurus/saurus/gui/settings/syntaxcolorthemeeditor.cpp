@@ -54,8 +54,8 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   m_ui.m_listComponents->clear();
 
   for (int i = 0; i < enums.keyCount(); i++) {
-    SyntaxColorTheme::StyleComponents component = SyntaxColorTheme::StyleComponents(enums.value(i));
-    QListWidgetItem* item = new QListWidgetItem(m_ui.m_listComponents);
+    auto component = SyntaxColorTheme::StyleComponents(enums.value(i));
+    auto* item = new QListWidgetItem(m_ui.m_listComponents);
 
     item->setData(Qt::UserRole, int(component));
     item->setText(labels[component]);
@@ -147,7 +147,6 @@ void SyntaxColorThemeEditor::clearBackgroundColor() {
 
 void SyntaxColorThemeEditor::updateCurrentComponent() {
   SyntaxColorTheme& curr_theme = currentColorTheme();
-
   SyntaxColorTheme::StyleComponents comp = itemComponent(m_ui.m_listComponents->currentRow());
 
   if (!m_ui.m_gbCustomizer->isCheckable() || m_ui.m_gbCustomizer->isChecked()) {
@@ -191,7 +190,6 @@ void SyntaxColorThemeEditor::onThemeSwitched(int row) {
 void SyntaxColorThemeEditor::displayComponentDetails(int row) {
   if (row >= 0) {
     SyntaxColorTheme curr_theme = currentColorTheme();
-
     SyntaxColorTheme::StyleComponents component = itemComponent(row);
 
     if (curr_theme.hasComponent(component)) {

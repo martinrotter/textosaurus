@@ -27,7 +27,7 @@ void SettingsLocalization::loadSettings() {
   onBeginLoadSettings();
 
   foreach (const Language& language, qApp->localization()->installedLanguages()) {
-    QTreeWidgetItem* item = new QTreeWidgetItem(m_ui.m_treeLanguages);
+    auto* item = new QTreeWidgetItem(m_ui.m_treeLanguages);
 
     item->setText(0, language.m_name);
     item->setText(1, language.m_code);
@@ -48,7 +48,7 @@ void SettingsLocalization::saveSettings() {
   onBeginSaveSettings();
 
   if (m_ui.m_treeLanguages->currentItem() == nullptr) {
-    qDebug("No localizations loaded in settings dialog, so no saving for them.");
+    qDebug().noquote() << QSL("No localizations loaded in settings dialog, so no saving for them.");
     return;
   }
 

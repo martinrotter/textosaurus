@@ -24,7 +24,7 @@ QVariant FindResultsModelItemResult::data(int role) const {
 }
 
 TextEditor* FindResultsModelItemResult::editor() const {
-  FindResultsModelItemEditor* item_editor = qobject_cast<FindResultsModelItemEditor*>(parentItem());
+  auto* item_editor = qobject_cast<FindResultsModelItemEditor*>(parentItem());
 
   if (item_editor != nullptr) {
     return item_editor->editor();

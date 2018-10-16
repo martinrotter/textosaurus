@@ -19,7 +19,7 @@ class SettingsGeneral : public SettingsPanel {
     virtual void saveSettings() override;
 
   private:
-    Ui::SettingsGeneral m_ui;
+    Ui::SettingsGeneral m_ui = {};
 };
 
 inline QString SettingsGeneral::title() const {

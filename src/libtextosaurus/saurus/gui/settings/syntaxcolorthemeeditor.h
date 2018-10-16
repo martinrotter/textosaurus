@@ -40,10 +40,12 @@ class SyntaxColorThemeEditor : public QWidget {
   private:
     SyntaxColorThemeComponent generateNewComponent() const;
     SyntaxColorTheme::StyleComponents itemComponent(int row) const;
+
     void loadColorTheme(const SyntaxColorTheme& theme);
 
   private:
-    Ui::SyntaxColorThemeEditor m_ui;
+    Ui::SyntaxColorThemeEditor m_ui = {};
+
     QList<SyntaxColorTheme> m_colorThemes;
     QMap<SyntaxColorTheme::StyleComponents, int> m_indexMapping;
 };

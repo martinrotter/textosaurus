@@ -11,7 +11,7 @@
 
 EditorTab::EditorTab(TextApplication* text_app, TextEditor* editor)
   : Tab(text_app->tabWidget()), m_editor(editor), m_title(QString()), m_toolTip(QString()) {
-  QVBoxLayout* lay = new QVBoxLayout(this);
+  auto* lay = new QVBoxLayout(this);
 
   lay->setMargin(0);
   lay->setSpacing(0);
@@ -37,7 +37,7 @@ EditorTab::EditorTab(TextApplication* text_app)
   : EditorTab(text_app, new TextEditor(text_app, this)) {}
 
 QMenu* EditorTab::contextMenu() const {
-  QMenu* menu = new QMenu();
+  auto* menu = new QMenu();
   QAction* act_read_only = menu->addAction(qApp->icons()->fromTheme(QSL("lock")), tr("Read-Only Mode"), [this](bool toggle) {
     m_editor->setReadOnly(toggle);
   });

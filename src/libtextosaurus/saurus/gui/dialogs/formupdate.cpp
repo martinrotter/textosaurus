@@ -126,22 +126,24 @@ void FormUpdate::saveUpdateFile(const QByteArray& file_contents) {
     QFile output_file(temp_directory + QDir::separator() + output_file_name);
 
     if (output_file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-      qDebug("Storing update file to temporary location '%s'.",
-             qPrintable(QDir::toNativeSeparators(output_file.fileName())));
+      qDebug().noquote().nospace() << QSL("Storing update file to temporary location '")
+                                   << QDir::toNativeSeparators(output_file.fileName())
+                                   << QSL("'.");
       output_file.write(file_contents);
       output_file.flush();
       output_file.close();
-      qDebug("Update file contents was successfuly saved.");
+      qDebug().noquote() << QSL("Update file contents was successfuly saved.");
       m_updateFilePath = output_file.fileName();
       m_readyToInstall = true;
     }
     else {
-      qDebug("Cannot save downloaded update file because target temporary file '%s' cannot be "
-             "opened for writing.", qPrintable(output_file_name));
+      qDebug().noquote().nospace() << QSL("Cannot save downloaded update file because target temporary file '")
+                                   << output_file_name
+                                   << QSL("' cannot be opened for writing.");
     }
   }
   else {
-    qDebug("Cannot save downloaded update file because no TEMP directory is available.");
+    qDebug().noquote() << QSL("Cannot save downloaded update file because no TEMP directory is available.");
   }
 }
 
@@ -170,7 +172,9 @@ void FormUpdate::loadAvailableFiles() {
 }
 
 void FormUpdate::updateCompleted(QNetworkReply::NetworkError status, const QByteArray& contents) {
-  qDebug("Download of application update file was completed with code '%d'.", status);
+  qDebug().noquote().nospace() << QSL("Download of application update file was completed with code '")
+                               << status
+                               << QSL("'.");
 
   switch (status) {
     case QNetworkReply::NoError:
@@ -203,7 +207,9 @@ void FormUpdate::startUpdate() {
 
   if (m_readyToInstall) {
     close();
-    qDebug("Preparing to launch external installer '%s'.", qPrintable(QDir::toNativeSeparators(m_updateFilePath)));
+    qDebug().noquote().nospace() << QSL("Preparing to launch external installer '")
+                                 << QDir::toNativeSeparators(m_updateFilePath)
+                                 << QSL("'.");
 #if defined(Q_OS_WIN)
     if (m_updateFilePath.endsWith(QL1S("exe"))) {
       HINSTANCE exec_result = ShellExecute(nullptr,
@@ -214,7 +220,7 @@ void FormUpdate::startUpdate() {
                                            SW_NORMAL);
 
       if (exec_result <= HINSTANCE(32)) {
-        qDebug("External updater was not launched due to error.");
+        qDebug().noquote() << QSL("External updater was not launched due to error.");
         QMessageBox::critical(this, tr("Cannot Start Installer"), tr("Cannot launch external updater. Update application manually."));
       }
       else {
@@ -223,7 +229,7 @@ void FormUpdate::startUpdate() {
     }
     else {
       if (!qApp->system()->openFolderFile(m_updateFilePath)) {
-        qDebug("External updater was not launched due to error.");
+        qDebug().noquote() << QSL("External updater was not launched due to error.");
         QMessageBox::critical(this, tr("Cannot Open Update File"), tr("Cannot open application update file. Update application manually."));
       }
       else {

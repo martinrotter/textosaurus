@@ -22,7 +22,7 @@ class SettingsGui : public SettingsPanel {
     virtual bool eventFilter(QObject* obj, QEvent* e) override;
 
   private:
-    Ui::SettingsGui m_ui;
+    Ui::SettingsGui m_ui = {};
 };
 
 inline QString SettingsGui::title() const {

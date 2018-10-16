@@ -28,7 +28,7 @@ class FindResultsModel : public QAbstractItemModel {
 
   public slots:
     void clear();
-    void addResults(TextEditor* editor, const QList<QPair<int, int>> results);
+    void addResults(TextEditor* editor, const QList<QPair<int, int>>& results);
 
   private:
     QScopedPointer<FindResultsModelItem> m_rootItem;

@@ -19,7 +19,7 @@ class SettingsShortcuts : public SettingsPanel {
     virtual void saveSettings() override;
 
   private:
-    Ui::SettingsShortcuts m_ui;
+    Ui::SettingsShortcuts m_ui = {};
 };
 
 inline QString SettingsShortcuts::title() const {

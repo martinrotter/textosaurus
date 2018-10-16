@@ -32,7 +32,7 @@ void SettingsPlugins::loadSettings() {
   onBeginLoadSettings();
 
   for (PluginState& plugin_state : qApp->textApplication()->settings()->pluginFactory()->plugins()) {
-    QTreeWidgetItem* ite = new QTreeWidgetItem();
+    auto* ite = new QTreeWidgetItem();
 
     ite->setData(0, Qt::ItemDataRole::UserRole, QVariant::fromValue<PluginState>(plugin_state));
     updateRow(ite);
@@ -57,7 +57,7 @@ void SettingsPlugins::goToWebsite() const {
 }
 
 void SettingsPlugins::updateRow(QTreeWidgetItem* row) {
-  PluginState plugin_state = row->data(0, Qt::ItemDataRole::UserRole).value<PluginState>();
+  auto plugin_state = row->data(0, Qt::ItemDataRole::UserRole).value<PluginState>();
 
   row->setText(0, plugin_state.pluginName());
   row->setText(1, plugin_state.pluginAuthor());

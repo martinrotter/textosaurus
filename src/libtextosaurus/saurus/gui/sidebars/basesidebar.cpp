@@ -16,7 +16,7 @@ BaseSidebar::BaseSidebar(TextApplication* text_app, QWidget* parent) : QDockWidg
 QAction* BaseSidebar::generateAction() {
   QAction* act_show = new QAction(windowTitle(), this);
 
-  act_show->setObjectName(QString("m_actionShow") + windowTitle().replace(QSL(" "), QSL("")));
+  act_show->setObjectName(QString("m_actionShow") + windowTitle().replace(QSL(" "), QString()));
   act_show->setCheckable(true);
 
   connect(this, &BaseSidebar::visibilityChanged, act_show, &QAction::setChecked);

@@ -56,7 +56,7 @@ void FindResultsSidebar::addResults(TextEditor* editor, const QList<QPair<int, i
 
 void FindResultsSidebar::navigateToResult(const QModelIndex& index) {
   FindResultsModelItem* item = m_model->itemForIndex(index);
-  FindResultsModelItemResult* result_item = qobject_cast<FindResultsModelItemResult*>(item);
+  auto* result_item = qobject_cast<FindResultsModelItemResult*>(item);
 
   if (result_item != nullptr && result_item->editor() != nullptr) {
     m_textApp->tabWidget()->makeEditorVisible(result_item->editor());

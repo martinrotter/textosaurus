@@ -28,7 +28,7 @@ class SettingsPlugins : public SettingsPanel {
     PluginState selectedPlugin() const;
 
   private:
-    Ui::SettingsPlugins m_ui;
+    Ui::SettingsPlugins m_ui = {};
 };
 
 #endif // SETTINGSPLUGINS_H

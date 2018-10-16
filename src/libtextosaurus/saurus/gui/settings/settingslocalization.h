@@ -19,7 +19,7 @@ class SettingsLocalization : public SettingsPanel {
     virtual void saveSettings() override;
 
   private:
-    Ui::SettingsLocalization m_ui;
+    Ui::SettingsLocalization m_ui = {};
 };
 
 inline QString SettingsLocalization::title() const {

@@ -8,6 +8,8 @@
 #include <QSize>
 #include <QTextDocument>
 
+#include <QtMath>
+
 FindResultsModel::FindResultsModel(QObject* parent)
   : QAbstractItemModel(parent), m_rootItem(new FindResultsModelItem(this)) {}
 
@@ -19,7 +21,7 @@ QModelIndex FindResultsModel::index(int row, int column, const QModelIndex& pare
   FindResultsModelItem* parentItem = itemForIndex(parent);
   FindResultsModelItem* childItem = parentItem->child(row);
 
-  if (childItem) {
+  if (childItem != nullptr) {
     return createIndex(row, column, childItem);
   }
   else {
@@ -75,18 +77,18 @@ void FindResultsModel::clear() {
   }
 }
 
-void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int>> results) {
+void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int>>& results) {
   clear();
 
   beginInsertRows(QModelIndex(), 0, 1);
-  FindResultsModelItemEditor* item_editor = new FindResultsModelItemEditor(editor, this);
+  auto* item_editor = new FindResultsModelItemEditor(editor, this);
 
-  for (const QPair<int, int> range : results) {
-    int line = editor->lineFromPosition(range.first) + 1;
+  for (const QPair<int, int>& range : results) {
+    int line = int(editor->lineFromPosition(range.first)) + 1;
     QString result_text = QString(editor->textRange(range.first, range.second)).toHtmlEscaped();
 
     if (result_text.isEmpty()) {
-      result_text = "&#10650;";
+      result_text = QSL("&#10650;");
     }
 
     QString text = QString("%2<b style=\"color: red;\">%1</b>%3").arg(result_text,
@@ -98,9 +100,8 @@ void FindResultsModel::addResults(TextEditor* editor, const QList<QPair<int, int
                                                                                                 qMin(range.second +
                                                                                                      FIND_RESULT_ENCLOSING_CHAR_COUNT,
                                                                                                      int(editor->length())))).toHtmlEscaped());
-    FindResultsModelItemResult* item_result = new FindResultsModelItemResult(text, line, range, item_editor);
 
-    item_editor->appendChild(item_result);
+    item_editor->appendChild(new FindResultsModelItemResult(text, line, range, item_editor));
   }
 
   m_rootItem->appendChild(item_editor);
@@ -123,7 +124,7 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, 
 
   initStyleOption(&optionV4, index);
 
-  QStyle* style = optionV4.widget ? optionV4.widget->style() : QApplication::style();
+  QStyle* style = optionV4.widget != nullptr ? optionV4.widget->style() : QApplication::style();
   QTextDocument doc;
 
   doc.setHtml(optionV4.text);
@@ -134,10 +135,8 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, 
 
   QAbstractTextDocumentLayout::PaintContext ctx;
 
-  if (optionV4.state & QStyle::State_Selected) {
-    if (optionV4.state & QStyle::State_HasFocus) {
-      ctx.palette.setColor(QPalette::Text, optionV4.palette.color(QPalette::Active, QPalette::HighlightedText));
-    }
+  if ((optionV4.state & (QStyle::State_Selected | QStyle::State_HasFocus)) > 0) {
+    ctx.palette.setColor(QPalette::Text, optionV4.palette.color(QPalette::Active, QPalette::HighlightedText));
   }
 
   QRect text_rect = style->subElementRect(QStyle::SE_ItemViewItemText, &optionV4);
@@ -160,7 +159,7 @@ QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelInd
   doc.setDocumentMargin(2);
   doc.setHtml(optionV4.text);
   doc.setTextWidth(optionV4.rect.width());
-  auto siz = QSize(doc.idealWidth(), doc.size().height());
+  auto siz = QSize(qCeil(doc.idealWidth()), qCeil(doc.size().height()));
 
   return siz;
 }

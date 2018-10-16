@@ -22,7 +22,7 @@ class SettingsEditor : public SettingsPanel {
     void changeMainFont();
 
   private:
-    Ui::SettingsEditor m_ui;
+    Ui::SettingsEditor m_ui = {};
 };
 
 inline QString SettingsEditor::title() const {
