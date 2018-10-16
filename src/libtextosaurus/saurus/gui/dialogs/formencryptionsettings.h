@@ -24,7 +24,7 @@ class FormEncryptionSettings : public QDialog {
     void updateResults();
 
   private:
-    Ui::FormEncryptionSettings m_ui;
+    Ui::FormEncryptionSettings m_ui = {};
 };
 
 #endif // FORMENCRYPTIONSETTINGS_H

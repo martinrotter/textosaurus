@@ -45,7 +45,7 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
 
   // Run in bash.
-  QProcess* bash_process = new QProcess(this);
+  auto* bash_process = new QProcess(this);
 
   bash_process->setProcessEnvironment(QProcessEnvironment::systemEnvironment());
 
@@ -87,7 +87,7 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 }
 
 void ExternalTool::onProcessError(QPointer<TextEditor> editor) {
-  QProcess* bash_process = qobject_cast<QProcess*>(sender());
+  auto* bash_process = qobject_cast<QProcess*>(sender());
   emit toolFinished(editor, QString(), bash_process->errorString(), false);
 
   m_isRunning = false;
@@ -95,7 +95,7 @@ void ExternalTool::onProcessError(QPointer<TextEditor> editor) {
 }
 
 void ExternalTool::onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status) {
-  QProcess* bash_process = qobject_cast<QProcess*>(sender());
+  auto* bash_process = qobject_cast<QProcess*>(sender());
 
   if (exit_status == QProcess::ExitStatus::NormalExit) {
     QByteArray tool_output = bash_process->readAllStandardOutput();

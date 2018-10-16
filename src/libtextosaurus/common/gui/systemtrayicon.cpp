@@ -27,7 +27,7 @@ SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
                                std::function<void()> visibility_switcher, QWidget* parent)
   : QSystemTrayIcon(parent), m_normalIcon(normal_icon), m_visibilitySwitcher(std::move(visibility_switcher)),
   m_messageTarget(nullptr) {
-  qDebug() << "Creating SystemTrayIcon instance.";
+  qDebug().noquote() << QSL("Creating SystemTrayIcon instance.");
 
   QSystemTrayIcon::setIcon(m_normalIcon);
 
@@ -48,7 +48,7 @@ SystemTrayIcon::SystemTrayIcon(const QString& normal_icon, QMenu* menu,
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
-  qDebug() << "Destroying SystemTrayIcon instance.";
+  qDebug().noquote() << QSL("Destroying SystemTrayIcon instance.");
   hide();
 }
 
@@ -87,19 +87,19 @@ void SystemTrayIcon::showPrivate() {
   QSystemTrayIcon::show();
   emit shown();
 
-  qDebug() << "Tray icon displayed.";
+  qDebug().noquote() << QSL("Tray icon displayed.");
 }
 
 void SystemTrayIcon::show() {
 #if defined(Q_OS_WIN)
 
   // Show immediately.
-  qDebug() << "Showing tray icon immediately.";
+  qDebug() << QSL("Showing tray icon immediately.");
   showPrivate();
 #else
 
   // Delay avoids race conditions and tray icon is properly displayed.
-  qDebug() << "Showing tray icon with 1000 ms delay.";
+  qDebug().noquote() << QSL("Showing tray icon with 1000 ms delay.");
   QTimer::singleShot(1000, this, SLOT(showPrivate()));
 #endif
 }

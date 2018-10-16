@@ -36,18 +36,23 @@ void BaseNetworkAccessManager::loadSettings() {
     // Custom proxy is selected, set it up.
     new_proxy.setType(selected_proxy_type);
     new_proxy.setHostName(settings->value(GROUP(Proxy), Proxy::Host).toString());
-    new_proxy.setPort(settings->value(GROUP(Proxy), SETTING(Proxy::Port)).toInt());
+    new_proxy.setPort(quint16(settings->value(GROUP(Proxy), SETTING(Proxy::Port)).toInt()));
     new_proxy.setUser(settings->value(GROUP(Proxy), Proxy::Username).toString());
     new_proxy.setPassword(settings->value(GROUP(Proxy), Proxy::Password).toString());
     setProxy(new_proxy);
   }
 
-  qDebug("Settings of BaseNetworkAccessManager loaded.");
+  qDebug().noquote() << QSL("Settings of BaseNetworkAccessManager loaded.");
 }
 
 void BaseNetworkAccessManager::onSslErrors(QNetworkReply* reply, const QList<QSslError>& error) {
-  qWarning("Ignoring SSL errors for '%s': '%s' (code %d).", qPrintable(reply->url().toString()), qPrintable(reply->errorString()),
-           (int) reply->error());
+  qWarning().noquote().nospace() << QSL("Ignoring SSL errors for '")
+                                 << reply->url()
+                                 << QSL("': '")
+                                 << reply->errorString()
+                                 << QSL("' (code ")
+                                 << reply->error()
+                                 << QSL(").");
 
   reply->ignoreSslErrors(error);
 }

@@ -107,9 +107,8 @@ QString PredefinedTools::xmlCheck(const QString& data, bool* ok) {
     if (reader.hasError()) {
       break;
     }
-    else {
-      reader.readNext();
-    }
+
+    reader.readNext();
   }
 
   *ok = !reader.hasError();
@@ -183,7 +182,7 @@ QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
       xml_encoding = reader.documentEncoding().toString();
 
       if (xml_encoding.isEmpty()) {
-        qWarning("No XML encoding detected when beautifying XML file.");
+        qWarning().noquote() << QSL("No XML encoding detected when beautifying XML file.");
       }
       else {
         writer.setCodec(xml_encoding.toUtf8().data());

@@ -18,7 +18,7 @@ class FormAbout : public QDialog {
     void loadLicenseAndInformation();
     void loadSettingsAndPaths();
 
-    Ui::FormAbout m_ui;
+    Ui::FormAbout m_ui = {};
 };
 
 #endif // FORMABOUT_H

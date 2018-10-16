@@ -39,7 +39,7 @@ class FormFindReplace : public QDialog {
     void searchOne(bool reverse);
 
   private:
-    Ui::FormFindReplace m_ui;
+    Ui::FormFindReplace m_ui = {};
     TextApplication* m_application;
 };
 

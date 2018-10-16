@@ -68,7 +68,7 @@ class TEXTOSAURUS_DLLSPEC FormMain : public QMainWindow {
     void createConnections();
     void setupIcons();
 
-    Ui::FormMain m_ui;
+    Ui::FormMain m_ui = {};
     TabWidget* m_tabEditors;
     StatusBar* m_statusBar;
     ToolBar* m_toolBar;

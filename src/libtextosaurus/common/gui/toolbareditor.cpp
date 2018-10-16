@@ -39,7 +39,7 @@ ToolBarEditor::ToolBarEditor(QWidget* parent)
 }
 
 ToolBarEditor::~ToolBarEditor() {
-  qDebug("Destroying ToolBarEditor instance.");
+  qDebug() << QSL("Destroying ToolBarEditor instance.");
 }
 
 void ToolBarEditor::loadFromToolBar(BaseBar* tool_bar) {
@@ -144,11 +144,11 @@ bool ToolBarEditor::eventFilter(QObject* object, QEvent* event) {
         deleteSelectedAction();
         return true;
       }
-      else if (key_event->key() == Qt::Key_Down && key_event->modifiers() & Qt::ControlModifier) {
+      else if (key_event->key() == Qt::Key_Down && (key_event->modifiers() & Qt::ControlModifier) == Qt::ControlModifier) {
         moveActionDown();
         return true;
       }
-      else if (key_event->key() == Qt::Key_Up && key_event->modifiers() & Qt::ControlModifier) {
+      else if (key_event->key() == Qt::Key_Up && (key_event->modifiers() & Qt::ControlModifier) == Qt::ControlModifier) {
         moveActionUp();
         return true;
       }

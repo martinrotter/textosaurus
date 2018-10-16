@@ -13,7 +13,8 @@ class TEXTOSAURUS_DLLSPEC Debugging {
     // Specifies format of output console messages.
     // NOTE: QT_NO_DEBUG_OUTPUT - disables debug outputs completely!!!
     static void debugHandler(QtMsgType type, const QMessageLogContext& placement, const QString& message);
-    static void performLog(const QString& message, QtMsgType type, const char* file = 0, const char* function = 0, int line = -1);
+    static void performLog(const QString& message, QtMsgType type, const char* file = nullptr,
+                           const char* function = nullptr, int line = -1);
     static QString typeToString(QtMsgType type);
 };
 

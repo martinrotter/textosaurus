@@ -37,7 +37,7 @@ class FormUpdate : public QDialog {
   private:
     void loadAvailableFiles();
 
-    Ui::FormUpdate m_ui;
+    Ui::FormUpdate m_ui = {};
     QPushButton* m_btnUpdate;
     Downloader m_downloader;
     QString m_updateFilePath;

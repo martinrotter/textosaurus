@@ -3,6 +3,7 @@
 #include "common/miscellaneous/iconfactory.h"
 
 #include <QBuffer>
+#include <QDebug>
 
 IconFactory::IconFactory(QObject* parent) : QObject(parent) {}
 
@@ -11,41 +12,41 @@ QIcon IconFactory::fromTheme(const QString& name) {
 }
 
 QIcon IconFactory::miscIcon(const QString& name) {
-  return QIcon(QString(APP_THEME_PATH) + QDir::separator() + "misc" + QDir::separator() + name + ".png");
+  return QIcon(QString(APP_THEME_PATH) + QDir::separator() + QL1S("misc") + QDir::separator() + name + QL1S(".png"));
 }
 
 void IconFactory::setupSearchPaths() {
   QIcon::setThemeSearchPaths(QIcon::themeSearchPaths() << APP_THEME_PATH);
-  qDebug("Available icon theme paths: %s.",
-         qPrintable(QIcon::themeSearchPaths()
-                    .replaceInStrings(QRegExp(QSL("^|$")), QSL("\'"))
-                    .replaceInStrings(QRegExp(QSL("/")), QDir::separator()).join(QSL(", "))));
+  qDebug().noquote().nospace() << QSL("Available icon theme paths: ")
+                               << QIcon::themeSearchPaths()
+                               << QSL(".");
 }
 
 void IconFactory::loadIconTheme(const QString& theme_name) {
   const QStringList installed_themes = installedIconThemes();
 
   if (currentIconTheme() == theme_name) {
-    qDebug("Icon theme '%s' already loaded.", qPrintable(theme_name));
+    qDebug().noquote().nospace() << QSL("Icon theme '") << theme_name << QSL("' already loaded.");
     return;
   }
 
   // Display list of installed themes.
-  qDebug("Installed icon themes are: %s.",
-         qPrintable(QStringList(installed_themes)
-                    .replaceInStrings(QRegExp(QSL("^|$")), QSL("\'"))
-                    .replaceInStrings(QRegExp(QSL("^\\'$")), QSL("\'\'")).join(QSL(", "))));
+  qDebug().noquote().nospace() << "Installed icon themes: "
+                               << QStringList(installed_themes)
+                               << QSL(".");
 
   if (installed_themes.contains(theme_name)) {
     // Desired icon theme is installed and can be loaded.
-    qDebug("Loading icon theme '%s'.", qPrintable(theme_name));
+    qDebug().noquote().nospace() << QSL("Loading icon theme '") << theme_name << QSL("'.");
     QIcon::setThemeName(theme_name);
   }
   else {
     // Desired icon theme is not currently available.
     // Install "default" icon theme instead.
-    qWarning("Icon theme '%s' cannot be loaded because it is not installed. No icon theme (or default icon theme) is loaded now.",
-             qPrintable(theme_name));
+    qWarning().noquote().nospace()
+      << QSL("Icon theme '")
+      << theme_name
+      << QSL("' cannot be loaded because it is not installed. No icon theme (or default icon theme) is loaded now.");
     QIcon::setThemeName(APP_NO_THEME);
   }
 }

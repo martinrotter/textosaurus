@@ -27,7 +27,7 @@ class FormSettings : public QDialog {
   private:
     void addSettingsPanel(SettingsPanel* panel);
 
-    Ui::FormSettings m_ui;
+    Ui::FormSettings m_ui = {};
     QPushButton* m_btnApply;
 
     QList<SettingsPanel*> m_panels;

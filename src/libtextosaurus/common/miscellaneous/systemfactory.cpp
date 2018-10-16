@@ -56,7 +56,7 @@ bool SystemFactory::removeTrolltechJunkRegistryKeys() {
 #endif
 
 void SystemFactory::checkForUpdates() {
-  Downloader* downloader = new Downloader();
+  auto* downloader = new Downloader();
 
   connect(downloader, &Downloader::completed, this, [this, downloader]() {
     QPair<QList<UpdateInfo>, QNetworkReply::NetworkError> result;

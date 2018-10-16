@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sk" sourcelanguage="en" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sk" sourcelanguage="en">
 <context>
     <name>EditorTab</name>
     <message>
@@ -354,7 +356,11 @@
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
         <source>%n result(s) - </source>
-        <translation><numerusform>%n výsledok</numerusform><numerusform>%n výsledky</numerusform><numerusform>%n výsledkov</numerusform><numerusform>%n výsledkov</numerusform></translation>
+        <translation>
+            <numerusform>%n výsledok</numerusform>
+            <numerusform>%n výsledky</numerusform>
+            <numerusform>%n výsledkov</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="19"/>
@@ -540,12 +546,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="51"/>
         <source>Nice! You are good to go.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="54"/>
         <source>Your password is too short, but it&apos;s your call, boss!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="57"/>
@@ -658,7 +664,11 @@
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="147"/>
         <source>Replaced %n occurrence(s).</source>
-        <translation><numerusform>Nahradený %n výskyt.</numerusform><numerusform>Nahradené %n výskyty.</numerusform><numerusform>Nahradených %n výskytov.</numerusform><numerusform>Nahradených %n výskytov.</numerusform></translation>
+        <translation>
+            <numerusform>Nahradený %n výskyt.</numerusform>
+            <numerusform>Nahradené %n výskyty.</numerusform>
+            <numerusform>Nahradených %n výskytov.</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="182"/>
@@ -1015,9 +1025,9 @@
         <translation>Hlavný panel nástrojov</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="364"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="371"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="378"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="367"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="374"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="381"/>
         <source>Cannot open external browser. Navigate to application website manually.</source>
         <translation>Nedá sa otvoriť externý prehliadač. Prejdite na webstránku programu ručne.</translation>
     </message>
@@ -1543,28 +1553,28 @@ Môžte ho teraz nainštalovať.</translation>
         <translation>nedostatočné práva</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="742"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="744"/>
         <source>Cannot save file</source>
         <translation>Nedá sa uložriť súbor</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="743"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="745"/>
         <source>File &apos;%1&apos; cannot be saved because %2.</source>
         <translation>Súbor &apos;%1&apos; sa nedá uložiť, pretože &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="831"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="880"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="834"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="883"/>
         <source>Cannot read file</source>
         <translation>Nedá sa prečítať súbor</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="835"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason: &apos;%2&apos;.</source>
         <translation>Súbor &apos;%1&apos; sa nedá otvoriť pre čítanie, dôvod: &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="881"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="884"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason &apos;%2&apos;.</source>
         <translation>Súbor &apos;%1&apos; sa nedá otvoriť pre čítanie, dôvod: &apos;%2&apos;.</translation>
     </message>
@@ -2588,7 +2598,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="383"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="843"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="846"/>
         <source>Unsaved Changes</source>
         <translation>Neuložené zmeny</translation>
     </message>
@@ -2598,7 +2608,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <translation>Tento dokument obsahuje neuložené zmeny. Chcete ho uložiť?</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="844"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="847"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
         <translation>Tento dokument obsahuje neuložené zmeny. Chcete ich ignorovať a súbor znovu načítať?</translation>
     </message>

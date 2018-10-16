@@ -47,7 +47,7 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   createConnections();
   setupIcons();
 
-  qDebug().nospace() << "Creating main application form in thread: \'" << QThread::currentThreadId() << "\'.";
+  qDebug().nospace() << QSL("Creating main application form in thread: \'") << QThread::currentThreadId() << "\'.";
 }
 
 TabWidget* FormMain::tabWidget() const {
@@ -142,7 +142,7 @@ void FormMain::switchFullscreenMode() {
 void FormMain::changeEvent(QEvent* event) {
   switch (event->type()) {
     case QEvent::WindowStateChange: {
-      if (windowState() & Qt::WindowMinimized &&
+      if ((windowState() & Qt::WindowMinimized) == Qt::WindowMinimized &&
           SystemTrayIcon::isSystemTrayActivated() &&
           qApp->settings()->value(GROUP(GUI), SETTING(GUI::HideMainWindowWhenMinimized)).toBool()) {
         event->ignore();

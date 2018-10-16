@@ -16,11 +16,11 @@ bool WebFactory::openUrlInExternalBrowser(const QString& url) const {
     const QString arguments = qApp->settings()->value(GROUP(Browser), SETTING(Browser::CustomExternalBrowserArguments)).toString();
     const QString call_line = "\"" + browser + "\" \"" + arguments.arg(url) + "\"";
 
-    qDebug("Running command '%s'.", qPrintable(call_line));
+    qDebug().noquote().nospace() << QSL("Running command '") << call_line << QSL("'.");
     const bool result = QProcess::startDetached(call_line);
 
     if (!result) {
-      qDebug("External web browser call failed.");
+      qDebug() << QSL("External web browser call failed.");
     }
 
     return result;

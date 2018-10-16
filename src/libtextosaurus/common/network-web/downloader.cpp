@@ -75,9 +75,9 @@ void Downloader::manipulateData(const QString& url,
 }
 
 void Downloader::finished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-
+  auto* reply = qobject_cast<QNetworkReply*>(sender());
   QNetworkAccessManager::Operation reply_operation = reply->operation();
+
   m_timer->stop();
 
   // In this phase, some part of downloading process is completed.

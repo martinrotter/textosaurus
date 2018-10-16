@@ -41,15 +41,15 @@ class CryptoFactory {
     ~CryptoFactory() = delete;
 
     // Encrypts data with given password.
-    static QByteArray encryptData(QString password, QByteArray data);
+    static QByteArray encryptData(const QString& password, const QByteArray& data);
 
     // Decrypts data with given password.
     // Throws exception if password is invalid or other
     // problem appears.
-    static QByteArray decryptData(QString password, QFile& file);
+    static QByteArray decryptData(const QString& password, QFile& file);
 
     // Checks if provided password is correct one.
-    static bool isPasswordCorrect(QString password, QFile& file);
+    static bool isPasswordCorrect(const QString& password, QFile& file);
 
     // Decides whether file is highly probably encrypted or not.
     static bool isEncrypted(QFile& file);

@@ -39,7 +39,7 @@ bool CryptoFactory::isEncrypted(QFile& file) {
   return border_1_found && border_2_found;
 }
 
-QByteArray CryptoFactory::encryptData(QString password, QByteArray data) {
+QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray& data) {
   if (data.isEmpty()) {
     return QByteArray();
   }
@@ -63,7 +63,7 @@ QByteArray CryptoFactory::encryptData(QString password, QByteArray data) {
   return QByteArray(1, CRYPTO_FORMAT_BOUNDARY) + hmachash + QByteArray(1, CRYPTO_FORMAT_BOUNDARY) + encpayload;
 }
 
-QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
+QByteArray CryptoFactory::decryptData(const QString& password, QFile& file) {
   if (password.isEmpty()) {
     throw ApplicationException(QObject::tr("cannot decrypt file with empty password"));
   }
@@ -123,7 +123,7 @@ QByteArray CryptoFactory::decryptData(QString password, QFile& file) {
   throw ApplicationException("unspecified error when decrypting file");
 }
 
-bool CryptoFactory::isPasswordCorrect(QString password, QFile& file) {
+bool CryptoFactory::isPasswordCorrect(const QString& password, QFile& file) {
   if (password.isEmpty()) {
     return false;
   }

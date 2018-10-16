@@ -17,34 +17,44 @@ QString Localization::desiredLanguage() const {
 }
 
 void Localization::loadActiveLanguage() {
-  QTranslator* qt_translator = new QTranslator(qApp);
-  QTranslator* app_translator = new QTranslator(qApp);
+  auto* qt_translator = new QTranslator(qApp);
+  auto* app_translator = new QTranslator(qApp);
   QString desired_localization = desiredLanguage();
 
-  qDebug("Starting to load active localization. Desired localization is '%s'.", qPrintable(desired_localization));
+  qDebug().nospace().noquote() << QSL("Starting to load active localization. Desired localization is '")
+                               << desired_localization
+                               << QSL("'.");
 
   if (app_translator->load(QLocale(desired_localization), "textosaurus", QSL("_"), APP_LANG_PATH)) {
     const QString real_loaded_locale = app_translator->translate("QObject", "LANG_ABBREV");
 
     Application::installTranslator(app_translator);
-    qDebug("Application localization '%s' loaded successfully, specifically sublocalization '%s' was loaded.",
-           qPrintable(desired_localization),
-           qPrintable(real_loaded_locale));
+    qDebug().nospace().noquote() << QSL("Application localization '")
+                                 << desired_localization
+                                 << QSL("' loaded successfully, specifically sublocalization '")
+                                 << real_loaded_locale
+                                 << QSL("' was loaded.");
     desired_localization = real_loaded_locale;
   }
   else {
-    qWarning("Application localization '%s' was not loaded. Loading '%s' instead.",
-             qPrintable(desired_localization),
-             DEFAULT_LOCALE);
+    qWarning().nospace().noquote() << QSL("Application localization '")
+                                   << desired_localization
+                                   << QSL("' was not loaded. Loading '")
+                                   << DEFAULT_LOCALE
+                                   << QSL("' instead.");
     desired_localization = DEFAULT_LOCALE;
   }
 
   if (qt_translator->load(QLocale(desired_localization), "qtbase", QSL("_"), APP_LANG_PATH)) {
     Application::installTranslator(qt_translator);
-    qDebug("Qt localization '%s' loaded successfully.", qPrintable(desired_localization));
+    qDebug().nospace().noquote() << QSL("Qt localization '")
+                                 << desired_localization
+                                 << QSL("' loaded successfully.");
   }
   else {
-    qWarning("Qt localization '%s' was not loaded.", qPrintable(desired_localization));
+    qWarning().nospace().noquote() << QSL("Qt localization '")
+                                   << desired_localization
+                                   << QSL("' was NOT loaded.");
   }
 
   m_loadedLanguage = desired_localization;

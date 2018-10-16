@@ -1023,9 +1023,9 @@
         <translation type="unfinished">Main Toolbar</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="364"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="371"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="378"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="367"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="374"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="381"/>
         <source>Cannot open external browser. Navigate to application website manually.</source>
         <translation type="unfinished">Cannot open external browser. Navigate to application website manually.</translation>
     </message>
@@ -1554,28 +1554,28 @@ You can install it now.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="742"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="744"/>
         <source>Cannot save file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="743"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="745"/>
         <source>File &apos;%1&apos; cannot be saved because %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="831"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="880"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="834"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="883"/>
         <source>Cannot read file</source>
         <translation type="unfinished">Cannot read file</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="835"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason: &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="881"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="884"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2599,7 +2599,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="383"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="843"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="846"/>
         <source>Unsaved Changes</source>
         <translation type="unfinished">Unsaved Changes</translation>
     </message>
@@ -2609,7 +2609,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <translation type="unfinished">This document has unsaved changes, do you want to save them?</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="844"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="847"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
         <translation type="unfinished">This document has unsaved changes, do you want to ignore the changes and reload file?</translation>
     </message>

@@ -50,7 +50,7 @@ QList<QAction*> ExternalTools::generateToolsMenuTools(QWidget* parent) const {
 
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
-        QMenu* category_menu = new QMenu(parent);
+        auto* category_menu = new QMenu(parent);
 
         category_menu->setTitle(tool->category());
 
@@ -96,7 +96,7 @@ QList<QAction*> ExternalTools::generateEditMenuTools(QWidget* parent) const {
 
     if (!tool->category().isEmpty()) {
       if (!categories.contains(tool->category())) {
-        QMenu* category_menu = new QMenu(parent);
+        auto* category_menu = new QMenu(parent);
 
         category_menu->setTitle(tool->category());
         actions.append(category_menu->menuAction());
@@ -170,7 +170,7 @@ void ExternalTools::runSelectedExternalTool() {
   TextEditor* editor = m_application->tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    ExternalTool* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
+    auto* tool_to_run = qobject_cast<QAction*>(sender())->data().value<ExternalTool*>();
 
     connect(tool_to_run, &ExternalTool::toolFinished, this, &ExternalTools::onToolFinished,
             Qt::ConnectionType(Qt::ConnectionType::AutoConnection | Qt::ConnectionType::UniqueConnection));
@@ -468,7 +468,7 @@ void ExternalTools::loadCustomTools() {
   foreach (const QString& section, sections) {
     sett_ext_tools.beginGroup(section);
 
-    ExternalTool* tool = new ExternalTool(this);
+    auto* tool = new ExternalTool(this);
 
     tool->setInterpreter(sett_ext_tools.value(QSL("interpreter"), EXT_TOOL_INTERPRETER).toString());
     tool->setName(sett_ext_tools.value(QSL("name")).toString());
@@ -486,7 +486,7 @@ void ExternalTools::loadCustomTools() {
 
   // We add extra tools if this is the first time when app runs.
   if (m_customTools.isEmpty()) {
-    ExternalTool* ext_bash_xml = new ExternalTool(this);
+    auto* ext_bash_xml = new ExternalTool(this);
 
     ext_bash_xml->setScript("IFS=''"
                             "read -r fil"
@@ -499,7 +499,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_bash_xml);
 
-    ExternalTool* ext_bash_json = new ExternalTool(this);
+    auto* ext_bash_json = new ExternalTool(this);
 
     ext_bash_json->setScript("import sys, json;\n\ndata = json.load(sys.stdin)\nprint(json.dumps(data, indent=2))");
     ext_bash_json->setCategory(tr("Python (external tool examples)"));
@@ -510,7 +510,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_bash_json);
 
-    ExternalTool* ext_bash_sha256 = new ExternalTool(this);
+    auto* ext_bash_sha256 = new ExternalTool(this);
 
     ext_bash_sha256->setScript("sha256sum | head -c 64");
     ext_bash_sha256->setCategory(tr("Bash (external tool examples)"));
@@ -520,7 +520,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_bash_sha256);
 
-    ExternalTool* ext_python_reverse = new ExternalTool(this);
+    auto* ext_python_reverse = new ExternalTool(this);
 
     ext_python_reverse->setScript("print raw_input().lower()[::-1]");
     ext_python_reverse->setInterpreter(QSL("python3.6"));
@@ -531,7 +531,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_python_reverse);
 
-    ExternalTool* ext_bash_seq = new ExternalTool(this);
+    auto* ext_bash_seq = new ExternalTool(this);
 
     ext_bash_seq->setScript("IFS=' '\nread -r a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
     ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
@@ -542,7 +542,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_bash_seq);
 
-    ExternalTool* ext_python_eval = new ExternalTool(this);
+    auto* ext_python_eval = new ExternalTool(this);
 
     ext_python_eval->setScript("import sys\nimport math\n\nprint(eval(sys.stdin.read()))");
     ext_python_eval->setCategory(tr("Python (external tool examples)"));
@@ -554,7 +554,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_python_eval);
 
-    ExternalTool* ext_bash_garbage = new ExternalTool(this);
+    auto* ext_bash_garbage = new ExternalTool(this);
 
     ext_bash_garbage->setScript("read -r count\n\n"
                                 "tr -dc a-z1-4 </dev/urandom | tr 1-2 ' \n' | awk 'length==0 || length>50' | tr 3-4 ' ' | sed 's/^ *//' | cat -s | sed 's/ / /g' | fmt | head -n $count");
@@ -566,7 +566,7 @@ void ExternalTools::loadCustomTools() {
 
     m_customTools.append(ext_bash_garbage);
 
-    ExternalTool* ext_bash_exec = new ExternalTool(this);
+    auto* ext_bash_exec = new ExternalTool(this);
 
     ext_bash_exec->setScript("IFS=''\n"
                              "read -r fil\n"
@@ -581,7 +581,7 @@ void ExternalTools::loadCustomTools() {
   }
 
   foreach (ExternalTool* tool, m_customTools) {
-    QAction* act = new QAction(tool->name(), tool);
+    auto* act = new QAction(tool->name(), tool);
 
     act->setData(QVariant::fromValue(tool));
     act->setShortcut(QKeySequence::fromString(tool->shortcut(), QKeySequence::SequenceFormat::PortableText));
@@ -659,14 +659,15 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
   Q_UNUSED(success)
 
   if (editor.isNull()) {
-    qCritical("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
+    qCritical().noquote()
+      << QSL("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
                                                   tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
                                                   QMessageBox::Icon::Critical);
     return;
   }
 
-  ExternalTool* tool = qobject_cast<ExternalTool*>(sender());
+  auto* tool = qobject_cast<ExternalTool*>(sender());
 
   switch (tool->output()) {
     case ToolOutput::InsertAtCursorPosition: {

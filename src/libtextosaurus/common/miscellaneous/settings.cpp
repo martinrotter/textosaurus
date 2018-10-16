@@ -17,7 +17,7 @@ QString Settings::pathName() const {
 }
 
 QSettings::Status Settings::checkSettings() {
-  qDebug("Syncing settings.");
+  qDebug() << QSL("Syncing settings.");
   sync();
   return status();
 }
@@ -35,11 +35,14 @@ Settings* Settings::setupSettings(QObject* parent, const QString& app_path, cons
 
   // Check if portable settings are available.
   if (properties.m_type == SettingsType::Portable) {
-    qDebug("Initializing settings in '%s' (portable way).", qPrintable(QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)));
+    qDebug().noquote().nospace() << QSL("Initializing settings in '")
+                                 << QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)
+                                 << QSL("' (portable way).");
   }
   else {
-    qDebug("Initializing settings in '%s' (non-portable way).",
-           qPrintable(QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)));
+    qDebug().noquote().nospace() << QSL("Initializing settings in '")
+                                 << QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)
+                                 << QSL("' (non-portable way).");
   }
 
   return new_settings;

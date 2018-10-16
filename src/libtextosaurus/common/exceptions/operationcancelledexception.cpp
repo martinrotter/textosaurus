@@ -2,4 +2,4 @@
 
 #include "common/exceptions/operationcancelledexception.h"
 
-OperationCancelledException::OperationCancelledException(QString message) : ApplicationException (message) {}
+OperationCancelledException::OperationCancelledException(QString message) : ApplicationException (std::move(message)) {}

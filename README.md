@@ -37,6 +37,7 @@ Features
     - main window can stay on top,
     - **tray icon**,
     - can record/save/play **macros**,
+    - can encrypt files with AES256-CBC (with SHA3-512 hashing along the way),
     - simple interface,
     - **movable dock sidebars**:
         * "Output" sidebar - can display output of external tools and other information,

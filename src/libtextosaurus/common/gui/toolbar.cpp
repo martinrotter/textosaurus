@@ -41,17 +41,17 @@ QList<QAction*> ToolBar::getSpecificActions(const QStringList& actions) {
     }
     else if (action_name == SEPARATOR_ACTION_NAME) {
       // Add new separator.
-      QAction* act = new QAction(this);
+      auto* act = new QAction(this);
 
       act->setSeparator(true);
       spec_actions.append(act);
     }
     else if (action_name == SPACER_ACTION_NAME) {
       // Add new spacer.
-      QWidget* spacer = new QWidget(this);
+      auto* spacer = new QWidget(this);
 
       spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      QWidgetAction* action = new QWidgetAction(this);
+      auto* action = new QWidgetAction(this);
 
       action->setDefaultWidget(spacer);
       action->setIcon(qApp->icons()->fromTheme(QSL("go-jump")));
