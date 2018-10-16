@@ -16,9 +16,9 @@ TabBar::TabBar(QWidget* parent) : QTabBar(parent) {
 }
 
 void TabBar::setupTabControls(int index) {
-  const QTabBar::ButtonPosition button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
-                                                                                                 nullptr,
-                                                                                                 this));
+  auto button_position = static_cast<ButtonPosition>(style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition,
+                                                                        nullptr,
+                                                                        this));
   PlainToolButton* close_button = new PlainToolButton(this);
 
   close_button->setIcon(qApp->icons()->fromTheme(QSL("window-close")));
