@@ -2,13 +2,8 @@
 
 #include "common/gui/basetoolbar.h"
 
-#include "common/miscellaneous/settings.h"
-#include "definitions/definitions.h"
-
-#include <QWidgetAction>
-
 BaseToolBar::BaseToolBar(const QString& title, QWidget* parent) : QToolBar(title, parent) {
-  setIconSize(QSize(20, 20));
+  setIconSize(QSize(18, 18));
 }
 
 void BaseBar::loadSavedActions() {
@@ -16,7 +11,7 @@ void BaseBar::loadSavedActions() {
 }
 
 QAction* BaseBar::findMatchingAction(const QString& action, const QList<QAction*>& actions) const {
-  foreach (QAction* act, actions) {
+  for (QAction* act : actions) {
     if (act->objectName() == action) {
       return act;
     }
