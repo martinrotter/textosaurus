@@ -609,6 +609,21 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     setCaretLineVisible(false);
   }
 
+  // Setup edge mode.
+  if (m_textApp->settings()->edgeLineEnabled()) {
+    setEdgeColumn(m_textApp->settings()->edgeLineColumn());
+    setEdgeMode(EDGE_LINE);
+
+    // We set color of the edge line and fallback to "red" if current
+    // color scheme does not define one.
+    setEdgeColour(color_theme.hasComponent(SyntaxColorTheme::StyleComponents::ScintillaEdge) ?
+                  QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaEdge).m_colorForeground) :
+                  QCOLOR_TO_SPRT(QColor(Qt::GlobalColor::red)));
+  }
+  else {
+    setEdgeMode(EDGE_NONE);
+  }
+
   if (m_lexer.m_code != SCLEX_NULL) {
     // Load more specific colors = keywords, operators etc.
     for (int i = 0; i <= STYLE_MAX; i++) {

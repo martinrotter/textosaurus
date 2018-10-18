@@ -21,8 +21,10 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
   m_ui.m_cmbIndentMode->addItem(tr("Tabs"), true);
 
   connect(m_ui.m_cbReloadFilesAutomatically, &QCheckBox::toggled, this, &SettingsEditor::dirtifySettings);
+  connect(m_ui.m_cbEdge, &QCheckBox::toggled, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_cmbIndentMode, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_cmbTimestampFormat, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
+  connect(m_ui.m_spinEdge, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinIndentSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinTabSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinLineSpacing, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
@@ -33,6 +35,8 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
 void SettingsEditor::loadSettings() {
   onBeginLoadSettings();
 
+  m_ui.m_spinEdge->setValue(qApp->textApplication()->settings()->edgeLineColumn());
+  m_ui.m_cbEdge->setChecked(qApp->textApplication()->settings()->edgeLineEnabled());
   m_ui.m_cbReloadFilesAutomatically->setChecked(qApp->textApplication()->settings()->reloadModifiedDocumentsAutomatically());
   m_ui.m_cmbIndentMode->setCurrentIndex(m_ui.m_cmbIndentMode->findData(qApp->textApplication()->settings()->indentWithTabs()));
   m_ui.m_spinIndentSize->setValue(qApp->textApplication()->settings()->indentSize());
@@ -63,6 +67,8 @@ void SettingsEditor::saveSettings() {
   onBeginSaveSettings();
 
   qApp->textApplication()->settings()->blockSignals(true);
+  qApp->textApplication()->settings()->setEdgeLineEnabled(m_ui.m_cbEdge->isChecked());
+  qApp->textApplication()->settings()->setEdgeLineColumn(m_ui.m_spinEdge->value());
   qApp->textApplication()->settings()->setReloadModifiedDocumentsAutomatically(m_ui.m_cbReloadFilesAutomatically->isChecked());
   qApp->textApplication()->settings()->setIndentSize(m_ui.m_spinIndentSize->value());
   qApp->textApplication()->settings()->setTabSize(m_ui.m_spinTabSize->value());

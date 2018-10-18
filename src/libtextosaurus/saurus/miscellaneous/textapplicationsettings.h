@@ -41,6 +41,9 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     int indentSize() const;
     bool indentWithTabs() const;
 
+    bool edgeLineEnabled() const;
+    int edgeLineColumn() const;
+
     ExternalTools* externalTools() const;
     SyntaxHighlighting* syntaxHighlighting() const;
     PluginFactory* pluginFactory() const;
@@ -73,6 +76,8 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     void setWordWrapEnabled(bool enabled);
     void setLineNumbersEnabled(bool enabled);
     void setEolMode(int mode);
+    void setEdgeLineEnabled(bool enabled);
+    void setEdgeLineColumn(int column);
 
   signals:
 

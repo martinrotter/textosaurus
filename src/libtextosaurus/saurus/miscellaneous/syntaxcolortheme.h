@@ -82,7 +82,8 @@ class SyntaxColorTheme : public QObject {
       //ScintillaCallTip = 1006,
       //ScintillaFoldDisplayText = 1007,
       ScintillaPaper = 1008,
-      ScintillaCurrentLine = 1009
+      ScintillaCurrentLine = 1009,
+      ScintillaEdge = 1010
     };
 
     Q_ENUM(StyleComponents)

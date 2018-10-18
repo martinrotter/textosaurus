@@ -109,6 +109,14 @@ bool TextApplicationSettings::indentWithTabs() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::IndentWithTabs)).toBool();
 }
 
+bool TextApplicationSettings::edgeLineEnabled() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::EdgeLongLine)).toBool();
+}
+
+int TextApplicationSettings::edgeLineColumn() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::EdgeLongLineColumn)).toInt();
+}
+
 void TextApplicationSettings::increaseFontSize() {
   QFont font_old = mainFont();
 
@@ -224,6 +232,16 @@ void TextApplicationSettings::setEolMode(int mode) {
   emit settingsChanged(false, false);
 }
 
+void TextApplicationSettings::setEdgeLineEnabled(bool enabled) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::EdgeLongLine, enabled);
+  emit settingsChanged(true, false);
+}
+
+void TextApplicationSettings::setEdgeLineColumn(int column) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::EdgeLongLineColumn, column);
+  emit settingsChanged(true, false);
+}
+
 SyntaxHighlighting* TextApplicationSettings::syntaxHighlighting() const {
   return m_syntaxHighlighting;
 }
@@ -237,6 +255,7 @@ void TextApplicationSettings::loadInitialSidebarGuiSettings(FormMain* main_form,
     dock->setParent(main_form);
 
     int size = dock->initialWidth();
+
     Qt::DockWidgetArea area = dock->initialArea();
 
     if (area == Qt::DockWidgetArea::NoDockWidgetArea) {

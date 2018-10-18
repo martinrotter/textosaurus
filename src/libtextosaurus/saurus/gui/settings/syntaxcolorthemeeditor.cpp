@@ -48,6 +48,7 @@ SyntaxColorThemeEditor::SyntaxColorThemeEditor(QWidget* parent)
   //labels[SyntaxColorTheme::StyleComponents::ScintillaFoldDisplayText] = tr("Fold display text");
   labels[SyntaxColorTheme::StyleComponents::ScintillaPaper] = tr("Paper background (bg color only)");
   labels[SyntaxColorTheme::StyleComponents::ScintillaCurrentLine] = tr("Current line background (bg color only)");
+  labels[SyntaxColorTheme::StyleComponents::ScintillaEdge] = tr("Color of long lines edge (fg color only)");
 
   QMetaEnum enums = QMetaEnum::fromType<SyntaxColorTheme::StyleComponents>();
 
@@ -147,6 +148,7 @@ void SyntaxColorThemeEditor::clearBackgroundColor() {
 
 void SyntaxColorThemeEditor::updateCurrentComponent() {
   SyntaxColorTheme& curr_theme = currentColorTheme();
+
   SyntaxColorTheme::StyleComponents comp = itemComponent(m_ui.m_listComponents->currentRow());
 
   if (!m_ui.m_gbCustomizer->isCheckable() || m_ui.m_gbCustomizer->isChecked()) {
@@ -190,6 +192,7 @@ void SyntaxColorThemeEditor::onThemeSwitched(int row) {
 void SyntaxColorThemeEditor::displayComponentDetails(int row) {
   if (row >= 0) {
     SyntaxColorTheme curr_theme = currentColorTheme();
+
     SyntaxColorTheme::StyleComponents component = itemComponent(row);
 
     if (curr_theme.hasComponent(component)) {

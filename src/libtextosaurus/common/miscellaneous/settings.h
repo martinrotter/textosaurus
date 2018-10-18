@@ -34,6 +34,10 @@ namespace Editor {
   constexpr auto TabSize = "tab_size";
   constexpr auto TabSizeDef = 2;
   constexpr auto ColorTheme = "color_theme";
+  constexpr auto EdgeLongLine = "edge_long_line";
+  constexpr auto EdgeLongLineDef = false;
+  constexpr auto EdgeLongLineColumn = "edge_long_line_column";
+  constexpr auto EdgeLongLineColumnDef = 60;
   constexpr auto IndentSize = "indent_size";
   constexpr auto IndentSizeDef = 2;
   constexpr auto IndentWithTabs = "indent_with_tabs";
