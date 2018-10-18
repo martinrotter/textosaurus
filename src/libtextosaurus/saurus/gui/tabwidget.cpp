@@ -19,7 +19,7 @@ TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
   setTabBar(new TabBar(this));
   setUsesScrollButtons(true);
   setMovable(true);
-  setIconSize(QSize(12, 12));
+  setIconSize(QSize(14, 14));
   setDocumentMode(true);
 
   createConnections();
@@ -28,7 +28,6 @@ TabWidget::TabWidget(QWidget* parent) : QTabWidget(parent) {
 void TabWidget::createConnections() {
   connect(tabBar(), &TabBar::tabCloseRequested, this, &TabWidget::closeTab);
   connect(tabBar(), &TabBar::customContextMenuRequested, this, &TabWidget::showTabContextMenu);
-
 }
 
 bool TabWidget::closeTab(int index) {
