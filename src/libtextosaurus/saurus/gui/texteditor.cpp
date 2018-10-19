@@ -653,11 +653,16 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     }
   }
 
-  setKeyWords(0, qstrdup(m_lexer.m_keywords.toLocal8Bit().constData()));
+  setKeyWords(0, m_lexer.m_keywords.toLocal8Bit().constData());
+
+  qDebug().noquote() << QSL("Current lexer offers these properties:") << propertyNames();
 
   if (m_textApp->settings()->codeFoldingEnabled() &&
       m_lexer.m_code != SCLEX_NULL &&
-      m_lexer.m_code != SCLEX_CONTAINER && propertyNames().contains("fold")) {
+      m_lexer.m_code != SCLEX_CONTAINER &&
+
+      // NOTE: Added hardcoded folding support for BASH lexer.
+      (propertyNames().contains("fold") || m_lexer.m_code == SCLEX_BASH)) {
     // We activate folding.
     setProperty("fold", "1");
     setProperty("fold.compact", "1");
