@@ -357,7 +357,14 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_D)
       << Lexer(QSL("Diff"), QStringList {
       QSL("diff")
-    }, SCLEX_DIFF)
+    }, SCLEX_DIFF, {
+      {SCE_DIFF_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_DIFF_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_DIFF_COMMAND, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_DIFF_HEADER, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_DIFF_POSITION, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_DIFF_DELETED, SyntaxColorTheme::StyleComponents::Error},
+    })
       << Lexer(QSL("Fortran"), QStringList {
       QSL("for"), QSL("f90"), QSL("f95"), QSL("f2k"), QSL("f23")
     }, SCLEX_FORTRAN)
