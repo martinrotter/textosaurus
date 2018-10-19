@@ -2,6 +2,8 @@
 
 #include "saurus/miscellaneous/textapplication.h"
 
+#include "3rd-party/scintilla/include/SciLexer.h"
+#include "3rd-party/uchardet/uchardet.h"
 #include "common/gui/messagebox.h"
 #include "common/gui/toolbar.h"
 #include "common/miscellaneous/iconfactory.h"
@@ -21,8 +23,6 @@
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 #include "saurus/plugin-system/pluginfactory.h"
-
-#include "3rd-party/uchardet/uchardet.h"
 
 #include <QClipboard>
 #include <QDockWidget>
@@ -67,7 +67,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -725,7 +725,14 @@ void TextApplication::loadLexersMenu() {
     foreach (const Lexer& lex, m_settings->syntaxHighlighting()->lexers()) {
       QAction* act = new QAction(QL1S("&") + lex.m_name, m_menuLanguage);
 
-      groups[lex.m_name.at(0)].append(act);
+      if (lex.m_code == SCLEX_NULL) {
+        // We move "plain text" lexer to first position.
+        m_menuLanguage->addAction(act);
+        m_menuLanguage->addSeparator();
+      }
+      else {
+        groups[lex.m_name.at(0)].append(act);
+      }
 
       act->setActionGroup(grp);
       act->setCheckable(true);

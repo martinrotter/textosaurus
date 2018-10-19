@@ -112,9 +112,11 @@ void TextEditor::loadFromFile(const QByteArray& file_data, const QString& file_p
   }
 
   QTextStream str(file_data); str.setCodec(codec_for_encoding);
+  QByteArray str_data = str.readAll().toUtf8();
 
   blockSignals(true);
-  setText(str.readAll().toUtf8().constData());
+  clearAll();
+  addText(str_data.size(), str_data);
   emptyUndoBuffer();
   blockSignals(false);
   reattachWatcher(m_filePath);
