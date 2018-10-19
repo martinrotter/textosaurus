@@ -525,13 +525,93 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       << Lexer(QSL("Rust"), QStringList {
       QSL("rs")
     }, SCLEX_RUST)
+      << Lexer(QSL("SAS"), QStringList { QSL("sas") }, SCLEX_SAS, {
+      {SCE_SAS_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_SAS_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SAS_GLOBAL_MACRO, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_SAS_MACRO_FUNCTION, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SAS_MACRO_KEYWORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SAS_BLOCK_KEYWORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_SAS_TYPE, SyntaxColorTheme::StyleComponents::Keyword2},
+      {SCE_SAS_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_SAS_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_SAS_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SAS_COMMENTBLOCK, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SAS_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_SAS_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_SAS_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    }, "% %abort %bquote %cmpres %compstor %copy %datatyp %display %do %else %end %eval %global %goto "
+       "%if %index %input %left %length %let %local %lowcase %macro %mend %nrbquote %nrquote %nrstr %put "
+       "%qcmpres %qleft %qlowcase %qscan %qsubstr %qsysfunc %qtrim %quote %qupcase %return %scan %str "
+       "%substr %superq %symdel %symexist %symglobl %symlocal %syscall %sysevalf %sysexec %sysfunc %sysget "
+       "%syslput %sysprod %sysrc %sysrput %then %trim %unquote %until %upcase %verify %while %window & cmdmac "
+       "implmac macro mautolocdisplay mautosource mcompilenote merror mfile mindelimiter mlogic mlogicnest "
+       "mprint mprintnest mrecall mstored msymtabmax mvarsize nocenter option sasautos sasmstore serror symbolgen "
+       "symdel symgetn symputn sysbuffr syscc syscharwidth syscmd sysdate sysdate9 sysday sysdevic sysdmg sysdsn "
+       "sysenv syserr sysfilrc sysindex sysinfo sysjobid syslast syslckrc syslibrc sysmacroname sysmenv sysncpu "
+       "syspbuff sysprocname sysscp sysscpl syssite sysstartid sysstartname systime sysuserid sysver sysvlong "
+       "abs addr addrlong airy allperm anyalnum anyalpha anycntrl anydigit anyfirst anygraph anylower anyname "
+       "anyprint anypunct anyspace anyupper anyxdigit appcort apply arcos armacov armalik armasim arsin atan "
+       "atan2 attrc attrn band beta betainv block blshift bnot bor branks brshift btran bxor byte cat cats catt "
+       "catx cdf ceil ceilz cexist change char choose choosec choosen cinv cnonct coalesce coalescec collate "
+       "colpctn colpctsum comb compbl compcost compged complev comport compound compress concat constant "
+       "convexit convx convxp cos cosh count countc covlag cshape css curobs cv cvexhull daccdb daccdbsl "
+       "daccsl daccsyd dacctab dairy datdif date datejul datepart datetime day dclose dcreate depdb depdbsl "
+       "depsl depsyd deptab dequote design designf det deviance dhms diag digamma dim dinfo dnum dopen "
+       "doptname doptnum dread dropnote dsname dur duration durp echelon eigen eigval eigvec erf erfc "
+       "eurocurr exist exp fact fappend farmacov farmafit farmalik farmasim fclose fcol fdelete fdif "
+       "fetch fetchobs fexist fft fget fileexist fileref findc finfo finv fipname fipnamel fipstate "
+       "floor floorz fnonct fnote fopen foptname foptnum forward fpoint fpos fput fread frewind frlen "
+       "fsep fuzz fwrite gaend gagetmem gagetval gainit gaminv gamma gareeval garegen gasetcro gasetmut "
+       "gasetobj gasetsel gasetup gblkvp gblkvpd gclose gdelete gdraw gdrawl geneig geomean geomeanz "
+       "getoption getvarc getvarn ggrid ginclude ginv gopen gpie gpiexy gpoint gpoly gport gportpop "
+       "gportstk gscale gscript gset gshow gsorth gstart gstop gstrlen gtext gvtext gwindow gxaxis "
+       "gyaxis half hankel harmean harmeanz hbound hdir hermite hms homogen hour htmldecode htmlencode "
+       "ibessel ifc ifft ifn indexc indexw inputc inputn insert int intck intnx intrr intz inv invupdt "
+       "iorcmsg ipf iqr irr itbicg itcgrad itminres jbessel jroot juldate juldate7 kalcvf kalcvs kaldff "
+       "kaldfs kcompare kcompress kcount kcvt kindex kindexc kleft klength klowcase kreverse kright kscan "
+       "kstrcat ksubstr ksubstrb ktranslate ktrim ktruncate kupcase kupdate kupdateb kurtosis kverify lag "
+       "largest lav lbound lcp lengthc lengthm lengthn lgamma libref lms loc log log10 log2 logbeta logcdf "
+       "logpdf logsdf lowcase lts lupdt mad marg max maxqform mcd mdy mean median min minute mod module "
+       "modulec modulei moduleic modulein modulen modz month mopen mort mve name ncol netpv nldate nldatm "
+       "nleng nliteral nlpcg nlpdd nlpfdd nlpfea nlphqn nlplm nlpnms nlpnra nlpnrr nlpqn nlpqua nlptr "
+       "nltime nmiss normal notalnum notalpha notcntrl notdigit note notfirst notgraph notlower notname "
+       "notprint notpunct notspace notupper notxdigit npv nrow num nvalid ode open opscal ordinal orpol "
+       "ortvec pagepctn pagepctsum pathname pctl pctn pctsum peek peekc peekclong peeklong perm pgraf "
+       "point poisson poke pokelong polyroot probbeta probbnml probbnrm probchi probf probgam probhypr "
+       "probmc probnegb probnorm probt product propcase prxchange prxdebug prxfree prxmatch prxnext "
+       "prxparen prxparse prxposn prxsubstr ptrlongadd push put putc putn pv pvp qtr quad quantile "
+       "queue quote ranbin rancau rand randgen randseed ranexp rangam range ranktie rannor ranperk "
+       "ranperm ranpoi rantbl rantri ranuni rates ratio rdodt repeat reppctn reppctsum resolve reverse "
+       "rewind rms root round rounde roundz rowcat rowcatc rowpctn rowpctsum rupdt rxchange rxfree "
+       "rxmatch rxparse rxsubstr rzlind saving scan scanq sdf second seq seqscale seqshift setdif shape "
+       "sign sin sinh skewness sleep smallest softmax solve solvelin sortndx sound soundex spedis spline "
+       "splinec splinev spot sqrsym sqrt ssq std stderr stfips stname stnamel storage streaminit strip "
+       "subpad substr substrn sum svd sweep symexist symget symglobl symlocal symput symputx symsqr sysget "
+       "sysmsg sysparm sysprocessid sysprocessname sysprod sysrc system tan tanh teigen teigval teigvec "
+       "time timepart tinv tnonct today toeplitz tpsplnev translate tranwrd trigamma trim trimn trisolv "
+       "trunc tsbaysea tsdecomp tsmlocar tsmlomar tsmulmar tspears tspred tsroot tstvcar tsunimar type "
+       "uniform union unique uniqueby upcase urldecode urlencode uss uuidgen valset value var varfmt "
+       "varinfmt varlabel varlen varmacov varmalik varmasim varname varnum varray varrayx vartranscode "
+       "vartype vecdiag vformat vformatd vformatdx vformatn vformatnx vformatw vformatwx vformatx "
+       "vinarray vinarrayx vinformat vinformatd vinformatdx vinformatn vinformatnx vinformatw vinformatwx "
+       "vinformatx vlabel vlabelx vlength vlengthx vname vnamex vnext vnormal vtranscode vtranscodex "
+       "vtsroot vtype vtypex vvalue vvaluex wavft wavget wavift wavprint wavthrsh week weekday xmult "
+       "xsect year yield yieldp yrdif yyq zipcity zipfips zipname zipnamel zipstate abort array as "
+       "attrib by call cards cards4 catname chtml class close closefile continue csvall datalines "
+       "datalines4 decimal_align declare delete describe dm do docbook edit else end endsas exclude "
+       "execute file filename find finish first. footnote for force format free from go goto html "
+       "html3 htmlcss id if imode include index infile informat input join keep label last. leave "
+       "length libname link list listing load lock lostcard markup mattrib merge missing modify "
+       "ods on order page pageby path pause pcl pdf phtml printer proclabel proctitle purge putlog "
+       "read redirect remove rename reset results resume return rtf sasfile save select separated "
+       "set setin setout show skip start stop store table then title to trace until use usegopt "
+       "verify when where while window with wml")
       << Lexer(QSL("Spice"), QStringList {
       QSL("scp"), QSL("out")
     }, SCLEX_SPICE)
-      << Lexer(QSL("SQL"),
-             QStringList {
-      QSL(
-        "sql")
+      << Lexer(QSL("SQL"), QStringList {
+      QSL("sql")
     }, SCLEX_SQL, {
       {SCE_SQL_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_SQL_WORD, SyntaxColorTheme::StyleComponents::Keyword},
@@ -598,6 +678,20 @@ QList<Lexer> SyntaxHighlighting::lexers() {
        "when whenever where with without work write "
        "year "
        "zone")
+      << Lexer(QSL("Stata"), QStringList { QSL("stata") }, SCLEX_STATA, {
+      {SCE_STATA_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_STATA_WORD, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_STATA_GLOBAL_MACRO, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_STATA_MACRO, SyntaxColorTheme::StyleComponents::Preprocessor},
+      {SCE_STATA_TYPE, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_STATA_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_STATA_STRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_STATA_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_STATA_COMMENTBLOCK, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_STATA_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_STATA_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_STATA_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
+    })
       << Lexer(QSL("TCL"), QStringList {
       QSL("tcl")
     }, SCLEX_TCL)
