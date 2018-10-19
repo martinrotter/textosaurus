@@ -70,17 +70,17 @@ void FormFindReplace::displayCount() {
 
   QPair<int, int> found_range;
   int start_position = 0;
-  int end_position = editor->length();
+  int end_position = int(editor->length());
   int count = 0;
 
   while (true) {
-    start_position = found_range.second;
     found_range = editor->findText(search_flags,
                                    m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
-                                   found_range.second,
+                                   start_position,
                                    end_position);
 
-    if (found_range.first >= 0 && found_range.second > start_position) {
+    if (found_range.first >= 0) {
+      start_position = found_range.first == found_range.second ? found_range.second + 1 : found_range.second;
       count++;
     }
     else {
