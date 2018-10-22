@@ -130,6 +130,15 @@ NotInstalled:
   
   ; Create uninstaller.
   WriteUninstaller "$INSTDIR\Uninstall.exe"
+  
+  ; Install VC++ Redist.
+  IfFileExists "$INSTDIR\${VCREDIST}" VcRedistExists PastVcRedistCheck
+  
+VcRedistExists:
+  ExecWait '"$INSTDIR\${VCREDIST}" /quiet /norestart'
+  
+PastVcRedistCheck:
+
 SectionEnd
 
 Section "Desktop Icon" DesktopIcon

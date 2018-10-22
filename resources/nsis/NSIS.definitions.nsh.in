@@ -4,6 +4,7 @@
 !define APP_VERSION "@APP_VERSION@"
 !define APP_NAME "@APP_NAME@"
 !define EXE_NAME "@EXE_NAME@"
+!define VCREDIST "vc_redist.x64.exe"
 !define README_FILE "README"
 !define LICENSE_FILE "@PWD@\..\..\resources\text\COPYING_GNU_GPL"
 !define MUI_ICON "@PWD@\..\..\resources\graphics\@APP_LOW_NAME@.ico"
