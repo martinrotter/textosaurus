@@ -33,7 +33,6 @@
 #include <QTemporaryFile>
 #include <QTextCodec>
 #include <QTimer>
-#include <QWidgetAction>
 
 TextApplication::TextApplication(QObject* parent)
   : QObject(parent), m_shouldSaveSession(false), m_settings(new TextApplicationSettings(this)), m_findReplaceDialog(nullptr) {

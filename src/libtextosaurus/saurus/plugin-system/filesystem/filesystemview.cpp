@@ -5,6 +5,12 @@
 #include "saurus/plugin-system/filesystem/filesystemmodel.h"
 
 #include <QKeyEvent>
+#include <QMenu>
+#include <QtGlobal>
+
+#if defined(Q_OS_WIN)
+#include <Windows.h>
+#endif
 
 FilesystemView::FilesystemView(FilesystemModel* model, QWidget* parent) : QListView(parent), m_model(model) {}
 
@@ -58,4 +64,43 @@ void FilesystemView::openFolder(const QString& path) {
 
   qDebug(R"(Opening folder '%s' (canonical), '%s' (non-canonical).)", qPrintable(can_path), qPrintable(path));
   setRootIndex(m_model->index(can_path));
+}
+
+void FilesystemView::highlightFile(const QString& file_path) {
+  QFileInfo info_file(file_path);
+
+  openFolder(info_file.absolutePath());
+  setCurrentIndex(m_model->index(file_path));
+}
+
+void FilesystemView::contextMenuEvent(QContextMenuEvent* event) {
+#if defined(Q_OS_WIN)
+  QString file_under_menu = m_model->filePath(indexAt(event->pos()));
+
+  if (!file_under_menu.isEmpty()) {
+    QMenu menu(tr("FS Sidebar Context Menu"), this);
+
+    menu.addAction(tr("Properties"), [file_under_menu]() {
+      SHELLEXECUTEINFO info = {0};
+      auto xx = file_under_menu;
+      auto cc = xx.toStdWString();
+      auto aa = cc.c_str();
+
+      info.lpFile = aa;
+      info.nShow = SW_SHOW;
+      info.fMask = SEE_MASK_INVOKEIDLIST;
+      info.lpVerb = L"properties";
+      info.cbSize = sizeof info;
+
+      ShellExecuteEx(&info);
+    });
+    menu.exec(event->globalPos());
+    event->accept();
+  }
+  else {
+    event->ignore();
+  }
+#else
+  QListView::contextMenuEvent(event);
+#endif
 }

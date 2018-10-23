@@ -6,6 +6,8 @@
 #include "common/gui/plaintoolbutton.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "definitions/definitions.h"
+#include "saurus/gui/tabwidget.h"
+#include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 #include "saurus/miscellaneous/textapplication.h"
@@ -98,13 +100,21 @@ void FilesystemSidebar::load() {
                                       tr("Go to Parent Folder"), widget_browser);
     QAction* btn_add_favorites = new QAction(m_plugin->iconFactory()->fromTheme(QSL("folder-favorites")),
                                              tr("Add Selected Item to Favorites"), widget_browser);
+    QAction* btn_follow_document = new QAction(m_plugin->iconFactory()->fromTheme(QSL("go-jump")),
+                                               tr("Follow Path of Active Document"), widget_browser);
+
+    btn_follow_document->setCheckable(true);
+    btn_follow_document->setChecked(pathFollowingEnabled());
 
     connect(btn_parent, &QAction::triggered, m_fsView, &FilesystemView::cdUp);
     connect(btn_add_favorites, &QAction::triggered, this, &FilesystemSidebar::addToFavorites);
+    connect(btn_follow_document, &QAction::toggled, this, &FilesystemSidebar::enablePathFollowing);
+    connect(m_plugin->textApp()->tabWidget(), &TabWidget::currentChanged, this, &FilesystemSidebar::followCurrentEditor);
 
     tool_bar->setFixedHeight(26);
     tool_bar->addAction(btn_parent);
     tool_bar->addAction(btn_add_favorites);
+    tool_bar->addAction(btn_follow_document);
     tool_bar->setIconSize(QSize(16, 16));
 
     // Initialize FS browser.
@@ -209,6 +219,10 @@ void FilesystemSidebar::addToFavorites() {
   }
 }
 
+bool FilesystemSidebar::pathFollowingEnabled() const {
+  return m_plugin->settings()->value(m_settingsSection, QSL("follow_path_document"), false).toBool();
+}
+
 void FilesystemSidebar::openFavoriteItem(const QModelIndex& idx) {
   const auto file_folder = QFileInfo(m_lvFavorites->item(idx.row())->data(Qt::UserRole).toString());
 
@@ -240,6 +254,22 @@ void FilesystemSidebar::saveFavorites() const {
   }
 
   m_plugin->settings()->setValue(m_settingsSection, QSL("favorites"), favorites);
+}
+
+void FilesystemSidebar::followCurrentEditor() {
+  TextEditor* editor = m_plugin->textApp()->tabWidget()->currentEditor();
+
+  if (editor != nullptr && !editor->filePath().isEmpty() && pathFollowingEnabled()) {
+    m_fsView->highlightFile(editor->filePath());
+  }
+}
+
+void FilesystemSidebar::enablePathFollowing(bool enable) {
+  m_plugin->settings()->setValue(m_settingsSection, QSL("follow_path_document"), enable);
+
+  if (enable) {
+    followCurrentEditor();
+  }
 }
 
 void FilesystemSidebar::makeExplorerVisible() const {

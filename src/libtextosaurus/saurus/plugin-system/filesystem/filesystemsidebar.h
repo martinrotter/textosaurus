@@ -28,6 +28,8 @@ class FilesystemSidebar : public BaseSidebar {
     void saveFavorites() const;
 
   private slots:
+    void followCurrentEditor();
+    void enablePathFollowing(bool enable);
     void reloadDrives();
     void openDrive(int index);
     void openFavoriteItem(const QModelIndex& idx);
@@ -42,6 +44,8 @@ class FilesystemSidebar : public BaseSidebar {
     void openFileRequested(const QString& file_path);
 
   private:
+    bool pathFollowingEnabled() const;
+
     void makeExplorerVisible() const;
     void makeFavoritesVisible() const;
     virtual void load() override;

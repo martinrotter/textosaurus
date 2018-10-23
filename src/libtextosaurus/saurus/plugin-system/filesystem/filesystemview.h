@@ -26,8 +26,10 @@ class FilesystemView : public QListView {
     void cdUp();
     void openFolder(const QModelIndex& idx);
     void openFolder(const QString& path);
+    void highlightFile(const QString& file_path);
 
   protected:
+    virtual void contextMenuEvent(QContextMenuEvent* event) override;
     virtual void keyPressEvent(QKeyEvent* event) override;
 
   signals:
