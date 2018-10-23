@@ -270,27 +270,27 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="664"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="665"/>
         <source>Cannot deliver output of external tool, assigned text editor no longer exists.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="701"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="702"/>
         <source>Tool &apos;%1&apos; finished, output copied to clipboard.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="717"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="718"/>
         <source>Tool &apos;%1&apos; finished, opening output in new tab.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="752"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="753"/>
         <source>Tool &apos;%1&apos; finished with error(s)...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="757"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="758"/>
         <source>Tool &apos;%1&apos; finished successfully...</source>
         <translation type="unfinished"/>
     </message>
@@ -314,33 +314,51 @@
 <context>
     <name>FilesystemSidebar</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="28"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="30"/>
         <source>Filesystem</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="98"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="100"/>
         <source>Go to Parent Folder</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="100"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="102"/>
         <source>Add Selected Item to Favorites</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="113"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="104"/>
+        <source>Follow Path of Active Document</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="123"/>
         <source>Filter Displayed Files</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="172"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="182"/>
         <source>Explorer</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="173"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="183"/>
         <source>Favorites</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>FilesystemView</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="81"/>
+        <source>FS Sidebar Context Menu</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="83"/>
+        <source>Properties</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1015,9 +1033,9 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="364"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="371"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="378"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="367"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="374"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="381"/>
         <source>Cannot open external browser. Navigate to application website manually.</source>
         <translation type="unfinished"/>
     </message>
@@ -1167,64 +1185,64 @@ currently installed one.</source>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="114"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="237"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="243"/>
         <source>Downloading update...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="168"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="170"/>
         <source>Available update files</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="178"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="182"/>
         <source>Downloaded successfully</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="179"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="183"/>
         <source>Package was downloaded successfully.
 You can install it now.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="180"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="184"/>
         <source>Install</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="185"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="187"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="189"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="191"/>
         <source>Error occured</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="186"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="190"/>
         <source>Error occured during downloading of the package.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="218"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="224"/>
         <source>Cannot Start Installer</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="218"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="224"/>
         <source>Cannot launch external updater. Update application manually.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="227"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="233"/>
         <source>Cannot Open Update File</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="227"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="233"/>
         <source>Cannot open application update file. Update application manually.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="244"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="250"/>
         <source>Cannot navigate to installation file. Check new installation downloads manually on project website.</source>
         <translation type="unfinished"/>
     </message>
@@ -1498,8 +1516,8 @@ You can install it now.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="27"/>
-        <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="66"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="29"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="76"/>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/application.cpp" line="34"/>
         <source>LANG_ABBREV</source>
         <extracomment>Abbreviation of language, e.g. en. Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code. Examples: &quot;cs&quot;, &quot;en&quot;, &quot;it&quot;, &quot;cs_CZ&quot;, &quot;en_GB&quot;, &quot;en_US&quot;.</extracomment>
@@ -1512,7 +1530,7 @@ You can install it now.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="116"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="115"/>
         <source>XML is well-formed.</source>
         <translation type="unfinished"/>
     </message>
@@ -1539,28 +1557,28 @@ You can install it now.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="742"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="762"/>
         <source>Cannot save file</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="743"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="763"/>
         <source>File &apos;%1&apos; cannot be saved because %2.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="831"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="880"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="852"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="901"/>
         <source>Cannot read file</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="832"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="853"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason: &apos;%2&apos;.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="881"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="902"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason &apos;%2&apos;.</source>
         <translation type="unfinished"/>
     </message>
@@ -1802,7 +1820,7 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="61"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="63"/>
         <source>Line spacing</source>
         <translation type="unfinished"/>
     </message>
@@ -1837,27 +1855,32 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="213"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="211"/>
+        <source>Show vertical edge for long lines on column</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="253"/>
         <source>Fonts &amp;&amp; Colors</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="219"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="259"/>
         <source>Colors</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="231"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="271"/>
         <source>Fonts</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="237"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="277"/>
         <source>&amp;Change</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="244"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="284"/>
         <source>Text editor font</source>
         <translation type="unfinished"/>
     </message>
@@ -1877,7 +1900,7 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="89"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="95"/>
         <source>Select new text editor main font</source>
         <translation type="unfinished"/>
     </message>
@@ -2423,32 +2446,37 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="97"/>
-        <source>%1 (built-in theme)</source>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="51"/>
+        <source>Color of long lines edge (fg color only)</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="98"/>
+        <source>%1 (built-in theme)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="99"/>
         <source>%1 (custom theme)</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="120"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="121"/>
         <source>Select Foreground Color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="135"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="136"/>
         <source>Select Background Color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="166"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="167"/>
         <source>Enter name for new theme</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="166"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="167"/>
         <source>Enter name for new color theme</source>
         <translation type="unfinished"/>
     </message>
@@ -2456,12 +2484,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>SyntaxHighlighting</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="204"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="210"/>
         <source> files (*</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="214"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="220"/>
         <source>Plain text</source>
         <translation type="unfinished"/>
     </message>
@@ -2490,7 +2518,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>TabWidget</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/tabwidget.cpp" line="121"/>
+        <location filename="../src/libtextosaurus/saurus/gui/tabwidget.cpp" line="120"/>
         <source>Close</source>
         <translation type="unfinished"/>
     </message>
@@ -2498,22 +2526,22 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>TextApplication</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="970"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="976"/>
         <source>New text file</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="813"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="819"/>
         <source>Unsaved text file</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="813"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="819"/>
         <source>Save your file first, please</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="820"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="826"/>
         <source>Open file</source>
         <translation type="unfinished"/>
     </message>
@@ -2521,78 +2549,78 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>TextEditor</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="149"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="153"/>
         <source>No other occurrences of &quot;%1&quot; found.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="229"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="233"/>
         <source>File Externally Modified</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="230"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="234"/>
         <source>This file was modified outside of %1.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="231"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="235"/>
         <source>Do you want to reload file now? This will discard all unsaved changes.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="233"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="237"/>
         <source>Reload all files automatically (discard changes)</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="238"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="242"/>
         <source>File &apos;%1&apos; was reloaded from disk.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="267"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="271"/>
         <source>&amp;Find All</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="273"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="277"/>
         <source>&amp;Select All</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="276"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="280"/>
         <source>&amp;Cut</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="279"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="283"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="282"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="286"/>
         <source>&amp;Paste</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="328"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="334"/>
         <source>Save File as</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="383"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="843"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="389"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="864"/>
         <source>Unsaved Changes</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="384"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="390"/>
         <source>This document has unsaved changes, do you want to save them?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="844"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="865"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
         <translation type="unfinished"/>
     </message>
