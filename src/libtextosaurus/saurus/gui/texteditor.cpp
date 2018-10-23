@@ -655,6 +655,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
     }
   }
 
+  // Setup keywords.
   setKeyWords(0, m_lexer.m_keywords.toLocal8Bit().constData());
 
   qDebug().noquote() << QSL("Current lexer offers these properties:") << propertyNames();
@@ -663,8 +664,8 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
       m_lexer.m_code != SCLEX_NULL &&
       m_lexer.m_code != SCLEX_CONTAINER &&
 
-      // NOTE: Added hardcoded folding support for BASH lexer.
-      (propertyNames().contains("fold") || m_lexer.m_code == SCLEX_BASH)) {
+      // NOTE: Added hardcoded folding support for old-style lexers.
+      (propertyNames().contains("fold") || m_lexer.m_supportsOldStyleFolding)) {
     // We activate folding.
     setProperty("fold", "1");
     setProperty("fold.compact", "1");
@@ -711,18 +712,13 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
                         QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).m_colorBackground));
   }
   else {
-    QByteArray prop_fold = property("fold");
+    setProperty("fold", "0");
+    setProperty("fold.compact", "0");
+    setProperty("fold.html", "0");
+    setMarginWidthN(MARGIN_FOLDING, 0);
 
-    if (!prop_fold.isEmpty() && prop_fold != QSL("0")) {
-      // Folding was turned on and we are turning it off right now.
-      setProperty("fold", "0");
-      setProperty("fold.compact", "0");
-      setProperty("fold.html", "0");
-      setMarginWidthN(MARGIN_FOLDING, 0);
-
-      // Make sure everything is expanded.
-      foldAll(SC_FOLDACTION_EXPAND);
-    }
+    // Make sure everything is expanded.
+    foldAll(SC_FOLDACTION_EXPAND);
   }
 
   colourise(0, -1);

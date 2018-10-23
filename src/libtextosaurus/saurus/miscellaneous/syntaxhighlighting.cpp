@@ -279,16 +279,14 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_SH_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_SH_BACKTICKS, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_SH_PARAM, SyntaxColorTheme::StyleComponents::Identifier}
-    })
+    }, {}, true)
       << Lexer(QSL("Batch"), QStringList {
       QSL("bat"), QSL("cmd")
     }, SCLEX_BATCH)
-      << Lexer(QSL("BibTeX"), QStringList {
-      QSL("bib")
-    }, SCLEX_BIBTEX)
+      << Lexer(QSL("BibTeX"), QStringList { QSL("bib") }, SCLEX_BIBTEX, {}, {}, true)
       << Lexer(QSL("CMake"), QStringList {
       QSL("cmake"), QSL("txt")
-    }, SCLEX_CMAKE)
+    }, SCLEX_CMAKE, {}, {}, true)
       << Lexer(QSL("CoffeeScript"), QStringList {
       QSL("litcoffee")
     }, SCLEX_COFFEESCRIPT)
@@ -348,7 +346,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
        "border-top-width border-right-width border-bottom-width border-left-width border-width "
        "border-top border-right border-bottom border-left border "
        "border-color border-style width height float clear "
-       "display white-space list-style-type list-style-image list-style-position list-style")
+       "display white-space list-style-type list-style-image list-style-position list-style", true)
       << Lexer(QSL("C#"), QStringList {
       QSL("cs")
     }, SCLEX_CPP)
@@ -385,7 +383,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_CPP)
       << Lexer(QSL("JSON"), QStringList {
       QSL("json")
-    }, SCLEX_JSON)
+    }, SCLEX_JSON, {}, {}, true)
       << Lexer(QSL("Lisp"), QStringList {
       QSL("lisp"), QSL("cl")
     }, SCLEX_LISP)
@@ -414,10 +412,10 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     })
       << Lexer(QSL("Matlab"), QStringList {
       QSL("m")
-    }, SCLEX_MATLAB)
+    }, SCLEX_MATLAB, {}, {}, true)
       << Lexer(QSL("NSIS"), QStringList {
       QSL("nsis")
-    }, SCLEX_NSIS)
+    }, SCLEX_NSIS, {}, {}, true)
       << Lexer(QSL("Octave"), QStringList {
       QSL("m")
     }, SCLEX_OCTAVE)
@@ -493,7 +491,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
        "else namespace while"
        "elseif parallel workflow"
        "end param"
-       "enum private")
+       "enum private", true)
       << Lexer(QSL("Properties/INI"), QStringList {
       QSL("properties"), QSL("ini"), QSL("conf"), QSL("theme")
     }, SCLEX_PROPERTIES)
@@ -522,7 +520,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
        "def for lambda try")
       << Lexer(QSL("R"), QStringList {
       QSL("r")
-    }, SCLEX_R)
+    }, SCLEX_R, {}, {}, true)
       << Lexer(QSL("Registry"), QStringList {
       QSL("reg")
     }, SCLEX_REGISTRY)
@@ -704,7 +702,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_TCL)
       << Lexer(QSL("TeX"), QStringList {
       QSL("tex"), QSL("latex"), QSL("sty"), QSL("cls")
-    }, SCLEX_TEX)
+    }, SCLEX_TEX, {}, {}, true)
       << Lexer(QSL("VeriLog"), QStringList {
       QSL("v"), QSL("sv"), QSL("vh"), QSL("svh")
     }, SCLEX_VERILOG)
@@ -752,8 +750,9 @@ Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL) {}
 
 Lexer::Lexer(const QString& name, const QStringList& suffices, int code,
              const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings,
-             const QString& keywords)
-  : m_name(name), m_code(code), m_suffices(suffices), m_keywords(keywords), m_styleMappings(style_mappings) {}
+             const QString& keywords, bool supports_old_style_folding)
+  : m_name(name), m_code(code), m_suffices(suffices), m_keywords(keywords), m_supportsOldStyleFolding(supports_old_style_folding),
+  m_styleMappings(style_mappings) {}
 
 bool Lexer::isEmpty() const {
   return m_name.isEmpty() && m_suffices.isEmpty();

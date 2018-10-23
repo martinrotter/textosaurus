@@ -72,7 +72,8 @@ struct Lexer {
   explicit Lexer();
   explicit Lexer(const QString& name, const QStringList& suffices, int code,
                  const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings = QMap<int, SyntaxColorTheme::StyleComponents>(),
-                 const QString& keywords = QString());
+                 const QString& keywords = QString(),
+                 bool supports_old_style_folding = false);
 
   bool isEmpty() const;
 
@@ -80,6 +81,7 @@ struct Lexer {
   int m_code;
   QStringList m_suffices;
   QString m_keywords;
+  bool m_supportsOldStyleFolding = false;
 
   QMap<int, SyntaxColorTheme::StyleComponents> m_styleMappings;
 };
