@@ -1033,8 +1033,7 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
 
 void TextEditor::closeEditor(bool* ok) {
   if (m_textApp->shouldSaveSession() && filePath().isEmpty()) {
-    // Store even empty editors to session.
-    //if (true /*length() > 0*/) {
+    // Store even empty editors to session.W
     // We save this editor "into" temporary session file.
     QString session_file = getSessionFile();
 
@@ -1044,12 +1043,6 @@ void TextEditor::closeEditor(bool* ok) {
     if (*ok) {
       appendSessionFile(session_file, true);
     }
-
-    //}
-
-    //else {
-    // * ok = true;
-    //}*/
   }
   else if (m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) {
     // No need to save, just mark to session if needed.
