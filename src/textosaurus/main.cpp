@@ -15,6 +15,7 @@
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
+#include <QCommandLineParser>
 #include <QDebug>
 
 int main(int argc, char* argv[]) {
@@ -30,6 +31,8 @@ int main(int argc, char* argv[]) {
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
 
+  application.parseCmdArguments();
+
   // Check if another instance is running.
   if (application.isRunning()) {
     qWarning("Another instance of the application is already running. Notifying it.");
@@ -37,7 +40,7 @@ int main(int argc, char* argv[]) {
   }
 
 #if defined (FLATPAK_MODE)
-  qDebug("Flatpak mode enabled.");
+  qDebug().noquote().nospace() << QSL("Flatpak mode enabled.");
 #endif
 
   QApplication::setWindowIcon(QIcon(APP_ICON_PATH));
@@ -46,6 +49,7 @@ int main(int argc, char* argv[]) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
 
+  qApp->settings()->printSettingsInfo();
   qApp->icons()->setupSearchPaths();
   qApp->icons()->loadIconTheme(qApp->settings()->value(GROUP(GUI), SETTING(GUI::IconTheme)).toString());
   qApp->localization()->loadActiveLanguage();
@@ -79,7 +83,9 @@ int main(int argc, char* argv[]) {
   // Restore opened documents and open passed documents
   // if any.
   qApp->textApplication()->restoreSession();
-  qApp->textApplication()->openPassedFilesOrNewDocument();
+
+  // TODO: Předělat, aby používalo cmdparser z application?
+  qApp->textApplication()->processCommandLineArguments();
 
   // Display tray icon if it is enabled and available.
   if (SystemTrayIcon::isSystemTrayActivated()) {

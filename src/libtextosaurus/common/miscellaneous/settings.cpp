@@ -22,6 +22,20 @@ QSettings::Status Settings::checkSettings() {
   return status();
 }
 
+void Settings::printSettingsInfo() {
+  // Check if portable settings are available.
+  if (m_initializationStatus == SettingsType::Portable) {
+    qDebug().noquote().nospace() << QSL("Initializing settings in '")
+                                 << QDir::toNativeSeparators(QFileInfo(fileName()).absoluteFilePath())
+                                 << QSL("' (portable way).");
+  }
+  else {
+    qDebug().noquote().nospace() << QSL("Initializing settings in '")
+                                 << QDir::toNativeSeparators(QFileInfo(fileName()).absoluteFilePath())
+                                 << QSL("' (non-portable way).");
+  }
+}
+
 Settings* Settings::setupSettings(QObject* parent, const QString& app_path, const QString& user_path) {
   Settings* new_settings;
 
@@ -32,18 +46,6 @@ Settings* Settings::setupSettings(QObject* parent, const QString& app_path, cons
 
   // Portable settings are available, use them.
   new_settings = new Settings(properties.m_absoluteSettingsFileName, QSettings::IniFormat, properties.m_type, parent);
-
-  // Check if portable settings are available.
-  if (properties.m_type == SettingsType::Portable) {
-    qDebug().noquote().nospace() << QSL("Initializing settings in '")
-                                 << QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)
-                                 << QSL("' (portable way).");
-  }
-  else {
-    qDebug().noquote().nospace() << QSL("Initializing settings in '")
-                                 << QDir::toNativeSeparators(properties.m_absoluteSettingsFileName)
-                                 << QSL("' (non-portable way).");
-  }
 
   return new_settings;
 }

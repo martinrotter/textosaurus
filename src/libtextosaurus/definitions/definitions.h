@@ -51,12 +51,14 @@ constexpr auto PASTEBIN_IXIO = "http://ix.io";
 constexpr auto HTTP_HEADERS_CONTENT_TYPE = "Content-Type";
 constexpr auto HTTP_HEADERS_USER_AGENT = "User-Agent";
 constexpr auto APP_CFG_FILE = "config.ini";
-constexpr auto APP_QUIT_INSTANCE = "-quit-app";
-constexpr auto APP_IS_RUNNING = "-app-is-running";
 constexpr auto APP_STYLE_DEFAULT = "Fusion";
 constexpr auto APP_THEME_DEFAULT = "Papirus";
 constexpr auto APP_NO_THEME = "";
 constexpr auto APP_THEME_SUFFIX = ".png";
+constexpr auto APP_QUIT_INSTANCE_SHORT = "q";
+constexpr auto APP_QUIT_INSTANCE = "quitapp";
+constexpr auto APP_IS_RUNNING_SHORT = "r";
+constexpr auto APP_IS_RUNNING = "appisrunning";
 
 #ifndef QSL
 

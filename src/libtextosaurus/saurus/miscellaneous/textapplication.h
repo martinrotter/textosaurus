@@ -54,7 +54,7 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
     void attachTextEditor(TextEditor* editor);
 
     // Load/save/new files.
-    void openPassedFilesOrNewDocument();
+    void processCommandLineArguments();
     void newFile();
     void reopenTextFile(QAction* action);
     void openTextFile(QAction* action = nullptr);

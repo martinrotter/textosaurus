@@ -20,6 +20,7 @@
 
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
+  m_cmdParser(QCommandLineParser()),
   m_settings(Settings::setupSettings(this, qApp->userDataAppFolder(), qApp->userDataHomeFolder())),
   m_textApplication(nullptr), m_mainForm(nullptr),
   m_webFactory(new WebFactory(this)),
@@ -38,10 +39,6 @@ Application::Application(const QString& id, int& argc, char** argv)
   connect(this, &Application::saveStateRequest, this, &Application::onSaveState);
 
   setQuitOnLastWindowClosed(true);
-  setStyleSheet(QSL("QStatusBar::item { border: none; } "
-                    "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
-
-  qDebug().noquote() << QSL("Instantiated Application class.");
 }
 
 void Application::activateQtSingleMsgProcessing() {
@@ -49,7 +46,7 @@ void Application::activateQtSingleMsgProcessing() {
 }
 
 bool Application::isRunning() {
-  return sendMessage((QStringList() << APP_IS_RUNNING << arguments().mid(1)).join(ARGUMENTS_LIST_SEPARATOR));
+  return sendMessage((QStringList() << QString("-%1").arg(APP_IS_RUNNING_SHORT) << arguments().mid(1)).join(ARGUMENTS_LIST_SEPARATOR));
 }
 
 QList<QAction*> Application::userActions() {
@@ -104,8 +101,7 @@ void Application::eliminateFirstRun(const QString& version) {
   settings()->setValue(GROUP(General), QString(General::FirstRun) + QL1C('_') + version, false);
 }
 
-bool Application::isQuitting() const
-{
+bool Application::isQuitting() const {
   return m_isQuitting;
 }
 
@@ -180,6 +176,10 @@ SystemTrayIcon* Application::trayIcon() {
   return m_trayIcon;
 }
 
+QCommandLineParser* Application::cmdParser() {
+  return &m_cmdParser;
+}
+
 void Application::setMainForm(FormMain* main_form) {
   m_mainForm = main_form;
 }
@@ -219,18 +219,44 @@ QString Application::homeFolder() {
   return QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
 }
 
+void Application::parseCmdArguments() {
+  QCommandLineOption opt_already_running({APP_IS_RUNNING_SHORT, APP_IS_RUNNING},
+                                         QSL("Indicates that another application instance is running. You should never need to use this."));
+  QCommandLineOption opt_quit({APP_QUIT_INSTANCE_SHORT, APP_QUIT_INSTANCE},
+                              QSL("Quit currently running application instance."));
+
+  m_cmdParser.addOption(opt_quit);
+  m_cmdParser.addOption(opt_already_running);
+  m_cmdParser.addPositionalArgument(QSL("files"), QSL("Text files to be opened."), QSL("file-1 ... file-n"));
+  m_cmdParser.addHelpOption();
+  m_cmdParser.addVersionOption();
+  m_cmdParser.setApplicationDescription(QSL("%1 is simple cross-platform text editor built on top of Qt.").arg(APP_NAME));
+
+  m_cmdParser.process(*this);
+
+  auto aa = m_cmdParser.optionNames();
+
+  if (m_cmdParser.isSet(opt_quit)) {
+    qWarning("Application termination is requested by user.");
+    qApp->exit(EXIT_SUCCESS);
+  }
+}
+
 void Application::processExecutionMessage(const QString& message) {
   qDebug().noquote().nospace() << QSL("Received '")
                                << message
                                << QSL("' execution message from another application instance.");
   QStringList messages = message.split(ARGUMENTS_LIST_SEPARATOR);
 
-  if (messages.contains(APP_QUIT_INSTANCE)) {
+  messages.prepend(qApp->applicationFilePath());
+  m_cmdParser.process(messages);
+
+  if (m_cmdParser.isSet(APP_QUIT_INSTANCE_SHORT)) {
     quitApplication();
   }
   else {
-    if (messages.contains(APP_IS_RUNNING)) {
-      qApp->textApplication()->loadFilesFromArgs(messages);
+    if (m_cmdParser.isSet(APP_IS_RUNNING_SHORT)) {
+      qApp->textApplication()->loadFilesFromArgs(m_cmdParser.positionalArguments());
       qApp->mainForm()->display();
     }
   }

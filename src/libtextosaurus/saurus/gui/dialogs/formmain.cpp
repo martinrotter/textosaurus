@@ -47,6 +47,9 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   createConnections();
   setupIcons();
 
+  setStyleSheet(QSL("QStatusBar::item { border: none; } "
+                    "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
+
   qDebug().nospace() << QSL("Creating main application form in thread: \'") << QThread::currentThreadId() << "\'.";
 }
 

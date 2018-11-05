@@ -189,6 +189,8 @@ class TEXTOSAURUS_DLLSPEC Settings : public QSettings {
     // Synchronizes settings.
     QSettings::Status checkSettings();
 
+    void printSettingsInfo();
+
     // Creates settings file in correct location.
     static Settings* setupSettings(QObject* parent, const QString& app_path, const QString& user_path);
 

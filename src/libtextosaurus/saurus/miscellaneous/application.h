@@ -11,6 +11,7 @@
 #include "common/miscellaneous/systemfactory.h"
 #include "definitions/definitions.h"
 
+#include <QCommandLineParser>
 #include <QList>
 #include <QMessageBox>
 
@@ -61,6 +62,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     FormMain* mainForm();
     QWidget* mainFormWidget();
     SystemTrayIcon* trayIcon();
+    QCommandLineParser* cmdParser();
 
     QString homeFolder();
     QString configFolder();
@@ -84,11 +86,13 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
 
     bool isQuitting() const;
 
+    void parseCmdArguments();
+
   public slots:
     void quitApplication();
     void restart();
 
-    // Processes incoming message from another RSS Guard instance.
+    // Processes incoming message from another application instance.
     void processExecutionMessage(const QString& message);
 
   signals:
@@ -108,6 +112,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     QString userDataHomeFolder();
 
   private:
+    QCommandLineParser m_cmdParser;
     Settings* m_settings;
     TextApplication* m_textApplication;
     FormMain* m_mainForm;
