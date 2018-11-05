@@ -22,7 +22,7 @@ void Debugging::performLog(const QString& message, QtMsgType type, const char* f
     std::cerr << "[" << APP_LOW_NAME << "] "
               << type_string.toUtf8().constData() << ": "
               << message.toUtf8().constData() << " ("
-              << QDateTime::currentDateTime().toString(QSL("yyyy-MM-dd HH:mm:ss")).toUtf8().constData() << ")" << std::endl << std::endl;
+              << QDateTime::currentDateTime().toString(QSL("yyyy-MM-dd HH:mm:ss")).toUtf8().constData() << ")" << std::endl;
   }
   else {
     std::cerr << "[" << APP_LOW_NAME << "] "
@@ -30,7 +30,7 @@ void Debugging::performLog(const QString& message, QtMsgType type, const char* f
               << QDateTime::currentDateTime().toString(QSL("yyyy-MM-dd HH:mm:ss")).toUtf8().constData() << ")" << std::endl
               << "  Type: " << type_string.toUtf8().constData() << std::endl
               << "  File: " << file << " (" << line << ")" << std::endl
-              << "  Function: " << function << std::endl << std::endl;
+              << "  Function: " << function << std::endl;
   }
 
   if (type == QtFatalMsg) {
