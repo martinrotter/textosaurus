@@ -117,7 +117,8 @@ void TextApplication::openPassedFilesOrNewDocument() {
   if (qApp->arguments().size() > 1) {
     loadFilesFromArgs(qApp->arguments().mid(1));
   }
-  else if (tabWidget()->count() == 0) {
+
+  if (tabWidget()->count() == 0) {
     newFile();
   }
 }
@@ -270,9 +271,11 @@ TabWidget* TextApplication::tabWidget() const {
 
 void TextApplication::loadFilesFromArgs(const QList<QString>& files) {
   foreach (const QString& file_path, files) {
-    QTimer::singleShot(0, this, [this, file_path] {
-      loadTextEditorFromFile(file_path);
-    });
+    if (!file_path.startsWith(QL1S("-"))) {
+      QTimer::singleShot(0, this, [this, file_path] {
+        loadTextEditorFromFile(file_path);
+      });
+    }
   }
 }
 

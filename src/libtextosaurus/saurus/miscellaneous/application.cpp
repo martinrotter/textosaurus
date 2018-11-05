@@ -230,18 +230,14 @@ void Application::processExecutionMessage(const QString& message) {
   }
   else {
     if (messages.contains(APP_IS_RUNNING)) {
-      messages.removeAll(APP_IS_RUNNING);
-
       qApp->textApplication()->loadFilesFromArgs(messages);
       qApp->mainForm()->display();
     }
   }
 }
 
-void Application::showGuiMessage(const QString& message,
-                                 QMessageBox::Icon message_type,
-                                 const QUrl& url,
-                                 QObject* target) {
+void Application::showGuiMessage(const QString& message, QMessageBox::Icon message_type,
+                                 const QUrl& url, QObject* target) {
   Q_UNUSED(message_type)
 
   if (SystemTrayIcon::isSystemTrayActivated()) {
