@@ -83,7 +83,7 @@ QPair<QByteArray, QString> FileMetadata::obtainRawFileData(const QString& file_p
   QFile file(file_path);
 
   if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    throw IOException(QObject::tr("insufficient permissions").arg(file_path));
+    throw IOException(QObject::tr("insufficient permissions for file '%1'").arg(file_path));
   }
 
   QByteArray data;
