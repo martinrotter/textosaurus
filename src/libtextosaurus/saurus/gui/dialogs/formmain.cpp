@@ -50,7 +50,7 @@ FormMain::FormMain(QWidget* parent) : QMainWindow(parent), m_statusBar() {
   setStyleSheet(QSL("QStatusBar::item { border: none; } "
                     "QSplitter::handle:horizontal, QSplitter::handle:vertical { width: 1px; }"));
 
-  qDebug().nospace() << QSL("Creating main application form in thread: \'") << QThread::currentThreadId() << "\'.";
+  qDebug().nospace().noquote() << QSL("Creating main application form in thread: \'") << QThread::currentThreadId() << "\'.";
 }
 
 TabWidget* FormMain::tabWidget() const {
