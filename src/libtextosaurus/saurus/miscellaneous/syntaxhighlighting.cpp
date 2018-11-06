@@ -748,10 +748,11 @@ Lexer SyntaxHighlighting::defaultLexer() {
 
 Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL) {}
 
-Lexer::Lexer(const QString& name, const QStringList& suffices, int code,
-             const QMap<int, SyntaxColorTheme::StyleComponents>& style_mappings,
-             const QString& keywords, bool supports_old_style_folding)
-  : m_name(name), m_code(code), m_suffices(suffices), m_keywords(keywords), m_supportsOldStyleFolding(supports_old_style_folding),
+Lexer::Lexer(QString name, QStringList suffices, int code,
+             QMap<int, SyntaxColorTheme::StyleComponents> style_mappings,
+             QString keywords, bool supports_old_style_folding)
+  : m_name(std::move(name)), m_code(std::move(code)),
+  m_suffices(std::move(suffices)), m_keywords(std::move(keywords)), m_supportsOldStyleFolding(supports_old_style_folding),
   m_styleMappings(style_mappings) {}
 
 bool Lexer::isEmpty() const {
