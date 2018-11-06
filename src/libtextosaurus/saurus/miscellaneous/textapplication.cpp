@@ -47,7 +47,7 @@ TextApplication::TextApplication(QObject* parent)
 }
 
 void TextApplication::loadTextEditorFromString(const QString& contents) {
-  TextEditor* new_editor = new TextEditor(this, m_tabEditors);
+  auto* new_editor = new TextEditor(this, m_tabEditors);
 
   if (m_tabEditors->hasOnlyOneEmptyEditor()) {
     // We have one empty non modified editor already open, close it.
@@ -66,7 +66,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -218,7 +218,7 @@ void TextApplication::setupEolMenu() {
 
 void TextApplication::updateEolMenu(int eol_mode) {
   if (m_actionEolMac->actionGroup() == nullptr) {
-    QActionGroup* grp_eol = new QActionGroup(m_menuEolMode);
+    auto* grp_eol = new QActionGroup(m_menuEolMode);
 
     grp_eol->addAction(m_actionEolMac);
     grp_eol->addAction(m_actionEolUnix);
@@ -294,7 +294,7 @@ void TextApplication::redo() {
 }
 
 void TextApplication::newFile() {
-  TextEditor* editor = new TextEditor(this, m_tabEditors);
+  auto* editor = new TextEditor(this, m_tabEditors);
 
   attachTextEditor(editor);
 
@@ -313,14 +313,14 @@ void TextApplication::onEditorModified(int type, int position, int length,
   Q_UNUSED(foldPrev)
 
   if ((type & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)) > 0) {
-    TextEditor* editor = qobject_cast<TextEditor*>(sender());
+    auto* editor = qobject_cast<TextEditor*>(sender());
 
     markEditorModified(editor, editor->modify());
   }
 }
 
 void TextApplication::onEditorSaved() {
-  TextEditor* editor = qobject_cast<TextEditor*>(sender());
+  auto* editor = qobject_cast<TextEditor*>(sender());
 
   updateStatusBarFromEditor(editor);
 
@@ -330,7 +330,7 @@ void TextApplication::onEditorSaved() {
 }
 
 void TextApplication::onEditorReloaded() {
-  TextEditor* sndr = qobject_cast<TextEditor*>(sender());
+  auto* sndr = qobject_cast<TextEditor*>(sender());
 
   if (sndr == tabWidget()->currentEditor()) {
     onTabSwitched(m_tabEditors->indexOfEditor(sndr));
@@ -574,7 +574,7 @@ bool TextApplication::eventFilter(QObject* obj, QEvent* event) {
   Q_UNUSED(obj)
 
   if (event->type() == QEvent::Type::Drop) {
-    QDropEvent* drop_event = dynamic_cast<QDropEvent*>(event);
+    auto* drop_event = dynamic_cast<QDropEvent*>(event);
 
     if (drop_event == nullptr) {
       return false;
@@ -697,7 +697,7 @@ void TextApplication::changeLexer(QAction* act) {
   TextEditor* cur_editor = tabWidget()->currentEditor();
 
   if (cur_editor != nullptr) {
-    Lexer lexer_act = act->data().value<Lexer>();
+    auto lexer_act = act->data().value<Lexer>();
 
     cur_editor->reloadLexer(lexer_act);
     updateStatusBarFromEditor(cur_editor);
@@ -718,12 +718,12 @@ void TextApplication::loadLexersMenu() {
     m_lexerActions = QList<QAction*>();
 
     // Fill the menu.
-    QActionGroup* grp = new QActionGroup(m_menuLanguage);
+    auto* grp = new QActionGroup(m_menuLanguage);
 
     QMap<QChar, QList<QAction*>> groups;
 
     foreach (const Lexer& lex, m_settings->syntaxHighlighting()->lexers()) {
-      QAction* act = new QAction(QL1S("&") + lex.m_name, m_menuLanguage);
+      auto* act = new QAction(QL1S("&") + lex.m_name, m_menuLanguage);
 
       if (lex.m_code == SCLEX_NULL) {
         // We move "plain text" lexer to first position.
@@ -763,7 +763,7 @@ void TextApplication::loadLexersMenu() {
     Lexer lexer = current_editor->lexer();
 
     foreach (QAction* act, m_lexerActions) {
-      Lexer lexer_act = act->data().value<Lexer>();
+      auto lexer_act = act->data().value<Lexer>();
 
       if (lexer_act.m_name == lexer.m_name) {
         act->setChecked(true);

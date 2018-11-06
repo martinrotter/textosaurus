@@ -13,7 +13,7 @@ class QSettings;
 
 struct SyntaxColorThemeComponent {
   explicit SyntaxColorThemeComponent() = default;
-  explicit SyntaxColorThemeComponent(const QColor& fore, const QColor& back = QColor(), bool bold = false,
+  explicit SyntaxColorThemeComponent(QColor fore, QColor back = QColor(), bool bold = false,
                                      bool italic = false, bool underline = false);
 
   void applyToEditor(TextEditor& editor, int style);
@@ -88,9 +88,10 @@ class SyntaxColorTheme : public QObject {
 
     Q_ENUM(StyleComponents)
 
-    explicit SyntaxColorTheme(const QString& name, bool predefined,
-                              const QMap<StyleComponents,
-                                         SyntaxColorThemeComponent>& styles = QMap<StyleComponents, SyntaxColorThemeComponent>());
+    explicit SyntaxColorTheme(QString name,
+                              bool predefined,
+                              QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> styles = QMap<StyleComponents,
+                                                                                                               SyntaxColorThemeComponent>());
     SyntaxColorTheme(const SyntaxColorTheme& another);
     SyntaxColorTheme(SyntaxColorTheme&& another) noexcept;
     virtual ~SyntaxColorTheme() = default;

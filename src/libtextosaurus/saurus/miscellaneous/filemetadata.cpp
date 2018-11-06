@@ -30,23 +30,31 @@ FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QStr
   int eol_mode = TextFactory::detectEol(data.left(FILE_CHUNK_LENGTH_FOR_EOL_DETECTION));
 
   if (eol_mode < 0) {
-    qWarning("Auto-detection of EOL mode for file '%s' failed, using app default.", qPrintable(file_path));
+    qWarning().noquote().nospace() << QSL("Auto-detection of EOL mode for file '")
+                                   << file_path
+                                   << QSL("' failed, using app default.");
     eol_mode = qApp->textApplication()->settings()->eolMode();
   }
   else {
-    qDebug("Auto-detected EOL mode is '%d'.", eol_mode);
+    qDebug() << QSL("Auto-detected EOL mode is '")
+             << eol_mode
+             << QSL("%d'.");
   }
 
   if (explicit_encoding.isEmpty()) {
-    qDebug("No explicit encoding for file '%s'. Try to detect one.", qPrintable(file_path));
+    qDebug().noquote().nospace() << QSL("No explicit encoding for file '")
+                                 << file_path
+                                 << QSL("'. Try to detect one.");
 
     if ((encoding = TextFactory::detectEncoding(data.left(FILE_CHUNK_LENGTH_FOR_ENCODING_DETECTION))).isEmpty()) {
       // No encoding auto-detected.
       encoding = DEFAULT_TEXT_FILE_ENCODING;
-      qWarning("Auto-detection of encoding failed, using default encoding.");
+      qWarning().noquote().nospace() << QSL("Auto-detection of encoding failed, using default encoding.");
     }
     else {
-      qDebug("Auto-detected encoding is '%s'.", qPrintable(encoding));
+      qDebug().noquote().nospace() << QSL("Auto-detected encoding is '")
+                                   << encoding
+                                   << QSL("'.");
     }
   }
   else {

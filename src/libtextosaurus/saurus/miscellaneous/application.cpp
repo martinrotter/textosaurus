@@ -20,7 +20,6 @@
 
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
-  m_cmdParser(QCommandLineParser()),
   m_settings(Settings::setupSettings(this, qApp->userDataAppFolder(), qApp->userDataHomeFolder())),
   m_textApplication(nullptr), m_mainForm(nullptr),
   m_webFactory(new WebFactory(this)),
@@ -237,7 +236,7 @@ void Application::parseCmdArguments() {
   auto aa = m_cmdParser.optionNames();
 
   if (m_cmdParser.isSet(opt_quit)) {
-    qWarning("Application termination is requested by user.");
+    qWarning().noquote().nospace() << QSL("Application termination is requested by user.");
     qApp->exit(EXIT_SUCCESS);
   }
 }

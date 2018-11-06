@@ -5,14 +5,17 @@
 #include "definitions/definitions.h"
 #include "saurus/gui/texteditor.h"
 
+#include <QDebug>
 #include <QList>
 #include <QMetaEnum>
 #include <QSettings>
 
 #include <utility>
 
-SyntaxColorTheme::SyntaxColorTheme(const QString& name, bool predefined, const QMap<StyleComponents, SyntaxColorThemeComponent>& styles)
-  : m_styleColors(styles), m_name(name), m_predefined(predefined) {}
+SyntaxColorTheme::SyntaxColorTheme(QString name,
+                                   bool predefined,
+                                   QMap<StyleComponents, SyntaxColorThemeComponent> styles)
+  : m_styleColors(std::move(styles)), m_name(std::move(name)), m_predefined(predefined) {}
 
 SyntaxColorTheme::SyntaxColorTheme(const SyntaxColorTheme& another) {
   // FIXME: Is this okay?
@@ -102,14 +105,18 @@ QList<SyntaxColorTheme> SyntaxColorTheme::fromSettings(QSettings& settings) {
         auto component = static_cast<SyntaxColorTheme::StyleComponents>(enum_converter.keyToValue(qPrintable(key.split('_').last())));
         SyntaxColorThemeComponent theme_component(raw_data.at(0),
                                                   raw_data.at(1),
-                                                  raw_data.at(2).toInt(),
-                                                  raw_data.at(3).toInt(),
-                                                  raw_data.at(4).toInt());
+                                                  raw_data.at(2).toInt() != 0,
+                                                  raw_data.at(3).toInt() != 0,
+                                                  raw_data.at(4).toInt() != 0);
 
         theme.setComponent(component, theme_component);
       }
       else {
-        qDebug(R"(Failed to parse key "%s" when loading color scheme "%s".)", qPrintable(key), qPrintable(group));
+        qDebug().noquote().nospace() << QSL("Failed to parse key '")
+                                     << key
+                                     << QSL("' when loading color scheme '")
+                                     << group
+                                     << QSL("'.");
       }
     }
 
@@ -144,8 +151,10 @@ QMap<SyntaxColorTheme::StyleComponents, SyntaxColorThemeComponent> SyntaxColorTh
   return m_styleColors;
 }
 
-SyntaxColorThemeComponent::SyntaxColorThemeComponent(const QColor& fore, const QColor& back, bool bold, bool italic, bool underline)
-  : m_colorForeground(fore), m_colorBackground(back), m_boldFont(bold), m_italicFont(italic), m_underlinedFont(underline) {}
+SyntaxColorThemeComponent::SyntaxColorThemeComponent(QColor fore, QColor back,
+                                                     bool bold, bool italic, bool underline)
+  : m_colorForeground(std::move(fore)), m_colorBackground(std::move(back)),
+  m_boldFont(bold), m_italicFont(italic), m_underlinedFont(underline) {}
 
 void SyntaxColorThemeComponent::applyToEditor(TextEditor& editor, int style) {
   if (m_colorForeground.isValid()) {
