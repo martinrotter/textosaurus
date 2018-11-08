@@ -35,8 +35,6 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
 
     void setReadOnly(bool read_only);
 
-    static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
-
     bool isLog() const;
     void setIsLog(bool is_log);
 
@@ -49,6 +47,8 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     QString encryptionPassword() const;
     void setEncryptionPassword(const QString& encryption_password);
 
+    static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
+
   public slots:
     void resetSaveAgreement();
     void askForSaveAgreement();
@@ -58,8 +58,8 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     void toggleFolding(int position, int modifiers, int margin);
     void printPreview(bool black_on_white);
     void print(bool black_on_white);
-    void save(bool* ok);
-    void saveAs(bool* ok, const QString& encoding = QString());
+    void save(bool& ok);
+    void saveAs(bool& ok, const QString& encoding = QString());
 
     // Shows/hides line numbers margin and adjusts its size to
     // current line count and zoom.
@@ -71,7 +71,7 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     // Closes the editor, user is asked to save unsaved text document.
     // Given parameter is used to indicate if closing was finished (true)
     // or user cancelled it (false).
-    void closeEditor(bool* ok);
+    void closeEditor(bool& ok);
     void loadFromFile(const QByteArray& file_data, const QString& file_path, const QString& encoding,
                       const Lexer& default_lexer, int initial_eol_mode);
     void loadFromString(const QString& contents);
@@ -106,7 +106,7 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     void reattachWatcher(const QString& file_path);
     bool isMarginVisible(int margin_number) const;
     void updateLineNumberMarginWidth(sptr_t zoom, QFont font, sptr_t line_count);
-    void saveToFile(const QString& file_path, bool* ok, const QString& encoding = QString());
+    void saveToFile(const QString& file_path, bool& ok, const QString& encoding = QString());
 
     // Returns filename relative to "user data" folder.
     // NOTE: This is used for saving of unattached editors

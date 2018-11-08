@@ -12,14 +12,17 @@
 class TextEditor;
 class TabWidget;
 
-enum class TabType {
-  TextEditor = 1
-};
-
 class Tab : public QWidget {
   Q_OBJECT
 
   public:
+    enum class TabType {
+      TextEditor = 1,
+      Other = 2
+    };
+
+    Q_ENUM(TabType)
+
     explicit Tab(TabWidget* tab_widget);
 
     // Returns context menu.
@@ -58,6 +61,6 @@ class Tab : public QWidget {
     TabWidget* m_tabWidget;
 };
 
-Q_DECLARE_METATYPE(TabType)
+Q_DECLARE_METATYPE(Tab::TabType)
 
 #endif // TAB_H

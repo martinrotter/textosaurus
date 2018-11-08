@@ -724,7 +724,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   colourise(0, -1);
 }
 
-void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& encoding) {
+void TextEditor::saveToFile(const QString& file_path, bool& ok, const QString& encoding) {
   QFile file(file_path);
 
   detachWatcher();
@@ -732,7 +732,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   QDir().mkpath(QFileInfo(file_path).absolutePath());
 
   if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
-    *ok = false;
+    ok = false;
     reattachWatcher(m_filePath);
     return;
   }
@@ -763,7 +763,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
                             QObject::tr("File '%1' cannot be saved because %2.").arg(QDir::toNativeSeparators(file_path),
                                                                                      ex.message()));
       file.close();
-      *ok = true;
+      ok = true;
     }
   }
   else {
@@ -782,7 +782,7 @@ void TextEditor::saveToFile(const QString& file_path, bool* ok, const QString& e
   setSavePoint();
   emit savedToFile(m_filePath);
 
-  *ok = true;
+  ok = true;
 }
 
 bool TextEditor::autoIndentEnabled() const {
@@ -994,7 +994,7 @@ QByteArray TextEditor::encoding() const {
   return m_encoding;
 }
 
-void TextEditor::save(bool* ok) {
+void TextEditor::save(bool& ok) {
   if (m_filePath.isEmpty()) {
     // Newly created document, save as.
     saveAs(ok);
@@ -1005,7 +1005,7 @@ void TextEditor::save(bool* ok) {
   }
 }
 
-void TextEditor::saveAs(bool* ok, const QString& encoding) {
+void TextEditor::saveAs(bool& ok, const QString& encoding) {
   // We save this documents as new file.
   QString file_path;
 
@@ -1027,11 +1027,11 @@ void TextEditor::saveAs(bool* ok, const QString& encoding) {
     }
   }
   else {
-    *ok = false;
+    ok = false;
   }
 }
 
-void TextEditor::closeEditor(bool* ok) {
+void TextEditor::closeEditor(bool& ok) {
   if (m_textApp->shouldSaveSession() && filePath().isEmpty()) {
     // Store even empty editors to session.W
     // We save this editor "into" temporary session file.
@@ -1040,14 +1040,14 @@ void TextEditor::closeEditor(bool* ok) {
     saveToFile(qApp->userDataFolder() + QDir::separator() + session_file, ok, DEFAULT_TEXT_FILE_ENCODING);
 
     // File is saved, we store the filename.
-    if (*ok) {
+    if (ok) {
       appendSessionFile(session_file, true);
     }
   }
   else if (m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) {
     // No need to save, just mark to session if needed.
     appendSessionFile(QDir::toNativeSeparators(filePath()), false);
-    *ok = true;
+    ok = true;
   }
   else if (modify() || (!filePath().isEmpty() && !QFile::exists(filePath()))) {
     emit visibilityRequested();
@@ -1064,8 +1064,8 @@ void TextEditor::closeEditor(bool* ok) {
       case QMessageBox::StandardButton::Save: {
         bool ok_save = false;
 
-        save(&ok_save);
-        *ok = ok_save;
+        save(ok_save);
+        ok = ok_save;
 
         if (ok_save && m_textApp->shouldSaveSession()) {
           appendSessionFile(QDir::toNativeSeparators(filePath()), false);
@@ -1075,7 +1075,7 @@ void TextEditor::closeEditor(bool* ok) {
       }
 
       case QMessageBox::StandardButton::Discard:
-        *ok = true;
+        ok = true;
 
         if (m_textApp->shouldSaveSession()) {
           appendSessionFile(QDir::toNativeSeparators(filePath()), false);
@@ -1084,18 +1084,18 @@ void TextEditor::closeEditor(bool* ok) {
         break;
 
       case QMessageBox::StandardButton::Cancel:
-        *ok = false;
+        ok = false;
         break;
 
       default:
-        *ok = false;
+        ok = false;
         break;
     }
 
     resetSaveAgreement();
   }
   else {
-    *ok = true;
+    ok = true;
   }
 }
 

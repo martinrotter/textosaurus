@@ -192,8 +192,8 @@ void ExternalTools::loadPredefinedTools() {
   insert_date_time->setActionObjectName(QSL("m_actionPredefCurrDateTime"));
   insert_date_time->setCategory(tr("&DateTime"));
   insert_date_time->setName(tr("Insert &DateTime"));
-  insert_date_time->setInput(ToolInput::NoInput);
-  insert_date_time->setOutput(ToolOutput::InsertAtCursorPosition);
+  insert_date_time->setInput(ExternalTool::ToolInput::NoInput);
+  insert_date_time->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
 
   m_predefinedTools.append(insert_date_time);
 
@@ -202,8 +202,8 @@ void ExternalTools::loadPredefinedTools() {
   insert_date->setActionObjectName(QSL("m_actionPredefCurrDate"));
   insert_date->setCategory(tr("&DateTime"));
   insert_date->setName(tr("Insert &Date"));
-  insert_date->setInput(ToolInput::NoInput);
-  insert_date->setOutput(ToolOutput::InsertAtCursorPosition);
+  insert_date->setInput(ExternalTool::ToolInput::NoInput);
+  insert_date->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
 
   m_predefinedTools.append(insert_date);
 
@@ -212,8 +212,8 @@ void ExternalTools::loadPredefinedTools() {
   insert_time->setActionObjectName(QSL("m_actionPredefCurrTime"));
   insert_time->setCategory(tr("&DateTime"));
   insert_time->setName(tr("Insert &Time"));
-  insert_time->setInput(ToolInput::NoInput);
-  insert_time->setOutput(ToolOutput::InsertAtCursorPosition);
+  insert_time->setInput(ExternalTool::ToolInput::NoInput);
+  insert_time->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
 
   m_predefinedTools.append(insert_time);
 
@@ -222,9 +222,9 @@ void ExternalTools::loadPredefinedTools() {
   insert_formatted_datetime->setActionObjectName(QSL("m_actionPredefCurrFormatDateTime"));
   insert_formatted_datetime->setCategory(tr("&DateTime"));
   insert_formatted_datetime->setName(tr("Insert &DateTime (Custom Format)"));
-  insert_formatted_datetime->setInput(ToolInput::AskForInput);
+  insert_formatted_datetime->setInput(ExternalTool::ToolInput::AskForInput);
   insert_formatted_datetime->setPromptValue(QSL("HH:mm:ss dddd, dd.MM.yyyy"));
-  insert_formatted_datetime->setOutput(ToolOutput::InsertAtCursorPosition);
+  insert_formatted_datetime->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
 
   m_predefinedTools.append(insert_formatted_datetime);
 
@@ -233,8 +233,8 @@ void ExternalTools::loadPredefinedTools() {
   json_beautify->setActionObjectName(QSL("m_actionPredefJsonBeautify"));
   json_beautify->setCategory(tr("&JSON"));
   json_beautify->setName(tr("JSON &Beautify"));
-  json_beautify->setInput(ToolInput::SelectionDocument);
-  json_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
+  json_beautify->setInput(ExternalTool::ToolInput::SelectionDocument);
+  json_beautify->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(json_beautify);
 
@@ -243,8 +243,8 @@ void ExternalTools::loadPredefinedTools() {
   json_minify->setActionObjectName(QSL("m_actionPredefMinify"));
   json_minify->setCategory(tr("&JSON"));
   json_minify->setName(tr("JSON &Minify"));
-  json_minify->setInput(ToolInput::SelectionDocument);
-  json_minify->setOutput(ToolOutput::ReplaceSelectionDocument);
+  json_minify->setInput(ExternalTool::ToolInput::SelectionDocument);
+  json_minify->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(json_minify);
 
@@ -253,8 +253,8 @@ void ExternalTools::loadPredefinedTools() {
   xml_check->setActionObjectName(QSL("m_actionPredefXmlCheck"));
   xml_check->setCategory(tr("&XML"));
   xml_check->setName(tr("&Check XML syntax"));
-  xml_check->setInput(ToolInput::SelectionDocument);
-  xml_check->setOutput(ToolOutput::DumpToOutputWindow);
+  xml_check->setInput(ExternalTool::ToolInput::SelectionDocument);
+  xml_check->setOutput(ExternalTool::ToolOutput::DumpToOutputWindow);
 
   m_predefinedTools.append(xml_check);
 
@@ -263,8 +263,8 @@ void ExternalTools::loadPredefinedTools() {
   xml_beautify->setActionObjectName(QSL("m_actionPredefXmlBeautify"));
   xml_beautify->setCategory(tr("&XML"));
   xml_beautify->setName(tr("XML &Beautify (Selected String)"));
-  xml_beautify->setInput(ToolInput::SelectionDocument);
-  xml_beautify->setOutput(ToolOutput::ReplaceSelectionDocument);
+  xml_beautify->setInput(ExternalTool::ToolInput::SelectionDocument);
+  xml_beautify->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(xml_beautify);
 
@@ -273,8 +273,8 @@ void ExternalTools::loadPredefinedTools() {
   xml_beautify_file->setActionObjectName(QSL("m_actionPredefXmlBeautifyFile"));
   xml_beautify_file->setCategory(tr("&XML"));
   xml_beautify_file->setName(tr("XML &Beautify (File)"));
-  xml_beautify_file->setInput(ToolInput::SavedFile);
-  xml_beautify_file->setOutput(ToolOutput::ReloadFile);
+  xml_beautify_file->setInput(ExternalTool::ToolInput::SavedFile);
+  xml_beautify_file->setOutput(ExternalTool::ToolOutput::ReloadFile);
 
   m_predefinedTools.append(xml_beautify_file);
 
@@ -283,8 +283,8 @@ void ExternalTools::loadPredefinedTools() {
   xml_linearize->setActionObjectName(QSL("m_actionPredefMinify"));
   xml_linearize->setCategory(tr("&XML"));
   xml_linearize->setName(tr("XML &Linearize/Minfy"));
-  xml_linearize->setInput(ToolInput::SelectionDocument);
-  xml_linearize->setOutput(ToolOutput::ReplaceSelectionDocument);
+  xml_linearize->setInput(ExternalTool::ToolInput::SelectionDocument);
+  xml_linearize->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(xml_linearize);
 
@@ -293,8 +293,8 @@ void ExternalTools::loadPredefinedTools() {
   tobase64->setActionObjectName(QSL("m_actionPredefToBase64"));
   tobase64->setCategory(tr("&MIME Tools"));
   tobase64->setName(tr("Text → &Base64"));
-  tobase64->setInput(ToolInput::SelectionDocument);
-  tobase64->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tobase64->setInput(ExternalTool::ToolInput::SelectionDocument);
+  tobase64->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(tobase64);
 
@@ -303,8 +303,8 @@ void ExternalTools::loadPredefinedTools() {
   tobase64url->setActionObjectName(QSL("m_actionPredefToBase64Url"));
   tobase64url->setCategory(tr("&MIME Tools"));
   tobase64url->setName(tr("Text → &Base64Url"));
-  tobase64url->setInput(ToolInput::SelectionDocument);
-  tobase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tobase64url->setInput(ExternalTool::ToolInput::SelectionDocument);
+  tobase64url->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(tobase64url);
 
@@ -313,8 +313,8 @@ void ExternalTools::loadPredefinedTools() {
   tohtmlencoded->setActionObjectName(QSL("m_actionPredefToHtmlEscaped"));
   tohtmlencoded->setCategory(tr("&MIME Tools"));
   tohtmlencoded->setName(tr("Text → &HTML escaped"));
-  tohtmlencoded->setInput(ToolInput::SelectionDocument);
-  tohtmlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tohtmlencoded->setInput(ExternalTool::ToolInput::SelectionDocument);
+  tohtmlencoded->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(tohtmlencoded);
 
@@ -323,8 +323,8 @@ void ExternalTools::loadPredefinedTools() {
   tourlencoded->setActionObjectName(QSL("m_actionPredefToUrlEncoded"));
   tourlencoded->setCategory(tr("&MIME Tools"));
   tourlencoded->setName(tr("Text → &URL encoded"));
-  tourlencoded->setInput(ToolInput::SelectionDocument);
-  tourlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tourlencoded->setInput(ExternalTool::ToolInput::SelectionDocument);
+  tourlencoded->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(tourlencoded);
 
@@ -333,8 +333,8 @@ void ExternalTools::loadPredefinedTools() {
   tolower->setActionObjectName(QSL("m_actionPredefToLower"));
   tolower->setCategory(tr("&Text Case Conversion"));
   tolower->setName(tr("to &lower case"));
-  tolower->setInput(ToolInput::SelectionDocument);
-  tolower->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tolower->setInput(ExternalTool::ToolInput::SelectionDocument);
+  tolower->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
   tolower->setAddToEditMenu(true);
 
   m_predefinedTools.append(tolower);
@@ -344,8 +344,8 @@ void ExternalTools::loadPredefinedTools() {
   toupper->setActionObjectName(QSL("m_actionPredefToUpper"));
   toupper->setCategory(tr("&Text Case Conversion"));
   toupper->setName(tr("TO &UPPER CASE"));
-  toupper->setInput(ToolInput::SelectionDocument);
-  toupper->setOutput(ToolOutput::ReplaceSelectionDocument);
+  toupper->setInput(ExternalTool::ToolInput::SelectionDocument);
+  toupper->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
   toupper->setAddToEditMenu(true);
 
   m_predefinedTools.append(toupper);
@@ -355,8 +355,8 @@ void ExternalTools::loadPredefinedTools() {
   tosentence->setActionObjectName(QSL("m_actionPredefToSentence"));
   tosentence->setCategory(tr("&Text Case Conversion"));
   tosentence->setName(tr("To &sentence case"));
-  tosentence->setInput(ToolInput::SelectionDocument);
-  tosentence->setOutput(ToolOutput::ReplaceSelectionDocument);
+  tosentence->setInput(ExternalTool::ToolInput::SelectionDocument);
+  tosentence->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
   tosentence->setAddToEditMenu(true);
 
   m_predefinedTools.append(tosentence);
@@ -366,8 +366,8 @@ void ExternalTools::loadPredefinedTools() {
   totitle->setActionObjectName(QSL("m_actionPredefToTitle"));
   totitle->setCategory(tr("&Text Case Conversion"));
   totitle->setName(tr("To &Title Case"));
-  totitle->setInput(ToolInput::SelectionDocument);
-  totitle->setOutput(ToolOutput::ReplaceSelectionDocument);
+  totitle->setInput(ExternalTool::ToolInput::SelectionDocument);
+  totitle->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
   totitle->setAddToEditMenu(true);
 
   m_predefinedTools.append(totitle);
@@ -377,19 +377,29 @@ void ExternalTools::loadPredefinedTools() {
   toinvert->setActionObjectName(QSL("m_actionPredefInvertCase"));
   toinvert->setCategory(tr("&Text Case Conversion"));
   toinvert->setName(tr("&Invert case"));
-  toinvert->setInput(ToolInput::SelectionDocument);
-  toinvert->setOutput(ToolOutput::ReplaceSelectionDocument);
+  toinvert->setInput(ExternalTool::ToolInput::SelectionDocument);
+  toinvert->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
   toinvert->setAddToEditMenu(true);
 
   m_predefinedTools.append(toinvert);
+
+  PredefinedTool* reverse = new PredefinedTool(&PredefinedTools::reverse, this);
+
+  reverse->setActionObjectName(QSL("m_actionPredefReverseString"));
+  reverse->setName(tr("&Invert Text"));
+  reverse->setInput(ExternalTool::ToolInput::SelectionDocument);
+  reverse->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
+  reverse->setAddToEditMenu(true);
+
+  m_predefinedTools.append(reverse);
 
   PredefinedTool* frombase64 = new PredefinedTool(&PredefinedTools::fromBase64, this);
 
   frombase64->setActionObjectName(QSL("m_actionPredefFromBase64"));
   frombase64->setCategory(tr("&MIME Tools"));
   frombase64->setName(tr("&Base64 → text"));
-  frombase64->setInput(ToolInput::SelectionDocument);
-  frombase64->setOutput(ToolOutput::ReplaceSelectionDocument);
+  frombase64->setInput(ExternalTool::ToolInput::SelectionDocument);
+  frombase64->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(frombase64);
 
@@ -398,8 +408,8 @@ void ExternalTools::loadPredefinedTools() {
   frombase64url->setActionObjectName(QSL("m_actionPredefFromBase64Url"));
   frombase64url->setCategory(tr("&MIME Tools"));
   frombase64url->setName(tr("&Base64Url → text"));
-  frombase64url->setInput(ToolInput::SelectionDocument);
-  frombase64url->setOutput(ToolOutput::ReplaceSelectionDocument);
+  frombase64url->setInput(ExternalTool::ToolInput::SelectionDocument);
+  frombase64url->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(frombase64url);
 
@@ -408,8 +418,8 @@ void ExternalTools::loadPredefinedTools() {
   fromurlencoded->setActionObjectName(QSL("m_actionPredefFromUrlEncoded"));
   fromurlencoded->setCategory(tr("&MIME Tools"));
   fromurlencoded->setName(tr("&URL encoded → text"));
-  fromurlencoded->setInput(ToolInput::SelectionDocument);
-  fromurlencoded->setOutput(ToolOutput::ReplaceSelectionDocument);
+  fromurlencoded->setInput(ExternalTool::ToolInput::SelectionDocument);
+  fromurlencoded->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 
   m_predefinedTools.append(fromurlencoded);
 
@@ -418,8 +428,8 @@ void ExternalTools::loadPredefinedTools() {
   send_to_clbin->setActionObjectName(QSL("m_actionPredefSendClbin"));
   send_to_clbin->setCategory(tr("&Upload to..."));
   send_to_clbin->setName(tr("Upload to &clbin.com"));
-  send_to_clbin->setInput(ToolInput::SelectionDocument);
-  send_to_clbin->setOutput(ToolOutput::DumpToOutputWindow);
+  send_to_clbin->setInput(ExternalTool::ToolInput::SelectionDocument);
+  send_to_clbin->setOutput(ExternalTool::ToolOutput::DumpToOutputWindow);
 
   m_predefinedTools.append(send_to_clbin);
 
@@ -428,8 +438,8 @@ void ExternalTools::loadPredefinedTools() {
   send_to_haste->setActionObjectName(QSL("m_actionPredefSendHastebin"));
   send_to_haste->setCategory(tr("&Upload to..."));
   send_to_haste->setName(tr("Upload to &hastebin.com"));
-  send_to_haste->setInput(ToolInput::SelectionDocument);
-  send_to_haste->setOutput(ToolOutput::DumpToOutputWindow);
+  send_to_haste->setInput(ExternalTool::ToolInput::SelectionDocument);
+  send_to_haste->setOutput(ExternalTool::ToolOutput::DumpToOutputWindow);
 
   m_predefinedTools.append(send_to_haste);
 
@@ -438,8 +448,8 @@ void ExternalTools::loadPredefinedTools() {
   send_to_ixio->setActionObjectName(QSL("m_actionPredefSendIxio"));
   send_to_ixio->setCategory(tr("&Upload to..."));
   send_to_ixio->setName(tr("Upload to &ix.io"));
-  send_to_ixio->setInput(ToolInput::SelectionDocument);
-  send_to_ixio->setOutput(ToolOutput::DumpToOutputWindow);
+  send_to_ixio->setInput(ExternalTool::ToolInput::SelectionDocument);
+  send_to_ixio->setOutput(ExternalTool::ToolOutput::DumpToOutputWindow);
 
   m_predefinedTools.append(send_to_ixio);
 
@@ -474,8 +484,10 @@ void ExternalTools::loadCustomTools() {
     tool->setName(sett_ext_tools.value(QSL("name")).toString());
     tool->setScript(sett_ext_tools.value(QSL("script")).toString());
     tool->setPrompt(sett_ext_tools.value(QSL("prompt")).toString());
-    tool->setInput(ToolInput(sett_ext_tools.value(QSL("input"), int(ToolInput::SelectionDocument)).toInt()));
-    tool->setOutput(ToolOutput(sett_ext_tools.value(QSL("output"), int(ToolOutput::ReplaceSelectionDocument)).toInt()));
+    tool->setInput(ExternalTool::ToolInput(sett_ext_tools.value(QSL("input"),
+                                                                int(ExternalTool::ToolInput::SelectionDocument)).toInt()));
+    tool->setOutput(ExternalTool::ToolOutput(sett_ext_tools.value(QSL("output"),
+                                                                  int(ExternalTool::ToolOutput::ReplaceSelectionDocument)).toInt()));
     tool->setCategory(sett_ext_tools.value(QSL("category")).toString());
     tool->setShortcut(sett_ext_tools.value(QSL("shortcut")).toString());
 
@@ -493,8 +505,8 @@ void ExternalTools::loadCustomTools() {
                             "xmllint --format \"$fil\" > \"${fil}.out\" 2> /dev/null"
                             "mv \"${fil}.out\" \"$fil\"");
     ext_bash_xml->setCategory(tr("Bash (external tool examples)"));
-    ext_bash_xml->setInput(ToolInput::SavedFile);
-    ext_bash_xml->setOutput(ToolOutput::ReloadFile);
+    ext_bash_xml->setInput(ExternalTool::ToolInput::SavedFile);
+    ext_bash_xml->setOutput(ExternalTool::ToolOutput::ReloadFile);
     ext_bash_xml->setName("XML - beautify");
 
     m_customTools.append(ext_bash_xml);
@@ -504,8 +516,8 @@ void ExternalTools::loadCustomTools() {
     ext_bash_json->setScript("import sys, json;\n\ndata = json.load(sys.stdin)\nprint(json.dumps(data, indent=2))");
     ext_bash_json->setCategory(tr("Python (external tool examples)"));
     ext_bash_json->setInterpreter(QSL("python3.6"));
-    ext_bash_json->setInput(ToolInput::SelectionDocument);
-    ext_bash_json->setOutput(ToolOutput::ReplaceSelectionDocument);
+    ext_bash_json->setInput(ExternalTool::ToolInput::SelectionDocument);
+    ext_bash_json->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
     ext_bash_json->setName("JSON - beautify");
 
     m_customTools.append(ext_bash_json);
@@ -514,8 +526,8 @@ void ExternalTools::loadCustomTools() {
 
     ext_bash_sha256->setScript("sha256sum | head -c 64");
     ext_bash_sha256->setCategory(tr("Bash (external tool examples)"));
-    ext_bash_sha256->setInput(ToolInput::SelectionDocument);
-    ext_bash_sha256->setOutput(ToolOutput::ReplaceSelectionDocument);
+    ext_bash_sha256->setInput(ExternalTool::ToolInput::SelectionDocument);
+    ext_bash_sha256->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
     ext_bash_sha256->setName(tr("SHA256 sum of selected/all text"));
 
     m_customTools.append(ext_bash_sha256);
@@ -525,8 +537,8 @@ void ExternalTools::loadCustomTools() {
     ext_python_reverse->setScript("print raw_input().lower()[::-1]");
     ext_python_reverse->setInterpreter(QSL("python3.6"));
     ext_python_reverse->setCategory(tr("Python (external tool examples)"));
-    ext_python_reverse->setInput(ToolInput::CurrentLine);
-    ext_python_reverse->setOutput(ToolOutput::ReplaceCurrentLine);
+    ext_python_reverse->setInput(ExternalTool::ToolInput::CurrentLine);
+    ext_python_reverse->setOutput(ExternalTool::ToolOutput::ReplaceCurrentLine);
     ext_python_reverse->setName(tr("Reverse current line"));
 
     m_customTools.append(ext_python_reverse);
@@ -536,8 +548,8 @@ void ExternalTools::loadCustomTools() {
     ext_bash_seq->setScript("IFS=' '\nread -r a b\nunset IFS\nfor i in $(seq $a $b); do printf \"$i \"; done");
     ext_bash_seq->setCategory(tr("Bash (external tool examples)"));
     ext_bash_seq->setPrompt(tr("Enter sequence bounds (for example \"0 10\"):"));
-    ext_bash_seq->setInput(ToolInput::AskForInput);
-    ext_bash_seq->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_bash_seq->setInput(ExternalTool::ToolInput::AskForInput);
+    ext_bash_seq->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
     ext_bash_seq->setName(tr("Generate sequence"));
 
     m_customTools.append(ext_bash_seq);
@@ -548,8 +560,8 @@ void ExternalTools::loadCustomTools() {
     ext_python_eval->setCategory(tr("Python (external tool examples)"));
     ext_python_eval->setInterpreter(QSL("python3.6"));
     ext_python_eval->setPrompt(tr("Enter Python code:"));
-    ext_python_eval->setInput(ToolInput::AskForInput);
-    ext_python_eval->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_python_eval->setInput(ExternalTool::ToolInput::AskForInput);
+    ext_python_eval->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
     ext_python_eval->setName(tr("Run Python code"));
 
     m_customTools.append(ext_python_eval);
@@ -560,8 +572,8 @@ void ExternalTools::loadCustomTools() {
                                 "tr -dc a-z1-4 </dev/urandom | tr 1-2 ' \n' | awk 'length==0 || length>50' | tr 3-4 ' ' | sed 's/^ *//' | cat -s | sed 's/ / /g' | fmt | head -n $count");
     ext_bash_garbage->setCategory(tr("Bash (external tool examples)"));
     ext_bash_garbage->setPrompt(tr("Enter number of lines:"));
-    ext_bash_garbage->setInput(ToolInput::AskForInput);
-    ext_bash_garbage->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_bash_garbage->setInput(ExternalTool::ToolInput::AskForInput);
+    ext_bash_garbage->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
     ext_bash_garbage->setName(tr("Generate garbage text"));
 
     m_customTools.append(ext_bash_garbage);
@@ -573,8 +585,8 @@ void ExternalTools::loadCustomTools() {
                              "eval $fil");
     ext_bash_exec->setCategory(tr("Bash (external tool examples)"));
     ext_bash_exec->setPrompt(tr("Enter Bash code:"));
-    ext_bash_exec->setInput(ToolInput::AskForInput);
-    ext_bash_exec->setOutput(ToolOutput::InsertAtCursorPosition);
+    ext_bash_exec->setInput(ExternalTool::ToolInput::AskForInput);
+    ext_bash_exec->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
     ext_bash_exec->setName(tr("Run Bash code"));
 
     m_customTools.append(ext_bash_exec);
@@ -609,11 +621,11 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
     QString data;
 
     switch (tool_to_run->input()) {
-      case ToolInput::SelectionDocument:
+      case ExternalTool::ToolInput::SelectionDocument:
         data = !ptr_editor->selectionEmpty() ? ptr_editor->getSelText() : ptr_editor->getText(ptr_editor->length() + 1);
         break;
 
-      case ToolInput::AskForInput: {
+      case ExternalTool::ToolInput::AskForInput: {
         bool ok;
 
         data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
@@ -626,19 +638,19 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
         break;
       }
 
-      case ToolInput::CurrentLine:
+      case ExternalTool::ToolInput::CurrentLine:
         data = ptr_editor->getCurLine(-1);
         break;
 
-      case ToolInput::SavedFile:
-        bool ok;
+      case ExternalTool::ToolInput::SavedFile: {
+        bool ok = false;
 
-        ptr_editor->save(&ok);
+        ptr_editor->save(ok);
         data = ptr_editor->filePath();
         break;
+      }
 
-      case ToolInput::NoInput:
-      default:
+      case ExternalTool::ToolInput::NoInput:
         break;
     }
 
@@ -670,7 +682,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
   auto* tool = qobject_cast<ExternalTool*>(sender());
 
   switch (tool->output()) {
-    case ToolOutput::InsertAtCursorPosition: {
+    case ExternalTool::ToolOutput::InsertAtCursorPosition: {
       if (!output_text.isEmpty()) {
         QByteArray output_utf = output_text.toUtf8();
 
@@ -681,7 +693,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
       break;
     }
 
-    case ToolOutput::ReplaceCurrentLine: {
+    case ExternalTool::ToolOutput::ReplaceCurrentLine: {
       if (!output_text.isEmpty()) {
         QByteArray output_utf = output_text.toUtf8();
         auto line = editor->lineFromPosition(editor->currentPos());
@@ -695,7 +707,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
       break;
     }
 
-    case ToolOutput::CopyToClipboard:
+    case ExternalTool::ToolOutput::CopyToClipboard:
       if (!output_text.isEmpty()) {
         qApp->clipboard()->setText(output_text, QClipboard::Mode::Clipboard);
         m_application->outputSidebar()->displayOutput(OutputSource::Application,
@@ -705,14 +717,14 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
       break;
 
-    case ToolOutput::DumpToOutputWindow:
+    case ExternalTool::ToolOutput::DumpToOutputWindow:
       if (!output_text.isEmpty()) {
         m_application->outputSidebar()->displayOutput(OutputSource::ExternalTool, output_text, QMessageBox::Icon::Information);
       }
 
       break;
 
-    case ToolOutput::NewSavedFile: {
+    case ExternalTool::ToolOutput::NewSavedFile: {
       if (!output_text.isEmpty()) {
         m_application->outputSidebar()->displayOutput(OutputSource::Application,
                                                       tr("Tool '%1' finished, opening output in new tab.").arg(tool->name()),
@@ -724,13 +736,13 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
       break;
     }
 
-    case ToolOutput::ReloadFile:
+    case ExternalTool::ToolOutput::ReloadFile:
 
       // NOTE: We do not probably have to do this.
       // FS watcher will reload automatically.
       break;
 
-    case ToolOutput::ReplaceSelectionDocument:
+    case ExternalTool::ToolOutput::ReplaceSelectionDocument:
       if (!output_text.isEmpty()) {
         if (!editor->selectionEmpty()) {
           editor->replaceSel(output_text.toUtf8().constData());
@@ -742,8 +754,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
       break;
 
-    case ToolOutput::NoOutput:
-    default:
+    case ExternalTool::ToolOutput::NoOutput:
       break;
   }
 

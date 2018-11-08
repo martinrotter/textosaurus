@@ -11,60 +11,60 @@
 
 #include <functional>
 
-enum class ToolInput {
-  // Currently selected text (or whole document's text) is given as tool input.
-  // WARNING: This is very bad idea if current document/selection is big.
-  SelectionDocument,
-
-  // Text from highlighted line is given as tool input.
-  CurrentLine,
-
-  // Saved file path is given as tool input.
-  SavedFile,
-
-  // User is asked to enter textual input.
-  AskForInput,
-
-  // This tool does not take any sort of input.
-  NoInput
-};
-
-enum class ToolOutput {
-  // Current selection (or document if there is no selection) is replaced.
-  // WARNING: This is very bad idea if current document/selection is big.
-  ReplaceSelectionDocument,
-
-  // Line containing care is replaced.
-  ReplaceCurrentLine,
-
-  // Tool output is inserted at cursor position.
-  // WARNING: This is very bad idea if tool output is big.
-  InsertAtCursorPosition,
-
-  // Tool output is dumped into output toolbox window.
-  // WARNING: This is very bad idea if tool output is big.
-  DumpToOutputWindow,
-
-  // Copies tool output to clipboard and displays in output window info.
-  // WARNING: This is very bad idea if tool output is big.
-  CopyToClipboard,
-
-  // Output is saved to some file stored in TEMP
-  // and is opened when tool finishes its work.
-  NewSavedFile,
-
-  // File opened in editor is reloaded.
-  ReloadFile,
-
-  // Tool has no output, therefore we do not have to wait for it to exit or handle it
-  // in any way.
-  NoOutput
-};
-
 class ExternalTool : public QObject {
   Q_OBJECT
 
   public:
+    enum class ToolInput {
+      // Currently selected text (or whole document's text) is given as tool input.
+      // WARNING: This is very bad idea if current document/selection is big.
+      SelectionDocument,
+
+      // Text from highlighted line is given as tool input.
+      CurrentLine,
+
+      // Saved file path is given as tool input.
+      SavedFile,
+
+      // User is asked to enter textual input.
+      AskForInput,
+
+      // This tool does not take any sort of input.
+      NoInput
+    };
+
+    enum class ToolOutput {
+      // Current selection (or document if there is no selection) is replaced.
+      // WARNING: This is very bad idea if current document/selection is big.
+      ReplaceSelectionDocument,
+
+      // Line containing care is replaced.
+      ReplaceCurrentLine,
+
+      // Tool output is inserted at cursor position.
+      // WARNING: This is very bad idea if tool output is big.
+      InsertAtCursorPosition,
+
+      // Tool output is dumped into output toolbox window.
+      // WARNING: This is very bad idea if tool output is big.
+      DumpToOutputWindow,
+
+      // Copies tool output to clipboard and displays in output window info.
+      // WARNING: This is very bad idea if tool output is big.
+      CopyToClipboard,
+
+      // Output is saved to some file stored in TEMP
+      // and is opened when tool finishes its work.
+      NewSavedFile,
+
+      // File opened in editor is reloaded.
+      ReloadFile,
+
+      // Tool has no output, therefore we do not have to wait for it to exit or handle it
+      // in any way.
+      NoOutput
+    };
+
     explicit ExternalTool(QObject* parent = nullptr);
     explicit ExternalTool(const ExternalTool& other, QObject* parent = nullptr);
     virtual ~ExternalTool() = default;
@@ -149,7 +149,7 @@ class PredefinedTool : public ExternalTool {
   Q_OBJECT
 
   public:
-    explicit PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent = nullptr);
+    explicit PredefinedTool(std::function<QString(const QString&, bool&)> functor, QObject* parent = nullptr);
     virtual ~PredefinedTool() = default;
 
     virtual bool isPredefined() const override;
@@ -158,7 +158,7 @@ class PredefinedTool : public ExternalTool {
     virtual void runTool(QPointer<TextEditor> editor, const QString& data) override;
 
   private:
-    std::function<QString(const QString&, bool*)> m_functor;
+    std::function<QString(const QString&, bool&)> m_functor;
 };
 
 #endif // EXTERNALTOOL_H

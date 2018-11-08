@@ -66,7 +66,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -125,9 +125,9 @@ void TextApplication::saveCurrentEditor() {
   TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    bool ok;
+    bool ok = false;
 
-    editor->save(&ok);
+    editor->save(ok);
   }
 }
 
@@ -135,9 +135,9 @@ void TextApplication::saveCurrentEditorAs() {
   TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    bool ok;
+    bool ok = false;
 
-    editor->saveAs(&ok);
+    editor->saveAs(ok);
   }
 }
 
@@ -145,18 +145,18 @@ void TextApplication::saveCurrentEditorAsWithEncoding(QAction* action) {
   TextEditor* editor = tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    bool ok;
+    bool ok = false;
     QString encoding = action->data().toString();
 
-    editor->saveAs(&ok, encoding);
+    editor->saveAs(ok, encoding);
   }
 }
 
 void TextApplication::saveAllEditors() {
-  bool ok;
-
   foreach (TextEditor* editor, m_tabEditors->editors()) {
-    editor->save(&ok);
+    bool ok = false;
+
+    editor->save(ok);
   }
 }
 

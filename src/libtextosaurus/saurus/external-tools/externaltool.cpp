@@ -44,7 +44,7 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   // Save script to file and make it executable.
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
 
-  // Run in bash.
+  // Run in interpreter.
   auto* bash_process = new QProcess(this);
 
   bash_process->setProcessEnvironment(QProcessEnvironment::systemEnvironment());
@@ -88,26 +88,33 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
 void ExternalTool::onProcessError(QPointer<TextEditor> editor) {
   auto* bash_process = qobject_cast<QProcess*>(sender());
-  emit toolFinished(editor, QString(), bash_process->errorString(), false);
+
+  if (bash_process != nullptr) {
+    emit toolFinished(editor, QString(), bash_process->errorString(), false);
+
+    bash_process->deleteLater();
+  }
 
   m_isRunning = false;
-  bash_process->deleteLater();
 }
 
 void ExternalTool::onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status) {
   auto* bash_process = qobject_cast<QProcess*>(sender());
 
-  if (exit_status == QProcess::ExitStatus::NormalExit) {
-    QByteArray tool_output = bash_process->readAllStandardOutput();
-    QByteArray tool_error = bash_process->readAllStandardError();
-    emit toolFinished(editor, QString::fromUtf8(tool_output), QString::fromUtf8(tool_error), exit_code == 0);
-  }
-  else {
-    emit toolFinished(editor, QString(), bash_process->errorString(), false);
+  if (bash_process != nullptr) {
+    if (exit_status == QProcess::ExitStatus::NormalExit) {
+      QByteArray tool_output = bash_process->readAllStandardOutput();
+      QByteArray tool_error = bash_process->readAllStandardError();
+      emit toolFinished(editor, QString::fromUtf8(tool_output), QString::fromUtf8(tool_error), exit_code == 0);
+    }
+    else {
+      emit toolFinished(editor, QString(), bash_process->errorString(), false);
+    }
+
+    bash_process->deleteLater();
   }
 
   m_isRunning = false;
-  bash_process->deleteLater();
 }
 
 QString ExternalTool::promptValue() const {
@@ -154,7 +161,7 @@ void ExternalTool::setCategory(const QString& category) {
   m_category = category;
 }
 
-ToolOutput ExternalTool::output() const {
+ExternalTool::ToolOutput ExternalTool::output() const {
   return m_output;
 }
 
@@ -162,7 +169,7 @@ void ExternalTool::setOutput(const ToolOutput& output) {
   m_output = output;
 }
 
-ToolInput ExternalTool::input() const {
+ExternalTool::ToolInput ExternalTool::input() const {
   return m_input;
 }
 
@@ -210,14 +217,14 @@ void ExternalTool::setActionObjectName(const QString& action_obj_name) {
   m_actionObjectName = action_obj_name;
 }
 
-PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool*)> functor, QObject* parent)
+PredefinedTool::PredefinedTool(std::function<QString(const QString&, bool&)> functor, QObject* parent)
   : ExternalTool(parent), m_functor(std::move(functor)) {}
 
 void PredefinedTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   Q_UNUSED(editor)
 
   bool ok = true;
-  QString result = m_functor(data, &ok);
+  QString result = m_functor(data, ok);
   emit toolFinished(editor, ok ? result : QString(), ok ? QString() : result, ok);
 }
 

@@ -14,7 +14,19 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-QString PredefinedTools::sendToHastebin(const QString& data, bool* ok) {
+QString PredefinedTools::reverse(const QString& data, bool& ok) {
+  Q_UNUSED(ok)
+
+  QString rev;
+
+  for (auto chr = data.crbegin(); chr < data.crend(); chr++) {
+    rev.append(*chr);
+  }
+
+  return rev;
+}
+
+QString PredefinedTools::sendToHastebin(const QString& data, bool& ok) {
   QByteArray output;
   QString content = QString("%1").arg(data);
   NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_HASTE_POST,
@@ -24,19 +36,19 @@ QString PredefinedTools::sendToHastebin(const QString& data, bool* ok) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
-    *ok = true;
+    ok = true;
 
     QJsonDocument json_doc = QJsonDocument::fromJson(output);
 
     return PASTEBIN_HASTE + json_doc.object()["key"].toString();
   }
   else {
-    *ok = false;
+    ok = false;
     return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
+QString PredefinedTools::sendToClbin(const QString& data, bool& ok) {
   QByteArray output;
   QString content = QString("clbin=%1").arg(data);
   NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_CLBIN,
@@ -46,16 +58,16 @@ QString PredefinedTools::sendToClbin(const QString& data, bool* ok) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
-    *ok = true;
+    ok = true;
     return QString(output).remove(QRegularExpression(QSL("\\s")));
   }
   else {
-    *ok = false;
+    ok = false;
     return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::sendToIxio(const QString& data, bool* ok) {
+QString PredefinedTools::sendToIxio(const QString& data, bool& ok) {
   QByteArray output;
   QString content = QString("f:1=%1").arg(data);
   NetworkResult result = NetworkFactory::performNetworkOperation(PASTEBIN_IXIO,
@@ -65,42 +77,42 @@ QString PredefinedTools::sendToIxio(const QString& data, bool* ok) {
                                                                  QNetworkAccessManager::Operation::PostOperation);
 
   if (result.first == QNetworkReply::NetworkError::NoError) {
-    *ok = true;
+    ok = true;
     return QString(output).remove(QRegularExpression(QSL("\\s")));
   }
   else {
-    *ok = false;
+    ok = false;
     return NetworkFactory::networkErrorText(result.first);
   }
 }
 
-QString PredefinedTools::jsonBeautify(const QString& data, bool* ok) {
+QString PredefinedTools::jsonBeautify(const QString& data, bool& ok) {
   QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
 
   if (doc.isNull()) {
-    *ok = false;
+    ok = false;
     return QObject::tr("Parsing of JSON document failed.");
   }
   else {
-    *ok = true;
+    ok = true;
     return doc.toJson(QJsonDocument::JsonFormat::Indented);
   }
 }
 
-QString PredefinedTools::jsonMinify(const QString& data, bool* ok) {
+QString PredefinedTools::jsonMinify(const QString& data, bool& ok) {
   QJsonDocument doc = QJsonDocument::fromJson(data.toUtf8());
 
   if (doc.isNull()) {
-    *ok = false;
+    ok = false;
     return QObject::tr("Parsing of JSON document failed.");
   }
   else {
-    *ok = true;
+    ok = true;
     return doc.toJson(QJsonDocument::JsonFormat::Compact);
   }
 }
 
-QString PredefinedTools::xmlCheck(const QString& data, bool* ok) {
+QString PredefinedTools::xmlCheck(const QString& data, bool& ok) {
   QXmlStreamReader reader(data.toUtf8());
 
   while (!reader.atEnd()) {
@@ -111,11 +123,11 @@ QString PredefinedTools::xmlCheck(const QString& data, bool* ok) {
     reader.readNext();
   }
 
-  *ok = !reader.hasError();
-  return *ok ? QObject::tr("XML is well-formed.") : reader.errorString();
+  ok = !reader.hasError();
+  return ok ? QObject::tr("XML is well-formed.") : reader.errorString();
 }
 
-QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
+QString PredefinedTools::xmlBeautify(const QString& data, bool& ok) {
   QByteArray input = data.toUtf8();
   QString xml_out;
   QXmlStreamReader reader(input);
@@ -140,26 +152,26 @@ QString PredefinedTools::xmlBeautify(const QString& data, bool* ok) {
   }
 
   if (reader.hasError()) {
-    *ok = false;
+    ok = false;
     return reader.errorString();
   }
   else {
-    *ok = true;
+    ok = true;
     return xml_out;
   }
 }
 
-QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
+QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool& ok) {
   QFile file(xml_file);
   QTemporaryFile file_out;
 
   if (!file.open(QIODevice::OpenModeFlag::ReadWrite)) {
-    *ok = false;
+    ok = false;
     return file.errorString();
   }
 
   if (!file_out.open()) {
-    *ok = false;
+    ok = false;
     file.close();
     return file_out.errorString();
   }
@@ -199,7 +211,7 @@ QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
   if (reader.hasError()) {
     file.close();
     file_out.close();
-    *ok = false;
+    ok = false;
     return reader.errorString();
   }
   else {
@@ -216,12 +228,12 @@ QString PredefinedTools::xmlBeautifyFile(const QString& xml_file, bool* ok) {
     file.flush();
     file.close();
 
-    *ok = true;
+    ok = true;
     return QString();
   }
 }
 
-QString PredefinedTools::xmlLinearize(const QString& data, bool* ok) {
+QString PredefinedTools::xmlLinearize(const QString& data, bool& ok) {
   QByteArray input = data.toUtf8();
   QString xml_out;
   QXmlStreamReader reader(input);
@@ -244,23 +256,23 @@ QString PredefinedTools::xmlLinearize(const QString& data, bool* ok) {
   }
 
   if (reader.hasError()) {
-    *ok = false;
+    ok = false;
     return reader.errorString();
   }
   else {
-    *ok = true;
+    ok = true;
     return xml_out;
   }
 }
 
-QString PredefinedTools::currentDateTime(const QString& data, bool* ok) {
+QString PredefinedTools::currentDateTime(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
   return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
 }
 
-QString PredefinedTools::currentDate(const QString& data, bool* ok) {
+QString PredefinedTools::currentDate(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
@@ -268,7 +280,7 @@ QString PredefinedTools::currentDate(const QString& data, bool* ok) {
                                                        qApp->localization()->loadedLocale().dateFormat(QLocale::FormatType::ShortFormat));
 }
 
-QString PredefinedTools::currentTime(const QString& data, bool* ok) {
+QString PredefinedTools::currentTime(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
@@ -276,57 +288,57 @@ QString PredefinedTools::currentTime(const QString& data, bool* ok) {
                                                        qApp->localization()->loadedLocale().timeFormat(QLocale::FormatType::ShortFormat));
 }
 
-QString PredefinedTools::formattedDateTime(const QString& data, bool* ok) {
+QString PredefinedTools::formattedDateTime(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(), data);
 }
 
-QString PredefinedTools::toUrlEncoded(const QString& data, bool* ok) {
+QString PredefinedTools::toUrlEncoded(const QString& data, bool& ok) {
   Q_UNUSED(ok)
   return QUrl::toPercentEncoding(data);
 }
 
-QString PredefinedTools::fromUrlEncoded(const QString& data, bool* ok) {
+QString PredefinedTools::fromUrlEncoded(const QString& data, bool& ok) {
   Q_UNUSED(ok)
   return QUrl::fromPercentEncoding(data.toUtf8());
 }
 
-QString PredefinedTools::toBase64(const QString& data, bool* ok) {
+QString PredefinedTools::toBase64(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   return data.toUtf8().toBase64();
 }
 
-QString PredefinedTools::fromBase64(const QString& data, bool* ok) {
+QString PredefinedTools::fromBase64(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   return QByteArray::fromBase64(data.toUtf8());
 }
 
-QString PredefinedTools::toBase64Url(const QString& data, bool* ok) {
+QString PredefinedTools::toBase64Url(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   return data.toUtf8().toBase64(QByteArray::Base64Option::Base64UrlEncoding);
 }
 
-QString PredefinedTools::fromBase64Url(const QString& data, bool* ok) {
+QString PredefinedTools::fromBase64Url(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   return QByteArray::fromBase64(data.toUtf8(), QByteArray::Base64Option::Base64UrlEncoding);
 }
 
-QString PredefinedTools::toLower(const QString& data, bool* ok) {
+QString PredefinedTools::toLower(const QString& data, bool& ok) {
   Q_UNUSED(ok)
   return data.toLower();
 }
 
-QString PredefinedTools::toUpper(const QString& data, bool* ok) {
+QString PredefinedTools::toUpper(const QString& data, bool& ok) {
   Q_UNUSED(ok)
   return data.toUpper();
 }
 
-QString PredefinedTools::toTitleCase(const QString& data, bool* ok) {
+QString PredefinedTools::toTitleCase(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   if (data.isEmpty()) {
@@ -348,7 +360,7 @@ QString PredefinedTools::toTitleCase(const QString& data, bool* ok) {
   }
 }
 
-QString PredefinedTools::toSentenceCase(const QString& data, bool* ok) {
+QString PredefinedTools::toSentenceCase(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   if (data.isEmpty()) {
@@ -359,7 +371,7 @@ QString PredefinedTools::toSentenceCase(const QString& data, bool* ok) {
   }
 }
 
-QString PredefinedTools::invertCase(const QString& data, bool* ok) {
+QString PredefinedTools::invertCase(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
   if (data.isEmpty()) {
@@ -376,7 +388,7 @@ QString PredefinedTools::invertCase(const QString& data, bool* ok) {
   }
 }
 
-QString PredefinedTools::toHtmlEscaped(const QString& data, bool* ok) {
+QString PredefinedTools::toHtmlEscaped(const QString& data, bool& ok) {
   Q_UNUSED(ok)
   return data.toHtmlEscaped();
 }

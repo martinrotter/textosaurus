@@ -46,8 +46,8 @@ QMenu* EditorTab::contextMenu() const {
   act_read_only->setChecked(m_editor->readOnly());
 
   menu->addAction(qApp->icons()->fromTheme(QSL("document-save")), tr("Save"), [this]() {
-    bool ok;
-    m_editor->save(&ok);
+    bool ok = false;
+    m_editor->save(ok);
   });
 
   return menu;
@@ -65,14 +65,14 @@ int EditorTab::countOfEditors() const {
   return 1;
 }
 
-TabType EditorTab::tabType() const {
-  return TabType::TextEditor;
+Tab::TabType EditorTab::tabType() const {
+  return Tab::TabType::TextEditor;
 }
 
 void EditorTab::closeEvent(QCloseEvent* event) {
   bool ok = false;
 
-  m_editor->closeEditor(&ok);
+  m_editor->closeEditor(ok);
 
   if (!ok) {
     event->ignore();

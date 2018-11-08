@@ -18,20 +18,20 @@ SettingsExternalTools::SettingsExternalTools(Settings* settings, QWidget* parent
   m_ui.m_btnAdd->setIcon(qApp->icons()->fromTheme(QSL("list-add")));
   m_ui.m_btnDelete->setIcon(qApp->icons()->fromTheme(QSL("list-remove")));
 
-  m_ui.m_cmbInput->addItem(tr("Current selection/document"), int(ToolInput::SelectionDocument));
-  m_ui.m_cmbInput->addItem(tr("Current line"), int(ToolInput::CurrentLine));
-  m_ui.m_cmbInput->addItem(tr("Saved file path"), int(ToolInput::SavedFile));
-  m_ui.m_cmbInput->addItem(tr("Ask user for input"), int(ToolInput::AskForInput));
-  m_ui.m_cmbInput->addItem(tr("No input"), int(ToolInput::NoInput));
+  m_ui.m_cmbInput->addItem(tr("Current selection/document"), int(ExternalTool::ToolInput::SelectionDocument));
+  m_ui.m_cmbInput->addItem(tr("Current line"), int(ExternalTool::ToolInput::CurrentLine));
+  m_ui.m_cmbInput->addItem(tr("Saved file path"), int(ExternalTool::ToolInput::SavedFile));
+  m_ui.m_cmbInput->addItem(tr("Ask user for input"), int(ExternalTool::ToolInput::AskForInput));
+  m_ui.m_cmbInput->addItem(tr("No input"), int(ExternalTool::ToolInput::NoInput));
 
-  m_ui.m_cmbOutput->addItem(tr("Replace current selection/document"), int(ToolOutput::ReplaceSelectionDocument));
-  m_ui.m_cmbOutput->addItem(tr("Replace current line"), int(ToolOutput::ReplaceCurrentLine));
-  m_ui.m_cmbOutput->addItem(tr("Insert at cursor position"), int(ToolOutput::InsertAtCursorPosition));
-  m_ui.m_cmbOutput->addItem(tr("Dump to output window"), int(ToolOutput::DumpToOutputWindow));
-  m_ui.m_cmbOutput->addItem(tr("Copy to clipboard"), int(ToolOutput::CopyToClipboard));
-  m_ui.m_cmbOutput->addItem(tr("New file"), int(ToolOutput::NewSavedFile));
-  m_ui.m_cmbOutput->addItem(tr("Reload file"), int(ToolOutput::ReloadFile));
-  m_ui.m_cmbOutput->addItem(tr("No output"), int(ToolOutput::NoOutput));
+  m_ui.m_cmbOutput->addItem(tr("Replace current selection/document"), int(ExternalTool::ToolOutput::ReplaceSelectionDocument));
+  m_ui.m_cmbOutput->addItem(tr("Replace current line"), int(ExternalTool::ToolOutput::ReplaceCurrentLine));
+  m_ui.m_cmbOutput->addItem(tr("Insert at cursor position"), int(ExternalTool::ToolOutput::InsertAtCursorPosition));
+  m_ui.m_cmbOutput->addItem(tr("Dump to output window"), int(ExternalTool::ToolOutput::DumpToOutputWindow));
+  m_ui.m_cmbOutput->addItem(tr("Copy to clipboard"), int(ExternalTool::ToolOutput::CopyToClipboard));
+  m_ui.m_cmbOutput->addItem(tr("New file"), int(ExternalTool::ToolOutput::NewSavedFile));
+  m_ui.m_cmbOutput->addItem(tr("Reload file"), int(ExternalTool::ToolOutput::ReloadFile));
+  m_ui.m_cmbOutput->addItem(tr("No output"), int(ExternalTool::ToolOutput::NoOutput));
 
   connect(m_ui.m_listTools, &QListWidget::currentItemChanged, this, &SettingsExternalTools::displayToolDetails);
   connect(m_ui.m_btnAdd, &PlainToolButton::clicked, this, &SettingsExternalTools::addNewTool);
@@ -144,8 +144,8 @@ void SettingsExternalTools::saveToolChanges(QListWidgetItem* item) {
     ext_tool->setScript(m_ui.m_txtFullScript->toPlainText());
     ext_tool->setName(m_ui.m_txtTitle->text());
     ext_tool->setCategory(m_ui.m_txtCategory->text());
-    ext_tool->setInput(ToolInput(m_ui.m_cmbInput->currentData().toInt()));
-    ext_tool->setOutput(ToolOutput(m_ui.m_cmbOutput->currentData().toInt()));
+    ext_tool->setInput(ExternalTool::ToolInput(m_ui.m_cmbInput->currentData().toInt()));
+    ext_tool->setOutput(ExternalTool::ToolOutput(m_ui.m_cmbOutput->currentData().toInt()));
     ext_tool->setPrompt(m_ui.m_txtPrompt->text());
     ext_tool->setShortcut(m_ui.m_shortcut->shortcut().toString(QKeySequence::SequenceFormat::PortableText));
   }
