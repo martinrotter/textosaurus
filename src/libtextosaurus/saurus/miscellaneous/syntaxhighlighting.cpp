@@ -751,9 +751,9 @@ Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL) {}
 Lexer::Lexer(QString name, QStringList suffices, int code,
              QMap<int, SyntaxColorTheme::StyleComponents> style_mappings,
              QString keywords, bool supports_old_style_folding)
-  : m_name(std::move(name)), m_code(std::move(code)),
+  : m_name(std::move(name)), m_code(code),
   m_suffices(std::move(suffices)), m_keywords(std::move(keywords)), m_supportsOldStyleFolding(supports_old_style_folding),
-  m_styleMappings(style_mappings) {}
+  m_styleMappings(std::move(style_mappings)) {}
 
 bool Lexer::isEmpty() const {
   return m_name.isEmpty() && m_suffices.isEmpty();

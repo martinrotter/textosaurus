@@ -53,6 +53,7 @@ class TEXTOSAURUS_DLLSPEC PluginFactory : public QObject {
 
   public:
     explicit PluginFactory(QObject* parent = nullptr);
+    virtual ~PluginFactory() = default;
 
     QList<PluginState> plugins() const;
     QList<BaseSidebar*> sidebars() const;

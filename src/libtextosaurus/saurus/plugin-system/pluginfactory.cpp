@@ -34,7 +34,9 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
     auto plugin = plugin_state.plugin();
 
     if (plugin == nullptr) {
-      qCritical("Cannot hook plugin '%s' into application.", qPrintable(plugin_state.pluginLibraryFile()));
+      qCritical().noquote().nospace() << QSL("Cannot hook plugin '")
+                                      << plugin_state.pluginLibraryFile()
+                                      << QSL("' into application.");
       continue;
     }
 
@@ -97,7 +99,9 @@ QList<QAction*> PluginFactory::generateMenusForPlugins(QWidget* parent) {
     auto plugin = plugin_state.plugin();
 
     if (plugin == nullptr) {
-      qCritical("Cannot hook plugin '%s' into application.", qPrintable(plugin_state.pluginLibraryFile()));
+      qCritical().noquote().nospace() << QSL("Cannot hook plugin '")
+                                      << plugin_state.pluginLibraryFile()
+                                      << QSL("' into application.");
       continue;
     }
 
@@ -128,7 +132,7 @@ void PluginFactory::addPlugin(PluginBase* plugin) {
   m_plugins.append(plugin);
 }
 
-PluginState::PluginState() {}
+PluginState::PluginState() : m_isLoaded(false), m_isBuiltin(false) {}
 
 PluginState::PluginState(PluginBase* builtin_plugin) {
   // We load built-in plugin.
@@ -159,7 +163,9 @@ PluginState::PluginState(const QString& library_file) {
     m_isLoaded = true;
     m_lastError = QString();
 
-    qDebug("Successfully loaded plugin '%s'.", qPrintable(m_pluginLibraryFile));
+    qDebug().noquote().nospace() << QSL("Successfully loaded plugin '")
+                                 << m_pluginLibraryFile
+                                 << QSL("%s'.");
   }
   else {
     m_plugin = nullptr;
@@ -168,7 +174,11 @@ PluginState::PluginState(const QString& library_file) {
 
     loader.unload();
 
-    qCritical("Cannot load plugin '%s', error is: '%s'", qPrintable(m_pluginLibraryFile), qPrintable(m_lastError));
+    qCritical().noquote().nospace() << QSL("Cannot load plugin '")
+                                    << m_pluginLibraryFile
+                                    << QSL("', error is: '")
+                                    << m_lastError
+                                    << QSL("'.");
   }
 }
 

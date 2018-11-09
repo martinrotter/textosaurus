@@ -18,6 +18,9 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
+typedef const uint8_t* cuint8_ta;
+typedef const char* cchara;
+
 MarkdownSidebar::MarkdownSidebar(MarkdownPlugin* plugin, QWidget* parent)
   : BaseSidebar(plugin->m_textApp, parent), m_txtPreview(nullptr), m_plugin(plugin) {
   setWindowTitle(tr("Markdown Preview"));
@@ -50,7 +53,7 @@ void MarkdownSidebar::refreshPreview() {
 
   if (editor != nullptr) {
     m_txtPreview->setMarkdownDocument(QFileInfo(editor->filePath()).absolutePath(),
-                                      convertMarkdownToHtml((const uint8_t*)editor->characterPointer()));
+                                      convertMarkdownToHtml(cuint8_ta(editor->characterPointer())));
   }
   else {
     m_txtPreview->clearMarkdownDocument();
@@ -73,9 +76,9 @@ void MarkdownSidebar::load() {
       m_plugin->m_webFactory->openUrlInExternalBrowser(url.toString());
     });
 
-    QWidget* widget = new QWidget(this);
-    QVBoxLayout* layout = new QVBoxLayout(widget);
-    QToolBar* tool_bar = new QToolBar(widget);
+    auto* widget = new QWidget(this);
+    auto* layout = new QVBoxLayout(widget);
+    auto* tool_bar = new QToolBar(widget);
 
     tool_bar->addAction(m_actionRefreshPreview);
     tool_bar->setIconSize(QSize(16, 16));
@@ -91,7 +94,7 @@ void MarkdownSidebar::load() {
 }
 
 QString MarkdownSidebar::convertMarkdownToHtml(const uint8_t* raw_utf8_data) {
-  size_t delka = strlen(reinterpret_cast<const char*>(raw_utf8_data));
+  size_t delka = strlen(cchara(raw_utf8_data));
 
   if (delka <= 0) {
     return QString();
@@ -109,7 +112,7 @@ QString MarkdownSidebar::convertMarkdownToHtml(const uint8_t* raw_utf8_data) {
     // We render Markdown into buffer.
     hoedown_document_render(document, html, raw_utf8_data, delka);
 
-    QString arr = QString::fromUtf8(reinterpret_cast<const char*>(html->data), int(html->size));
+    QString arr = QString::fromUtf8(cchara(html->data), int(html->size));
 
     hoedown_buffer_free(html);
     hoedown_document_free(document);

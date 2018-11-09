@@ -14,7 +14,7 @@ FavoritesListWidget::FavoritesListWidget(FilesystemPlugin* plugin, QWidget* pare
 }
 
 void FavoritesListWidget::loadFileItem(const QString& file_path) {
-  QListWidgetItem* item = new QListWidgetItem(this);
+  auto* item = new QListWidgetItem(this);
   QFileInfo info(file_path);
 
   item->setData(Qt::UserRole, file_path);

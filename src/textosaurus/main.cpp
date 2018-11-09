@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
   // Check if another instance is running.
   if (application.isRunning()) {
-    qWarning("Another instance of the application is already running. Notifying it.");
+    qWarning().noquote().nospace() << QSL("Another instance of the application is already running. Notifying it.");
     return EXIT_FAILURE;
   }
 

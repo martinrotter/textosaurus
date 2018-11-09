@@ -2,8 +2,10 @@
 
 #include "saurus/plugin-system/filesystem/filesystemview.h"
 
+#include "definitions/definitions.h"
 #include "saurus/plugin-system/filesystem/filesystemmodel.h"
 
+#include <QDebug>
 #include <QKeyEvent>
 #include <QMenu>
 #include <QtGlobal>
@@ -62,7 +64,11 @@ void FilesystemView::openFolder(const QModelIndex& idx) {
 void FilesystemView::openFolder(const QString& path) {
   auto can_path = normalizePath(path);
 
-  qDebug(R"(Opening folder '%s' (canonical), '%s' (non-canonical).)", qPrintable(can_path), qPrintable(path));
+  qDebug().noquote().nospace() << QSL("Opening folder '")
+                               << can_path
+                               << QSL("' (canonical), '")
+                               << path
+                               << QSL("' (non-canonical).");
   setRootIndex(m_model->index(can_path));
 }
 

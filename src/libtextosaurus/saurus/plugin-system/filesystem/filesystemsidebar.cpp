@@ -80,8 +80,8 @@ void FilesystemSidebar::openDrive(int index) {
 void FilesystemSidebar::load() {
   if (m_fsModel == nullptr) {
     m_tabWidget = new QTabWidget(this);
-    QWidget* widget_browser = new QWidget(this);
-    QVBoxLayout* layout_browser = new QVBoxLayout(widget_browser);
+    auto* widget_browser = new QWidget(this);
+    auto* layout_browser = new QVBoxLayout(widget_browser);
 
     m_fsModel = new FilesystemModel(m_plugin, widget_browser);
     m_fsView = new FilesystemView(m_fsModel, widget_browser);
@@ -95,13 +95,13 @@ void FilesystemSidebar::load() {
     layout_browser->setMargin(0);
 
     // Initialize toolbar.
-    QToolBar* tool_bar = new QToolBar(widget_browser);
-    QAction* btn_parent = new QAction(m_plugin->iconFactory()->fromTheme(QSL("go-up")),
-                                      tr("Go to Parent Folder"), widget_browser);
-    QAction* btn_add_favorites = new QAction(m_plugin->iconFactory()->fromTheme(QSL("folder-favorites")),
-                                             tr("Add Selected Item to Favorites"), widget_browser);
-    QAction* btn_follow_document = new QAction(m_plugin->iconFactory()->fromTheme(QSL("go-jump")),
-                                               tr("Follow Path of Active Document"), widget_browser);
+    auto* tool_bar = new QToolBar(widget_browser);
+    auto* btn_parent = new QAction(m_plugin->iconFactory()->fromTheme(QSL("go-up")),
+                                   tr("Go to Parent Folder"), widget_browser);
+    auto* btn_add_favorites = new QAction(m_plugin->iconFactory()->fromTheme(QSL("folder-favorites")),
+                                          tr("Add Selected Item to Favorites"), widget_browser);
+    auto* btn_follow_document = new QAction(m_plugin->iconFactory()->fromTheme(QSL("go-jump")),
+                                            tr("Follow Path of Active Document"), widget_browser);
 
     btn_follow_document->setCheckable(true);
     btn_follow_document->setChecked(pathFollowingEnabled());

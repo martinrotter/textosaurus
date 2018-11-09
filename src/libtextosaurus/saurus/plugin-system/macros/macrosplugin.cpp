@@ -8,7 +8,8 @@
 #include "saurus/plugin-system/macros/macrossidebar.h"
 
 MacrosPlugin::MacrosPlugin(QObject* parent)
-  : QObject(parent), m_textApp(nullptr), m_iconFactory(nullptr), m_settings(nullptr), m_macrosFactory(nullptr), m_sidebar(nullptr) {}
+  : QObject(parent), m_mainForm(nullptr), m_textApp(nullptr), m_iconFactory(nullptr),
+  m_settings(nullptr), m_macrosFactory(nullptr), m_sidebar(nullptr) {}
 
 QString MacrosPlugin::name() const {
   return tr("Macros");
