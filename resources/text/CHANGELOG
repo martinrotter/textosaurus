@@ -1,3 +1,25 @@
+0.9.10
+-----
+Added:
+* Textosaurus now has command line interface. Run "textosaurus --help" for more info. (#56)
+* FS sidebar is now able to follow path of currently displayed document.
+* Folding support for even more programming languages.
+* Installer now automatically installs VC++ runtime files.
+* Added SAS and STATA lexers.
+* Adjustable vertical line for indicating long lines.
+
+Changed:
+* Adjusted sizes of icons in tabs and in toolbar.
+* "Plain Text" menu item is now moved to top of "Language" menu.
+* Substyles adjusted in "Diff" lexer.
+* Some more optimizations.
+* Debug logging to "error output" is now bit more polished.
+
+Fixed:
+* Fixed incorrect "modified" icon in .LOG files.
+* Fixed QString::arg() incorrect usage on some places.
+* MacOS build now works.
+
 0.9.9
 -----
 Added:
