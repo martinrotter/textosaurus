@@ -7,7 +7,7 @@
 
 // Simple encryption for byte-arrays or files based on AES-CBC.
 //
-// Layout of "encrypted file:
+// Layout of encrypted file:
 //  | 1 byte  | 64 bytes           | 1 byte  | X bytes                |
 //  |---------|--------------------|---------|------------------------|
 //  | dec(30) | HMAC SHA3-512 hash | dec(30) | AES-CBC-encrypted data |
