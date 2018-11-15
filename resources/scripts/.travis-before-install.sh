@@ -25,7 +25,7 @@ else
   
   sudo apt-get update
   sudo apt-get -y install gcc-7 g++-7 qt511tools qt511base qt511svg
-  sudo apt-get -y install openssl libssl-dev libgl1-mesa-glx
+  sudo apt-get -y install openssl libssl-dev libgl1-mesa-dev 
   
   sudo update-alternatives --remove-all gcc 
   sudo update-alternatives --remove-all g++
