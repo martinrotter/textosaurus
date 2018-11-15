@@ -11,6 +11,10 @@ if test "$TRAVIS_OS_NAME" = "osx"; then
   brew link --force curl
   brew install openssl@1.1
   brew link --force openssl@1.1
+  
+  ln -s /usr/local/opt/openssl/include/openssl /usr/local/include
+  ln -s /usr/local/Cellar/openssl/*/include/openssl /usr/bin/openssl
+  ln -s /usr/local/opt/openssl/lib/libssl.*.dylib /usr/local/lib/
 else
   # Linux.
   sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com DFA2F90D
