@@ -13,10 +13,15 @@ if test "$TRAVIS_OS_NAME" = "osx"; then
   brew link --force openssl@1.1
 else
   # Linux.
+  sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com DFA2F90D
+  
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y
+  sudo add-apt-repository ppa:beineri/opt-qt-5.11.1-xenial -y
+  sudo add-apt-repository ppa:carsten-uppenbrink-net/dovecot -y
+  
   sudo apt-get update
-  sudo apt-get -y install gcc-7 g++-7 qt59tools qt59base qt59svg openssl
+  sudo apt-get -y install gcc-7 g++-7 qt511tools qt511base qt511svg
+  sudo apt-get -y install -t dovecot openssl
   
   sudo update-alternatives --remove-all gcc 
   sudo update-alternatives --remove-all g++

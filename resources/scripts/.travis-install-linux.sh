@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setup Qt build environment.
-source /opt/qt59/bin/qt59-env.sh
+source /opt/qt511/bin/qt511-env.sh
 
 env
 
