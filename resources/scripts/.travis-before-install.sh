@@ -14,7 +14,7 @@ else
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y
   sudo apt-get update
-  sudo apt-get -y install gcc-7 g++-7 qt59tools qt59base qt59svg
+  sudo apt-get -y install gcc-7 g++-7 qt59tools qt59base qt59svg openssl
   
   sudo update-alternatives --remove-all gcc 
   sudo update-alternatives --remove-all g++
