@@ -9,6 +9,8 @@ if test "$TRAVIS_OS_NAME" = "osx"; then
   brew link --force qt5
   brew install curl
   brew link --force curl
+  brew install openssl@1.1
+  brew link --force openssl@1.1
 else
   # Linux.
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y

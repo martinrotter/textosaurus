@@ -28,7 +28,7 @@ cd "src\textosaurus"
 cd "app"
 
 & "C:\textosaurus\$qt_stub\bin\windeployqt.exe" --no-translations "textosaurus.exe" "libtextosaurus.dll"
-Copy-Item -Path C:\textosaurus\$qt_stub\bin\*eay* -Destination .\
+Copy-Item -Path C:\textosaurus\$qt_stub\bin\*MD.dll -Destination .\
 
 cd ..
 
