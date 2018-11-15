@@ -111,7 +111,7 @@ QByteArray CryptoFactory::decryptData(const QString& password, QFile& file) {
           file.close();
         }
 
-        throw ApplicationException(QSL("incorrect password"));
+        throw ApplicationException(QObject::tr("incorrect password"));
       }
     }
   }
@@ -120,7 +120,7 @@ QByteArray CryptoFactory::decryptData(const QString& password, QFile& file) {
     file.close();
   }
 
-  throw ApplicationException(QSL("unspecified error when decrypting file"));
+  throw ApplicationException(QObject::tr("unspecified error when decrypting file"));
 }
 
 bool CryptoFactory::isPasswordCorrect(const QString& password, QFile& file) {
