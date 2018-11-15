@@ -76,10 +76,11 @@ void FormAbout::loadLicenseAndInformation() {
   catch (...) {
     m_ui.m_txtChangelog->setText(tr("Changelog not found."));
   }
+
 #if OPENSSL_VERSION_NUMBER >= 0x10100000
-  const char *openssl_version = OpenSSL_version(OPENSSL_VERSION);
+  const char* openssl_version = OpenSSL_version(OPENSSL_VERSION);
 #else
-  const char *openssl_version = SSLeay_version(SSLEAY_VERSION);
+  const char* openssl_version = SSLeay_version(SSLEAY_VERSION);
 #endif
 
   // Set other informative texts.
