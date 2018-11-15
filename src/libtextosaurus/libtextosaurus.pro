@@ -37,6 +37,10 @@ win32 {
   LIBS *= Shell32.lib
 }
 
+# Link against OpenSSL 1.1.x.
+win32: LIBS += -llibsslMD -llibcryptoMD
+unix: LIBS += -lsslMD -lcryptoMD
+
 CONFIG(FLATPAK_MODE) {
   message($$MSG_PREFIX: Enabling Flatpak-specific code.)
   DEFINES *= FLATPAK_MODE=1

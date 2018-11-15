@@ -14,6 +14,9 @@
 #include <QFontDatabase>
 #include <QTextStream>
 
+#include <openssl/crypto.h>
+#include <openssl/opensslv.h>
+
 FormAbout::FormAbout(QWidget* parent) : QDialog(parent) {
   m_ui.setupUi(this);
   m_ui.m_lblIcon->setPixmap(QPixmap(APP_ICON_PATH));
@@ -79,17 +82,23 @@ void FormAbout::loadLicenseAndInformation() {
                              "<b>Version:</b> %1 (built on %2/%3)<br/>"
                              "<b>Revision:</b> %4<br/>"
                              "<b>Build date:</b> %5<br/>"
-                             "<b>Qt:</b> %6 (compiled against %7)").arg(
+                             "<b>Qt:</b> %6 (compiled against %7)<br/>"
+                             "<b>OpenSSL:</b> %9").arg(
                           #if defined(FLATPAK_MODE)
                             qApp->applicationVersion() + QL1S(" (Flatpak) "),
                           #else
                             qApp->applicationVersion(),
                           #endif
-                            APP_SYSTEM_NAME, APP_SYSTEM_VERSION, APP_REVISION,
+                            APP_SYSTEM_NAME,
+                            APP_SYSTEM_VERSION,
+                            APP_REVISION,
                             TextFactory::parseDateTime(QString("%1 %2").arg(__DATE__,
                                                                             __TIME__)).toString(Qt::DefaultLocaleShortDate),
-                            qVersion(), QT_VERSION_STR,
-                            APP_NAME));
+                            qVersion(),
+                            QT_VERSION_STR,
+                            APP_NAME,
+                            OpenSSL_version(OPENSSL_VERSION)));
+
   m_ui.m_txtInfo->setText(tr("<body>%5 is simple cross-platform text editor based on Qt and Scintilla."
                              "<br><br>This software is distributed under the terms of GNU General Public License, version 3."
                              "<br><br>Contacts:"
