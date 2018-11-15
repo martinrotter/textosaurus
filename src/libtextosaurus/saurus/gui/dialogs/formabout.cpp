@@ -76,6 +76,11 @@ void FormAbout::loadLicenseAndInformation() {
   catch (...) {
     m_ui.m_txtChangelog->setText(tr("Changelog not found."));
   }
+#if OPENSSL_VERSION_NUMBER >= 0x10100000
+  const char *openssl_version = OpenSSL_version(OPENSSL_VERSION);
+#else
+  const char *openssl_version = SSLeay_version(SSLEAY_VERSION);
+#endif
 
   // Set other informative texts.
   m_ui.m_lblDesc->setText(tr("<b>%8</b><br/>"
@@ -97,7 +102,7 @@ void FormAbout::loadLicenseAndInformation() {
                             qVersion(),
                             QT_VERSION_STR,
                             APP_NAME,
-                            OpenSSL_version(OPENSSL_VERSION)));
+                            openssl_version));
 
   m_ui.m_txtInfo->setText(tr("<body>%5 is simple cross-platform text editor based on Qt and Scintilla."
                              "<br><br>This software is distributed under the terms of GNU General Public License, version 3."
