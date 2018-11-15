@@ -37,7 +37,7 @@ win32 {
   LIBS *= Shell32.lib
 }
 
-# Link against OpenSSL 1.1.x.
+# Link against OpenSSL.
 win32: LIBS += -llibsslMD -llibcryptoMD
 unix: LIBS += -lssl -lcrypto
 
