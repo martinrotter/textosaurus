@@ -886,6 +886,7 @@ void TextEditor::reloadFromDisk() {
         loadFromFile(file_data.first, filePath(), metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
         setEncryptionPassword(file_data.second);
         emit editorReloaded();
+        emit savePointChanged(false);
 
         if (IS_IN_ARRAY(current_line, lineCount())) {
           auto position_new_document = positionFromLine(current_line);

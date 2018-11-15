@@ -66,7 +66,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -1039,7 +1039,7 @@ void TextApplication::onTabIconChanged(const QIcon& icon) {
   int index = m_tabEditors->indexOf(tab);
 
   if (index >= 0) {
-    m_tabEditors->setTabIcon(index, icon);
+    m_tabEditors->changeIcon(index, icon);
   }
 }
 
@@ -1053,7 +1053,7 @@ void TextApplication::onTabTitleChanged(const QString& title, const QString& too
 }
 
 void TextApplication::onTabWithIndexTitleChanged(Tab* tab, int index, const QString& title, const QString& tool_tip) {
-  m_tabEditors->setTabIcon(index, tab->icon());
+  m_tabEditors->changeIcon(index, tab->icon());
   m_tabEditors->changeTitle(index, title, tool_tip);
 }
 
