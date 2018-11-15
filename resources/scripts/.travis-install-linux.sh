@@ -79,7 +79,7 @@ git push origin master
 
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
-echo "Current git commit has is $(git rev-parse HEAD)."
+echo "Current git commit hash is $(git rev-parse HEAD)."
 echo "Travis branch $TRAVIS_BRANCH and Travis tag $TRAVIS_TAG."
 
 if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then
