@@ -38,8 +38,20 @@ win32 {
 }
 
 # Link against OpenSSL.
-win32: LIBS += -llibsslMD -llibcryptoMD
-unix: LIBS += -lssl -lcrypto
+isEmpty(OPENSSL_LIB_FOLDER) {
+  message("$$MSG_PREFIX: OpenSSL lib directory not specified, using global OpenSSL.")
+
+  win32: LIBS += -llibsslMD -llibcryptoMD
+  unix: LIBS += -lssl -lcrypto
+}
+else {
+  message("$$MSG_PREFIX: Will link against OpenSSL libraries which are located in \"$$OPENSSL_LIB_FOLDER\".")
+
+  win32: LIBS += -L$$OPENSSL_LIB_FOLDER -llibsslMD -llibcryptoMD
+  unix: LIBS += -L$$OPENSSL_LIB_FOLDER -lssl -lcrypto
+}
+
+
 
 CONFIG(FLATPAK_MODE) {
   message($$MSG_PREFIX: Enabling Flatpak-specific code.)

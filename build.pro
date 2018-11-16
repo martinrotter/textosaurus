@@ -18,6 +18,8 @@
 #
 #   LRELEASE_EXECUTABLE - specifies the name/path of "lrelease" executable, defaults to "lrelease".
 #
+#   OPENSSL_LIB_FOLDER - specifies full path to folder which contains lib{ssl,crypto}.{so,lib,dll}.
+#
 # Other information:
 #   - supports Windows or Linux,
 #   - Qt 5.7.0 or higher is required,
