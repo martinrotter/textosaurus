@@ -17,12 +17,12 @@ class FormDecryptPasswordPrompt : public QDialog {
   Q_OBJECT
 
   public:
-    explicit FormDecryptPasswordPrompt(QFile& file, QWidget* parent = nullptr);
+    explicit FormDecryptPasswordPrompt(const QByteArray& data, QWidget* parent = nullptr);
     virtual ~FormDecryptPasswordPrompt() = default;
 
     QString password() const;
 
-    static QString getPasswordFromUser(QFile& file, bool& ok);
+    static QString getPasswordFromUser(const QByteArray& data, bool& ok);
 
   private:
     Ui::FormDecryptPasswordPrompt m_ui = {};

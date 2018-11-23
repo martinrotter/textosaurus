@@ -2,41 +2,17 @@
 
 #include "common/miscellaneous/cryptofactory.h"
 
-#include "3rd-party/qtaes/qaesencryption.h"
 #include "common/exceptions/ioexception.h"
+#include "common/miscellaneous/iofactory.h"
 #include "definitions/definitions.h"
 
+#include <QCoreApplication>
 #include <QCryptographicHash>
-#include <QMessageAuthenticationCode>
+#include <QDir>
+#include <QProcess>
 
-bool CryptoFactory::isEncrypted(QFile& file) {
-  bool was_open = file.isOpen();
-
-  if (!was_open && !file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    return false;
-  }
-
-  bool border_1_found = false;
-  bool border_2_found = false;
-
-  // Check bytes according to layout.
-  if (file.seek(0)) {
-    QByteArray byte_0 = file.read(1);
-
-    border_1_found = !byte_0.isEmpty() && byte_0.at(0) == CRYPTO_FORMAT_BOUNDARY;
-  }
-
-  if (border_1_found && file.seek(65)) {
-    QByteArray byte_65 = file.read(1);
-
-    border_2_found = !byte_65.isEmpty() && byte_65.at(0) == CRYPTO_FORMAT_BOUNDARY;
-  }
-
-  if (!was_open) {
-    file.close();
-  }
-
-  return border_1_found && border_2_found;
+bool CryptoFactory::isEncrypted(const QByteArray& data) {
+  return data.left(8) == QSL("Salted__");
 }
 
 QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray& data) {
@@ -48,117 +24,110 @@ QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray&
     throw ApplicationException(QObject::tr("cannot encrypt file with empty password"));
   }
 
-  auto utfpass = password.toUtf8();
-  auto shahash = QCryptographicHash::hash(utfpass, QCryptographicHash::Algorithm::Sha3_512);
-  auto iv = shahash.left(16);
-  auto encpayload = QAESEncryption::Crypt(QAESEncryption::AES_256, QAESEncryption::Mode::CBC,
-                                          data, shahash, iv, QAESEncryption::Padding::ISO);
+  // Save unencrypted data to temp file first.
+  auto temp_input_file = QDir::toNativeSeparators(IOFactory::writeToTempFile(data));
 
-  if (encpayload.isEmpty()) {
-    throw ApplicationException(QObject::tr("some weird error appeared when encrypting the file"));
+  // Run OpenSSL binary and encrypt the file.
+  // Password is passed to standard input.
+  // Encrypted data is read from standard output.
+  QProcess proc_openssl(qApp);
+
+  proc_openssl.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+  proc_openssl.connect(&proc_openssl, &QProcess::started, [password, &proc_openssl] {
+    proc_openssl.write(password.toUtf8());
+    proc_openssl.closeWriteChannel();
+  });
+
+#if defined (Q_OS_WIN)
+  QString program = QDir::toNativeSeparators(qApp->applicationDirPath()) + QDir::separator() + QL1S("openssl.exe");
+#else
+  QString program(QSL("openssl"));
+#endif
+
+  proc_openssl.start(program, {
+    "enc", "-aes-256-cbc", "-salt", "-pass", "stdin", "-in", temp_input_file
+  });
+
+  if (!proc_openssl.waitForFinished()) {
+    QFile::remove(temp_input_file);
+    throw ApplicationException(QObject::tr("encryption failed"));
   }
 
-  auto hmachash = QMessageAuthenticationCode::hash(encpayload, utfpass, QCryptographicHash::Algorithm::Sha3_512);
+  if (proc_openssl.exitCode() != EXIT_SUCCESS) {
+    // Failure.
+    QFile::remove(temp_input_file);
+    throw ApplicationException(QObject::tr("encryption failed with error: '%1'").arg(QString::fromUtf8(proc_openssl.readAllStandardError())));
+  }
 
-  return QByteArray(1, CRYPTO_FORMAT_BOUNDARY) + hmachash + QByteArray(1, CRYPTO_FORMAT_BOUNDARY) + encpayload;
+  // Collect encrypted data from OpenSSL output.
+  auto output = proc_openssl.readAllStandardOutput();
+
+  // Cleanup.
+  QFile::remove(temp_input_file);
+
+  return output;
 }
 
-QByteArray CryptoFactory::decryptData(const QString& password, QFile& file) {
-  if (password.isEmpty()) {
-    throw ApplicationException(QObject::tr("cannot decrypt file with empty password"));
+QByteArray CryptoFactory::decryptData(const QString& password, const QByteArray& data) {
+  // openssl enc -aes-256-cbc -d -pass stdin -in text.enc
+  // pass password as stdin
+  // decrypted is in stdout
+  // non-zero return value -> pad password or other error
+
+  if (password.isEmpty() || data.isEmpty()) {
+    throw ApplicationException(QObject::tr("password cannot be empty"));
   }
 
-  bool was_open = file.isOpen();
+  // Save encrypted data to temp file first.
+  auto temp_input_file = QDir::toNativeSeparators(IOFactory::writeToTempFile(data));
 
-  if (!was_open && !file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    throw IOException(QObject::tr("insufficient permissions"));
+  // Run OpenSSL binary and encrypt the file.
+  // Password is passed to standard input.
+  // Encrypted data is read from standard output.
+  QProcess proc_openssl(qApp);
+
+  proc_openssl.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+  proc_openssl.connect(&proc_openssl, &QProcess::started, [password, &proc_openssl] {
+    proc_openssl.write(password.toUtf8());
+    proc_openssl.closeWriteChannel();
+  });
+
+#if defined (Q_OS_WIN)
+  QString program = QDir::toNativeSeparators(qApp->applicationDirPath()) + QDir::separator() + QL1S("openssl.exe");
+#else
+  QString program(QSL("openssl"));
+#endif
+
+  proc_openssl.start(program, {
+    "enc", "-aes-256-cbc", "-d", "-pass", "stdin", "-in", temp_input_file
+  });
+
+  if (!proc_openssl.waitForFinished()) {
+    QFile::remove(temp_input_file);
+    throw ApplicationException(QObject::tr("decryption failed"));
   }
 
-  if (file.size() <= 0) {
-    if (!was_open) {
-      file.close();
-    }
-
-    return QByteArray();
+  if (proc_openssl.exitCode() != EXIT_SUCCESS) {
+    // Failure.
+    QFile::remove(temp_input_file);
+    throw ApplicationException(QObject::tr("decryption failed with error: '%1'").arg(QString::fromUtf8(proc_openssl.readAllStandardError())));
   }
 
-  if (file.seek(1)) {
-    QByteArray hmachash = file.read(64);
+  // Collect decrypted data from OpenSSL output.
+  auto output = proc_openssl.readAllStandardOutput();
 
-    if (file.seek(66)) {
-      QByteArray encpayload = file.readAll();
-      auto utfpass = password.toUtf8();
-      auto hmachash_check = QMessageAuthenticationCode::hash(encpayload, utfpass, QCryptographicHash::Algorithm::Sha3_512);
+  // Cleanup.
+  QFile::remove(temp_input_file);
 
-      if (hmachash == hmachash_check) {
-        // HMAC hash from file and checking HMAC are the same.
-        // Decrypt payload.
-        auto shahash = QCryptographicHash::hash(utfpass, QCryptographicHash::Algorithm::Sha3_512);
-        auto iv = shahash.left(16);
-        auto payload = QAESEncryption::Decrypt(QAESEncryption::AES_256, QAESEncryption::Mode::CBC,
-                                               encpayload, shahash, iv, QAESEncryption::Padding::ISO);
-
-        payload = QAESEncryption::RemovePadding(payload, QAESEncryption::Padding::ISO);
-
-        if (!was_open) {
-          file.close();
-        }
-
-        return payload;
-      }
-      else {
-        if (!was_open) {
-          file.close();
-        }
-
-        throw ApplicationException(QObject::tr("incorrect password"));
-      }
-    }
-  }
-
-  if (!was_open) {
-    file.close();
-  }
-
-  throw ApplicationException(QObject::tr("unspecified error when decrypting file"));
+  return output;
 }
 
-bool CryptoFactory::isPasswordCorrect(const QString& password, QFile& file) {
-  if (password.isEmpty()) {
+bool CryptoFactory::isPasswordCorrect(const QString& password, const QByteArray& data) {
+  try {
+    decryptData(password, data);
+    return true;
+  }
+  catch (...) {
     return false;
   }
-
-  bool was_open = file.isOpen();
-
-  if (!was_open && !file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    throw IOException(QObject::tr("insufficient permissions"));
-  }
-
-  if (file.size() <= 0) {
-    if (!was_open) {
-      file.close();
-    }
-
-    return false;
-  }
-
-  bool correct_pw = false;
-
-  if (file.seek(1)) {
-    QByteArray hmachash = file.read(64);
-
-    if (file.seek(66)) {
-      QByteArray encpayload = file.readAll();
-      auto utfpass = password.toUtf8();
-      auto hmachash_check = QMessageAuthenticationCode::hash(encpayload, utfpass, QCryptographicHash::Algorithm::Sha3_512);
-
-      correct_pw = hmachash == hmachash_check;
-    }
-  }
-
-  if (!was_open) {
-    file.close();
-  }
-
-  return correct_pw;
 }

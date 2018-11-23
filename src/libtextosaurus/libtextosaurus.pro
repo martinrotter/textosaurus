@@ -37,20 +37,6 @@ win32 {
   LIBS *= Shell32.lib
 }
 
-# Link against OpenSSL.
-isEmpty(OPENSSL_LIB_FOLDER) {
-  message("$$MSG_PREFIX: OpenSSL lib directory not specified, using global OpenSSL.")
-
-  win32: LIBS += -llibsslMD -llibcryptoMD
-  unix: LIBS += -lssl -lcrypto
-}
-else {
-  message("$$MSG_PREFIX: Will link against OpenSSL libraries which are located in \"$$OPENSSL_LIB_FOLDER\".")
-
-  win32: LIBS += -L$$OPENSSL_LIB_FOLDER -llibsslMD -llibcryptoMD
-  unix: LIBS += -L$$OPENSSL_LIB_FOLDER -lssl -lcrypto
-}
-
 CONFIG(FLATPAK_MODE) {
   message($$MSG_PREFIX: Enabling Flatpak-specific code.)
   DEFINES *= FLATPAK_MODE=1
@@ -265,10 +251,6 @@ HEADERS  += $$files(3rd-party/qtsingleapplication/*.h, false)
 # Add uchardet.
 SOURCES += $$files(3rd-party/uchardet/*.cpp, false)
 HEADERS  += $$files(3rd-party/uchardet/*.h, false)
-
-# Add Qt-AES.
-SOURCES += $$files(3rd-party/qtaes/*.cpp, false)
-HEADERS  += $$files(3rd-party/qtaes/*.h, false)
 
 # Add Scintilla.
 SOURCES += \

@@ -88,33 +88,26 @@ FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QStr
 }
 
 QPair<QByteArray, QString> FileMetadata::obtainRawFileData(const QString& file_path) {
-  QFile file(file_path);
-
-  if (!file.open(QIODevice::OpenModeFlag::ReadOnly)) {
-    throw IOException(QObject::tr("insufficient permissions for file '%1'").arg(file_path));
-  }
-
-  QByteArray data;
+  QByteArray encrypted_data = IOFactory::readFile(file_path);
+  QByteArray decrypted_data;
   QString password;
 
-  if (CryptoFactory::isEncrypted(file)) {
+  if (CryptoFactory::isEncrypted(encrypted_data)) {
     // File is encrypted, decrypt it but ask for password first.
     bool ok;
 
-    password = FormDecryptPasswordPrompt::getPasswordFromUser(file, ok);
+    password = FormDecryptPasswordPrompt::getPasswordFromUser(encrypted_data, ok);
 
     if (ok) {
-      data = CryptoFactory::decryptData(password, file);
+      decrypted_data = CryptoFactory::decryptData(password, encrypted_data);
     }
     else {
       throw OperationCancelledException();
     }
+
+    return QPair<QByteArray, QString>(decrypted_data, password);
   }
   else {
-    file.seek(0);
-    data = file.readAll();
+    return QPair<QByteArray, QString>(encrypted_data, password);
   }
-
-  file.close();
-  return QPair<QByteArray, QString>(data, password);
 }

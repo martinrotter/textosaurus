@@ -732,6 +732,10 @@ void TextEditor::saveToFile(const QString& file_path, bool& ok, const QString& e
   QDir().mkpath(QFileInfo(file_path).absolutePath());
 
   if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
+    MessageBox::show(qApp->mainFormWidget(),
+                     QMessageBox::Icon::Critical,
+                     tr("Cannot Save to File"),
+                     tr("Document cannot be saved to file because the destination is probably non-writable."));
     ok = false;
     reattachWatcher(m_filePath);
     return;
@@ -759,11 +763,15 @@ void TextEditor::saveToFile(const QString& file_path, bool& ok, const QString& e
       file.flush();
     }
     catch (const ApplicationException& ex) {
-      QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot save file"),
-                            QObject::tr("File '%1' cannot be saved because %2.").arg(QDir::toNativeSeparators(file_path),
-                                                                                     ex.message()));
+      MessageBox::show(qApp->mainFormWidget(),
+                       QMessageBox::Icon::Critical,
+                       tr("Cannot Save to File"),
+                       tr("Encryption of file failed: %1.").arg(ex.message()));
+
       file.close();
-      ok = true;
+      ok = false;
+      reattachWatcher(m_filePath);
+      return;
     }
   }
   else {
@@ -850,8 +858,8 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
   }
   catch (const ApplicationException& ex) {
     QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
-                          QObject::tr("File '%1' cannot be opened for reading, reason: '%2'.").arg(QDir::toNativeSeparators(file_path),
-                                                                                                   ex.message()));
+                          QObject::tr("File '%1' cannot be opened for reading, reason: %2.").arg(QDir::toNativeSeparators(file_path),
+                                                                                                 ex.message()));
     return nullptr;
   }
 }
@@ -900,8 +908,8 @@ void TextEditor::reloadFromDisk() {
     }
     catch (const ApplicationException& ex) {
       QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot read file"),
-                            QObject::tr("File '%1' cannot be opened for reading, reason '%2'.").arg(QDir::toNativeSeparators(filePath()),
-                                                                                                    ex.message()));
+                            QObject::tr("File '%1' cannot be opened for reading, reason: %2.").arg(QDir::toNativeSeparators(filePath()),
+                                                                                                   ex.message()));
     }
   }
 }
@@ -1003,13 +1011,6 @@ void TextEditor::save(bool& ok) {
   else {
     // We just save this modified document to same file.
     saveToFile(m_filePath, ok);
-  }
-
-  if (!ok) {
-    MessageBox::show(qApp->mainFormWidget(),
-                     QMessageBox::Icon::Critical,
-                     tr("Cannot Save to File"),
-                     tr("Document cannot be saved to file because the destination is probably non-writable."));
   }
 }
 

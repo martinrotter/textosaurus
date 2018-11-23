@@ -70,7 +70,7 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
   tmp_file.setAutoRemove(false);
   tmp_file.setFileTemplate(QStandardPaths::writableLocation(QStandardPaths::TempLocation) +
                            QDir::separator() +
-                           QSL("tool_output_XXXXXX.txt"));
+                           QSL("temp_file_XXXXXX.txt"));
 
   if (tmp_file.open()) {
     tmp_file.write(data);

@@ -14,9 +14,6 @@
 #include <QFontDatabase>
 #include <QTextStream>
 
-#include <openssl/crypto.h>
-#include <openssl/opensslv.h>
-
 FormAbout::FormAbout(QWidget* parent) : QDialog(parent) {
   m_ui.setupUi(this);
   m_ui.m_lblIcon->setPixmap(QPixmap(APP_ICON_PATH));
@@ -77,19 +74,12 @@ void FormAbout::loadLicenseAndInformation() {
     m_ui.m_txtChangelog->setText(tr("Changelog not found."));
   }
 
-#if OPENSSL_VERSION_NUMBER >= 0x10100000
-  const char* openssl_version = OpenSSL_version(OPENSSL_VERSION);
-#else
-  const char* openssl_version = SSLeay_version(SSLEAY_VERSION);
-#endif
-
   // Set other informative texts.
   m_ui.m_lblDesc->setText(tr("<b>%8</b><br/>"
                              "<b>Version:</b> %1 (built on %2/%3)<br/>"
                              "<b>Revision:</b> %4<br/>"
                              "<b>Build date:</b> %5<br/>"
-                             "<b>Qt:</b> %6 (compiled against %7)<br/>"
-                             "<b>OpenSSL:</b> %9").arg(
+                             "<b>Qt:</b> %6 (compiled against %7)").arg(
                           #if defined(FLATPAK_MODE)
                             qApp->applicationVersion() + QL1S(" (Flatpak) "),
                           #else
@@ -102,8 +92,7 @@ void FormAbout::loadLicenseAndInformation() {
                                                                             __TIME__)).toString(Qt::DefaultLocaleShortDate),
                             qVersion(),
                             QT_VERSION_STR,
-                            APP_NAME,
-                            openssl_version));
+                            APP_NAME));
 
   m_ui.m_txtInfo->setText(tr("<body>%5 is simple cross-platform text editor based on Qt and Scintilla."
                              "<br><br>This software is distributed under the terms of GNU General Public License, version 3."

@@ -9,7 +9,7 @@
 
 #include <QPushButton>
 
-FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(QFile& file, QWidget* parent) : QDialog(parent) {
+FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(const QByteArray& data, QWidget* parent) : QDialog(parent) {
   m_ui.setupUi(this);
   m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setText(tr("Decrypt && Open File"));
   m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(false);
@@ -29,11 +29,11 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(QFile& file, QWidget* paren
       m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->click();
     }
   });
-  connect(m_ui.m_tbPassword->lineEdit(), &QLineEdit::textEdited, this, [this, &file](const QString& text) {
+  connect(m_ui.m_tbPassword->lineEdit(), &QLineEdit::textEdited, this, [this, &data](const QString& text) {
     bool pass_correct;
 
     try {
-      pass_correct = CryptoFactory::isPasswordCorrect(text, file);
+      pass_correct = CryptoFactory::isPasswordCorrect(text, data);
     }
     catch (...) {
       pass_correct = false;
@@ -56,8 +56,8 @@ QString FormDecryptPasswordPrompt::password() const {
   return m_ui.m_tbPassword->lineEdit()->text();
 }
 
-QString FormDecryptPasswordPrompt::getPasswordFromUser(QFile& file, bool& ok) {
-  FormDecryptPasswordPrompt prompt(file, qApp->mainFormWidget());
+QString FormDecryptPasswordPrompt::getPasswordFromUser(const QByteArray& data, bool& ok) {
+  FormDecryptPasswordPrompt prompt(data, qApp->mainFormWidget());
 
   ok = prompt.exec() == QDialog::DialogCode::Accepted;
   return prompt.password();
