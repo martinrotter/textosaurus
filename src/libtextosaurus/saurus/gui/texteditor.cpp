@@ -1004,6 +1004,13 @@ void TextEditor::save(bool& ok) {
     // We just save this modified document to same file.
     saveToFile(m_filePath, ok);
   }
+
+  if (!ok) {
+    MessageBox::show(qApp->mainFormWidget(),
+                     QMessageBox::Icon::Critical,
+                     tr("Cannot Save to File"),
+                     tr("Document cannot be saved to file because the destination is probably non-writable."));
+  }
 }
 
 void TextEditor::saveAs(bool& ok, const QString& encoding) {
