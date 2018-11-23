@@ -51,8 +51,6 @@ else {
   unix: LIBS += -L$$OPENSSL_LIB_FOLDER -lssl -lcrypto
 }
 
-
-
 CONFIG(FLATPAK_MODE) {
   message($$MSG_PREFIX: Enabling Flatpak-specific code.)
   DEFINES *= FLATPAK_MODE=1
