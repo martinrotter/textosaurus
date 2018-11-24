@@ -28,7 +28,8 @@ cd "src\textosaurus"
 cd "app"
 
 & "C:\textosaurus\$qt_stub\bin\windeployqt.exe" --no-translations "textosaurus.exe" "libtextosaurus.dll"
-Copy-Item -Path C:\textosaurus\$qt_stub\bin\*MD.dll -Destination .\
+Copy-Item -Path C:\textosaurus\$qt_stub\bin\libcrypto*.dll -Destination .\
+Copy-Item -Path C:\textosaurus\$qt_stub\bin\libssl*.dll -Destination .\
 Copy-Item -Path C:\textosaurus\$qt_stub\bin\openssl.exe -Destination .\
 
 cd ..
