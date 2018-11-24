@@ -4,6 +4,7 @@
 
 #include "common/exceptions/applicationexception.h"
 #include "common/gui/guiutilities.h"
+#include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/iconfactory.h"
 #include "common/miscellaneous/settingsproperties.h"
 #include "common/miscellaneous/textfactory.h"
@@ -79,7 +80,8 @@ void FormAbout::loadLicenseAndInformation() {
                              "<b>Version:</b> %1 (built on %2/%3)<br/>"
                              "<b>Revision:</b> %4<br/>"
                              "<b>Build date:</b> %5<br/>"
-                             "<b>Qt:</b> %6 (compiled against %7)").arg(
+                             "<b>Qt:</b> %6 (compiled against %7)<br/>"
+                             "<b>OpenSSL:</b> %9").arg(
                           #if defined(FLATPAK_MODE)
                             qApp->applicationVersion() + QL1S(" (Flatpak) "),
                           #else
@@ -92,7 +94,8 @@ void FormAbout::loadLicenseAndInformation() {
                                                                             __TIME__)).toString(Qt::DefaultLocaleShortDate),
                             qVersion(),
                             QT_VERSION_STR,
-                            APP_NAME));
+                            APP_NAME,
+                            CryptoFactory::openSslVersion()));
 
   m_ui.m_txtInfo->setText(tr("<body>%5 is simple cross-platform text editor based on Qt and Scintilla."
                              "<br><br>This software is distributed under the terms of GNU General Public License, version 3."

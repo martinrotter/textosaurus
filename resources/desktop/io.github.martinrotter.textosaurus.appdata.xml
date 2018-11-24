@@ -22,7 +22,7 @@
     <binary>textosaurus</binary>
   </provides>
   <releases>
-    <release version="0.9.10" date="2018-11-23" />
+    <release version="0.9.10" date="2018-11-24" />
   </releases>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">none</content_attribute>

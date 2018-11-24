@@ -2,6 +2,7 @@
 
 #include "saurus/gui/dialogs/formdecryptpasswordprompt.h"
 
+#include "common/exceptions/applicationexception.h"
 #include "common/gui/guiutilities.h"
 #include "common/miscellaneous/cryptofactory.h"
 #include "common/miscellaneous/iconfactory.h"
@@ -15,7 +16,7 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(const QByteArray& data, QWi
   m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(false);
   m_ui.m_tbPassword->lineEdit()->setPlaceholderText(tr("Enter Decryption Password"));
   m_ui.m_tbPassword->lineEdit()->setEchoMode(QLineEdit::EchoMode::Password);
-  m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Error, tr("Entered password is incorrect."));
+  m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Error, tr("Enter some password."));
   m_ui.m_tbPassword->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
 
   GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("multipart-encrypted")));
@@ -33,20 +34,21 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(const QByteArray& data, QWi
     bool pass_correct;
 
     try {
-      pass_correct = CryptoFactory::isPasswordCorrect(text, data);
+      CryptoFactory::testPassword(text, data);
+      m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Ok, tr("Nice! This is correct password."));
+
+      pass_correct = true;
     }
-    catch (...) {
+    catch (ApplicationException& ex) {
+      m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Error, tr("Bad password or other problem: %1.").arg(ex.message()));
+      qWarning().noquote().nospace() << QSL("Password is probably not correct, crypto routine reports: ")
+                                     << ex.message()
+                                     << QL1C('.');
+
       pass_correct = false;
     }
 
     m_ui.m_buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(pass_correct);
-
-    if (pass_correct) {
-      m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Ok, tr("Nice! This is correct password."));
-    }
-    else {
-      m_ui.m_tbPassword->setStatus(WidgetWithStatus::StatusType::Error, tr("Entered password is incorrect."));
-    }
   });
 
   m_ui.m_tbPassword->setFocus();
