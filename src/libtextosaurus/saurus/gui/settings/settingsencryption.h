@@ -19,7 +19,7 @@ class SettingsEncryption : public SettingsPanel {
     virtual void saveSettings() override;
 
   private:
-    Ui::SettingsEncryption ui = {};
+    Ui::SettingsEncryption m_ui = {};
 };
 
 inline QString SettingsEncryption::title() const {

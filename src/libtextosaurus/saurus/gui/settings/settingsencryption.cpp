@@ -3,7 +3,7 @@
 #include "saurus/gui/settings/settingsencryption.h"
 
 SettingsEncryption::SettingsEncryption(Settings* settings, QWidget* parent) : SettingsPanel(settings, parent) {
-  ui.setupUi(this);
+  m_ui.setupUi(this);
 }
 
 void SettingsEncryption::loadSettings() {}
