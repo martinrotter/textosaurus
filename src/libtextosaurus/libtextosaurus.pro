@@ -137,7 +137,8 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/plugin-system/markdown/markdownsidebar.h \
             saurus/plugin-system/markdown/markdowntextbrowser.h \
             saurus/plugin-system/pluginbase.h \
-            saurus/plugin-system/pluginfactory.h
+            saurus/plugin-system/pluginfactory.h \
+    saurus/gui/settings/settingsencryption.h
 
 SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -223,7 +224,8 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/markdown/markdownplugin.cpp \
             saurus/plugin-system/markdown/markdownsidebar.cpp \
             saurus/plugin-system/markdown/markdowntextbrowser.cpp \
-            saurus/plugin-system/pluginfactory.cpp
+            saurus/plugin-system/pluginfactory.cpp \
+    saurus/gui/settings/settingsencryption.cpp
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \
@@ -242,7 +244,8 @@ FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/settings/settingsplugins.ui \
           saurus/gui/settings/settingsshortcuts.ui \
           saurus/gui/settings/syntaxcolorthemeeditor.ui \
-          saurus/plugin-system/macros/macroswidget.ui
+          saurus/plugin-system/macros/macroswidget.ui \
+    saurus/gui/settings/settingsencryption.ui
 
 # Add qtsingleapplication.
 SOURCES += $$files(3rd-party/qtsingleapplication/*.cpp, false)
