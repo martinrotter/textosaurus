@@ -36,14 +36,14 @@ FormSettings::FormSettings(QWidget& parent)
   connect(m_btnApply, &QPushButton::clicked, this, &FormSettings::applySettings);
 
   addSettingsPanel(new SettingsGeneral(&m_settings, this));
-  addSettingsPanel(new SettingsPlugins(&m_settings, this));
   addSettingsPanel(new SettingsGui(&m_settings, this));
-  addSettingsPanel(new SettingsLocalization(&m_settings, this));
   addSettingsPanel(new SettingsShortcuts(&m_settings, this));
-  addSettingsPanel(new SettingsBrowserMail(&m_settings, this));
   addSettingsPanel(new SettingsEditor(&m_settings, this));
   addSettingsPanel(new SettingsEncryption(&m_settings, this));
   addSettingsPanel(new SettingsExternalTools(&m_settings, this));
+  addSettingsPanel(new SettingsPlugins(&m_settings, this));
+  addSettingsPanel(new SettingsLocalization(&m_settings, this));
+  addSettingsPanel(new SettingsBrowserMail(&m_settings, this));
 
   m_ui.m_listSettings->setCurrentRow(0);
 }
