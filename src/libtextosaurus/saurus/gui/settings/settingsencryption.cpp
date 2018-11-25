@@ -6,6 +6,13 @@ SettingsEncryption::SettingsEncryption(Settings* settings, QWidget* parent) : Se
   m_ui.setupUi(this);
 }
 
-void SettingsEncryption::loadSettings() {}
+void SettingsEncryption::loadSettings() {
+  // Load values.
 
-void SettingsEncryption::saveSettings() {}
+  //connect(m_ui.m_txtDecryption, &QPlainTextEdit::textChanged, this, &SettingsEncryption::dirtifySettings);
+  //connect(m_ui.m_txtEncryption, &QPlainTextEdit::textChanged, this, &SettingsEncryption::dirtifySettings);
+}
+
+void SettingsEncryption::saveSettings() {
+  // Save values.
+}

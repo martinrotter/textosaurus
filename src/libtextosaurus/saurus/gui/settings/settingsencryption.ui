@@ -21,10 +21,13 @@
        <property name="text">
         <string>OpenSSL status</string>
        </property>
+       <property name="buddy">
+        <cstring>m_txtStatus</cstring>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="m_txtStatus"/>
      </item>
      <item>
       <spacer name="horizontalSpacer">
@@ -52,6 +55,9 @@
         <property name="text">
          <string>Encryption</string>
         </property>
+        <property name="buddy">
+         <cstring>m_txtEncryption</cstring>
+        </property>
        </widget>
       </item>
       <item row="0" column="1">
@@ -59,19 +65,27 @@
         <property name="text">
          <string>Decryption</string>
         </property>
+        <property name="buddy">
+         <cstring>m_txtDecryption</cstring>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="QPlainTextEdit" name="m_txtEncryption"/>
       </item>
       <item row="1" column="1">
-       <widget class="QListWidget" name="listWidget_2"/>
+       <widget class="QPlainTextEdit" name="m_txtDecryption"/>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_txtStatus</tabstop>
+  <tabstop>m_txtEncryption</tabstop>
+  <tabstop>m_txtDecryption</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
