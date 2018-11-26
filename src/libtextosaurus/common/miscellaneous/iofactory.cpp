@@ -6,6 +6,7 @@
 #include "definitions/definitions.h"
 
 #include <QDataStream>
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -76,7 +77,15 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
     tmp_file.write(data);
     tmp_file.close();
 
-    return tmp_file.fileName();
+    auto file_name = QDir::toNativeSeparators(tmp_file.fileName());
+
+    if (!tmp_file.setPermissions(QFileDevice::Permission::ReadOwner | QFileDevice::Permission::WriteOwner)) {
+      qWarning().noquote().nospace() << QSL("Failed to set permissions on temporary file '")
+                                     << file_name
+                                     << QSL("'.");
+    }
+
+    return file_name;
   }
   else {
     throw IOException(tr("Cannot open temporary file for writting."));

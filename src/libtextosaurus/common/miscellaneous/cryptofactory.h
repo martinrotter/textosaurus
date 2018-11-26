@@ -31,6 +31,9 @@ class CryptoFactory {
     // Returns output of "openssl version" or "not installed".
     static QString openSslVersion();
 
+    // Returns list of supported cipher algorithms.
+    static QStringList ciphers();
+
   private:
     static QString openSslBinaryPath();
 };

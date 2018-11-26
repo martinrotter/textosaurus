@@ -14,9 +14,21 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
         <string>OpenSSL status</string>
@@ -26,11 +38,37 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="1">
       <widget class="QLineEdit" name="m_txtStatus"/>
      </item>
-     <item>
+     <item row="0" column="2">
       <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="m_cmbCipher"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Cipher algorithm</string>
+       </property>
+       <property name="buddy">
+        <cstring>m_cmbCipher</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -45,46 +83,28 @@
     </layout>
    </item>
    <item row="1" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>OpenSSL arguments</string>
+    <widget class="QCheckBox" name="m_cbPbkdf2">
+     <property name="text">
+      <string>Use PBKDF2 key derivation function, but this works only with OpenSSL 1.1.x or newer</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Encryption</string>
-        </property>
-        <property name="buddy">
-         <cstring>m_txtEncryption</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Decryption</string>
-        </property>
-        <property name="buddy">
-         <cstring>m_txtDecryption</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPlainTextEdit" name="m_txtEncryption"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPlainTextEdit" name="m_txtDecryption"/>
-      </item>
-     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QLabel" name="m_lblInfo">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>m_txtStatus</tabstop>
-  <tabstop>m_txtEncryption</tabstop>
-  <tabstop>m_txtDecryption</tabstop>
+  <tabstop>m_cmbCipher</tabstop>
+  <tabstop>m_cbPbkdf2</tabstop>
  </tabstops>
  <resources/>
  <connections/>

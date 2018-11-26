@@ -5,8 +5,8 @@
 #include "common/exceptions/ioexception.h"
 #include "common/miscellaneous/iofactory.h"
 #include "definitions/definitions.h"
+#include "saurus/miscellaneous/application.h"
 
-#include <QCoreApplication>
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QDir>
@@ -28,6 +28,75 @@ QString CryptoFactory::openSslVersion() {
   return version.isEmpty() ? QObject::tr("not installed") : version;
 }
 
+QStringList CryptoFactory::ciphers() {
+  return {
+           QSL("-aes-128-cbc"),
+           QSL("-aes-128-ecb"),
+           QSL("-aes-192-cbc"),
+           QSL("-aes-192-ecb"),
+           QSL("-aes-256-cbc"),
+           QSL("-aes-256-ecb"),
+           QSL("-base64"),
+           QSL("-bf"),
+           QSL("-bf-cbc"),
+           QSL("-bf-cfb"),
+           QSL("-bf-ecb"),
+           QSL("-bf-ofb"),
+           QSL("-camellia-128-cbc"),
+           QSL("-camellia-128-ecb"),
+           QSL("-camellia-192-cbc"),
+           QSL("-camellia-192-ecb"),
+           QSL("-camellia-256-cbc"),
+           QSL("-camellia-256-ecb"),
+           QSL("-cast"),
+           QSL("-cast-cbc"),
+           QSL("-cast5-cbc"),
+           QSL("-cast5-cfb"),
+           QSL("-cast5-ecb"),
+           QSL("-cast5-ofb"),
+           QSL("-des"),
+           QSL("-des-cbc"),
+           QSL("-des-cfb"),
+           QSL("-des-ecb"),
+           QSL("-des-ede"),
+           QSL("-des-ede-cbc"),
+           QSL("-des-ede-cfb"),
+           QSL("-des-ede-ofb"),
+           QSL("-des-ede3"),
+           QSL("-des-ede3-cbc"),
+           QSL("-des-ede3-cfb"),
+           QSL("-des-ede3-ofb"),
+           QSL("-des-ofb"),
+           QSL("-des3"),
+           QSL("-desx"),
+           QSL("-idea"),
+           QSL("-idea-cbc"),
+           QSL("-idea-cfb"),
+           QSL("-idea-ecb"),
+           QSL("-idea-ofb"),
+           QSL("-rc2"),
+           QSL("-rc2-40-cbc"),
+           QSL("-rc2-64-cbc"),
+           QSL("-rc2-cbc"),
+           QSL("-rc2-cfb"),
+           QSL("-rc2-ecb"),
+           QSL("-rc2-ofb"),
+           QSL("-rc4"),
+           QSL("-rc4-40"),
+           QSL("-rc5"),
+           QSL("-rc5-cbc"),
+           QSL("-rc5-cfb"),
+           QSL("-rc5-ecb"),
+           QSL("-rc5-ofb"),
+           QSL("-seed"),
+           QSL("-seed-cbc"),
+           QSL("-seed-cfb"),
+           QSL("-seed-ecb"),
+           QSL("-seed-ofb"),
+           QSL("-zlib")
+  };
+}
+
 QString CryptoFactory::openSslBinaryPath() {
 #if defined (Q_OS_WIN)
   QString program = QDir::toNativeSeparators(qApp->applicationDirPath()) + QDir::separator() + QL1S("openssl.exe");
@@ -44,7 +113,7 @@ QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray&
   }
 
   // Save unencrypted data to temp file first.
-  auto temp_input_file = QDir::toNativeSeparators(IOFactory::writeToTempFile(data));
+  auto temp_input_file = IOFactory::writeToTempFile(data);
 
   // Run OpenSSL binary and encrypt the file.
   // Password is passed to standard input.
@@ -58,9 +127,17 @@ QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray&
     proc_openssl.closeWriteChannel();
   });
 
-  proc_openssl.start(program, {
-    "enc", "-aes-256-cbc", "-salt", "-pass", "stdin", "-in", temp_input_file
+  QStringList args({
+    "enc", qApp->settings()->value(GROUP(General), SETTING(General::EncryptionCipher)).toString(),
+    "-salt", "-pass",
+    "stdin", "-in", temp_input_file
   });
+
+  if (qApp->settings()->value(GROUP(General), SETTING(General::EncryptionUsePbkdf2)).toBool()) {
+    args.append(QSL("-pbkdf2"));
+  }
+
+  proc_openssl.start(program, args);
 
   if (!proc_openssl.waitForFinished(10000)) {
     QFile::remove(temp_input_file);
@@ -113,7 +190,7 @@ QByteArray CryptoFactory::decryptData(const QString& password, const QByteArray&
   }
 
   // Save encrypted data to temp file first.
-  auto temp_input_file = QDir::toNativeSeparators(IOFactory::writeToTempFile(data));
+  auto temp_input_file = IOFactory::writeToTempFile(data);
 
   // Run OpenSSL binary and encrypt the file.
   // Password is passed to standard input.
@@ -127,9 +204,17 @@ QByteArray CryptoFactory::decryptData(const QString& password, const QByteArray&
     proc_openssl.closeWriteChannel();
   });
 
-  proc_openssl.start(program, {
-    "enc", "-aes-256-cbc", "-d", "-pass", "stdin", "-in", temp_input_file
+  QStringList args({
+    "enc", qApp->settings()->value(GROUP(General), SETTING(General::EncryptionCipher)).toString(),
+    "-d", "-pass",
+    "stdin", "-in", temp_input_file
   });
+
+  if (qApp->settings()->value(GROUP(General), SETTING(General::EncryptionUsePbkdf2)).toBool()) {
+    args.append(QSL("-pbkdf2"));
+  }
+
+  proc_openssl.start(program, args);
 
   if (!proc_openssl.waitForFinished(10000)) {
     QFile::remove(temp_input_file);

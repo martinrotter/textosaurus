@@ -143,6 +143,10 @@ namespace General {
   constexpr auto RemoveTrolltechJunkDef = false;
   constexpr auto FirstRun = "first_run";
   constexpr auto FirstRunDef = true;
+  constexpr auto EncryptionCipher = "enc_cipher";
+  constexpr auto EncryptionCipherDef = "-aes-256-cbc";
+  constexpr auto EncryptionUsePbkdf2 = "enc_pbkdf2";
+  constexpr auto EncryptionUsePbkdf2Def = false;
   constexpr auto RestoreSession = "restore_session";
   constexpr auto RestoreSessionDef = false;
   const QString RestoreSessionIndex = QString("restore_session_index_%1").arg(OS_ID_LOW);
