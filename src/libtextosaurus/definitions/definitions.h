@@ -70,6 +70,26 @@ constexpr auto APP_IS_RUNNING = "appisrunning";
 #define QSL(x) QStringLiteral(x)
 #endif
 
+#ifndef qDebugNN
+#define qDebugNN qDebug().noquote().nospace()
+#endif
+
+#ifndef qWarningNN
+#define qWarningNN qWarning().noquote().nospace()
+#endif
+
+#ifndef qCriticalNN
+#define qCriticalNN qCritical().noquote().nospace()
+#endif
+
+#ifndef qFatalNN
+#define qFatalNN qFatal().noquote().nospace()
+#endif
+
+#ifndef qInfoNN
+#define qInfoNN qInfo().noquote().nospace()
+#endif
+
 #ifndef QL1S
 
 // Macro for latin strings. Latin strings are

@@ -125,6 +125,8 @@ QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray&
     // Pass password via stdin.
     proc_openssl.write(password.toUtf8());
     proc_openssl.closeWriteChannel();
+
+    qDebugNN << QSL("Passing password to openssl tool via stdin.");
   });
 
   QStringList args({
@@ -137,9 +139,14 @@ QByteArray CryptoFactory::encryptData(const QString& password, const QByteArray&
     args.append(QSL("-pbkdf2"));
   }
 
+  qDebugNN << QSL("Arguments for openssl are: ") << args;
+
   proc_openssl.start(program, args);
 
+  qDebugNN << QSL("Starting openssl.");
+
   if (!proc_openssl.waitForFinished(10000)) {
+    qCriticalNN << QSL("Failed to wait for openssl to finish.");
     QFile::remove(temp_input_file);
     throw ApplicationException(QObject::tr("encryption failed with error '%1'").arg(proc_openssl.errorString()));
   }
@@ -202,6 +209,8 @@ QByteArray CryptoFactory::decryptData(const QString& password, const QByteArray&
     // Pass password via stdin.
     proc_openssl.write(password.toUtf8());
     proc_openssl.closeWriteChannel();
+
+    qDebugNN << QSL("Passing password to openssl tool via stdin.");
   });
 
   QStringList args({
@@ -214,9 +223,14 @@ QByteArray CryptoFactory::decryptData(const QString& password, const QByteArray&
     args.append(QSL("-pbkdf2"));
   }
 
+  qDebugNN << QSL("Arguments for openssl are: ") << args;
+
   proc_openssl.start(program, args);
 
+  qDebugNN << QSL("Starting openssl.");
+
   if (!proc_openssl.waitForFinished(10000)) {
+    qCriticalNN << QSL("Failed to wait for openssl to finish.");
     QFile::remove(temp_input_file);
     throw ApplicationException(QObject::tr("decryption failed with error '%1'").arg(proc_openssl.errorString()));
   }
