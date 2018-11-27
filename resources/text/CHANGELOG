@@ -1,5 +1,18 @@
+0.9.11
+------
+Added:
+* 
+
+Changed:
+* File encryption now uses OpenSSL utility and the encryption is exactly the same as produced by running "openssl enc...", so now you can {en,de}crypt your file either with Textosaurus or with "openssl" CLI tool.
+* Bundled OpenSSL on Windows was updated to latest 1.1.1a version and this updated library is also used by bundled Qt libs as well.
+
+Fixed:
+* No errors were reported while saving to write-protected file.
+
+
 0.9.10
------
+------
 Added:
 * Textosaurus now has command line interface. Run "textosaurus --help" for more info. (#56)
 * FS sidebar is now able to follow path of currently displayed document.
