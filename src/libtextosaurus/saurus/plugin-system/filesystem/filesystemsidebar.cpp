@@ -193,7 +193,15 @@ void FilesystemSidebar::saveCurrentFolder(const QString& path) {
   m_txtPath->setPlainText(path);
   m_txtPath->setToolTip(path);
 
-  int index_drive = m_cmbDrives->findData(QDir::toNativeSeparators(QStorageInfo(path).rootPath()));
+  auto rpath = QStorageInfo(path).rootPath();
+  int index_drive = m_cmbDrives->findData(QDir::toNativeSeparators(rpath));
+
+#if defined (Q_OS_WIN)
+  if (index_drive < 0 && path.size() >= 2) {
+    index_drive = m_cmbDrives->findText(path.left(2),
+                                        Qt::MatchFlag::MatchStartsWith);
+  }
+#endif
 
   m_cmbDrives->blockSignals(true);
   m_cmbDrives->setCurrentIndex(index_drive);
