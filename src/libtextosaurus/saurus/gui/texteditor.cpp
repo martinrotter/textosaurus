@@ -378,8 +378,7 @@ void TextEditor::resetSaveAgreement() {
 
 void TextEditor::askForSaveAgreement() {
   // We determine if there is any dialog to be shown,
-  // when this text editor is about to be closed:
-  //  - unsaved file confirmation.
+  // when this text editor is about to be closed.
   if (!(m_textApp->shouldSaveSession() && filePath().isEmpty()) &&
       !(m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) &&
       (modify() || (!filePath().isEmpty() && !QFile::exists(filePath())))) {
