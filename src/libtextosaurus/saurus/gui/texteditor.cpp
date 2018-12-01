@@ -194,7 +194,6 @@ void TextEditor::onCharAdded(int chr) {
       if (curr_line > 0) {
         int range_start = int(positionFromLine(curr_line - 1));
         int range_end = int(lineEndPosition(curr_line - 1));
-
         QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
 
         if (found.first >= 0 && found.second > 0) {
@@ -384,6 +383,8 @@ void TextEditor::askForSaveAgreement() {
   if (!(m_textApp->shouldSaveSession() && filePath().isEmpty()) &&
       !(m_textApp->shouldSaveSession() && !filePath().isEmpty() && QFile::exists(filePath()) && !modify()) &&
       (modify() || (!filePath().isEmpty() && !QFile::exists(filePath())))) {
+    emit requestVisibility();
+
     m_saveAgreement = MessageBox::show(qApp->mainFormWidget(),
                                        QMessageBox::Icon::Question,
                                        tr("Unsaved Changes"),
