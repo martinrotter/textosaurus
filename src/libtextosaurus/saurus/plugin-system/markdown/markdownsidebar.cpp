@@ -18,8 +18,8 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-typedef const uint8_t* cuint8_ta;
-typedef const char* cchara;
+using cuint8_ta = const uint8_t *;
+using cchara = const char*;
 
 MarkdownSidebar::MarkdownSidebar(MarkdownPlugin* plugin, QWidget* parent)
   : BaseSidebar(plugin->m_textApp, parent), m_txtPreview(nullptr), m_plugin(plugin) {
