@@ -335,7 +335,6 @@ INCLUDEPATH +=  $$PWD/. \
                 $$PWD/saurus/gui/sidebars \
                 $$PWD/saurus/plugin-system
 
-
 # Localizations.
 TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
                       $$PWD/../../localization/textosaurus_cs.ts \
