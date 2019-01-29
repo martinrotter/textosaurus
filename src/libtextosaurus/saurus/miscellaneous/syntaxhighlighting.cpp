@@ -279,7 +279,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_SH_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_SH_BACKTICKS, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_SH_PARAM, SyntaxColorTheme::StyleComponents::Identifier}
-    }, {}, true)
+    })
       << Lexer(QSL("Batch"), QStringList {
       QSL("bat"), QSL("cmd")
     }, SCLEX_BATCH)
