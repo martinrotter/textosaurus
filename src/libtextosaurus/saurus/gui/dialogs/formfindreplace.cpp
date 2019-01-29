@@ -116,7 +116,7 @@ void FormFindReplace::replaceAll() {
     QPair<int, int> found_range = editor->findText(search_flags,
                                                    m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
                                                    start_position,
-                                                   editor->length());
+                                                   int(editor->length()));
 
     if (found_range.first >= 0) {
       sptr_t replacement_length;
@@ -132,7 +132,7 @@ void FormFindReplace::replaceAll() {
       }
 
       replacement_length += found_range.first;
-      start_position = found_range.first == found_range.second ? (replacement_length + 1) : replacement_length;
+      start_position = found_range.first == found_range.second ? (int(replacement_length) + 1) : int(replacement_length);
       replacements_made++;
     }
     else {
@@ -161,7 +161,7 @@ void FormFindReplace::searchAll() {
   }
 
   QList<QPair<int, int>> found_ranges;
-  int start_position = 0, end_position = editor->length(), search_flags = extractFlags();
+  int start_position = 0, end_position = int(editor->length()), search_flags = extractFlags();
 
   while (true) {
     QPair<int, int> found_range = editor->findText(search_flags,
@@ -208,12 +208,12 @@ void FormFindReplace::searchReplaceOne(bool reverse) {
   int start_position, end_position;
 
   if (reverse) {
-    start_position = editor->selectionStart();
+    start_position = int(editor->selectionStart());
     end_position = 0;
   }
   else {
-    start_position = static_cast<int>(editor->selectionEnd());
-    end_position = editor->length();
+    start_position = int(editor->selectionEnd());
+    end_position = int(editor->length());
   }
 
   int search_flags = extractFlags();
@@ -236,10 +236,10 @@ void FormFindReplace::searchReplaceOne(bool reverse) {
 
     // We replace.
     if (m_ui.m_rbModeRegex->isChecked()) {
-      replacement_length = editor->replaceTargetRE(-1, m_ui.m_txtReplaceString->text().toUtf8().constData());
+      replacement_length = int(editor->replaceTargetRE(-1, m_ui.m_txtReplaceString->text().toUtf8().constData()));
     }
     else {
-      replacement_length = editor->replaceTarget(-1, m_ui.m_txtReplaceString->text().toUtf8().constData());
+      replacement_length = int(editor->replaceTarget(-1, m_ui.m_txtReplaceString->text().toUtf8().constData()));
     }
 
     // We highlight and scroll.
@@ -259,12 +259,12 @@ void FormFindReplace::searchOne(bool reverse) {
   int start_position, end_position;
 
   if (reverse) {
-    start_position = editor->selectionStart();
+    start_position = int(editor->selectionStart());
     end_position = 0;
   }
   else {
     start_position = static_cast<int>(editor->selectionEnd());
-    end_position = editor->length();
+    end_position = int(editor->length());
   }
 
   int search_flags = extractFlags();

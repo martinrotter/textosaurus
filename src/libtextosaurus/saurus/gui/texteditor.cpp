@@ -126,10 +126,12 @@ void TextEditor::loadFromFile(const QByteArray& file_data, const QString& file_p
   // We decide if this file is "log" file.
   setTargetRange(0, lineLength(0));
   setIsLog(searchInTarget(4, ".LOG") != -1);
+  setSel(0, 0);
 }
 
 void TextEditor::loadFromString(const QString& contents) {
   setText(contents.toUtf8().constData());
+  setSel(0, 0);
 }
 
 void TextEditor::findAllFromSelectedText() {
@@ -194,6 +196,7 @@ void TextEditor::onCharAdded(int chr) {
       if (curr_line > 0) {
         int range_start = int(positionFromLine(curr_line - 1));
         int range_end = int(lineEndPosition(curr_line - 1));
+
         QPair<int, int> found = findText(SCFIND_REGEXP | SCFIND_CXX11REGEX, "^[ \\t]+", range_start, range_end);
 
         if (found.first >= 0 && found.second > 0) {
