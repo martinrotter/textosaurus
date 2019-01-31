@@ -28,6 +28,7 @@
 #include "3rd-party/scintilla/qt/ScintillaEditBase/PlatQt.h"
 
 #include <QDir>
+#include <QElapsedTimer>
 #include <QFileDialog>
 #include <QFileSystemWatcher>
 #include <QFontDatabase>
@@ -425,6 +426,12 @@ void TextEditor::setFilePath(const QString& file_path) {
 }
 
 void TextEditor::updateUrlHighlights() {
+  // FIXME: This method is VERY slow as it can run even several seconds
+  // when opened file has long rows.
+  QElapsedTimer tmr;
+
+  tmr.start();
+
   setIndicatorCurrent(INDICATOR_URL);
   indicatorClearRange(0, length());
 
@@ -455,6 +462,8 @@ void TextEditor::updateUrlHighlights() {
       break;
     }
   }
+
+  qDebugNN << QSL("URL highlighting took ") << tmr.elapsed() << QSL(" miliseconds");
 }
 
 void TextEditor::updateOccurrencesHighlights() {
