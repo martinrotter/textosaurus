@@ -16,8 +16,6 @@
 #            Also, note that INSTALL_ROOT variable during "make install" step is not needed, when
 #            PREFIX variable in "qmake" call is used.
 #
-#   LRELEASE_EXECUTABLE - specifies the name/path of "lrelease" executable, defaults to "lrelease".
-#
 # Other information:
 #   - supports Windows or Linux,
 #   - Qt 5.7.0 or higher is required,

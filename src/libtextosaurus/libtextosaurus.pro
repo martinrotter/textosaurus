@@ -11,12 +11,6 @@ MSG_PREFIX  = "libtextosaurus"
 APP_TYPE    = "core library"
 
 include(../../pri/vars.pri)
-
-isEmpty(LRELEASE_EXECUTABLE) {
-  LRELEASE_EXECUTABLE = lrelease
-  message($$MSG_PREFIX: LRELEASE_EXECUTABLE variable is not set.)
-}
-
 include(../../pri/defs.pri)
 
 message($$MSG_PREFIX: Shadow copy build directory \"$$OUT_PWD\".)
@@ -24,7 +18,7 @@ message($$MSG_PREFIX: $$APP_NAME version is: \"$$APP_VERSION\".)
 message($$MSG_PREFIX: Detected Qt version: \"$$QT_VERSION\".)
 message($$MSG_PREFIX: Build destination directory: \"$$DESTDIR\".)
 message($$MSG_PREFIX: Build revision: \"$$APP_REVISION\".)
-message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE_EXECUTABLE\".)
+message($$MSG_PREFIX: lrelease executable name: \"$$LRELEASE\".)
 
 QT *= core gui widgets network printsupport svg
 
@@ -359,8 +353,8 @@ QMAKE_EXTRA_TARGETS += lupdate
 
 # Make sure QM translations are created.
 qtPrepareTool(LRELEASE, lrelease) {
-  message($$MSG_PREFIX: Running: $$LRELEASE_EXECUTABLE -compress $$shell_quote($$shell_path($$PWD/libtextosaurus.pro)))
-  system($$LRELEASE_EXECUTABLE -compress libtextosaurus.pro)
+  message($$MSG_PREFIX: Running: \"$$LRELEASE\" -compress $$shell_quote($$shell_path($$PWD/libtextosaurus.pro)))
+  system(\"$$LRELEASE\" -compress libtextosaurus.pro)
 }
 
 static {
