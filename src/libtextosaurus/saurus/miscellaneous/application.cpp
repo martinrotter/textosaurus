@@ -20,7 +20,7 @@
 
 Application::Application(const QString& id, int& argc, char** argv)
   : QtSingleApplication(id, argc, argv),
-  m_settings(Settings::setupSettings(this, qApp->userDataAppFolder(), qApp->userDataHomeFolder())),
+  m_settings(nullptr),
   m_textApplication(nullptr), m_mainForm(nullptr),
   m_webFactory(new WebFactory(this)),
   m_system(new SystemFactory(this)),
@@ -28,6 +28,14 @@ Application::Application(const QString& id, int& argc, char** argv)
   m_trayIcon(nullptr),
   m_shouldRestart(false),
   m_isQuitting(false) {
+
+  // Parse cmd arguments and then initialize settings.
+  parseCmdArguments();
+  m_settings = Settings::setupSettings(this,
+                                       qApp->userDataAppFolder(),
+                                       qApp->userDataHomeFolder(),
+                                       m_cmdParser.value(APP_OPT_CONFIG_SHORT));
+
   //: Abbreviation of language, e.g. en.
   //: Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code.
   //: Examples: "cs", "en", "it", "cs_CZ", "en_GB", "en_US".
@@ -194,12 +202,7 @@ QString Application::userDataAppFolder() {
 }
 
 QString Application::userDataFolder() {
-  if (settings()->type() == SettingsType::Portable) {
-    return userDataAppFolder();
-  }
-  else {
-    return userDataHomeFolder();
-  }
+  return settings()->baseFolder();
 }
 
 QString Application::userDataHomeFolder() {
@@ -208,6 +211,10 @@ QString Application::userDataHomeFolder() {
 #else
   return configFolder();
 #endif
+}
+
+QString Application::userDataForcedFolder() {
+  return m_cmdParser.value(APP_OPT_CONFIG_SHORT);
 }
 
 void Application::setTextApplication(TextApplication* text_application) {
@@ -223,7 +230,11 @@ void Application::parseCmdArguments() {
                                          QSL("Indicates that another application instance is running. You should never need to use this."));
   QCommandLineOption opt_quit({APP_QUIT_INSTANCE_SHORT, APP_QUIT_INSTANCE},
                               QSL("Quit currently running application instance."));
+  QCommandLineOption opt_config({APP_OPT_CONFIG_SHORT, APP_OPT_CONFIG},
+                                QSL("Use an alternate configuration directory. If the directory does not exist, then it is created."),
+                                QSL("directory"));
 
+  m_cmdParser.addOption(opt_config);
   m_cmdParser.addOption(opt_quit);
   m_cmdParser.addOption(opt_already_running);
   m_cmdParser.addPositionalArgument(QSL("files"), QSL("Text files to be opened."), QSL("file-1 ... file-n"));

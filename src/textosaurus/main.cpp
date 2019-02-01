@@ -31,8 +31,6 @@ int main(int argc, char* argv[]) {
   // Instantiate base application object.
   Application application(APP_LOW_NAME, argc, argv);
 
-  application.parseCmdArguments();
-
   // Check if another instance is running.
   if (application.isRunning()) {
     qWarning().noquote().nospace() << QSL("Another instance of the application is already running. Notifying it.");

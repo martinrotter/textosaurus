@@ -57,6 +57,8 @@ constexpr auto APP_NO_THEME = "";
 constexpr auto APP_THEME_SUFFIX = ".png";
 constexpr auto APP_QUIT_INSTANCE_SHORT = "q";
 constexpr auto APP_QUIT_INSTANCE = "quitapp";
+constexpr auto APP_OPT_CONFIG_SHORT = "c";
+constexpr auto APP_OPT_CONFIG = "config";
 constexpr auto APP_IS_RUNNING_SHORT = "r";
 constexpr auto APP_IS_RUNNING = "appisrunning";
 

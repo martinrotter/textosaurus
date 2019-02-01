@@ -188,7 +188,7 @@ class TEXTOSAURUS_DLLSPEC Settings : public QSettings {
     void remove(const QString& section, const QString& key);
 
     // Returns the path which contains the settings.
-    QString pathName() const;
+    QString baseFolder() const;
 
     // Synchronizes settings.
     QSettings::Status checkSettings();
@@ -196,10 +196,10 @@ class TEXTOSAURUS_DLLSPEC Settings : public QSettings {
     void printSettingsInfo();
 
     // Creates settings file in correct location.
-    static Settings* setupSettings(QObject* parent, const QString& app_path, const QString& user_path);
+    static Settings* setupSettings(QObject* parent, const QString& app_path, const QString& user_path, const QString& forced_path);
 
     // Returns properties of the actual application-wide settings.
-    static SettingsProperties determineProperties(const QString& app_path, const QString& user_path);
+    static SettingsProperties determineProperties(const QString& app_path, const QString& user_path, const QString& forced_path);
 
   private:
     explicit Settings(const QString& file_name, Format format, SettingsType type, QObject* parent = nullptr);

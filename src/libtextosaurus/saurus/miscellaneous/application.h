@@ -110,6 +110,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     // These return user ready folders.
     QString userDataAppFolder();
     QString userDataHomeFolder();
+    QString userDataForcedFolder();
 
   private:
     QCommandLineParser m_cmdParser;

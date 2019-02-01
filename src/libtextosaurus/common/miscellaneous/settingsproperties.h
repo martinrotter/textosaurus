@@ -5,7 +5,8 @@
 
 enum class SettingsType {
   Portable,
-  NonPortable
+  NonPortable,
+  Forced
 };
 
 struct SettingsProperties {

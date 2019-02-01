@@ -141,7 +141,7 @@ QList<QAction*> ExternalTools::predefinedToolsActions() const {
 
 void ExternalTools::saveExternalTools(const QList<ExternalTool*>& ext_tools) {
   // We persistently save custom tools.
-  QSettings sett_ext_tools(qApp->settings()->pathName() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
+  QSettings sett_ext_tools(qApp->settings()->baseFolder() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
 
   sett_ext_tools.clear();
   int i = 0;
@@ -472,7 +472,7 @@ void ExternalTools::loadCustomTools() {
   qDeleteAll(m_customTools);
   m_customTools.clear();
 
-  QSettings sett_ext_tools(qApp->settings()->pathName() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
+  QSettings sett_ext_tools(qApp->settings()->baseFolder() + QDir::separator() + EXT_TOOLS_CONFIG, QSettings::Format::IniFormat);
   QStringList sections = sett_ext_tools.childGroups();
 
   foreach (const QString& section, sections) {

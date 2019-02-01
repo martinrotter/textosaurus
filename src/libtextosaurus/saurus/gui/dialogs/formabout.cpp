@@ -27,8 +27,11 @@ void FormAbout::loadSettingsAndPaths() {
   if (qApp->settings()->type() == SettingsType::Portable) {
     m_ui.m_txtPathsSettingsType->setText(tr("FULLY portable"));
   }
-  else {
+  else if (qApp->settings()->type() == SettingsType::NonPortable) {
     m_ui.m_txtPathsSettingsType->setText(tr("NOT portable"));
+  }
+  else {
+    m_ui.m_txtPathsSettingsType->setText(tr("FORCED by user"));
   }
 
   m_ui.m_txtPathsSettingsFile->setText(QDir::toNativeSeparators(qApp->settings()->fileName()));
