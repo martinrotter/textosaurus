@@ -219,10 +219,10 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     m_lexers
       << Lexer(tr("Plain text"), QStringList {
       QString(), QSL("txt")
-    }, SCLEX_NULL)
+    }, SCLEX_NULL, {}, {QSL("text/plain")})
       << Lexer(QSL("A68k"), QStringList {
       QSL("doxygen")
-    }, SCLEX_A68K)
+    }, SCLEX_A68K, {}, {QSL("text/x-Algol68")})
       << Lexer(QSL("Ada"), QStringList {
       QSL("ada")
     }, SCLEX_ADA)
@@ -231,12 +231,12 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     }, SCLEX_ASN1)
       << Lexer(QSL("Assembly"), QStringList {
       QSL("asm"), QSL("nasm")
-    }, SCLEX_ASM)
+    }, SCLEX_ASM, {}, {QSL("text/x-asm")})
       << Lexer(QSL("AVS"), QStringList {
       QSL("avs")
     }, SCLEX_AVS)
       << Lexer(QSL("AWK"), QStringList {
-      QSL("awk")
+      QSL("awk"), QSL("gawk"), QSL("nawk")
     }, SCLEX_CPP, {
       {SCE_C_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_C_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
@@ -260,10 +260,11 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_C_GLOBALCLASS, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_C_PREPROCESSORCOMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_C_PREPROCESSORCOMMENTDOC, SyntaxColorTheme::StyleComponents::Keyword}
-    }, "break case continue do else exit function for if in next return switch while "
-       "@include delete nextfile BEGIN END"
-       "ARGC ARGIND ARGV FILENAME FNR FS NF NR OFMT OFS ORS RLENGTH RS RSTART SUBSEP "
-       "BINMODE CONVFMT FIELDWIDTHS FPAT IGNORECASE LINT TEXTDOMAiN ENVIRON ERRNO PROCINFO RT")
+    }, {QSL("text/x-awk"), QSL("text/x-gawk"), QSL("text/x-nawk")},
+             "break case continue do else exit function for if in next return switch while "
+             "@include delete nextfile BEGIN END"
+             "ARGC ARGIND ARGV FILENAME FNR FS NF NR OFMT OFS ORS RLENGTH RS RSTART SUBSEP "
+             "BINMODE CONVFMT FIELDWIDTHS FPAT IGNORECASE LINT TEXTDOMAiN ENVIRON ERRNO PROCINFO RT")
       << Lexer(QSL("Bash"), QStringList {
       QSL("bash"), QSL("sh"), QSL("zsh"), QSL("bashrc"), QSL("zshrc"), QSL("_profile"), QSL("PKGBUILD")
     }, SCLEX_BASH, {
@@ -279,14 +280,14 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_SH_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_SH_BACKTICKS, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_SH_PARAM, SyntaxColorTheme::StyleComponents::Identifier}
-    })
+    }, {QSL("text/x-shellscript")})
       << Lexer(QSL("Batch"), QStringList {
       QSL("bat"), QSL("cmd")
-    }, SCLEX_BATCH)
-      << Lexer(QSL("BibTeX"), QStringList { QSL("bib") }, SCLEX_BIBTEX, {}, {}, true)
+    }, SCLEX_BATCH, {}, {QSL("text/x-msdos-batch")})
+      << Lexer(QSL("BibTeX"), QStringList { QSL("bib") }, SCLEX_BIBTEX, {}, {QSL("BibTeX text file")}, {}, true)
       << Lexer(QSL("CMake"), QStringList {
       QSL("cmake"), QSL("txt")
-    }, SCLEX_CMAKE, {}, {}, true)
+    }, SCLEX_CMAKE, {}, {}, {}, true)
       << Lexer(QSL("CoffeeScript"), QStringList {
       QSL("litcoffee")
     }, SCLEX_COFFEESCRIPT)
@@ -320,13 +321,14 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_C_GLOBALCLASS, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_C_PREPROCESSORCOMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_C_PREPROCESSORCOMMENTDOC, SyntaxColorTheme::StyleComponents::Keyword}
-    }, "alignas alignof and and_eq asm auto bitand bitor bool break case catch char "
-       "char16_t char32_t class compl const constexpr const_cast continue decltype default "
-       "delete do double dynamic_cast else enum explicit export extern false final float for "
-       "friend goto if inline int long mutable namespace new noexcept not not_eq nullptr operator "
-       "or or_eq override private protected public register reinterpret_cast return short signed "
-       "sizeof static static_assert static_cast struct switch template this thread_local throw true "
-       "try typedef typeid typename union unsigned using virtual void volatile wchar_t while xor xor_eq")
+    }, {QSL("text/x-c++"), QSL("text/x-c")},
+             "alignas alignof and and_eq asm auto bitand bitor bool break case catch char "
+             "char16_t char32_t class compl const constexpr const_cast continue decltype default "
+             "delete do double dynamic_cast else enum explicit export extern false final float for "
+             "friend goto if inline int long mutable namespace new noexcept not not_eq nullptr operator "
+             "or or_eq override private protected public register reinterpret_cast return short signed "
+             "sizeof static static_assert static_cast struct switch template this thread_local throw true "
+             "try typedef typeid typename union unsigned using virtual void volatile wchar_t while xor xor_eq")
       << Lexer(QSL("CSS"), QStringList {
       QSL("css")
     }, SCLEX_CSS, {
@@ -338,15 +340,15 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_CSS_DOUBLESTRING, SyntaxColorTheme::StyleComponents::String},
       {SCE_CSS_SINGLESTRING, SyntaxColorTheme::StyleComponents::String},
       {SCE_CSS_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, "color background-color background-image background-repeat background-attachment background-position background "
-       "font-family font-style font-variant font-weight font-size font "
-       "word-spacing letter-spacing text-decoration vertical-align text-transform text-align text-indent line-height "
-       "margin-top margin-right margin-bottom margin-left margin "
-       "padding-top padding-right padding-bottom padding-left padding "
-       "border-top-width border-right-width border-bottom-width border-left-width border-width "
-       "border-top border-right border-bottom border-left border "
-       "border-color border-style width height float clear "
-       "display white-space list-style-type list-style-image list-style-position list-style", true)
+    }, {}, "color background-color background-image background-repeat background-attachment background-position background "
+           "font-family font-style font-variant font-weight font-size font "
+           "word-spacing letter-spacing text-decoration vertical-align text-transform text-align text-indent line-height "
+           "margin-top margin-right margin-bottom margin-left margin "
+           "padding-top padding-right padding-bottom padding-left padding "
+           "border-top-width border-right-width border-bottom-width border-left-width border-width "
+           "border-top border-right border-bottom border-left border "
+           "border-color border-style width height float clear "
+           "display white-space list-style-type list-style-image list-style-position list-style", true)
       << Lexer(QSL("C#"), QStringList {
       QSL("cs")
     }, SCLEX_CPP)
@@ -362,37 +364,37 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_DIFF_HEADER, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_DIFF_POSITION, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_DIFF_DELETED, SyntaxColorTheme::StyleComponents::Error},
-    })
+    }, {QSL("text/x-diff")})
       << Lexer(QSL("Fortran"), QStringList {
       QSL("for"), QSL("f90"), QSL("f95"), QSL("f2k"), QSL("f23")
-    }, SCLEX_FORTRAN)
+    }, SCLEX_FORTRAN, {}, {QSL("text/x-fortran")})
       << Lexer(QSL("Fortran77"), QStringList {
       QSL("f77")
     }, SCLEX_F77)
       << Lexer(QSL("HTML"), QStringList {
       QSL("html"), QSL("htm"), QSL("shtml"), QSL("shtm"), QSL("xhtml"), QSL("xht"), QSL("hta")
-    }, SCLEX_HTML)
+    }, SCLEX_HTML, {}, {QSL("text/html"), QSL("XHTML document text")})
       << Lexer(QSL("Inno Setup"), QStringList {
       QSL("inno")
     }, SCLEX_INNOSETUP)
       << Lexer(QSL("Java"), QStringList {
       QSL("java")
-    }, SCLEX_CPP)
+    }, SCLEX_CPP, {}, {QSL("text/x-java")})
       << Lexer(QSL("JavaScript"), QStringList {
       QSL("js")
     }, SCLEX_CPP)
       << Lexer(QSL("JSON"), QStringList {
       QSL("json")
-    }, SCLEX_JSON, {}, {}, true)
+    }, SCLEX_JSON, {}, {}, {}, true)
       << Lexer(QSL("Lisp"), QStringList {
       QSL("lisp"), QSL("cl")
-    }, SCLEX_LISP)
+    }, SCLEX_LISP, {}, {QSL("text/x-lisp")})
       << Lexer(QSL("Lua"), QStringList {
       QSL("lua")
-    }, SCLEX_LUA)
+    }, SCLEX_LUA, {}, {QSL("text/x-lua")})
       << Lexer(QSL("Make"), QStringList {
       QSL("mak"), QSL("Makefile")
-    }, SCLEX_MAKEFILE)
+    }, SCLEX_MAKEFILE, {}, {QSL("text/x-makefile")})
       << Lexer(QSL("Markdown"), QStringList {
       QSL("markdown"), QSL("md")
     }, SCLEX_MARKDOWN, {
@@ -411,11 +413,11 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_MARKDOWN_HEADER6, SyntaxColorTheme::StyleComponents::Comment},
     })
       << Lexer(QSL("Matlab"), QStringList {
-      QSL("m")
-    }, SCLEX_MATLAB, {}, {}, true)
+      QSL("m"), QSL("mat")
+    }, SCLEX_MATLAB, {}, {QSL("Matlab v5 mat-file")}, {}, true)
       << Lexer(QSL("NSIS"), QStringList {
       QSL("nsis")
-    }, SCLEX_NSIS, {}, {}, true)
+    }, SCLEX_NSIS, {}, {}, {}, true)
       << Lexer(QSL("Octave"), QStringList {
       QSL("m")
     }, SCLEX_OCTAVE)
@@ -437,26 +439,26 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_PAS_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_PAS_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_PAS_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, "absolute abstract and array as asm assembler automated begin case "
-       "cdecl class const constructor delayed deprecated destructor dispid dispinterface "
-       "div do downto dynamic else end except experimental export exports external far "
-       "file final finalization finally for forward function goto helper if "
-       "implementation in inherited initialization inline interface is label library "
-       "message mod near nil not object of on operator or out overload override packed "
-       "pascal platform private procedure program property protected public published "
-       "raise record reference register reintroduce repeat resourcestring safecall "
-       "sealed set shl shr static stdcall strict string then threadvar to try type unit "
-       "unsafe until uses var varargs virtual while winapi with xor "
-       "add default implements index name nodefault read readonly remove stored write writeonly")
+    }, {QSL("text/x-pascal")}, "absolute abstract and array as asm assembler automated begin case "
+                               "cdecl class const constructor delayed deprecated destructor dispid dispinterface "
+                               "div do downto dynamic else end except experimental export exports external far "
+                               "file final finalization finally for forward function goto helper if "
+                               "implementation in inherited initialization inline interface is label library "
+                               "message mod near nil not object of on operator or out overload override packed "
+                               "pascal platform private procedure program property protected public published "
+                               "raise record reference register reintroduce repeat resourcestring safecall "
+                               "sealed set shl shr static stdcall strict string then threadvar to try type unit "
+                               "unsafe until uses var varargs virtual while winapi with xor "
+                               "add default implements index name nodefault read readonly remove stored write writeonly")
       << Lexer(QSL("Perl"), QStringList {
       QSL("pl"), QSL("pm"), QSL("plx")
-    }, SCLEX_PERL)
+    }, SCLEX_PERL, {}, {QSL("text/x-perl")})
       << Lexer(QSL("PO"), QStringList {
       QSL("po")
     }, SCLEX_PO)
       << Lexer(QSL("PostScript"), QStringList {
       QSL("ps")
-    }, SCLEX_PS)
+    }, SCLEX_PS, {}, {QSL("application/postscript"), QSL("PostScript document")})
       << Lexer(QSL("POV"), QStringList {
       QSL("pov")
     }, SCLEX_POV)
@@ -475,26 +477,26 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_POWERSHELL_COMMENTSTREAM, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_POWERSHELL_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_POWERSHELL_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, "assembly exit process"
-       "base filter public"
-       "begin finally return"
-       "break for sequence"
-       "catch foreach static"
-       "class from switch"
-       "command function throw"
-       "configuration hidden trap"
-       "continue if try"
-       "data in type"
-       "define inlinescript until"
-       "do interface using"
-       "dynamicparam module  var"
-       "else namespace while"
-       "elseif parallel workflow"
-       "end param"
-       "enum private", true)
+    }, {}, "assembly exit process"
+           "base filter public"
+           "begin finally return"
+           "break for sequence"
+           "catch foreach static"
+           "class from switch"
+           "command function throw"
+           "configuration hidden trap"
+           "continue if try"
+           "data in type"
+           "define inlinescript until"
+           "do interface using"
+           "dynamicparam module  var"
+           "else namespace while"
+           "elseif parallel workflow"
+           "end param"
+           "enum private", true)
       << Lexer(QSL("Properties/INI"), QStringList {
       QSL("properties"), QSL("ini"), QSL("conf"), QSL("theme")
-    }, SCLEX_PROPERTIES)
+    }, SCLEX_PROPERTIES, {}, {QSL("OS/2 INI")})
       << Lexer(QSL("Python"), QStringList {
       QSL("py"), QSL("pyw")
     }, SCLEX_PYTHON, {
@@ -511,22 +513,23 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_P_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_P_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_P_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, "and del from not while "
-       "as elif global or with "
-       "assert else if pass yield "
-       "break except import print "
-       "class exec in raise "
-       "continue finally is return "
-       "def for lambda try")
+    }, {QSL("text/x-python"), QSL("Python script text executable"), QSL("Blender3D BPython script")},
+             "and del from not while "
+             "as elif global or with "
+             "assert else if pass yield "
+             "break except import print "
+             "class exec in raise "
+             "continue finally is return "
+             "def for lambda try")
       << Lexer(QSL("R"), QStringList {
       QSL("r")
-    }, SCLEX_R, {}, {}, true)
+    }, SCLEX_R, {}, {}, {}, true)
       << Lexer(QSL("Registry"), QStringList {
       QSL("reg")
     }, SCLEX_REGISTRY)
       << Lexer(QSL("Ruby"), QStringList {
       QSL("rb"), QSL("rbw")
-    }, SCLEX_RUBY)
+    }, SCLEX_RUBY, {}, {QSL("text/x-ruby")})
       << Lexer(QSL("Rust"), QStringList {
       QSL("rs")
     }, SCLEX_RUST)
@@ -545,73 +548,73 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_SAS_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_SAS_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_SAS_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, "% %abort %bquote %cmpres %compstor %copy %datatyp %display %do %else %end %eval %global %goto "
-       "%if %index %input %left %length %let %local %lowcase %macro %mend %nrbquote %nrquote %nrstr %put "
-       "%qcmpres %qleft %qlowcase %qscan %qsubstr %qsysfunc %qtrim %quote %qupcase %return %scan %str "
-       "%substr %superq %symdel %symexist %symglobl %symlocal %syscall %sysevalf %sysexec %sysfunc %sysget "
-       "%syslput %sysprod %sysrc %sysrput %then %trim %unquote %until %upcase %verify %while %window & cmdmac "
-       "implmac macro mautolocdisplay mautosource mcompilenote merror mfile mindelimiter mlogic mlogicnest "
-       "mprint mprintnest mrecall mstored msymtabmax mvarsize nocenter option sasautos sasmstore serror symbolgen "
-       "symdel symgetn symputn sysbuffr syscc syscharwidth syscmd sysdate sysdate9 sysday sysdevic sysdmg sysdsn "
-       "sysenv syserr sysfilrc sysindex sysinfo sysjobid syslast syslckrc syslibrc sysmacroname sysmenv sysncpu "
-       "syspbuff sysprocname sysscp sysscpl syssite sysstartid sysstartname systime sysuserid sysver sysvlong "
-       "abs addr addrlong airy allperm anyalnum anyalpha anycntrl anydigit anyfirst anygraph anylower anyname "
-       "anyprint anypunct anyspace anyupper anyxdigit appcort apply arcos armacov armalik armasim arsin atan "
-       "atan2 attrc attrn band beta betainv block blshift bnot bor branks brshift btran bxor byte cat cats catt "
-       "catx cdf ceil ceilz cexist change char choose choosec choosen cinv cnonct coalesce coalescec collate "
-       "colpctn colpctsum comb compbl compcost compged complev comport compound compress concat constant "
-       "convexit convx convxp cos cosh count countc covlag cshape css curobs cv cvexhull daccdb daccdbsl "
-       "daccsl daccsyd dacctab dairy datdif date datejul datepart datetime day dclose dcreate depdb depdbsl "
-       "depsl depsyd deptab dequote design designf det deviance dhms diag digamma dim dinfo dnum dopen "
-       "doptname doptnum dread dropnote dsname dur duration durp echelon eigen eigval eigvec erf erfc "
-       "eurocurr exist exp fact fappend farmacov farmafit farmalik farmasim fclose fcol fdelete fdif "
-       "fetch fetchobs fexist fft fget fileexist fileref findc finfo finv fipname fipnamel fipstate "
-       "floor floorz fnonct fnote fopen foptname foptnum forward fpoint fpos fput fread frewind frlen "
-       "fsep fuzz fwrite gaend gagetmem gagetval gainit gaminv gamma gareeval garegen gasetcro gasetmut "
-       "gasetobj gasetsel gasetup gblkvp gblkvpd gclose gdelete gdraw gdrawl geneig geomean geomeanz "
-       "getoption getvarc getvarn ggrid ginclude ginv gopen gpie gpiexy gpoint gpoly gport gportpop "
-       "gportstk gscale gscript gset gshow gsorth gstart gstop gstrlen gtext gvtext gwindow gxaxis "
-       "gyaxis half hankel harmean harmeanz hbound hdir hermite hms homogen hour htmldecode htmlencode "
-       "ibessel ifc ifft ifn indexc indexw inputc inputn insert int intck intnx intrr intz inv invupdt "
-       "iorcmsg ipf iqr irr itbicg itcgrad itminres jbessel jroot juldate juldate7 kalcvf kalcvs kaldff "
-       "kaldfs kcompare kcompress kcount kcvt kindex kindexc kleft klength klowcase kreverse kright kscan "
-       "kstrcat ksubstr ksubstrb ktranslate ktrim ktruncate kupcase kupdate kupdateb kurtosis kverify lag "
-       "largest lav lbound lcp lengthc lengthm lengthn lgamma libref lms loc log log10 log2 logbeta logcdf "
-       "logpdf logsdf lowcase lts lupdt mad marg max maxqform mcd mdy mean median min minute mod module "
-       "modulec modulei moduleic modulein modulen modz month mopen mort mve name ncol netpv nldate nldatm "
-       "nleng nliteral nlpcg nlpdd nlpfdd nlpfea nlphqn nlplm nlpnms nlpnra nlpnrr nlpqn nlpqua nlptr "
-       "nltime nmiss normal notalnum notalpha notcntrl notdigit note notfirst notgraph notlower notname "
-       "notprint notpunct notspace notupper notxdigit npv nrow num nvalid ode open opscal ordinal orpol "
-       "ortvec pagepctn pagepctsum pathname pctl pctn pctsum peek peekc peekclong peeklong perm pgraf "
-       "point poisson poke pokelong polyroot probbeta probbnml probbnrm probchi probf probgam probhypr "
-       "probmc probnegb probnorm probt product propcase prxchange prxdebug prxfree prxmatch prxnext "
-       "prxparen prxparse prxposn prxsubstr ptrlongadd push put putc putn pv pvp qtr quad quantile "
-       "queue quote ranbin rancau rand randgen randseed ranexp rangam range ranktie rannor ranperk "
-       "ranperm ranpoi rantbl rantri ranuni rates ratio rdodt repeat reppctn reppctsum resolve reverse "
-       "rewind rms root round rounde roundz rowcat rowcatc rowpctn rowpctsum rupdt rxchange rxfree "
-       "rxmatch rxparse rxsubstr rzlind saving scan scanq sdf second seq seqscale seqshift setdif shape "
-       "sign sin sinh skewness sleep smallest softmax solve solvelin sortndx sound soundex spedis spline "
-       "splinec splinev spot sqrsym sqrt ssq std stderr stfips stname stnamel storage streaminit strip "
-       "subpad substr substrn sum svd sweep symexist symget symglobl symlocal symput symputx symsqr sysget "
-       "sysmsg sysparm sysprocessid sysprocessname sysprod sysrc system tan tanh teigen teigval teigvec "
-       "time timepart tinv tnonct today toeplitz tpsplnev translate tranwrd trigamma trim trimn trisolv "
-       "trunc tsbaysea tsdecomp tsmlocar tsmlomar tsmulmar tspears tspred tsroot tstvcar tsunimar type "
-       "uniform union unique uniqueby upcase urldecode urlencode uss uuidgen valset value var varfmt "
-       "varinfmt varlabel varlen varmacov varmalik varmasim varname varnum varray varrayx vartranscode "
-       "vartype vecdiag vformat vformatd vformatdx vformatn vformatnx vformatw vformatwx vformatx "
-       "vinarray vinarrayx vinformat vinformatd vinformatdx vinformatn vinformatnx vinformatw vinformatwx "
-       "vinformatx vlabel vlabelx vlength vlengthx vname vnamex vnext vnormal vtranscode vtranscodex "
-       "vtsroot vtype vtypex vvalue vvaluex wavft wavget wavift wavprint wavthrsh week weekday xmult "
-       "xsect year yield yieldp yrdif yyq zipcity zipfips zipname zipnamel zipstate abort array as "
-       "attrib by call cards cards4 catname chtml class close closefile continue csvall datalines "
-       "datalines4 decimal_align declare delete describe dm do docbook edit else end endsas exclude "
-       "execute file filename find finish first. footnote for force format free from go goto html "
-       "html3 htmlcss id if imode include index infile informat input join keep label last. leave "
-       "length libname link list listing load lock lostcard markup mattrib merge missing modify "
-       "ods on order page pageby path pause pcl pdf phtml printer proclabel proctitle purge putlog "
-       "read redirect remove rename reset results resume return rtf sasfile save select separated "
-       "set setin setout show skip start stop store table then title to trace until use usegopt "
-       "verify when where while window with wml")
+    }, {}, "% %abort %bquote %cmpres %compstor %copy %datatyp %display %do %else %end %eval %global %goto "
+           "%if %index %input %left %length %let %local %lowcase %macro %mend %nrbquote %nrquote %nrstr %put "
+           "%qcmpres %qleft %qlowcase %qscan %qsubstr %qsysfunc %qtrim %quote %qupcase %return %scan %str "
+           "%substr %superq %symdel %symexist %symglobl %symlocal %syscall %sysevalf %sysexec %sysfunc %sysget "
+           "%syslput %sysprod %sysrc %sysrput %then %trim %unquote %until %upcase %verify %while %window & cmdmac "
+           "implmac macro mautolocdisplay mautosource mcompilenote merror mfile mindelimiter mlogic mlogicnest "
+           "mprint mprintnest mrecall mstored msymtabmax mvarsize nocenter option sasautos sasmstore serror symbolgen "
+           "symdel symgetn symputn sysbuffr syscc syscharwidth syscmd sysdate sysdate9 sysday sysdevic sysdmg sysdsn "
+           "sysenv syserr sysfilrc sysindex sysinfo sysjobid syslast syslckrc syslibrc sysmacroname sysmenv sysncpu "
+           "syspbuff sysprocname sysscp sysscpl syssite sysstartid sysstartname systime sysuserid sysver sysvlong "
+           "abs addr addrlong airy allperm anyalnum anyalpha anycntrl anydigit anyfirst anygraph anylower anyname "
+           "anyprint anypunct anyspace anyupper anyxdigit appcort apply arcos armacov armalik armasim arsin atan "
+           "atan2 attrc attrn band beta betainv block blshift bnot bor branks brshift btran bxor byte cat cats catt "
+           "catx cdf ceil ceilz cexist change char choose choosec choosen cinv cnonct coalesce coalescec collate "
+           "colpctn colpctsum comb compbl compcost compged complev comport compound compress concat constant "
+           "convexit convx convxp cos cosh count countc covlag cshape css curobs cv cvexhull daccdb daccdbsl "
+           "daccsl daccsyd dacctab dairy datdif date datejul datepart datetime day dclose dcreate depdb depdbsl "
+           "depsl depsyd deptab dequote design designf det deviance dhms diag digamma dim dinfo dnum dopen "
+           "doptname doptnum dread dropnote dsname dur duration durp echelon eigen eigval eigvec erf erfc "
+           "eurocurr exist exp fact fappend farmacov farmafit farmalik farmasim fclose fcol fdelete fdif "
+           "fetch fetchobs fexist fft fget fileexist fileref findc finfo finv fipname fipnamel fipstate "
+           "floor floorz fnonct fnote fopen foptname foptnum forward fpoint fpos fput fread frewind frlen "
+           "fsep fuzz fwrite gaend gagetmem gagetval gainit gaminv gamma gareeval garegen gasetcro gasetmut "
+           "gasetobj gasetsel gasetup gblkvp gblkvpd gclose gdelete gdraw gdrawl geneig geomean geomeanz "
+           "getoption getvarc getvarn ggrid ginclude ginv gopen gpie gpiexy gpoint gpoly gport gportpop "
+           "gportstk gscale gscript gset gshow gsorth gstart gstop gstrlen gtext gvtext gwindow gxaxis "
+           "gyaxis half hankel harmean harmeanz hbound hdir hermite hms homogen hour htmldecode htmlencode "
+           "ibessel ifc ifft ifn indexc indexw inputc inputn insert int intck intnx intrr intz inv invupdt "
+           "iorcmsg ipf iqr irr itbicg itcgrad itminres jbessel jroot juldate juldate7 kalcvf kalcvs kaldff "
+           "kaldfs kcompare kcompress kcount kcvt kindex kindexc kleft klength klowcase kreverse kright kscan "
+           "kstrcat ksubstr ksubstrb ktranslate ktrim ktruncate kupcase kupdate kupdateb kurtosis kverify lag "
+           "largest lav lbound lcp lengthc lengthm lengthn lgamma libref lms loc log log10 log2 logbeta logcdf "
+           "logpdf logsdf lowcase lts lupdt mad marg max maxqform mcd mdy mean median min minute mod module "
+           "modulec modulei moduleic modulein modulen modz month mopen mort mve name ncol netpv nldate nldatm "
+           "nleng nliteral nlpcg nlpdd nlpfdd nlpfea nlphqn nlplm nlpnms nlpnra nlpnrr nlpqn nlpqua nlptr "
+           "nltime nmiss normal notalnum notalpha notcntrl notdigit note notfirst notgraph notlower notname "
+           "notprint notpunct notspace notupper notxdigit npv nrow num nvalid ode open opscal ordinal orpol "
+           "ortvec pagepctn pagepctsum pathname pctl pctn pctsum peek peekc peekclong peeklong perm pgraf "
+           "point poisson poke pokelong polyroot probbeta probbnml probbnrm probchi probf probgam probhypr "
+           "probmc probnegb probnorm probt product propcase prxchange prxdebug prxfree prxmatch prxnext "
+           "prxparen prxparse prxposn prxsubstr ptrlongadd push put putc putn pv pvp qtr quad quantile "
+           "queue quote ranbin rancau rand randgen randseed ranexp rangam range ranktie rannor ranperk "
+           "ranperm ranpoi rantbl rantri ranuni rates ratio rdodt repeat reppctn reppctsum resolve reverse "
+           "rewind rms root round rounde roundz rowcat rowcatc rowpctn rowpctsum rupdt rxchange rxfree "
+           "rxmatch rxparse rxsubstr rzlind saving scan scanq sdf second seq seqscale seqshift setdif shape "
+           "sign sin sinh skewness sleep smallest softmax solve solvelin sortndx sound soundex spedis spline "
+           "splinec splinev spot sqrsym sqrt ssq std stderr stfips stname stnamel storage streaminit strip "
+           "subpad substr substrn sum svd sweep symexist symget symglobl symlocal symput symputx symsqr sysget "
+           "sysmsg sysparm sysprocessid sysprocessname sysprod sysrc system tan tanh teigen teigval teigvec "
+           "time timepart tinv tnonct today toeplitz tpsplnev translate tranwrd trigamma trim trimn trisolv "
+           "trunc tsbaysea tsdecomp tsmlocar tsmlomar tsmulmar tspears tspred tsroot tstvcar tsunimar type "
+           "uniform union unique uniqueby upcase urldecode urlencode uss uuidgen valset value var varfmt "
+           "varinfmt varlabel varlen varmacov varmalik varmasim varname varnum varray varrayx vartranscode "
+           "vartype vecdiag vformat vformatd vformatdx vformatn vformatnx vformatw vformatwx vformatx "
+           "vinarray vinarrayx vinformat vinformatd vinformatdx vinformatn vinformatnx vinformatw vinformatwx "
+           "vinformatx vlabel vlabelx vlength vlengthx vname vnamex vnext vnormal vtranscode vtranscodex "
+           "vtsroot vtype vtypex vvalue vvaluex wavft wavget wavift wavprint wavthrsh week weekday xmult "
+           "xsect year yield yieldp yrdif yyq zipcity zipfips zipname zipnamel zipstate abort array as "
+           "attrib by call cards cards4 catname chtml class close closefile continue csvall datalines "
+           "datalines4 decimal_align declare delete describe dm do docbook edit else end endsas exclude "
+           "execute file filename find finish first. footnote for force format free from go goto html "
+           "html3 htmlcss id if imode include index infile informat input join keep label last. leave "
+           "length libname link list listing load lock lostcard markup mattrib merge missing modify "
+           "ods on order page pageby path pause pcl pdf phtml printer proclabel proctitle purge putlog "
+           "read redirect remove rename reset results resume return rtf sasfile save select separated "
+           "set setin setout show skip start stop store table then title to trace until use usegopt "
+           "verify when where while window with wml")
       << Lexer(QSL("Spice"), QStringList {
       QSL("scp"), QSL("out")
     }, SCLEX_SPICE)
@@ -632,57 +635,57 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_SQL_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_SQL_IDENTIFIER, SyntaxColorTheme::StyleComponents::Identifier},
       {SCE_SQL_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, "absolute action add admin after aggregate "
-       "alias all allocate alter and any are array as asc "
-       "assertion at authorization "
-       "before begin binary bit blob body boolean both breadth by "
-       "call cascade cascaded case cast catalog char character "
-       "check class clob close collate collation column commit "
-       "completion connect connection constraint constraints "
-       "constructor continue corresponding create cross cube current "
-       "current_date current_path current_role current_time current_timestamp "
-       "current_user cursor cycle "
-       "data date day deallocate dec decimal declare default "
-       "deferrable deferred delete depth deref desc describe descriptor "
-       "destroy destructor deterministic dictionary diagnostics disconnect "
-       "distinct domain double drop dynamic "
-       "each else end end-exec equals escape every except "
-       "exception exec execute exists exit external "
-       "false fetch first float for foreign found from free full "
-       "function "
-       "general get global go goto grant group grouping "
-       "having host hour "
-       "identity if ignore immediate in indicator initialize initially "
-       "inner inout input insert int integer intersect interval "
-       "into is isolation iterate "
-       "join "
-       "key "
-       "language large last lateral leading left less level like "
-       "limit local localtime localtimestamp locator "
-       "map match merge minute modifies modify module month "
-       "names national natural nchar nclob new next no none "
-       "not null numeric "
-       "object of off old on only open operation option "
-       "or order ordinality out outer output "
-       "package pad parameter parameters partial path postfix precision prefix "
-       "preorder prepare preserve primary "
-       "prior privileges procedure public "
-       "read reads real recursive ref references referencing relative "
-       "restrict result return returns revoke right "
-       "role rollback rollup routine row rows "
-       "savepoint schema scroll scope search second section select "
-       "sequence session session_user set sets size smallint some| space "
-       "specific specifictype sql sqlexception sqlstate sqlwarning start "
-       "state statement static structure system_user "
-       "table temporary terminate than then time timestamp "
-       "timezone_hour timezone_minute to trailing transaction translation "
-       "treat trigger true "
-       "under union unique unknown "
-       "unnest update usage user using "
-       "value values varchar variable varying view "
-       "when whenever where with without work write "
-       "year "
-       "zone")
+    }, {}, "absolute action add admin after aggregate "
+           "alias all allocate alter and any are array as asc "
+           "assertion at authorization "
+           "before begin binary bit blob body boolean both breadth by "
+           "call cascade cascaded case cast catalog char character "
+           "check class clob close collate collation column commit "
+           "completion connect connection constraint constraints "
+           "constructor continue corresponding create cross cube current "
+           "current_date current_path current_role current_time current_timestamp "
+           "current_user cursor cycle "
+           "data date day deallocate dec decimal declare default "
+           "deferrable deferred delete depth deref desc describe descriptor "
+           "destroy destructor deterministic dictionary diagnostics disconnect "
+           "distinct domain double drop dynamic "
+           "each else end end-exec equals escape every except "
+           "exception exec execute exists exit external "
+           "false fetch first float for foreign found from free full "
+           "function "
+           "general get global go goto grant group grouping "
+           "having host hour "
+           "identity if ignore immediate in indicator initialize initially "
+           "inner inout input insert int integer intersect interval "
+           "into is isolation iterate "
+           "join "
+           "key "
+           "language large last lateral leading left less level like "
+           "limit local localtime localtimestamp locator "
+           "map match merge minute modifies modify module month "
+           "names national natural nchar nclob new next no none "
+           "not null numeric "
+           "object of off old on only open operation option "
+           "or order ordinality out outer output "
+           "package pad parameter parameters partial path postfix precision prefix "
+           "preorder prepare preserve primary "
+           "prior privileges procedure public "
+           "read reads real recursive ref references referencing relative "
+           "restrict result return returns revoke right "
+           "role rollback rollup routine row rows "
+           "savepoint schema scroll scope search second section select "
+           "sequence session session_user set sets size smallint some| space "
+           "specific specifictype sql sqlexception sqlstate sqlwarning start "
+           "state statement static structure system_user "
+           "table temporary terminate than then time timestamp "
+           "timezone_hour timezone_minute to trailing transaction translation "
+           "treat trigger true "
+           "under union unique unknown "
+           "unnest update usage user using "
+           "value values varchar variable varying view "
+           "when whenever where with without work write "
+           "year "
+           "zone")
       << Lexer(QSL("Stata"), QStringList { QSL("stata") }, SCLEX_STATA, {
       {SCE_STATA_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_STATA_WORD, SyntaxColorTheme::StyleComponents::Keyword},
@@ -699,10 +702,10 @@ QList<Lexer> SyntaxHighlighting::lexers() {
     })
       << Lexer(QSL("TCL"), QStringList {
       QSL("tcl")
-    }, SCLEX_TCL)
+    }, SCLEX_TCL, {}, {QSL("text/x-tcl"), QSL("Tcl script")})
       << Lexer(QSL("TeX"), QStringList {
       QSL("tex"), QSL("latex"), QSL("sty"), QSL("cls")
-    }, SCLEX_TEX, {}, {}, true)
+    }, SCLEX_TEX, {}, {QSL("text/x-tex"), QSL("TeX document text")}, {}, true)
       << Lexer(QSL("VeriLog"), QStringList {
       QSL("v"), QSL("sv"), QSL("vh"), QSL("svh")
     }, SCLEX_VERILOG)
@@ -733,7 +736,8 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_H_XMLEND, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_H_SCRIPT, SyntaxColorTheme::StyleComponents::Script},
       {SCE_H_CDATA, SyntaxColorTheme::StyleComponents::PlainData}
-    })
+    }, {QSL("text/xml"), QSL("image/svg+xml"),
+        QSL("application/xml-sitemap"), QSL("application/vnd.google-earth.kml+xml")})
       << Lexer(QSL("YAML"), QStringList {
       QSL("yml"), QSL("yaml")
     }, SCLEX_YAML);
@@ -746,14 +750,14 @@ Lexer SyntaxHighlighting::defaultLexer() {
   return lexers().first();
 }
 
-Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL) {}
+Lexer::Lexer() : m_name(QString()), m_code(SCLEX_NULL), m_mimeTypes(QStringList()) {}
 
 Lexer::Lexer(QString name, QStringList suffices, int code,
-             QMap<int, SyntaxColorTheme::StyleComponents> style_mappings,
+             QMap<int, SyntaxColorTheme::StyleComponents> style_mappings, QStringList mime_types,
              QString keywords, bool supports_old_style_folding)
-  : m_name(std::move(name)), m_code(code),
-  m_suffices(std::move(suffices)), m_keywords(std::move(keywords)), m_supportsOldStyleFolding(supports_old_style_folding),
-  m_styleMappings(std::move(style_mappings)) {}
+  : m_name(std::move(name)), m_code(code), m_suffices(std::move(suffices)), m_keywords(std::move(keywords)),
+  m_supportsOldStyleFolding(supports_old_style_folding),
+  m_mimeTypes(mime_types), m_styleMappings(std::move(style_mappings)) {}
 
 bool Lexer::isEmpty() const {
   return m_name.isEmpty() && m_suffices.isEmpty();
