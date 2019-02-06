@@ -125,7 +125,8 @@ Lexer SyntaxHighlighting::lexerForName(const QString& name) {
 Lexer SyntaxHighlighting::lexerForFilter(const QString& filter) {
   int idx_filter = fileFilters().indexOf(filter);
 
-  if (idx_filter >= 0) {
+  // We do want to ignore "plain text" filter here.
+  if (idx_filter >= 1) {
     return lexers().at(idx_filter);
   }
   else {
