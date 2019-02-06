@@ -46,7 +46,7 @@ Features
     - tabbed interface.
 * Text editor component:
     - **supports a lot of input encodings**,
-    - automagic recognition of file type via `file` utility (if available),
+    - automagic recognition of input file type via `file` utility (if available),
     - input file encoding detection (via bundled [uchardet](https://www.freedesktop.org/wiki/Software/uchardet/)),
     - switchable encoding for each separate document,
     - **uses full UTF-8 internally**,
