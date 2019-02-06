@@ -3,10 +3,12 @@
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 
 #include "3rd-party/scintilla/include/SciLexer.h"
+#include "common/exceptions/applicationexception.h"
 #include "definitions/definitions.h"
 #include "saurus/miscellaneous/application.h"
 
 #include <QDir>
+#include <QProcess>
 #include <QRegularExpression>
 #include <QSettings>
 
@@ -26,10 +28,67 @@ QStringList SyntaxHighlighting::bareFileFilters() {
 }
 
 Lexer SyntaxHighlighting::lexerForFile(const QString& file_name) {
+  QProcess proc_file(this);
+  QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+
+  // Force English locale with UTF-8 arguments parsing.
+  env.remove(QSL("LOCALE"));
+  env.remove(QSL("LC_ALL"));
+  env.remove(QSL("LC_CTYPE"));
+
+  env.insert(QSL("LOCALE"), QSL("en_US.UTF-8"));
+  env.insert(QSL("LC_ALL"), QSL("en_US.UTF-8"));
+  env.insert(QSL("LC_CTYPE"), QSL("en_US.UTF-8"));
+
+  proc_file.setProcessEnvironment(env);
+  proc_file.start(QSL("file"), { QSL("-b"), QSL("-n"), QSL("--mime-type"), QDir::toNativeSeparators(file_name)});
+
+  if (!proc_file.waitForStarted(50)) {
+    qWarningNN <<
+      QSL("File format recognition via 'file' utility failed, 'file' was not launched due to error '%1'").arg(proc_file.error());
+    proc_file.kill();
+  }
+  else {
+    if (!proc_file.waitForFinished(500)) {
+      qWarningNN <<
+        QSL("File format recognition via 'file' utility failed, the execution of 'file' took too long.").arg(proc_file.error());
+      proc_file.kill();
+    }
+    else {
+      QString output_o = proc_file.readAllStandardOutput(); output_o = output_o.remove('\n');
+      QString error_o = proc_file.readAllStandardError();
+
+      if (!error_o.isEmpty()) {
+        qWarningNN << QSL("Utility 'file' reported some error via error output: %1").arg(error_o);
+      }
+
+      if (!output_o.isEmpty()) {
+        try {
+          auto lexer = lexerForMime(output_o);
+
+          if (lexer.m_code != defaultLexer().m_code) {
+            qDebugNN << QSL("Lexer '%2' for MIME type '%1' was found using utility 'file'.").arg(output_o, lexer.m_name);
+            return lexer;
+          }
+        }
+        catch (ApplicationException& ex) {
+          // Not found.
+          qWarningNN << QString("Failed to find lexer using 'file' utility: %1").arg(ex.message());
+        }
+      }
+    }
+  }
+
   QRegularExpression reg(QSL("(?:\\.?)(\\w+$)|($)"), QRegularExpression::PatternOption::CaseInsensitiveOption);
   QString suffix = reg.match(file_name).captured(1);
 
-  return lexerForSuffix(suffix);
+  try {
+    return lexerForSuffix(suffix);
+  }
+  catch (ApplicationException& ex) {
+    qWarningNN << QString("Failed to find lexer via filename suffix: %1").arg(ex.message());
+    return defaultLexer();
+  }
 }
 
 Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
@@ -39,8 +98,17 @@ Lexer SyntaxHighlighting::lexerForSuffix(const QString& suffix) {
     }
   }
 
-  // We return first lexer, which is lexer for plain text files.
-  return m_lexers.first();
+  throw ApplicationException(QString("lexer for suffix '%1' was not found").arg(suffix));
+}
+
+Lexer SyntaxHighlighting::lexerForMime(const QString& mime_type) {
+  for (const Lexer& lex : lexers()) {
+    if (lex.m_mimeTypes.contains(mime_type)) {
+      return lex;
+    }
+  }
+
+  throw ApplicationException(QString("lexer for MIME type '%1' was not found").arg(mime_type));
 }
 
 Lexer SyntaxHighlighting::lexerForName(const QString& name) {

@@ -109,6 +109,7 @@ class SyntaxHighlighting : public QObject {
 
     Lexer lexerForFile(const QString& file_name);
     Lexer lexerForSuffix(const QString& suffix);
+    Lexer lexerForMime(const QString& mime_type);
     Lexer lexerForName(const QString& name);
 
   private:
