@@ -320,17 +320,19 @@ void TextApplication::onEditorModified(int type, int position, int length,
 void TextApplication::onEditorSaved() {
   auto* editor = qobject_cast<TextEditor*>(sender());
 
-  updateStatusBarFromEditor(editor);
+  //updateStatusBarFromEditor(editor);
 
   if (!shouldSaveSession()) {
     m_settings->setLoadSaveDefaultDirectory(editor->filePath());
+  }
+
+  if (editor == tabWidget()->currentEditor()) {
+    onTabSwitched(m_tabEditors->indexOfEditor(editor));
   }
 }
 
 void TextApplication::onEditorReloaded() {
   auto* sndr = qobject_cast<TextEditor*>(sender());
-
-  sndr->setSettingsDirty(true);
 
   if (sndr == tabWidget()->currentEditor()) {
     onTabSwitched(m_tabEditors->indexOfEditor(sndr));

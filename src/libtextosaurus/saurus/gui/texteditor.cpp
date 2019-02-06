@@ -332,14 +332,14 @@ void TextEditor::wheelEvent(QWheelEvent* event) {
   }
 }
 
-QString TextEditor::requestSaveFileName() const {
+QString TextEditor::requestSaveFileName(QString* selected_filter) const {
   return MessageBox::getSaveFileName(qApp->mainFormWidget(),
                                      tr("Save File as"),
                                      m_filePath.isEmpty()
                                      ? m_textApp->settings()->loadSaveDefaultDirectory()
                                      : m_filePath,
                                      m_textApp->settings()->syntaxHighlighting()->fileFilters(),
-                                     nullptr);
+                                     selected_filter);
 }
 
 void TextEditor::appendSessionFile(const QString& file_name, bool is_nonexistent) {
@@ -906,6 +906,8 @@ void TextEditor::reloadFromDisk() {
       if (!metadata.m_encoding.isEmpty()) {
         loadFromFile(file_data.first, filePath(), metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
         setEncryptionPassword(file_data.second);
+        setSettingsDirty(true);
+
         emit editorReloaded();
         emit savePointChanged(false);
 
@@ -1030,16 +1032,32 @@ void TextEditor::save(bool& ok) {
 void TextEditor::saveAs(bool& ok, const QString& encoding) {
   // We save this documents as new file.
   QString file_path;
+  QString sel_filter;
 
   if (m_filePathOnEditorQuit.isEmpty()) {
-    file_path = requestSaveFileName();
+    file_path = requestSaveFileName(&sel_filter);
   }
   else {
     file_path = m_filePathOnEditorQuit;
   }
 
   if (!file_path.isEmpty()) {
-    m_textApp->settings()->setLoadSaveDefaultDirectory(file_path);
+    //m_textApp->settings()->setLoadSaveDefaultDirectory(file_path);
+
+    // Reload lexer if needed.
+    if (!sel_filter.isEmpty()) {
+      try {
+        Lexer new_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->lexerForFilter(sel_filter);
+
+        if (lexer().m_code != new_lexer.m_code) {
+          m_lexer = new_lexer;
+          setSettingsDirty(true);
+        }
+      }
+      catch (ApplicationException& ex) {
+        qWarningNN << QSL("Failed to find syntax highlighter: %1").arg(ex.message());
+      }
+    }
 
     if (encoding.isEmpty()) {
       saveToFile(file_path, ok);

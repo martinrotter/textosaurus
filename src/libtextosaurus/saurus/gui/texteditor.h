@@ -100,7 +100,7 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     void savedToFile(QString destination_file_path);
 
   private:
-    QString requestSaveFileName() const;
+    QString requestSaveFileName(QString* selected_filter = nullptr) const;
     void appendSessionFile(const QString& file_name, bool is_nonexistent);
 
     void detachWatcher();
