@@ -66,7 +66,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     bool restoring_session) {
   Q_UNUSED(file_filter)
 
-  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -331,6 +331,8 @@ void TextApplication::onEditorSaved() {
 
 void TextApplication::onEditorReloaded() {
   auto* sndr = qobject_cast<TextEditor*>(sender());
+
+  sndr->setSettingsDirty(true);
 
   if (sndr == tabWidget()->currentEditor()) {
     onTabSwitched(m_tabEditors->indexOfEditor(sndr));
