@@ -64,9 +64,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
                                                     const QString& explicit_encoding,
                                                     const QString& file_filter,
                                                     bool restoring_session) {
-  Q_UNUSED(file_filter)
-
-  Tab * tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
+  Tab* tab_already_opened_file = m_tabEditors->tabWithFile(file_path);
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
@@ -74,7 +72,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
     return tab_already_opened_file->primaryEditor();
   }
 
-  TextEditor* new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding);
+  TextEditor* new_editor = TextEditor::fromTextFile(this, file_path, explicit_encoding, file_filter);
 
   if (new_editor != nullptr) {
     if (!restoring_session && m_tabEditors->hasOnlyOneEmptyEditor()) {
@@ -826,10 +824,10 @@ void TextApplication::reopenTextFile(QAction* action) {
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
   QString selected_filter;
-  QString file_path = QFileDialog::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
-                                                   m_settings->loadSaveDefaultDirectory(),
-                                                   m_settings->syntaxHighlighting()->fileFilters().join(QSL(";;")),
-                                                   &selected_filter);
+  QString file_path = MessageBox::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
+                                                  m_settings->loadSaveDefaultDirectory(),
+                                                  m_settings->syntaxHighlighting()->fileFilters(),
+                                                  &selected_filter);
 
   if (!file_path.isEmpty()) {
     loadTextEditorFromFile(file_path, encoding, selected_filter);

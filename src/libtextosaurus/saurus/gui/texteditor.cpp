@@ -848,10 +848,11 @@ void TextEditor::setReadOnly(bool read_only) {
   }
 }
 
-TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding) {
+TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path,
+                                     const QString& explicit_encoding, const QString& explicit_filter) {
   try {
     auto file_data = FileMetadata::obtainRawFileData(file_path);
-    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, file_path, explicit_encoding);
+    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, file_path, explicit_encoding, explicit_filter);
 
     if (!metadata.m_encoding.isEmpty()) {
       auto* new_editor = new TextEditor(app, qApp->mainFormWidget());

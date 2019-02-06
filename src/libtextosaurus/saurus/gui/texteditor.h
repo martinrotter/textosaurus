@@ -47,7 +47,8 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     QString encryptionPassword() const;
     void setEncryptionPassword(const QString& encryption_password);
 
-    static TextEditor* fromTextFile(TextApplication* app, const QString& file_path, const QString& explicit_encoding = QString());
+    static TextEditor* fromTextFile(TextApplication* app, const QString& file_path,
+                                    const QString& explicit_encoding, const QString& explicit_filter);
 
   public slots:
     void resetSaveAgreement();

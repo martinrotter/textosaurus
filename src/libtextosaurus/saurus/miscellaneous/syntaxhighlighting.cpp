@@ -122,6 +122,17 @@ Lexer SyntaxHighlighting::lexerForName(const QString& name) {
   return m_lexers.first();
 }
 
+Lexer SyntaxHighlighting::lexerForFilter(const QString& filter) {
+  int idx_filter = fileFilters().indexOf(filter);
+
+  if (idx_filter >= 0) {
+    return lexers().at(idx_filter);
+  }
+  else {
+    throw ApplicationException(QSL("lexer for filter '%1' not found").arg(filter));
+  }
+}
+
 void SyntaxHighlighting::loadColorThemes() {
   // Add predefined themes.
 

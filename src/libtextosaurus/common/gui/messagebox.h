@@ -17,6 +17,8 @@ class MessageBox : public QMessageBox {
     void setIcon(Icon icon);
 
     static void setCheckBox(QMessageBox* msg_box, const QString& text, bool* data);
+    static QString getOpenFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
+                                   const QStringList& filters, QString* selected_filter);
     static QString getSaveFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
                                    const QStringList& filters, QString* selected_filter);
 

@@ -17,7 +17,8 @@
 #include <QInputDialog>
 #include <QTextCodec>
 
-FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QString& file_path, const QString& explicit_encoding) {
+FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QString& file_path,
+                                              const QString& explicit_encoding, const QString& explicit_filter) {
   if (data.size() >= MAX_TEXT_FILE_SIZE) {
     QMessageBox::critical(qApp->mainFormWidget(), QObject::tr("Cannot Open File"),
                           QObject::tr("File '%1' too big. %2 can only open files smaller than %3 MB.")
@@ -73,8 +74,20 @@ FileMetadata FileMetadata::getInitialMetadata(const QByteArray& data, const QStr
     default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->defaultLexer();
   }
   else {
-    // We try to detect default lexer.
-    default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->lexerForFile(file_path);
+    if (!explicit_filter.isEmpty()) {
+      // User provided some explicit filter, try to find lexer for it.
+      try {
+        default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->lexerForFilter(explicit_filter);
+      }
+      catch (ApplicationException& ex) {
+        qWarningNN << QSL("Failed to find syntax highlighter: %1").arg(ex.message());
+        default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->lexerForFile(file_path);
+      }
+    }
+    else {
+      // We try to detect default lexer.
+      default_lexer = qApp->textApplication()->settings()->syntaxHighlighting()->lexerForFile(file_path);
+    }
   }
 
   FileMetadata metadata;

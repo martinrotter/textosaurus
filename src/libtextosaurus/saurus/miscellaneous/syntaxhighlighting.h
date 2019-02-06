@@ -111,6 +111,7 @@ class SyntaxHighlighting : public QObject {
     Lexer lexerForSuffix(const QString& suffix);
     Lexer lexerForMime(const QString& mime_type);
     Lexer lexerForName(const QString& name);
+    Lexer lexerForFilter(const QString& filter);
 
   private:
     void loadColorThemes();
