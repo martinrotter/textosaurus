@@ -42,6 +42,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
     void activateQtSingleMsgProcessing();
 
     bool isRunning();
+    bool forcesNewInstance() const;
 
     // Globally accessible actions.
     QList<QAction*> userActions();

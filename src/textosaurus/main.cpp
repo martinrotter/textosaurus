@@ -32,7 +32,10 @@ int main(int argc, char* argv[]) {
   Application application(APP_LOW_NAME, argc, argv);
 
   // Check if another instance is running.
-  if (application.isRunning()) {
+  if (application.forcesNewInstance()) {
+    qWarningNN << QSL("New instance of application was forced by the user.");
+  }
+  else if (application.isRunning()) {
     qWarning().noquote().nospace() << QSL("Another instance of the application is already running. Notifying it.");
     return EXIT_FAILURE;
   }
@@ -58,7 +61,9 @@ int main(int argc, char* argv[]) {
   qApp->setTextApplication(new TextApplication(qApp));
 
   // Setup single-instance behavior.
-  application.activateQtSingleMsgProcessing();
+  if (!application.forcesNewInstance()) {
+    application.activateQtSingleMsgProcessing();
+  }
 
   // Instantiate main application window.
   FormMain main_window;

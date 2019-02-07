@@ -56,6 +56,10 @@ bool Application::isRunning() {
   return sendMessage((QStringList() << QString("-%1").arg(APP_IS_RUNNING_SHORT) << arguments().mid(1)).join(ARGUMENTS_LIST_SEPARATOR));
 }
 
+bool Application::forcesNewInstance() const {
+  return m_cmdParser.isSet(APP_NOSINGLE_INSTANCE_SHORT);
+}
+
 QList<QAction*> Application::userActions() {
   QList<QAction*> user_actions;
 
@@ -233,8 +237,12 @@ void Application::parseCmdArguments() {
   QCommandLineOption opt_config({APP_OPT_CONFIG_SHORT, APP_OPT_CONFIG},
                                 QSL("Use an alternate configuration directory. If the directory does not exist, then it is created."),
                                 QSL("directory"));
+  QCommandLineOption opt_no_single({APP_NOSINGLE_INSTANCE_SHORT, APP_NOSINGLE_INSTANCE},
+                                   QSL("Forces the application to start completely new instance. "
+                                       "This is particularly useful when combined with '-%1' option.").arg(opt_config.names().at(0)));
 
   m_cmdParser.addOption(opt_config);
+  m_cmdParser.addOption(opt_no_single);
   m_cmdParser.addOption(opt_quit);
   m_cmdParser.addOption(opt_already_running);
   m_cmdParser.addPositionalArgument(QSL("files"), QSL("Text files to be opened."), QSL("file-1 ... file-n"));
