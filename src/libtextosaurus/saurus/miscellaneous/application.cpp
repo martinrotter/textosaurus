@@ -235,8 +235,9 @@ void Application::parseCmdArguments() {
   QCommandLineOption opt_quit({APP_QUIT_INSTANCE_SHORT, APP_QUIT_INSTANCE},
                               QSL("Quit currently running application instance."));
   QCommandLineOption opt_config({APP_OPT_CONFIG_SHORT, APP_OPT_CONFIG},
-                                QSL("Use an alternate configuration directory. If the directory does not exist, then it is created."),
-                                QSL("directory"));
+                                QSL("Use an alternate configuration directory. If the directory does not exist, then it is created. "
+                                    "Make sure you use absolute directory path which is writable by the current user."),
+                                QSL("absolute-directory-path"));
   QCommandLineOption opt_no_single({APP_NOSINGLE_INSTANCE_SHORT, APP_NOSINGLE_INSTANCE},
                                    QSL("Forces the application to start completely new instance. "
                                        "This is particularly useful when combined with '-%1' option.").arg(opt_config.names().at(0)));
