@@ -1,8 +1,27 @@
-0.9.11
+0.9.12
 ------
 Added:
-* 
+* Ukrainian translation, thanks to "prolinuxua".
+* Automagic file type recognition via utility `file`. This recognition is ran before file "suffix" detection and is able to correctly detect file type of many files. For example if you have Bash script with name "script" (not suffix), then this method will currently detect it as Bash document and will fire up correct syntax highlighting etc. This method works in a x-platform way on all platforms where `file` utility is available via `PATH` env. variable.
+* Automagic file type recognition is also ran when file is "reloaded from disk" and when file is "saved as" via the dialog.
+* Added couple of new command line switches, namely "-c" (select another user data directory) and "-n" (force new instance launch). See `textosaurus -h` for more info.
 
+Changed:
+* Caret is explicitly set to position 0 when document is loaded.
+* Scintilla core updated to latest stable.
+* Fixed Bash lexer folding ability.
+* Some code cleanups.
+
+Fixed:
+* C++17 compilation with MSVC17 fixed.
+* FS sidebar combobox with drives/mountpoints now works better with network drives on Windows (note that some bugs are unsolvable and need to be probably solved upstream, for example SSHFS network drives do not work with combobox correctly).
+* Show tab with correct document when asking for save.
+
+Special thanks:
+* "paoloschi" - for some good new features proposals.
+
+0.9.11
+------
 Changed:
 * File encryption now uses OpenSSL utility and the encryption is exactly the same as produced by running "openssl enc...", so now you can {en,de}crypt your file either with Textosaurus or with "openssl" CLI tool.
 * Bundled OpenSSL on Windows was updated to latest 1.1.1a version and this updated library is also used by bundled Qt libs as well.

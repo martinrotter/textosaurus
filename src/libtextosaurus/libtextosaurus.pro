@@ -44,6 +44,8 @@ mac|win32 {
   message($$MSG_PREFIX: Adding resources for default icon theme.)
 }
 
+DISTFILES += ../../resources/text/CHANGELOG
+
 HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             common/dynamic-shortcuts/dynamicshortcutswidget.h \
             common/dynamic-shortcuts/shortcutcatcher.h \
