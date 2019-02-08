@@ -331,7 +331,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="104"/>
         <source>Follow Path of Active Document</source>
-        <translation type="unfinished"/>
+        <translation>Pronásledovat aktivní dokument</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="123"/>
@@ -354,12 +354,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="81"/>
         <source>FS Sidebar Context Menu</source>
-        <translation type="unfinished"/>
+        <translation>Kontextové menu</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="83"/>
         <source>Properties</source>
-        <translation type="unfinished"/>
+        <translation>Vlastnosti</translation>
     </message>
 </context>
 <context>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="14"/>
         <source>Decrypt &amp;&amp; Open File</source>
-        <translation type="unfinished"/>
+        <translation>Dešifrovat &amp;&amp; otevřít soubor</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="16"/>
         <source>Enter Decryption Password</source>
-        <translation type="unfinished"/>
+        <translation>Zadat dešifrovací heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="18"/>
@@ -533,42 +533,42 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="14"/>
         <source>File Encryption Settings</source>
-        <translation type="unfinished"/>
+        <translation>Nastavení šifrování souboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="20"/>
         <source>Use File Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Použít šifrování souboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="32"/>
         <source>&amp;Show password</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Zobrazit heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="14"/>
         <source>Enter Encryption Password</source>
-        <translation type="unfinished"/>
+        <translation>Zadat šifrovací heslo</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="16"/>
         <source>Entered password is incorrect.</source>
-        <translation type="unfinished"/>
+        <translation>Zadané heslo není správné.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="51"/>
         <source>Nice! You are good to go.</source>
-        <translation type="unfinished"/>
+        <translation>Paráda, můžete pokračovat.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="54"/>
         <source>Your password is too short, but it&apos;s your call, boss!</source>
-        <translation type="unfinished"/>
+        <translation>Vaše heslo je příliš krátké, je to na vás, šéfe!</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="57"/>
         <source>Enter some password.</source>
-        <translation type="unfinished"/>
+        <translation>Zadejte nějaké heslo.</translation>
     </message>
 </context>
 <context>
@@ -1025,7 +1025,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="544"/>
         <source>File &amp;Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Šifrování souboru</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="40"/>
