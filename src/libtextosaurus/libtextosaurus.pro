@@ -134,7 +134,7 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/plugin-system/markdown/markdowntextbrowser.h \
             saurus/plugin-system/pluginbase.h \
             saurus/plugin-system/pluginfactory.h \
-    saurus/gui/settings/settingsencryption.h
+            saurus/gui/settings/settingsencryption.h
 
 SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             common/dynamic-shortcuts/dynamicshortcutswidget.cpp \
@@ -221,7 +221,7 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/markdown/markdownsidebar.cpp \
             saurus/plugin-system/markdown/markdowntextbrowser.cpp \
             saurus/plugin-system/pluginfactory.cpp \
-    saurus/gui/settings/settingsencryption.cpp
+            saurus/gui/settings/settingsencryption.cpp
 
 FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/dialogs/formabout.ui \
@@ -241,7 +241,7 @@ FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/settings/settingsshortcuts.ui \
           saurus/gui/settings/syntaxcolorthemeeditor.ui \
           saurus/plugin-system/macros/macroswidget.ui \
-    saurus/gui/settings/settingsencryption.ui
+          saurus/gui/settings/settingsencryption.ui
 
 # Add qtsingleapplication.
 SOURCES += $$files(3rd-party/qtsingleapplication/*.cpp, false)
@@ -336,13 +336,15 @@ TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
                       $$PWD/../../localization/textosaurus_cs.ts \
                       $$PWD/../../localization/textosaurus_es.ts \
                       $$PWD/../../localization/textosaurus_sk.ts \
-                      $$PWD/../../localization/textosaurus_uk_UA.ts
+                      $$PWD/../../localization/textosaurus_uk_UA.ts \
+                      $$PWD/../../localization/textosaurus_zh_CN.ts
 
 TRANSLATIONS += $$TRANSLATIONS_WO_QT \
                 $$PWD/../../localization/qtbase_cs.ts \
                 $$PWD/../../localization/qtbase_es.ts \
                 $$PWD/../../localization/qtbase_sk.ts \
-                $$PWD/../../localization/qtbase_uk_UA.ts
+                $$PWD/../../localization/qtbase_uk_UA.ts \
+                $$PWD/../../localization/qtbase_zh_CN.ts
 
 load(uic)
 uic.commands -= -no-stringliteral
