@@ -9,13 +9,13 @@ Added:
 
 Changed:
 * Caret is explicitly set to position 0 when document is loaded.
-* Scintilla core updated to latest stable.
+* Scintilla core updated to latest stable (4.1.4).
 * Fixed Bash lexer folding ability.
 * Some code cleanups.
 
 Fixed:
 * C++17 compilation with MSVC17 fixed.
-* FS sidebar combobox with drives/mountpoints now works better with network drives on Windows (note that some bugs are unsolvable and need to be probably solved upstream, for example SSHFS network drives do not work with combobox correctly).
+* FS sidebar combobox with drives/mountpoints now works better with network drives on Windows (note that some bugs are unsolvable and need to be probably solved upstream, for example SSHFS network drives sometimes do not work with combobox correctly).
 * Show tab with correct document when asking for save.
 
 Special thanks:
