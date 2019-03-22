@@ -3,7 +3,7 @@
 Added:
 * Ukrainian translation, thanks to "prolinuxua".
 * Chinese translation, thanks to "zarchwegiant".
-* Automagic file type recognition via utility `file`. This recognition is ran before file "suffix" detection and is able to correctly detect file type of many files. For example if you have Bash script with name "script" (not suffix), then this method will currently detect it as Bash document and will fire up correct syntax highlighting etc. This method works in a x-platform way on all platforms where `file` utility is available via `PATH` env. variable.
+* Automagic file type recognition via utility `file`. This recognition is ran before file "suffix" detection and is able to correctly detect file type of many files. For example if you have Bash script with name "script" (no suffix), then this method will correctly detect it as Bash document and will fire up correct syntax highlighting etc. This method works in a x-platform way on all platforms where `file` utility is available via `PATH` env. variable.
 * Automagic file type recognition is also ran when file is "reloaded from disk" and when file is "saved as" via the dialog.
 * Added couple of new command line switches, namely "-c" (select another user data directory) and "-n" (force new instance launch). See `textosaurus -h` for more info.
 
