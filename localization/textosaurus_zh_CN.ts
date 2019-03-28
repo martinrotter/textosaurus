@@ -486,12 +486,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="78"/>
         <source>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)</source>
-        <translation type="unfinished"/>
+        <translation>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;版本：&lt;/b&gt; %1（构建于 %2%3）&lt;br/&gt;&lt;b&gt;审核：&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;构建日期：&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 （编译对 %7）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="93"/>
         <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and Scintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;body&gt;%5  是一个基于 Qt 和 Scintilla 的简单跨平台文本编辑器。&lt;br&gt;&lt;br&gt;此软件在第3版的 GNU 通用公共授权许可下发布。&lt;br&gt;&lt;br&gt;联系：&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt;~电邮&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;~网站&lt;/li&gt;&lt;/ul&gt;您可在该软件网站上获取源代码。&lt;br&gt;&lt;br&gt;&lt;br&gt;版权所有© 2017-%3 %4&lt;/body&gt;</translation>
     </message>
 </context>
 <context>
@@ -601,7 +601,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="61"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;（ECMA 脚本，&lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;更多信息&lt;/span&gt;&lt;/a&gt;）&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="81"/>
@@ -1618,7 +1618,7 @@ You can install it now.</source>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如未选中，将使用系统默认浏览器。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="42"/>
@@ -2136,92 +2136,92 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
         <source>Hide main window when closed (do not quit application)</source>
-        <translation type="unfinished"/>
+        <translation>当关闭时隐藏主窗口（不退出应用）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="145"/>
         <source>Tabs</source>
-        <translation type="unfinished"/>
+        <translation>标签</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="154"/>
         <source>Close Tabs with</source>
-        <translation type="unfinished"/>
+        <translation>关闭标签，以</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="160"/>
         <source>Left mouse button double-click</source>
-        <translation type="unfinished"/>
+        <translation>双击鼠标左键</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="167"/>
         <source>Middle mouse button single-click</source>
-        <translation type="unfinished"/>
+        <translation>单击鼠标中键</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="177"/>
         <source>Open new tabs with left mouse button double-click on tab bar</source>
-        <translation type="unfinished"/>
+        <translation>在标签栏上双击鼠标左键新建标签</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="185"/>
         <source>Toolbars</source>
-        <translation type="unfinished"/>
+        <translation>工具栏</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="198"/>
         <source>Main toolbar</source>
-        <translation type="unfinished"/>
+        <translation>主工具栏</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="238"/>
         <source>Toolbar button style</source>
-        <translation type="unfinished"/>
+        <translation>工具栏按钮样式</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="248"/>
         <source>Select toolbar to edit</source>
-        <translation type="unfinished"/>
+        <translation>选择要编辑的工具栏</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="65"/>
         <source>no icon theme/system icon theme</source>
-        <translation type="unfinished"/>
+        <translation>没有图标主题或系统图标主题</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="90"/>
         <source>(Tray icon is not available.)</source>
-        <translation type="unfinished"/>
+        <translation>（托盘图标不可用）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="113"/>
         <source>Icon only</source>
-        <translation type="unfinished"/>
+        <translation>仅图标</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="114"/>
         <source>Text only</source>
-        <translation type="unfinished"/>
+        <translation>仅文字</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="115"/>
         <source>Text beside icon</source>
-        <translation type="unfinished"/>
+        <translation>文字在图标旁</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="116"/>
         <source>Text under icon</source>
-        <translation type="unfinished"/>
+        <translation>文字在图标下</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="117"/>
         <source>Follow OS style</source>
-        <translation type="unfinished"/>
+        <translation>跟随系统主题</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.h" line="29"/>
         <source>User Interface</source>
-        <translation type="unfinished"/>
+        <translation>用户界面</translation>
     </message>
 </context>
 <context>
@@ -2229,17 +2229,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.cpp" line="16"/>
         <source>Language</source>
-        <translation type="unfinished"/>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.cpp" line="17"/>
         <source>Code</source>
-        <translation type="unfinished"/>
+        <translation>代码</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingslocalization.h" line="26"/>
         <source>Localization</source>
-        <translation type="unfinished"/>
+        <translation>本地化</translation>
     </message>
 </context>
 <context>
@@ -2247,32 +2247,32 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.ui" line="71"/>
         <source>Go to &amp;Website</source>
-        <translation type="unfinished"/>
+        <translation>去站点(&amp;W)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>名字</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Author</source>
-        <translation type="unfinished"/>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="16"/>
         <source>Website</source>
-        <translation type="unfinished"/>
+        <translation>站点</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="28"/>
         <source>Plugins</source>
-        <translation type="unfinished"/>
+        <translation>插件</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsplugins.cpp" line="72"/>
         <source>no plugin selected</source>
-        <translation type="unfinished"/>
+        <translation>无选中插件</translation>
     </message>
 </context>
 <context>
@@ -2280,7 +2280,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsshortcuts.h" line="26"/>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"/>
+        <translation>快捷键</translation>
     </message>
 </context>
 <context>
@@ -2288,17 +2288,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="22"/>
         <source>Reset to original shortcut.</source>
-        <translation type="unfinished"/>
+        <translation>恢复原快捷键</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="28"/>
         <source>Clear current shortcut.</source>
-        <translation type="unfinished"/>
+        <translation>清除当前快捷键</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="33"/>
         <source>Click and hit new shortcut.</source>
-        <translation type="unfinished"/>
+        <translation>按击设置新快捷键</translation>
     </message>
 </context>
 <context>
@@ -2306,184 +2306,186 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="29"/>
         <source>Customize Substyle</source>
-        <translation type="unfinished"/>
+        <translation>个性化子风格</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="45"/>
         <source>Make &amp;Foreground Transparent</source>
-        <translation type="unfinished"/>
+        <translation>前景透明(&amp;F)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="59"/>
         <source>Make &amp;Background Transparent</source>
-        <translation type="unfinished"/>
+        <translation>背景透明(&amp;B)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="74"/>
         <source>Bold</source>
-        <translation type="unfinished"/>
+        <translation>粗体</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="86"/>
         <source>Italic</source>
-        <translation type="unfinished"/>
+        <translation>斜体</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="98"/>
         <source>Underline</source>
-        <translation type="unfinished"/>
+        <translation>下划线</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="121"/>
         <source>&amp;Create New Theme...</source>
-        <translation type="unfinished"/>
+        <translation>创建新主题(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="128"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished"/>
+        <translation>删除(&amp;D)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="166"/>
         <source>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
 
 Customizing too many substyles may lead to bad performance when handling big files.</source>
-        <translation type="unfinished"/>
+        <translation>如您未个性化此子风格，其值将会从“基本”子风格中继承。
+
+个性化多过子风格会导致处理大文件时性能变差。</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="25"/>
         <source>Base color (fg color only)</source>
-        <translation type="unfinished"/>
+        <translation>基本颜色（仅前景色）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="26"/>
         <source>Comments (both oneline and multiline)</source>
-        <translation type="unfinished"/>
+        <translation>注释（单行或多行）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="27"/>
         <source>Numbers</source>
-        <translation type="unfinished"/>
+        <translation>数字</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="28"/>
         <source>Strings and character literals</source>
-        <translation type="unfinished"/>
+        <translation>字符串和字符类型符</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="29"/>
         <source>Operators</source>
-        <translation type="unfinished"/>
+        <translation>操作符</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="30"/>
         <source>Identifiers</source>
-        <translation type="unfinished"/>
+        <translation>标识符</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="31"/>
         <source>Keywords</source>
-        <translation type="unfinished"/>
+        <translation>关键字</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="32"/>
         <source>Secondary keywords</source>
-        <translation type="unfinished"/>
+        <translation>第二关键字</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="33"/>
         <source>Preprocessor directives</source>
-        <translation type="unfinished"/>
+        <translation>预处理器指令</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="34"/>
         <source>Regular expressions</source>
-        <translation type="unfinished"/>
+        <translation>正则表达式</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="35"/>
         <source>Foreign scripts</source>
-        <translation type="unfinished"/>
+        <translation>外语脚本</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="36"/>
         <source>Plain data</source>
-        <translation type="unfinished"/>
+        <translation>纯数据</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="37"/>
         <source>Errors</source>
-        <translation type="unfinished"/>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="38"/>
         <source>Margin (line numbers, etc.)</source>
-        <translation type="unfinished"/>
+        <translation>边距（行号等）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="42"/>
         <source>Control characters (newline placeholder)</source>
-        <translation type="unfinished"/>
+        <translation>控制符（新行占位符）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="43"/>
         <source>Indent guides</source>
-        <translation type="unfinished"/>
+        <translation>缩进向导</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="44"/>
         <source>URL highlighting</source>
-        <translation type="unfinished"/>
+        <translation>URL 高亮</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="45"/>
         <source>Occurrences highlighting</source>
-        <translation type="unfinished"/>
+        <translation>事件高亮</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="49"/>
         <source>Paper background (bg color only)</source>
-        <translation type="unfinished"/>
+        <translation>纸张背景（仅背景色）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="50"/>
         <source>Current line background (bg color only)</source>
-        <translation type="unfinished"/>
+        <translation>当前行背景（仅背景色）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="51"/>
         <source>Color of long lines edge (fg color only)</source>
-        <translation type="unfinished"/>
+        <translation>长行边缘颜色（仅背景色）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="98"/>
         <source>%1 (built-in theme)</source>
-        <translation type="unfinished"/>
+        <translation>%1 （内建主题）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="99"/>
         <source>%1 (custom theme)</source>
-        <translation type="unfinished"/>
+        <translation>%1 （用户主题）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="121"/>
         <source>Select Foreground Color</source>
-        <translation type="unfinished"/>
+        <translation>选择前景色</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="136"/>
         <source>Select Background Color</source>
-        <translation type="unfinished"/>
+        <translation>选择背景色</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="167"/>
         <source>Enter name for new theme</source>
-        <translation type="unfinished"/>
+        <translation>输入新主题名称</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="167"/>
         <source>Enter name for new color theme</source>
-        <translation type="unfinished"/>
+        <translation>输入新颜色主题名称</translation>
     </message>
 </context>
 <context>
@@ -2491,12 +2493,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="210"/>
         <source> files (*</source>
-        <translation type="unfinished"/>
+        <translation>文件（*</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="220"/>
         <source>Plain text</source>
-        <translation type="unfinished"/>
+        <translation>纯文本</translation>
     </message>
 </context>
 <context>
@@ -2504,7 +2506,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/systemfactory.cpp" line="146"/>
         <source> bytes</source>
-        <translation type="unfinished"/>
+        <translation>字节</translation>
     </message>
 </context>
 <context>
@@ -2512,12 +2514,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabbar.cpp" line="25"/>
         <source>Close This Tab</source>
-        <translation type="unfinished"/>
+        <translation>关闭此标签</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabbar.cpp" line="26"/>
         <source>Close Tab</source>
-        <translation type="unfinished"/>
+        <translation>关闭标签</translation>
     </message>
 </context>
 <context>
@@ -2525,7 +2527,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabwidget.cpp" line="120"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -2533,22 +2535,22 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="976"/>
         <source>New text file</source>
-        <translation type="unfinished"/>
+        <translation>新文本文件</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="819"/>
         <source>Unsaved text file</source>
-        <translation type="unfinished"/>
+        <translation>未保存的文本文件</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="819"/>
         <source>Save your file first, please</source>
-        <translation type="unfinished"/>
+        <translation>请先保存</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="826"/>
         <source>Open file</source>
-        <translation type="unfinished"/>
+        <translation>打开文件</translation>
     </message>
 </context>
 <context>
@@ -2556,78 +2558,78 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="153"/>
         <source>No other occurrences of &quot;%1&quot; found.</source>
-        <translation type="unfinished"/>
+        <translation>无法找到“ %1 ”的其它事件。</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="233"/>
         <source>File Externally Modified</source>
-        <translation type="unfinished"/>
+        <translation>文件已在外部修改</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="234"/>
         <source>This file was modified outside of %1.</source>
-        <translation type="unfinished"/>
+        <translation>此文件已被外部的 %1 修改。</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="235"/>
         <source>Do you want to reload file now? This will discard all unsaved changes.</source>
-        <translation type="unfinished"/>
+        <translation>现在重新载入文件吗？会忽略所有未保存的更改。</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="237"/>
         <source>Reload all files automatically (discard changes)</source>
-        <translation type="unfinished"/>
+        <translation>自动重新载入所有文件（忽略更改）</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="242"/>
         <source>File &apos;%1&apos; was reloaded from disk.</source>
-        <translation type="unfinished"/>
+        <translation>文件“ %1 ”已从磁盘重新载入。</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="271"/>
         <source>&amp;Find All</source>
-        <translation type="unfinished"/>
+        <translation>查找所有(&amp;F)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="277"/>
         <source>&amp;Select All</source>
-        <translation type="unfinished"/>
+        <translation>全选(&amp;S)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="280"/>
         <source>&amp;Cut</source>
-        <translation type="unfinished"/>
+        <translation>剪切(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="283"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"/>
+        <translation>复制(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="286"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished"/>
+        <translation>粘贴(&amp;P)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="334"/>
         <source>Save File as</source>
-        <translation type="unfinished"/>
+        <translation>另存为</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="389"/>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="864"/>
         <source>Unsaved Changes</source>
-        <translation type="unfinished"/>
+        <translation>未保存更改</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="390"/>
         <source>This document has unsaved changes, do you want to save them?</source>
-        <translation type="unfinished"/>
+        <translation>此文档有未保存的更改，保存吗？</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="865"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
-        <translation type="unfinished"/>
+        <translation>此文件有未保存的更改，忽略更改并重新载入？</translation>
     </message>
 </context>
 <context>
@@ -2635,7 +2637,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbar.cpp" line="59"/>
         <source>Toolbar spacer</source>
-        <translation type="unfinished"/>
+        <translation>工具栏间隔符</translation>
     </message>
 </context>
 <context>
@@ -2643,52 +2645,52 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="32"/>
         <source>Activated Actions</source>
-        <translation type="unfinished"/>
+        <translation>活动动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="42"/>
         <source>Available Actions</source>
-        <translation type="unfinished"/>
+        <translation>可用动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="76"/>
         <source>Move action up</source>
-        <translation type="unfinished"/>
+        <translation>上移动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="92"/>
         <source>Move action down</source>
-        <translation type="unfinished"/>
+        <translation>下移动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="112"/>
         <source>Insert separator</source>
-        <translation type="unfinished"/>
+        <translation>插入分隔符</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="125"/>
         <source>Insert spacer</source>
-        <translation type="unfinished"/>
+        <translation>插入间隔符</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="145"/>
         <source>Add selected action</source>
-        <translation type="unfinished"/>
+        <translation>添加所选动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="158"/>
         <source>Delete selected action</source>
-        <translation type="unfinished"/>
+        <translation>删除所选动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="171"/>
         <source>Delete all actions</source>
-        <translation type="unfinished"/>
+        <translation>删除所有动作</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="184"/>
         <source>Reset toolbar</source>
-        <translation type="unfinished"/>
+        <translation>重置工具栏</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="85"/>
@@ -2698,12 +2700,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="184"/>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="187"/>
         <source>Separator</source>
-        <translation type="unfinished"/>
+        <translation>分隔符</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="173"/>
         <source>Toolbar spacer</source>
-        <translation type="unfinished"/>
+        <translation>工具栏间隔符</translation>
     </message>
 </context>
 <context>
@@ -2711,7 +2713,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     <message>
         <location filename="../src/libtextosaurus/common/gui/systemtrayicon.cpp" line="18"/>
         <source>Close opened modal dialogs first.</source>
-        <translation type="unfinished"/>
+        <translation>先关闭已打开的模态对话框。</translation>
     </message>
 </context>
 </TS>
