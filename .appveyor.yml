@@ -6,7 +6,7 @@ clone_folder: C:\textosaurus
 
 environment:
   access_token:
-    secure: bM8uJbH7GK+2EW6aL8D0/qwwdM/lzW6y2odXWs/VcMq+nUBZa68x+k3EpZEAo6iT
+    secure: oR2iY1h+Z5AF4t3yP1mxNW7HL8qhPm8y4Uupp4b03QSC7puVrkkCaO1E1NQA9q9K
 
 artifacts:
   - path: 'textosaurus-build\src\textosaurus\*win64.exe'
@@ -19,7 +19,7 @@ deploy:
   description: 'New Textosaurus release.'
   provider: GitHub
   auth_token:
-    secure: XCWdr9wPgK4gm6289WXCg2vtMA02eBSnj6eKHC+ps6Z5lgw0jsK09UQ5y9E9ZFwS
+    secure: oR2iY1h+Z5AF4t3yP1mxNW7HL8qhPm8y4Uupp4b03QSC7puVrkkCaO1E1NQA9q9K
   artifact: textosaurusexe, textosaurus7z
   draft: false
   prerelease: false
