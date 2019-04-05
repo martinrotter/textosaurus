@@ -16,8 +16,7 @@ deploy:
   provider: releases
   file_glob: true
   skip_cleanup: true
-  api_key:
-    secure: QGF06WqRsp2ErZ2Gy5YTdNKeag1iXbyRu+q9eo/GemEPnxZzJU4x6+/xZ5zr1RIlM3TEGMcpclRBK86AeJogfkVQqvze8w+WGngirts3dwBLsBuc6xSH8FGIkZnvl67jfn24sGYHFLLSDWp4dQuhrEFohZl0mGATenPn0YoTr0UQ/OVObEFbHcrpTyVozn2ynJrA+ACm7jQCoXs5mYlKH55S1WSIxu5J2LUA3A3jAkaSyVtlQpo4yNcfoMqK8Swm+eqKv8CINOBTZspVci9c/1l0CpKv4gsp5sc/itBx8bPggBGa7RqoXFnc3grGI53JrQdF6uPHT8fnVJmyHBQdK/jHgVyBVvXE7DgVCYHWfM4gK8z3Fy8J3N8QY3iswVxZqNFZ+JOYbBvHZCG17WFNcaiCC0gqmVCmaOgsetNCP+QJb3q9Bv1KoQa8hT1ayTBKgAwK9MQ8GREpW6HbzNRYoLk40xdiH9mFvl+FOuT9EKnOih56fWdEEkwZ64MguybvTwWl8wvvTJ0R2KTyOX0sasZh3u6v6woVCj9S/0fTt/7k3mpjc0INQd9aC7BIY6rVRlaQuoo3lq7r6zduiDJEs5jU/psKpChKP8gyjfMwJvspEAbdPSzA0zt8r2ynB+i99bcbQ24frYpeGEoY3fso2PpKRjQtD7OEp6GTAD1pvwg=
+  api_key: $GH_TOKEN
   file:
   - textosaurus-build/src/textosaurus/textosaurus*.AppImage
   - textosaurus-build/src/textosaurus/textosaurus*.7z
