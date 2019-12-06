@@ -260,7 +260,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	Editor(Editor &&) = delete;
 	Editor &operator=(const Editor &) = delete;
 	Editor &operator=(Editor &&) = delete;
-	~Editor() override;
+	// ~Editor() in public section
 	virtual void Initialise() = 0;
 	virtual void Finalise();
 
@@ -393,7 +393,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	Sci::Position RealizeVirtualSpace(Sci::Position position, Sci::Position virtualSpace);
 	SelectionPosition RealizeVirtualSpace(const SelectionPosition &position);
 	void AddChar(char ch);
-	virtual void AddCharUTF(const char *s, unsigned int len, bool treatAsDBCS=false);
+	virtual void InsertCharacter(std::string_view sv, CharacterSource charSource);
 	void ClearBeforeTentativeStart();
 	void InsertPaste(const char *text, Sci::Position len);
 	enum PasteShape { pasteStream=0, pasteRectangular = 1, pasteLine = 2 };
@@ -421,7 +421,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	virtual int GetCtrlID() { return ctrlID; }
 	virtual void NotifyParent(SCNotification scn) = 0;
 	virtual void NotifyStyleToNeeded(Sci::Position endStyleNeeded);
-	void NotifyChar(int ch);
+	void NotifyChar(int ch, CharacterSource charSource);
 	void NotifySavePoint(bool isSavePoint);
 	void NotifyModifyAttempt();
 	virtual void NotifyDoubleClick(Point pt, int modifiers);
@@ -522,6 +522,9 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	Sci::Position PositionAfterMaxStyling(Sci::Position posMax, bool scrolling) const;
 	void StartIdleStyling(bool truncatedLastStyling);
 	void StyleAreaBounded(PRectangle rcArea, bool scrolling);
+	constexpr bool SynchronousStylingToVisible() const noexcept {
+		return (idleStyling == SC_IDLESTYLING_NONE) || (idleStyling == SC_IDLESTYLING_AFTERVISIBLE);
+	}
 	void IdleStyling();
 	virtual void IdleWork();
 	virtual void QueueIdleWork(WorkNeeded::workItems items, Sci::Position upTo=0);
@@ -595,7 +598,22 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	static sptr_t StringResult(sptr_t lParam, const char *val) noexcept;
 	static sptr_t BytesResult(sptr_t lParam, const unsigned char *val, size_t len) noexcept;
 
+	// Set a variable controlling appearance to a value and invalidates the display
+	// if a change was made. Avoids extra text and the possibility of mistyping.
+	template <typename T>
+	bool SetAppearance(T &variable, T value) {
+		// Using ! and == as more types have == defined than !=.
+		const bool changed = !(variable == value);
+		if (changed) {
+			variable = value;
+			InvalidateStyleRedraw();
+		}
+		return changed;
+	}
+
 public:
+	~Editor() override;
+
 	// Public so the COM thunks can access it.
 	bool IsUnicodeMode() const noexcept;
 	// Public so scintilla_send_message can use it.

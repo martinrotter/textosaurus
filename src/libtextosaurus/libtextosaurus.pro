@@ -260,6 +260,7 @@ SOURCES += \
     3rd-party/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp \
     3rd-party/scintilla/src/XPM.cxx \
     3rd-party/scintilla/src/ViewStyle.cxx \
+    3rd-party/scintilla/src/UniqueString.cxx \
     3rd-party/scintilla/src/UniConversion.cxx \
     3rd-party/scintilla/src/Style.cxx \
     3rd-party/scintilla/src/Selection.cxx \

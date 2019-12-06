@@ -52,10 +52,8 @@ ScintillaQt::ScintillaQt(QAbstractScrollArea *parent)
 
 ScintillaQt::~ScintillaQt()
 {
-	for (TickReason tr = tickCaret; tr <= tickDwell; tr = static_cast<TickReason>(tr + 1)) {
-		FineTickerCancel(tr);
-	}
-	SetIdle(false);
+	CancelTimers();
+	ChangeIdle(false);
 }
 
 void ScintillaQt::execCommand(QAction *action)
@@ -145,9 +143,7 @@ void ScintillaQt::Init()
 
 void ScintillaQt::Finalise()
 {
-	for (TickReason tr = tickCaret; tr <= tickDwell; tr = static_cast<TickReason>(tr + 1)) {
-		FineTickerCancel(tr);
-	}
+	CancelTimers();
 	ScintillaBase::Finalise();
 }
 
@@ -417,6 +413,18 @@ void ScintillaQt::FineTickerStart(TickReason reason, int millis, int /* toleranc
 	timers[reason] = startTimer(millis);
 }
 
+// CancelTimers cleans up all fine-ticker timers and is non-virtual to avoid warnings when
+// called during destruction.
+void ScintillaQt::CancelTimers()
+{
+	for (TickReason tr = tickCaret; tr <= tickDwell; tr = static_cast<TickReason>(tr + 1)) {
+		if (timers[tr]) {
+			killTimer(timers[tr]);
+			timers[tr] = 0;
+		}
+	}
+}
+
 void ScintillaQt::FineTickerCancel(TickReason reason)
 {
 	if (timers[reason]) {
@@ -433,7 +441,7 @@ void ScintillaQt::onIdle()
 	}
 }
 
-bool ScintillaQt::SetIdle(bool on)
+bool ScintillaQt::ChangeIdle(bool on)
 {
 	QTimer *qIdle;
 	if (on) {
@@ -457,6 +465,11 @@ bool ScintillaQt::SetIdle(bool on)
 		}
 	}
 	return true;
+}
+
+bool ScintillaQt::SetIdle(bool on)
+{
+	return ChangeIdle(on);
 }
 
 int ScintillaQt::CharacterSetOfDocument() const

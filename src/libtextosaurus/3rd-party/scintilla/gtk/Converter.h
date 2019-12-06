@@ -15,24 +15,29 @@ const gsize sizeFailure = static_cast<gsize>(-1);
  */
 class Converter {
 	GIConv iconvh;
-	void OpenHandle(const char *fullDestination, const char *charSetSource) {
+	void OpenHandle(const char *fullDestination, const char *charSetSource) noexcept {
 		iconvh = g_iconv_open(fullDestination, charSetSource);
 	}
-	bool Succeeded() const {
+	bool Succeeded() const noexcept {
 		return iconvh != iconvhBad;
 	}
 public:
-	Converter() {
+	Converter() noexcept {
 		iconvh = iconvhBad;
 	}
 	Converter(const char *charSetDestination, const char *charSetSource, bool transliterations) {
 		iconvh = iconvhBad;
-	    	Open(charSetDestination, charSetSource, transliterations);
+		Open(charSetDestination, charSetSource, transliterations);
 	}
+	// Deleted so Converter objects can not be copied.
+	Converter(const Converter &) = delete;
+	Converter(Converter &&) = delete;
+	Converter &operator=(const Converter &) = delete;
+	Converter &operator=(Converter &&) = delete;
 	~Converter() {
 		Close();
 	}
-	operator bool() const {
+	operator bool() const noexcept {
 		return Succeeded();
 	}
 	void Open(const char *charSetDestination, const char *charSetSource, bool transliterations) {
@@ -50,13 +55,13 @@ public:
 			}
 		}
 	}
-	void Close() {
+	void Close() noexcept {
 		if (Succeeded()) {
 			g_iconv_close(iconvh);
 			iconvh = iconvhBad;
 		}
 	}
-	gsize Convert(char** src, gsize *srcleft, char **dst, gsize *dstleft) const {
+	gsize Convert(char **src, gsize *srcleft, char **dst, gsize *dstleft) const noexcept {
 		if (!Succeeded()) {
 			return sizeFailure;
 		} else {

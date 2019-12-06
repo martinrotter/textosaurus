@@ -243,6 +243,14 @@ sptr_t ScintillaEdit::tabWidth() const {
     return send(SCI_GETTABWIDTH, 0, 0);
 }
 
+void ScintillaEdit::setTabMinimumWidth(sptr_t pixels) {
+    send(SCI_SETTABMINIMUMWIDTH, pixels, 0);
+}
+
+sptr_t ScintillaEdit::tabMinimumWidth() const {
+    return send(SCI_GETTABMINIMUMWIDTH, 0, 0);
+}
+
 void ScintillaEdit::clearTabStops(sptr_t line) {
     send(SCI_CLEARTABSTOPS, line, 0);
 }
@@ -561,6 +569,14 @@ void ScintillaEdit::setWordChars(const char * characters) {
 
 QByteArray ScintillaEdit::wordChars() const {
     return TextReturner(SCI_GETWORDCHARS, 0);
+}
+
+void ScintillaEdit::setCharacterCategoryOptimization(sptr_t countCharacters) {
+    send(SCI_SETCHARACTERCATEGORYOPTIMIZATION, countCharacters, 0);
+}
+
+sptr_t ScintillaEdit::characterCategoryOptimization() const {
+    return send(SCI_GETCHARACTERCATEGORYOPTIMIZATION, 0, 0);
 }
 
 void ScintillaEdit::beginUndoAction() {
@@ -1221,6 +1237,18 @@ void ScintillaEdit::toggleFoldShowText(sptr_t line, const char * text) {
 
 void ScintillaEdit::foldDisplayTextSetStyle(sptr_t style) {
     send(SCI_FOLDDISPLAYTEXTSETSTYLE, style, 0);
+}
+
+sptr_t ScintillaEdit::foldDisplayTextStyle() const {
+    return send(SCI_FOLDDISPLAYTEXTGETSTYLE, 0, 0);
+}
+
+void ScintillaEdit::setDefaultFoldDisplayText(const char * text) {
+    send(SCI_SETDEFAULTFOLDDISPLAYTEXT, 0, (sptr_t)text);
+}
+
+QByteArray ScintillaEdit::getDefaultFoldDisplayText() {
+    return TextReturner(SCI_GETDEFAULTFOLDDISPLAYTEXT, 0);
 }
 
 void ScintillaEdit::foldLine(sptr_t line, sptr_t action) {

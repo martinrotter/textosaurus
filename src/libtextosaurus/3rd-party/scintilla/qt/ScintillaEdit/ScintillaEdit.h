@@ -99,6 +99,8 @@ public:
 	void setBufferedDraw(bool buffered);
 	void setTabWidth(sptr_t tabWidth);
 	sptr_t tabWidth() const;
+	void setTabMinimumWidth(sptr_t pixels);
+	sptr_t tabMinimumWidth() const;
 	void clearTabStops(sptr_t line);
 	void addTabStop(sptr_t line, sptr_t x);
 	sptr_t getNextTabStop(sptr_t line, sptr_t x);
@@ -179,6 +181,8 @@ public:
 	void setCaretPeriod(sptr_t periodMilliseconds);
 	void setWordChars(const char * characters);
 	QByteArray wordChars() const;
+	void setCharacterCategoryOptimization(sptr_t countCharacters);
+	sptr_t characterCategoryOptimization() const;
 	void beginUndoAction();
 	void endUndoAction();
 	void indicSetStyle(sptr_t indicator, sptr_t indicatorStyle);
@@ -344,6 +348,9 @@ public:
 	void toggleFold(sptr_t line);
 	void toggleFoldShowText(sptr_t line, const char * text);
 	void foldDisplayTextSetStyle(sptr_t style);
+	sptr_t foldDisplayTextStyle() const;
+	void setDefaultFoldDisplayText(const char * text);
+	QByteArray getDefaultFoldDisplayText();
 	void foldLine(sptr_t line, sptr_t action);
 	void foldChildren(sptr_t line, sptr_t action);
 	void expandChildren(sptr_t line, sptr_t level);
@@ -770,6 +777,9 @@ public:
 
 #if defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+#if !defined(__clang__) && (__GNUC__ >= 8)
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+#endif
 #endif
 
 #endif /* SCINTILLAEDIT_H */
