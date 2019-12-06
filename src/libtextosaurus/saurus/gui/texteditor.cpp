@@ -851,13 +851,22 @@ void TextEditor::setReadOnly(bool read_only) {
 TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_path,
                                      const QString& explicit_encoding, const QString& explicit_filter) {
   try {
-    auto file_data = FileMetadata::obtainRawFileData(file_path);
-    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, file_path, explicit_encoding, explicit_filter);
+
+    QFileInfo nfo(file_path);
+    QString file_target_path = file_path;
+
+    if (nfo.isSymLink() && !nfo.symLinkTarget().isEmpty()) {
+      qWarningNN << QSL("File '") << file_path << QSL("' is symlink with target at '") << nfo.symLinkTarget() << QSL("'.");
+      file_target_path = nfo.symLinkTarget();
+    }
+
+    auto file_data = FileMetadata::obtainRawFileData(file_target_path);
+    FileMetadata metadata = FileMetadata::getInitialMetadata(file_data.first, file_target_path, explicit_encoding, explicit_filter);
 
     if (!metadata.m_encoding.isEmpty()) {
       auto* new_editor = new TextEditor(app, qApp->mainFormWidget());
 
-      new_editor->loadFromFile(file_data.first, file_path, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
+      new_editor->loadFromFile(file_data.first, file_target_path, metadata.m_encoding, metadata.m_lexer, metadata.m_eolMode);
       new_editor->setEncryptionPassword(file_data.second);
       return new_editor;
     }
@@ -866,7 +875,7 @@ TextEditor* TextEditor::fromTextFile(TextApplication* app, const QString& file_p
     }
   }
   catch (const OperationCancelledException&) {
-    qDebug().noquote() << QSL("User cancelled decryption password prompt.");
+    qDebugNN << QSL("User cancelled decryption password prompt.");
     return nullptr;
   }
   catch (const ApplicationException& ex) {
