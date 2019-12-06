@@ -269,7 +269,8 @@ QString PredefinedTools::currentDateTime(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
-  return QDateTime::currentDateTime().toString(Qt::DateFormat::ISODate);
+  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(),
+                                                       qApp->localization()->loadedLocale().dateTimeFormat(QLocale::FormatType::ShortFormat));
 }
 
 QString PredefinedTools::currentDate(const QString& data, bool& ok) {
