@@ -133,6 +133,10 @@ namespace Browser {
   constexpr auto CustomExternalEmailArguments = "external_email_arguments";
 }
 
+namespace ToolsPromptValues {
+  constexpr auto ID = "external_tools_prompts";
+}
+
 namespace StoredMacros {
   constexpr auto ID = "macros";
 }
