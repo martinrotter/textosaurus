@@ -1,6 +1,6 @@
 ls
 
-$qt_stub = "qt-5.11.2-dynamic-msvc2017-x86_64"
+$qt_stub = "qt-5.12.6-dynamic-msvc2017-x86_64"
 
 cd "C:\textosaurus"
 
