@@ -193,7 +193,7 @@ void ExternalTools::loadPredefinedTools() {
   insert_date_time->setCategory(tr("&DateTime"));
   insert_date_time->setName(tr("Insert &DateTime"));
   insert_date_time->setInput(ExternalTool::ToolInput::NoInput);
-  insert_date_time->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
+  insert_date_time->setOutput(ExternalTool::ToolOutput::InsertAtCursorPositionAndReplaceSelection);
 
   m_predefinedTools.append(insert_date_time);
 
@@ -203,7 +203,7 @@ void ExternalTools::loadPredefinedTools() {
   insert_date->setCategory(tr("&DateTime"));
   insert_date->setName(tr("Insert &Date"));
   insert_date->setInput(ExternalTool::ToolInput::NoInput);
-  insert_date->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
+  insert_date->setOutput(ExternalTool::ToolOutput::InsertAtCursorPositionAndReplaceSelection);
 
   m_predefinedTools.append(insert_date);
 
@@ -213,7 +213,7 @@ void ExternalTools::loadPredefinedTools() {
   insert_time->setCategory(tr("&DateTime"));
   insert_time->setName(tr("Insert &Time"));
   insert_time->setInput(ExternalTool::ToolInput::NoInput);
-  insert_time->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
+  insert_time->setOutput(ExternalTool::ToolOutput::InsertAtCursorPositionAndReplaceSelection);
 
   m_predefinedTools.append(insert_time);
 
@@ -224,7 +224,7 @@ void ExternalTools::loadPredefinedTools() {
   insert_formatted_datetime->setName(tr("Insert &DateTime (Custom Format)"));
   insert_formatted_datetime->setInput(ExternalTool::ToolInput::AskForInput);
   insert_formatted_datetime->setPromptValue(QSL("HH:mm:ss dddd, dd.MM.yyyy"));
-  insert_formatted_datetime->setOutput(ExternalTool::ToolOutput::InsertAtCursorPosition);
+  insert_formatted_datetime->setOutput(ExternalTool::ToolOutput::InsertAtCursorPositionAndReplaceSelection);
 
   m_predefinedTools.append(insert_formatted_datetime);
 
@@ -688,6 +688,22 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
 
         editor->insertText(editor->currentPos(), output_utf.constData());
         editor->gotoPos(editor->currentPos() + output_utf.size());
+      }
+
+      break;
+    }
+
+    case ExternalTool::ToolOutput::InsertAtCursorPositionAndReplaceSelection: {
+      if (!output_text.isEmpty()) {
+        QByteArray output_utf = output_text.toUtf8();
+
+        if (editor->selectionEmpty()) {
+          editor->insertText(editor->currentPos(), output_utf.constData());
+          editor->gotoPos(editor->currentPos() + output_utf.size());
+        }
+        else {
+          editor->replaceSel(output_text.toUtf8().constData());
+        }
       }
 
       break;
