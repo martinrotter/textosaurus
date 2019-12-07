@@ -398,7 +398,7 @@ void TextApplication::createConnections() {
   connect(m_menuEncoding, &QMenu::triggered, this, &TextApplication::changeEncoding);
   connect(m_menuFileSaveWithEncoding, &QMenu::aboutToShow, this, [this]() {
     if (m_menuFileSaveWithEncoding->isEmpty()) {
-      TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);;
+      TextFactory::initializeEncodingMenu(m_menuFileSaveWithEncoding);
     }
   });
   connect(m_menuFileSaveWithEncoding, &QMenu::triggered, this, &TextApplication::saveCurrentEditorAsWithEncoding);
