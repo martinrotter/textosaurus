@@ -668,7 +668,12 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   }
 
   // Setup keywords.
-  setKeyWords(0, m_lexer.m_keywords.toLocal8Bit().constData());
+  QMapIterator<int, QString> i(m_lexer.m_keywords);
+
+  while (i.hasNext()) {
+    i.next();
+    setKeyWords( i.key(), i.value().toLocal8Bit().constData());
+  }
 
   qDebug().noquote() << QSL("Current lexer offers these properties:") << propertyNames();
 
