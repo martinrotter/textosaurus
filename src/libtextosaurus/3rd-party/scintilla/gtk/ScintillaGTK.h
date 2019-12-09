@@ -53,7 +53,7 @@ class ScintillaGTK : public ScintillaBase {
 
 	// Wheel mouse support
 	unsigned int linesPerScroll;
-	GTimeVal lastWheelMouseTime;
+	gint64 lastWheelMouseTime;
 	gint lastWheelMouseDirection;
 	gint wheelMouseIntensity;
 	gdouble smoothScrollY;

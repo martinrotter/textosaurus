@@ -109,15 +109,25 @@ public:
 		pfont = nullptr;
 	}
 };
-static int FontCharacterSet(Font &f)
-{
-	return reinterpret_cast<FontAndCharacterSet *>(f.GetID())->characterSet;
+
+namespace {
+
+FontAndCharacterSet *AsFontAndCharacterSet(const Font &f) {
+	return reinterpret_cast<FontAndCharacterSet *>(f.GetID());
 }
 
-static QFont *FontPointer(Font &f)
+int FontCharacterSet(const Font &f)
 {
-	return reinterpret_cast<FontAndCharacterSet *>(f.GetID())->pfont;
+	return AsFontAndCharacterSet(f)->characterSet;
 }
+
+QFont *FontPointer(const Font &f)
+{
+	return AsFontAndCharacterSet(f)->pfont;
+}
+
+}
+
 Font::Font() noexcept : fid(nullptr) {}
 Font::~Font()
 {

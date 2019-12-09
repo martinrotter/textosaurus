@@ -172,6 +172,7 @@ ScintillaGTK::ScintillaGTK(_ScintillaObject *sci_) :
 	atomSought(nullptr),
 	im_context(nullptr),
 	lastNonCommonScript(PANGO_SCRIPT_INVALID_CODE),
+	lastWheelMouseTime(0),
 	lastWheelMouseDirection(0),
 	wheelMouseIntensity(0),
 	smoothScrollY(0),
@@ -201,8 +202,6 @@ ScintillaGTK::ScintillaGTK(_ScintillaObject *sci_) :
 #else
 	linesPerScroll = 4;
 #endif
-	lastWheelMouseTime.tv_sec = 0;
-	lastWheelMouseTime.tv_usec = 0;
 
 	Init();
 }
@@ -757,16 +756,16 @@ std::string ConvertText(const char *s, size_t len, const char *charSetDest,
 // Returns the target converted to UTF8.
 // Return the length in bytes.
 Sci::Position ScintillaGTK::TargetAsUTF8(char *text) const {
-	const Sci::Position targetLength = targetEnd - targetStart;
+	const Sci::Position targetLength = targetRange.Length();
 	if (IsUnicodeMode()) {
 		if (text) {
-			pdoc->GetCharRange(text, targetStart, targetLength);
+			pdoc->GetCharRange(text, targetRange.start.Position(), targetLength);
 		}
 	} else {
 		// Need to convert
 		const char *charSetBuffer = CharacterSetID();
 		if (*charSetBuffer) {
-			std::string s = RangeText(targetStart, targetEnd);
+			std::string s = RangeText(targetRange.start.Position(), targetRange.end.Position());
 			std::string tmputf = ConvertText(&s[0], targetLength, "UTF-8", charSetBuffer, false);
 			if (text) {
 				memcpy(text, tmputf.c_str(), tmputf.length());
@@ -774,7 +773,7 @@ Sci::Position ScintillaGTK::TargetAsUTF8(char *text) const {
 			return tmputf.length();
 		} else {
 			if (text) {
-				pdoc->GetCharRange(text, targetStart, targetLength);
+				pdoc->GetCharRange(text, targetRange.start.Position(), targetLength);
 			}
 		}
 	}
@@ -1893,13 +1892,8 @@ gint ScintillaGTK::ScrollEvent(GtkWidget *widget, GdkEventScroll *event) {
 			cLineScroll = 4;
 		sciThis->wheelMouseIntensity = cLineScroll;
 #else
-		int timeDelta = 1000000;
-		GTimeVal curTime;
-		g_get_current_time(&curTime);
-		if (curTime.tv_sec == sciThis->lastWheelMouseTime.tv_sec)
-			timeDelta = curTime.tv_usec - sciThis->lastWheelMouseTime.tv_usec;
-		else if (curTime.tv_sec == sciThis->lastWheelMouseTime.tv_sec + 1)
-			timeDelta = 1000000 + (curTime.tv_usec - sciThis->lastWheelMouseTime.tv_usec);
+		const gint64 curTime = g_get_monotonic_time();
+		const gint64 timeDelta = curTime - sciThis->lastWheelMouseTime;
 		if ((event->direction == sciThis->lastWheelMouseDirection) && (timeDelta < 250000)) {
 			if (sciThis->wheelMouseIntensity < 12)
 				sciThis->wheelMouseIntensity++;
@@ -1910,11 +1904,11 @@ gint ScintillaGTK::ScrollEvent(GtkWidget *widget, GdkEventScroll *event) {
 				cLineScroll = 4;
 			sciThis->wheelMouseIntensity = cLineScroll;
 		}
+		sciThis->lastWheelMouseTime = curTime;
 #endif
 		if (event->direction == GDK_SCROLL_UP || event->direction == GDK_SCROLL_LEFT) {
 			cLineScroll *= -1;
 		}
-		g_get_current_time(&sciThis->lastWheelMouseTime);
 		sciThis->lastWheelMouseDirection = event->direction;
 
 		// Note:  Unpatched versions of win32gtk don't set the 'state' value so

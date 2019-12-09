@@ -310,8 +310,12 @@ public:
 	sptr_t caretWidth() const;
 	void setTargetStart(sptr_t start);
 	sptr_t targetStart() const;
+	void setTargetStartVirtualSpace(sptr_t space);
+	sptr_t targetStartVirtualSpace() const;
 	void setTargetEnd(sptr_t end);
 	sptr_t targetEnd() const;
+	void setTargetEndVirtualSpace(sptr_t space);
+	sptr_t targetEndVirtualSpace() const;
 	void setTargetRange(sptr_t start, sptr_t end);
 	QByteArray targetText() const;
 	void targetFromSelection();
@@ -678,7 +682,9 @@ public:
 	sptr_t selectionNAnchorVirtualSpace(sptr_t selection) const;
 	void setSelectionNStart(sptr_t selection, sptr_t anchor);
 	sptr_t selectionNStart(sptr_t selection) const;
+	sptr_t selectionNStartVirtualSpace(sptr_t selection) const;
 	void setSelectionNEnd(sptr_t selection, sptr_t caret);
+	sptr_t selectionNEndVirtualSpace(sptr_t selection) const;
 	sptr_t selectionNEnd(sptr_t selection) const;
 	void setRectangularSelectionCaret(sptr_t caret);
 	sptr_t rectangularSelectionCaret() const;
