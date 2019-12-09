@@ -335,6 +335,7 @@ INCLUDEPATH +=  $$PWD/. \
 # Localizations.
 TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
                       $$PWD/../../localization/textosaurus_cs.ts \
+                      $$PWD/../../localization/textosaurus_de.ts \
                       $$PWD/../../localization/textosaurus_es.ts \
                       $$PWD/../../localization/textosaurus_sk.ts \
                       $$PWD/../../localization/textosaurus_uk_UA.ts \
@@ -342,6 +343,7 @@ TRANSLATIONS_WO_QT += $$PWD/../../localization/textosaurus_en.ts \
 
 TRANSLATIONS += $$TRANSLATIONS_WO_QT \
                 $$PWD/../../localization/qtbase_cs.ts \
+                $$PWD/../../localization/qtbase_de.ts \
                 $$PWD/../../localization/qtbase_es.ts \
                 $$PWD/../../localization/qtbase_sk.ts \
                 $$PWD/../../localization/qtbase_uk_UA.ts \

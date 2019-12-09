@@ -11,6 +11,7 @@
     <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
     
     <file>graphics/misc/flags/cs.png</file>
+    <file>graphics/misc/flags/de.png</file>
     <file>graphics/misc/flags/en.png</file>
     <file>graphics/misc/flags/es.png</file>
     <file>graphics/misc/flags/sk.png</file>
@@ -21,6 +22,9 @@
     
     <file>../localization/textosaurus_cs.qm</file>
     <file>../localization/qtbase_cs.qm</file>
+    
+    <file>../localization/textosaurus_de.qm</file>
+    <file>../localization/qtbase_de.qm</file>
     
     <file>../localization/textosaurus_es.qm</file>
     <file>../localization/qtbase_es.qm</file>
