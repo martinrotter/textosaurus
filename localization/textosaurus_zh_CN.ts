@@ -48,249 +48,259 @@
         <translation>插入日期时间（自定义格式）(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="234"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="244"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="226"/>
+        <source>Enter DateTime format string:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="235"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="245"/>
         <source>&amp;JSON</source>
         <translation>&amp;JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="235"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="236"/>
         <source>JSON &amp;Beautify</source>
         <translation>美化 &amp;JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="245"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="246"/>
         <source>JSON &amp;Minify</source>
         <translation>缩减 &amp;JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="254"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="264"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="274"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="284"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="255"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="265"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="275"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="285"/>
         <source>&amp;XML</source>
         <translation>&amp;XML</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="255"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="256"/>
         <source>&amp;Check XML syntax</source>
         <translation>检查 XML 语法(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="265"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="266"/>
         <source>XML &amp;Beautify (Selected String)</source>
         <translation>美化 XML （已选字串）(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="275"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="276"/>
         <source>XML &amp;Beautify (File)</source>
         <translation>美化 XML （文件）(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="285"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="286"/>
         <source>XML &amp;Linearize/Minfy</source>
         <translation>线性化/缩减 XML(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="294"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="304"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="314"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="324"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="389"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="399"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="409"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="305"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="400"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="410"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="420"/>
         <source>&amp;MIME Tools</source>
         <translation>&amp;MIME 工具</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="296"/>
         <source>Text → &amp;Base64</source>
         <translation>文本 → &amp;Base64</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="305"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="306"/>
         <source>Text → &amp;Base64Url</source>
         <translation>文本 → &amp;Base64URL</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="316"/>
         <source>Text → &amp;HTML escaped</source>
         <translation>文本 → HTML 逸出</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="326"/>
         <source>Text → &amp;URL encoded</source>
         <translation>文本→ URL 编码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="334"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="345"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="356"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="367"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="378"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="335"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="346"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="357"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="368"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="379"/>
         <source>&amp;Text Case Conversion</source>
         <translation>文本大小写转换(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="335"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="336"/>
         <source>to &amp;lower case</source>
         <translation>转小写(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="346"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="347"/>
         <source>TO &amp;UPPER CASE</source>
         <translation>转大写(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="357"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="358"/>
         <source>To &amp;sentence case</source>
         <translation>转句首大写(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="368"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="369"/>
         <source>To &amp;Title Case</source>
         <translation>转标题大写(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="379"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="380"/>
         <source>&amp;Invert case</source>
         <translation>大小写互换(&amp;I)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="390"/>
+        <source>&amp;Invert Text</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="401"/>
         <source>&amp;Base64 → text</source>
         <translation>&amp;Base64 → 文本</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="400"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="411"/>
         <source>&amp;Base64Url → text</source>
         <translation>&amp;Base64URL → 文本</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="410"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="421"/>
         <source>&amp;URL encoded → text</source>
         <translation>&amp;URL 编码 → 文本</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="419"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="429"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="439"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="430"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="440"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="450"/>
         <source>&amp;Upload to...</source>
         <translation>上传至...(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="420"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="431"/>
         <source>Upload to &amp;clbin.com</source>
         <translation>上传至 &amp;Clbin.com</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="430"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="441"/>
         <source>Upload to &amp;hastebin.com</source>
         <translation>上传至 &amp;Hastebin.com</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="440"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="451"/>
         <source>Upload to &amp;ix.io</source>
         <translation>上传至 &amp;Ix.io</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="495"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="516"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="537"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="508"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="529"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="574"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="587"/>
         <source>Bash (external tool examples)</source>
         <translation>Bash（外部工具示例）</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="505"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="527"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="548"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="518"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="540"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
         <source>Python (external tool examples)</source>
         <translation>Python（外部工具示例）</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="519"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="532"/>
         <source>SHA256 sum of selected/all text</source>
         <translation>SHA256 所选之和/所有文本</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="530"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="543"/>
         <source>Reverse current line</source>
         <translation>翻转当前行</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="538"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="551"/>
         <source>Enter sequence bounds (for example &quot;0 10&quot;):</source>
         <translation>输入序列界限（如“0 10”）：</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="541"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="554"/>
         <source>Generate sequence</source>
         <translation>生成序列</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="563"/>
         <source>Enter Python code:</source>
         <translation>输入 Python 代码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="553"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="566"/>
         <source>Run Python code</source>
         <translation>执行 Python 代码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="562"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="575"/>
         <source>Enter number of lines:</source>
         <translation>输入行号：</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="565"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="578"/>
         <source>Generate garbage text</source>
         <translation>生成乱码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="575"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="588"/>
         <source>Enter Bash code:</source>
         <translation>输入 Bash 代码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="578"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="591"/>
         <source>Run Bash code</source>
         <translation>执行 Bash 代码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="604"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="617"/>
         <source>Tool &apos;%1&apos; is already running.</source>
         <translation>工具“ %1 ”已运行。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="619"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="635"/>
         <source>Enter input for external tool</source>
         <translation>外部工具输入</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="665"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="684"/>
         <source>Cannot deliver output of external tool, assigned text editor no longer exists.</source>
         <translation>不能分发外部工具输出，指定的文件不存在。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="702"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="737"/>
         <source>Tool &apos;%1&apos; finished, output copied to clipboard.</source>
         <translation>工具“ %1 ”结束，输出已复制至剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="718"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="753"/>
         <source>Tool &apos;%1&apos; finished, opening output in new tab.</source>
         <translation>工具“ %1 ”结束，在新标签中打开。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="753"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="787"/>
         <source>Tool &apos;%1&apos; finished with error(s)...</source>
         <translation>工具“ %1 ”结束，错误...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="758"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="792"/>
         <source>Tool &apos;%1&apos; finished successfully...</source>
         <translation>工具“ %1 ”结束，成功...</translation>
     </message>
@@ -352,12 +362,12 @@
 <context>
     <name>FilesystemView</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="81"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="87"/>
         <source>FS Sidebar Context Menu</source>
         <translation>FS 侧边栏快捷菜单</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="83"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemview.cpp" line="89"/>
         <source>Properties</source>
         <translation>属性</translation>
     </message>
@@ -456,40 +466,45 @@
         <translation>设置文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="20"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="21"/>
         <source>About %1</source>
         <translation>关于 %1</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="27"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="28"/>
         <source>FULLY portable</source>
         <translation>全便携</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="30"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="31"/>
         <source>NOT portable</source>
         <translation>非便携</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="42"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="50"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="58"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="66"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="34"/>
+        <source>FORCED by user</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="46"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="54"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="62"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="70"/>
         <source>License not found.</source>
         <translation>未找到许可证</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="74"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="78"/>
         <source>Changelog not found.</source>
         <translation>未找到更新日志</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="78"/>
-        <source>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)</source>
-        <translation>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;版本：&lt;/b&gt; %1（构建于 %2%3）&lt;br/&gt;&lt;b&gt;审核：&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;构建日期：&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 （编译对 %7）</translation>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="82"/>
+        <source>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)&lt;br/&gt;&lt;b&gt;OpenSSL:&lt;/b&gt; %9</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="93"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="103"/>
         <source>&lt;body&gt;%5 is simple cross-platform text editor based on Qt and Scintilla.&lt;br&gt;&lt;br&gt;This software is distributed under the terms of GNU General Public License, version 3.&lt;br&gt;&lt;br&gt;Contacts:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt; ~e-mail&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt; ~website&lt;/li&gt;&lt;/ul&gt;You can obtain source code for %5 from its website.&lt;br&gt;&lt;br&gt;&lt;br&gt;Copyright (C) 2017-%3 %4&lt;/body&gt;</source>
         <translation>&lt;body&gt;%5  是一个基于 Qt 和 Scintilla 的简单跨平台文本编辑器。&lt;br&gt;&lt;br&gt;此软件在第3版的 GNU 通用公共授权许可下发布。&lt;br&gt;&lt;br&gt;联系：&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;mailto://%1&quot;&gt;%1&lt;/a&gt;~电邮&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;~网站&lt;/li&gt;&lt;/ul&gt;您可在该软件网站上获取源代码。&lt;br&gt;&lt;br&gt;&lt;br&gt;版权所有© 2017-%3 %4&lt;/body&gt;</translation>
     </message>
@@ -507,23 +522,27 @@
         <translation>显示密码(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="14"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="15"/>
         <source>Decrypt &amp;&amp; Open File</source>
         <translation>加密和打开文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="16"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="17"/>
         <source>Enter Decryption Password</source>
         <translation>输入密码</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="18"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="48"/>
-        <source>Entered password is incorrect.</source>
-        <translation>密码输入错误</translation>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="19"/>
+        <source>Enter some password.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="45"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="43"/>
+        <source>Bad password or other problem: %1.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="38"/>
         <source>Nice! This is correct password.</source>
         <translation>好！这是正确的密码</translation>
     </message>
@@ -1033,9 +1052,9 @@
         <translation>主工具栏</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="367"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="374"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="381"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="370"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="377"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.cpp" line="384"/>
         <source>Cannot open external browser. Navigate to application website manually.</source>
         <translation>无法打开外部浏览器。请手动导航至应用网站。</translation>
     </message>
@@ -1048,12 +1067,12 @@
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="74"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="76"/>
         <source>Critical Settings Were Changed</source>
         <translation>关键设置已更改</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="75"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="77"/>
         <source>Some critical settings were changed and will be applied after the application gets restarted. 
 
 You have to restart manually.</source>
@@ -1062,30 +1081,30 @@ You have to restart manually.</source>
 请手动重启。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="78"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="80"/>
         <source>Do you want to restart now?</source>
         <translation>现在重启？</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="79"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="112"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="81"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="114"/>
         <source>Changed categories of settings:
 %1.</source>
         <translation>已更改设置类型：
 %1 。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="109"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="111"/>
         <source>Some Settings are Changed and Will be Lost</source>
         <translation>已更改的设置将丢失</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="110"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="112"/>
         <source>Some settings were changed and by cancelling this dialog, you would lose these changes.</source>
         <translation>一些已更改设置将被本会话取消，更改将丢失。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="111"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="113"/>
         <source>Do you really want to close this dialog without saving any settings?</source>
         <translation>确定不保存设置而关闭会话？</translation>
     </message>
@@ -1255,17 +1274,17 @@ You can install it now.</source>
 <context>
     <name>IOFactory</name>
     <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="51"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="52"/>
         <source>Cannot open file &apos;%1&apos; for reading.</source>
         <translation>无法打开读取“ %1 ”文件。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="63"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos; for writting.</source>
         <translation>无法打开写入“ %1 ”文件。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="82"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="91"/>
         <source>Cannot open temporary file for writting.</source>
         <translation>无法打开写入临时文件。</translation>
     </message>
@@ -1301,7 +1320,7 @@ You can install it now.</source>
 <context>
     <name>MacrosPlugin</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="14"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="15"/>
         <source>Macros</source>
         <translation>宏</translation>
     </message>
@@ -1380,17 +1399,17 @@ You can install it now.</source>
 <context>
     <name>MarkdownSidebar</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="23"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="26"/>
         <source>Markdown Preview</source>
         <translation>Markdown 预览</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="27"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="30"/>
         <source>Refresh Markdown Preview</source>
         <translation>刷新 Markdown 预览</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="63"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="66"/>
         <source>This sidebar displays simple HTML preview of your Markdown source...</source>
         <translation>此侧边栏显示您的 Markdown 源代码简单的 HTML 预览...</translation>
     </message>
@@ -1398,7 +1417,7 @@ You can install it now.</source>
 <context>
     <name>MessageBox</name>
     <message>
-        <location filename="../src/libtextosaurus/common/gui/messagebox.cpp" line="104"/>
+        <location filename="../src/libtextosaurus/common/gui/messagebox.cpp" line="128"/>
         <source>Do not show this dialog again.</source>
         <translation>不再显示此对话框。</translation>
     </message>
@@ -1523,89 +1542,110 @@ You can install it now.</source>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="29"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/localization.cpp" line="76"/>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/application.cpp" line="34"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/application.cpp" line="42"/>
         <source>LANG_ABBREV</source>
         <extracomment>Abbreviation of language, e.g. en. Use ISO 639-1 code here combined with ISO 3166-1 (alpha-2) code. Examples: &quot;cs&quot;, &quot;en&quot;, &quot;it&quot;, &quot;cs_CZ&quot;, &quot;en_GB&quot;, &quot;en_US&quot;.</extracomment>
         <translation>zh_CN</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="82"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="95"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="94"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="107"/>
         <source>Parsing of JSON document failed.</source>
         <translation>解析 XML 文件失败</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="115"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="127"/>
         <source>XML is well-formed.</source>
         <translation>XML 文件格式良好</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="48"/>
-        <source>cannot encrypt file with empty password</source>
-        <translation>不能使用空密码加密文件</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="58"/>
-        <source>some weird error appeared when encrypting the file</source>
-        <translation>加密文件中出现错误</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="68"/>
-        <source>cannot decrypt file with empty password</source>
-        <translation>不能使用空密码解密文件</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="74"/>
-        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="134"/>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="86"/>
-        <source>insufficient permissions</source>
-        <translation>权限不足</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="762"/>
-        <source>Cannot save file</source>
-        <translation>无法保存文件</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="763"/>
-        <source>File &apos;%1&apos; cannot be saved because %2.</source>
-        <translation>无法保存文件“ %1 ”。原因是“ %2 ”。</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="852"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="901"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="885"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="937"/>
         <source>Cannot read file</source>
         <translation>无法读取文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="853"/>
-        <source>File &apos;%1&apos; cannot be opened for reading, reason: &apos;%2&apos;.</source>
-        <translation>无法打开读取文件“ 1% ”。原因是“ %2 ”。</translation>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="886"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="938"/>
+        <source>File &apos;%1&apos; cannot be opened for reading, reason: %2.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="902"/>
-        <source>File &apos;%1&apos; cannot be opened for reading, reason &apos;%2&apos;.</source>
-        <translation>无法打开读取文件“ 1% ”。原因是“ %2 ”。</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="22"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="23"/>
         <source>Cannot Open File</source>
         <translation>无法打开文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="23"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="24"/>
         <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
         <translation>文件“ %1 ”过大。 %2 只能读取不大于 %3 MB。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="58"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="67"/>
         <source>Loading Big File</source>
         <translation>加载大文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="59"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="68"/>
         <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
         <translation>此文件过大。 %2 将关闭一些特性（如文字换行或语法高亮），以避免加载文件过缓。</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="28"/>
+        <source>not installed</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="112"/>
+        <source>cannot encrypt data with empty password</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="151"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="182"/>
+        <source>encryption failed with error &apos;%1&apos;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="156"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="240"/>
+        <source>&quot;openssl&quot; utility crashed</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="160"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="244"/>
+        <source>&quot;openssl&quot; utility was not found</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="164"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="248"/>
+        <source>&quot;openssl&quot; utility was not able to read input</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="168"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="252"/>
+        <source>&quot;openssl&quot; utility timed out</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="172"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="256"/>
+        <source>&quot;openssl&quot; utility cannot write output</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="196"/>
+        <source>cannot decrypt data with empty password</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="235"/>
+        <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="266"/>
+        <source>decryption failed with error &apos;%1&apos;</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1916,6 +1956,39 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
 </context>
 <context>
+    <name>SettingsEncryption</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="34"/>
+        <source>OpenSSL status</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="67"/>
+        <source>Cipher algorithm</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="92"/>
+        <source>Use PBKDF2 key derivation function, but this works only with OpenSSL 1.1.x or newer</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.cpp" line="13"/>
+        <source>%1 uses &quot;openssl&quot; utility to encrypt and decrypt your documents. Your password is passed to the utility via &quot;standard input&quot; and the document which should be encrypted (or decrypted) is passed via temporary file which is always deleted after the operation is done.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.h" line="26"/>
+        <source>Encryption</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>SettingsExternalTools</name>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="47"/>
@@ -2034,31 +2107,36 @@ File filter for external e-mail selection dialog.</extracomment>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="30"/>
+        <source>Insert at cursor position and replace selection (if any)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="32"/>
         <source>Dump to output window</source>
         <translation>推至输出窗口</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="31"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="33"/>
         <source>Copy to clipboard</source>
         <translation>复制至剪切板</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="32"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="34"/>
         <source>New file</source>
         <translation>新文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="33"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="35"/>
         <source>Reload file</source>
         <translation>重新加载文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="34"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="36"/>
         <source>No output</source>
         <translation>无输出</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="106"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="108"/>
         <source>New tool</source>
         <translation>新工具</translation>
     </message>
@@ -2491,12 +2569,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>SyntaxHighlighting</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="210"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="295"/>
         <source> files (*</source>
         <translation>文件（*</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="220"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/syntaxhighlighting.cpp" line="305"/>
         <source>Plain text</source>
         <translation>纯文本</translation>
     </message>
@@ -2533,22 +2611,22 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>TextApplication</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="976"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="979"/>
         <source>New text file</source>
         <translation>新文本文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="819"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="822"/>
         <source>Unsaved text file</source>
         <translation>未保存的文本文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="819"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="822"/>
         <source>Save your file first, please</source>
         <translation>请先保存</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="826"/>
+        <location filename="../src/libtextosaurus/saurus/miscellaneous/textapplication.cpp" line="829"/>
         <source>Open file</source>
         <translation>打开文件</translation>
     </message>
@@ -2556,78 +2634,94 @@ Customizing too many substyles may lead to bad performance when handling big fil
 <context>
     <name>TextEditor</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="153"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="154"/>
         <source>No other occurrences of &quot;%1&quot; found.</source>
         <translation>无法找到“ %1 ”的其它事件。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="233"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="234"/>
         <source>File Externally Modified</source>
         <translation>文件已在外部修改</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="234"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="235"/>
         <source>This file was modified outside of %1.</source>
         <translation>此文件已被外部的 %1 修改。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="235"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="236"/>
         <source>Do you want to reload file now? This will discard all unsaved changes.</source>
         <translation>现在重新载入文件吗？会忽略所有未保存的更改。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="237"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="238"/>
         <source>Reload all files automatically (discard changes)</source>
         <translation>自动重新载入所有文件（忽略更改）</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="242"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="243"/>
         <source>File &apos;%1&apos; was reloaded from disk.</source>
         <translation>文件“ %1 ”已从磁盘重新载入。</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="271"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="272"/>
         <source>&amp;Find All</source>
         <translation>查找所有(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="277"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="278"/>
         <source>&amp;Select All</source>
         <translation>全选(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="280"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="281"/>
         <source>&amp;Cut</source>
         <translation>剪切(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="283"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="284"/>
         <source>&amp;Copy</source>
         <translation>复制(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="286"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="287"/>
         <source>&amp;Paste</source>
         <translation>粘贴(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="334"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="335"/>
         <source>Save File as</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="389"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="864"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="391"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="897"/>
         <source>Unsaved Changes</source>
         <translation>未保存更改</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="390"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="392"/>
         <source>This document has unsaved changes, do you want to save them?</source>
         <translation>此文档有未保存的更改，保存吗？</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="865"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="752"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="783"/>
+        <source>Cannot Save to File</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="753"/>
+        <source>Document cannot be saved to file because the destination is probably non-writable.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="784"/>
+        <source>Encryption of file failed: %1.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="898"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
         <translation>此文件有未保存的更改，忽略更改并重新载入？</translation>
     </message>
