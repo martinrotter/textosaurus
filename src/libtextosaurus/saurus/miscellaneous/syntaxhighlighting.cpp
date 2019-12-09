@@ -602,7 +602,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_HPHP_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_HPHP_OPERATOR, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_HPHP_WORD, SyntaxColorTheme::StyleComponents::Keyword}
-    }, {QSL("text/html"), QSL("XHTML document text")}, {
+    }, {QSL("text/x-php"), QSL("PHP script")}, {
       {0, "a abbr acronym address applet area b base basefont "
           "bdo bgsound big blink blockquote body br button caption center "
           "cite code col colgroup dd del dfn dir div dl dt em "
