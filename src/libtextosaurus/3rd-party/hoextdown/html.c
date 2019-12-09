@@ -64,85 +64,93 @@ static void escape_href(hoedown_buffer *ob, const uint8_t *source, size_t length
 static int
 rndr_attributes(struct hoedown_buffer *ob, const uint8_t *buf, const size_t size, hoedown_buffer *class, const hoedown_renderer_data *data)
 {
-	size_t n, i = 0, len = 0;
-	int id = 0, type = 0;
-	int free = 0;
+	/* i keeps track of how much we've parsed so far. */
+	size_t i = 0;
+	int rendered_id = 0;
+	int must_free_class = 0;
 
 	while (i < size) {
+		/* An attribute can come in a variety of shapes:
+		 * - #id, where "id" is a sequence of non-space characters
+		 * - .cls, where  "cls" is a sequence of non-space characters
+		 * - key=val, where "key" and "val" are sequences of non-space characters
+		 * - key="quoted val", where "quoted val" may not contain a quote.
+		 * We look for each case and set the key and val variables. We ignore text
+		 * that does not match the patterns above (e.g., single words).
+		 * */
+		int is_id = 0;
+		int is_class = 0;
+		size_t key_start = 0, key_end = 0, val_start = 0, val_end = 0;
+
+		/* Skip to the first non-space character */
+		for (; i < size && buf[i] == ' '; ++i) {}
+		if (i >= size) break;
+
 		if (buf[i] == '#') {
-			type = 1;
+			/* #id */
+			is_id = 1;
+			++i;
 		} else if (buf[i] == '.') {
-			type = 2;
-		} else if (buf[i] != ' ') {
-			type = 3;
+			/* .cls */
+			is_class = 1;
+			++i;
+		}
+		if (is_id || is_class) {
+			val_start = i;
+			for (val_end = val_start; val_end < size && buf[val_end] != ' '; ++val_end) {}
+			i = val_end;
 		} else {
+			/* key=... */
+			key_start = i;
+			for (key_end = key_start; key_end < size && buf[key_end] != ' ' && buf[key_end] != '='; ++key_end) {}
+			i = key_end;
+			if (i >= size) break;
 			++i;
-			continue;
-		}
-
-		n = i;
-
-		while (i < size && buf[i] != ' ') {
-			++i;
-		}
-
-		len = i - n;
-		if (len == 0) {
-			++i;
-			continue;
-		}
-
-		switch (type) {
-			case 1:
-				/* id */
-				if (!id) {
-					HOEDOWN_BUFPUTSL(ob, " id=\"");
-					escape_html(ob, buf+n+1, len-1);
-					hoedown_buffer_putc(ob, '"');
-					id = 1;
-				}
-				break;
-			case 2:
-				/* class */
-				if (!class) {
-					class = hoedown_buffer_new(size);
-					free = 1;
-				}
-				escape_html(class, buf+n+1, len-1);
-				hoedown_buffer_putc(class, ' ');
-				break;
-			case 3: {
-				/* attribute */
-				size_t j;
-				void *s =memchr(buf+n, '=', len);
-				if (s == NULL) {
-					break;
-				}
-				j = (char *)s - ((char *)buf + n) + 1;
-				if (buf[n+j] != buf[i-1]) {
-					while (i < size && buf[i-1] != buf[n+j]) {
-						++i;
-						++len;
-					}
-				}
-				if (len > 3 && strncasecmp((char *)buf+n, "id=", 3) == 0) {
-					if (id) {
-						break;
-					}
-					id = 1;
-				} else if (len > 6 && strncasecmp((char *)buf+n, "class=", 6) == 0) {
-					if (!class) {
-						class = hoedown_buffer_new(size);
-						free = 1;
-					}
-					escape_html(class, buf+n+7, len-8);
-					hoedown_buffer_putc(class, ' ');
-					break;
-				}
-				hoedown_buffer_putc(ob, ' ');
-				hoedown_buffer_put(ob, buf+n, len);
-				break;
+			if (buf[key_end] != '=') continue;
+			if (strncasecmp((char *)buf + key_start, "id", key_end - key_start) == 0) {
+				is_id = 1;
+			} else if (strncasecmp((char *)buf + key_start, "class", key_end - key_start) == 0) {
+				is_class = 1;
 			}
+
+			val_start = i;
+			if (val_start < size && (buf[val_start] == '"' || buf[val_start] == '\'')) {
+				/* key="quoted val" */
+				val_start += 1;
+				for (val_end = val_start; val_end < size && buf[val_end] != buf[val_start - 1]; ++val_end) {}
+				i = val_end;
+				if (i >= size) break;
+				++i;
+			} else {
+				/* key=val */
+				for (val_end = val_start; val_end < size && buf[val_end] != ' '; ++val_end) {}
+				i = val_end;
+			}
+		}
+
+		/* Now that we found our keys and values, let's render the attribute. */
+		if (is_id) {
+			if (rendered_id) continue;
+			if (val_end == val_start) continue;
+			rendered_id = 1;
+			HOEDOWN_BUFPUTSL(ob, " id=\"");
+			escape_html(ob, buf + val_start, val_end - val_start);
+			hoedown_buffer_putc(ob, '"');
+		} else if (is_class) {
+			if (val_end == val_start) continue;
+			if (!class) {
+				class = hoedown_buffer_new(size);
+				must_free_class = 1;
+			}
+			escape_html(class, buf + val_start, val_end - val_start);
+			hoedown_buffer_putc(class, ' ');
+		} else {
+			if (key_end == key_start) continue;
+			hoedown_buffer_putc(ob, ' ');
+			escape_html(ob, buf + key_start, key_end - key_start);
+			HOEDOWN_BUFPUTSL(ob, "=\"");
+			escape_html(ob, buf + val_start, val_end - val_start);
+			hoedown_buffer_putc(ob, '"');
 		}
 	}
 
@@ -152,11 +160,10 @@ rndr_attributes(struct hoedown_buffer *ob, const uint8_t *buf, const size_t size
 			hoedown_buffer_put(ob, class->data, class->size-1);
 			hoedown_buffer_putc(ob, '"');
 		}
-		if (free) {
+		if (must_free_class) {
 			hoedown_buffer_free(class);
 		}
 	}
-
 	return 1;
 }
 
@@ -205,7 +212,7 @@ rndr_blockcode(hoedown_buffer *ob, const hoedown_buffer *text, const hoedown_buf
 	if (lang) {
 		hoedown_html_renderer_state *state = data->opaque;
 		if ((state->flags & HOEDOWN_HTML_FENCED_CODE_SCRIPT) &&
-		    lang->size > 7 && memcmp(lang->data, "script@", 7) == 0) {
+		    lang->size > 7 && memcmp(lang->data, "script@", 7) == 0 && text) {
 			HOEDOWN_BUFPUTSL(ob, "<script type=\"");
 			escape_html(ob, lang->data + 7, lang->size - 7);
 			HOEDOWN_BUFPUTSL(ob, "\">\n");
@@ -413,7 +420,7 @@ rndr_header(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_buf
 	if (attr && attr->size) {
 		hoedown_buffer_put(merged_attr, attr->data, attr->size);
 	}
-	if (content && ((state->flags & HOEDOWN_HTML_HEADER_ID) || (level <= state->toc_data.nesting_level))) {
+	if (content && content->size && ((state->flags & HOEDOWN_HTML_HEADER_ID) || (level <= state->toc_data.nesting_level))) {
 		hoedown_buffer_puts(merged_attr, " #");
 		rndr_header_id(merged_attr, content->data, content->size, 0, data);
 	}
@@ -498,6 +505,7 @@ rndr_listitem(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_b
 		hoedown_html_renderer_state *state = data->opaque;
 		size_t prefix = 0;
 		size_t size = content->size;
+		int is_li_tag = 0;
 		while (size && content->data[size - 1] == '\n')
 			size--;
 
@@ -507,6 +515,7 @@ rndr_listitem(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_b
 			HOEDOWN_BUFPUTSL(ob, "<dt");
 		} else {
 			HOEDOWN_BUFPUTSL(ob, "<li");
+			is_li_tag = 1;
 		}
 
 		if (attr && attr->size) {
@@ -514,24 +523,25 @@ rndr_listitem(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_b
 		}
 		hoedown_buffer_putc(ob, '>');
 
-		if (USE_TASK_LIST(state) && size >= 3) {
+		if (USE_TASK_LIST(state) && is_li_tag && size >= 3) {
+			/* Block list items are wrapped in <p> tags. Output the opening tag now,
+			 * then check for a task list. */
 			if (*flags & HOEDOWN_LI_BLOCK) {
 				prefix = 3;
+				hoedown_buffer_put(ob, content->data, prefix);
 			}
-			if (strncmp((char *)content->data + prefix, "[ ]", 3) == 0) {
-				hoedown_buffer_put(ob, content->data, prefix);
-				HOEDOWN_BUFPUTSL(ob, "<input type=\"checkbox\"");
-				hoedown_buffer_puts(ob, USE_XHTML(state) ? "/>" : ">");
-				prefix += 3;
-				*flags |= HOEDOWN_LI_TASK;
-			} else if (strncasecmp((char *)content->data + prefix, "[x]", 3) == 0) {
-				hoedown_buffer_put(ob, content->data, prefix);
-				HOEDOWN_BUFPUTSL(ob, "<input checked=\"\" type=\"checkbox\"");
-				hoedown_buffer_puts(ob, USE_XHTML(state) ? "/>" : ">");
-				prefix += 3;
-				*flags |= HOEDOWN_LI_TASK;
-			} else {
-				prefix = 0;
+			if (size >= prefix + 3) {
+				if (strncmp((char *)content->data + prefix, "[ ]", 3) == 0) {
+					HOEDOWN_BUFPUTSL(ob, "<input type=\"checkbox\"");
+					hoedown_buffer_puts(ob, USE_XHTML(state) ? "/>" : ">");
+					prefix += 3;
+					*flags |= HOEDOWN_LI_TASK;
+				} else if (strncasecmp((char *)content->data + prefix, "[x]", 3) == 0) {
+					HOEDOWN_BUFPUTSL(ob, "<input checked=\"\" type=\"checkbox\"");
+					hoedown_buffer_puts(ob, USE_XHTML(state) ? "/>" : ">");
+					prefix += 3;
+					*flags |= HOEDOWN_LI_TASK;
+				}
 			}
 		}
 

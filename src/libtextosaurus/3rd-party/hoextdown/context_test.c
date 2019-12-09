@@ -44,7 +44,7 @@ rndr_header(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_buf
 static int
 rndr_link(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_buffer *link, const hoedown_buffer *title, const hoedown_buffer *attr, const hoedown_renderer_data *data)
 {
-	const hoedown_buffer *id;
+	const hoedown_buffer *id, *ref_attr, *inline_attr;
 	hoedown_link_type link_type;
 
 	id = hoedown_document_link_id(((hoedown_context_test_renderer_state*) data->opaque)->doc);
@@ -70,6 +70,18 @@ rndr_link(hoedown_buffer *ob, const hoedown_buffer *content, const hoedown_buffe
 			break;
 		default:
 			break;
+	}
+
+	ref_attr = hoedown_document_link_ref_attr(((hoedown_context_test_renderer_state*) data->opaque)->doc);
+	if (ref_attr && ref_attr->size > 0) {
+		hoedown_buffer_puts(ob, " ref_attr: ");
+		hoedown_buffer_put(ob, ref_attr->data, ref_attr->size);
+	}
+
+	inline_attr = hoedown_document_link_inline_attr(((hoedown_context_test_renderer_state*) data->opaque)->doc);
+	if (inline_attr && inline_attr->size > 0) {
+		hoedown_buffer_puts(ob, " inline_attr: ");
+		hoedown_buffer_put(ob, inline_attr->data, inline_attr->size);
 	}
 
 	return 1;
@@ -128,7 +140,7 @@ rndr_hrule(hoedown_buffer *ob, const hoedown_renderer_data *data)
 static int
 rndr_image(hoedown_buffer *ob, const hoedown_buffer *link, const hoedown_buffer *title, const hoedown_buffer *alt, const hoedown_buffer *attr, const hoedown_renderer_data *data)
 {
-	const hoedown_buffer *id;
+	const hoedown_buffer *id, *ref_attr, *inline_attr;
 	hoedown_link_type link_type;
 
 	id = hoedown_document_link_id(((hoedown_context_test_renderer_state*) data->opaque)->doc);
@@ -153,6 +165,18 @@ rndr_image(hoedown_buffer *ob, const hoedown_buffer *link, const hoedown_buffer 
 			break;
 		default:
 			break;
+	}
+
+	ref_attr = hoedown_document_link_ref_attr(((hoedown_context_test_renderer_state*) data->opaque)->doc);
+	if (ref_attr && ref_attr->size > 0) {
+		hoedown_buffer_puts(ob, " ref_attr: ");
+		hoedown_buffer_put(ob, ref_attr->data, ref_attr->size);
+	}
+
+	inline_attr = hoedown_document_link_inline_attr(((hoedown_context_test_renderer_state*) data->opaque)->doc);
+	if (inline_attr && inline_attr->size > 0) {
+		hoedown_buffer_puts(ob, " inline_attr: ");
+		hoedown_buffer_put(ob, inline_attr->data, inline_attr->size);
 	}
 
 	return 1;

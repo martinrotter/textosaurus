@@ -221,6 +221,16 @@ void hoedown_document_free(hoedown_document *doc);
 /* returns a hoedown buffer containing the id of link or footnote reference being processed, or NULL if no link or footnote is being processed */
 const hoedown_buffer *hoedown_document_link_id(hoedown_document* document);
 
+/* returns a hoedown buffer containing the reference attr of link being
+ * processed, or NULL or empty if none exists */
+const hoedown_buffer *hoedown_document_link_ref_attr(
+    hoedown_document *document);
+
+/* returns a hoedown buffer containing the inline attr of link being processed,
+ * or NULL or empty if none exists */
+const hoedown_buffer *hoedown_document_link_inline_attr(
+    hoedown_document *document);
+
 /* returns the id of the footnote definition currently processed, or NULL if not processing a footnote */
 const hoedown_buffer *hoedown_document_footnote_id(hoedown_document *document);
 

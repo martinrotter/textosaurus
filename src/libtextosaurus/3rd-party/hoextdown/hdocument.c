@@ -138,6 +138,8 @@ struct hoedown_document {
 
 	/* extra information provided to callbacks */
 	const hoedown_buffer *link_id;
+	const hoedown_buffer *link_inline_attr;
+	const hoedown_buffer *link_ref_attr;
 	int is_escape_char;
 	hoedown_header_type header_type;
 	hoedown_link_type link_type;
@@ -445,10 +447,12 @@ script_tag_length(uint8_t *data, size_t size)
 			} else {
 				comment = data[i];
 			}
-			}
+		}
 
 		++i;
 	}
+
+	if (i >= size) return i;
 
 	return i + 1;
 }
@@ -464,8 +468,8 @@ tag_length(uint8_t *data, size_t size, hoedown_autolink_type *autolink, int scri
 
 	if (data[0] != '<') return 0;
 
-        /* HTML comment, laxist form */
-        if (size > 5 && data[1] == '!' && data[2] == '-' && data[3] == '-') {
+	/* HTML comment, laxist form */
+	if (size > 5 && data[1] == '!' && data[2] == '-' && data[3] == '-') {
 		i = 5;
 
 		while (i < size && !(data[i - 2] == '-' && data[i - 1] == '-' && data[i] == '>'))
@@ -475,10 +479,10 @@ tag_length(uint8_t *data, size_t size, hoedown_autolink_type *autolink, int scri
 
 		if (i <= size)
 			return i;
-        }
+	}
 
 	/* begins with a '<' optionally followed by '/', followed by letter or number */
-        i = (data[1] == '/') ? 2 : 1;
+	i = (data[1] == '/') ? 2 : 1;
 
 	if (!isalnum(data[i])) {
 		if (script_tag) {
@@ -1371,17 +1375,20 @@ static size_t
 char_link(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t offset, size_t size)
 {
 	int is_img = (offset && data[-1] == '!' && !is_escaped(data - offset, offset - 1));
-	int is_footnote = (doc->ext_flags & HOEDOWN_EXT_FOOTNOTES && data[1] == '^');
+	int is_footnote = (doc->ext_flags & HOEDOWN_EXT_FOOTNOTES && size > 1 && data[1] == '^');
 	size_t i = 1, txt_e, link_b = 0, link_e = 0, title_b = 0, title_e = 0;
 	hoedown_buffer *content = NULL;
 	hoedown_buffer *link = NULL;
 	hoedown_buffer *title = NULL;
 	hoedown_buffer *u_link = NULL;
+	hoedown_buffer *inline_attr = NULL;
+	hoedown_buffer *ref_attr = NULL;
 	hoedown_buffer *attr = NULL;
 	hoedown_buffer *id = NULL;
 	size_t org_work_size = doc->work_bufs[BUFFER_SPAN].size;
 	int ret = 0, in_title = 0, qtype = 0;
 	hoedown_link_type link_type = HOEDOWN_LINK_NONE;
+	int ref_attr_exists = 0, inline_attr_exists = 0;
 
 	/* checking whether the correct renderer exists */
 	if ((is_footnote && !doc->md.footnote_ref) || (is_img && !doc->md.image)
@@ -1545,7 +1552,7 @@ char_link(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t offse
 		/* keeping link and title from link_ref */
 		link = lr->link;
 		title = lr->title;
-		attr = lr->attr;
+		ref_attr = lr->attr;
 		i++;
 	}
 
@@ -1568,7 +1575,7 @@ char_link(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t offse
 		/* keeping link and title from link_ref */
 		link = lr->link;
 		title = lr->title;
-		attr = lr->attr;
+		ref_attr = lr->attr;
 
 		/* rewinding the spacing */
 		i = txt_e + 1;
@@ -1593,34 +1600,66 @@ char_link(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t offse
 		unscape_text(u_link, link);
 	}
 
+	/* if special attributes are enabled, attempt to parse an inline one from
+	 * the link */
 	if (doc->ext_flags & HOEDOWN_EXT_SPECIAL_ATTRIBUTE) {
-		if (!attr) {
-			/* attr is a span because cleanup code depends on it being span */
-			attr = newbuf(doc, BUFFER_SPAN);
-		}
-		i += parse_inline_attributes(data + i, size - i, attr, doc->attr_activation);
-		if (attr->size > 0) {
-			if (attr->size > 1) {
-				/* remove optional < and > around special attributes */
-				if (attr->data[0] == '<') {
-					attr->data++;
-					attr->size--;
-				}
-				if (attr->data[attr->size - 1] == '>') {
-					attr->size--;
-				}
+		/* attr is a span because cleanup code depends on it being span */
+		inline_attr = newbuf(doc, BUFFER_SPAN);
+		i += parse_inline_attributes(data + i, size - i, inline_attr, doc->attr_activation);
+	}
+
+	/* remove optional < and > around inline and ref special attributes */
+	if (ref_attr && ref_attr->size > 0) {
+		if (ref_attr->size > 1) {
+			if (ref_attr->data[0] == '<') {
+				hoedown_buffer_slurp(ref_attr, 1);
 			}
+			if (ref_attr->data[ref_attr->size - 1] == '>') {
+				ref_attr->size--;
+			}
+		}
+	}
+	if (inline_attr && inline_attr->size > 0) {
+		if (inline_attr->size > 1) {
+			if (inline_attr->data[0] == '<') {
+				hoedown_buffer_slurp(inline_attr, 1);
+			}
+			if (inline_attr->data[inline_attr->size - 1] == '>') {
+				inline_attr->size--;
+			}
+		}
+	}
+
+	/* construct the final attr that is actually applied to the link */
+	ref_attr_exists = ref_attr && ref_attr->size > 0;
+	inline_attr_exists = inline_attr && inline_attr->size > 0;
+	if (ref_attr_exists || inline_attr_exists) {
+		attr = newbuf(doc, BUFFER_SPAN);
+		if (ref_attr_exists) {
+			hoedown_buffer_put(attr, ref_attr->data, ref_attr->size);
+		}
+		/* if both inline and ref attrs exist, join them with a space to prevent
+		 * conflicts */
+		if (ref_attr_exists && inline_attr_exists) {
+			hoedown_buffer_putc(attr, ' ');
+		}
+		if (inline_attr_exists) {
+			hoedown_buffer_put(attr, inline_attr->data, inline_attr->size);
 		}
 	}
 
 	/* calling the relevant rendering function */
 	doc->link_id = id;
 	doc->link_type = link_type;
+	doc->link_ref_attr = ref_attr;
+	doc->link_inline_attr = inline_attr;
 	if (is_img) {
 		ret = doc->md.image(ob, u_link, title, content, attr, &doc->data);
 	} else {
 		ret = doc->md.link(ob, content, u_link, title, attr, &doc->data);
 	}
+	doc->link_inline_attr = NULL;
+	doc->link_ref_attr = NULL;
 	doc->link_type = HOEDOWN_LINK_NONE;
 	doc->link_id = NULL;
 
@@ -1805,7 +1844,7 @@ parse_codefence(hoedown_document *doc, uint8_t *data, size_t size, hoedown_buffe
 static int
 is_atxheader(hoedown_document *doc, uint8_t *data, size_t size)
 {
-	size_t level = 0, len = size, begin = 0;
+	size_t level = 0, begin = 0, len;
 	uint8_t *p;
 
 	if (data[0] != '#')
@@ -1818,9 +1857,10 @@ is_atxheader(hoedown_document *doc, uint8_t *data, size_t size)
 			return 0;
 	}
 
+	len = size - level;
 	p = memchr(data + level, '\n', len);
 	if (p) {
-		len = (p - data) - level + 1;
+		len = p - (data + level) + 1;
 	}
 
 	/* if the header is only whitespace, it is not a header */
@@ -1837,13 +1877,12 @@ is_atxheader(hoedown_document *doc, uint8_t *data, size_t size)
 		p = memchr(data + level, '{', len);
 		if (p) {
 			/* get number of characters from # to { */
-			begin = (p - data) - level;
+			begin = p - (data + level);
 			if (begin > 0 && !is_empty_all(data + level, begin)) {
 				return 1;
 			}
 			/* check for special attributes after the # */
-			begin += level;
-			return !parse_inline_attributes(data + begin, len - begin, NULL, doc->attr_activation);
+			return !parse_inline_attributes(data + level + begin, len - begin, NULL, doc->attr_activation);
 		}
 	}
 
@@ -2253,7 +2292,7 @@ parse_fencedcode(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_
 			is_empty(data + (line_start+w), i - (line_start+w)))
 			break;
 
-		i++;
+		if (i < size) i++;
 	}
 
 	text.data = data + text_start;
@@ -2347,8 +2386,10 @@ parse_listitem(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t 
 		}
 	}
 
-	if (!beg)
+	if (!beg) {
+		if (ol_numeral) hoedown_buffer_free(ol_numeral);
 		return 0;
+	}
 
 	/* skipping to the beginning of the following line */
 	end = beg;
@@ -2478,7 +2519,7 @@ parse_listitem(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t 
 				break;
 			}
 
-			i = 1;
+			i = 0;
 			while (i < end && work->data[i] != '\n') {
 				i++;
 			}
@@ -3044,13 +3085,17 @@ parse_table_row(
 			}
 
 			/* skip new line and leading colon */
-			pos += 2;
+			if (pos < size) pos++;
+			if (pos < size) pos++;
 
-			/* seek to the beginning of the correct column on the continuation line */
+			/* Seek to the beginning of the correct column on the continuation line.
+			 * The continuation line should have the expected number of columns, and
+			 * so we never expect pos >= size or data[pos] == '\n'. These checks serve
+			 * as defense in depth against wrong preconditions. */
 			for (c = 0; c < col; c++) {
-				while (pos < size && (is_backslashed(data, pos) || data[pos] != ':'))
+				while (pos < size && data[pos] != '\n' && (is_backslashed(data, pos) || data[pos] != ':'))
 					pos++;
-				pos++;  /* skip colon */
+				if (pos < size && data[pos] == ':') pos++;  /* skip colon */
 			}
 
 			parse_table_cell_line(cell_content, data, size, pos, ':', 1 /* is_contination */);
@@ -3321,7 +3366,11 @@ parse_table(
 					if (!is_backslashed(data, j - 1) && data[j - 1] == ':')
 						colons--;
 
-					if (colons != pipes) break;
+					/* Hoedown allows table rows where the number of cells is different
+					 * from `columns`. In this case, `parse_table_row` will add empty
+					 * cells. However, the code does not work in the multi-line case, so
+					 * we require the right number of columns. */
+					if (colons != pipes || colons != columns - 1) break;
 
 					rows++;
 					i = j;
@@ -3683,14 +3732,14 @@ is_html_comment(const uint8_t *data, size_t beg, size_t end, size_t *last)
 	if (!(data[beg] == '<'  && data[beg + 1] == '!' && data[beg + 2] == '-' && data[beg + 3] == '-')) return 0;
 
 	i = 5;
-	while (i < end && !(data[beg + i - 2] == '-' && data[beg + i - 1] == '-' && data[beg + i] == '>')) i++;
+	while (beg + i < end && !(data[beg + i - 2] == '-' && data[beg + i - 1] == '-' && data[beg + i] == '>')) i++;
 	/* i can only ever be beyond the end if the ending --> is not found */
-	if (i >= end) return 0;
+	if (beg + i >= end) return 0;
 	i++;
 
-	if (i < end && (data[beg + i] == '\n' || data[beg + i] == '\r')) {
+	if (beg + i < end && (data[beg + i] == '\n' || data[beg + i] == '\r')) {
 		i++;
-		if (i < end && data[beg + i] == '\r' && data[beg + i - 1] == '\n') i++;
+		if (beg + i < end && data[beg + i] == '\r' && data[beg + i - 1] == '\n') i++;
 	}
 
 	if (last)
@@ -3975,6 +4024,8 @@ hoedown_document_new(
 	doc->attr_activation = attr_activation;
 	doc->in_link_body = 0;
 	doc->link_id = NULL;
+	doc->link_ref_attr = NULL;
+	doc->link_inline_attr = NULL;
 	doc->is_escape_char = 0;
 	doc->header_type = HOEDOWN_HEADER_NONE;
 	doc->link_type = HOEDOWN_LINK_NONE;
@@ -4036,7 +4087,7 @@ hoedown_document_render(hoedown_document *doc, hoedown_buffer *ob, const uint8_t
 			beg = end;
 		} else if (is_html_comment(data, beg, size, &end)) {
 			size_t  i = 0;
-			while (i < (end - beg)) {
+			while (i < (end - beg) && beg + i < size) {
 				if (data[beg + i] == '\t' && (data[beg + i] & 0xc0) != 0x80) {
 					hoedown_buffer_put(text, (uint8_t*)"    ", 4);
 				} else {
@@ -4081,7 +4132,7 @@ hoedown_document_render(hoedown_document *doc, hoedown_buffer *ob, const uint8_t
 
 	if (text->size) {
 		/* adding a final newline if not already present */
-		if (text->data[text->size - 1] != '\n' &&  text->data[text->size - 1] != '\r')
+		if (text->data[text->size - 1] != '\n')
 			hoedown_buffer_putc(text, '\n');
 
 		parse_block(ob, doc, text->data, text->size);
@@ -4179,6 +4230,18 @@ const hoedown_buffer*
 hoedown_document_link_id(hoedown_document* document)
 {
 	return document->link_id;
+}
+
+const hoedown_buffer*
+hoedown_document_link_ref_attr(hoedown_document* document)
+{
+	return document->link_ref_attr;
+}
+
+const hoedown_buffer*
+hoedown_document_link_inline_attr(hoedown_document* document)
+{
+	return document->link_inline_attr;
 }
 
 int
