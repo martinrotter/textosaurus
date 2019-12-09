@@ -573,6 +573,55 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       << Lexer(QSL("PO"), QStringList {
       QSL("po")
     }, SCLEX_PO)
+      << Lexer(QSL("PHP"), QStringList {
+      QSL("php")
+    }, SCLEX_PHPSCRIPT, {
+      {SCE_H_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
+      {SCE_H_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_H_TAG, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_H_TAGEND, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_H_ATTRIBUTE, SyntaxColorTheme::StyleComponents::Keyword2},
+      {SCE_H_XMLSTART, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_H_XMLEND, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_H_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_H_TAGUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_H_ATTRIBUTEUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_H_CDATA, SyntaxColorTheme::StyleComponents::PlainData},
+      {SCE_H_DOUBLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_H_SINGLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_H_QUESTION, SyntaxColorTheme::StyleComponents::Preprocessor},
+
+      // PHP-specific bindings.
+      {SCE_HPHP_COMPLEX_VARIABLE, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_HPHP_SIMPLESTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_HPHP_HSTRING, SyntaxColorTheme::StyleComponents::String},
+      {SCE_HPHP_HSTRING_VARIABLE, SyntaxColorTheme::StyleComponents::String},
+      {SCE_HPHP_NUMBER, SyntaxColorTheme::StyleComponents::Number},
+      {SCE_HPHP_VARIABLE, SyntaxColorTheme::StyleComponents::Identifier},
+      {SCE_HPHP_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_HPHP_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
+      {SCE_HPHP_OPERATOR, SyntaxColorTheme::StyleComponents::Operator},
+      {SCE_HPHP_WORD, SyntaxColorTheme::StyleComponents::Keyword}
+    }, {QSL("text/html"), QSL("XHTML document text")}, {
+      {0, "a abbr acronym address applet area b base basefont "
+          "bdo bgsound big blink blockquote body br button caption center "
+          "cite code col colgroup dd del dfn dir div dl dt em "
+          "fieldset font form frame frameset h1 h2 h3 h4 h5 h6 "
+          "head hr html i iframe img input ins isindex kbd label "
+          "legend li link listing map marquee menu menuitem meta multicol nobr noembed noframes noscript "
+          "object ol optgroup option p param plaintext pre q s samp "
+          "script select small spacer span strike strong style sub sup "
+          "table tbody td textarea tfoot th thead title tr tt u ul "
+          "var xml xmlns xmp"},
+      {4, "__halt_compiler() abstract and array() as "
+          "break callable case catch class clone const continue declare default "
+          "die() do echo else elseif empty() enddeclare endfor endforeach endif "
+          "endswitch endwhile eval() exit() extends final finally for foreach function "
+          "global goto if implements include include_once instanceof "
+          "insteadof interface isset() list() namespace new or print "
+          "private protected public require require_once "
+          "return static switch throw trait try unset() use var while xor yield "}
+    })
       << Lexer(QSL("PostScript"), QStringList {
       QSL("ps")
     }, SCLEX_PS, {}, {QSL("application/postscript"), QSL("PostScript document")})
