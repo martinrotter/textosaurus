@@ -487,7 +487,9 @@ QList<Lexer> SyntaxHighlighting::lexers() {
           "object ol optgroup option p param plaintext pre q s samp "
           "script select small spacer span strike strong style sub sup "
           "table tbody td textarea tfoot th thead title tr tt u ul "
-          "var xml xmlns xmp"}
+          "var xml xmlns xmp address article aside audio base bdi canvas command details datalist dialog embed "
+          "figure figcaption footer header hgroup keygen main mark menu meter nav output "
+          "picture progress ruby rb rt rtc rp section source template track time video wbr"}
     })
       << Lexer(QSL("Inno Setup"), QStringList {
       QSL("inno")
