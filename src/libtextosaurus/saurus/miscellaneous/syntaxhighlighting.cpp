@@ -347,7 +347,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_C_PREPROCESSORCOMMENTDOC, SyntaxColorTheme::StyleComponents::Keyword}
     }, {QSL("text/x-awk"), QSL("text/x-gawk"), QSL("text/x-nawk")}, {
       {0, "break case continue do else exit function for if in next return switch while "
-          "@include delete nextfile BEGIN END"
+          "@include delete nextfile BEGIN END "
           "ARGC ARGIND ARGV FILENAME FNR FS NF NR OFMT OFS ORS RLENGTH RS RSTART SUBSEP "
           "BINMODE CONVFMT FIELDWIDTHS FPAT IGNORECASE LINT TEXTDOMAiN ENVIRON ERRNO PROCINFO RT"}
     })
@@ -453,6 +453,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       {SCE_DIFF_HEADER, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_DIFF_POSITION, SyntaxColorTheme::StyleComponents::Operator},
       {SCE_DIFF_DELETED, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_DIFF_ADDED, SyntaxColorTheme::StyleComponents::Number}
     }, {QSL("text/x-diff")})
       << Lexer(QSL("Fortran"), QStringList {
       QSL("for"), QSL("f90"), QSL("f95"), QSL("f2k"), QSL("f23")
@@ -461,29 +462,33 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       QSL("f77")
     }, SCLEX_F77)
       << Lexer(QSL("HTML"), QStringList {
-      QSL("html"), QSL("htm"), QSL("shtml"), QSL("shtm"), QSL("xhtml"), QSL("xht"), QSL("hta"), QSL("php")
-    }, SCLEX_PHPSCRIPT, {
+      QSL("html"), QSL("htm"), QSL("shtml"), QSL("shtm"), QSL("xhtml"), QSL("xht"), QSL("hta")
+    }, SCLEX_HTML, {
       {SCE_H_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
       {SCE_H_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
       {SCE_H_TAG, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_H_TAGEND, SyntaxColorTheme::StyleComponents::Keyword},
+      {SCE_H_ATTRIBUTE, SyntaxColorTheme::StyleComponents::Keyword2},
       {SCE_H_XMLSTART, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_H_XMLEND, SyntaxColorTheme::StyleComponents::Keyword},
       {SCE_H_NUMBER, SyntaxColorTheme::StyleComponents::Number},
-      {SCE_H_ATTRIBUTE, SyntaxColorTheme::StyleComponents::Keyword2},
+      {SCE_H_TAGUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_H_ATTRIBUTEUNKNOWN, SyntaxColorTheme::StyleComponents::Error},
+      {SCE_H_CDATA, SyntaxColorTheme::StyleComponents::PlainData},
       {SCE_H_DOUBLESTRING, SyntaxColorTheme::StyleComponents::String},
-      {SCE_H_SINGLESTRING, SyntaxColorTheme::StyleComponents::String},
-      {SCE_HPHP_DEFAULT, SyntaxColorTheme::StyleComponents::Default},
-      {SCE_HPHP_HSTRING, SyntaxColorTheme::StyleComponents::String},
-      {SCE_HPHP_WORD, SyntaxColorTheme::StyleComponents::Keyword},
-      {SCE_HPHP_SIMPLESTRING, SyntaxColorTheme::StyleComponents::String},
-      {SCE_HPHP_NUMBER, SyntaxColorTheme::StyleComponents::Number},
-      {SCE_HPHP_VARIABLE, SyntaxColorTheme::StyleComponents::Identifier},
-      {SCE_HPHP_COMMENT, SyntaxColorTheme::StyleComponents::Comment},
-      {SCE_HPHP_COMMENTLINE, SyntaxColorTheme::StyleComponents::Comment},
-      {SCE_HPHP_HSTRING_VARIABLE, SyntaxColorTheme::StyleComponents::String},
-      {SCE_HPHP_OPERATOR, SyntaxColorTheme::StyleComponents::Operator}
-    }, {QSL("text/html"), QSL("XHTML document text")})
+      {SCE_H_SINGLESTRING, SyntaxColorTheme::StyleComponents::String}
+    }, {QSL("text/html"), QSL("XHTML document text")}, {
+      {0, "a abbr acronym address applet area b base basefont "
+          "bdo bgsound big blink blockquote body br button caption center "
+          "cite code col colgroup dd del dfn dir div dl dt em "
+          "fieldset font form frame frameset h1 h2 h3 h4 h5 h6 "
+          "head hr html i iframe img input ins isindex kbd label "
+          "legend li link listing map marquee menu menuitem meta multicol nobr noembed noframes noscript "
+          "object ol optgroup option p param plaintext pre q s samp "
+          "script select small spacer span strike strong style sub sup "
+          "table tbody td textarea tfoot th thead title tr tt u ul "
+          "var xml xmlns xmp"}
+    })
       << Lexer(QSL("Inno Setup"), QStringList {
       QSL("inno")
     }, SCLEX_INNOSETUP)
