@@ -43,7 +43,7 @@ QString MessageBox::getOpenFileName(QWidget* parent, const QString& caption, con
   dialog.setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
   dialog.setOption(QFileDialog::Option::ShowDirsOnly, false);
   dialog.setOption(QFileDialog::Option::DontConfirmOverwrite, false);
-  dialog.setOption(QFileDialog::Option::DontUseNativeDialog, false);
+  dialog.setOption(QFileDialog::Option::DontUseNativeDialog, true);
   dialog.setOption(QFileDialog::Option::HideNameFilterDetails, false);
 
   if (dialog.exec() == QDialog::DialogCode::Accepted) {
