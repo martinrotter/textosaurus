@@ -319,8 +319,8 @@ CONFIG(release, debug|release) {
 }
 
 # Add hoextdown.
-SOURCES += $$files(3rd-party/hoedown/*.c, false)
-HEADERS  += $$files(3rd-party/hoedown/*.h, false)
+SOURCES += $$files(3rd-party/hoextdown/*.c, false)
+HEADERS  += $$files(3rd-party/hoextdown/*.h, false)
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/common/dynamic-shortcuts \

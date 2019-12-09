@@ -7,6 +7,7 @@
 #define SOLAR_LIGHT_BLUE      38, 139, 210
 #define SOLAR_LIGHT_MAGENTA   211, 54, 130
 #define SOLAR_LIGHT_ORANGE    203, 75, 22
+#define SOLAR_LIGHT_CYAN      175, 74, 63
 #define SOLAR_LIGHT_BASE_00   101, 123, 131
 #define SOLAR_LIGHT_VIOLET    108, 113, 196
 #define SOLAR_LIGHT_BASE_1    147, 161, 161
@@ -21,6 +22,7 @@
 #define SOLAR_GREEN     133, 153, 0
 #define SOLAR_VIOLET    108, 113, 196
 #define SOLAR_RED       220, 50, 47
+#define SOLAR_CYAN      175, 74, 63
 #define SOLAR_ORANGE    203, 75, 22
 #define SOLAR_BASE_01   88, 110, 117
 

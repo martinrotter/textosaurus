@@ -20,8 +20,6 @@
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
-#include "3rd-party/hoedown/hdocument.h"
-#include "3rd-party/hoedown/html.h"
 #include "3rd-party/scintilla/include/ILoader.h"
 #include "3rd-party/scintilla/include/Platform.h"
 #include "3rd-party/scintilla/include/SciLexer.h"

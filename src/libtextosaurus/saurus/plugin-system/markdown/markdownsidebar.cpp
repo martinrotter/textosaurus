@@ -11,8 +11,8 @@
 #include "saurus/plugin-system/markdown/markdownplugin.h"
 #include "saurus/plugin-system/markdown/markdowntextbrowser.h"
 
-#include "3rd-party/hoedown/hdocument.h"
-#include "3rd-party/hoedown/html.h"
+#include "3rd-party/hoextdown/hdocument.h"
+#include "3rd-party/hoextdown/html.h"
 
 #include <QTextBrowser>
 #include <QToolBar>

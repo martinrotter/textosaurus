@@ -1,15 +1,15 @@
 # Setup all public headers, this needs to be kept in
 # sync with truly used headers.
 INSTALL_HEADERS = \
-../libtextosaurus/3rd-party/hoedown/autolink.h \
-../libtextosaurus/3rd-party/hoedown/buffer.h \
-../libtextosaurus/3rd-party/hoedown/context_test.h \
-../libtextosaurus/3rd-party/hoedown/escape.h \
-../libtextosaurus/3rd-party/hoedown/hash.h \
-../libtextosaurus/3rd-party/hoedown/hdocument.h \
-../libtextosaurus/3rd-party/hoedown/html.h \
-../libtextosaurus/3rd-party/hoedown/stack.h \
-../libtextosaurus/3rd-party/hoedown/version.h \
+../libtextosaurus/3rd-party/hoextdown/autolink.h \
+../libtextosaurus/3rd-party/hoextdown/buffer.h \
+../libtextosaurus/3rd-party/hoextdown/context_test.h \
+../libtextosaurus/3rd-party/hoextdown/escape.h \
+../libtextosaurus/3rd-party/hoextdown/hash.h \
+../libtextosaurus/3rd-party/hoextdown/hdocument.h \
+../libtextosaurus/3rd-party/hoextdown/html.h \
+../libtextosaurus/3rd-party/hoextdown/stack.h \
+../libtextosaurus/3rd-party/hoextdown/version.h \
 ../libtextosaurus/3rd-party/qtsingleapplication/qtlocalpeer.h \
 ../libtextosaurus/3rd-party/qtsingleapplication/qtlockedfile.h \
 ../libtextosaurus/3rd-party/qtsingleapplication/qtsingleapplication.h \
