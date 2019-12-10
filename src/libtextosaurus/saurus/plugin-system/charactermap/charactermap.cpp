@@ -43,8 +43,12 @@ void CharacterMap::mouseMoveEvent(QMouseEvent* event) {
   if (idx >= 0 && idx < m_characters.size()) {
     CharacterInfo nfo = m_characters.at(idx);
     QString text = tr("<center><h1>%1</h1></center>"
-                      "<p>HEX: %3 (UTF-16)</p>").arg(QString(nfo.m_character), nfo.m_description.toHtmlEscaped(),
-                                                     QString::number(nfo.m_character.unicode(), 16));
+                      "<center><p>%2</p><hr></center>"
+                      "HEX: %3<br/>"
+                      "DEC: %4").arg(QString(nfo.m_character),
+                                     nfo.m_description.toHtmlEscaped(),
+                                     QString::number(nfo.m_character.unicode(), 16),
+                                     QString::number(nfo.m_character.unicode(), 10));
 
     QToolTip::showText(event->globalPos(), text, this);
   }
