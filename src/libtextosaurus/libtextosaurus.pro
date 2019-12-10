@@ -122,6 +122,7 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/plugin-system/charactermap/charactermap.h \
             saurus/plugin-system/charactermap/charactermapplugin.h \
             saurus/plugin-system/charactermap/charactermapsidebar.h \
+            saurus/plugin-system/charactermap/charactermapwidget.h \
             saurus/plugin-system/filesystem/favoriteslistwidget.h \
             saurus/plugin-system/filesystem/filesystemmodel.h \
             saurus/plugin-system/filesystem/filesystemplugin.h \
@@ -213,6 +214,7 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/charactermap/charactermap.cpp \
             saurus/plugin-system/charactermap/charactermapplugin.cpp \
             saurus/plugin-system/charactermap/charactermapsidebar.cpp \
+            saurus/plugin-system/charactermap/charactermapwidget.cpp \
             saurus/plugin-system/filesystem/favoriteslistwidget.cpp \
             saurus/plugin-system/filesystem/filesystemmodel.cpp \
             saurus/plugin-system/filesystem/filesystemplugin.cpp \

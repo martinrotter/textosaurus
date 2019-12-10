@@ -7,12 +7,14 @@
 
 #include "saurus/plugin-system/pluginbase.h"
 
+class CharacterMapSidebar;
+
 class CharacterMapPlugin : public QObject, public PluginBase {
   Q_OBJECT
   Q_INTERFACES(PluginBase)
 
   public:
-    explicit CharacterMapPlugin();
+    explicit CharacterMapPlugin(QObject* parent = nullptr);
 
     QString name() const override;
     QString id() const override;
@@ -24,6 +26,9 @@ class CharacterMapPlugin : public QObject, public PluginBase {
                IconFactory* icon_factory,
                WebFactory* web_factory) override;
     void stop() override;
+
+  private:
+    CharacterMapSidebar* m_sidebar;
 };
 
 #endif // CHARACTERMAPPLUGIN_H

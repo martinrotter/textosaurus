@@ -6,12 +6,14 @@
 #include "saurus/gui/sidebars/basesidebar.h"
 
 class CharacterMapPlugin;
+class CharacterMapWidget;
 
 class CharacterMapSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:
-    CharacterMapSidebar(CharacterMapPlugin* plugin, QWidget* parent = nullptr);
+    explicit CharacterMapSidebar(CharacterMapPlugin* plugin, QWidget* parent = nullptr);
+    virtual ~CharacterMapSidebar() = default;
 
   public:
     virtual Qt::DockWidgetArea initialArea() const override;
@@ -20,6 +22,12 @@ class CharacterMapSidebar : public BaseSidebar {
 
   protected:
     virtual void load() override;
+
+  private slots:
+    void onCharactedSelected(const QChar& chr);
+
+  private:
+    CharacterMapWidget* m_mapWidget;
 };
 
 #endif // CHARACTERMAPSIDEBAR_H

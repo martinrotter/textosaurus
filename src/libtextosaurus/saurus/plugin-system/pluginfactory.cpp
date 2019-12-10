@@ -8,6 +8,7 @@
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
+#include "saurus/plugin-system/charactermap/charactermapplugin.h"
 #include "saurus/plugin-system/filesystem/filesystemplugin.h"
 #include "saurus/plugin-system/macros/macrosplugin.h"
 #include "saurus/plugin-system/markdown/markdownplugin.h"
@@ -21,7 +22,8 @@ PluginFactory::PluginFactory(QObject* parent) : QObject(parent) {}
 
 void PluginFactory::loadPlugins(TextApplication* text_app) {
   // Some hardcoded "plugins".
-  m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this) << new MacrosPlugin(this);
+  m_plugins << new MarkdownPlugin(this) << new FilesystemPlugin(this)
+            << new MacrosPlugin(this) << new CharacterMapPlugin(this);
 
   const QString plugins_path = pluginsLibPath();
 

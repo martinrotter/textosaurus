@@ -3,8 +3,9 @@
 #include "saurus/plugin-system/charactermap/charactermapplugin.h"
 
 #include "definitions/definitions.h"
+#include "saurus/plugin-system/charactermap/charactermapsidebar.h"
 
-CharacterMapPlugin::CharacterMapPlugin()
+CharacterMapPlugin::CharacterMapPlugin(QObject* parent) : QObject(parent), m_sidebar(nullptr)
 {}
 
 QString CharacterMapPlugin::name() const {
@@ -16,7 +17,11 @@ QString CharacterMapPlugin::id() const {
 }
 
 QList<BaseSidebar*> CharacterMapPlugin::sidebars() {
-  return {};
+  if (m_sidebar == nullptr) {
+    m_sidebar = new CharacterMapSidebar(this, nullptr);
+  }
+
+  return QList<BaseSidebar*>() << m_sidebar;
 }
 
 QList<QAction*> CharacterMapPlugin::userActions() {
