@@ -10,6 +10,9 @@
     <file>graphics/textosaurus.png</file>
     <file>desktop/io.github.martinrotter.textosaurus.desktop</file>
     
+    <file>unicode/Blocks.txt</file>
+    <file>unicode/UnicodeData.txt</file>  
+    
     <file>graphics/misc/flags/cs.png</file>
     <file>graphics/misc/flags/de.png</file>
     <file>graphics/misc/flags/en.png</file>

@@ -2,6 +2,7 @@
 
 #include "saurus/plugin-system/charactermap/charactermapwidget.h"
 
+#include "common/miscellaneous/iofactory.h"
 #include "definitions/definitions.h"
 #include "saurus/plugin-system/charactermap/charactermap.h"
 
@@ -10,23 +11,30 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QScrollArea>
+#include <QScrollBar>
 
-CharacterMapWidget::CharacterMapWidget(QWidget* parent) : QWidget(parent), m_map(nullptr), m_cmbPlane(nullptr) {
+CharacterMapWidget::CharacterMapWidget(QWidget* parent)
+  : QWidget(parent), m_scrollForMap(nullptr), m_map(nullptr), m_cmbPlane(nullptr), m_allCharacters(QList<CharacterInfo>()) {
   setupUi();
+
+  // Load characted categories.
+  loadCategories();
+  loadCharacters();
+
+  updateVisibleCharacters();
 }
 
 void CharacterMapWidget::setupUi() {
   m_map = new CharacterMap(this);
 
-  QScrollArea* scroll_map = new QScrollArea(this);
+  m_scrollForMap = new QScrollArea(this);
 
-  scroll_map->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
-  scroll_map->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
-  scroll_map->setWidget(m_map);
-  scroll_map->setWidgetResizable(true);
+  m_scrollForMap->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
+  m_scrollForMap->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+  m_scrollForMap->setWidget(m_map);
+  m_scrollForMap->setWidgetResizable(true);
 
   m_cmbPlane = new QComboBox(this);
-  m_cmbPlane->addItem(tr("All Symbols"));
 
   m_txtSearch = new QLineEdit(this);
   m_txtSearch->setPlaceholderText(tr("Search for symbol"));
@@ -37,21 +45,84 @@ void CharacterMapWidget::setupUi() {
   central_layout->setMargin(0);
   central_layout->addWidget(m_cmbPlane);
   central_layout->addWidget(m_txtSearch);
-  central_layout->addWidget(scroll_map);
+  central_layout->addWidget(m_scrollForMap);
+
+  connect(m_cmbPlane, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [=]() {
+    updateVisibleCharacters();
+  });
+  connect(m_txtSearch, &QLineEdit::textChanged, this, [=]() {
+    updateVisibleCharacters();
+  });
 
   setLayout(central_layout);
+}
 
-  m_map->loadCharacters({
-    CharacterInfo(QChar(53), "DIGIT FIVE"),
-    CharacterInfo(QChar(53), "DIGIT FIVE"),
-    CharacterInfo(QChar(53), "DIGIT FIVE"),
-    CharacterInfo(QChar(53), "DIGIT FIVE"),
-    CharacterInfo(QChar(53), "DIGIT FIVE"),
-    CharacterInfo(QChar(53), "DIGIT FIVE"),
-    CharacterInfo(QChar(54), "DIGIT FOUR")
-  });
+void CharacterMapWidget::loadCategories() {
+  m_cmbPlane->addItem(tr("All Symbols"), QVariant::fromValue(CharacterCategory(-1, -1)));
+
+  QString blocks = QString::fromLocal8Bit(IOFactory::readFile(QSL(":/unicode/Blocks.txt")));
+  QRegularExpression exp(QSL("^([\\dA-F]+)\\.\\.([\\dA-F]+); ?(.+)$"), QRegularExpression::PatternOption::MultilineOption);
+
+  exp.optimize();
+
+  QRegularExpressionMatchIterator i = exp.globalMatch(blocks);
+
+  while (i.hasNext()) {
+    QRegularExpressionMatch match = i.next();
+
+    m_cmbPlane->addItem(match.captured(3), QVariant::fromValue(CharacterCategory(match.captured(1).toInt(nullptr, 16),
+                                                                                 match.captured(2).toInt(nullptr, 16))));
+  }
+}
+
+void CharacterMapWidget::loadCharacters() {
+  QString chars = QString::fromLocal8Bit(IOFactory::readFile(QSL(":/unicode/UnicodeData.txt")));
+  QRegularExpression exp(QSL("^([\\dA-F]+);([^;]+)"), QRegularExpression::PatternOption::MultilineOption);
+
+  exp.optimize();
+
+  QRegularExpressionMatchIterator i = exp.globalMatch(chars);
+
+  while (i.hasNext()) {
+    QRegularExpressionMatch match = i.next();
+
+    m_allCharacters << CharacterInfo(QChar(match.captured(1).toUInt(nullptr, 16)), match.captured(2));
+  }
 }
 
 CharacterMap* CharacterMapWidget::map() const {
   return m_map;
+}
+
+void CharacterMapWidget::updateVisibleCharacters() {
+  if (!m_allCharacters.isEmpty()) {
+    auto category = m_cmbPlane->currentData().value<CharacterCategory>();
+
+    QList<CharacterInfo> categorised = charactersForCategory(category);
+
+    m_scrollForMap->verticalScrollBar()->setValue(0);
+    m_map->loadCharacters(categorised);
+  }
+}
+
+QList<CharacterInfo> CharacterMapWidget::charactersForCategory(const CharacterCategory& cat) const {
+  if (cat.m_from < 0) {
+    return m_allCharacters;
+  }
+  else {
+    QList<CharacterInfo> chars;
+
+    for (int i = 0; i < m_allCharacters.size(); i++) {
+      auto character_at = m_allCharacters.at(i);
+
+      if (character_at.m_character >= cat.m_from && character_at.m_character <= cat.m_to) {
+        chars << character_at;
+      }
+      else if (character_at.m_character > cat.m_to) {
+        break;
+      }
+    }
+
+    return chars;
+  }
 }

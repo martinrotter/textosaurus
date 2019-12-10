@@ -2,6 +2,8 @@
 
 #include "saurus/plugin-system/charactermap/charactermap.h"
 
+#include "definitions/definitions.h"
+
 #include <QApplication>
 #include <QFontDatabase>
 #include <QMouseEvent>
@@ -23,7 +25,7 @@ void CharacterMap::calculateSquareSize() {
 }
 
 QSize CharacterMap::sizeHint() const {
-  return QSize(1, qCeil(m_characters.size() / m_columns) * m_squareSize);
+  return QSize(1, (qCeil(m_characters.size() / (m_columns * 1.01)) + 1) * m_squareSize);
 }
 
 void CharacterMap::loadCharacters(const QList<CharacterInfo>& list) {
@@ -32,6 +34,20 @@ void CharacterMap::loadCharacters(const QList<CharacterInfo>& list) {
 
   adjustSize();
   update();
+}
+
+void CharacterMap::mouseMoveEvent(QMouseEvent* event) {
+  QPoint widgetPosition = mapFromGlobal(event->globalPos());
+  int idx = indexFromPoint(widgetPosition);
+
+  if (idx >= 0 && idx < m_characters.size()) {
+    CharacterInfo nfo = m_characters.at(idx);
+    QString text = tr("<center><h1>%1</h1></center>"
+                      "<p>HEX: %3 (UTF-16)</p>").arg(QString(nfo.m_character), nfo.m_description.toHtmlEscaped(),
+                                                     QString::number(nfo.m_character.unicode(), 16));
+
+    QToolTip::showText(event->globalPos(), text, this);
+  }
 }
 
 void CharacterMap::mouseDoubleClickEvent(QMouseEvent* event) {
@@ -63,7 +79,16 @@ void CharacterMap::paintEvent(QPaintEvent* event) {
   m_font.setPixelSize(int(m_squareSize * 0.5));
   painter.setFont(m_font);
 
-  for (int row = 0, column = 0, i = 0; i < m_characters.size(); i++) {
+  int start_idx = indexFromPoint(event->region().boundingRect().topLeft());
+  int stop_idx = indexFromPoint(event->region().boundingRect().bottomRight());
+  int row = start_idx / m_columns;
+  int column = start_idx % m_columns;
+
+  if (stop_idx >= m_characters.size()) {
+    stop_idx = m_characters.size() - 1;
+  }
+
+  for (int i = start_idx; i <= stop_idx; i++) {
     // Draw next character.
     const CharacterInfo& chr_info = m_characters.at(i);
     QRect cell_rect(column* m_squareSize, row* m_squareSize, m_squareSize, m_squareSize);

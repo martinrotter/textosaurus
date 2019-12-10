@@ -29,6 +29,7 @@ class CharacterMap : public QWidget {
     void loadCharacters(const QList<CharacterInfo>& list);
 
   protected:
+    void mouseMoveEvent(QMouseEvent* event) override;
     void mouseDoubleClickEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void paintEvent(QPaintEvent* event) override;
