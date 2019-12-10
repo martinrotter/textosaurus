@@ -39,10 +39,13 @@ void CharacterMapSidebar::load() {
   }
 }
 
-void CharacterMapSidebar::onCharactedSelected(const QChar& chr) {
+void CharacterMapSidebar::onCharactedSelected(const QString& chr) {
   TextEditor* editor = m_textApp->tabWidget()->currentEditor();
 
   if (editor != nullptr) {
-    editor->insertText(editor->currentPos(), QString(chr).toUtf8().constData());
+    QByteArray output_utf = chr.toUtf8();
+
+    editor->insertText(editor->currentPos(), output_utf.constData());
+    editor->gotoPos(editor->currentPos() + output_utf.size());
   }
 }

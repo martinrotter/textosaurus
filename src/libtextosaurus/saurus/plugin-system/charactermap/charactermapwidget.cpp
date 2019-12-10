@@ -58,7 +58,7 @@ void CharacterMapWidget::setupUi() {
 }
 
 void CharacterMapWidget::loadCategories() {
-  m_cmbPlane->addItem(tr("All Symbols"), QVariant::fromValue(CharacterCategory(-1, -1)));
+  m_cmbPlane->addItem(tr("All Symbols"), QVariant::fromValue(CharacterCategory(0, 0)));
 
   QString blocks = QString::fromLocal8Bit(IOFactory::readFile(QSL(":/unicode/Blocks.txt")));
   QRegularExpression exp(QSL("^([\\dA-F]+)\\.\\.([\\dA-F]+); ?(.+)$"), QRegularExpression::PatternOption::MultilineOption);
@@ -69,12 +69,10 @@ void CharacterMapWidget::loadCategories() {
 
   while (i.hasNext()) {
     QRegularExpressionMatch match = i.next();
-    unsigned int to = match.captured(2).toInt(nullptr, 16);
+    uint from = match.captured(1).toUInt(nullptr, 16);
+    uint to = match.captured(2).toUInt(nullptr, 16);
 
-    if (to <= 0xFFFF) {
-      m_cmbPlane->addItem(match.captured(3), QVariant::fromValue(CharacterCategory(match.captured(1).toInt(nullptr, 16),
-                                                                                   to)));
-    }
+    m_cmbPlane->addItem(match.captured(3), QVariant::fromValue(CharacterCategory(from, to)));
   }
 }
 
@@ -90,11 +88,9 @@ void CharacterMapWidget::loadCharacters() {
     QRegularExpressionMatch match = i.next();
 
     if (match.captured(2) != QL1S("<control>")) {
-      unsigned int cod = match.captured(1).toUInt(nullptr, 16);
+      uint cod = match.captured(1).toUInt(nullptr, 16);
 
-      if (cod <= 0xFFFF) {
-        m_allCharacters << CharacterInfo(QChar(cod), match.captured(2));
-      }
+      m_allCharacters << CharacterInfo(cod, match.captured(2));
     }
   }
 }
@@ -115,7 +111,7 @@ void CharacterMapWidget::updateVisibleCharacters() {
 }
 
 QList<CharacterInfo> CharacterMapWidget::charactersForCategory(const CharacterCategory& cat, const QString& txt) const {
-  if (cat.m_from < 0) {
+  if (cat.m_from == cat.m_to) {
     if (txt.isEmpty()) {
       return m_allCharacters;
     }
@@ -139,12 +135,12 @@ QList<CharacterInfo> CharacterMapWidget::charactersForCategory(const CharacterCa
     for (int i = 0; i < m_allCharacters.size(); i++) {
       auto character_at = m_allCharacters.at(i);
 
-      if ((character_at.m_character >= cat.m_from && character_at.m_character <= cat.m_to) &&
+      if ((character_at.m_codePoint >= cat.m_from && character_at.m_codePoint <= cat.m_to) &&
           (txt.isEmpty() || character_at.m_description.contains(txt, Qt::CaseSensitivity::CaseInsensitive))) {
         chars << character_at;
       }
 
-      if (character_at.m_character > cat.m_to && txt.isEmpty()) {
+      if (character_at.m_codePoint > cat.m_to && txt.isEmpty()) {
         break;
       }
     }

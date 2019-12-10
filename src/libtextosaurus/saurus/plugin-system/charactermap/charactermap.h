@@ -6,10 +6,10 @@
 #include <QWidget>
 
 struct CharacterInfo {
-  QChar m_character;
+  uint m_codePoint;
   QString m_description;
 
-  CharacterInfo(QChar chr, const QString& description) : m_character(chr), m_description(description) {}
+  CharacterInfo(uint chr, const QString& description) : m_codePoint(chr), m_description(description) {}
 
 };
 
@@ -23,7 +23,7 @@ class CharacterMap : public QWidget {
     QSize sizeHint() const override;
 
   signals:
-    void characterSelected(const QChar& character);
+    void characterSelected(const QString& character);
 
   public slots:
     void loadCharacters(const QList<CharacterInfo>& list);
@@ -36,6 +36,7 @@ class CharacterMap : public QWidget {
     void resizeEvent(QResizeEvent* event) override;
 
   private:
+    QString stringFromUnicodeCode(uint unicode_code);
     bool isSelectedValidCharacter() const;
     void calculateSquareSize();
 

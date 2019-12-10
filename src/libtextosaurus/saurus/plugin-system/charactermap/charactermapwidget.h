@@ -13,11 +13,11 @@ class QLineEdit;
 class QScrollArea;
 
 struct CharacterCategory {
-  int m_from;
-  int m_to;
+  uint32_t m_from;
+  uint32_t m_to;
 
   CharacterCategory() = default;
-  CharacterCategory(int from, int to) : m_from(from), m_to(to) {}
+  CharacterCategory(uint32_t from, uint32_t to) : m_from(from), m_to(to) {}
 
 };
 

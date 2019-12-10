@@ -12,7 +12,7 @@
 #include <QToolTip>
 
 CharacterMap::CharacterMap(QWidget* parent)
-  : QWidget(parent), m_columns(4), m_squareSize(0), m_characters(QList<CharacterInfo>()),
+  : QWidget(parent), m_columns(6), m_squareSize(0), m_characters(QList<CharacterInfo>()),
   m_selectedCharacter(-1) {
   setMouseTracking(true);
   setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
@@ -45,10 +45,10 @@ void CharacterMap::mouseMoveEvent(QMouseEvent* event) {
     QString text = tr("<center><h1>%1</h1></center>"
                       "<center><p>%2</p><hr></center>"
                       "HEX: %3<br/>"
-                      "DEC: %4").arg(QString(nfo.m_character),
+                      "DEC: %4").arg(QString(nfo.m_codePoint),
                                      nfo.m_description.toHtmlEscaped(),
-                                     QString::number(nfo.m_character.unicode(), 16),
-                                     QString::number(nfo.m_character.unicode(), 10));
+                                     QString::number(nfo.m_codePoint, 16).toUpper(),
+                                     QString::number(nfo.m_codePoint, 10));
 
     QToolTip::showText(event->globalPos(), text, this);
   }
@@ -57,7 +57,7 @@ void CharacterMap::mouseMoveEvent(QMouseEvent* event) {
 void CharacterMap::mouseDoubleClickEvent(QMouseEvent* event) {
   if (event->button() == Qt::MouseButton::LeftButton) {
     if (isSelectedValidCharacter()) {
-      emit characterSelected(m_characters.at(m_selectedCharacter).m_character);
+      emit characterSelected(stringFromUnicodeCode(m_characters.at(m_selectedCharacter).m_codePoint));
     }
   }
   else {
@@ -102,12 +102,13 @@ void CharacterMap::paintEvent(QPaintEvent* event) {
     painter.drawRect(cell_rect);
 
     QFontMetrics fnt_metrics(m_font);
-    QRect char_rect = fnt_metrics.boundingRect(chr_info.m_character);
+    QString target_str = stringFromUnicodeCode(chr_info.m_codePoint);
+    QRect char_rect = fnt_metrics.boundingRect(target_str);
 
     // Draw character.
     painter.drawText(cell_rect.topLeft() + QPoint(int((m_squareSize - char_rect.width()) / 2.0),
                                                   char_rect.height() + int((m_squareSize - char_rect.height()) / 2.0)),
-                     chr_info.m_character);
+                     target_str);
 
     if (cell_rect.width() > 50) {
       // Draw description, because cell is big enough.
@@ -125,6 +126,20 @@ void CharacterMap::resizeEvent(QResizeEvent* event) {
   Q_UNUSED(event)
 
   calculateSquareSize();
+}
+
+QString CharacterMap::stringFromUnicodeCode(uint unicode_code) {
+  if(QChar::requiresSurrogates(unicode_code)) {
+    QChar char_array[2];
+
+    char_array[0] = QChar::highSurrogate(unicode_code);
+    char_array[1] = QChar::lowSurrogate(unicode_code);
+
+    return QString(char_array, 2);
+  }
+  else {
+    return QString(QChar(unicode_code));
+  }
 }
 
 bool CharacterMap::isSelectedValidCharacter() const {

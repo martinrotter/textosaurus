@@ -24,7 +24,7 @@ class CharacterMapSidebar : public BaseSidebar {
     virtual void load() override;
 
   private slots:
-    void onCharactedSelected(const QChar& chr);
+    void onCharactedSelected(const QString& chr);
 
   private:
     CharacterMapWidget* m_mapWidget;
