@@ -8,8 +8,11 @@
 #include "saurus/plugin-system/pluginbase.h"
 
 class CharacterMapPlugin : public QObject, public PluginBase {
+  Q_OBJECT
+  Q_INTERFACES(PluginBase)
+
   public:
-    CharacterMapPlugin();
+    explicit CharacterMapPlugin();
 
     QString name() const override;
     QString id() const override;

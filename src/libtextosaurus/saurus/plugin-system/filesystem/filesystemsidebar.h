@@ -43,12 +43,14 @@ class FilesystemSidebar : public BaseSidebar {
   signals:
     void openFileRequested(const QString& file_path);
 
+  protected:
+    virtual void load() override;
+
   private:
     bool pathFollowingEnabled() const;
 
     void makeExplorerVisible() const;
     void makeFavoritesVisible() const;
-    virtual void load() override;
 
   private:
     const QString m_settingsSection = "filesystem";

@@ -75,8 +75,6 @@ void OutputSidebar::displayOutput(OutputSource source, const QString& message, Q
     }
   }
 
-  load();
-
   if (source == OutputSource::ExternalTool) {
     m_txtOutput->append(QString("%1").arg(text_to_insert));
   }

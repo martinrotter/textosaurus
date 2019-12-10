@@ -12,8 +12,6 @@ class WebFactory;
 
 class MarkdownPlugin : public QObject, public PluginBase {
   Q_OBJECT
-
-  //Q_PLUGIN_METADATA(IID "io.github.martinrotter.textosaurus.markdownsimple")
   Q_INTERFACES(PluginBase)
 
   friend class MarkdownSidebar;

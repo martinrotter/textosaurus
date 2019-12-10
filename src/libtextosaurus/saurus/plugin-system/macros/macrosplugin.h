@@ -12,8 +12,6 @@ class MacrosSidebar;
 
 class MacrosPlugin : public QObject, public PluginBase {
   Q_OBJECT
-
-  //Q_PLUGIN_METADATA(IID "io.github.martinrotter.textosaurus.macros")
   Q_INTERFACES(PluginBase)
 
   public:

@@ -21,10 +21,11 @@ class MarkdownSidebar : public BaseSidebar {
     virtual bool initiallyVisible() const override;
     virtual int initialWidth() const override;
 
-  public slots:
-    void refreshPreview();
-
+  protected:
     virtual void load() override;
+
+  private slots:
+    void refreshPreview();
 
   private:
     QString convertMarkdownToHtml(const uint8_t* raw_utf8_data);

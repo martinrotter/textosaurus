@@ -2,6 +2,7 @@
 
 #include "saurus/plugin-system/pluginfactory.h"
 
+#include "definitions/definitions.h"
 #include "saurus/gui/sidebars/findresultssidebar.h"
 #include "saurus/gui/sidebars/outputsidebar.h"
 #include "saurus/miscellaneous/application.h"
@@ -163,9 +164,7 @@ PluginState::PluginState(const QString& library_file) {
     m_isLoaded = true;
     m_lastError = QString();
 
-    qDebug().noquote().nospace() << QSL("Successfully loaded plugin '")
-                                 << m_pluginLibraryFile
-                                 << QSL("%s'.");
+    qDebugNN << QSL("Successfully loaded plugin '") << m_pluginLibraryFile << QSL("%s'.");
   }
   else {
     m_plugin = nullptr;
@@ -174,11 +173,7 @@ PluginState::PluginState(const QString& library_file) {
 
     loader.unload();
 
-    qCritical().noquote().nospace() << QSL("Cannot load plugin '")
-                                    << m_pluginLibraryFile
-                                    << QSL("', error is: '")
-                                    << m_lastError
-                                    << QSL("'.");
+    qCriticalNN << QSL("Cannot load plugin '") << m_pluginLibraryFile << QSL("', error is: '") << m_lastError << QSL("'.");
   }
 }
 

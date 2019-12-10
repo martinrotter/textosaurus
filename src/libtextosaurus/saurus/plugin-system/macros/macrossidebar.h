@@ -17,12 +17,11 @@ class MacrosSidebar : public BaseSidebar {
     explicit MacrosSidebar(MacrosPlugin* plugin, Macros* macros_factory, QWidget* parent = nullptr);
     virtual ~MacrosSidebar() = default;
 
-    Qt::DockWidgetArea initialArea() const;
-    bool initiallyVisible() const;
-    int initialWidth() const;
+    virtual Qt::DockWidgetArea initialArea() const override;
+    virtual bool initiallyVisible() const override;
+    virtual int initialWidth() const override;
 
   public slots:
-    void load();
     void startRecording();
     void stopRecording();
     void saveRecordedMacroAs();
@@ -33,6 +32,9 @@ class MacrosSidebar : public BaseSidebar {
   private slots:
     void onCurrentStoredMacroChanged(int row);
     void loadNewRecordedMacroStep(Macro::MacroStep step);
+
+  protected:
+    virtual void load() override;
 
   private:
     void reloadStoredMacros();
