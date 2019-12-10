@@ -41,6 +41,7 @@ Features
     - simple interface,
     - **movable dock sidebars**:
         * "Output" sidebar - can display output of external tools and other information,
+	* "Character Map" sidebar - displays **ALL non-control characters from Unicode table (not only from BMP)** and allows user to insert them in text editor via mouse double click,
         * "Filesystem" sidebar - allows to browse folder hierarchy and mark some files as favorites,
         * "Markdown Preview" sidebar - allows yout to display simple preview of your Markdown scripts,
     - tabbed interface.
