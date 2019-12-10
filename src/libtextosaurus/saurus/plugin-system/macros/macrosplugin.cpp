@@ -8,8 +8,7 @@
 #include "saurus/plugin-system/macros/macrossidebar.h"
 
 MacrosPlugin::MacrosPlugin(QObject* parent)
-  : QObject(parent), m_mainForm(nullptr), m_textApp(nullptr), m_iconFactory(nullptr),
-  m_settings(nullptr), m_macrosFactory(nullptr), m_sidebar(nullptr) {}
+  : QObject(parent), m_macrosFactory(nullptr), m_sidebar(nullptr) {}
 
 QString MacrosPlugin::name() const {
   return tr("Macros");
@@ -29,12 +28,8 @@ QList<QAction*> MacrosPlugin::userActions() {
 
 void MacrosPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
                          Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
-  Q_UNUSED(web_factory)
+  PluginBase::start(main_form_widget, text_app, settings, icon_factory, web_factory);
 
-  m_mainForm = main_form_widget;
-  m_textApp = text_app;
-  m_iconFactory = icon_factory;
-  m_settings = settings;
   m_macrosFactory = new Macros(this, this);
 }
 
@@ -46,20 +41,4 @@ MacrosSidebar* MacrosPlugin::sidebar() {
   }
 
   return m_sidebar;
-}
-
-Settings* MacrosPlugin::settings() const {
-  return m_settings;
-}
-
-QWidget* MacrosPlugin::mainForm() const {
-  return m_mainForm;
-}
-
-TextApplication* MacrosPlugin::textApp() const {
-  return m_textApp;
-}
-
-IconFactory* MacrosPlugin::iconFactory() const {
-  return m_iconFactory;
 }

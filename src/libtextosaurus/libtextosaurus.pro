@@ -119,6 +119,7 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/miscellaneous/syntaxhighlighting.h \
             saurus/miscellaneous/textapplication.h \
             saurus/miscellaneous/textapplicationsettings.h \
+            saurus/plugin-system/charactermap/charactermapplugin.h \
             saurus/plugin-system/filesystem/favoriteslistwidget.h \
             saurus/plugin-system/filesystem/filesystemmodel.h \
             saurus/plugin-system/filesystem/filesystemplugin.h \
@@ -207,6 +208,7 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/miscellaneous/syntaxhighlighting.cpp \
             saurus/miscellaneous/textapplication.cpp \
             saurus/miscellaneous/textapplicationsettings.cpp \
+            saurus/plugin-system/charactermap/charactermapplugin.cpp \
             saurus/plugin-system/filesystem/favoriteslistwidget.cpp \
             saurus/plugin-system/filesystem/filesystemmodel.cpp \
             saurus/plugin-system/filesystem/filesystemplugin.cpp \

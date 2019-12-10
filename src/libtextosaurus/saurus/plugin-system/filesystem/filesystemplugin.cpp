@@ -5,7 +5,7 @@
 #include "definitions/definitions.h"
 #include "saurus/plugin-system/filesystem/filesystemsidebar.h"
 
-FilesystemPlugin::FilesystemPlugin(QObject* parent) : QObject(parent), m_textApp(nullptr), m_settings(nullptr), m_iconFactory(nullptr) {}
+FilesystemPlugin::FilesystemPlugin(QObject* parent) : QObject(parent) {}
 
 QString FilesystemPlugin::name() const {
   return tr("Filesystem");
@@ -29,27 +29,10 @@ QList<QAction*> FilesystemPlugin::userActions() {
 
 void FilesystemPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
                              Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
-  Q_UNUSED(main_form_widget)
-  Q_UNUSED(web_factory)
-
-  m_textApp = text_app;
-  m_settings = settings;
-  m_iconFactory = icon_factory;
+  PluginBase::start(main_form_widget, text_app, settings, icon_factory, web_factory);
 }
 
 void FilesystemPlugin::stop() {}
-
-TextApplication* FilesystemPlugin::textApp() const {
-  return m_textApp;
-}
-
-Settings* FilesystemPlugin::settings() const {
-  return m_settings;
-}
-
-IconFactory* FilesystemPlugin::iconFactory() const {
-  return m_iconFactory;
-}
 
 FilesystemSidebar* FilesystemPlugin::sidebar() const {
   return m_sidebar;

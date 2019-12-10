@@ -24,15 +24,9 @@ class FilesystemPlugin : public QObject, public PluginBase {
                        Settings* settings, IconFactory* icon_factory,
                        WebFactory* web_factory) override;
     virtual void stop() override;
-    TextApplication* textApp() const;
-    Settings* settings() const;
-    IconFactory* iconFactory() const;
     FilesystemSidebar* sidebar() const;
 
-  protected:
-    TextApplication* m_textApp;
-    Settings* m_settings;
-    IconFactory* m_iconFactory;
+  private:
     FilesystemSidebar* m_sidebar = nullptr;
 };
 

@@ -9,7 +9,7 @@
 #include <QAction>
 
 MarkdownPlugin::MarkdownPlugin(QObject* parent)
-  : QObject(parent), m_textApp(nullptr), m_sidebar(nullptr), m_iconFactory(nullptr), m_webFactory(nullptr) {}
+  : QObject(parent), m_sidebar(nullptr) {}
 
 QString MarkdownPlugin::name() const {
   return QSL("Markdown Preview");
@@ -39,12 +39,7 @@ MarkdownSidebar* MarkdownPlugin::sidebar() {
 
 void MarkdownPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
                            Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
-  Q_UNUSED(main_form_widget)
-  Q_UNUSED(settings)
-
-  m_textApp = text_app;
-  m_iconFactory = icon_factory;
-  m_webFactory = web_factory;
+  PluginBase::start(main_form_widget, text_app, settings, icon_factory, web_factory);
 }
 
 void MarkdownPlugin::stop() {}

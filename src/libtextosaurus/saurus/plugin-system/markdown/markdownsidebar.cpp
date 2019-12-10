@@ -22,11 +22,11 @@ using cuint8_ta = const uint8_t *;
 using cchara = const char*;
 
 MarkdownSidebar::MarkdownSidebar(MarkdownPlugin* plugin, QWidget* parent)
-  : BaseSidebar(plugin->m_textApp, parent), m_txtPreview(nullptr), m_plugin(plugin) {
+  : BaseSidebar(plugin->textApp(), parent), m_txtPreview(nullptr), m_plugin(plugin) {
   setWindowTitle(tr("Markdown Preview"));
   setObjectName(QSL("m_sidebarMarkdown"));
 
-  m_actionRefreshPreview = new QAction(m_plugin->m_iconFactory->fromTheme(QSL("view-refresh")),
+  m_actionRefreshPreview = new QAction(m_plugin->iconFactory()->fromTheme(QSL("view-refresh")),
                                        tr("Refresh Markdown Preview"),
                                        this);
   m_actionRefreshPreview->setObjectName(QSL("m_actionRefreshMarkdownPreview"));
@@ -73,7 +73,7 @@ void MarkdownSidebar::load() {
     m_txtPreview->setOpenLinks(false);
 
     connect(m_txtPreview, &QTextBrowser::anchorClicked, this, [this](const QUrl& url) {
-      m_plugin->m_webFactory->openUrlInExternalBrowser(url.toString());
+      m_plugin->webFactory()->openUrlInExternalBrowser(url.toString());
     });
 
     auto* widget = new QWidget(this);

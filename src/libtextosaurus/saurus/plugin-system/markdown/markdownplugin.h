@@ -34,10 +34,7 @@ class MarkdownPlugin : public QObject, public PluginBase {
     MarkdownSidebar* sidebar();
 
   private:
-    TextApplication* m_textApp;
     MarkdownSidebar* m_sidebar;
-    IconFactory* m_iconFactory;
-    WebFactory* m_webFactory;
 };
 
 #endif // MARKDOWNPLUGIN_H

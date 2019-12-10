@@ -27,19 +27,11 @@ class MacrosPlugin : public QObject, public PluginBase {
                        Settings* settings, IconFactory* icon_factory,
                        WebFactory* web_factory) override;
     virtual void stop() override;
-    IconFactory* iconFactory() const;
-    TextApplication* textApp() const;
-    QWidget* mainForm() const;
-    Settings* settings() const;
 
   private:
     MacrosSidebar* sidebar();
 
   private:
-    QWidget* m_mainForm;
-    TextApplication* m_textApp;
-    IconFactory* m_iconFactory;
-    Settings* m_settings;
     Macros* m_macrosFactory;
     MacrosSidebar* m_sidebar;
 };

@@ -35,14 +35,58 @@ class PluginBase {
     // could be called later than methods name(), sidebars() and userActions().
     virtual void start(QWidget* main_form_widget, TextApplication* text_app,
                        Settings* settings, IconFactory* icon_factory,
-                       WebFactory* web_factory) = 0;
+                       WebFactory* web_factory);
 
     // Stops the plugin.
     //
     // NOTE: Stopping of plugin must be done synchronously.
     // NOTE: Stopping and starting is done on main GUI thread.
     virtual void stop() = 0;
+
+  public:
+    QWidget* mainForm() const;
+    TextApplication* textApp() const;
+    Settings* settings() const;
+    IconFactory* iconFactory() const;
+    WebFactory* webFactory() const;
+
+  private:
+    QWidget* m_mainForm;
+    TextApplication* m_textApp;
+    Settings* m_settings;
+    IconFactory* m_iconFactory;
+    WebFactory* m_webFactory;
 };
+
+inline QWidget* PluginBase::mainForm() const {
+  return m_mainForm;
+}
+
+inline TextApplication* PluginBase::textApp() const {
+  return m_textApp;
+}
+
+inline Settings* PluginBase::settings() const {
+  return m_settings;
+}
+
+inline IconFactory* PluginBase::iconFactory() const {
+  return m_iconFactory;
+}
+
+inline WebFactory* PluginBase::webFactory() const {
+  return m_webFactory;
+}
+
+inline void PluginBase::start(QWidget* main_form_widget, TextApplication* text_app,
+                              Settings* settings, IconFactory* icon_factory,
+                              WebFactory* web_factory) {
+  m_mainForm = main_form_widget;
+  m_textApp = text_app;
+  m_settings = settings;
+  m_iconFactory = icon_factory;
+  m_webFactory = web_factory;
+}
 
 Q_DECLARE_INTERFACE(PluginBase, "io.github.martinrotter.textosaurus.pluginbase")
 
