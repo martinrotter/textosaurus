@@ -25,7 +25,7 @@ void CharacterMap::calculateSquareSize() {
 }
 
 QSize CharacterMap::sizeHint() const {
-  return QSize(1, (qCeil(m_characters.size() / (m_columns * 1.01)) + 1) * m_squareSize);
+  return QSize(1, (qCeil(m_characters.size() / (m_columns * 1.00)) + 2) * m_squareSize);
 }
 
 void CharacterMap::loadCharacters(const QList<CharacterInfo>& list) {

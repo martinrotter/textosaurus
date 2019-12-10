@@ -36,7 +36,7 @@ class CharacterMapWidget : public QWidget {
     void updateVisibleCharacters();
 
   private:
-    QList<CharacterInfo> charactersForCategory(const CharacterCategory& cat) const;
+    QList<CharacterInfo> charactersForCategory(const CharacterCategory& cat, const QString& txt) const;
     void setupUi();
     void loadCategories();
     void loadCharacters();
