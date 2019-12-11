@@ -1,3 +1,28 @@
+0.9.13
+------
+Added:
+* Brand new sidebar "Character Map" which offers traditional character map functionality.
+  Note that this character map offers ALL Unicode characters, not just first plane.
+  It is also searchable.
+* Text search function can now wrap around.
+* External tools now can just insert or replace selected text with their output.
+* Fix *.lnk file handling on Windows. If user opens *.lnk pointing to file, then the
+  target file is opened. Also, handling of linked folders is fixed with Qt's native
+  open file dialog.
+* New PHP-only lexer.
+
+Changed:
+* Added some more substyles for some lexers, updated substyles of
+  built-in color schemes.
+* HTML lexer now handles HTML5 keywords.
+* Scintilla is now directly incorporated into the source tree
+  and its version is updated to 4.2.2.
+* Persistent DateTime format setting for external tool.
+* Some translations added or synced.
+* Prebuilt Windows binaries now use update Qt library.
+
+Fixed:
+
 0.9.12
 ------
 Added:
