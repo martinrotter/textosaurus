@@ -223,11 +223,7 @@ void FormFindReplace::searchReplaceOne(bool reverse) {
                                                  start_position,
                                                  end_position);
 
-  if (found_range.first < 0) {
-    // Next occurrence was not found.
-    m_ui.m_lblResult->setText(tr("Cannot find the text \"%1\".").arg(m_ui.m_txtSearchPhrase->text()));
-  }
-  else {
+  if (found_range.first >= 0) {
     m_ui.m_lblResult->clear();
 
     int replacement_length;
@@ -245,7 +241,51 @@ void FormFindReplace::searchReplaceOne(bool reverse) {
     // We highlight and scroll.
     editor->ensureVisible(editor->lineFromPosition(found_range.first));
     editor->setSel(found_range.first, found_range.first + replacement_length);
+    return;
   }
+
+  if (m_ui.m_checkWrapSearch->isChecked()) {
+    // Second pass, wrapping around.
+    if (reverse) {
+      // From end to current position.
+      start_position = int(editor->length());
+      end_position = static_cast<int>(editor->selectionEnd());
+    }
+    else {
+      // From beginning to current position.
+      start_position = 0;
+      end_position = static_cast<int>(editor->selectionStart());
+    }
+
+    found_range = editor->findText(search_flags,
+                                   m_ui.m_txtSearchPhrase->text().toUtf8().constData(),
+                                   start_position,
+                                   end_position);
+
+    if (found_range.first >= 0) {
+      m_ui.m_lblResult->clear();
+
+      int replacement_length;
+
+      editor->setTargetRange(found_range.first, found_range.second);
+
+      // We replace.
+      if (m_ui.m_rbModeRegex->isChecked()) {
+        replacement_length = int(editor->replaceTargetRE(-1, m_ui.m_txtReplaceString->text().toUtf8().constData()));
+      }
+      else {
+        replacement_length = int(editor->replaceTarget(-1, m_ui.m_txtReplaceString->text().toUtf8().constData()));
+      }
+
+      // We highlight and scroll.
+      editor->ensureVisible(editor->lineFromPosition(found_range.first));
+      editor->setSel(found_range.first, found_range.first + replacement_length);
+      return;
+    }
+  }
+
+  // Next occurrence was not found.
+  m_ui.m_lblResult->setText(tr("Cannot find the text \"%1\".").arg(m_ui.m_txtSearchPhrase->text()));
 }
 
 void FormFindReplace::searchOne(bool reverse) {
