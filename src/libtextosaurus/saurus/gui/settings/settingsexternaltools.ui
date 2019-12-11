@@ -109,6 +109,9 @@
         <property name="placeholderText">
          <string>External tool title</string>
         </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="4" column="0">
@@ -125,6 +128,9 @@
        <widget class="QLineEdit" name="m_txtCategory">
         <property name="placeholderText">
          <string>Optional category name</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -182,6 +188,9 @@
         <property name="placeholderText">
          <string>Interpreter for the script</string>
         </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="2">
@@ -201,6 +210,9 @@
        <widget class="QLineEdit" name="m_txtPrompt">
         <property name="placeholderText">
          <string>Optional prompt text for input</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

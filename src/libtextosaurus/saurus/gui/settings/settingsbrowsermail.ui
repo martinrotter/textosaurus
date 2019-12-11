@@ -65,6 +65,9 @@
               <property name="placeholderText">
                <string>Executable file of web browser</string>
               </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -87,6 +90,9 @@
            <widget class="QLineEdit" name="m_txtExternalBrowserArguments">
             <property name="placeholderText">
              <string>Parameters to executable</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -161,6 +167,9 @@
               <property name="placeholderText">
                <string>Executable file of e-mail client</string>
               </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -183,6 +192,9 @@
            <widget class="QLineEdit" name="m_txtExternalEmailArguments">
             <property name="placeholderText">
              <string>Parameters to executable</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -254,6 +266,9 @@
            <property name="placeholderText">
             <string>Hostname or IP of your proxy server</string>
            </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -305,6 +320,9 @@
          <property name="placeholderText">
           <string>Your username for proxy server authentication</string>
          </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="3" column="0">
@@ -330,6 +348,9 @@
          </property>
          <property name="placeholderText">
           <string>Your password for proxy server authentication</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
