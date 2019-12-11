@@ -5,9 +5,11 @@
 #include "definitions/definitions.h"
 
 #include <QApplication>
+#include <QDataStream>
 #include <QFontDatabase>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QtEndian>
 #include <QtMath>
 #include <QToolTip>
 
@@ -25,7 +27,8 @@ void CharacterMap::calculateSquareSize() {
 }
 
 QSize CharacterMap::sizeHint() const {
-  return QSize(1, (qCeil(m_characters.size() / (m_columns * 1.00)) + 2) * m_squareSize);
+  // Make sure there is one extra empty line.
+  return QSize(1, (qCeil(m_characters.size() / (m_columns * 1.00)) + 1) * m_squareSize);
 }
 
 void CharacterMap::loadCharacters(const QList<CharacterInfo>& list) {
@@ -42,13 +45,16 @@ void CharacterMap::mouseMoveEvent(QMouseEvent* event) {
 
   if (idx >= 0 && idx < m_characters.size()) {
     CharacterInfo nfo = m_characters.at(idx);
+    QString string = stringFromUnicodeCode(nfo.m_codePoint).toUtf8();
+    QByteArray utf8 = string.toUtf8();
     QString text = tr("<center><h1>%1</h1></center>"
                       "<center><p>%2</p><hr></center>"
-                      "HEX: %3<br/>"
-                      "DEC: %4").arg(QString(nfo.m_codePoint),
-                                     nfo.m_description.toHtmlEscaped(),
-                                     QString::number(nfo.m_codePoint, 16).toUpper(),
-                                     QString::number(nfo.m_codePoint, 10));
+                      "UCP: <b>%3</b> (HEX), <b>%4</b> (DEC)<br/>"
+                      "UTF-8: <b>%5</b> (HEX)").arg(string.toHtmlEscaped(),
+                                                    nfo.m_description.toHtmlEscaped(),
+                                                    QString::number(nfo.m_codePoint, 16).toUpper(),
+                                                    QString::number(nfo.m_codePoint, 10),
+                                                    utf8.toHex().toUpper());
 
     QToolTip::showText(event->globalPos(), text, this);
   }
@@ -78,6 +84,12 @@ void CharacterMap::mousePressEvent(QMouseEvent* event) {
 void CharacterMap::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event)
 
+  QWidget::paintEvent(event);
+
+  if (m_characters.isEmpty()) {
+    return;
+  }
+
   QPainter painter(this);
 
   m_font.setPixelSize(int(m_squareSize * 0.5));
@@ -99,7 +111,7 @@ void CharacterMap::paintEvent(QPaintEvent* event) {
 
     // Draw cell background and border.
     painter.fillRect(cell_rect, m_selectedCharacter == i ? Qt::GlobalColor::lightGray : Qt::GlobalColor::white);
-    painter.drawRect(cell_rect);
+    painter.drawRect(cell_rect.adjusted(0, 0, -1, 0));
 
     QFontMetrics fnt_metrics(m_font);
     QString target_str = stringFromUnicodeCode(chr_info.m_codePoint);
@@ -151,4 +163,15 @@ int CharacterMap::indexFromPoint(const QPoint& pt) const {
   int col = pt.x() / m_squareSize;
 
   return (row * m_columns) + col;
+}
+
+QFont CharacterMap::font() const {
+  return m_font;
+}
+
+void CharacterMap::setFont(const QFont& font) {
+  m_font = font;
+
+  adjustSize();
+  update();
 }

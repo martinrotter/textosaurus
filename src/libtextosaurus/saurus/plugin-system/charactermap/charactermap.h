@@ -20,7 +20,10 @@ class CharacterMap : public QWidget {
     explicit CharacterMap(QWidget* parent = nullptr);
     virtual ~CharacterMap() = default;
 
-    QSize sizeHint() const override;
+    virtual QSize sizeHint() const override;
+
+    QFont font() const;
+    void setFont(const QFont& font);
 
   signals:
     void characterSelected(const QString& character);

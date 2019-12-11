@@ -29,8 +29,8 @@ void CharacterMapWidget::setupUi() {
 
   m_scrollForMap = new QScrollArea(this);
 
-  m_scrollForMap->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
-  m_scrollForMap->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+  m_scrollForMap->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+  m_scrollForMap->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
   m_scrollForMap->setWidget(m_map);
   m_scrollForMap->setWidgetResizable(true);
 
