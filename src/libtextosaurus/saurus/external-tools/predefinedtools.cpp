@@ -269,30 +269,30 @@ QString PredefinedTools::currentDateTime(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
-  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(),
-                                                       qApp->localization()->loadedLocale().dateTimeFormat(QLocale::FormatType::ShortFormat));
+  return QLocale::system().toString(QDateTime::currentDateTime(),
+                                    QLocale::system().dateTimeFormat(QLocale::FormatType::ShortFormat));
 }
 
 QString PredefinedTools::currentDate(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
-  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(),
-                                                       qApp->localization()->loadedLocale().dateFormat(QLocale::FormatType::ShortFormat));
+  return QLocale::system().toString(QDateTime::currentDateTime(),
+                                    QLocale::system().dateFormat(QLocale::FormatType::ShortFormat));
 }
 
 QString PredefinedTools::currentTime(const QString& data, bool& ok) {
   Q_UNUSED(data)
   Q_UNUSED(ok)
 
-  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(),
-                                                       qApp->localization()->loadedLocale().timeFormat(QLocale::FormatType::ShortFormat));
+  return QLocale::system().toString(QDateTime::currentDateTime(),
+                                    QLocale::system().timeFormat(QLocale::FormatType::ShortFormat));
 }
 
 QString PredefinedTools::formattedDateTime(const QString& data, bool& ok) {
   Q_UNUSED(ok)
 
-  return qApp->localization()->loadedLocale().toString(QDateTime::currentDateTime(), data);
+  return QLocale::system().toString(QDateTime::currentDateTime(), data);
 }
 
 QString PredefinedTools::toUrlEncoded(const QString& data, bool& ok) {
