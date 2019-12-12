@@ -222,9 +222,7 @@ void ExternalTools::loadPredefinedTools() {
   insert_formatted_datetime->setActionObjectName(QSL("m_actionPredefCurrFormatDateTime"));
   insert_formatted_datetime->setCategory(tr("&DateTime"));
   insert_formatted_datetime->setName(tr("Insert &DateTime (Custom Format)"));
-  insert_formatted_datetime->setInput(ExternalTool::ToolInput::AskForInput);
-  insert_formatted_datetime->setPrompt(tr("Enter DateTime format string:"));
-  insert_formatted_datetime->setPromptValue(QSL("HH:mm:ss dddd, dd.MM.yyyy"));
+  insert_formatted_datetime->setInput(ExternalTool::ToolInput::NoInput);
   insert_formatted_datetime->setOutput(ExternalTool::ToolOutput::InsertAtCursorPositionAndReplaceSelection);
 
   m_predefinedTools.append(insert_formatted_datetime);
@@ -628,19 +626,13 @@ void ExternalTools::runTool(ExternalTool* tool_to_run, TextEditor* editor) {
 
       case ExternalTool::ToolInput::AskForInput: {
         bool ok;
-        auto saved_prompt_value = qApp->settings()->value(GROUP(ToolsPromptValues),
-                                                          tool_to_run->name(),
-                                                          tool_to_run->promptValue()).toString();
 
         data = QInputDialog::getText(qApp->mainFormWidget(), tr("Enter input for external tool"),
-                                     tool_to_run->prompt(), QLineEdit::EchoMode::Normal, saved_prompt_value, &ok);
+                                     tool_to_run->prompt(), QLineEdit::EchoMode::Normal, tool_to_run->promptValue(), &ok);
 
         if (!ok) {
           return;
         }
-
-        // Save new tool prompt value.
-        qApp->settings()->setValue(GROUP(ToolsPromptValues), tool_to_run->name(), data);
 
         break;
       }

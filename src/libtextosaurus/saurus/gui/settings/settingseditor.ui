@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>407</width>
-    <height>309</height>
+    <width>487</width>
+    <height>360</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -48,159 +48,11 @@
        <item>
         <widget class="QWidget" name="widget" native="true">
          <layout class="QFormLayout" name="formLayout">
-          <item row="0" column="0" colspan="2">
+          <item row="0" column="0">
            <widget class="QCheckBox" name="m_cbReloadFilesAutomatically">
             <property name="text">
              <string>Reload externally edited files automatically</string>
             </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Line spacing</string>
-              </property>
-              <property name="buddy">
-               <cstring>m_spinLineSpacing</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="m_spinLineSpacing">
-              <property name="minimum">
-               <number>-10</number>
-              </property>
-              <property name="maximum">
-               <number>50</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QGroupBox" name="m_gbIndentation">
-            <property name="title">
-             <string>Indentation</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_2">
-               <property name="text">
-                <string>Tab size</string>
-               </property>
-               <property name="buddy">
-                <cstring>m_spinTabSize</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="text">
-                <string>Indent size</string>
-               </property>
-               <property name="buddy">
-                <cstring>m_spinIndentSize</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="m_cmbIndentMode"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSpinBox" name="m_spinTabSize">
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <number>32</number>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QSpinBox" name="m_spinIndentSize">
-               <property name="maximum">
-                <number>32</number>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>Indent with</string>
-               </property>
-               <property name="buddy">
-                <cstring>m_cmbIndentMode</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2" rowspan="3">
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QGroupBox" name="m_gbLog">
-            <property name="title">
-             <string>.LOG Feature</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_5">
-               <property name="text">
-                <string>Timestamp format</string>
-               </property>
-               <property name="buddy">
-                <cstring>m_cmbTimestampFormat</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="m_cmbTimestampFormat">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <spacer name="horizontalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
            </widget>
           </item>
           <item row="1" column="0">
@@ -228,20 +80,137 @@
               </property>
              </widget>
             </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Line spacing</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
+              <property name="buddy">
+               <cstring>m_spinLineSpacing</cstring>
               </property>
-             </spacer>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="m_spinLineSpacing">
+              <property name="minimum">
+               <number>-10</number>
+              </property>
+              <property name="maximum">
+               <number>50</number>
+              </property>
+             </widget>
             </item>
            </layout>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>DateTime custom format</string>
+              </property>
+              <property name="buddy">
+               <cstring>m_cmbTimestampFormat</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="m_cmbDateTimeFormat">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0">
+           <widget class="QGroupBox" name="m_gbIndentation">
+            <property name="title">
+             <string>Indentation</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="1">
+              <widget class="QComboBox" name="m_cmbIndentMode"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Indent with</string>
+               </property>
+               <property name="buddy">
+                <cstring>m_cmbIndentMode</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Tab size</string>
+               </property>
+               <property name="buddy">
+                <cstring>m_spinTabSize</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="m_spinIndentSize">
+               <property name="maximum">
+                <number>32</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Indent size</string>
+               </property>
+               <property name="buddy">
+                <cstring>m_spinIndentSize</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="m_spinTabSize">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>32</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QGroupBox" name="m_gbLog">
+            <property name="title">
+             <string>.LOG Feature</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="1">
+              <widget class="QComboBox" name="m_cmbTimestampFormat">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Timestamp format</string>
+               </property>
+               <property name="buddy">
+                <cstring>m_cmbTimestampFormat</cstring>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>

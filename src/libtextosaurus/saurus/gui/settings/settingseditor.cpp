@@ -24,6 +24,7 @@ SettingsEditor::SettingsEditor(Settings* settings, QWidget* parent)
   connect(m_ui.m_cbEdge, &QCheckBox::toggled, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_cmbIndentMode, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_cmbTimestampFormat, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
+  connect(m_ui.m_cmbDateTimeFormat, &QComboBox::currentTextChanged, this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinEdge, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinIndentSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
   connect(m_ui.m_spinTabSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &SettingsEditor::dirtifySettings);
@@ -56,9 +57,11 @@ void SettingsEditor::loadSettings() {
 
   for (const QString& pattern : qAsConst(date_patterns)) {
     m_ui.m_cmbTimestampFormat->addItem(pattern);
+    m_ui.m_cmbDateTimeFormat->addItem(pattern);
   }
 
   m_ui.m_cmbTimestampFormat->setCurrentText(qApp->textApplication()->settings()->logTimestampFormat());
+  m_ui.m_cmbDateTimeFormat->setCurrentText(qApp->textApplication()->settings()->dateTimeTimestampFormat());
 
   onEndLoadSettings();
 }
@@ -75,6 +78,7 @@ void SettingsEditor::saveSettings() {
   qApp->textApplication()->settings()->setIndentWithTabs(m_ui.m_cmbIndentMode->currentData().toBool());
   qApp->textApplication()->settings()->setMainFont(m_ui.m_lblFontMain->font());
   qApp->textApplication()->settings()->setLogTimestampFormat(m_ui.m_cmbTimestampFormat->currentText());
+  qApp->textApplication()->settings()->setDateTimeTimestampFormat(m_ui.m_cmbDateTimeFormat->currentText());
   qApp->textApplication()->settings()->syntaxHighlighting()->saveColorThemes(m_ui.m_themeEditor->colorThemes(),
                                                                              m_ui.m_themeEditor->currentColorThemeIndex());
 

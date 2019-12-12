@@ -31,6 +31,8 @@ namespace Editor {
   constexpr auto ID = "editor";
   constexpr auto LogTimestampFormat = "log_timestamp_format";
   constexpr auto LogTimestampFormatDef = "yyyy-MM-dd HH:mm:ss";
+  constexpr auto DateTimeTimestampFormat = "dt_timestamp_format";
+  constexpr auto DateTimeTimestampFormatDef = "yyyy-MM-dd HH:mm:ss";
   constexpr auto TabSize = "tab_size";
   constexpr auto TabSizeDef = 2;
   constexpr auto ColorTheme = "color_theme";

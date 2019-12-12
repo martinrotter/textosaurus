@@ -36,6 +36,7 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     QFont mainFont() const;
     bool reloadModifiedDocumentsAutomatically() const;
     QString logTimestampFormat() const;
+    QString dateTimeTimestampFormat() const;
 
     int tabSize() const;
     int indentSize() const;
@@ -63,6 +64,7 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     void setRestorePreviousSession(bool restore);
     void setAutoIndentEnabled(bool enabled);
     void setLogTimestampFormat(const QString& format);
+    void setDateTimeTimestampFormat(const QString& format);
     void setReloadModifiedDocumentsAutomatically(bool reload_automatically);
     void setTabSize(int size);
     void setIndentSize(int size);

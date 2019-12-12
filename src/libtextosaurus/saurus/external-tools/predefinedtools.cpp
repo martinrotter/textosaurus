@@ -5,6 +5,8 @@
 #include "common/network-web/networkfactory.h"
 #include "definitions/definitions.h"
 #include "saurus/miscellaneous/application.h"
+#include "saurus/miscellaneous/textapplication.h"
+#include "saurus/miscellaneous/textapplicationsettings.h"
 
 #include <QDateTime>
 #include <QJsonDocument>
@@ -290,9 +292,10 @@ QString PredefinedTools::currentTime(const QString& data, bool& ok) {
 }
 
 QString PredefinedTools::formattedDateTime(const QString& data, bool& ok) {
+  Q_UNUSED(data)
   Q_UNUSED(ok)
 
-  return QLocale::system().toString(QDateTime::currentDateTime(), data);
+  return QLocale::system().toString(QDateTime::currentDateTime(), qApp->textApplication()->settings()->dateTimeTimestampFormat());
 }
 
 QString PredefinedTools::toUrlEncoded(const QString& data, bool& ok) {

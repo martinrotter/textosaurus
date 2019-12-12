@@ -17,7 +17,9 @@ Changed:
 * HTML lexer now handles HTML5 keywords.
 * Scintilla is now directly incorporated into the source tree
   and its version is updated to 4.2.2.
-* Persistent DateTime format setting for external tool.
+* Persistent DateTime format setting for external tool. Setting is now changeable in
+  "Settings" -> "Editor".
+* DateTime tools now follow SYSTEM locale specifics.
 * Some translations added or synced.
 * Prebuilt Windows binaries now use update Qt library.
 

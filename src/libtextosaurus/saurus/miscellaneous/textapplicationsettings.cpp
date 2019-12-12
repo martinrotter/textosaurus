@@ -97,6 +97,10 @@ QString TextApplicationSettings::logTimestampFormat() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::LogTimestampFormat)).toString();
 }
 
+QString TextApplicationSettings::dateTimeTimestampFormat() const {
+  return qApp->settings()->value(GROUP(Editor), SETTING(Editor::DateTimeTimestampFormat)).toString();
+}
+
 int TextApplicationSettings::tabSize() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::TabSize)).toInt();
 }
@@ -158,6 +162,11 @@ void TextApplicationSettings::setAutoIndentEnabled(bool enabled) {
 
 void TextApplicationSettings::setLogTimestampFormat(const QString& format) {
   qApp->settings()->setValue(GROUP(Editor), Editor::LogTimestampFormat, format);
+  emit settingsChanged(false, false);
+}
+
+void TextApplicationSettings::setDateTimeTimestampFormat(const QString& format) {
+  qApp->settings()->setValue(GROUP(Editor), Editor::DateTimeTimestampFormat, format);
   emit settingsChanged(false, false);
 }
 
