@@ -10,6 +10,13 @@
 #include <QSize>
 #endif
 
+void GuiUtilities::disableCloseButton(QWidget& widget) {
+  Qt::WindowFlags flags = widget.windowFlags();
+  Qt::WindowFlags closeFlag = Qt::WindowType::WindowCloseButtonHint;
+  flags = flags & (~closeFlag);
+  widget.setWindowFlags(flags);
+}
+
 void GuiUtilities::setLabelAsNotice(QLabel& label, bool is_warning) {
   label.setMargin(4);
 

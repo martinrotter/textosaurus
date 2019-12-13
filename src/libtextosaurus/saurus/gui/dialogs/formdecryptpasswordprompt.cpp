@@ -20,6 +20,7 @@ FormDecryptPasswordPrompt::FormDecryptPasswordPrompt(const QByteArray& data, QWi
   m_ui.m_tbPassword->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
 
   GuiUtilities::applyDialogProperties(*this, qApp->icons()->fromTheme(QSL("multipart-encrypted")));
+  GuiUtilities::disableCloseButton(*this);
 
   connect(m_ui.m_cbShowPassword, &QCheckBox::toggled, this, [this](bool checked) {
     m_ui.m_tbPassword->lineEdit()->setEchoMode(checked ? QLineEdit::EchoMode::Normal : QLineEdit::EchoMode::Password);

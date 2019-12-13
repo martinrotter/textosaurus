@@ -46,6 +46,8 @@ FormSettings::FormSettings(QWidget& parent)
   addSettingsPanel(new SettingsBrowserMail(&m_settings, this));
 
   m_ui.m_listSettings->setCurrentRow(0);
+
+  GuiUtilities::disableCloseButton(*this);
 }
 
 void FormSettings::saveSettings() {
