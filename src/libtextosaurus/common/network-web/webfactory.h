@@ -12,7 +12,6 @@ class WebFactory : public QObject {
 
   public:
     explicit WebFactory(QObject* parent = nullptr);
-    virtual ~WebFactory() = default;
 
   public slots:
     bool openUrlInExternalBrowser(const QString& url) const;

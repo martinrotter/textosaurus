@@ -18,7 +18,6 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
 
   public:
     explicit TextApplicationSettings(TextApplication* parent = nullptr);
-    virtual ~TextApplicationSettings() = default;
 
     bool contextAwareHighlightingEnabled() const;
     bool codeFoldingEnabled() const;

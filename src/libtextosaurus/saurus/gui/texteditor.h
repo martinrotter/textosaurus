@@ -11,8 +11,8 @@
 #include <QFile>
 #include <QMessageBox>
 
-#define QCOLOR_TO_SPRT(col) ((col.blue()) << 16) | ((col.green()) << 8) | (col.red())
-#define RGB_TO_SPRT(b, g, r) ((r) << 16) | ((g) << 8) | (b)
+#define QCOLOR_TO_SPRT(col) ((((col).blue()) << 16) | (((col).green()) << 8) | ((col).red()))
+#define RGB_TO_SPRT(b, g, r) (((r) << 16) | ((g) << 8) | (b))
 
 class TextApplication;
 class QFileSystemWatcher;
@@ -22,7 +22,6 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
 
   public:
     explicit TextEditor(TextApplication* text_app, QWidget* parent = nullptr);
-    virtual ~TextEditor() = default;
 
     QString filePath() const;
     Lexer lexer() const;

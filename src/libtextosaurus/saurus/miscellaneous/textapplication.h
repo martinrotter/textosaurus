@@ -33,7 +33,6 @@ class TEXTOSAURUS_DLLSPEC TextApplication : public QObject {
 
   public:
     explicit TextApplication(QObject* parent = nullptr);
-    virtual ~TextApplication() = default;
 
     OutputSidebar* outputSidebar() const;
     FindResultsSidebar* findResultsSidebar() const;

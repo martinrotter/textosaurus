@@ -51,11 +51,11 @@ class PluginBase {
     WebFactory* webFactory() const;
 
   private:
-    QWidget* m_mainForm;
-    TextApplication* m_textApp;
-    Settings* m_settings;
-    IconFactory* m_iconFactory;
-    WebFactory* m_webFactory;
+    QWidget* m_mainForm = nullptr;
+    TextApplication* m_textApp = nullptr;
+    Settings* m_settings = nullptr;
+    IconFactory* m_iconFactory = nullptr;
+    WebFactory* m_webFactory = nullptr;
 };
 
 inline QWidget* PluginBase::mainForm() const {

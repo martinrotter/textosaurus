@@ -107,7 +107,7 @@ constexpr auto APP_IS_RUNNING = "appisrunning";
 #define QL1C(x) QLatin1Char(x)
 #endif
 
-#define IS_IN_ARRAY(idx, count_array) (idx >= 0 && idx < count_array)
+#define IS_IN_ARRAY(idx, count_array) ((idx) >= 0 && (idx) < (count_array))
 
 #if defined(Q_OS_LINUX)
 constexpr auto OS_ID = "Linux";

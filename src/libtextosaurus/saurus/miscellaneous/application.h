@@ -37,7 +37,6 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
 
   public:
     explicit Application(const QString& id, int& argc, char** argv);
-    virtual ~Application() = default;
 
     void activateQtSingleMsgProcessing();
 
