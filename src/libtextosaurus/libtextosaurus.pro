@@ -329,6 +329,7 @@ CONFIG(release, debug|release) {
 # Add md4c.
 SOURCES += $$files(3rd-party/md4c/*.c, false)
 HEADERS  += $$files(3rd-party/md4c/*.h, false)
+DEFINES *= MD4C_USE_UTF8
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/common/dynamic-shortcuts \

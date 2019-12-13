@@ -18,9 +18,6 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-using cuint8_ta = const uint8_t *;
-using cchara = const char*;
-
 MarkdownSidebar::MarkdownSidebar(MarkdownPlugin* plugin, QWidget* parent)
   : BaseSidebar(plugin->textApp(), parent), m_txtPreview(nullptr), m_plugin(plugin) {
   setWindowTitle(tr("Markdown Preview"));
