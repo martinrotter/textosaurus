@@ -11,8 +11,8 @@
 #include "saurus/plugin-system/markdown/markdownplugin.h"
 #include "saurus/plugin-system/markdown/markdowntextbrowser.h"
 
-#include "3rd-party/hoextdown/hdocument.h"
-#include "3rd-party/hoextdown/html.h"
+#include "3rd-party/md4c/md4c.h"
+#include "3rd-party/md4c/render_html.h"
 
 #include <QTextBrowser>
 #include <QToolBar>
@@ -52,8 +52,10 @@ void MarkdownSidebar::refreshPreview() {
   TextEditor* editor = m_textApp->tabWidget()->currentEditor();
 
   if (editor != nullptr) {
+    QByteArray dat = editor->getText(editor->length() + 1);
+
     m_txtPreview->setMarkdownDocument(QFileInfo(editor->filePath()).absolutePath(),
-                                      convertMarkdownToHtml(cuint8_ta(editor->characterPointer())));
+                                      convertMarkdownToHtml(dat.data()));
   }
   else {
     m_txtPreview->clearMarkdownDocument();
@@ -93,31 +95,34 @@ void MarkdownSidebar::load() {
   }
 }
 
-QString MarkdownSidebar::convertMarkdownToHtml(const uint8_t* raw_utf8_data) {
-  size_t delka = strlen(cchara(raw_utf8_data));
+QString MarkdownSidebar::convertMarkdownToHtml(char* raw_data) {
+  size_t data_len = strlen(raw_data);
 
-  if (delka <= 0) {
+  if (data_len <= 0) {
     return QString();
   }
   else {
-    hoedown_renderer* renderer = hoedown_html_renderer_new(hoedown_html_flags::HOEDOWN_HTML_USE_XHTML, 0);
-    hoedown_document* document = hoedown_document_new(renderer,
-                                                      hoedown_extensions(4194303), // Enable all flags.
-                                                      16,
-                                                      0,
-                                                      hoedown_user_block(),
-                                                      nullptr);
-    hoedown_buffer* html = hoedown_buffer_new(delka);
+    QByteArray array;
+    int render_result = md_render_html(raw_data,
+                                       MD_SIZE(data_len),
+                                       &MarkdownSidebar::captureHtmlFragment,
+                                       &array,
+                                       MD_DIALECT_GITHUB | MD_FLAG_WIKILINKS | MD_FLAG_LATEXMATHSPANS | MD_FLAG_PERMISSIVEATXHEADERS,
+                                       0);
 
-    // We render Markdown into buffer.
-    hoedown_document_render(document, html, raw_utf8_data, delka);
+    if (render_result == 0) {
+      return QString::fromUtf8(array);
+    }
+    else {
+      return QString();
+    }
+  }
+}
 
-    QString arr = QString::fromUtf8(cchara(html->data), int(html->size));
+void MarkdownSidebar::captureHtmlFragment(const MD_CHAR* data, MD_SIZE data_size, void* userData) {
+  QByteArray* array = static_cast<QByteArray*>(userData);
 
-    hoedown_buffer_free(html);
-    hoedown_document_free(document);
-    hoedown_html_renderer_free(renderer);
-
-    return arr;
+  if (data_size > 0) {
+    array->append(data, int(data_size));
   }
 }

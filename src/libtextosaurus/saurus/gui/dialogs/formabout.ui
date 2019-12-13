@@ -235,8 +235,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>685</width>
-            <height>275</height>
+            <width>83</width>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -305,7 +305,7 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
+            <width>83</width>
             <height>69</height>
            </rect>
           </property>
@@ -370,17 +370,17 @@ p, li { white-space: pre-wrap; }
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="page_Hoedown">
+         <widget class="QWidget" name="page_Md4c">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>69</height>
+            <width>685</width>
+            <height>275</height>
            </rect>
           </property>
           <attribute name="label">
-           <string>MIT License (Hoextdown source code)</string>
+           <string>MIT License (md4c source code)</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <property name="leftMargin">
@@ -396,7 +396,7 @@ p, li { white-space: pre-wrap; }
             <number>0</number>
            </property>
            <item>
-            <widget class="QTextBrowser" name="m_txtLicenseHoedown">
+            <widget class="QTextBrowser" name="m_txtLicenseMd4c">
              <property name="font">
               <font>
                <family>DejaVu Sans Mono</family>

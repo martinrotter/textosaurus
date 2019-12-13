@@ -55,11 +55,11 @@ void FormAbout::loadLicenseAndInformation() {
   }
 
   try {
-    m_ui.m_txtLicenseHoedown->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_HOEDOWN")));
-    m_ui.m_txtLicenseHoedown->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
+    m_ui.m_txtLicenseMd4c->setText(IOFactory::readFile(APP_INFO_PATH + QL1S("/COPYING_MD4C")));
+    m_ui.m_txtLicenseMd4c->setFont(QFontDatabase::systemFont(QFontDatabase::SystemFont::FixedFont));
   }
   catch (...) {
-    m_ui.m_txtLicenseHoedown->setText(tr("License not found."));
+    m_ui.m_txtLicenseMd4c->setText(tr("License not found."));
   }
 
   try {

@@ -326,9 +326,9 @@ CONFIG(release, debug|release) {
   DEFINES *= NDEBUG=1
 }
 
-# Add hoextdown.
-SOURCES += $$files(3rd-party/hoextdown/*.c, false)
-HEADERS  += $$files(3rd-party/hoextdown/*.h, false)
+# Add md4c.
+SOURCES += $$files(3rd-party/md4c/*.c, false)
+HEADERS  += $$files(3rd-party/md4c/*.h, false)
 
 INCLUDEPATH +=  $$PWD/. \
                 $$PWD/common/dynamic-shortcuts \
