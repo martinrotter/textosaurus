@@ -14,7 +14,7 @@ Added:
 Changed:
 * Added some more substyles for some lexers, updated substyles of
   built-in color schemes.
-* "Markdown Preview" now uses md4c library which is more up-to-date.
+* "Markdown Preview" now uses md4c library (https://github.com/mity/md4c) which is more up-to-date.
 * HTML lexer now handles HTML5 keywords.
 * Scintilla is now directly incorporated into the source tree
   and its version is updated to 4.2.2.
