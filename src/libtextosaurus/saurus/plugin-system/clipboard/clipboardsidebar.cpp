@@ -30,9 +30,10 @@ int ClipboardSidebar::initialWidth() const {
 void ClipboardSidebar::load() {
   if (m_treeClipboard == nullptr) {
     m_treeClipboard = new QTreeView(this);
-    m_model = new ClipboardModel(this);
-    m_treeClipboard->setModel(m_model);
 
+    m_model = new ClipboardModel(this);
+
+    m_treeClipboard->setModel(m_model);
     m_treeClipboard->setIndentation(0);
     m_treeClipboard->header()->setSectionResizeMode(0, QHeaderView::ResizeMode::ResizeToContents);
     m_treeClipboard->header()->setSectionResizeMode(1, QHeaderView::ResizeMode::Stretch);

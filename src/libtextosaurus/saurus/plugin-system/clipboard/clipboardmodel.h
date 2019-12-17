@@ -57,7 +57,7 @@ class ClipboardModel : public QAbstractItemModel {
     ClipboardItem* itemForIndex(const QModelIndex& idx) const;
 
   private:
-    ClipboardItem* m_rootItem;
+    QScopedPointer<ClipboardItem> m_rootItem;
     QClipboard* m_clipboard;
     QDateTime m_lastDetection;
 };

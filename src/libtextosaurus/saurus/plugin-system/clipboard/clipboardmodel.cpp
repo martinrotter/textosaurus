@@ -9,7 +9,7 @@
 #include <QMimeData>
 
 ClipboardItem::ClipboardItem(QObject* parent)
-  : QObject(parent), m_time(QDateTime::currentDateTime()) {}
+  : QObject(parent), m_data(nullptr), m_time(QDateTime::currentDateTime()) {}
 
 ClipboardItem::ClipboardItem(QMimeData* data, QObject* parent)
   : QObject(parent), m_data(data), m_time(QDateTime::currentDateTime()) {}
@@ -18,10 +18,12 @@ ClipboardItem::~ClipboardItem() {
   if (m_data != nullptr) {
     delete m_data;
   }
+
+  clearChildren();
 }
 
 QString ClipboardItem::mimeType() const {
-  return m_data == nullptr ? QString() : m_data->formats().join(QL1C('\n'));
+  return m_data == nullptr ? QString() : m_data->formats().join(QL1S(", "));
 }
 
 QString ClipboardItem::heading() const {
@@ -134,7 +136,7 @@ QModelIndex ClipboardModel::parent(const QModelIndex& child) const {
   ClipboardItem* childItem = itemForIndex(child);
   ClipboardItem* parentItem = childItem->parentItem();
 
-  if (parentItem == m_rootItem) {
+  if (parentItem == m_rootItem.data()) {
     return QModelIndex();
   }
   else {
@@ -179,6 +181,10 @@ QVariant ClipboardModel::data(const QModelIndex& index, int role) const {
         }
       }
 
+      case Qt::ItemDataRole::ToolTipRole:
+        return tr("MIME: %1\n"
+                  "Contents: %2").arg(item->mimeType(), item->heading());
+
       default:
         return QVariant();
     }
@@ -212,6 +218,6 @@ ClipboardItem* ClipboardModel::itemForIndex(const QModelIndex& idx) const {
     return static_cast<ClipboardItem*>(idx.internalPointer());
   }
   else {
-    return m_rootItem;
+    return m_rootItem.data();
   }
 }
