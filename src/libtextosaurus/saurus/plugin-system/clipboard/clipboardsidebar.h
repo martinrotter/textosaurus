@@ -1,20 +1,20 @@
 // This file is distributed under GNU GPLv3 license. For full license text, see <project-git-repository-root-folder>/LICENSE.md.
 
-#ifndef CHARACTERMAPSIDEBAR_H
-#define CHARACTERMAPSIDEBAR_H
+#ifndef CLIPBOARDSIDEBAR_H
+#define CLIPBOARDSIDEBAR_H
 
 #include "saurus/gui/sidebars/basesidebar.h"
 
-class CharacterMapPlugin;
-class CharacterMapWidget;
+class ClipboardPlugin;
+class ClipboardModel;
+class QTreeView;
 
-class CharacterMapSidebar : public BaseSidebar {
+class ClipboardSidebar : public BaseSidebar {
   Q_OBJECT
 
   public:
-    explicit CharacterMapSidebar(CharacterMapPlugin* plugin, QWidget* parent = nullptr);
+    explicit ClipboardSidebar(ClipboardPlugin* plugin, QWidget* parent = nullptr);
 
-  public:
     virtual Qt::DockWidgetArea initialArea() const override;
     virtual bool initiallyVisible() const override;
     virtual int initialWidth() const override;
@@ -22,11 +22,9 @@ class CharacterMapSidebar : public BaseSidebar {
   protected:
     virtual void load() override;
 
-  private slots:
-    void onCharactedSelected(const QString& chr);
-
   private:
-    CharacterMapWidget* m_mapWidget;
+    QTreeView* m_treeClipboard;
+    ClipboardModel* m_model;
 };
 
-#endif // CHARACTERMAPSIDEBAR_H
+#endif // CLIPBOARDSIDEBAR_H

@@ -7,6 +7,7 @@
 #include "saurus/miscellaneous/application.h"
 #include "saurus/miscellaneous/textapplication.h"
 
+#include <QCloseEvent>
 #include <QLayout>
 
 EditorTab::EditorTab(TextApplication* text_app, TextEditor* editor)

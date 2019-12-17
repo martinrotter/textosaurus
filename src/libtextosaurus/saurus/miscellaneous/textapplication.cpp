@@ -24,8 +24,8 @@
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 #include "saurus/plugin-system/pluginfactory.h"
 
-#include <QClipboard>
 #include <QDockWidget>
+#include <QDropEvent>
 #include <QFileDialog>
 #include <QIcon>
 #include <QLineEdit>
