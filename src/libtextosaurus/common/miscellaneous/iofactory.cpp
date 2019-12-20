@@ -61,7 +61,7 @@ void IOFactory::writeFile(const QString& file_path, const QByteArray& data) {
     input_file.close();
   }
   else {
-    throw IOException(tr("Cannot open file '%1' for writting.").arg(QDir::toNativeSeparators(file_path)));
+    throw IOException(tr("Cannot open file '%1' for writing.").arg(QDir::toNativeSeparators(file_path)));
   }
 }
 
@@ -88,6 +88,6 @@ QString IOFactory::writeToTempFile(const QByteArray& data) {
     return file_name;
   }
   else {
-    throw IOException(tr("Cannot open temporary file for writting."));
+    throw IOException(tr("Cannot open temporary file for writing."));
   }
 }

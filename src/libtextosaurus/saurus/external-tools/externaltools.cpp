@@ -281,7 +281,7 @@ void ExternalTools::loadPredefinedTools() {
 
   xml_linearize->setActionObjectName(QSL("m_actionPredefMinify"));
   xml_linearize->setCategory(tr("&XML"));
-  xml_linearize->setName(tr("XML &Linearize/Minfy"));
+  xml_linearize->setName(tr("XML &Linearize/Minify"));
   xml_linearize->setInput(ExternalTool::ToolInput::SelectionDocument);
   xml_linearize->setOutput(ExternalTool::ToolOutput::ReplaceSelectionDocument);
 

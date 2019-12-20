@@ -605,6 +605,7 @@ void TextEditor::reloadLexer(const Lexer& default_lexer) {
   styleClearAll();
 
   color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaMargin).applyToEditor(*this, STYLE_LINENUMBER);
+  color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaControlChar).applyToEditor(*this, STYLE_CONTROLCHAR);
 
   // Set selection colors.
   setSelFore(true, QCOLOR_TO_SPRT(color_theme.component(SyntaxColorTheme::StyleComponents::ScintillaPaper).m_colorBackground));

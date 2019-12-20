@@ -158,9 +158,13 @@
         <translation>美化 XML （文件）(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="284"/>
         <source>XML &amp;Linearize/Minfy</source>
-        <translation>线性化/缩减 XML(&amp;L)</translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="284"/>
+        <source>XML &amp;Linearize/Minify</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="293"/>
@@ -1260,10 +1264,15 @@ downloaded successfully.</source>
         <translation>有可用的新发行版</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="87"/>
         <source>This is new version which can be
 downloaded.</source>
-        <translation>这是可下载的新版本</translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="87"/>
+        <source>This is a new version which can be
+downloaded.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="95"/>
@@ -1355,13 +1364,21 @@ You can install it now.</source>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="64"/>
-        <source>Cannot open file &apos;%1&apos; for writting.</source>
-        <translation>无法打开写入“ %1 ”文件。</translation>
+        <source>Cannot open file &apos;%1&apos; for writing.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="91"/>
+        <source>Cannot open temporary file for writing.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cannot open file &apos;%1&apos; for writting.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Cannot open temporary file for writting.</source>
-        <translation>无法打开写入临时文件。</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1634,14 +1651,14 @@ You can install it now.</source>
         <translation>XML 文件格式良好</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="885"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="937"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="886"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="938"/>
         <source>Cannot read file</source>
         <translation>无法读取文件</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="886"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="938"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="887"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="939"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason: %2.</source>
         <translation type="unfinished"/>
     </message>
@@ -2577,8 +2594,12 @@ Customizing too many substyles may lead to bad performance when handling big fil
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="42"/>
+        <source>Control characters</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Control characters (newline placeholder)</source>
-        <translation>控制符（新行占位符）</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="43"/>
@@ -2770,7 +2791,7 @@ Customizing too many substyles may lead to bad performance when handling big fil
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="391"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="897"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="898"/>
         <source>Unsaved Changes</source>
         <translation>未保存更改</translation>
     </message>
@@ -2780,23 +2801,23 @@ Customizing too many substyles may lead to bad performance when handling big fil
         <translation>此文档有未保存的更改，保存吗？</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="752"/>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="783"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="753"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="784"/>
         <source>Cannot Save to File</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="753"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="754"/>
         <source>Document cannot be saved to file because the destination is probably non-writable.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="784"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="785"/>
         <source>Encryption of file failed: %1.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="898"/>
+        <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="899"/>
         <source>This document has unsaved changes, do you want to ignore the changes and reload file?</source>
         <translation>此文件有未保存的更改，忽略更改并重新载入？</translation>
     </message>
