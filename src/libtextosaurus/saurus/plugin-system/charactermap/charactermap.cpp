@@ -47,7 +47,7 @@ void CharacterMap::mouseMoveEvent(QMouseEvent* event) {
     CharacterInfo nfo = m_characters.at(idx);
     QString string = stringFromUnicodeCode(nfo.m_codePoint).toUtf8();
     QByteArray utf8 = string.toUtf8();
-    QString text = tr("<center><h1>%1</h1></center>"
+    QString text = tr("<center><h2>%1</h2></center>"
                       "<center><p>%2</p><hr></center>"
                       "UCP: <b>%3</b> (HEX), <b>%4</b> (DEC)<br/>"
                       "UTF-8: <b>%5</b> (HEX)").arg(string.toHtmlEscaped(),

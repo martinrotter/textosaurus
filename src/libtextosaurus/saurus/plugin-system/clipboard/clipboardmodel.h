@@ -17,10 +17,11 @@ class ClipboardItem : public QObject {
     QString mimeType() const;
     QString heading() const;
     QDateTime time() const;
+    QMimeData* data() const;
 
     void appendChild(ClipboardItem* child);
     void prependChild(ClipboardItem* item);
-    ClipboardItem* child(int row);
+    ClipboardItem* child(int row) const;
 
     int childCount() const;
     int row() const;
@@ -33,7 +34,7 @@ class ClipboardItem : public QObject {
     void clearChildren();
 
   private:
-    QMimeData* m_data;
+    QScopedPointer<QMimeData> m_data;
     QDateTime m_time;
 
     QList<ClipboardItem*> m_childItems;

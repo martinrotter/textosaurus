@@ -1,18 +1,89 @@
 <?xml version="1.0" ?><!DOCTYPE TS><TS language="cs" sourcelanguage="en" version="2.1">
 <context>
+    <name>CharacterMap</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermap.cpp" line="50"/>
+        <source>&lt;center&gt;&lt;h2&gt;%1&lt;/h2&gt;&lt;/center&gt;&lt;center&gt;&lt;p&gt;%2&lt;/p&gt;&lt;hr&gt;&lt;/center&gt;UCP: &lt;b&gt;%3&lt;/b&gt; (HEX), &lt;b&gt;%4&lt;/b&gt; (DEC)&lt;br/&gt;UTF-8: &lt;b&gt;%5&lt;/b&gt; (HEX)</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>CharacterMapPlugin</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapplugin.cpp" line="12"/>
+        <source>Character Map</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>CharacterMapSidebar</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapsidebar.cpp" line="15"/>
+        <source>Character Map</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>CharacterMapWidget</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapwidget.cpp" line="40"/>
+        <source>Search for symbol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapwidget.cpp" line="61"/>
+        <source>All Symbols</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ClipboardModel</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardmodel.cpp" line="185"/>
+        <source>&lt;h2&gt;MIME type&lt;/h2&gt;%1&lt;h2&gt;Contents&lt;/h2&gt;%2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardmodel.cpp" line="203"/>
+        <source>Time</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardmodel.cpp" line="206"/>
+        <source>Contents</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ClipboardPlugin</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardplugin.cpp" line="11"/>
+        <source>Clipboard History</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ClipboardSidebar</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardsidebar.cpp" line="14"/>
+        <source>Clipboard History</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>EditorTab</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="41"/>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="42"/>
         <source>Read-Only Mode</source>
         <translation>Mód jen pro čtení</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="48"/>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="49"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="100"/>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="101"/>
         <source>New text file</source>
         <translation>Nový textový soubor</translation>
     </message>
@@ -48,259 +119,254 @@
         <translation>Vložit &amp;datum/čas (vlastní formát)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="226"/>
-        <source>Enter DateTime format string:</source>
-        <translation>Formátovací řetězce pro DateTime:</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="235"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="245"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="233"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="243"/>
         <source>&amp;JSON</source>
         <translation>&amp;JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="236"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="234"/>
         <source>JSON &amp;Beautify</source>
         <translation>&amp;Zkrášlit JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="246"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="244"/>
         <source>JSON &amp;Minify</source>
         <translation>&amp;Minifikovat JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="255"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="265"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="275"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="285"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="253"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="263"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="273"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="283"/>
         <source>&amp;XML</source>
         <translation>&amp;XML</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="256"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="254"/>
         <source>&amp;Check XML syntax</source>
         <translation>&amp;Zkontrolovat syntax XML</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="266"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="264"/>
         <source>XML &amp;Beautify (Selected String)</source>
         <translation>&amp;Zkrášlit XML (vybraný text)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="276"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="274"/>
         <source>XML &amp;Beautify (File)</source>
         <translation>&amp;Zkrášlit XML (celý soubor)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="286"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="284"/>
         <source>XML &amp;Linearize/Minfy</source>
         <translation>&amp;Linearizovat XML</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="305"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="400"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="410"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="420"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="293"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="303"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="313"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="323"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="398"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="408"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="418"/>
         <source>&amp;MIME Tools</source>
         <translation>&amp;Nástroje MIME</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="296"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="294"/>
         <source>Text → &amp;Base64</source>
         <translation>Text → &amp;Base64</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="306"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="304"/>
         <source>Text → &amp;Base64Url</source>
         <translation>Text → &amp;Base64Url</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="316"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="314"/>
         <source>Text → &amp;HTML escaped</source>
         <translation>Text → &amp;Eskapované HTML</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="326"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="324"/>
         <source>Text → &amp;URL encoded</source>
         <translation>Text → &amp;URL kódování</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="335"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="346"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="357"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="368"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="379"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="333"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="344"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="355"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="366"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="377"/>
         <source>&amp;Text Case Conversion</source>
         <translation>&amp;Změna velikosti písma</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="336"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="334"/>
         <source>to &amp;lower case</source>
         <translation>na &amp;malá písmena</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="347"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="345"/>
         <source>TO &amp;UPPER CASE</source>
         <translation>NA &amp;VELKÁ PÍSMENA</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="358"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="356"/>
         <source>To &amp;sentence case</source>
         <translation>&amp;První písmeno velké</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="369"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="367"/>
         <source>To &amp;Title Case</source>
         <translation>&amp;Kapitálky</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="380"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="378"/>
         <source>&amp;Invert case</source>
         <translation>&amp;Invertovat velikost písmen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="390"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="388"/>
         <source>&amp;Invert Text</source>
         <translation>&amp;Obrátit text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="401"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="399"/>
         <source>&amp;Base64 → text</source>
         <translation>&amp;Base64 → text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="411"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="409"/>
         <source>&amp;Base64Url → text</source>
         <translation>&amp;Base64Url → text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="421"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="419"/>
         <source>&amp;URL encoded → text</source>
         <translation>&amp;URL kódované → text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="430"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="440"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="450"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="428"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="438"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="448"/>
         <source>&amp;Upload to...</source>
         <translation>&amp;Nahrát na web...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="431"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="429"/>
         <source>Upload to &amp;clbin.com</source>
         <translation>Nahrát na &amp;clbin.com</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="441"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="439"/>
         <source>Upload to &amp;hastebin.com</source>
         <translation>Nahrát na &amp;hastebin.com</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="451"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="449"/>
         <source>Upload to &amp;ix.io</source>
         <translation>Nahrát na &amp;ix.io</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="508"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="529"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="574"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="587"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="506"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="527"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="548"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="572"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="585"/>
         <source>Bash (external tool examples)</source>
         <translation>Bash (příklady užití ext. nástrojů)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="518"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="540"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="516"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="538"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="559"/>
         <source>Python (external tool examples)</source>
         <translation>Python (příklady užití ext. nástrojů)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="532"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="530"/>
         <source>SHA256 sum of selected/all text</source>
         <translation>SHA256 součet vybraného/všeho textu</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="543"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="541"/>
         <source>Reverse current line</source>
         <translation>Převrátit aktivní řádek</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="551"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="549"/>
         <source>Enter sequence bounds (for example &quot;0 10&quot;):</source>
         <translation>Zadejte hraniční hodnoty řady (např. &quot;0 10&quot;):</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="554"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="552"/>
         <source>Generate sequence</source>
         <translation>Vygenerovat řadu čísel</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="563"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
         <source>Enter Python code:</source>
         <translation>Zadejte kód v jazyce Python:</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="566"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="564"/>
         <source>Run Python code</source>
         <translation>Spustit kód v jazyce Python</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="575"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="573"/>
         <source>Enter number of lines:</source>
         <translation>Zadejte počet řádků:</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="578"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="576"/>
         <source>Generate garbage text</source>
         <translation>Vygenerovat odpadní text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="588"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="586"/>
         <source>Enter Bash code:</source>
         <translation>Zadejte kód Bash:</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="591"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="589"/>
         <source>Run Bash code</source>
         <translation>Spustit kód v jazyce Bash</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="617"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="615"/>
         <source>Tool &apos;%1&apos; is already running.</source>
         <translation>Nástroj &apos;%1&apos; již běží.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="635"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="630"/>
         <source>Enter input for external tool</source>
         <translation>Zadejte vstup pro externí nástroj</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="684"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="676"/>
         <source>Cannot deliver output of external tool, assigned text editor no longer exists.</source>
         <translation>Výstup z externího nástroje nelze doručit do daného textového editoru, protože ten již byl zavřen.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="737"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="729"/>
         <source>Tool &apos;%1&apos; finished, output copied to clipboard.</source>
         <translation>Nástroj &apos;%1&apos; dokončil svoji činnost, výstup byl zkopírován do textové schránky.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="753"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="745"/>
         <source>Tool &apos;%1&apos; finished, opening output in new tab.</source>
         <translation>Nástroj &apos;%1&apos; dokončil svoji činnost, otevírám výstup v novém panelu.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="787"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="779"/>
         <source>Tool &apos;%1&apos; finished with error(s)...</source>
         <translation>Nástroj &apos;%1&apos; skončil s chybou...</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="792"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="784"/>
         <source>Tool &apos;%1&apos; finished successfully...</source>
         <translation>Nástroj &apos;%1&apos; úspěšně dokončil svoji činnost...</translation>
     </message>
@@ -432,8 +498,12 @@
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="383"/>
+        <source>MIT License (md4c source code)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>MIT License (Hoextdown source code)</source>
-        <translation>Licence MIT (zdrojový kód knihovny Hoextdown)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="448"/>
@@ -537,12 +607,12 @@
         <translation>Zadejte heslo.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="43"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="44"/>
         <source>Bad password or other problem: %1.</source>
         <translation>Špatné heslo či jiný problém: %1</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="38"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="39"/>
         <source>Nice! This is correct password.</source>
         <translation>Super! Je zadáno správné heslo.</translation>
     </message>
@@ -575,17 +645,17 @@
         <translation>Zadané heslo není správné.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="51"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="52"/>
         <source>Nice! You are good to go.</source>
         <translation>Paráda, můžete pokračovat.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="54"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="55"/>
         <source>Your password is too short, but it&apos;s your call, boss!</source>
         <translation>Vaše heslo je příliš krátké, je to na vás, šéfe!</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="57"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="58"/>
         <source>Enter some password.</source>
         <translation>Zadejte nějaké heslo.</translation>
     </message>
@@ -598,92 +668,97 @@
         <translation>Najít a nahradit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="20"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="105"/>
         <source>Match mode</source>
         <translation>Mód hledání</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="26"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="111"/>
         <source>Normal</source>
         <translation>Normální</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="39"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="124"/>
         <source>Match whole words only</source>
         <translation>Hledat pouze celá slova</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="54"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="139"/>
         <source>Regular expression</source>
         <translation>Regulární výraz</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="61"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="146"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="81"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="25"/>
         <source>&amp;Find Next</source>
         <translation>Najít &amp;další</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="88"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="32"/>
         <source>Find &amp;Previous</source>
         <translation>Najít předchozí</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="95"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="39"/>
         <source>Find &amp;All</source>
         <translation>Najít &amp;vše</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="102"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="46"/>
         <source>&amp;Count</source>
         <translation>&amp;Počet</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="109"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="53"/>
         <source>Searches for next occurrence and then replaces it.</source>
         <translation>Vyhledá další výskyt a nahradí jej.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="112"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="56"/>
         <source>&amp;Replace Next</source>
         <translation>&amp;Nahradit další</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="119"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="63"/>
         <source>Replace &amp;All</source>
         <translation>N&amp;ahradit vše</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="126"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="70"/>
         <source>&amp;Close</source>
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="158"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="221"/>
         <source>Case-sensitive search</source>
         <translation>Rozlišovat malá a VELKÁ písmena</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="235"/>
+        <source>Wrap around</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="163"/>
         <source>Search for</source>
         <translation>Hledat</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="203"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="173"/>
         <source>Phrase to search for</source>
         <translation>Text k vyhledání</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="210"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="183"/>
         <source>Replace with</source>
         <translation>Nahradit textem</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="220"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
         <source>Replace string</source>
         <translation>Nahradit za</translation>
     </message>
@@ -703,8 +778,8 @@
         <translation>Nic nenalezeno.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="228"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="279"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="288"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="351"/>
         <source>Cannot find the text &quot;%1&quot;.</source>
         <translation>Nelze najít text &quot;%1&quot;.</translation>
     </message>
@@ -1067,12 +1142,12 @@
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="76"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="78"/>
         <source>Critical Settings Were Changed</source>
         <translation>Důležitá nastavení byla změněna</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="77"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="79"/>
         <source>Some critical settings were changed and will be applied after the application gets restarted. 
 
 You have to restart manually.</source>
@@ -1081,30 +1156,30 @@ You have to restart manually.</source>
 Aplikaci můžete restartovat ručně.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="80"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="82"/>
         <source>Do you want to restart now?</source>
         <translation>Chcete aplikaci restartovat nyní?</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="81"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="114"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="83"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="116"/>
         <source>Changed categories of settings:
 %1.</source>
         <translation>Změněno nastavení v sekcích:
 %1.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="111"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="113"/>
         <source>Some Settings are Changed and Will be Lost</source>
         <translation>Některá nastavení jsou změněna a tyto změny se ztratí</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="112"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="114"/>
         <source>Some settings were changed and by cancelling this dialog, you would lose these changes.</source>
         <translation>Některá nastavení byla změněna. Tím, že zrušíte tento dialog, by tyto změny byly ztraceny.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="113"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="115"/>
         <source>Do you really want to close this dialog without saving any settings?</source>
         <translation>Opravdu chcete zavřít toto dialogové okno bez uložení nastavení?</translation>
     </message>
@@ -1318,7 +1393,7 @@ You can install it now.</source>
 <context>
     <name>MacrosPlugin</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="15"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="14"/>
         <source>Macros</source>
         <translation>Makra</translation>
     </message>
@@ -1397,17 +1472,17 @@ You can install it now.</source>
 <context>
     <name>MarkdownSidebar</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="26"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="23"/>
         <source>Markdown Preview</source>
         <translation>Náhled Markdownu</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="30"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="27"/>
         <source>Refresh Markdown Preview</source>
         <translation>Obnovit náhled Markdownu</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="66"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="65"/>
         <source>This sidebar displays simple HTML preview of your Markdown source...</source>
         <translation>Tento postranní panel zobrazuje jednoduchý HTML náhled Markdown zdroje...</translation>
     </message>
@@ -1530,7 +1605,7 @@ You can install it now.</source>
         <translation>Výstup</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="119"/>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="117"/>
         <source>This sidebar displays output of external tools and some other critical information...</source>
         <translation>Tento postranní panel zobrazuje výstup z externích nástrojů a některé další důležité informace...</translation>
     </message>
@@ -1546,13 +1621,13 @@ You can install it now.</source>
         <translation>cs</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="94"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="107"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="96"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="109"/>
         <source>Parsing of JSON document failed.</source>
         <translation>Analýza dokumentu JSON se nezdařila.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="127"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="129"/>
         <source>XML is well-formed.</source>
         <translation>XML má správný formát.</translation>
     </message>
@@ -1654,7 +1729,7 @@ You can install it now.</source>
         <translation>Externí webový prohlížeč</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="141"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Není-li zaškrtnuto, pak je použit výchozí systémový webový prohlížeč.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1679,118 +1754,118 @@ You can install it now.</source>
         <translation>Spustitelný soubor webového prohlížeče</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="73"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="169"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="76"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="178"/>
         <source>&amp;Browse</source>
         <translation>&amp;Procházet</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="82"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="178"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="85"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="187"/>
         <source>Executable parameters</source>
         <translation>Dodatečné parametry spouštěče</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="89"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="185"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="92"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="194"/>
         <source>Parameters to executable</source>
         <translation>Dodatečné parametry spouštěče</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="96"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="192"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="102"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="204"/>
         <source>Use sample arguments for</source>
         <translation>Použít doporučené argumenty pro</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="107"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="113"/>
         <source>Select browser</source>
         <translation>Zvolit prohlížeč</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="115"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="121"/>
         <source>Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</source>
         <translation>Všimněte si, že &quot;%1&quot; (bez uvozovek) je zástupný symbol pro předané adresy URL.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="129"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
         <source>External E-mail Client</source>
         <translation>Externí e-mailový klient</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="138"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="144"/>
         <source>Use Custom External E-mail Client</source>
         <translation>Použít vlastní externí e-mailový klient</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="150"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="156"/>
         <source>E-mail client executable</source>
         <translation>Spouštěč e-mailového klienta</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="162"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="168"/>
         <source>Executable file of e-mail client</source>
         <translation>Spouštěč e-mailového klienta</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="203"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="215"/>
         <source>Select client</source>
         <translation>Vyberte klienta</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="215"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="227"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.h" line="34"/>
         <source>Proxy</source>
         <translation>Proxy</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="221"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="233"/>
         <source>Type</source>
         <extracomment>Proxy server type.</extracomment>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="237"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="249"/>
         <source>Host</source>
         <translation>Hostitel</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="255"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="267"/>
         <source>Hostname or IP of your proxy server</source>
         <translation>Název hostitele nebo IP serveru proxy</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="262"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="277"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="290"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="305"/>
         <source>Username</source>
         <translation>Uživatelské jméno</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="306"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="321"/>
         <source>Your username for proxy server authentication</source>
         <translation>Vaše uživatelské jméno pro ověřování proxy serveru</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="313"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="331"/>
         <source>Password</source>
         <translation>Heslo</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="332"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="350"/>
         <source>Your password for proxy server authentication</source>
         <translation>Heslo pro ověření serveru proxy</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="342"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="363"/>
         <source>Display password</source>
         <translation>Zobrazit heslo</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="349"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="370"/>
         <source>Note that these settings are applied only on newly established connections.</source>
         <translation>Tato nastavení platí pouze na nově vytvořená spojení.</translation>
     </message>
@@ -1863,67 +1938,72 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation>Znovu načíst externě upravené soubory automaticky</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="63"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="90"/>
         <source>Line spacing</source>
         <translation>Řádkování</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="98"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="114"/>
+        <source>DateTime custom format</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="133"/>
         <source>Indentation</source>
         <translation>Odsazení</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="104"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="152"/>
         <source>Tab size</source>
         <translation>Šířka tabulátoru</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="114"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="169"/>
         <source>Indent size</source>
         <translation>Šířka odsazení</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="144"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="142"/>
         <source>Indent with</source>
         <translation>Odsadit pomocí</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="170"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="192"/>
         <source>.LOG Feature</source>
         <translation>Funkce .LOG</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="176"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="205"/>
         <source>Timestamp format</source>
         <translation>Formát časového razítka</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="211"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="63"/>
         <source>Show vertical edge for long lines on column</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="253"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="222"/>
         <source>Fonts &amp;&amp; Colors</source>
         <translation>Písma &amp;&amp; barvy</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="259"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="228"/>
         <source>Colors</source>
         <translation>Barvy</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="271"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="240"/>
         <source>Fonts</source>
         <translation>Písma</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="277"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="246"/>
         <source>&amp;Change</source>
         <translation>&amp;Změnit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="284"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="253"/>
         <source>Text editor font</source>
         <translation>Písmo pro text editoru</translation>
     </message>
@@ -1943,7 +2023,7 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation>Tabulátory</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="95"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="99"/>
         <source>Select new text editor main font</source>
         <translation>Vybrat nové hlavní písmo textového editoru</translation>
     </message>
@@ -1956,22 +2036,17 @@ File filter for external e-mail selection dialog.</extracomment>
 <context>
     <name>SettingsEncryption</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="34"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="31"/>
         <source>OpenSSL status</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="67"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="64"/>
         <source>Cipher algorithm</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="92"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="89"/>
         <source>Use PBKDF2 key derivation function, but this works only with OpenSSL 1.1.x or newer</source>
         <translation type="unfinished"/>
     </message>
@@ -2014,52 +2089,52 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation>Název externího nástroje</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="117"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="120"/>
         <source>Category</source>
         <translation>Kategorie</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="127"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="130"/>
         <source>Optional category name</source>
         <translation>Volitelný název kategorie</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="134"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="140"/>
         <source>Shortcut</source>
         <translation>Klávesová zkratka</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="147"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="153"/>
         <source>Input</source>
         <translation>Vstup</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="160"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="166"/>
         <source>Output</source>
         <translation>Výstup</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="173"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="179"/>
         <source>Interpreter</source>
         <translation>Interpret pro skript</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="183"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="189"/>
         <source>Interpreter for the script</source>
         <translation>Interpret pro skript</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="190"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="199"/>
         <source>It is generally better to have your interpreters available via your PATH environment variable, so that simply typing in &quot;bash&quot; or &quot;python&quot; could work.</source>
         <translation>Je to obecně lepší mít vaše interprety skriptů dostupné prostřednictvím proměnné prostředí PATH, a pak stačí jednoduše zadat &quot;bash&quot; nebo &quot;pythony&quot; a vše bude fungovat.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="203"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="212"/>
         <source>Optional prompt text for input</source>
         <translation>Volitelný text výzvy pro vstup</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="210"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="222"/>
         <source>Prompt</source>
         <translation>Výzva</translation>
     </message>

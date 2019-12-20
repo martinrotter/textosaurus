@@ -1,18 +1,89 @@
 <?xml version="1.0" ?><!DOCTYPE TS><TS language="de" sourcelanguage="en" version="2.1">
 <context>
+    <name>CharacterMap</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermap.cpp" line="50"/>
+        <source>&lt;center&gt;&lt;h2&gt;%1&lt;/h2&gt;&lt;/center&gt;&lt;center&gt;&lt;p&gt;%2&lt;/p&gt;&lt;hr&gt;&lt;/center&gt;UCP: &lt;b&gt;%3&lt;/b&gt; (HEX), &lt;b&gt;%4&lt;/b&gt; (DEC)&lt;br/&gt;UTF-8: &lt;b&gt;%5&lt;/b&gt; (HEX)</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>CharacterMapPlugin</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapplugin.cpp" line="12"/>
+        <source>Character Map</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>CharacterMapSidebar</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapsidebar.cpp" line="15"/>
+        <source>Character Map</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>CharacterMapWidget</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapwidget.cpp" line="40"/>
+        <source>Search for symbol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/charactermap/charactermapwidget.cpp" line="61"/>
+        <source>All Symbols</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ClipboardModel</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardmodel.cpp" line="185"/>
+        <source>&lt;h2&gt;MIME type&lt;/h2&gt;%1&lt;h2&gt;Contents&lt;/h2&gt;%2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardmodel.cpp" line="203"/>
+        <source>Time</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardmodel.cpp" line="206"/>
+        <source>Contents</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ClipboardPlugin</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardplugin.cpp" line="11"/>
+        <source>Clipboard History</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ClipboardSidebar</name>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/clipboard/clipboardsidebar.cpp" line="14"/>
+        <source>Clipboard History</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>EditorTab</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="41"/>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="42"/>
         <source>Read-Only Mode</source>
         <translation>Schreibgeschützt</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="48"/>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="49"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="100"/>
+        <location filename="../src/libtextosaurus/saurus/gui/editortab.cpp" line="101"/>
         <source>New text file</source>
         <translation>Neue Textdatei</translation>
     </message>
@@ -35,7 +106,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="204"/>
         <source>Insert &amp;Date</source>
-        <translation>&amp;Date einfügen</translation>
+        <translation>&amp;Datum einfügen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="214"/>
@@ -48,259 +119,254 @@
         <translation>&amp;DatumZeit einfügen (benutzerdefiniert)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="226"/>
-        <source>Enter DateTime format string:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="235"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="245"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="233"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="243"/>
         <source>&amp;JSON</source>
         <translation>&amp;JSON</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="236"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="234"/>
         <source>JSON &amp;Beautify</source>
-        <translation type="unfinished"/>
+        <translation>JSON &amp;verschönern</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="246"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="244"/>
         <source>JSON &amp;Minify</source>
         <translation>JSON &amp;kürzen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="255"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="265"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="275"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="285"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="253"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="263"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="273"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="283"/>
         <source>&amp;XML</source>
         <translation>&amp;XML</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="256"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="254"/>
         <source>&amp;Check XML syntax</source>
-        <translation>XML Syntax &amp;überprüfen</translation>
+        <translation>XML-Syntax &amp;überprüfen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="266"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="264"/>
         <source>XML &amp;Beautify (Selected String)</source>
-        <translation type="unfinished"/>
+        <translation>XML &amp;verschönern (ausgewählte Zeichenkette)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="276"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="274"/>
         <source>XML &amp;Beautify (File)</source>
-        <translation type="unfinished"/>
+        <translation>XML &amp;verschönern (Datei)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="286"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="284"/>
         <source>XML &amp;Linearize/Minfy</source>
-        <translation type="unfinished"/>
+        <translation>XML &amp;linearisieren/kürzen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="295"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="305"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="315"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="325"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="400"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="410"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="420"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="293"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="303"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="313"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="323"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="398"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="408"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="418"/>
         <source>&amp;MIME Tools</source>
-        <translation>&amp;MIME Werkzeug</translation>
+        <translation>&amp;MIME-Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="296"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="294"/>
         <source>Text → &amp;Base64</source>
         <translation>Text → %Base64</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="306"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="304"/>
         <source>Text → &amp;Base64Url</source>
         <translation>Text → &amp;Base64Url</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="316"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="314"/>
         <source>Text → &amp;HTML escaped</source>
         <translation>Text → &amp;HTML escaped</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="326"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="324"/>
         <source>Text → &amp;URL encoded</source>
-        <translation>Text → &amp;URL codiert</translation>
+        <translation>Text → &amp;URL-kodiert</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="335"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="346"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="357"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="368"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="379"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="333"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="344"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="355"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="366"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="377"/>
         <source>&amp;Text Case Conversion</source>
-        <translation>&amp;Text formatierung</translation>
+        <translation>&amp;Text-Schreibungskonvertierung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="336"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="334"/>
         <source>to &amp;lower case</source>
-        <translation>zu &amp;kleingeschrieben</translation>
+        <translation>zu &amp;Kleinschreibung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="347"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="345"/>
         <source>TO &amp;UPPER CASE</source>
-        <translation>zu &amp;Großgeschrieben</translation>
+        <translation>ZU &amp;GROSSSCHREIBUNG</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="358"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="356"/>
         <source>To &amp;sentence case</source>
-        <translation>zu &amp;Satzformatierung</translation>
+        <translation>zu &amp;Satzschreibung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="369"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="367"/>
         <source>To &amp;Title Case</source>
-        <translation>To </translation>
+        <translation>zu &amp;Titelschreibung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="380"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="378"/>
         <source>&amp;Invert case</source>
-        <translation>Groß- und Kleinschreibung &amp;invertieren</translation>
+        <translation>Groß-/Kleinschreibung &amp;invertieren</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="390"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="388"/>
         <source>&amp;Invert Text</source>
-        <translation type="unfinished"/>
+        <translation>Text &amp;invertieren</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="401"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="399"/>
         <source>&amp;Base64 → text</source>
-        <translation>&amp;Base64 → text</translation>
+        <translation>&amp;Base64 → Text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="411"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="409"/>
         <source>&amp;Base64Url → text</source>
-        <translation>&amp;Base64Url → text</translation>
+        <translation>&amp;Base64Url → Text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="421"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="419"/>
         <source>&amp;URL encoded → text</source>
-        <translation>%URL codiert → text</translation>
+        <translation>%URL-kodiert → Text</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="430"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="440"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="450"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="428"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="438"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="448"/>
         <source>&amp;Upload to...</source>
         <translation>%Hochladen auf</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="431"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="429"/>
         <source>Upload to &amp;clbin.com</source>
         <translation>Auf &amp;clbin.com hochladen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="441"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="439"/>
         <source>Upload to &amp;hastebin.com</source>
         <translation>Auf %hastebin.com hochladen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="451"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="449"/>
         <source>Upload to &amp;ix.io</source>
         <translation>Auf &amp;ix.io hochalden</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="508"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="529"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="550"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="574"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="587"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="506"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="527"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="548"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="572"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="585"/>
         <source>Bash (external tool examples)</source>
-        <translation>Bash (externe tool Beispiele)</translation>
+        <translation>Bash (externe Werkzeug-Beispiele)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="518"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="540"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="516"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="538"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="559"/>
         <source>Python (external tool examples)</source>
-        <translation>Python (externe tool Beispiele)</translation>
+        <translation>Python (externe Werkzeug-Beispiele)</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="532"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="530"/>
         <source>SHA256 sum of selected/all text</source>
-        <translation>SHA256 Summe des markierten/ganzen Textes</translation>
+        <translation>SHA256-Summe des ausgewählten/gesamten Textes</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="543"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="541"/>
         <source>Reverse current line</source>
-        <translation>Kehre aktuelle Zeile um</translation>
+        <translation>Aktuelle Zeile umkehren</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="551"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="549"/>
         <source>Enter sequence bounds (for example &quot;0 10&quot;):</source>
         <translation>Abgrenzungen eingeben (zum Beispiel &quot;0 10&quot;):</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="554"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="552"/>
         <source>Generate sequence</source>
-        <translation>Generiere Sequenz</translation>
+        <translation>Sequenz generieren</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="563"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="561"/>
         <source>Enter Python code:</source>
-        <translation>Python code eingeben:</translation>
+        <translation>Python-Code eingeben:</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="566"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="564"/>
         <source>Run Python code</source>
-        <translation>Python Code ausführen</translation>
+        <translation>Python-Code ausführen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="575"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="573"/>
         <source>Enter number of lines:</source>
-        <translation>Zeilenanzahl eingeben:</translation>
+        <translation>Anzahl der Zeilen eingeben:</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="578"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="576"/>
         <source>Generate garbage text</source>
-        <translation>Zufallstext generieren:</translation>
+        <translation>Datenmülltext generieren</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="588"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="586"/>
         <source>Enter Bash code:</source>
-        <translation>Bashcode eingeben:</translation>
+        <translation>Bash-Code eingeben:</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="591"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="589"/>
         <source>Run Bash code</source>
-        <translation>Bashcode ausführen</translation>
+        <translation>Bash-Code ausführen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="617"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="615"/>
         <source>Tool &apos;%1&apos; is already running.</source>
         <translation>Werkzeug &apos;%1&apos; läuft bereits.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="635"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="630"/>
         <source>Enter input for external tool</source>
-        <translation>Eingabe für externes Tool</translation>
+        <translation>Eingabe für externes Werkzeug</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="684"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="676"/>
         <source>Cannot deliver output of external tool, assigned text editor no longer exists.</source>
-        <translation>Ausgabe des externen Tools kann nicht angezeigt werden, zugewiesener Texteditor existiert nicht mehr</translation>
+        <translation>Ausgabe des externen Werkzeugs kann nicht angezeigt werden, zugewiesener Texteditor existiert nicht mehr.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="737"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="729"/>
         <source>Tool &apos;%1&apos; finished, output copied to clipboard.</source>
         <translation>Werkzeug &apos;&amp;1&apos; fertig, Ausgabe in Zwischenablage kopiert</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="753"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="745"/>
         <source>Tool &apos;%1&apos; finished, opening output in new tab.</source>
         <translation>Werkzeug &apos;&amp;1&apos; fertig, Ausgabe wird in neuen Tab geöffnet</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="787"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="779"/>
         <source>Tool &apos;%1&apos; finished with error(s)...</source>
         <translation>Werkzeug &apos;%1&apos; mit Fehler(n) beendet... </translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="792"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/externaltools.cpp" line="784"/>
         <source>Tool &apos;%1&apos; finished successfully...</source>
         <translation>Werkzeug &apos;&amp;1&apos; erfolgreich beendet...</translation>
     </message>
@@ -310,7 +376,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/favoriteslistwidget.cpp" line="31"/>
         <source> (N/A)</source>
-        <translation>(N/A)</translation>
+        <translation>(N/V)</translation>
     </message>
 </context>
 <context>
@@ -341,7 +407,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="104"/>
         <source>Follow Path of Active Document</source>
-        <translation>Pfad des aktiven Dokument folgen</translation>
+        <translation>Pfad des aktiven Dokuments folgen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/filesystem/filesystemsidebar.cpp" line="123"/>
@@ -382,7 +448,7 @@
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="18"/>
         <source>%n result(s) - </source>
-        <translation><numerusform>%n Ergebniss(e)-</numerusform><numerusform>%n Ergebniss(e)-</numerusform></translation>
+        <translation><numerusform>%n Ergebnis(se)-</numerusform><numerusform>%n Ergebnis(se)-</numerusform></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultsmodelitemeditor.cpp" line="19"/>
@@ -395,7 +461,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/sidebars/findresultssidebar.cpp" line="15"/>
         <source>Find Results</source>
-        <translation>Ergebnisse finden</translation>
+        <translation>Ergebnisse suchen</translation>
     </message>
 </context>
 <context>
@@ -413,7 +479,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="170"/>
         <source>GNU GPL License (Textosaurus source code)</source>
-        <translation>GNU GPL Lizenz (Textosaurus source code)</translation>
+        <translation>GNU GPL Lizenz (Textosaurus-Quellcode)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="173"/>
@@ -423,22 +489,26 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="243"/>
         <source>GNU LGPL License (Qt library source code)</source>
-        <translation>GNU LGPL Lizenz (Qt library source code)</translation>
+        <translation>GNU LGPL Lizenz (Qt-Bibliothek-Quellcode)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="313"/>
         <source>Mozilla Public License (uchardet source code)</source>
-        <translation>Mozilla Public License (uchardet Quellcode)</translation>
+        <translation>Mozilla Public License (uchardet-Quellcode)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="383"/>
+        <source>MIT License (md4c source code)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>MIT License (Hoextdown source code)</source>
-        <translation>MIT Lizenz (Hoextdown Quellcode)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="448"/>
         <source>Licenses page is available only in English language.</source>
-        <translation>Lizenzanzeige ist nur in Englisch verfügbar</translation>
+        <translation>Lizenzseite ist nur in englischer Sprache verfügbar.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="456"/>
@@ -448,12 +518,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="493"/>
         <source>Changelog page is available only in English language.</source>
-        <translation>Änderungsprotokoll ist nur in Englisch verfügbar</translation>
+        <translation>Änderungsprotokollseite ist nur in englischer Sprache verfügbar.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="501"/>
         <source>Resources</source>
-        <translation>Resourcen</translation>
+        <translation>Ressourcen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.ui" line="510"/>
@@ -483,7 +553,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="34"/>
         <source>FORCED by user</source>
-        <translation type="unfinished"/>
+        <translation>Vom Benutzer ERZWUNGEN</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="46"/>
@@ -491,17 +561,17 @@
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="62"/>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="70"/>
         <source>License not found.</source>
-        <translation>Lizenz nicht gefunden</translation>
+        <translation>Lizenz nicht gefunden.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="78"/>
         <source>Changelog not found.</source>
-        <translation>Änderungsprotokoll nicht gefunden</translation>
+        <translation>Änderungsprotokoll nicht gefunden.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="82"/>
         <source>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (built on %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build date:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (compiled against %7)&lt;br/&gt;&lt;b&gt;OpenSSL:&lt;/b&gt; %9</source>
-        <translation type="unfinished"/>
+        <translation>&lt;b&gt;%8&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Version:&lt;/b&gt; %1 (gebaut am %2/%3)&lt;br/&gt;&lt;b&gt;Revision:&lt;/b&gt; %4&lt;br/&gt;&lt;b&gt;Build-Datum:&lt;/b&gt; %5&lt;br/&gt;&lt;b&gt;Qt:&lt;/b&gt; %6 (kompiliert gegen %7)&lt;br/&gt;&lt;b&gt;OpenSSL:&lt;/b&gt; %9</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formabout.cpp" line="103"/>
@@ -519,7 +589,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.ui" line="46"/>
         <source>&amp;Show password</source>
-        <translation>&amp;Zeige Passwort</translation>
+        <translation>Passwort an&amp;zeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="15"/>
@@ -529,22 +599,22 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="17"/>
         <source>Enter Decryption Password</source>
-        <translation>Passwort eingeben</translation>
+        <translation>Entschlüsselungspasswort eingeben</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="19"/>
         <source>Enter some password.</source>
-        <translation type="unfinished"/>
+        <translation>Ein Passwort eingeben.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="43"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="44"/>
         <source>Bad password or other problem: %1.</source>
-        <translation type="unfinished"/>
+        <translation>Falsches Passwort oder anderes Problem: %1.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="38"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formdecryptpasswordprompt.cpp" line="39"/>
         <source>Nice! This is correct password.</source>
-        <translation>Perfekt! Das Passwort ist korrekt</translation>
+        <translation>Schön! Dies ist das richtige Passwort.</translation>
     </message>
 </context>
 <context>
@@ -552,7 +622,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="14"/>
         <source>File Encryption Settings</source>
-        <translation>Dateiverschlüsselungs Einstellungen</translation>
+        <translation>Dateiverschlüsselungs-Einstellungen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="20"/>
@@ -562,7 +632,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.ui" line="32"/>
         <source>&amp;Show password</source>
-        <translation>&amp;Passwort anzeigen</translation>
+        <translation>Passwort an&amp;zeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="14"/>
@@ -572,22 +642,22 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="16"/>
         <source>Entered password is incorrect.</source>
-        <translation>Eingegebenes Passwort ist unzulässig</translation>
+        <translation>Eingegebenes Passwort ist falsch.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="51"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="52"/>
         <source>Nice! You are good to go.</source>
-        <translation>Perfekt! Du bist startklar</translation>
+        <translation>Schön! Du bist startklar.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="54"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="55"/>
         <source>Your password is too short, but it&apos;s your call, boss!</source>
-        <translation>Dein Passwort ist zu kurz aber das ist deine Entscheidung, Boss!</translation>
+        <translation>Dein Passwort ist zu kurz, aber das ist deine Entscheidung, Boss!</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="57"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formencryptionsettings.cpp" line="58"/>
         <source>Enter some password.</source>
-        <translation>Ein Passwort eingeben</translation>
+        <translation>Ein Passwort eingeben.</translation>
     </message>
 </context>
 <context>
@@ -598,115 +668,120 @@
         <translation>Suchen und Ersetzen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="20"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="105"/>
         <source>Match mode</source>
         <translation>Vergleichsmodus</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="26"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="111"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="39"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="124"/>
         <source>Match whole words only</source>
         <translation>Nur ganze Wörter finden</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="54"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="139"/>
         <source>Regular expression</source>
         <translation>Regulärer Ausdruck</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="61"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="146"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;more info&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(ECMAScript, &lt;a href=&quot;http://www.cplusplus.com/reference/regex/ECMAScript/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;weitere Informationen&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="81"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="25"/>
         <source>&amp;Find Next</source>
-        <translation>%finde nächstes</translation>
+        <translation>Nächstes &amp;suchen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="88"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="32"/>
         <source>Find &amp;Previous</source>
-        <translation>Finde &amp;vorheriges</translation>
+        <translation>&amp;Vorheriges suchen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="95"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="39"/>
         <source>Find &amp;All</source>
-        <translation>Finde &amp;alles</translation>
+        <translation>&amp;Alles suchen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="102"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="46"/>
         <source>&amp;Count</source>
         <translation>%Zählen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="109"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="53"/>
         <source>Searches for next occurrence and then replaces it.</source>
-        <translation>Nächstes Objekt finden und ersetzen</translation>
+        <translation>Sucht nach dem nächsten Auftreten und ersetzt es dann.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="112"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="56"/>
         <source>&amp;Replace Next</source>
         <translation>Nächstes %ersetzen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="119"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="63"/>
         <source>Replace &amp;All</source>
         <translation>Alles %ersetzen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="126"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="70"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="158"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="221"/>
         <source>Case-sensitive search</source>
-        <translation>Suche Case-sensitive</translation>
+        <translation>Groß-/Kleinschreibung beachtende Suche</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="235"/>
+        <source>Wrap around</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="163"/>
         <source>Search for</source>
         <translation>Suche nach</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="203"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="173"/>
         <source>Phrase to search for</source>
         <translation>Gesuchte Phrase</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="210"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="183"/>
         <source>Replace with</source>
         <translation>Ersetzen mit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="220"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.ui" line="193"/>
         <source>Replace string</source>
-        <translation>String ersetzen</translation>
+        <translation>Zeichenkette ersetzen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="91"/>
         <source>Count: %1 matches.</source>
-        <translation>Zähler: %1 Treffer</translation>
+        <translation>Zähler: %1 Treffer.</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="147"/>
         <source>Replaced %n occurrence(s).</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n Vorkommnis(se) ersetzt.</numerusform><numerusform>%n Vorkommnis(se) ersetzt.</numerusform></translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="182"/>
         <source>Nothing found.</source>
-        <translation>Nichts gefunden</translation>
+        <translation>Nichts gefunden.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="228"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="279"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="288"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formfindreplace.cpp" line="351"/>
         <source>Cannot find the text &quot;%1&quot;.</source>
-        <translation>Text &quot;%1&quot; nicht gefunden</translation>
+        <translation>Text &quot;%1&quot; nicht gefunden.</translation>
     </message>
 </context>
 <context>
@@ -719,12 +794,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="50"/>
         <source>&amp;Save File with Encoding...</source>
-        <translation>Datei mit Codierung %speichern</translation>
+        <translation>Datei mit Kodierung %speichern...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="55"/>
         <source>&amp;Open File with Encoding...</source>
-        <translation>Datei mit Codierung %öffnen</translation>
+        <translation>Datei mit Kodierung %öffnen...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="60"/>
@@ -734,7 +809,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="65"/>
         <source>&amp;Reopen File with Encoding...</source>
-        <translation>%Öffne erneut Datei mit Codierung</translation>
+        <translation>Datei mit Kodierung e&amp;rneut öffnen...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="90"/>
@@ -749,12 +824,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="104"/>
         <source>&amp;UI Elements</source>
-        <translation>&amp;UI Elemente</translation>
+        <translation>&amp;UI-Elemente</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="114"/>
         <source>&amp;Invisible Characters</source>
-        <translation>&amp;Nicht sichtbare Zeichen</translation>
+        <translation>&amp;Unsichtbare Zeichen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="121"/>
@@ -774,27 +849,27 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="153"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Ändern</translation>
+        <translation>B&amp;earbeiten</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="157"/>
         <source>Converts existing EOLs and sets mode for new EOLs.</source>
-        <translation type="unfinished"/>
+        <translation>Konvertiert bestehende Zeilenenden und legt den Modus für neue Zeilenenden fest.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="160"/>
         <source>&amp;EOL Conversion</source>
-        <translation>%EOL Konvertierung</translation>
+        <translation>%Zeilenenden-Konvertierung</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="168"/>
         <source>This does not convert existing EOLs.</source>
-        <translation type="unfinished"/>
+        <translation>Dadurch werden bestehende Zeilenenden nicht konvertiert.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="171"/>
         <source>&amp;EOL Mode (does not convert existing EOLs)</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Zeilenenden-Modus (konvertiert keine vorhandenen Zeilenenden)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="189"/>
@@ -814,7 +889,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="539"/>
         <source>Context-aware Occurrences Highlighting</source>
-        <translation type="unfinished"/>
+        <translation>Kontextabhängige Hervorhebung von Vorkommnissen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="219"/>
@@ -824,57 +899,57 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="224"/>
         <source>&amp;About Application</source>
-        <translation>&amp;Über das Programm</translation>
+        <translation>&amp;Über die Anwendung</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="235"/>
         <source>View &amp;Fullscreen</source>
-        <translation>Zeige &amp;Vollbild</translation>
+        <translation>&amp;Vollbild anzeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="246"/>
         <source>No Actions Available</source>
-        <translation>Keine Aktion verfügbar</translation>
+        <translation>Keine Aktionen verfügbar</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="249"/>
         <source>No actions are available right now.</source>
-        <translation>Keine Aktion aktuell verfügbar</translation>
+        <translation>Zur Zeit sind keine Aktionen verfügbar.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="257"/>
         <source>Switch Visibility of Main &amp;Window</source>
-        <translation>Sichtbarkeit von Main &amp; Fenster wechseln</translation>
+        <translation>Sichtbarkeit des Haupt&amp;fensters umschalten</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="260"/>
         <source>Hides main window if it is visible and shows it if it is hidden.</source>
-        <translation>Versteckt Hauptfenster wenn es sichtbar ist und zeigt es wenn es versteckt ist</translation>
+        <translation>Blendet das Hauptfenster aus, wenn es sichtbar ist und zeigt es an, wenn es ausgeblendet ist.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="265"/>
         <source>Check for &amp;Updates</source>
-        <translation>Suche nach &amp;Updates</translation>
+        <translation>Nach Akt&amp;ualisierungen suchen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="270"/>
         <source>Report a &amp;Bug...</source>
-        <translation>Melde einen &amp;Bug</translation>
+        <translation>Einen &amp;Fehler melden...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="281"/>
         <source>View &amp;Toolbar</source>
-        <translation>Zeige &amp;Werkzeugleiste</translation>
+        <translation>&amp;Werkzeugleiste anzeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="286"/>
         <source>&amp;Donate...</source>
-        <translation>&amp;Spenden</translation>
+        <translation>&amp;Spenden...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="291"/>
         <source>Display &amp;Wiki</source>
-        <translation>Zeige &amp;Wiki</translation>
+        <translation>&amp;Wiki anzeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="296"/>
@@ -884,27 +959,27 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="307"/>
         <source>View &amp;Statusbar</source>
-        <translation>Zeige &amp;Statusleiste</translation>
+        <translation>&amp;Statusleiste anzeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="312"/>
         <source>Close &amp;All Tabs</source>
-        <translation>Schließe &amp;alle Tabs</translation>
+        <translation>&amp;Alle Tabs schließen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="317"/>
         <source>Close All Tabs &amp;Except Current</source>
-        <translation>Schließe alle Tabs &amp;außer dem aktuellen</translation>
+        <translation>Alle Tabs &amp;außer dem aktuellen schließen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="322"/>
         <source>Go to &amp;Next Tab</source>
-        <translation>Gehe zum &amp;nächsten Tab</translation>
+        <translation>Zum &amp;nächsten Tab gehen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="327"/>
         <source>Go to &amp;Previous Tab</source>
-        <translation>Gehe zum &amp;letzten Tab</translation>
+        <translation>Zum &amp;vorherigen Tab gehen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="332"/>
@@ -914,7 +989,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="340"/>
         <source>&amp;Open File...</source>
-        <translation>Datei &amp;öffnen</translation>
+        <translation>Datei &amp;öffnen...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="348"/>
@@ -934,22 +1009,22 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="372"/>
         <source>Close All &amp;Unmodified Editors</source>
-        <translation>Schließe alle und unmodifizierten Editoren</translation>
+        <translation>Alle &amp;ungeänderten Editoren schließen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="380"/>
         <source>Use &amp;Unix (LF)</source>
-        <translation>Benutze &amp;Unix (LF)</translation>
+        <translation>&amp;Unix (LF) verwenden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="388"/>
         <source>Use &amp;Windows (CRLF)</source>
-        <translation>Benutze &amp;Windows (CRLF)</translation>
+        <translation>&amp;Windows (CRLF) verwenden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="396"/>
         <source>Use &amp;Mac (CR)</source>
-        <translation>Benutze &amp;Mac (CR)</translation>
+        <translation>&amp;Mac (CR) verwenden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="404"/>
@@ -964,7 +1039,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="417"/>
         <source>&amp;Redo</source>
-        <translation>&amp;Widerherstellen</translation>
+        <translation>&amp;Wiederherstellen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="425"/>
@@ -984,7 +1059,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="443"/>
         <source>Display &amp;EOLs</source>
-        <translation>&amp;Zeilenende anzeigen</translation>
+        <translation>&amp;Zeilenenden anzeigen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="451"/>
@@ -994,7 +1069,7 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="456"/>
         <source>&amp;Find and Replace</source>
-        <translation>&amp;Suche und Ersetze</translation>
+        <translation>&amp;Suchen und Ersetzen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="467"/>
@@ -1019,12 +1094,12 @@
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="496"/>
         <source>&amp;Close Current Tab</source>
-        <translation>&amp;Schließe aktuellen Tab</translation>
+        <translation>Aktuellen Tab s&amp;chließen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="507"/>
         <source>&amp;Enable Auto-Indent</source>
-        <translation>&amp;Aktiviere automatisches Einrücken</translation>
+        <translation>Automatisches Einrücken &amp;aktivieren</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formmain.ui" line="515"/>
@@ -1067,43 +1142,44 @@
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="76"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="78"/>
         <source>Critical Settings Were Changed</source>
         <translation>Kritische Einstellungen wurden geändert</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="77"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="79"/>
         <source>Some critical settings were changed and will be applied after the application gets restarted. 
 
 You have to restart manually.</source>
-        <translation>Einige wichte Einstellungen wurden geändert. Sie werden erst nach einen Neustart wirksam.
+        <translation>Einige wichtige Einstellungen wurden geändert und werden erst nach einen Neustart wirksam.
 
-Du musst das Programm selbst neustarten.</translation>
+Du musst das Programm manuell neu starten.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="80"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="82"/>
         <source>Do you want to restart now?</source>
-        <translation>Willst du jetzt neustarten?</translation>
+        <translation>Willst du jetzt neu starten?</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="81"/>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="114"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="83"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="116"/>
         <source>Changed categories of settings:
 %1.</source>
-        <translation type="unfinished"/>
+        <translation>Geänderte Kategorien von Einstellungen:
+%1.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="111"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="113"/>
         <source>Some Settings are Changed and Will be Lost</source>
         <translation>Einige Einstellungen wurden geändert und werden verloren sein.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="112"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="114"/>
         <source>Some settings were changed and by cancelling this dialog, you would lose these changes.</source>
-        <translation>Einige Einstellungen wurden geändert. Wenn du diesen Dialog jetzt schließt, werden die Änderungen nicht gespeichert.</translation>
+        <translation>Einige Einstellungen wurden geändert und durch das Abbrechen dieses Dialogs würdest du diese Änderungen verlieren.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="113"/>
+        <location filename="../src/libtextosaurus/saurus/gui/dialogs/formsettings.cpp" line="115"/>
         <source>Do you really want to close this dialog without saving any settings?</source>
         <translation>Möchtest du diesen Dialog wirklich schließen, ohne die Einstellungen zu speichern?</translation>
     </message>
@@ -1113,17 +1189,17 @@ Du musst das Programm selbst neustarten.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="14"/>
         <source>Check for updates</source>
-        <translation>Nach Updates suchen</translation>
+        <translation>Nach Aktualisierungen suchen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="22"/>
         <source>Current release</source>
-        <translation>Aktueller Release</translation>
+        <translation>Aktuelle Version</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="36"/>
         <source>Available release</source>
-        <translation>Verfügbarer Release</translation>
+        <translation>Verfügbare Version</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="50"/>
@@ -1133,7 +1209,7 @@ Du musst das Programm selbst neustarten.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="71"/>
         <source>Changelog</source>
-        <translation>Änderungshistorie</translation>
+        <translation>Änderungsprotokoll</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.ui" line="124"/>
@@ -1143,22 +1219,22 @@ Du musst das Programm selbst neustarten.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="36"/>
         <source>Download selected update</source>
-        <translation>Ausgewähltes Update herunterladen</translation>
+        <translation>Ausgewählte Aktualisierung herunterladen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="37"/>
         <source>Download new installation files.</source>
-        <translation>Neue Installationsdateien herunterladen</translation>
+        <translation>Neue Installationsdateien herunterladen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="40"/>
         <source>Go to application website</source>
-        <translation>Gehe zu Anwendungswebseite</translation>
+        <translation>Zur Anwendungswebseite gehen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="41"/>
         <source>Go to application website to get update packages manually.</source>
-        <translation>Rufe die Programmwebseite auf um die Updates von hand herunterzuladen.</translation>
+        <translation>Gehe zur Webseite der Anwendung, um Aktualisierungspakete manuell herunterzuladen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="67"/>
@@ -1175,60 +1251,60 @@ Du musst das Programm selbst neustarten.</translation>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="71"/>
         <source>List with updates was not
 downloaded successfully.</source>
-        <translation>Liste mit Updates wurde nicht
-vollständig heruntergeladen</translation>
+        <translation>Liste mit Aktualisierungen wurde nicht
+vollständig heruntergeladen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="86"/>
         <source>New release available.</source>
-        <translation>Neue Version verfügbar</translation>
+        <translation>Neue Version verfügbar.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="87"/>
         <source>This is new version which can be
 downloaded.</source>
-        <translation>Diese neue Version kann heruntergeladen
-werden</translation>
+        <translation>Diese neue Version kann
+heruntergeladen werden.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="95"/>
         <source>No new release available.</source>
-        <translation>Keine neuen Versionen verfügbar</translation>
+        <translation>Keine neuen Versionen verfügbar.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="96"/>
         <source>This release is not newer than
 currently installed one.</source>
         <translation>Diese Version ist nicht neuer als die
-aktuell installierte</translation>
+aktuell installierte.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="106"/>
         <source>Downloaded %1% (update size is %2 kB).</source>
-        <translation>%1% heruntergeladen (Die Updategröße beträgt %2 kB).</translation>
+        <translation>%1% heruntergeladen (Aktualisierungsgröße beträgt %2 kB).</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="114"/>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="243"/>
         <source>Downloading update...</source>
-        <translation>Update wird heruntergeladen...</translation>
+        <translation>Aktualisierung wird heruntergeladen...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="170"/>
         <source>Available update files</source>
-        <translation>Verfügbare Updatedateien</translation>
+        <translation>Verfügbare Aktualisierungsdateien</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="182"/>
         <source>Downloaded successfully</source>
-        <translation>Download erfolgreich</translation>
+        <translation>Erfolgreich heruntergeladen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="183"/>
         <source>Package was downloaded successfully.
 You can install it now.</source>
-        <translation>Paket erfolgreich heruntergeladen.
-Installation jetzt möglich.</translation>
+        <translation>Paket wurde erfolgreich heruntergeladen.
+Du kannst es jetzt installieren.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="184"/>
@@ -1244,32 +1320,32 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="190"/>
         <source>Error occured during downloading of the package.</source>
-        <translation>Während dem herunterladen des Paketes ist ein Fehler aufgetreten. </translation>
+        <translation>Während dem Herunterladen des Paketes ist ein Fehler aufgetreten. </translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="224"/>
         <source>Cannot Start Installer</source>
-        <translation>Der Installer kann nicht gestartet werden.</translation>
+        <translation>Installationsprogramm kann nicht gestartet werden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="224"/>
         <source>Cannot launch external updater. Update application manually.</source>
-        <translation>Externer Updater kann nicht gestartet werden. Anwendung manuell aktualisieren.</translation>
+        <translation>Externes Aktualisierungsprogramm kann nicht gestartet werden. Anwendung manuell aktualisieren.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="233"/>
         <source>Cannot Open Update File</source>
-        <translation>Kann Updatedatei nicht öffnen</translation>
+        <translation>Kann Aktualisierungsdatei nicht öffnen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="233"/>
         <source>Cannot open application update file. Update application manually.</source>
-        <translation>Kann Updatedatei nicht öffnen. Anwendung manuell aktualisieren.</translation>
+        <translation>Kann Anwendungs-Aktualisierungsdatei nicht öffnen. Anwendung manuell aktualisieren.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp" line="250"/>
         <source>Cannot navigate to installation file. Check new installation downloads manually on project website.</source>
-        <translation>Die Navigation zur Installationsdatei ist nicht möglich. Überprüfe die Downloads neuer Installationen manuell auf der Projektseite.</translation>
+        <translation>Kann nicht zur Installationsdatei navigieren. Überprüfe die Downloads neuer Installationen manuell auf der Projektseite.</translation>
     </message>
 </context>
 <context>
@@ -1277,17 +1353,17 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="52"/>
         <source>Cannot open file &apos;%1&apos; for reading.</source>
-        <translation>Kann Datei &apos;%1&apos; nicht im Lesemodus öffnen.</translation>
+        <translation>Kann Datei &apos;%1&apos; nicht zum Lesen öffnen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos; for writting.</source>
-        <translation>Kann Datei &apos;%1%&apos; nicht im Schreibmodus öffnen.</translation>
+        <translation>Kann Datei &apos;%1%&apos; nicht zum Schreiben öffnen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/iofactory.cpp" line="91"/>
         <source>Cannot open temporary file for writting.</source>
-        <translation>Die tempomäre Datei konnte nocht im Schreibmodus geöffnet werden.</translation>
+        <translation>Kann temporäre Datei nach zum Schreiben öffnen.</translation>
     </message>
 </context>
 <context>
@@ -1310,7 +1386,7 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="69"/>
         <source>Macro Name Already Used</source>
-        <translation>Der Name des Makros ist bereits in Verwendung.</translation>
+        <translation>Makroname wird bereits verwendet</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macros.cpp" line="70"/>
@@ -1321,7 +1397,7 @@ Installation jetzt möglich.</translation>
 <context>
     <name>MacrosPlugin</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="15"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrosplugin.cpp" line="14"/>
         <source>Macros</source>
         <translation>Makros</translation>
     </message>
@@ -1336,7 +1412,7 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="40"/>
         <source>Macro Recorder Toolbar</source>
-        <translation>Makrorecorder Werkzeugleiste</translation>
+        <translation>Makrorekorder-Werkzeugleiste</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macrossidebar.cpp" line="45"/>
@@ -1389,7 +1465,7 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="65"/>
         <source>Recorder</source>
-        <translation>Recorder</translation>
+        <translation>Rekorder</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/plugin-system/macros/macroswidget.ui" line="83"/>
@@ -1400,19 +1476,19 @@ Installation jetzt möglich.</translation>
 <context>
     <name>MarkdownSidebar</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="26"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="23"/>
         <source>Markdown Preview</source>
-        <translation>Markdown Vorschau</translation>
+        <translation>Markdown-Vorschau</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="30"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="27"/>
         <source>Refresh Markdown Preview</source>
-        <translation>Makro Vorschau neuladen</translation>
+        <translation>Makro-Vorschau neu laden</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="66"/>
+        <location filename="../src/libtextosaurus/saurus/plugin-system/markdown/markdownsidebar.cpp" line="65"/>
         <source>This sidebar displays simple HTML preview of your Markdown source...</source>
-        <translation>Diese Seitenleiste ziegt eine einfache HTML Vorschau von deinen Markdown code...</translation>
+        <translation>Diese Seitenleiste zeigt eine einfache HTML-Vorschau von deiner Markdown-Quelle an...</translation>
     </message>
 </context>
 <context>
@@ -1420,7 +1496,7 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/common/gui/messagebox.cpp" line="128"/>
         <source>Do not show this dialog again.</source>
-        <translation>Zeige diesen Dialog nicht mehr.</translation>
+        <translation>Diesen Dialog nicht mehr anzeigen.</translation>
     </message>
 </context>
 <context>
@@ -1429,7 +1505,7 @@ Installation jetzt möglich.</translation>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="22"/>
         <source>protocol error</source>
         <extracomment>Network status.</extracomment>
-        <translation>Fehlerprotokoll</translation>
+        <translation>Protokollfehler</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="25"/>
@@ -1445,7 +1521,7 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="34"/>
         <source>connection timed out or was cancelled</source>
-        <translation>Die Verbindung hatte eine Zeitüberschreitung oder wurde beendet.</translation>
+        <translation>Die Verbindung hatte eine Zeitüberschreitung oder wurde abgebrochen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="40"/>
@@ -1457,25 +1533,25 @@ Installation jetzt möglich.</translation>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="45"/>
         <source>connection timed out</source>
         <extracomment>Network status.</extracomment>
-        <translation>Zeitüberschreitung</translation>
+        <translation>Zeitüberschreitung der Verbindung</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="50"/>
         <source>SSL handshake failed</source>
         <extracomment>Network status.</extracomment>
-        <translation>SSL handschake fehlgeschlagen</translation>
+        <translation>SSL-Handshake fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="56"/>
         <source>proxy server connection refused</source>
         <extracomment>Network status.</extracomment>
-        <translation>Der Proxyserver hat die Verbindung abgelehnt.</translation>
+        <translation>Der Proxyserver hat die Verbindung abgelehnt</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="61"/>
         <source>temporary failure</source>
         <extracomment>Network status.</extracomment>
-        <translation>vorübergehende Störung</translation>
+        <translation>temporäre Störung</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="66"/>
@@ -1493,7 +1569,7 @@ Installation jetzt möglich.</translation>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="76"/>
         <source>proxy server not found</source>
         <extracomment>Network status.</extracomment>
-        <translation>Der Proxyserver wurde nicht gefunden.</translation>
+        <translation>Der Proxyserver wurde nicht gefunden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/network-web/networkfactory.cpp" line="81"/>
@@ -1533,9 +1609,9 @@ Installation jetzt möglich.</translation>
         <translation>Ausgabe</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="119"/>
+        <location filename="../src/libtextosaurus/saurus/gui/sidebars/outputsidebar.cpp" line="117"/>
         <source>This sidebar displays output of external tools and some other critical information...</source>
-        <translation>Diese Seitenleiste zeigt die Ausgabe von externen Werkzeugen und andere wichtige Informationen...</translation>
+        <translation>Diese Seitenleiste zeigt die Ausgabe von externen Werkzeugen und andere kritische Informationen...</translation>
     </message>
 </context>
 <context>
@@ -1549,13 +1625,13 @@ Installation jetzt möglich.</translation>
         <translation>de</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="94"/>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="107"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="96"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="109"/>
         <source>Parsing of JSON document failed.</source>
         <translation>Das Parsen des JSON-Dokuments ist fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="127"/>
+        <location filename="../src/libtextosaurus/saurus/external-tools/predefinedtools.cpp" line="129"/>
         <source>XML is well-formed.</source>
         <translation>XML ist gut formatiert.</translation>
     </message>
@@ -1563,13 +1639,13 @@ Installation jetzt möglich.</translation>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="885"/>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="937"/>
         <source>Cannot read file</source>
-        <translation>Kann datei nicht lesen</translation>
+        <translation>Kann Datei nicht lesen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="886"/>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="938"/>
         <source>File &apos;%1&apos; cannot be opened for reading, reason: %2.</source>
-        <translation type="unfinished"/>
+        <translation>Datei &apos;%1&apos; kann nicht zum Lesen geöffnet werden, Grund: %2.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="23"/>
@@ -1579,74 +1655,74 @@ Installation jetzt möglich.</translation>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="24"/>
         <source>File &apos;%1&apos; too big. %2 can only open files smaller than %3 MB.</source>
-        <translation>Die datei &apos;%1&apos; ist zu groß. %2 kann nur Dateien öffnen, die kleiner als %3 MB sind.</translation>
+        <translation>Datei &apos;%1&apos; ist zu groß. %2 kann nur Dateien öffnen, die kleiner als %3 MB sind.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="67"/>
         <source>Loading Big File</source>
-        <translation>Lade große Datei</translation>
+        <translation>Große Datei wird geladen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/miscellaneous/filemetadata.cpp" line="68"/>
         <source>This file is big. %2 will switch some features (for example &apos;Word Wrap&apos; or syntax highlighting) off to make sure that file loading is not horribly slow.</source>
-        <translation>Diese Datei ist groß. %2 wird einige Features (z.B. den Zeilenumbruch oder die Syntaxhervorhebung) ausschalten um sicherzugehen, das die Datei nicht zu langsam lädt.</translation>
+        <translation>Diese Datei ist groß. %2 wird einige Funktionen (z.B. den Zeilenumbruch oder die Syntaxhervorhebung) ausschalten, um sicherzustellen, dass das Laden der Datei nicht schrecklich langsam ist.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="28"/>
         <source>not installed</source>
-        <translation type="unfinished"/>
+        <translation>nicht installiert</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="112"/>
         <source>cannot encrypt data with empty password</source>
-        <translation type="unfinished"/>
+        <translation>Kann Daten nicht mit leerem Passwort verschlüsseln</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="151"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="182"/>
         <source>encryption failed with error &apos;%1&apos;</source>
-        <translation type="unfinished"/>
+        <translation>Verschlüsselung mit Fehler &apos;%1&apos; fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="156"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="240"/>
         <source>&quot;openssl&quot; utility crashed</source>
-        <translation type="unfinished"/>
+        <translation>Dienstprogramm &quot;openssl&quot; abgestürzt</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="160"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="244"/>
         <source>&quot;openssl&quot; utility was not found</source>
-        <translation type="unfinished"/>
+        <translation>Dienstprogramm &quot;openssl&quot; wurde nicht gefunden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="164"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="248"/>
         <source>&quot;openssl&quot; utility was not able to read input</source>
-        <translation type="unfinished"/>
+        <translation>Dienstprogramm &quot;openssl&quot; konnte die Eingaben nicht lesen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="168"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="252"/>
         <source>&quot;openssl&quot; utility timed out</source>
-        <translation type="unfinished"/>
+        <translation>Dienstprogramm &quot;openssl&quot; mit Zeitüberschreitung</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="172"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="256"/>
         <source>&quot;openssl&quot; utility cannot write output</source>
-        <translation type="unfinished"/>
+        <translation>Dienstprogramm &quot;openssl&quot; kann keine Ausgabe schreiben</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="196"/>
         <source>cannot decrypt data with empty password</source>
-        <translation type="unfinished"/>
+        <translation>Die Daten können nicht mit einem leeren Passwort entschlüsselt werden.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="235"/>
         <location filename="../src/libtextosaurus/common/miscellaneous/cryptofactory.cpp" line="266"/>
         <source>decryption failed with error &apos;%1&apos;</source>
-        <translation type="unfinished"/>
+        <translation>Entschlüsselung mit Fehler &apos;%1&apos; fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -1657,150 +1733,150 @@ Installation jetzt möglich.</translation>
         <translation>Externer Webbrowser</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="141"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, then default system-wide web browser is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn deaktiviert, wird der Webbrowser des Systems benutzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="42"/>
         <source>Use Custom External Web Browser</source>
-        <translation>Benutze eigenen externen Webbrowser</translation>
+        <translation>Eigenen externen Webbrowser verwenden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="39"/>
         <source>If unchecked, then default system-wide web browser is used</source>
-        <translation>Wenn deaktiviert, wird der der Webbrowser des Systems benutzt.</translation>
+        <translation>Wenn deaktiviert, wird der der Webbrowser des Systems benutzt</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="54"/>
         <source>Web browser executable</source>
-        <translation>Ausführbare Webbrowser Datei</translation>
+        <translation>Ausführbare Webbrowser-Datei</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="66"/>
         <source>Executable file of web browser</source>
-        <translation>Ausführbare Webbrowser Datei</translation>
+        <translation>Ausführbare Datei des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="73"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="169"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="76"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="178"/>
         <source>&amp;Browse</source>
         <translation>&amp;Durchsuchen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="82"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="178"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="85"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="187"/>
         <source>Executable parameters</source>
         <translation>Ausführbare Parameter</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="89"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="185"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="92"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="194"/>
         <source>Parameters to executable</source>
         <translation>Parameter für die ausführbare Datei</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="96"/>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="192"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="102"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="204"/>
         <source>Use sample arguments for</source>
         <translation>Verwende Beispielargumente für</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="107"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="113"/>
         <source>Select browser</source>
-        <translation>Wähle Browser</translation>
+        <translation>Browser auswählen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="115"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="121"/>
         <source>Note that &quot;%1&quot; (without quotation marks) is placeholder for passed URL.</source>
-        <translation>Beachte, dass &quot;%1&quot; (ohne Anführungszeichen) ein Platzhalter für eine übergebene URL ist</translation>
+        <translation>Beachte, dass &quot;%1&quot; (ohne Anführungszeichen) ein Platzhalter für eine übergebene URL ist.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="129"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="135"/>
         <source>External E-mail Client</source>
-        <translation>Externer E-Mail Client</translation>
+        <translation>Externer E-Mail-Client</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="138"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="144"/>
         <source>Use Custom External E-mail Client</source>
-        <translation>Benutze externen E-mail Client</translation>
+        <translation>Eigenen externen E-Mail-Client verwenden</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="150"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="156"/>
         <source>E-mail client executable</source>
         <translation>E-Mail-Client ausführbare Datei</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="162"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="168"/>
         <source>Executable file of e-mail client</source>
-        <translation>Ausführbare Datei des E-Mail Client</translation>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="203"/>
-        <source>Select client</source>
-        <translation>Wähle Client aus</translation>
+        <translation>Ausführbare Datei des E-Mail-Clients</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="215"/>
+        <source>Select client</source>
+        <translation>Client auswählen</translation>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="227"/>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.h" line="34"/>
         <source>Proxy</source>
         <translation>Proxy</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="221"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="233"/>
         <source>Type</source>
         <extracomment>Proxy server type.</extracomment>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="237"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="249"/>
         <source>Host</source>
         <translation>Host</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="255"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="267"/>
         <source>Hostname or IP of your proxy server</source>
-        <translation>Hostname oder IP deines Proxy Servers</translation>
+        <translation>Hostname oder IP deines Proxyservers</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="262"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="277"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="290"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="305"/>
         <source>Username</source>
         <translation>Benutername</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="306"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="321"/>
         <source>Your username for proxy server authentication</source>
-        <translation>Dein Benutzername für die Proxyserver Authentifizierung</translation>
+        <translation>Dein Benutzername für die Proxyserver-Authentifizierung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="313"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="331"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="332"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="350"/>
         <source>Your password for proxy server authentication</source>
-        <translation>Dein Passwort für die Proxyserver Authentifizierung</translation>
+        <translation>Dein Passwort für die Proxyserver-Authentifizierung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="342"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="363"/>
         <source>Display password</source>
         <translation>Passwort anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="349"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.ui" line="370"/>
         <source>Note that these settings are applied only on newly established connections.</source>
         <translation>Beachte , dass diese Einstellungen nur auf neu eingerichtete Verbindungen angewendet werden.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="53"/>
         <source>Select web browser executable</source>
-        <translation>Ausführbare Webbrowser Datei auswählen</translation>
+        <translation>Ausführbare Webbrowser-Datei auswählen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsbrowsermail.cpp" line="58"/>
@@ -1863,70 +1939,75 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="54"/>
         <source>Reload externally edited files automatically</source>
-        <translation>Extern bearbeitete Dateien automatisch neuladen</translation>
+        <translation>Extern bearbeitete Dateien automatisch neu laden</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="63"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="90"/>
         <source>Line spacing</source>
         <translation>Zeilenabstand</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="98"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="114"/>
+        <source>DateTime custom format</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="133"/>
         <source>Indentation</source>
         <translation>Einrückung</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="104"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="152"/>
         <source>Tab size</source>
         <translation>Tabulatorgröße</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="114"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="169"/>
         <source>Indent size</source>
         <translation>Einrückungsgröße</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="144"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="142"/>
         <source>Indent with</source>
         <translation>Einrücken mit</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="170"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="192"/>
         <source>.LOG Feature</source>
-        <translation>.LOg Feature</translation>
+        <translation>.LOG-Funktion</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="176"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="205"/>
         <source>Timestamp format</source>
-        <translation>Zeitstempel Format</translation>
+        <translation>Zeitstempelformat</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="211"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="63"/>
         <source>Show vertical edge for long lines on column</source>
         <translation>Vertikale Kante für lange Linien auf der Spalte anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="253"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="222"/>
         <source>Fonts &amp;&amp; Colors</source>
         <translation>Schriften &amp;&amp; Farben</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="259"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="228"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="271"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="240"/>
         <source>Fonts</source>
         <translation>Schriften</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="277"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="246"/>
         <source>&amp;Change</source>
         <translation>&amp;Ändern</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="284"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.ui" line="253"/>
         <source>Text editor font</source>
         <translation>Texeditorschrift</translation>
     </message>
@@ -1946,9 +2027,9 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation>Tabulatoren</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="95"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.cpp" line="99"/>
         <source>Select new text editor main font</source>
-        <translation>Wähle eine neue Hauptschriftart für den Texteditor</translation>
+        <translation>Neue Hauptschriftart für den Texteditor auswählen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingseditor.h" line="29"/>
@@ -1959,24 +2040,19 @@ File filter for external e-mail selection dialog.</extracomment>
 <context>
     <name>SettingsEncryption</name>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="34"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="31"/>
         <source>OpenSSL status</source>
-        <translation type="unfinished"/>
+        <translation>OpenSSL-Status</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="67"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="64"/>
         <source>Cipher algorithm</source>
-        <translation type="unfinished"/>
+        <translation>Verschlüsselungsalgorithmus</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="92"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.ui" line="89"/>
         <source>Use PBKDF2 key derivation function, but this works only with OpenSSL 1.1.x or newer</source>
-        <translation type="unfinished"/>
+        <translation>PBKDF2-Schlüsselableitungsfunktion verwenden, aber dies funktioniert nur mit OpenSSL 1.1.x oder neuer.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.cpp" line="13"/>
@@ -1986,7 +2062,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsencryption.h" line="26"/>
         <source>Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Verschlüsselung</translation>
     </message>
 </context>
 <context>
@@ -1994,17 +2070,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="47"/>
         <source>Add new external tool</source>
-        <translation>Füge ein neues externes Werkzeug hinzu</translation>
+        <translation>Neues externes Werkzeug hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="57"/>
         <source>Remove selected external tool</source>
-        <translation>Entferne das ausgewählte externe Werkzeug</translation>
+        <translation>Ausgewähltes externes Werkzeug entfernen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="93"/>
         <source>Full-blown script goes here</source>
-        <translation>Ein vollwertiges Skript kommt hierhin.</translation>
+        <translation>Ein vollwertiges Skript kommt hierhin</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="100"/>
@@ -2017,64 +2093,64 @@ File filter for external e-mail selection dialog.</extracomment>
         <translation>Titel des externen Werkzeugs</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="117"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="120"/>
         <source>Category</source>
         <translation>Kategorie</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="127"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="130"/>
         <source>Optional category name</source>
         <translation>Optionaler Kategoriename</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="134"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="140"/>
         <source>Shortcut</source>
         <translation>Tastenkombination</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="147"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="153"/>
         <source>Input</source>
         <translation>Eingabe</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="160"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="166"/>
         <source>Output</source>
         <translation>Ausgabe</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="173"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="179"/>
         <source>Interpreter</source>
         <translation>Interpreter</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="183"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="189"/>
         <source>Interpreter for the script</source>
         <translation>Interpreter für das Skript</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="190"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="199"/>
         <source>It is generally better to have your interpreters available via your PATH environment variable, so that simply typing in &quot;bash&quot; or &quot;python&quot; could work.</source>
-        <translation>Es ist generell besser, die Interpreter in der PATH Umgebungsvariable zu haben, so dass das einfache tippen von &quot;bash&quot; oder &quot;python&quot; funktioniert.</translation>
+        <translation>Es ist generell besser, die Interpreter in der Umgebungsvariable PATH zu haben, so dass das einfache Tippen von &quot;bash&quot; oder &quot;python&quot; funktioniert.</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="203"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="212"/>
         <source>Optional prompt text for input</source>
         <translation>Optionaler Prompt-Text für die Eingabe</translation>
     </message>
     <message>
-        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="210"/>
+        <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.ui" line="222"/>
         <source>Prompt</source>
         <translation>Prompt</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="21"/>
         <source>Current selection/document</source>
-        <translation>Mommentane Auswahl/Dokument</translation>
+        <translation>Aktuelle Auswahl/Dokument</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="22"/>
         <source>Current line</source>
-        <translation>Mommentane Zeile</translation>
+        <translation>Aktuelle Zeile</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="23"/>
@@ -2084,7 +2160,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="24"/>
         <source>Ask user for input</source>
-        <translation>Frage den Benutzer nach einer Eingabe</translation>
+        <translation>Benutzer nach einer Eingabe fragen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="25"/>
@@ -2094,22 +2170,22 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="27"/>
         <source>Replace current selection/document</source>
-        <translation>Ersetze momentane Auswahl/Dokument</translation>
+        <translation>Aktuelle Auswahl/Dokument ersetzen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="28"/>
         <source>Replace current line</source>
-        <translation>Ersetze momentanne Zeile</translation>
+        <translation>Aktuelle Zeile ersetzen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="29"/>
         <source>Insert at cursor position</source>
-        <translation>Füge an der Zeigerposition ein</translation>
+        <translation>An der Zeigerposition einfügen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="30"/>
         <source>Insert at cursor position and replace selection (if any)</source>
-        <translation type="unfinished"/>
+        <translation>An der Zeigerposition einfügen und Auswahl ersetzen (falls vorhanden)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="32"/>
@@ -2129,7 +2205,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="35"/>
         <source>Reload file</source>
-        <translation>Datei neuladen</translation>
+        <translation>Datei neu laden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsexternaltools.cpp" line="36"/>
@@ -2152,7 +2228,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="29"/>
         <source>Remove junk Trolltech registry key (HKCU\Software\Trolltech) when application quits</source>
-        <translation>Enferne den überflüssigen Trolltech Registrierungsschlüssel(HKCU\Software\Trolltech), wenn das Programm beendet wird.</translation>
+        <translation>Überflüssigen Trolltech Registrierungsschlüssel(HKCU\Software\Trolltech) entfernen, wenn das Programm beendet wird</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgeneral.ui" line="36"/>
@@ -2175,17 +2251,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="36"/>
         <source>Icons &amp;&amp; Skins</source>
-        <translation>Icons &amp;6 Skins</translation>
+        <translation>Symbole &amp;&amp; Skins</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="75"/>
         <source>Icon theme</source>
-        <translation>Icontheme</translation>
+        <translation>Symbolthema</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="88"/>
         <source>Style</source>
-        <translation>Style</translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="101"/>
@@ -2195,7 +2271,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="113"/>
         <source>Hide main window when minimized</source>
-        <translation>Verstecke Fenster wenn es minimiert ist</translation>
+        <translation>Hauptfenster ausblenden, wenn minimiert</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="120"/>
@@ -2215,7 +2291,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="130"/>
         <source>Hide main window when closed (do not quit application)</source>
-        <translation>Verstcke Hauptfenster wenn geschlossen (das Programm wird nicht beendet)</translation>
+        <translation>Hauptfenster beim Schließen ausblenden (Anwendung nicht beenden)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="145"/>
@@ -2230,17 +2306,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="160"/>
         <source>Left mouse button double-click</source>
-        <translation>Linke Maustaste doppelklick</translation>
+        <translation>Doppelklick mit linker Maustaste</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="167"/>
         <source>Middle mouse button single-click</source>
-        <translation>Mittlere Maustaste einfacher klick</translation>
+        <translation>Einfacher Klick mit mittlerer Maustaste</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="177"/>
         <source>Open new tabs with left mouse button double-click on tab bar</source>
-        <translation>Öfnne neue tabs, wenn mit der linken Maustaste doppelt auf die Tabbar geklickt wird.</translation>
+        <translation>Neue Tabs mit einem Doppelklick mit der linken Maustaste auf die Tab-Leiste öffnen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="185"/>
@@ -2255,17 +2331,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="238"/>
         <source>Toolbar button style</source>
-        <translation>Werkzeugleiste Buttonstyle</translation>
+        <translation>Werkzeugleisten-Schaltflächenstil</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.ui" line="248"/>
         <source>Select toolbar to edit</source>
-        <translation>Wähle Werkzeugleiste zum bearbeiten aus</translation>
+        <translation>Werkzeugleiste zum Bearbeiten auswählen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="65"/>
         <source>no icon theme/system icon theme</source>
-        <translation>Kein Icon theme/System Icontheme</translation>
+        <translation>Kein Symbolthema/Systemsymbolthema</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="90"/>
@@ -2275,7 +2351,7 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="113"/>
         <source>Icon only</source>
-        <translation>Nur Icon</translation>
+        <translation>Nur Symbol</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="114"/>
@@ -2285,17 +2361,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="115"/>
         <source>Text beside icon</source>
-        <translation>Text neben Icon</translation>
+        <translation>Text neben Symbol</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="116"/>
         <source>Text under icon</source>
-        <translation>Text unter Icon</translation>
+        <translation>Text unter Symbol</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.cpp" line="117"/>
         <source>Follow OS style</source>
-        <translation>Benutze Style des Betriebssystems</translation>
+        <translation>Betriebssystem-Stil folgen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/settingsgui.h" line="29"/>
@@ -2367,17 +2443,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="22"/>
         <source>Reset to original shortcut.</source>
-        <translation>Setze Tastenkombination zurück</translation>
+        <translation>Auf ursprüngliche Tastenkombination zurücksetzen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="28"/>
         <source>Clear current shortcut.</source>
-        <translation>Lösche aktuelle Tastenkombination</translation>
+        <translation>Aktuelle Tastenkombination löschen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/dynamic-shortcuts/shortcutcatcher.cpp" line="33"/>
         <source>Click and hit new shortcut.</source>
-        <translation>Klicke und gib eine neue Tastenkombination ein</translation>
+        <translation>Klicke und gib eine neue Tastenkombination ein.</translation>
     </message>
 </context>
 <context>
@@ -2385,17 +2461,17 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="29"/>
         <source>Customize Substyle</source>
-        <translation>Substyle anpassen</translation>
+        <translation>Substil anpassen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="45"/>
         <source>Make &amp;Foreground Transparent</source>
-        <translation>Mache &amp;Fordergrund Transparent</translation>
+        <translation>&amp;Vordergrund transparent machen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="59"/>
         <source>Make &amp;Background Transparent</source>
-        <translation>Mache &amp;Hintergrund Transparent</translation>
+        <translation>&amp;Hintergrund transparent machen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="74"/>
@@ -2415,31 +2491,31 @@ File filter for external e-mail selection dialog.</extracomment>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="121"/>
         <source>&amp;Create New Theme...</source>
-        <translation>&amp;Erstelle neues Theme...</translation>
+        <translation>Neues Thema &amp;erstellen...</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="128"/>
         <source>&amp;Delete</source>
-        <translation>&amp;Lösche</translation>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.ui" line="166"/>
         <source>If you do not customize this substyle, then its value will be derived from &quot;Base&quot; substyle.
 
 Customizing too many substyles may lead to bad performance when handling big files.</source>
-        <translation>Wenn du diesen Substyle nicht anpasst, wird sein Wert vom &quot;Base&quot; Substyle. abgeleitet.
+        <translation>Wenn du diesen Substil nicht anpasst, wird sein Wert vom Substil &quot;Base&quot;. abgeleitet.
 
-Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgang mit großen Dateien führen.</translation>
+Das Anpassen zu vieler Substils kann zu einer schlechten Leistung beim Umgang mit großen Dateien führen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="25"/>
         <source>Base color (fg color only)</source>
-        <translation>Grundfarbe (nur fg-Farbe)</translation>
+        <translation>Grundfarbe (nur Vordergrundfarbe)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="26"/>
         <source>Comments (both oneline and multiline)</source>
-        <translation>Kommentare (einzeiler und mehrzeiler)</translation>
+        <translation>Kommentare (sowohl ein- als auch mehrzeilig)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="27"/>
@@ -2504,7 +2580,7 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="42"/>
         <source>Control characters (newline placeholder)</source>
-        <translation>Steuerzeichen (neue zeile, platzhalter)</translation>
+        <translation>Steuerzeichen (neue Zeile, Platzhalter)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="43"/>
@@ -2514,7 +2590,7 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="44"/>
         <source>URL highlighting</source>
-        <translation>URL hervorhebung</translation>
+        <translation>URL-Hervorhebung</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="45"/>
@@ -2524,17 +2600,17 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="49"/>
         <source>Paper background (bg color only)</source>
-        <translation>Papierhintergrund (nur hg-Farbe)</translation>
+        <translation>Papierhintergrund (nur Hintergrundfarbe)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="50"/>
         <source>Current line background (bg color only)</source>
-        <translation>Hintergrund der aktuellen Zeile (nur hg-Farbe)</translation>
+        <translation>Hintergrund der aktuellen Zeile (nur Hintergrundfarbe)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="51"/>
         <source>Color of long lines edge (fg color only)</source>
-        <translation>Farbe des Randes der langen Linien (nur fg-Farbe)</translation>
+        <translation>Farbe des Randes der langen Linien (nur Vordergrundfarbe)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="98"/>
@@ -2549,12 +2625,12 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="121"/>
         <source>Select Foreground Color</source>
-        <translation>Wähle Vodergrundfarbe</translation>
+        <translation>Vordergrundfarbe auswählen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="136"/>
         <source>Select Background Color</source>
-        <translation>Wähle Hintergrundfarbe</translation>
+        <translation>Hintergrundfarbe auswählen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/settings/syntaxcolorthemeeditor.cpp" line="167"/>
@@ -2593,12 +2669,12 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabbar.cpp" line="25"/>
         <source>Close This Tab</source>
-        <translation>Schließe diesen Tab</translation>
+        <translation>Diesen Tab schließen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/tabbar.cpp" line="26"/>
         <source>Close Tab</source>
-        <translation>Schließe Tab</translation>
+        <translation>Tab schließen</translation>
     </message>
 </context>
 <context>
@@ -2642,42 +2718,42 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="234"/>
         <source>File Externally Modified</source>
-        <translation>Die Datei wurde fvon einer anderen Anwendung bearbeitet.</translation>
+        <translation>Datei extern geändert</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="235"/>
         <source>This file was modified outside of %1.</source>
-        <translation>Die Datei wurde außerhalb von %1 bearbeitet.</translation>
+        <translation>Diese Datei wurde außerhalb von %1 geändert.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="236"/>
         <source>Do you want to reload file now? This will discard all unsaved changes.</source>
-        <translation>Willst du die Datei neuladen? Alle ungespeicherten Änderungen gehen dabei verloren.</translation>
+        <translation>Möchtest du die Datei jetzt neu laden? Dadurch werden alle nicht gespeicherten Änderungen verworfen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="238"/>
         <source>Reload all files automatically (discard changes)</source>
-        <translation>Lade alle Dateien automatich neu (Änderungen verwerfen)</translation>
+        <translation>Alle Dateien automatisch neu laden (Änderungen verwerfen)</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="243"/>
         <source>File &apos;%1&apos; was reloaded from disk.</source>
-        <translation>Die Datei &quot;%1&quot; wurde neugeladen</translation>
+        <translation>Datei &quot;%1&quot; wurde von der Festplatte neu geladen.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="272"/>
         <source>&amp;Find All</source>
-        <translation>&amp;Alle Suchen</translation>
+        <translation>Alles &amp;suchen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="278"/>
         <source>&amp;Select All</source>
-        <translation>&amp;Alles makieren</translation>
+        <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="281"/>
         <source>&amp;Cut</source>
-        <translation>&amp;Ausschneiden</translation>
+        <translation>Auss&amp;chneiden</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="284"/>
@@ -2703,23 +2779,23 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="392"/>
         <source>This document has unsaved changes, do you want to save them?</source>
-        <translation>Dieses Dokument hat ungespeicherte Änderungen. Möchstest du es speichern?</translation>
+        <translation>Dieses Dokument hat ungespeicherte Änderungen, möchtest du sie speichern?</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="752"/>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="783"/>
         <source>Cannot Save to File</source>
-        <translation type="unfinished"/>
+        <translation>Kann nicht in Datei speichern</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="753"/>
         <source>Document cannot be saved to file because the destination is probably non-writable.</source>
-        <translation type="unfinished"/>
+        <translation>Dokument kann nicht in einer Datei gespeichert werden, da das Ziel wahrscheinlich nicht beschreibbar ist.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="784"/>
         <source>Encryption of file failed: %1.</source>
-        <translation type="unfinished"/>
+        <translation>Verschlüsselung der Datei fehlgeschlagen: %1.</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/saurus/gui/texteditor.cpp" line="898"/>
@@ -2740,22 +2816,22 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="32"/>
         <source>Activated Actions</source>
-        <translation type="unfinished"/>
+        <translation>Aktivierte Aktionen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="42"/>
         <source>Available Actions</source>
-        <translation type="unfinished"/>
+        <translation>Verfügbare Aktionen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="76"/>
         <source>Move action up</source>
-        <translation type="unfinished"/>
+        <translation>Aktion nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="92"/>
         <source>Move action down</source>
-        <translation type="unfinished"/>
+        <translation>Aktion nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="112"/>
@@ -2765,22 +2841,22 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="125"/>
         <source>Insert spacer</source>
-        <translation>Abstandhalter einfügen </translation>
+        <translation>Abstandshalter einfügen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="145"/>
         <source>Add selected action</source>
-        <translation type="unfinished"/>
+        <translation>Ausgewählte Aktion hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="158"/>
         <source>Delete selected action</source>
-        <translation type="unfinished"/>
+        <translation>Ausgewählte Aktion löschen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="171"/>
         <source>Delete all actions</source>
-        <translation type="unfinished"/>
+        <translation>Alle Aktionen löschen</translation>
     </message>
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.ui" line="184"/>
@@ -2800,7 +2876,7 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/common/gui/toolbareditor.cpp" line="173"/>
         <source>Toolbar spacer</source>
-        <translation type="unfinished"/>
+        <translation>Werkzeugleisten-Abstandshalter</translation>
     </message>
 </context>
 <context>
@@ -2808,7 +2884,7 @@ Das Anpassen zu vieler Substyles kann zu einer schlechten Performance beim Umgan
     <message>
         <location filename="../src/libtextosaurus/common/gui/systemtrayicon.cpp" line="18"/>
         <source>Close opened modal dialogs first.</source>
-        <translation type="unfinished"/>
+        <translation>Schließe zuerst die geöffneten modalen Dialoge.</translation>
     </message>
 </context>
 </TS>

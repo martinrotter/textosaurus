@@ -18,7 +18,6 @@ class CharacterMap : public QWidget {
 
   public:
     explicit CharacterMap(QWidget* parent = nullptr);
-    virtual ~CharacterMap() = default;
 
     virtual QSize sizeHint() const override;
 
