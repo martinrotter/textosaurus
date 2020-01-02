@@ -3,6 +3,9 @@
 #include "saurus/plugin-system/clipboard/clipboardsidebar.h"
 
 #include "definitions/definitions.h"
+#include "saurus/gui/tabwidget.h"
+#include "saurus/gui/texteditor.h"
+#include "saurus/miscellaneous/textapplication.h"
 #include "saurus/plugin-system/clipboard/clipboardmodel.h"
 #include "saurus/plugin-system/clipboard/clipboardplugin.h"
 
@@ -36,8 +39,24 @@ void ClipboardSidebar::load() {
     m_treeClipboard->setModel(m_model);
     m_treeClipboard->setIndentation(0);
     m_treeClipboard->header()->setSectionResizeMode(0, QHeaderView::ResizeMode::ResizeToContents);
-    m_treeClipboard->header()->setSectionResizeMode(1, QHeaderView::ResizeMode::Stretch);
+    m_treeClipboard->header()->setSectionResizeMode(1, QHeaderView::ResizeMode::ResizeToContents);
+    m_treeClipboard->header()->setSectionResizeMode(2, QHeaderView::ResizeMode::Stretch);
+
+    m_treeClipboard->setColumnHidden(0, true);
+
+    connect(m_treeClipboard, &QTreeView::activated, this, &ClipboardSidebar::onEntryActivated);
   }
 
   setWidget(m_treeClipboard);
 }
+
+void ClipboardSidebar::onEntryActivated(const QModelIndex& idx) {
+  ClipboardItem* item = m_model->itemForIndex(idx);
+
+  if (item != nullptr) {
+    // Offer user more actions, insert to editor or copy to clipboard.
+    importSelectedClipboardEntry(item, m_textApp->tabWidget()->currentEditor());
+  }
+}
+
+void ClipboardSidebar::importSelectedClipboardEntry(ClipboardItem* entry, TextEditor* editor) {}

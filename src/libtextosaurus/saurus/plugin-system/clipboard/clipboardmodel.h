@@ -10,12 +10,24 @@ class ClipboardItem : public QObject {
   Q_OBJECT
 
   public:
+    enum class ItemType {
+      None,
+      Unknown,
+      Text,
+      File,
+      Url,
+      Color,
+      Html,
+      Picture
+    };
+
     explicit ClipboardItem(QObject* parent = nullptr);
     explicit ClipboardItem(QMimeData* data, QObject* parent = nullptr);
     virtual ~ClipboardItem();
 
+    ItemType type() const;
     QString mimeType() const;
-    QString heading() const;
+    QString heading(bool simple_view = true) const;
     QDateTime time() const;
     QMimeData* data() const;
 
@@ -34,6 +46,11 @@ class ClipboardItem : public QObject {
     void clearChildren();
 
   private:
+    void decideType();
+
+  private:
+    ItemType m_type;
+
     QScopedPointer<QMimeData> m_data;
     QDateTime m_time;
 

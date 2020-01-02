@@ -6,13 +6,21 @@
 
 #include <QApplication>
 #include <QClipboard>
+#include <QDir>
+#include <QImage>
 #include <QMimeData>
+#include <QPixmap>
+#include <QUrl>
 
 ClipboardItem::ClipboardItem(QObject* parent)
-  : QObject(parent), m_data(nullptr), m_time(QDateTime::currentDateTime()) {}
+  : QObject(parent), m_data(nullptr), m_time(QDateTime::currentDateTime()) {
+  decideType();
+}
 
 ClipboardItem::ClipboardItem(QMimeData* data, QObject* parent)
-  : QObject(parent), m_data(data), m_time(QDateTime::currentDateTime()) {}
+  : QObject(parent), m_data(data), m_time(QDateTime::currentDateTime()) {
+  decideType();
+}
 
 ClipboardItem::~ClipboardItem() {
   clearChildren();
@@ -22,8 +30,34 @@ QString ClipboardItem::mimeType() const {
   return m_data == nullptr ? QString() : m_data->formats().join(QL1S(", "));
 }
 
-QString ClipboardItem::heading() const {
-  return m_data == nullptr ? QString() : m_data->text();
+QString ClipboardItem::heading(bool simple_view) const {
+  switch (m_type) {
+    case ClipboardItem::ItemType::File:
+    case ClipboardItem::ItemType::Url: {
+      auto urls = m_data->urls();
+      QStringList str_urls;
+
+      for (const QUrl& url :m_data->urls()) {
+        str_urls << tr("%1").arg(url.isLocalFile()
+                                 ? QDir::toNativeSeparators(url.toLocalFile())
+                                 : url.toString());
+      }
+
+      return str_urls.join(QL1S("\n"));
+    }
+
+    case ClipboardItem::ItemType::Html:
+      return simple_view ? m_data->text().left(100) :  m_data->html();
+
+    case ClipboardItem::ItemType::Text:
+      return simple_view ? m_data->text().left(100) :  m_data->text();
+
+    case ClipboardItem::ItemType::Color:
+      return qvariant_cast<QColor>(m_data->colorData()).name();
+
+    default:
+      return "-";
+  }
 }
 
 void ClipboardItem::appendChild(ClipboardItem* item) {
@@ -64,6 +98,47 @@ void ClipboardItem::clearChildren() {
   }
 
   m_childItems.clear();
+}
+
+void ClipboardItem::decideType() {
+  if (m_data == nullptr) {
+    // Root item.
+    m_type = ItemType::None;
+  }
+  else if (m_data->hasUrls()) {
+    auto urls = m_data->urls();
+
+    for (const QUrl& url : m_data->urls()) {
+      if (url.isLocalFile()) {
+        // Return path to local file.
+        m_type = ItemType::File;
+        return;
+      }
+    }
+
+    // Return general URL.
+    m_type = ItemType::Url;
+  }
+  else if (m_data->hasHtml()) {
+    // Return HTML.
+    m_type = ItemType::Html;
+  }
+  else if (m_data->hasText()) {
+    // Return plain text.
+    m_type = ItemType::Text;
+  }
+  else if (m_data->hasImage()) {
+    // Return picture data.
+    m_type = ItemType::Picture;
+  }
+  else {
+    // Return raw dat for first MIME type.
+    m_type = ItemType::Unknown;
+  }
+}
+
+ClipboardItem::ItemType ClipboardItem::type() const {
+  return m_type;
 }
 
 QMimeData* ClipboardItem::data() const {
@@ -156,7 +231,7 @@ int ClipboardModel::rowCount(const QModelIndex& parent) const {
 
 int ClipboardModel::columnCount(const QModelIndex& parent) const {
   Q_UNUSED(parent)
-  return 2;
+  return 3;
 }
 
 QVariant ClipboardModel::data(const QModelIndex& index, int role) const {
@@ -176,14 +251,41 @@ QVariant ClipboardModel::data(const QModelIndex& index, int role) const {
           case 0:
             return item->time();
 
-          case 1:
+          case 1: {
+            switch (item->type()) {
+              case ClipboardItem::ItemType::Url:
+                return "URL";
+
+              case ClipboardItem::ItemType::File:
+                return "File";
+
+              case ClipboardItem::ItemType::Html:
+                return "HTML";
+
+              case ClipboardItem::ItemType::Text:
+                return "Text";
+
+              case ClipboardItem::ItemType::Color:
+                return "Color";
+
+              case ClipboardItem::ItemType::Picture:
+                return "Picture";
+
+              case ClipboardItem::ItemType::None:
+              case ClipboardItem::ItemType::Unknown:
+                return "-";
+            }
+          }
+
+          case 2:
             return item->heading();
         }
       }
 
       case Qt::ItemDataRole::ToolTipRole:
         return tr("<h2>MIME type</h2>%1"
-                  "<h2>Contents</h2>%2").arg(item->mimeType(), item->heading());
+                  "<h2>Contents</h2>%2").arg(item->mimeType(),
+                                             item->heading().replace(QL1S("\n"), QL1S("<br/>")));
 
       default:
         return QVariant();
@@ -203,6 +305,9 @@ QVariant ClipboardModel::headerData(int section, Qt::Orientation orientation, in
             return tr("Time");
 
           case 1:
+            return tr("Type");
+
+          case 2:
             return tr("Contents");
         }
       }

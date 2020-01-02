@@ -255,7 +255,8 @@ void SyntaxHighlighting::loadColorThemes() {
     }
   }
 
-  m_currentColorThemeIndex = 0;
+  // NOTE: Solarized Dark is the default color scheme.
+  m_currentColorThemeIndex = 2;
 }
 
 QList<SyntaxColorTheme> SyntaxHighlighting::colorThemes() {

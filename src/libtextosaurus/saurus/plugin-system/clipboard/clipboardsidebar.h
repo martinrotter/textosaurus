@@ -7,6 +7,8 @@
 
 class ClipboardPlugin;
 class ClipboardModel;
+class ClipboardItem;
+class TextEditor;
 class QTreeView;
 
 class ClipboardSidebar : public BaseSidebar {
@@ -21,6 +23,12 @@ class ClipboardSidebar : public BaseSidebar {
 
   protected:
     virtual void load() override;
+
+  private slots:
+    void onEntryActivated(const QModelIndex& idx);
+
+  private:
+    void importSelectedClipboardEntry(ClipboardItem* entry, TextEditor* editor);
 
   private:
     QTreeView* m_treeClipboard;
