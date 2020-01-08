@@ -5,7 +5,7 @@ VERSION = $$APP_VERSION
 
 os2 {
   CONFIG *= c++11
-  QMAKE_CXXFLAGS *= -std=c++11
+  QMAKE_CXXFLAGS *= -std=c++11 -D_GLIBCXX_USE_C99
 }
 else {
   CONFIG *= c++1z
