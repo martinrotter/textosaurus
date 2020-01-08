@@ -10,7 +10,6 @@
 #include <cstring>
 
 #include <stdexcept>
-#include <string_view>
 #include <vector>
 #include <algorithm>
 #include <memory>
@@ -101,11 +100,11 @@ ContractionState<LINE>::~ContractionState() {
 template <typename LINE>
 void ContractionState<LINE>::EnsureData() {
 	if (OneToOne()) {
-		visible = std::make_unique<RunStyles<LINE, char>>();
-		expanded = std::make_unique<RunStyles<LINE, char>>();
-		heights = std::make_unique<RunStyles<LINE, int>>();
-		foldDisplayTexts = std::make_unique<SparseVector<UniqueString>>();
-		displayLines = std::make_unique<Partitioning<LINE>>(4);
+		visible = Sci::make_unique<RunStyles<LINE, char>>();
+		expanded = Sci::make_unique<RunStyles<LINE, char>>();
+		heights = Sci::make_unique<RunStyles<LINE, int>>();
+		foldDisplayTexts = Sci::make_unique<SparseVector<UniqueString>>();
+		displayLines = Sci::make_unique<Partitioning<LINE>>(4);
 		InsertLines(0, linesInDocument);
 	}
 }
@@ -413,9 +412,9 @@ namespace Scintilla {
 
 std::unique_ptr<IContractionState> ContractionStateCreate(bool largeDocument) {
 	if (largeDocument)
-		return std::make_unique<ContractionState<Sci::Line>>();
+		return Sci::make_unique<ContractionState<Sci::Line>>();
 	else
-		return std::make_unique<ContractionState<int>>();
+		return Sci::make_unique<ContractionState<int>>();
 }
 
 }

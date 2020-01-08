@@ -11,7 +11,6 @@
 #include <cstdarg>
 
 #include <stdexcept>
-#include <string_view>
 #include <vector>
 #include <algorithm>
 #include <memory>
@@ -144,7 +143,7 @@ Decoration<POS> *DecorationList<POS>::DecorationFromIndicator(int indicator) {
 template <typename POS>
 Decoration<POS> *DecorationList<POS>::Create(int indicator, Sci::Position length) {
 	currentIndicator = indicator;
-	std::unique_ptr<Decoration<POS>> decoNew = std::make_unique<Decoration<POS>>(indicator);
+	std::unique_ptr<Decoration<POS>> decoNew = Sci::make_unique<Decoration<POS>>(indicator);
 	decoNew->rs.InsertSpace(0, static_cast<POS>(length));
 
 	typename std::vector<std::unique_ptr<Decoration<POS>>>::iterator it = std::lower_bound(
@@ -193,7 +192,7 @@ FillResult<Sci::Position> DecorationList<POS>::FillRange(Sci::Position position,
 	// Converting result from POS to Sci::Position as callers not polymorphic.
 	const FillResult<POS> frInPOS = current->rs.FillRange(static_cast<POS>(position), value, static_cast<POS>(fillLength));
 	const FillResult<Sci::Position> fr { frInPOS.changed, frInPOS.position, frInPOS.fillLength };
-		if (current->Empty()) {
+	if (current->Empty()) {
 		Delete(currentIndicator);
 	}
 	return fr;
@@ -301,16 +300,16 @@ namespace Scintilla {
 
 std::unique_ptr<IDecoration> DecorationCreate(bool largeDocument, int indicator) {
 	if (largeDocument)
-		return std::make_unique<Decoration<Sci::Position>>(indicator);
+		return Sci::make_unique<Decoration<Sci::Position>>(indicator);
 	else
-		return std::make_unique<Decoration<int>>(indicator);
+		return Sci::make_unique<Decoration<int>>(indicator);
 }
 
 std::unique_ptr<IDecorationList> DecorationListCreate(bool largeDocument) {
 	if (largeDocument)
-		return std::make_unique<DecorationList<Sci::Position>>();
+		return Sci::make_unique<DecorationList<Sci::Position>>();
 	else
-		return std::make_unique<DecorationList<int>>();
+		return Sci::make_unique<DecorationList<int>>();
 }
 
 }

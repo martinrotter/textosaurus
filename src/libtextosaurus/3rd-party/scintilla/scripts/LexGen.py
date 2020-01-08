@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # LexGen.py - implemented 2002 by Neil Hodgson neilh@scintilla.org
 # Released to the public domain.
 
 # Regenerate the Scintilla source files that list all the lexers.
 # Should be run whenever a new lexer is added or removed.
-# Requires Python 3.6 or later
+# Requires Python 2.5 or later
 # Files are regenerated in place with templates stored in comments.
 # The format of generation comments is documented in FileGenerator.py.
 
@@ -18,7 +18,7 @@ import uuid
 import sys
 
 baseDirectory = os.path.dirname(os.path.dirname(ScintillaData.__file__))
-sys.path.append(baseDirectory)
+sys.path.insert(0, baseDirectory)
 
 import win32.DepGen
 import gtk.DepGen
@@ -37,7 +37,7 @@ def UpdateVersionNumbers(sci, root):
     UpdateLineInFile(root + "doc/ScintillaDownload.html", "       Release",
         "       Release " + sci.versionDotted)
     ReplaceREInFile(root + "doc/ScintillaDownload.html",
-        r"/www.scintilla.org/([a-zA-Z]+)\d\d\d",
+        r"/www.scintilla.org/([a-zA-Z]+)\d\d\d\d?",
         r"/www.scintilla.org/\g<1>" +  sci.version)
     UpdateLineInFile(root + "doc/index.html",
         '          <font color="#FFCC99" size="3"> Release version',

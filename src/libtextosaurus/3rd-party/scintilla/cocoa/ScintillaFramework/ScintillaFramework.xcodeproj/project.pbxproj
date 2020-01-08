@@ -226,6 +226,7 @@
 		28D516D91830FFCA0047C93D /* mac_cursor_busy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D516D61830FFCA0047C93D /* mac_cursor_busy@2x.png */; };
 		28D516DA1830FFCA0047C93D /* mac_cursor_flipped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D516D71830FFCA0047C93D /* mac_cursor_flipped@2x.png */; };
 		28FDA42119B6967B00BE27D7 /* LexBibTeX.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 28FDA42019B6967B00BE27D7 /* LexBibTeX.cxx */; };
+		4D0C4365AB6DF998CD48B1FC /* LexLPeg.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 5EB3467789767C0ACE40A46A /* LexLPeg.cxx */; }; */; };
 		3D994BD7A5EAC4FA5B3CFBDF /* LexMaxima.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 29B042978C1F93EF42F9E4AB /* LexMaxima.cxx */; };
 		5F804AA6B60FE695863A39FE /* LexStata.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 7623427695416AB1270EE023 /* LexStata.cxx */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
@@ -235,6 +236,7 @@
 		AE894E1CB7328CAE5B2EF47E /* LexX12.cxx in Sources */ = {isa = PBXBuildFile; fileRef = ADA64364A443F3E3F02D294E /* LexX12.cxx */; };
 		902B40FE926FE48538B168F1 /* LexDataflex.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 362E48F5A7F79598CB0B037D /* LexDataflex.cxx */; };
 		4AA242EE8F0CCEA01AB59842 /* LexHollywood.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 96884184929F317E72FC1BE8 /* LexHollywood.cxx */; };
+		513A4B43B903344E142C441E /* LexRaku.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 48484CD7A1F20D09703376E5 /* LexRaku.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -461,6 +463,7 @@
 		28D516D71830FFCA0047C93D /* mac_cursor_flipped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mac_cursor_flipped@2x.png"; sourceTree = "<group>"; };
 		28F2653B224C30D7000CF4A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		28FDA42019B6967B00BE27D7 /* LexBibTeX.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexBibTeX.cxx; path = ../../lexers/LexBibTeX.cxx; sourceTree = "<group>"; };
+		5EB3467789767C0ACE40A46A /* LexLPeg.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexLPeg.cxx; path = ../../lexers/LexLPeg.cxx; sourceTree = SOURCE_ROOT; };
 		29B042978C1F93EF42F9E4AB /* LexMaxima.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexMaxima.cxx; path = ../../lexers/LexMaxima.cxx; sourceTree = SOURCE_ROOT; };
 		32DBCF5E0370ADEE00C91783 /* Scintilla_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scintilla_Prefix.pch; sourceTree = "<group>"; };
 		47814937A6B72D2B0F065B61 /* LexNim.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexNim.cxx; path = ../../lexers/LexNim.cxx; sourceTree = SOURCE_ROOT; };
@@ -473,6 +476,7 @@
 		ADA64364A443F3E3F02D294E /* LexX12.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexX12.cxx; path = ../../lexers/LexX12.cxx; sourceTree = SOURCE_ROOT; };
 		362E48F5A7F79598CB0B037D /* LexDataflex.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexDataflex.cxx; path = ../../lexers/LexDataflex.cxx; sourceTree = SOURCE_ROOT; };
 		96884184929F317E72FC1BE8 /* LexHollywood.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexHollywood.cxx; path = ../../lexers/LexHollywood.cxx; sourceTree = SOURCE_ROOT; };
+		48484CD7A1F20D09703376E5 /* LexRaku.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LexRaku.cxx; path = ../../lexers/LexRaku.cxx; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -625,6 +629,7 @@
 				1102C31B169FB49300DC16AB /* LexLaTeX.cxx */,
 				114B6EE011FA7526004FB6AB /* LexLisp.cxx */,
 				114B6EE111FA7526004FB6AB /* LexLout.cxx */,
+				5EB3467789767C0ACE40A46A /* LexLPeg.cxx */,
 				114B6EE211FA7526004FB6AB /* LexLua.cxx */,
 				114B6EE311FA7526004FB6AB /* LexMagik.cxx */,
 				28B647091B54C0720009DC49 /* LexMake.cxx */,
@@ -656,6 +661,7 @@
 				114B6EF711FA7526004FB6AB /* LexPS.cxx */,
 				114B6EF811FA7526004FB6AB /* LexPython.cxx */,
 				114B6EF911FA7526004FB6AB /* LexR.cxx */,
+				48484CD7A1F20D09703376E5 /* LexRaku.cxx */,
 				114B6EFA11FA7526004FB6AB /* LexRebol.cxx */,
 				28A7D6041995E47D0062D204 /* LexRegistry.cxx */,
 				114B6EFB11FA7526004FB6AB /* LexRuby.cxx */,
@@ -942,15 +948,18 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0800;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "ScintillaFramework" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
 				Base,
-				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* Scintilla */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -1134,6 +1143,7 @@
 				1160E0381803651C00BCEBCB /* LexRust.cxx in Sources */,
 				11FF3FE21810EB3900E13F13 /* LexDMAP.cxx in Sources */,
 				F437405F9F32C7DEFCA38C11 /* LexIndent.cxx in Sources */,
+				4D0C4365AB6DF998CD48B1FC /* LexLPeg.cxx in Sources */,
 				3D994BD7A5EAC4FA5B3CFBDF /* LexMaxima.cxx in Sources */,
 				FDC7442CAD70B9A67EF1639D /* LexSAS.cxx in Sources */,
 				5F804AA6B60FE695863A39FE /* LexStata.cxx in Sources */,
@@ -1142,6 +1152,7 @@
 				AE894E1CB7328CAE5B2EF47E /* LexX12.cxx in Sources */,
 				902B40FE926FE48538B168F1 /* LexDataflex.cxx in Sources */,
 				4AA242EE8F0CCEA01AB59842 /* LexHollywood.cxx in Sources */,
+				513A4B43B903344E142C441E /* LexRaku.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1151,7 +1162,7 @@
 		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28F2653B224C30D7000CF4A3 /* en */,
+				089C1667FE841158C02AAC07 /* English */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1164,7 +1175,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
@@ -1177,7 +1187,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Scintilla_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = SCI_LEXER;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SCI_LEXER,
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -1198,7 +1210,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -1231,22 +1242,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1276,22 +1278,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

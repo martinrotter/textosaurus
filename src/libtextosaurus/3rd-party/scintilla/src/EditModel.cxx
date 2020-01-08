@@ -13,7 +13,6 @@
 
 #include <stdexcept>
 #include <string>
-#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -64,7 +63,6 @@ EditModel::EditModel() : braces{} {
 	highlightGuideColumn = 0;
 	primarySelection = true;
 	imeInteraction = imeWindowed;
-	bidirectional = Bidirectional::bidiDisabled;
 	foldFlags = 0;
 	foldDisplayTextStyle = SC_FOLDDISPLAYTEXT_HIDDEN;
 	hotspot = Range(Sci::invalidPosition);
@@ -78,15 +76,6 @@ EditModel::EditModel() : braces{} {
 EditModel::~EditModel() {
 	pdoc->Release();
 	pdoc = nullptr;
-}
-
-bool EditModel::BidirectionalEnabled() const {
-	return (bidirectional != Bidirectional::bidiDisabled) &&
-		(SC_CP_UTF8 == pdoc->dbcsCodePage);
-}
-
-bool EditModel::BidirectionalR2L() const {
-	return bidirectional == Bidirectional::bidiR2L;
 }
 
 void EditModel::SetDefaultFoldDisplayText(const char *text) {

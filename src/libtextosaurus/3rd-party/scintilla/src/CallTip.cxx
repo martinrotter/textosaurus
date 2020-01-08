@@ -13,7 +13,6 @@
 
 #include <stdexcept>
 #include <string>
-#include <string_view>
 #include <vector>
 #include <algorithm>
 #include <memory>
@@ -135,14 +134,14 @@ void CallTip::DrawChunk(Surface *surface, int &x, const char *s,
     						Point::FromInts(centreX + halfWidth, centreY + quarterWidth),
     						Point::FromInts(centreX, centreY - halfWidth + quarterWidth),
 						};
-						surface->Polygon(pts, std::size(pts), colourBG, colourBG);
+						surface->Polygon(pts, Sci::size(pts), colourBG, colourBG);
 					} else {            // Down arrow
 						Point pts[] = {
     						Point::FromInts(centreX - halfWidth, centreY - quarterWidth),
     						Point::FromInts(centreX + halfWidth, centreY - quarterWidth),
     						Point::FromInts(centreX, centreY + halfWidth - quarterWidth),
 						};
-						surface->Polygon(pts, std::size(pts), colourBG, colourBG);
+						surface->Polygon(pts, Sci::size(pts), colourBG, colourBG);
 					}
 				}
 				offsetMain = xEnd;
@@ -154,13 +153,13 @@ void CallTip::DrawChunk(Surface *surface, int &x, const char *s,
 			} else if (IsTabCharacter(s[startSeg])) {
 				xEnd = NextTabPos(x);
 			} else {
-				std::string_view segText(s + startSeg, endSeg - startSeg);
-				xEnd = x + static_cast<int>(std::lround(surface->WidthText(font, segText)));
+				xEnd = x + static_cast<int>(Sci::lround(surface->WidthText(font, s + startSeg, endSeg - startSeg)));
 				if (draw) {
 					rcClient.left = static_cast<XYPOSITION>(x);
 					rcClient.right = static_cast<XYPOSITION>(xEnd);
 					surface->DrawTextTransparent(rcClient, font, static_cast<XYPOSITION>(ytext),
-										segText, highlight ? colourSel : colourUnSel);
+										s+startSeg, endSeg - startSeg,
+					                             highlight ? colourSel : colourUnSel);
 				}
 			}
 			x = xEnd;
@@ -176,7 +175,7 @@ int CallTip::PaintContents(Surface *surfaceWindow, bool draw) {
 	PRectangle rcClient(1.0f, 1.0f, rcClientSize.right - 1, rcClientSize.bottom - 1);
 
 	// To make a nice small call tip window, it is only sized to fit most normal characters without accents
-	const int ascent = static_cast<int>(std::round(surfaceWindow->Ascent(font) - surfaceWindow->InternalLeading(font)));
+	const int ascent = static_cast<int>(Sci::round(surfaceWindow->Ascent(font) - surfaceWindow->InternalLeading(font)));
 
 	// For each line...
 	// Draw the definition in three parts: before highlight, highlighted, after highlight
@@ -280,7 +279,7 @@ PRectangle CallTip::CallTipStart(Sci::Position pos, Point pt, int textHeight, co
 	rectDown = PRectangle(0,0,0,0);
 	offsetMain = insetX;            // changed to right edge of any arrows
 	const int width = PaintContents(surfaceMeasure.get(), false) + insetX;
-	lineHeight = static_cast<int>(std::lround(surfaceMeasure->Height(font)));
+	lineHeight = static_cast<int>(Sci::lround(surfaceMeasure->Height(font)));
 
 	// The returned
 	// rectangle is aligned to the right edge of the last arrow encountered in

@@ -21,7 +21,6 @@
 #include <cmath>
 #include <stdexcept>
 #include <string>
-#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -58,11 +57,6 @@
 #include "Editor.h"
 #include "ScintillaBase.h"
 #include "CaseConvert.h"
-
-#ifdef SCI_LEXER
-#include "SciLexer.h"
-#include "PropSetSimple.h"
-#endif
 
 #include <QObject>
 #include <QAbstractScrollArea>

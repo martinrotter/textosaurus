@@ -77,8 +77,11 @@ public:
 		}
 		return buf[position - startPos];
 	}
-	IDocument *MultiByteAccess() const {
-		return pAccess;
+	IDocumentWithLineEnd *MultiByteAccess() const {
+		if (documentVersion >= dvLineEnd) {
+			return static_cast<IDocumentWithLineEnd *>(pAccess);
+		}
+		return 0;
 	}
 	/** Safe version of operator[], returning a defined value for invalid position. */
 	char SafeGetCharAt(Sci_Position position, char chDefault=' ') {
@@ -114,8 +117,18 @@ public:
 	Sci_Position LineStart(Sci_Position line) const {
 		return pAccess->LineStart(line);
 	}
-	Sci_Position LineEnd(Sci_Position line) const {
-		return pAccess->LineEnd(line);
+	Sci_Position LineEnd(Sci_Position line) {
+		if (documentVersion >= dvLineEnd) {
+			return (static_cast<IDocumentWithLineEnd *>(pAccess))->LineEnd(line);
+		} else {
+			// Old interface means only '\r', '\n' and '\r\n' line ends.
+			Sci_Position startNext = pAccess->LineStart(line+1);
+			const char chLineEnd = SafeGetCharAt(startNext-1);
+			if (chLineEnd == '\n' && (SafeGetCharAt(startNext-2)  == '\r'))
+				return startNext - 2;
+			else
+				return startNext - 1;
+		}
 	}
 	int LevelAt(Sci_Position line) const {
 		return pAccess->GetLevel(line);
@@ -138,7 +151,7 @@ public:
 	}
 	// Style setting
 	void StartAt(Sci_PositionU start) {
-		pAccess->StartStyling(start);
+		pAccess->StartStyling(start, '\377');
 		startPosStyling = start;
 	}
 	Sci_PositionU GetStartSegment() const {

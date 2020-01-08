@@ -6,6 +6,7 @@
 #include "saurus/gui/tabwidget.h"
 #include "saurus/gui/texteditor.h"
 #include "saurus/miscellaneous/textapplication.h"
+#include "saurus/plugin-system/clipboard/clipboardimporter.h"
 #include "saurus/plugin-system/clipboard/clipboardmodel.h"
 #include "saurus/plugin-system/clipboard/clipboardplugin.h"
 
@@ -13,7 +14,7 @@
 #include <QTreeView>
 
 ClipboardSidebar::ClipboardSidebar(ClipboardPlugin* plugin, QWidget* parent)
-  : BaseSidebar(plugin->textApp(), parent), m_treeClipboard(nullptr), m_model(nullptr) {
+  : BaseSidebar(plugin->textApp(), parent), m_treeClipboard(nullptr), m_mainForm(plugin->mainForm()), m_model(nullptr) {
   setWindowTitle(tr("Clipboard History"));
   setObjectName(QSL("m_sidebarClipboard"));
 }
@@ -59,4 +60,6 @@ void ClipboardSidebar::onEntryActivated(const QModelIndex& idx) {
   }
 }
 
-void ClipboardSidebar::importSelectedClipboardEntry(ClipboardItem* entry, TextEditor* editor) {}
+void ClipboardSidebar::importSelectedClipboardEntry(ClipboardItem* entry, TextEditor* editor) {
+  ClipboardImporter(entry, editor, m_mainForm).exec();
+}

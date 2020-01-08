@@ -1,4 +1,5 @@
 // Scintilla Lexer for X12
+// @file LexX12.cxx
 // Written by Iain Clarke, IMCSoft & Inobiz AB.
 // X12 official documentation is behind a paywall, but there's a description of the syntax here:
 // http://www.rawlinsecconsulting.com/x12tutorial/x12syn.html
@@ -29,13 +30,13 @@ public:
 	LexerX12();
 	virtual ~LexerX12() {} // virtual destructor, as we inherit from ILexer
 
-	static ILexer4 *Factory() {
+	static ILexer *Factory() {
 		return new LexerX12;
 	}
 
 	int SCI_METHOD Version() const override
 	{
-		return lvRelease4;
+		return lvIdentity;
 	}
 	void SCI_METHOD Release() override
 	{
@@ -66,6 +67,9 @@ public:
 		}
 		return -1;
 	}
+	const char * SCI_METHOD PropertyGet(const char *) override {
+		return "";
+	}
 	const char * SCI_METHOD DescribeWordListSets() override
 	{
 		return NULL;
@@ -84,10 +88,10 @@ public:
 protected:
 	struct Terminator
 	{
-		int Style = SCE_X12_BAD;
-		Sci_PositionU pos = 0;
-		Sci_PositionU length = 0;
-		int FoldChange = 0;
+		int Style;// = SCE_X12_BAD;
+		Sci_PositionU pos;// = 0;
+		Sci_PositionU length;// = 0;
+		int FoldChange;// = 0;
 	};
 	Terminator InitialiseFromISA(IDocument *pAccess);
 	Sci_PositionU FindPreviousSegmentStart(IDocument *pAccess, Sci_Position startPos) const;
@@ -108,7 +112,7 @@ LexerModule lmX12(SCLEX_X12, LexerX12::Factory, "x12");
 
 ///////////////////////////////////////////////////////////////////////////////
 
-LexerX12::LexerX12()
+LexerX12::LexerX12() : DefaultLexer("x12", SCLEX_X12)
 {
 	m_bFold = false;
 	m_chSegment[0] = m_chSegment[1] = m_chSegment[2] = m_chElement = m_chSubElement = 0;
@@ -124,7 +128,7 @@ void LexerX12::Lex(Sci_PositionU startPos, Sci_Position length, int, IDocument *
 	{
 		if (T.pos < startPos)
 			T.pos = startPos; // we may be colouring in batches.
-		pAccess->StartStyling(startPos);
+		pAccess->StartStyling(startPos, '\377');
 		pAccess->SetStyleFor(T.pos - startPos, SCE_X12_ENVELOPE);
 		pAccess->SetStyleFor(posFinish - T.pos, SCE_X12_BAD);
 		return;
@@ -134,7 +138,7 @@ void LexerX12::Lex(Sci_PositionU startPos, Sci_Position length, int, IDocument *
 	Sci_PositionU posCurrent = FindPreviousSegmentStart (pAccess, startPos);
 
 	// Style buffer, so we're not issuing loads of notifications
-	pAccess->StartStyling(posCurrent);
+	pAccess->StartStyling(posCurrent, '\377');
 
 	while (posCurrent < posFinish)
 	{

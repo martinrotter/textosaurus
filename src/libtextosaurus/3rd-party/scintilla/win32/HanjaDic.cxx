@@ -7,7 +7,6 @@
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <string>
-#include <string_view>
 
 #include <windows.h>
 

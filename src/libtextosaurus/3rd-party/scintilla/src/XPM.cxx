@@ -9,7 +9,6 @@
 #include <cstring>
 
 #include <stdexcept>
-#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>

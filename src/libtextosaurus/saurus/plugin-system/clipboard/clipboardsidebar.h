@@ -32,6 +32,7 @@ class ClipboardSidebar : public BaseSidebar {
 
   private:
     QTreeView* m_treeClipboard;
+    QWidget* m_mainForm;
     ClipboardModel* m_model;
 };
 

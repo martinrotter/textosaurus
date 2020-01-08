@@ -36,7 +36,7 @@ enum DrawPhase {
 bool ValidStyledText(const ViewStyle &vs, size_t styleOffset, const StyledText &st);
 int WidestLineWidth(Surface *surface, const ViewStyle &vs, int styleOffset, const StyledText &st);
 void DrawTextNoClipPhase(Surface *surface, PRectangle rc, const Style &style, XYPOSITION ybase,
-	std::string_view text, DrawPhase phase);
+	const char *s, int len, DrawPhase phase);
 void DrawStyledText(Surface *surface, const ViewStyle &vs, int styleOffset, PRectangle rcText,
 	const StyledText &st, size_t start, size_t length, DrawPhase phase);
 
@@ -116,13 +116,11 @@ public:
 	void LayoutLine(const EditModel &model, Sci::Line line, Surface *surface, const ViewStyle &vstyle,
 		LineLayout *ll, int width = LineLayout::wrapWidthInfinite);
 
-	static void UpdateBidiData(const EditModel &model, const ViewStyle &vstyle, LineLayout *ll);
-
 	Point LocationFromPosition(Surface *surface, const EditModel &model, SelectionPosition pos, Sci::Line topLine,
-		const ViewStyle &vs, PointEnd pe, const PRectangle rcClient);
+				   const ViewStyle &vs, PointEnd pe);
 	Range RangeDisplayLine(Surface *surface, const EditModel &model, Sci::Line lineVisible, const ViewStyle &vs);
 	SelectionPosition SPositionFromLocation(Surface *surface, const EditModel &model, PointDocument pt, bool canReturnInvalid,
-		bool charPosition, bool virtualSpace, const ViewStyle &vs, const PRectangle rcClient);
+		bool charPosition, bool virtualSpace, const ViewStyle &vs);
 	SelectionPosition SPositionFromLineX(Surface *surface, const EditModel &model, Sci::Line lineDoc, int x, const ViewStyle &vs);
 	Sci::Line DisplayFromPosition(Surface *surface, const EditModel &model, Sci::Position pos, const ViewStyle &vs);
 	Sci::Position StartEndDisplayLine(Surface *surface, const EditModel &model, Sci::Position pos, bool start, const ViewStyle &vs);

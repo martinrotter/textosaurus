@@ -22,9 +22,6 @@ def Generate():
 	# Add ScintillaBaseL as the same as ScintillaBase
 	deps = Dependencies.InsertSynonym(deps, "ScintillaBase.o", "ScintillaBaseL.o")
 
-	# Add ScintillaWinL as the same as ScintillaWin
-	deps = Dependencies.InsertSynonym(deps, "ScintillaWin.o", "ScintillaWinL.o")
-
 	Dependencies.UpdateDependencies("../win32/deps.mak", deps, topComment)
 
 	# Create the dependencies file for MSVC

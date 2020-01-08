@@ -59,7 +59,7 @@ public:
     int line_end_position(int pos);
     int length();
     int lines_total();
-    void start_styling(int position);
+    void start_styling(int position, char flags);
     bool set_style_for(int length, char style);
     int get_end_styled();
     void ensure_styled_to(int position);

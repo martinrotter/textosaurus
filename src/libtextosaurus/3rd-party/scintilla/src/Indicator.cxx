@@ -8,7 +8,6 @@
 #include <cmath>
 
 #include <stdexcept>
-#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -25,8 +24,8 @@ using namespace Scintilla;
 
 static PRectangle PixelGridAlign(const PRectangle &rc) noexcept {
 	// Move left and right side to nearest pixel to avoid blurry visuals
-	return PRectangle(std::round(rc.left), std::floor(rc.top),
-		std::round(rc.right), std::floor(rc.bottom));
+	return PRectangle(Sci::round(rc.left), std::floor(rc.top),
+		Sci::round(rc.right), std::floor(rc.bottom));
 }
 
 void Indicator::Draw(Surface *surface, const PRectangle &rc, const PRectangle &rcLine, const PRectangle &rcCharacter, DrawState drawState, int value) const {
@@ -203,14 +202,14 @@ void Indicator::Draw(Surface *surface, const PRectangle &rc, const PRectangle &r
 		if (rcCharacter.Width() >= 0.1) {
 			const XYPOSITION pixelHeight = std::floor(rc.Height() - 1.0f);	// 1 pixel onto next line if multiphase
 			const XYPOSITION x = (sacDraw.style == INDIC_POINT) ? (rcCharacter.left) : ((rcCharacter.right + rcCharacter.left) / 2);
-			const XYPOSITION ix = std::round(x);
+			const XYPOSITION ix = Sci::round(x);
 			const XYPOSITION iy = std::floor(rc.top + 1.0f);
 			Point pts[] = {
 				Point(ix - pixelHeight, iy + pixelHeight),	// Left
 				Point(ix + pixelHeight, iy + pixelHeight),	// Right
 				Point(ix, iy)								// Top
 			};
-			surface->Polygon(pts, std::size(pts), sacDraw.fore, sacDraw.fore);
+			surface->Polygon(pts, Sci::size(pts), sacDraw.fore, sacDraw.fore);
 		}
 	} else {	// Either INDIC_PLAIN or unknown
 		surface->MoveTo(irc.left, ymid);

@@ -47,10 +47,14 @@ QString ClipboardItem::heading(bool simple_view) const {
     }
 
     case ClipboardItem::ItemType::Html:
-      return simple_view ? m_data->text().left(100) :  m_data->html();
+      return simple_view
+             ? (m_data->text().size() > 64 ? m_data->text().left(64).append(QSL("...")) : m_data->text().left(100))
+                                           :  m_data->html();
 
     case ClipboardItem::ItemType::Text:
-      return simple_view ? m_data->text().left(100) :  m_data->text();
+      return simple_view
+             ? (m_data->text().size() > 64 ? m_data->text().left(64).append(QSL("...")) : m_data->text().left(100))
+                                           :  m_data->text();
 
     case ClipboardItem::ItemType::Color:
       return qvariant_cast<QColor>(m_data->colorData()).name();
@@ -278,14 +282,14 @@ QVariant ClipboardModel::data(const QModelIndex& index, int role) const {
           }
 
           case 2:
-            return item->heading();
+            return item->heading(true);
         }
       }
 
       case Qt::ItemDataRole::ToolTipRole:
         return tr("<h2>MIME type</h2>%1"
                   "<h2>Contents</h2>%2").arg(item->mimeType(),
-                                             item->heading().replace(QL1S("\n"), QL1S("<br/>")));
+                                             item->heading(true).toHtmlEscaped().replace(QL1S("\n"), QL1S("<br/>")));
 
       default:
         return QVariant();

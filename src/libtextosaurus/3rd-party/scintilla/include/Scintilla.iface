@@ -1574,6 +1574,13 @@ get bool GetVScrollBar=2281(,)
 # Append a string to the end of the document without changing the selection.
 fun void AppendText=2282(position length, string text)
 
+# Is drawing done in two phases with backgrounds drawn before foregrounds?
+get bool GetTwoPhaseDraw=2283(,)
+
+# In twoPhaseDraw mode, drawing is performed in two phases, first the background
+# and then the foreground. This avoids chopping off characters that overlap the next run.
+set void SetTwoPhaseDraw=2284(bool twoPhase,)
+
 enu PhasesDraw=SC_PHASES_
 val SC_PHASES_ONE=0
 val SC_PHASES_TWO=1
@@ -3182,6 +3189,8 @@ val SCLEX_CIL=127
 val SCLEX_X12=128
 val SCLEX_DATAFLEX=129
 val SCLEX_HOLLYWOOD=130
+val SCLEX_RAKU=131
+val SCLEX_LPEG=999
 
 # When a lexer specifies its language as SCLEX_AUTOMATIC it receives a
 # value assigned in sequence from SCLEX_AUTOMATIC+1.
@@ -5212,6 +5221,37 @@ val SCE_HOLLYWOOD_OPERATOR=11
 val SCE_HOLLYWOOD_IDENTIFIER=12
 val SCE_HOLLYWOOD_CONSTANT=13
 val SCE_HOLLYWOOD_HEXNUMBER=14
+# Lexical states for SCLEX_RAKU
+lex Raku=SCLEX_RAKU SCE_RAKU_
+val SCE_RAKU_DEFAULT=0
+val SCE_RAKU_ERROR=1
+val SCE_RAKU_COMMENTLINE=2
+val SCE_RAKU_COMMENTEMBED=3
+val SCE_RAKU_POD=4
+val SCE_RAKU_CHARACTER=5
+val SCE_RAKU_HEREDOC_Q=6
+val SCE_RAKU_HEREDOC_QQ=7
+val SCE_RAKU_STRING=8
+val SCE_RAKU_STRING_Q=9
+val SCE_RAKU_STRING_QQ=10
+val SCE_RAKU_STRING_Q_LANG=11
+val SCE_RAKU_STRING_VAR=12
+val SCE_RAKU_REGEX=13
+val SCE_RAKU_REGEX_VAR=14
+val SCE_RAKU_ADVERB=15
+val SCE_RAKU_NUMBER=16
+val SCE_RAKU_PREPROCESSOR=17
+val SCE_RAKU_OPERATOR=18
+val SCE_RAKU_WORD=19
+val SCE_RAKU_FUNCTION=20
+val SCE_RAKU_IDENTIFIER=21
+val SCE_RAKU_TYPEDEF=22
+val SCE_RAKU_MU=23
+val SCE_RAKU_POSITIONAL=24
+val SCE_RAKU_ASSOCIATIVE=25
+val SCE_RAKU_CALLABLE=26
+val SCE_RAKU_GRAMMAR=27
+val SCE_RAKU_CLASS=28
 
 # Events
 
@@ -5250,17 +5290,6 @@ evt void MarginRightClick=2031(int modifiers, int position, int margin)
 evt void AutoCSelectionChange=2032(int listType, string text, int position)
 
 cat Provisional
-
-enu Bidirectional=SC_BIDIRECTIONAL_
-val SC_BIDIRECTIONAL_DISABLED=0
-val SC_BIDIRECTIONAL_L2R=1
-val SC_BIDIRECTIONAL_R2L=2
-
-# Retrieve bidirectional text display state.
-get Bidirectional GetBidirectional=2708(,)
-
-# Set bidirectional text display state.
-set void SetBidirectional=2709(Bidirectional bidirectional,)
 
 enu LineCharacterIndexType=SC_LINECHARACTERINDEX_
 val SC_LINECHARACTERINDEX_NONE=0
@@ -5302,13 +5331,6 @@ set void SetKeysUnicode=2521(bool keysUnicode,)
 
 # Are keys always interpreted as Unicode?
 get bool GetKeysUnicode=2522(,)
-
-# Is drawing done in two phases with backgrounds drawn before foregrounds?
-get bool GetTwoPhaseDraw=2283(,)
-
-# In twoPhaseDraw mode, drawing is performed in two phases, first the background
-# and then the foreground. This avoids chopping off characters that overlap the next run.
-set void SetTwoPhaseDraw=2284(bool twoPhase,)
 
 val INDIC0_MASK=0x20
 val INDIC1_MASK=0x40

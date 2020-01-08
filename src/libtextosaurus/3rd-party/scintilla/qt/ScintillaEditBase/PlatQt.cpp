@@ -93,10 +93,6 @@ const char *CharacterSetID(int characterSet)
 	}
 }
 
-QString UnicodeFromText(QTextCodec *codec, std::string_view text) {
-	return codec->toUnicode(text.data(), static_cast<int>(text.length()));
-}
-
 class FontAndCharacterSet {
 public:
 	int characterSet;
@@ -223,7 +219,7 @@ void SurfaceImpl::Release()
 
 bool SurfaceImpl::Initialised()
 {
-	return device != 0;
+	return device != nullptr;
 }
 
 void SurfaceImpl::PenColour(ColourDesired fore)
@@ -238,7 +234,7 @@ void SurfaceImpl::BrushColour(ColourDesired back)
 	GetPainter()->setBrush(QBrush(QColorFromCA(back)));
 }
 
-void SurfaceImpl::SetCodec(Font &font)
+void SurfaceImpl::SetCodec(const Font &font)
 {
 	if (font.GetID()) {
 		const char *csid = "UTF-8";
@@ -419,15 +415,11 @@ void SurfaceImpl::Copy(PRectangle rc, Point from, Surface &surfaceSource)
 	GetPainter()->drawPixmap(rc.left, rc.top, *pixmap, from.x, from.y, -1, -1);
 }
 
-std::unique_ptr<IScreenLineLayout> SurfaceImpl::Layout(const IScreenLine *)
-{
-	return {};
-}
-
 void SurfaceImpl::DrawTextNoClip(PRectangle rc,
                                  Font &font,
                                  XYPOSITION ybase,
-				 std::string_view text,
+                                 const char *s,
+                                 int len,
                                  ColourDesired fore,
                                  ColourDesired back)
 {
@@ -436,33 +428,35 @@ void SurfaceImpl::DrawTextNoClip(PRectangle rc,
 
 	GetPainter()->setBackground(QColorFromCA(back));
 	GetPainter()->setBackgroundMode(Qt::OpaqueMode);
-	QString su = UnicodeFromText(codec, text);
+	QString su = codec->toUnicode(s, len);
 	GetPainter()->drawText(QPointF(rc.left, ybase), su);
 }
 
 void SurfaceImpl::DrawTextClipped(PRectangle rc,
                                   Font &font,
                                   XYPOSITION ybase,
-				  std::string_view text,
+                                  const char *s,
+                                  int len,
                                   ColourDesired fore,
                                   ColourDesired back)
 {
 	SetClip(rc);
-	DrawTextNoClip(rc, font, ybase, text, fore, back);
+	DrawTextNoClip(rc, font, ybase, s, len, fore, back);
 	GetPainter()->setClipping(false);
 }
 
 void SurfaceImpl::DrawTextTransparent(PRectangle rc,
                                       Font &font,
                                       XYPOSITION ybase,
-				      std::string_view text,
+                                      const char *s,
+                                      int len,
         ColourDesired fore)
 {
 	SetFont(font);
 	PenColour(fore);
 
 	GetPainter()->setBackgroundMode(Qt::TransparentMode);
-	QString su = UnicodeFromText(codec, text);
+	QString su = codec->toUnicode(s, len);
 	GetPainter()->drawText(QPointF(rc.left, ybase), su);
 }
 
@@ -472,13 +466,14 @@ void SurfaceImpl::SetClip(PRectangle rc)
 }
 
 void SurfaceImpl::MeasureWidths(Font &font,
-				std::string_view text,
+                                const char *s,
+                                int len,
                                 XYPOSITION *positions)
 {
 	if (!font.GetID())
 		return;
 	SetCodec(font);
-	QString su = UnicodeFromText(codec, text);
+	QString su = codec->toUnicode(s, len);
 	QTextLayout tlay(su, *FontPointer(font), GetPaintDevice());
 	tlay.beginLayout();
 	QTextLine tl = tlay.createLine();
@@ -486,13 +481,13 @@ void SurfaceImpl::MeasureWidths(Font &font,
 	if (unicodeMode) {
 		int fit = su.size();
 		int ui=0;
-		size_t i=0;
+		int i=0;
 		while (ui<fit) {
-			const unsigned char uch = text[i];
+			const unsigned char uch = s[i];
 			const unsigned int byteCount = UTF8BytesOfLead[uch];
 			const int codeUnits = UTF16LengthFromUTF8ByteCount(byteCount);
 			qreal xPosition = tl.cursorToX(ui+codeUnits);
-			for (size_t bytePos=0; (bytePos<byteCount) && (i<text.length()); bytePos++) {
+			for (unsigned int bytePos=0; (bytePos<byteCount) && (i<len); bytePos++) {
 				positions[i++] = xPosition;
 			}
 			ui += codeUnits;
@@ -500,33 +495,33 @@ void SurfaceImpl::MeasureWidths(Font &font,
 		XYPOSITION lastPos = 0;
 		if (i > 0)
 			lastPos = positions[i-1];
-		while (i<text.length()) {
+		while (i<len) {
 			positions[i++] = lastPos;
 		}
 	} else if (codePage) {
 		// DBCS
 		int ui = 0;
-		for (size_t i=0; i<text.length();) {
-			size_t lenChar = DBCSIsLeadByte(codePage, text[i]) ? 2 : 1;
+		for (int i=0; i<len;) {
+			size_t lenChar = DBCSIsLeadByte(codePage, s[i]) ? 2 : 1;
 			qreal xPosition = tl.cursorToX(ui+1);
-			for (unsigned int bytePos=0; (bytePos<lenChar) && (i<text.length()); bytePos++) {
+			for (unsigned int bytePos=0; (bytePos<lenChar) && (i<len); bytePos++) {
 				positions[i++] = xPosition;
 			}
 			ui++;
 		}
 	} else {
 		// Single byte encoding
-		for (int i=0; i<static_cast<int>(text.length()); i++) {
+		for (int i=0; i<len; i++) {
 			positions[i] = tl.cursorToX(i+1);
 		}
 	}
 }
 
-XYPOSITION SurfaceImpl::WidthText(Font &font, std::string_view text)
+XYPOSITION SurfaceImpl::WidthText(Font &font, const char *s, int len)
 {
 	QFontMetricsF metrics(*FontPointer(font), device);
 	SetCodec(font);
-	QString su = UnicodeFromText(codec, text);
+	QString su = codec->toUnicode(s, len);
 	return metrics.width(su);
 }
 
@@ -579,10 +574,6 @@ void SurfaceImpl::SetUnicodeMode(bool unicodeMode_)
 void SurfaceImpl::SetDBCSMode(int codePage_)
 {
 	codePage = codePage_;
-}
-
-void SurfaceImpl::SetBidiR2L(bool)
-{
 }
 
 QPaintDevice *SurfaceImpl::GetPaintDevice()
@@ -1119,17 +1110,17 @@ public:
 	}
 	Function FindFunction(const char *name) override {
 		if (lib) {
-			// C++ standard doesn't like casts between function pointers and void pointers so use a union
-			union {
+			// Use memcpy as it doesn't invoke undefined or conditionally defined behaviour.
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-				QFunctionPointer fp;
+			QFunctionPointer fp {};
 #else
-				void *fp;
+			void *fp = nullptr;
 #endif
-				Function f;
-			} fnConv;
-			fnConv.fp = lib->resolve(name);
-			return fnConv.f;
+			fp = lib->resolve(name);
+			Function f = nullptr;
+			static_assert(sizeof(f) == sizeof(fp), "size mismatch");
+			memcpy(&f, &fp, sizeof(f));
+			return f;
 		}
 		return nullptr;
 	}

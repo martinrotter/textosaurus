@@ -123,6 +123,7 @@ HEADERS +=  common/dynamic-shortcuts/dynamicshortcuts.h \
             saurus/plugin-system/charactermap/charactermapplugin.h \
             saurus/plugin-system/charactermap/charactermapsidebar.h \
             saurus/plugin-system/charactermap/charactermapwidget.h \
+            saurus/plugin-system/clipboard/clipboardimporter.h \
             saurus/plugin-system/clipboard/clipboardmodel.h \
             saurus/plugin-system/clipboard/clipboardplugin.h \
             saurus/plugin-system/clipboard/clipboardsidebar.h \
@@ -218,6 +219,7 @@ SOURCES +=  common/dynamic-shortcuts/dynamicshortcuts.cpp \
             saurus/plugin-system/charactermap/charactermapplugin.cpp \
             saurus/plugin-system/charactermap/charactermapsidebar.cpp \
             saurus/plugin-system/charactermap/charactermapwidget.cpp \
+            saurus/plugin-system/clipboard/clipboardimporter.cpp \
             saurus/plugin-system/clipboard/clipboardmodel.cpp \
             saurus/plugin-system/clipboard/clipboardplugin.cpp \
             saurus/plugin-system/clipboard/clipboardsidebar.cpp \
@@ -254,6 +256,7 @@ FORMS +=  common/gui/toolbareditor.ui \
           saurus/gui/settings/settingsplugins.ui \
           saurus/gui/settings/settingsshortcuts.ui \
           saurus/gui/settings/syntaxcolorthemeeditor.ui \
+          saurus/plugin-system/clipboard/clipboardimporter.ui \
           saurus/plugin-system/macros/macroswidget.ui \
           saurus/gui/settings/settingsencryption.ui
 

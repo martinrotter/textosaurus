@@ -27,7 +27,7 @@ class ClipboardItem : public QObject {
 
     ItemType type() const;
     QString mimeType() const;
-    QString heading(bool simple_view = true) const;
+    QString heading(bool simple_view) const;
     QDateTime time() const;
     QMimeData* data() const;
 

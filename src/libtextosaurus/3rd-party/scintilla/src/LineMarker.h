@@ -34,7 +34,7 @@ public:
 	 * platforms must implement as empty. */
 	DrawLineMarkerFn customDraw = nullptr;
 
-	LineMarker() noexcept = default;
+	LineMarker() = default;
 	LineMarker(const LineMarker &other);
 	LineMarker(LineMarker &&) noexcept = default;
 	LineMarker &operator=(const LineMarker& other);
