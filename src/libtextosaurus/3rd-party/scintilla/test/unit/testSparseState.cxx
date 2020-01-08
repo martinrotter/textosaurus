@@ -1,6 +1,7 @@
 // Unit Tests for Scintilla internal data structures
 
 #include <string>
+#include <string_view>
 #include <vector>
 #include <algorithm>
 #include <memory>

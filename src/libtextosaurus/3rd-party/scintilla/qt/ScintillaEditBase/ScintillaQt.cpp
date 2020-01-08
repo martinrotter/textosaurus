@@ -10,6 +10,10 @@
 
 #include "ScintillaQt.h"
 #include "PlatQt.h"
+#ifdef SCI_LEXER
+#include "LexerModule.h"
+#include "ExternalLexer.h"
+#endif
 
 #include <QApplication>
 #include <QDrag>
@@ -37,7 +41,7 @@ ScintillaQt::ScintillaQt(QAbstractScrollArea *parent)
 	// On OS X drawing text into a pixmap moves it around 1 pixel to
 	// the right compared to drawing it directly onto a window.
 	// Buffered drawing turned off by default to avoid this.
-	view.bufferedDraw = false;
+	WndProc(SCI_SETBUFFEREDDRAW, false, 0);
 
 	Init();
 
@@ -295,6 +299,7 @@ void ScintillaQt::ReconfigureScrollBars()
 void ScintillaQt::CopyToModeClipboard(const SelectionText &selectedText, QClipboard::Mode clipboardMode_)
 {
 	QClipboard *clipboard = QApplication::clipboard();
+	clipboard->clear(clipboardMode_);
 	QString su = StringFromSelectedText(selectedText);
 	QMimeData *mimeData = new QMimeData();
 	mimeData->setText(su);
@@ -698,6 +703,12 @@ sptr_t ScintillaQt::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam)
 
 		case SCI_GETDIRECTPOINTER:
 			return reinterpret_cast<sptr_t>(this);
+
+#ifdef SCI_LEXER
+		case SCI_LOADLEXERLIBRARY:
+			LexerManager::GetInstance()->Load(reinterpret_cast<const char *>(lParam));
+			break;
+#endif
 
 		default:
 			return ScintillaBase::WndProc(iMessage, wParam, lParam);

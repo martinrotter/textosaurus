@@ -1,13 +1,10 @@
 # Make file for Scintilla on Windows
-# @file makefile
 # Copyright 1998-2010 by Neil Hodgson <neilh@scintilla.org>
 # The License.txt file describes the conditions under which this software may be distributed.
-# This makefile assumes Mingw GCC 4.8+ is used and changes will be needed to use other compilers.
-# Clang 3.4+ can be used with CLANG=1 on command line.
+# This makefile assumes the Mingw-w64 version of GCC 7.1+ is used and changes will
+# be needed to use other compilers.
 
-.PHONY: all clean analyze depend
-
-.SUFFIXES: .cxx .c .o .h .a
+.SUFFIXES: .cxx
 
 DIR_BIN=../bin
 
@@ -15,87 +12,68 @@ COMPONENT = $(DIR_BIN)/Scintilla.dll
 LEXCOMPONENT = $(DIR_BIN)/SciLexer.dll
 LIBSCI = $(DIR_BIN)/libscintilla.a
 
-WARNINGS = -Wpedantic -Wall
-
 ifdef CLANG
 CXX = clang++
-DEFINES += -D_CRT_SECURE_NO_DEPRECATE
 # Clang doesn't like omitting braces in array initialization but they just add noise,
+# __uuidof is a Microsoft extension but makes COM code neater,
 # public visibility avoids warnings like 'locally defined symbol __std_terminate imported'
-DEFINES += -Wno-missing-braces -Xclang -flto-visibility-public-std
+CLANG_OPTS = -Wno-missing-braces -Wno-language-extension-token -Xclang -flto-visibility-public-std
 else
 # MinGW GCC
+LDMINGW = -Wl,--enable-runtime-pseudo-reloc-v2 -Wl,--add-stdcall-alias
 LIBSMINGW = -lstdc++
 STRIPOPTION = -s
 endif
-ARFLAGS = rc
-RANLIB ?= ranlib
-WINDRES ?= windres
 
-# Environment variable windir always defined on Win32
+CXXSTD = c++17
 
-# Take care of changing Unix style '/' directory separator to '\' on Windows
-normalize = $(if $(windir),$(subst /,\,$1),$1)
-
-ifdef windir
+ifeq ($(OS),Windows_NT)
 DEL = $(if $(wildcard $(dir $(SHELL))rm.exe), $(dir $(SHELL))rm.exe -f, del /q)
 else
 DEL = rm -f
 endif
+RANLIB ?= ranlib
+WINDRES ?= windres
 
 vpath %.h ../src ../include ../lexlib
 vpath %.cxx ../src ../lexlib ../lexers
-vpath %.c ../lua/src
 
-LDFLAGS=-shared -static -mwindows
+LDFLAGS=-shared -static -mwindows $(LDMINGW)
 LIBS=-lgdi32 -luser32 -limm32 -lole32 -luuid -loleaut32 -lmsimg32 $(LIBSMINGW)
+# Add -MMD to get dependencies
+INCLUDEDIRS=-I ../include -I ../src -I../lexlib
 
-INCLUDES=-I ../include -I ../src -I../lexlib
-
-BASE_FLAGS += $(WARNINGS)
+CXXBASEFLAGS=--std=$(CXXSTD) -Wall -pedantic $(INCLUDEDIRS) -D_CRT_SECURE_NO_DEPRECATE=1 $(CLANG_OPTS)
 
 ifdef NO_CXX11_REGEX
-DEFINES += -DNO_CXX11_REGEX
+REFLAGS=-DNO_CXX11_REGEX
 endif
 
-DEFINES += -D$(if $(DEBUG),DEBUG,NDEBUG)
-BASE_FLAGS += $(if $(DEBUG),-g,-Os)
-
-ifndef DEBUG
+ifdef DEBUG
+CXXFLAGS=-DDEBUG -g $(CXXBASEFLAGS)
+else
+CXXFLAGS=-DNDEBUG -Os $(CXXBASEFLAGS)
 STRIPFLAG=$(STRIPOPTION)
 endif
-
-CXX_BASE_FLAGS =--std=c++11 $(BASE_FLAGS)
-CXX_ALL_FLAGS =$(DEFINES) $(INCLUDES) $(CXX_BASE_FLAGS)
 
 all:	$(COMPONENT) $(LEXCOMPONENT) $(LIBSCI)
 
 clean:
-	$(DEL) *.exe *.o *.a *.obj *.dll *.res *.map *.plist $(call normalize,$(LIBSCI))
+	$(DEL) *.exe *.o *.a *.obj *.dll *.res *.map *.plist
 
-ifdef LPEG_LEXER
-CXXFLAGS+=-DLPEG_LEXER -I ../lua/src
-LUAOBJS:=lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o linit.o \
-         llex.o lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o \
-         ltable.o ltm.o lundump.o lvm.o lzio.o \
-         lauxlib.o lbaselib.o lbitlib.o lcorolib.o ldblib.o liolib.o \
-         lmathlib.o loadlib.o loslib.o lstrlib.o ltablib.o lutf8lib.o \
-         lpcap.o lpcode.o lpprint.o lptree.o lpvm.o
-endif
-
-%.o: %.cxx
-	$(CXX) $(CXX_ALL_FLAGS) $(CXXFLAGS) -c $<
+.cxx.o:
+	$(CXX) $(CXXFLAGS) $(REFLAGS) -c $<
 
 analyze:
-	$(CXX) --analyze $(CXX_ALL_FLAGS) $(CXXFLAGS) *.cxx ../src/*.cxx ../lexlib/*.cxx ../lexers/*.cxx
+	$(CXX) --analyze $(CXXFLAGS) *.cxx ../src/*.cxx ../lexlib/*.cxx ../lexers/*.cxx
 
 depend deps.mak:
 	python DepGen.py
 
-LEX_OBJS:=$(addsuffix .o,$(basename $(sort $(notdir $(wildcard ../lexers/Lex*.cxx)))))
+LEXOBJS:=$(addsuffix .o,$(basename $(sort $(notdir $(wildcard ../lexers/Lex*.cxx)))))
 
 # Required for base Scintilla
-SRC_OBJS = \
+BASEOBJS = \
 	AutoComplete.o \
 	CallTip.o \
 	CaseConvert.o \
@@ -111,74 +89,64 @@ SRC_OBJS = \
 	EditModel.o \
 	Editor.o \
 	EditView.o \
-	Indicator.o \
 	KeyMap.o \
+	Indicator.o \
 	LineMarker.o \
 	MarginView.o \
 	PerLine.o \
+	PlatWin.o \
 	PositionCache.o \
+	PropSetSimple.o \
 	RESearch.o \
 	RunStyles.o \
+	ScintRes.o \
 	Selection.o \
 	Style.o \
 	UniConversion.o \
 	UniqueString.o \
 	ViewStyle.o \
-	XPM.o
+	XPM.o \
+	HanjaDic.o
+
+SOBJS = ScintillaDLL.o ScintillaWin.o ScintillaBase.o $(BASEOBJS)
 
 # Required by lexers
-LEXLIB_OBJS = \
+LEXLIBOBJS=\
 	Accessor.o \
 	Catalogue.o \
-	DefaultLexer.o \
 	ExternalLexer.o \
+	DefaultLexer.o \
 	LexerBase.o \
 	LexerModule.o \
 	LexerSimple.o \
-	PropSetSimple.o \
 	StyleContext.o \
-	WordList.o
+	WordList.o \
 
 # Required by libraries and DLLs that include lexing
-SCILEX_OBJS=\
-	$(SRC_OBJS) \
-	$(LEXLIB_OBJS) \
-	$(LEX_OBJS) \
-	$(LUAOBJS) \
-	HanjaDic.o \
-	PlatWin.o \
-	ScintillaBaseL.o \
-	ScintillaWin.o
+SCILEXOBJS=\
+	$(BASEOBJS) \
+	$(LEXLIBOBJS) \
+	$(LEXOBJS) \
+	ScintillaBaseL.o
 
-COMPONENT_OBJS = \
-	$(SRC_OBJS) \
-	HanjaDic.o \
-	PlatWin.o \
-	ScintillaBase.o \
-	ScintillaDLL.o \
-	ScintillaWin.o \
-	ScintRes.o
+$(COMPONENT): $(SOBJS) Scintilla.def
+	$(CXX) $(LDFLAGS) -o $@ $(STRIPFLAG) $(SOBJS) $(CXXFLAGS) $(LIBS)
 
-LEXCOMPONENT_OBJS = \
-	$(SCILEX_OBJS) \
-	ScintillaDLL.o \
-	ScintRes.o
+$(LEXCOMPONENT): ScintillaDLL.o ScintillaWinL.o $(SCILEXOBJS) Scintilla.def
+	$(CXX) $(LDFLAGS) -o $@ $(STRIPFLAG) ScintillaDLL.o ScintillaWinL.o $(SCILEXOBJS) $(CXXFLAGS) $(LIBS)
 
-$(COMPONENT): $(COMPONENT_OBJS)
-	$(CXX) $(LDFLAGS) -o $@ $(STRIPFLAG) $^ $(CXXFLAGS) $(LIBS)
-
-$(LEXCOMPONENT): $(LEXCOMPONENT_OBJS)
-	$(CXX) $(LDFLAGS) -o $@ $(STRIPFLAG) $^ $(CXXFLAGS) $(LIBS)
-
-$(LIBSCI): $(SCILEX_OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+$(LIBSCI): ScintillaWin.o $(SCILEXOBJS)
+	$(AR) rc $@ $^
 	$(RANLIB) $@
 
 # Automatically generate dependencies for most files with "make deps"
 include deps.mak
 
 ScintillaBaseL.o:
-	$(CXX) $(CXX_ALL_FLAGS) $(CXXFLAGS) -D SCI_LEXER -c $< -o $@
+	$(CXX) $(CXXFLAGS) -D SCI_LEXER -c $< -o $@
+
+ScintillaWinL.o:
+	$(CXX) $(CXXFLAGS) -D SCI_LEXER -c $< -o $@
 
 ScintRes.o:	ScintRes.rc
 	$(WINDRES) ScintRes.rc $@

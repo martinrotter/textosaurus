@@ -1,6 +1,6 @@
 // Scintilla source code edit control
-/** @file LexTACL.cxx
- ** Lexer for TACL
+/** @file LexTAL.cxx
+ ** Lexer for TAL
  ** Based on LexPascal.cxx
  ** Written by Laurent le Tynevez
  ** Updated by Simon Steele <s.steele@pnotepad.org> September 2002

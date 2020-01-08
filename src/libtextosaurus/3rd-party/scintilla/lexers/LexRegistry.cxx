@@ -161,10 +161,10 @@ class LexerRegistry : public DefaultLexer {
 	}
 
 public:
-	LexerRegistry() : DefaultLexer("registry", SCLEX_REGISTRY) {}
+	LexerRegistry() {}
 	virtual ~LexerRegistry() {}
 	int SCI_METHOD Version() const override {
-		return lvIdentity;
+		return lvRelease4;
 	}
 	void SCI_METHOD Release() override {
 		delete this;
@@ -184,17 +184,13 @@ public:
 		}
 		return -1;
 	}
-	const char * SCI_METHOD PropertyGet(const char *key) override {
-		return optSetRegistry.PropertyGet(key);
-	}
-
 	Sci_Position SCI_METHOD WordListSet(int, const char *) override {
 		return -1;
 	}
 	void *SCI_METHOD PrivateCall(int, void *) override {
 		return 0;
 	}
-	static ILexer *LexerFactoryRegistry() {
+	static ILexer4 *LexerFactoryRegistry() {
 		return new LexerRegistry;
 	}
 	const char *SCI_METHOD DescribeWordListSets() override {

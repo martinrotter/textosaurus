@@ -32,8 +32,6 @@ protected:
 		idcmdSelectAll=16
 	};
 
-	enum { maxLenInputIME = 200 };
-
 	int displayPopupMenu;
 	Menu popup;
 	AutoComplete ac;
@@ -61,10 +59,11 @@ protected:
 	void Initialise() override {}
 	void Finalise() override;
 
+	[[deprecated]]
 	// This method is deprecated, use InsertCharacter instead. The treatAsDBCS parameter is no longer used.
 	virtual void AddCharUTF(const char *s, unsigned int len, bool treatAsDBCS=false);
 
-	void InsertCharacter(const char *s, unsigned int len, CharacterSource charSource) override;
+	void InsertCharacter(std::string_view sv, CharacterSource charSource) override;
 	void Command(int cmdId);
 	void CancelModes() override;
 	int KeyCommand(unsigned int iMessage) override;

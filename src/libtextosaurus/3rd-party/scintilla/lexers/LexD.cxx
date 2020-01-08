@@ -157,7 +157,6 @@ class LexerD : public DefaultLexer {
 	OptionSetD osD;
 public:
 	LexerD(bool caseSensitive_) :
-		DefaultLexer("D", SCLEX_D),
 		caseSensitive(caseSensitive_) {
 	}
 	virtual ~LexerD() {
@@ -166,7 +165,7 @@ public:
 		delete this;
 	}
 	int SCI_METHOD Version() const override {
-		return lvIdentity;
+		return lvRelease4;
 	}
 	const char * SCI_METHOD PropertyNames() override {
 		return osD.PropertyNames();
@@ -178,9 +177,6 @@ public:
 		return osD.DescribeProperty(name);
 	}
 	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
-	const char * SCI_METHOD PropertyGet(const char *key) override {
-		return osD.PropertyGet(key);
-	}
 	const char * SCI_METHOD DescribeWordListSets() override {
 		return osD.DescribeWordListSets();
 	}
@@ -192,10 +188,10 @@ public:
 		return 0;
 	}
 
-	static ILexer *LexerFactoryD() {
+	static ILexer4 *LexerFactoryD() {
 		return new LexerD(true);
 	}
-	static ILexer *LexerFactoryDInsensitive() {
+	static ILexer4 *LexerFactoryDInsensitive() {
 		return new LexerD(false);
 	}
 };

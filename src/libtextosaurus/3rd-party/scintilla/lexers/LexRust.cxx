@@ -120,15 +120,13 @@ class LexerRust : public DefaultLexer {
 	OptionsRust options;
 	OptionSetRust osRust;
 public:
-	LexerRust() : DefaultLexer("rust", SCLEX_RUST) {
-	}
 	virtual ~LexerRust() {
 	}
 	void SCI_METHOD Release() override {
 		delete this;
 	}
 	int SCI_METHOD Version() const override {
-		return lvIdentity;
+		return lvRelease4;
 	}
 	const char * SCI_METHOD PropertyNames() override {
 		return osRust.PropertyNames();
@@ -140,9 +138,6 @@ public:
 		return osRust.DescribeProperty(name);
 	}
 	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
-	const char * SCI_METHOD PropertyGet(const char *key) override {
-		return osRust.PropertyGet(key);
-	}
 	const char * SCI_METHOD DescribeWordListSets() override {
 		return osRust.DescribeWordListSets();
 	}
@@ -152,7 +147,7 @@ public:
 	void * SCI_METHOD PrivateCall(int, void *) override {
 		return 0;
 	}
-	static ILexer *LexerFactoryRust() {
+	static ILexer4 *LexerFactoryRust() {
 		return new LexerRust();
 	}
 };

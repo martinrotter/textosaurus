@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include <new>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -41,8 +42,14 @@
 #include "ILexer.h"
 #include "Scintilla.h"
 #include "ScintillaWidget.h"
+#ifdef SCI_LEXER
+#include "SciLexer.h"
+#endif
 #include "StringCopy.h"
 #include "CharacterCategory.h"
+#ifdef SCI_LEXER
+#include "LexerModule.h"
+#endif
 #include "Position.h"
 #include "UniqueString.h"
 #include "SplitVector.h"
@@ -70,6 +77,10 @@
 #include "Editor.h"
 #include "AutoComplete.h"
 #include "ScintillaBase.h"
+
+#ifdef SCI_LEXER
+#include "ExternalLexer.h"
+#endif
 
 #include "ScintillaGTK.h"
 #include "scintilla-marshal.h"
@@ -103,7 +114,7 @@ static GdkWindow *PWindow(const Window &w) noexcept {
 	return gtk_widget_get_window(widget);
 }
 
-extern std::string UTF8FromLatin1(const char *s, int len);
+extern std::string UTF8FromLatin1(std::string_view text);
 
 enum {
 	COMMAND_SIGNAL,
@@ -822,6 +833,11 @@ sptr_t ScintillaGTK::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam
 		case SCI_GETDIRECTPOINTER:
 			return reinterpret_cast<sptr_t>(this);
 
+#ifdef SCI_LEXER
+		case SCI_LOADLEXERLIBRARY:
+			LexerManager::GetInstance()->Load(ConstCharPtrFromSPtr(lParam));
+			break;
+#endif
 		case SCI_TARGETASUTF8:
 			return TargetAsUTF8(CharPtrFromSPtr(lParam));
 
@@ -1406,7 +1422,7 @@ void ScintillaGTK::GetGtkSelectionText(GtkSelectionData *selectionData, Selectio
 	if (selectionTypeData == GDK_TARGET_STRING) {
 		if (IsUnicodeMode()) {
 			// Unknown encoding so assume in Latin1
-			dest = UTF8FromLatin1(dest.c_str(), dest.length());
+			dest = UTF8FromLatin1(dest);
 			selText.Copy(dest, SC_CP_UTF8, 0, isRectangular, false);
 		} else {
 			// Assume buffer is in same encoding as selection
@@ -1518,7 +1534,7 @@ void ScintillaGTK::GetSelection(GtkSelectionData *selection_data, guint info, Se
 		const char *charSet = ::CharacterSetID(text->characterSet);
 		if (*charSet) {
 			std::string tmputf = ConvertText(text->Data(), text->Length(), "UTF-8", charSet, false);
-			converted = Sci::make_unique<SelectionText>();
+			converted = std::make_unique<SelectionText>();
 			converted->Copy(tmputf, SC_CP_UTF8, 0, text->rectangular, false);
 			text = converted.get();
 		}
@@ -2339,7 +2355,7 @@ void ScintillaGTK::CommitThis(char *commitStr) {
 			if (!IsUnicodeMode())
 				docChar = ConvertText(u8Char, u8CharLen, charSetSource, "UTF-8", true);
 
-			InsertCharacter(docChar.c_str(), docChar.size(), CharacterSource::directInput);
+			InsertCharacter(docChar, CharacterSource::directInput);
 		}
 		g_free(uniStr);
 		ShowCaretAtCurrentPosition();
@@ -2380,8 +2396,7 @@ void ScintillaGTK::PreeditChangedInlineThis() {
 			return;
 		}
 
-		if (preeditStr.uniStrLen == 0 || preeditStr.uniStrLen > maxLenInputIME) {
-			//fprintf(stderr, "Do not allow over 200 chars: %i\n", preeditStr.uniStrLen);
+		if (preeditStr.uniStrLen == 0) {
 			ShowCaretAtCurrentPosition();
 			return;
 		}
@@ -2399,7 +2414,7 @@ void ScintillaGTK::PreeditChangedInlineThis() {
 			if (!IsUnicodeMode())
 				docChar = ConvertText(u8Char, u8CharLen, charSetSource, "UTF-8", true);
 
-			InsertCharacter(docChar.c_str(), docChar.size(), CharacterSource::tentativeInput);
+			InsertCharacter(docChar, CharacterSource::tentativeInput);
 
 			DrawImeIndicator(indicator[i], docChar.size());
 		}
@@ -3030,6 +3045,9 @@ GType scintilla_object_get_type() {
 
 void ScintillaGTK::ClassInit(OBJECT_CLASS *object_class, GtkWidgetClass *widget_class, GtkContainerClass *container_class) {
 	Platform_Initialise();
+#ifdef SCI_LEXER
+	Scintilla_LinkLexers();
+#endif
 	atomUTF8 = gdk_atom_intern("UTF8_STRING", FALSE);
 	atomString = GDK_SELECTION_TYPE_STRING;
 	atomUriList = gdk_atom_intern("text/uri-list", FALSE);

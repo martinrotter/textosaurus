@@ -95,6 +95,9 @@
 	.provisional {
 		background: #FFB000;
         }
+	.deprecated {
+		text-decoration: line-through red;
+        }
 	.parameter {
 		font-style:italic;
         }
@@ -136,7 +139,6 @@
      How to implement folding</a>.<br />
      <a class="jump" href="https://bitbucket.org/StarFire/scintilla-doc/downloads/Scintilla-var'aq-Tutorial.pdf">
      Beginner's Guide to lexing and folding</a>.<br />
-     <a class="jump" href="LPegLexer.html">How to write lexers in Lua</a>.<br />
      The <a class="jump" href="SciCoding.html">coding style</a> used in Scintilla and SciTE is
     worth following if you want to contribute code to Scintilla but is not compulsory.</p>
 
@@ -152,12 +154,13 @@
     <p>The GTK version also uses messages in a similar way to the Windows version. This is
     different to normal GTK practice but made it easier to implement rapidly.</p>
 
-    <p>Scintilla also builds with Cocoa on OS X, with Qt, and with curses, and follows the conventions of
+    <p>Scintilla also builds with Cocoa on OS X and with Qt, and follows the conventions of
     those platforms.</p>
 
-    <p>Scintilla does not properly support right-to-left languages like Arabic and Hebrew.
-    While text in these languages may appear correct, it is not possible to interact with this text
-    as is normal with other editing components.</p>
+    <p>Scintilla provides only limited experimental support on Windows for right-to-left languages
+    like Arabic and Hebrew.
+    While text in these languages may appear correct, interaction with this text may not work
+    correctly as occurs with other editors.</p>
 
     <p>This documentation describes the individual messages and notifications used by Scintilla. It
     does not describe how to link them together to form a useful editor. For now, the best way to
@@ -3698,8 +3701,6 @@ struct Sci_TextToFind {
      <a class="message" href="#SCI_GETBUFFEREDDRAW">SCI_GETBUFFEREDDRAW &rarr; bool</a><br />
      <a class="message" href="#SCI_SETPHASESDRAW">SCI_SETPHASESDRAW(int phases)</a><br />
      <a class="message" href="#SCI_GETPHASESDRAW">SCI_GETPHASESDRAW &rarr; int</a><br />
-     <a class="message" href="#SCI_SETTWOPHASEDRAW">SCI_SETTWOPHASEDRAW(bool twoPhase)</a><br />
-     <a class="message" href="#SCI_GETTWOPHASEDRAW">SCI_GETTWOPHASEDRAW &rarr; bool</a><br />
      <a class="message" href="#SCI_SETTECHNOLOGY">SCI_SETTECHNOLOGY(int technology)</a><br />
      <a class="message" href="#SCI_GETTECHNOLOGY">SCI_GETTECHNOLOGY &rarr; int</a><br />
      <a class="message" href="#SCI_SETFONTQUALITY">SCI_SETFONTQUALITY(int fontQuality)</a><br />
@@ -3708,6 +3709,10 @@ struct Sci_TextToFind {
      <a class="message" href="#SCI_GETCODEPAGE">SCI_GETCODEPAGE &rarr; int</a><br />
      <a class="message" href="#SCI_SETIMEINTERACTION">SCI_SETIMEINTERACTION(int imeInteraction)</a><br />
      <a class="message" href="#SCI_GETIMEINTERACTION">SCI_GETIMEINTERACTION &rarr; int</a><br />
+<div  class="provisional">
+     <a class="message" href="#SCI_SETBIDIRECTIONAL"><span class="provisional">SCI_SETBIDIRECTIONAL(int bidirectional)</span></a><br />
+     <a class="message" href="#SCI_GETBIDIRECTIONAL">SCI_GETBIDIRECTIONAL &rarr; int</a><br />
+</div>
      <a class="message" href="#SCI_GRABFOCUS">SCI_GRABFOCUS</a><br />
      <a class="message" href="#SCI_SETFOCUS">SCI_SETFOCUS(bool focus)</a><br />
      <a class="message" href="#SCI_GETFOCUS">SCI_GETFOCUS &rarr; bool</a><br />
@@ -3740,12 +3745,15 @@ struct Sci_TextToFind {
      <b id="SCI_GETPHASESDRAW">SCI_GETPHASESDRAW &rarr; int</b><br />
      There are several orders in which the text area may be drawn offering a trade-off between speed
      and allowing all pixels of text to be seen even when they overlap other elements.</p>
-     <p>In single phase drawing (<code>SC_PHASES_ONE</code>) each
+     <p>In single phase drawing (<code class="deprecated">SC_PHASES_ONE</code>) each
      run of characters in one style is drawn along with its background.
      If a character overhangs the end of a run, such as in "<i>V</i>_" where the
      "<i>V</i>" is in a different style from the "_", then this can cause the right hand
      side of the "<i>V</i>" to be overdrawn by the background of the "_" which
      cuts it off.</p>
+     <p>
+     Single phase drawing is deprecated and should not be used by applications.
+     </p>
      <p>Two phase drawing (<code>SC_PHASES_TWO</code>)
      fixes this by drawing all the backgrounds of a line first and then drawing the text
      in transparent mode. Lines are drawn separately and no line will overlap another
@@ -3767,11 +3775,6 @@ struct Sci_TextToFind {
      <a class="message" href="#SCI_SETLAYOUTCACHE"><code>
      SCI_SETLAYOUTCACHE(SC_CACHE_PAGE)</code></a>
      or higher can ensure that multiple phase drawing is not significantly slower.</p>
-
-    <p><b id="SCI_SETTWOPHASEDRAW">SCI_SETTWOPHASEDRAW(bool twoPhase)</b><br />
-     <b id="SCI_GETTWOPHASEDRAW">SCI_GETTWOPHASEDRAW &rarr; bool</b><br />
-     This property has been replaced with the preceding PHASESDRAW property which is more general,
-     allowing multiple phase drawing as well as one and two phase drawing.</p>
 
     <p><b id="SCI_SETTECHNOLOGY">SCI_SETTECHNOLOGY(int technology)</b><br />
      <b id="SCI_GETTECHNOLOGY">SCI_GETTECHNOLOGY &rarr; int</b><br />
@@ -3836,6 +3839,30 @@ struct Sci_TextToFind {
      <p>When the inline IME mode is active, characters are added tentatively before being finalised and an
      <a class="message" href="#SCN_CHARADDED">SCN_CHARADDED</a>
      notification (with <code class="parameter">characterSource</code> set to <code>SC_CHARACTERSOURCE_TENTATIVE_INPUT</code>) is sent for each character.</p>
+
+<div  class="provisional">
+    <a href="#ProvisionalMessages">These bidirectional features are experimental and incomplete.</a><br />
+    <p><b id="SCI_SETBIDIRECTIONAL">SCI_SETBIDIRECTIONAL(int bidirectional)</b><br />
+     <b id="SCI_GETBIDIRECTIONAL">SCI_GETBIDIRECTIONAL &rarr; int</b><br />
+     Some languages, like Arabic and Hebrew, are written from right to left instead of from left to right as English is.
+     Documents that use multiple languages may contain both directions and this is termed "bidirectional".
+     The default text direction may be right to left or left to right.
+     Scintilla only correctly displays bidirectional text on some platforms.
+     Currently, there is experimental support for bidirectional text on Win32 using DirectWrite and on macOS using Cocoa.
+     Only UTF-8 documents will show bidirectional behaviour and only in <code>SC_BIDIRECTIONAL_L2R</code> mode.
+     Some features, such as virtual space may not work with
+     bidirectional text or may work only in some circumstances.</p>
+     <p>There are additional processing and storage costs to bidirectional text.
+     As some applications may not want to pay the costs, bidirectional support must be explicitly enabled by calling
+     <code>SCI_SETBIDIRECTIONAL(SC_BIDIRECTIONAL_L2R)</code> (1) which chooses left to right as the default direction or
+     <code>SCI_SETBIDIRECTIONAL(SC_BIDIRECTIONAL_R2L)</code> (2) for default right to left.
+     On Win32, this should be done after setting the technology to <code>SC_TECHNOLOGY_DIRECTWRITE</code>,
+     <code>SC_TECHNOLOGY_DIRECTWRITERETAIN</code>, or
+     <code>SC_TECHNOLOGY_DIRECTWRITEDC</code>.</p>
+     <p>If the call succeeded <code>SCI_GETBIDIRECTIONAL</code> will return the same value otherwise
+     <code>SC_BIDIRECTIONAL_DISABLED</code> (0) is returned.
+     </p>
+</div>
 
     <p><b id="SCI_GRABFOCUS">SCI_GRABFOCUS</b><br />
      <b id="SCI_SETFOCUS">SCI_SETFOCUS(bool focus)</b><br />
@@ -4686,8 +4713,8 @@ struct Sci_TextToFind {
     <p><b id="SCI_INDICSETUNDER">SCI_INDICSETUNDER(int indicator, bool under)</b><br />
      <b id="SCI_INDICGETUNDER">SCI_INDICGETUNDER(int indicator) &rarr; bool</b><br />
      These two messages set and get whether an indicator is drawn under text or over(default).
-     Drawing under text works only for indicators when <a class="message" href="#SCI_SETTWOPHASEDRAW">two phase drawing</a>
-     is enabled.</p>
+     Drawing under text does not work with the deprecated <a class="message" href="#SCI_SETPHASESDRAW">single phase drawing</a>
+     mode.</p>
 
     <p><b id="SCI_INDICSETHOVERSTYLE">SCI_INDICSETHOVERSTYLE(int indicator, int
     indicatorStyle)</b><br />
@@ -6830,13 +6857,9 @@ sptr_t CallScintilla(unsigned int iMessage, uptr_t wParam, sptr_t lParam){
     styling and fold points for an unsupported language you can either do this in the container or
     better still, write your own lexer following the pattern of one of the existing ones.</p>
 
-    <p>If the symbol <code>SCI_EMPTYCATALOGUE</code> is defined when building
-    Scintilla, then no lexers are made available but other lexing support code may be present.</p>
-
-    <p>Scintilla also supports external lexers. These are DLLs (on Windows), .dylib modules (on macOS),
-    or .so modules (on GTK/Linux) that export three
+    <p>Scintilla also supports external lexers. These are DLLs (on Windows) or .so modules (on GTK/Linux) that export three
     functions: <code>GetLexerCount</code>, <code>GetLexerName</code>, and
-    <code>GetLexerFactory</code>. See <code>ExternalLexer.cxx</code> for more information.</p>
+    <code>GetLexerFactory</code>. See <code>externalLexer.cxx</code> for more.</p>
      <a class="message" href="#SCI_SETLEXER">SCI_SETLEXER(int lexer)</a><br />
      <a class="message" href="#SCI_GETLEXER">SCI_GETLEXER &rarr; int</a><br />
      <a class="message" href="#SCI_SETLEXERLANGUAGE">SCI_SETLEXERLANGUAGE(&lt;unused&gt;, const char
@@ -6899,7 +6922,7 @@ sptr_t CallScintilla(unsigned int iMessage, uptr_t wParam, sptr_t lParam){
     <p><code>SCI_GETLEXERLANGUAGE</code> retrieves the name of the lexer.</p>
 
     <p><b id="SCI_LOADLEXERLIBRARY">SCI_LOADLEXERLIBRARY(&lt;unused&gt;, const char *path)</b><br />
-     Load a lexer implemented in a shared library. This is a .so file on GTK/Linux, a .dylib file on macOS, or a .DLL file on Windows.
+     Load a lexer implemented in a shared library. This is a .so file on GTK/Linux or a .DLL file on Windows.
      </p>
 
     <p><b id="SCI_COLOURISE">SCI_COLOURISE(position start, position end)</b><br />
@@ -7016,7 +7039,7 @@ sptr_t CallScintilla(unsigned int iMessage, uptr_t wParam, sptr_t lParam){
     purpose would exhaust the number of allowed styles quickly.
     This is alleviated by substyles which allow the application to determine how many sets of identifiers to allocate for
     each purpose.
-    Lexers have to explicitly support this feature by implementing the methods in <code>ILexerWithSubStyles</code>.</p>
+    Lexers have to explicitly support this feature by implementing particular methods.</p>
 
     <p><b id="SCI_GETSUBSTYLEBASES">SCI_GETSUBSTYLEBASES(&lt;unused&gt;, char *styles NUL-terminated) &rarr; int</b><br />
      Fill <code class="parameter">styles</code> with a byte for each style that can be split into substyles.</p>
@@ -7067,7 +7090,7 @@ sptr_t CallScintilla(unsigned int iMessage, uptr_t wParam, sptr_t lParam){
 
     <h2 id="LexerObjects">Lexer Objects</h2>
 
-    <p>Lexers are programmed as objects that implement the ILexer interface and that interact
+    <p>Lexers are programmed as objects that implement the ILexer4 interface and that interact
     with the document they are lexing through the IDocument interface.
     Previously lexers were defined by providing lexing and folding functions but creating an object
     to handle the interaction of a lexer with a document allows the lexer to store state information that
@@ -7075,54 +7098,42 @@ sptr_t CallScintilla(unsigned int iMessage, uptr_t wParam, sptr_t lParam){
     or variable declarations and style these depending on their role.</p>
 
     <p>A set of helper classes allows older lexers defined by functions to be used in Scintilla.</p>
-<h4>ILexer</h4>
+<h4>ILexer4</h4>
 
 <div class="highlighted">
-<span class="S5">class</span><span class="S0"> </span>ILexer<span class="S0"> </span><span class="S10">{</span><br />
+<span class="S5">class</span><span class="S0"> </span>ILexer4<span class="S0"> </span><span class="S10">{</span><br />
 <span class="S5">public</span><span class="S10">:</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>Version<span class="S10">()</span><span class="S0"> </span>
-<span class="S5">const</span><span class="S0"> </span><span class="S10">=</span>
-<span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>Release<span class="S10">()</span><span class="S0"> </span>
-<span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span><span class="S0"> </span>
-<span class="S5">const</span><span class="S0"> </span>
-<span class="S5">char</span><span class="S0"> </span>
-<span class="S10">*</span><span class="S0"> </span>
-SCI_METHOD<span class="S0"> </span>PropertyNames<span class="S10">()</span>
-<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PropertyType<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>name<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DescribeProperty<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>name<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>PropertySet<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>key<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>val<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>DescribeWordListSets<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>WordListSet<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>n<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>wl<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>Lex<span class="S10">(</span>Sci_PositionU<span class="S0"> </span>startPos<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>lengthDoc<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>initStyle<span class="S10">,</span><span class="S0"> </span>IDocument<span class="S0"> </span><span class="S10">*</span>pAccess<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>Fold<span class="S10">(</span>Sci_PositionU<span class="S0"> </span>startPos<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>lengthDoc<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>initStyle<span class="S10">,</span><span class="S0"> </span>IDocument<span class="S0"> </span><span class="S10">*</span>pAccess<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">virtual</span>
-<span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD
-<span class="S0"> </span>PrivateCall<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>operation<span class="S10">,</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S10">*</span>pointer<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>Version<span class="S10">()</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>Release<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PropertyNames<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PropertyType<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>name<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DescribeProperty<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>name<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PropertySet<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>key<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>val<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DescribeWordListSets<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD<span class="S0"> </span>WordListSet<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>n<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>wl<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>Lex<span class="S10">(</span>Sci_PositionU<span class="S0"> </span>startPos<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>lengthDoc<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>initStyle<span class="S10">,</span><span class="S0"> </span>IDocument<span class="S0"> </span><span class="S10">*</span>pAccess<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>Fold<span class="S10">(</span>Sci_PositionU<span class="S0"> </span>startPos<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>lengthDoc<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>initStyle<span class="S10">,</span><span class="S0"> </span>IDocument<span class="S0"> </span><span class="S10">*</span>pAccess<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PrivateCall<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>operation<span class="S10">,</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S10">*</span>pointer<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>LineEndTypesSupported<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>AllocateSubStyles<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>styleBase<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>numberStyles<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SubStylesStart<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>styleBase<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SubStylesLength<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>styleBase<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>StyleFromSubStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>subStyle<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PrimaryStyleFromStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>FreeSubStyles<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SetIdentifiers<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>identifiers<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DistanceToSecondaryStyles<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetSubStyleBases<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>NamedStyles<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>NameOfStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>TagsOfStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DescriptionOfStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S10">};</span><br />
 </div>
 
 <p>
 The types <code>Sci_Position</code> and <code>Sci_PositionU</code> are used for positions and line numbers in the document.
-With release 3.8.0, 64-bit builds define these as 64-bit types to allow future implementation of documents larger than 2 GB.
+With Scintilla 4, 64-bit builds define these as 64-bit types to allow future implementation of documents larger than 2 GB.
 </p>
 
 <p>
@@ -7140,8 +7151,7 @@ optimisation could be to remember where a setting first affects the document and
 </p>
 
 <p><code>Version</code> returns an enumerated value specifying which version of the interface is implemented:
-<code>lvOriginal</code> for <code>ILexer</code>, <code>lvSubStyles</code> for <code>ILexerWithSubStyles</code>,
-<code>lvMetaData</code> for <code>ILexerWithMetaData</code>, and <code>lvIdentity</code> for <code>ILexerWithIdentity></code>.</p>
+<code>lvRelease4</code> for <code>ILexer4</code>. Prior to Scintilla 4.0 different values were possible.</p>
 
 <p><code>Release</code> is called to destroy the lexer object.</p>
 
@@ -7159,31 +7169,6 @@ needs to be folded as this allowed fixing up the last line from the previous fol
 The new approach allows the lexer to decide whether to backtrack or to handle this
 more efficiently.</p>
 
-<h4>ILexerWithSubStyles</h4>
-
-<p>
-To allow lexers to report which line ends they support, and to support substyles,
-<code>Ilexer</code> is extended to <code>ILexerWithSubStyles</code>.
-</p>
-
-<div class="highlighted">
-<span class="S5">class</span><span class="S0"> </span>ILexerWithSubStyles<span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S5">public</span><span class="S0"> </span>ILexer<span class="S0"> </span><span class="S10">{</span><br />
-<span class="S5">public</span><span class="S10">:</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>LineEndTypesSupported<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>AllocateSubStyles<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>styleBase<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>numberStyles<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SubStylesStart<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>styleBase<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SubStylesLength<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>styleBase<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>StyleFromSubStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>subStyle<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PrimaryStyleFromStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>FreeSubStyles<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SetIdentifiers<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>identifiers<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DistanceToSecondaryStyles<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetSubStyleBases<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S10">};</span><br />
-</div>
-
-<h4>ILexerWithMetaData</h4>
-
 <p><code>NamedStyles</code>, <code>NameOfStyle</code>,
 <code>TagsOfStyle</code>, and <code>DescriptionOfStyle</code>
 are used to provide information on the set of styles used by this lexer.
@@ -7192,37 +7177,6 @@ are used to provide information on the set of styles used by this lexer.
 A set of common tags and conventions for combining them is <a  class="jump" href="StyleMetadata.html">described here</a>.
 <code>DescriptionOfStyle</code> is an English description of the style like "<code>Function or method name definition</code>".
 </p>
-
-<div class="highlighted">
-<span class="S5">class</span><span class="S0"> </span>ILexerWithMetaData<span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S5">public</span><span class="S0"> </span>ILexerWithSubStyles<span class="S0"> </span><span class="S10">{</span><br />
-<span class="S5">public</span><span class="S10">:</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>NamedStyles<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>NameOfStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>TagsOfStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DescriptionOfStyle<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S10">};</span><br />
-</div>
-
-<h4 class="provisional">ILexerWithIdentity</h4>
-
-<div class="highlighted">
-<span><span class="S5">class</span><span class="S0"> </span>ILexerWithIdentity<span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S5">public</span><span class="S0"> </span>ILexer<span class="S0"> </span><span class="S10">{</span><br />
-<span class="S5">public</span><span class="S10">:</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetName<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> &nbsp;</span>GetIdentifier<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>PropertyGet<span class="S10">(</span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>key<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S10">};</span><br />
-<span class="S0"></span></span>
-</div>
-
-<p class="provisional"><code>GetName</code> and <code>GetIdentifier</code> may be called
-to discover the identity of a lexer and be used to implement
-<a class="message" href="#SCI_GETLEXERLANGUAGE">SCI_GETLEXERLANGUAGE</a> and
-<a class="message" href="#SCI_GETLEXER">SCI_GETLEXER</a>.</p>
-
-<p class="provisional"><code>PropertyGet</code> may be called
-to discover the value of a property stored by a lexer and be used to implement
-<a class="message" href="#SCI_GETPROPERTY">SCI_GETPROPERTY</a>.</p>
 
 <h4>IDocument</h4>
 
@@ -7240,7 +7194,7 @@ to discover the value of a property stored by a lexer and be used to implement
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SetLevel<span class="S10">(</span>Sci_Position<span class="S0"> </span>line<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>level<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetLineState<span class="S10">(</span>Sci_Position<span class="S0"> </span>line<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SetLineState<span class="S10">(</span>Sci_Position<span class="S0"> </span>line<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>state<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>StartStyling<span class="S10">(</span>Sci_Position<span class="S0"> </span>position<span class="S10">,</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span>mask<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>StartStyling<span class="S10">(</span>Sci_Position<span class="S0"> </span>position<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">bool</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SetStyleFor<span class="S10">(</span>Sci_Position<span class="S0"> </span>length<span class="S10">,</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span>style<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">bool</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>SetStyles<span class="S10">(</span>Sci_Position<span class="S0"> </span>length<span class="S10">,</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>styles<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>DecorationSetCurrentIndicator<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>indicator<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
@@ -7250,6 +7204,9 @@ to discover the value of a property stored by a lexer and be used to implement
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">bool</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>IsDBCSLeadByte<span class="S10">(</span><span class="S5">char</span><span class="S0"> </span>ch<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>BufferPointer<span class="S10">()</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetLineIndentation<span class="S10">(</span>Sci_Position<span class="S0"> </span>line<span class="S10">)</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD<span class="S0"> </span>LineEnd<span class="S10">(</span>Sci_Position<span class="S0"> </span>line<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetRelativePosition<span class="S10">(</span>Sci_Position<span class="S0"> </span>positionStart<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>characterOffset<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetCharacterAndWidth<span class="S10">(</span>Sci_Position<span class="S0"> </span>position<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span><span class="S10">*</span>pWidth<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
 <span class="S10">};</span><br />
 </div>
 
@@ -7269,11 +7226,10 @@ exceptions. Exceptions should not be thrown over build boundaries as the
  two sides may be built with different compilers or incompatible
 exception options.</p>
 
-<h4>IDocumentWithLineEnd</h4>
-
 <p>
 To allow lexers to determine the end position of a line and thus more easily support Unicode line ends
-<code>IDocument</code> is extended to <code>IDocumentWithLineEnd</code>.</p>
+<code>IDocument</code> includes <code>LineEnd</code> which should be used rather than testing for specific
+line end characters.</p>
 <p><code>GetRelativePosition</code> navigates the document by whole characters,
 returning <code>INVALID_POSITION</code> for movement beyond the start and end of the document.</p>
 <p><code>GetCharacterAndWidth</code> provides a standard
@@ -7284,20 +7240,14 @@ The <code class="parameter">pWidth</code> argument can be NULL if the caller doe
 bytes in the character.
 </p>
 
-<div class="highlighted">
-<span class="S5">class</span><span class="S0"> </span>IDocumentWithLineEnd<span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S5">public</span><span class="S0"> </span>IDocument<span class="S0"> </span><span class="S10">{</span><br />
-<span class="S5">public</span><span class="S10">:</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD<span class="S0"> </span>LineEnd<span class="S10">(</span>Sci_Position<span class="S0"> </span>line<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetRelativePosition<span class="S10">(</span>Sci_Position<span class="S0"> </span>positionStart<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span>characterOffset<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">virtual</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SCI_METHOD<span class="S0"> </span>GetCharacterAndWidth<span class="S10">(</span>Sci_Position<span class="S0"> </span>position<span class="S10">,</span><span class="S0"> </span>Sci_Position<span class="S0"> </span><span class="S10">*</span>pWidth<span class="S10">)</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
-<span class="S10">};</span><br />
-</div>
-
-<p>The <code>ILexer</code>, <code>ILexerWithSubStyles</code>, <code>IDocument</code>, and
-<code>IDocumentWithLineEnd</code>  interfaces may be
-expanded in the future with extended versions (<code>ILexer2</code>...).
+<p>The <code>ILexer4</code> and <code>IDocument</code>  interfaces may be
+expanded in the future with extended versions (<code>ILexer5</code>...).
  The <code>Version</code> method indicates which interface is
 implemented and thus which methods may be called.</p>
+
+<p>Scintilla 4 changed the definition of <code>IDocument</code> by merging the previously separate
+<code>IDocumentWithLineEnd</code> interface and
+removing the mask parameter to <code>StartStyling</code>.</p>
 
     <h2 id="Notifications">Notifications</h2>
 
@@ -8518,6 +8468,8 @@ EM_FORMATRANGE
     <code>
      <a class="message" href="#SCI_SETKEYSUNICODE">SCI_SETKEYSUNICODE(bool keysUnicode)</a><br />
      <a class="message" href="#SCI_GETKEYSUNICODE">SCI_GETKEYSUNICODE &rarr; bool</a><br />
+     <a class="message" href="#SCI_SETTWOPHASEDRAW">SCI_SETTWOPHASEDRAW(bool twoPhase)</a><br />
+     <a class="message" href="#SCI_GETTWOPHASEDRAW">SCI_GETTWOPHASEDRAW &rarr; bool</a><br />
      <a class="message" href="#SCI_SETSTYLEBITS">SCI_SETSTYLEBITS(int bits)</a><br />
      <a class="message" href="#SCI_GETSTYLEBITS">SCI_GETSTYLEBITS &rarr; int</a><br />
      <a class="message" href="#SCI_GETSTYLEBITSNEEDED">SCI_GETSTYLEBITSNEEDED &rarr; int</a><br />
@@ -8526,6 +8478,15 @@ EM_FORMATRANGE
     <p><b id="SCI_SETKEYSUNICODE">SCI_SETKEYSUNICODE(bool keysUnicode)</b> Deprecated<br />
      <b id="SCI_GETKEYSUNICODE">SCI_GETKEYSUNICODE &rarr; bool</b> Deprecated<br />
      On Windows, Scintilla no longer supports narrow character windows so input is always treated as Unicode.</p>
+
+    <p><b id="SCI_SETTWOPHASEDRAW">SCI_SETTWOPHASEDRAW(bool twoPhase)</b><br />
+     <b id="SCI_GETTWOPHASEDRAW">SCI_GETTWOPHASEDRAW &rarr; bool</b><br />
+     This property has been replaced with the preceding PHASESDRAW property which is more general,
+     allowing multiple phase drawing as well as one and two phase drawing.</p>
+
+    <p>Single phase drawing <code>SC_PHASES_ONE</code>, is deprecated and should be replaced with
+    2-phase <code>SC_PHASES_TWO</code> or multi-phase <code>SC_PHASES_MULTIPLE</code> drawing.
+    </p>
 
     <p>The following are features that should be removed from calling code but are still
     defined to avoid breaking callers.</p>
@@ -8595,9 +8556,9 @@ EM_SETTARGETDEVICE
 
     <p>To build Scintilla or SciTE, see the README file present in both the Scintilla and SciTE
     directories.
-    The compiler must support C++11.
-    For Windows, GCC 4.8 or Microsoft Visual C++ 2015 can be used
-    for building. For GTK, GCC 4.8 or newer should be used. GTK 2.24+ and 3.x are
+    The compiler must support C++17.
+    For Windows, GCC 7.1 or Microsoft Visual C++ 2017.5 can be used
+    for building. For GTK, GCC 7.1 or newer should be used. GTK 2.24 and 3.x are
     supported with glib 2.22+. The version of GTK installed should be detected automatically.
     When both GTK 2 and GTK 3 are present, building for GTK 3.x requires defining GTK3
     on the command line.</p>

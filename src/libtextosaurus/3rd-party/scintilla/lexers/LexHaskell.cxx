@@ -390,8 +390,7 @@ class LexerHaskell : public DefaultLexer {
 
 public:
    LexerHaskell(bool literate_)
-      : DefaultLexer(literate_ ? "literatehaskell" : "haskell", literate_ ? SCLEX_LITERATEHASKELL : SCLEX_HASKELL)
-	  , literate(literate_)
+      : literate(literate_)
       , firstImportLine(-1)
       , firstImportIndent(0)
       {}
@@ -402,7 +401,7 @@ public:
    }
 
    int SCI_METHOD Version() const override {
-      return lvIdentity;
+      return lvRelease4;
    }
 
    const char * SCI_METHOD PropertyNames() override {
@@ -419,10 +418,6 @@ public:
 
    Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
 
-   const char * SCI_METHOD PropertyGet(const char *key) override {
-	   return osHaskell.PropertyGet(key);
-   }
-
    const char * SCI_METHOD DescribeWordListSets() override {
       return osHaskell.DescribeWordListSets();
    }
@@ -437,11 +432,11 @@ public:
       return 0;
    }
 
-   static ILexer *LexerFactoryHaskell() {
+   static ILexer4 *LexerFactoryHaskell() {
       return new LexerHaskell(false);
    }
 
-   static ILexer *LexerFactoryLiterateHaskell() {
+   static ILexer4 *LexerFactoryLiterateHaskell() {
       return new LexerHaskell(true);
    }
 };

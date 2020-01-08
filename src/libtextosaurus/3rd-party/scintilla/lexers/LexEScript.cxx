@@ -1,5 +1,5 @@
 // Scintilla source code edit control
-/** @file LexEScript.cxx
+/** @file LexESCRIPT.cxx
  ** Lexer for ESCRIPT
  **/
 // Copyright 2003 by Patrizio Bekerle (patrizio@bekerle.com)

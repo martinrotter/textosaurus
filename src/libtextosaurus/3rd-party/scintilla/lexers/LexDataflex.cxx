@@ -123,12 +123,6 @@ inline bool IsADataFlexField(int ch) {
 }
 
 
-size_t _strnlen(const char *s, size_t max) {
-  const char *end = (const char*)memchr((void *)s, 0, max);
-  return end ? (size_t)(end - s) : max;
-}
-
-
 static void ClassifyDataFlexWord(WordList *keywordlists[], StyleContext &sc, Accessor &styler) {
 	WordList& keywords = *keywordlists[0];
 	WordList& scopeOpen   = *keywordlists[1];
@@ -143,7 +137,7 @@ static void ClassifyDataFlexWord(WordList *keywordlists[], StyleContext &sc, Acc
     oldState = sc.state;
 	newState = oldState;
 	sc.GetCurrentLowered(s, sizeof(s));
-	tokenlen = _strnlen(s,sizeof(s));
+	tokenlen = strnlen(s,sizeof(s));
 	if (keywords.InList(s)) {
 		// keywords in DataFlex can be used as table column names (file.field) and as such they
 		// should not be characterized as a keyword. So test for that.
@@ -386,7 +380,7 @@ static int ClassifyDataFlexPreprocessorFoldPoint(int &levelCurrent, int &lineFol
 
 	char s[100];	// Size of the longest possible keyword + one additional character + null
 	GetForwardRangeLowered(startPos, setWord, styler, s, sizeof(s));
-	size_t iLen = _strnlen(s,sizeof(s));
+	size_t iLen = strnlen(s,sizeof(s));
 	size_t iWordSize = 0;
 
 	unsigned int nestLevel = GetFoldInPreprocessorLevelFlag(lineFoldStateCurrent);

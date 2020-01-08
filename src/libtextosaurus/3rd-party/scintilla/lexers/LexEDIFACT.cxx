@@ -1,5 +1,4 @@
 // Scintilla Lexer for EDIFACT
-// @file LexEDIFACT.cxx
 // Written by Iain Clarke, IMCSoft & Inobiz AB.
 // EDIFACT documented here: https://www.unece.org/cefact/edifact/welcome.html
 // and more readably here: https://en.wikipedia.org/wiki/EDIFACT
@@ -12,8 +11,6 @@
 #include <cassert>
 #include <cstring>
 #include <cctype>
-
-#include <string>
 
 #include "ILexer.h"
 #include "Scintilla.h"
@@ -31,13 +28,13 @@ public:
 	LexerEDIFACT();
 	virtual ~LexerEDIFACT() {} // virtual destructor, as we inherit from ILexer
 
-	static ILexer *Factory() {
+	static ILexer4 *Factory() {
 		return new LexerEDIFACT;
 	}
 
 	int SCI_METHOD Version() const override
 	{
-		return lvIdentity;
+		return lvRelease4;
 	}
 	void SCI_METHOD Release() override
 	{
@@ -75,21 +72,6 @@ public:
 		}
 		return -1;
 	}
-
-	const char * SCI_METHOD PropertyGet(const char *key) override
-	{
-		m_lastPropertyValue = "";
-		if (!strcmp(key, "fold"))
-		{
-			m_lastPropertyValue = m_bFold ? "1" : "0";
-		}
-		if (!strcmp(key, "lexer.edifact.highlight.un.all"))	// GetProperty
-		{
-			m_lastPropertyValue = m_bHighlightAllUN ? "1" : "0";
-		}
-		return m_lastPropertyValue.c_str();
-	}
-
 	const char * SCI_METHOD DescribeWordListSets() override
 	{
 		return NULL;
@@ -122,8 +104,6 @@ protected:
 	char m_chDecimal;
 	char m_chRelease;
 	char m_chSegment;
-
-	std::string m_lastPropertyValue;
 };
 
 LexerModule lmEDIFACT(SCLEX_EDIFACT, LexerEDIFACT::Factory, "edifact");
@@ -134,7 +114,7 @@ LexerModule lmEDIFACT(SCLEX_EDIFACT, LexerEDIFACT::Factory, "edifact");
 
 ///////////////////////////////////////////////////////////////////////////////
 
-LexerEDIFACT::LexerEDIFACT() : DefaultLexer("edifact", SCLEX_EDIFACT)
+LexerEDIFACT::LexerEDIFACT()
 {
 	m_bFold = false;
 	m_bHighlightAllUN = false;
@@ -158,7 +138,7 @@ void LexerEDIFACT::Lex(Sci_PositionU startPos, Sci_Position length, int, IDocume
 
 	// Style buffer, so we're not issuing loads of notifications
 	LexAccessor styler (pAccess);
-	pAccess->StartStyling(posCurrent, '\377');
+	pAccess->StartStyling(posCurrent);
 	styler.StartSegment(posCurrent);
 	Sci_Position posSegmentStart = -1;
 
@@ -221,7 +201,7 @@ void LexerEDIFACT::Lex(Sci_PositionU startPos, Sci_Position length, int, IDocume
 	if (posSegmentStart == -1)
 		return;
 
-	pAccess->StartStyling(posSegmentStart, -1);
+	pAccess->StartStyling(posSegmentStart);
 	pAccess->SetStyleFor(posFinish - posSegmentStart, SCE_EDI_BADSEGMENT);
 }
 

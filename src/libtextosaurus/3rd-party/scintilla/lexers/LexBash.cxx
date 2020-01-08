@@ -201,7 +201,7 @@ class LexerBash : public DefaultLexer {
 	SubStyles subStyles;
 public:
 	LexerBash() :
-		DefaultLexer("bash", SCLEX_BASH, lexicalClasses, ELEMENTS(lexicalClasses)),
+		DefaultLexer(lexicalClasses, ELEMENTS(lexicalClasses)),
 		subStyles(styleSubable, 0x80, 0x40, 0) {
 	}
 	virtual ~LexerBash() {
@@ -210,7 +210,7 @@ public:
 		delete this;
 	}
 	int SCI_METHOD Version() const override {
-		return lvIdentity;
+		return lvRelease4;
 	}
 	const char * SCI_METHOD PropertyNames() override {
 		return osBash.PropertyNames();
@@ -222,9 +222,6 @@ public:
 		return osBash.DescribeProperty(name);
 	}
 	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
-	const char * SCI_METHOD PropertyGet(const char* key) override {
-		return osBash.PropertyGet(key);
-	}
 	const char * SCI_METHOD DescribeWordListSets() override {
 		return osBash.DescribeWordListSets();
 	}
@@ -265,7 +262,7 @@ public:
 		return styleSubable;
 	}
 
-	static ILexer *LexerFactoryBash() {
+	static ILexer4 *LexerFactoryBash() {
 		return new LexerBash();
 	}
 };

@@ -398,8 +398,6 @@ public:
 	void setVScrollBar(bool visible);
 	bool vScrollBar() const;
 	void appendText(sptr_t length, const char * text);
-	bool twoPhaseDraw() const;
-	void setTwoPhaseDraw(bool twoPhase);
 	sptr_t phasesDraw() const;
 	void setPhasesDraw(sptr_t phases);
 	void setFontQuality(sptr_t fontQuality);
@@ -772,6 +770,8 @@ public:
 	QByteArray nameOfStyle(sptr_t style);
 	QByteArray tagsOfStyle(sptr_t style);
 	QByteArray descriptionOfStyle(sptr_t style);
+	sptr_t bidirectional() const;
+	void setBidirectional(sptr_t bidirectional);
 	sptr_t lineCharacterIndex() const;
 	void allocateLineCharacterIndex(sptr_t lineCharacterIndex);
 	void releaseLineCharacterIndex(sptr_t lineCharacterIndex);

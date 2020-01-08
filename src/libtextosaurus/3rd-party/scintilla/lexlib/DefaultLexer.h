@@ -13,14 +13,11 @@
 namespace Scintilla {
 
 // A simple lexer with no state
-class DefaultLexer : public ILexerWithIdentity {
-	const char *languageName;
-	int language;
+class DefaultLexer : public ILexer4 {
 	const LexicalClass *lexClasses;
 	size_t nClasses;
 public:
-	DefaultLexer(const char *languageName_, int language_,
-		const LexicalClass *lexClasses_ = nullptr, size_t nClasses_ = 0);
+	DefaultLexer(const LexicalClass *lexClasses_ = nullptr, size_t nClasses_ = 0);
 	virtual ~DefaultLexer();
 	void SCI_METHOD Release() override;
 	int SCI_METHOD Version() const override;
@@ -47,9 +44,6 @@ public:
 	const char * SCI_METHOD NameOfStyle(int style) override;
 	const char * SCI_METHOD TagsOfStyle(int style) override;
 	const char * SCI_METHOD DescriptionOfStyle(int style) override;
-	// ILexerWithIdentity methods
-	const char * SCI_METHOD GetName() override;
-	int SCI_METHOD GetIdentifier() override;
 };
 
 }

@@ -23,7 +23,6 @@
 
 #define INDIC_INPUTMETHOD 24
 
-#define MAXLENINPUTIME 200
 #define SC_INDICATOR_INPUT INDICATOR_IME
 #define SC_INDICATOR_TARGET INDICATOR_IME+1
 #define SC_INDICATOR_CONVERTED INDICATOR_IME+2
@@ -259,7 +258,7 @@ void ScintillaEditBase::keyPressEvent(QKeyEvent *event)
 		QString text = event->text();
 		if (input && !text.isEmpty() && text[0].isPrint()) {
 			QByteArray utext = sqt->BytesForDocument(text);
-			sqt->InsertCharacter(utext.data(), utext.size(), EditModel::CharacterSource::directInput);
+			sqt->InsertCharacter(std::string_view(utext.data(), utext.size()), EditModel::CharacterSource::directInput);
 		} else {
 			event->ignore();
 		}
@@ -549,14 +548,14 @@ void ScintillaEditBase::inputMethodEvent(QInputMethodEvent *event)
 			const QString oneCharUTF16 = commitStr.mid(i, ucWidth);
 			const QByteArray oneChar = sqt->BytesForDocument(oneCharUTF16);
 
-			sqt->InsertCharacter(oneChar.data(), oneChar.length(), EditModel::CharacterSource::directInput);
+			sqt->InsertCharacter(std::string_view(oneChar.data(), oneChar.length()), EditModel::CharacterSource::directInput);
 			i += ucWidth;
 		}
 
 	} else if (!event->preeditString().isEmpty()) {
 		const QString preeditStr = event->preeditString();
 		const unsigned int preeditStrLen = preeditStr.length();
-		if ((preeditStrLen == 0) || (preeditStrLen > MAXLENINPUTIME)) {
+		if (preeditStrLen == 0) {
 			sqt->ShowCaretAtCurrentPosition();
 			return;
 		}
@@ -573,7 +572,7 @@ void ScintillaEditBase::inputMethodEvent(QInputMethodEvent *event)
 			const QByteArray oneChar = sqt->BytesForDocument(oneCharUTF16);
 			const int oneCharLen = oneChar.length();
 
-			sqt->InsertCharacter(oneChar.data(), oneCharLen, EditModel::CharacterSource::tentativeInput);
+			sqt->InsertCharacter(std::string_view(oneChar.data(), oneCharLen), EditModel::CharacterSource::tentativeInput);
 
 			DrawImeIndicator(imeIndicator[i], oneCharLen);
 			i += ucWidth;

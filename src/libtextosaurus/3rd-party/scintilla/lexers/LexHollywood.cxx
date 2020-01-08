@@ -252,42 +252,38 @@ class LexerHollywood : public DefaultLexer {
 	OptionSetHollywood osHollywood;
 public:
 	LexerHollywood(int (*CheckFoldPoint_)(char const *), const char * const wordListDescriptions[]) :
-						 DefaultLexer("hollywood", SCLEX_HOLLYWOOD),
 						 CheckFoldPoint(CheckFoldPoint_),
 						 osHollywood(wordListDescriptions) {
 	}
 	virtual ~LexerHollywood() {
 	}
-	void SCI_METHOD Release() override {
+	void SCI_METHOD Release() {
 		delete this;
 	}
-	int SCI_METHOD Version() const override {
-		return lvIdentity;
+	int SCI_METHOD Version() const {
+		return lvRelease4;
 	}
-	const char * SCI_METHOD PropertyNames() override {
+	const char * SCI_METHOD PropertyNames() {
 		return osHollywood.PropertyNames();
 	}
-	int SCI_METHOD PropertyType(const char *name) override {
+	int SCI_METHOD PropertyType(const char *name) {
 		return osHollywood.PropertyType(name);
 	}
-	const char * SCI_METHOD DescribeProperty(const char *name) override {
+	const char * SCI_METHOD DescribeProperty(const char *name) {
 		return osHollywood.DescribeProperty(name);
 	}
-	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
-	const char * SCI_METHOD PropertyGet(const char* key) override {
-		return osHollywood.PropertyGet(key);
-	}
-	const char * SCI_METHOD DescribeWordListSets() override {
+	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val);
+	const char * SCI_METHOD DescribeWordListSets() {
 		return osHollywood.DescribeWordListSets();
 	}
-	Sci_Position SCI_METHOD WordListSet(int n, const char *wl) override;
-	void SCI_METHOD Lex(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess) override;
-	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess) override;
+	Sci_Position SCI_METHOD WordListSet(int n, const char *wl);
+	void SCI_METHOD Lex(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
+	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
-	void * SCI_METHOD PrivateCall(int, void *) override {
+	void * SCI_METHOD PrivateCall(int, void *) {
 		return 0;
 	}
-	static ILexer *LexerFactoryHollywood() {
+	static ILexer4 *LexerFactoryHollywood() {
 		return new LexerHollywood(CheckHollywoodFoldPoint, hollywoodWordListDesc);
 	}
 };
@@ -332,16 +328,16 @@ void SCI_METHOD LexerHollywood::Lex(Sci_PositionU startPos, Sci_Position length,
 
 	styler.StartAt(startPos);
 	bool inString = false;
-
+	
 	StyleContext sc(startPos, length, initStyle, styler);
 
 	// Can't use sc.More() here else we miss the last character
 	for (; ; sc.Forward())
 	 {
 	 	if (sc.atLineStart) inString = false;
-
+	 		
 	 	if (sc.ch == '\"' && sc.chPrev != '\\') inString = !inString;
-
+	 		
 		if (sc.state == SCE_HOLLYWOOD_IDENTIFIER) {
 			if (!IsIdentifier(sc.ch)) {				
 				char s[100];
@@ -360,14 +356,14 @@ void SCI_METHOD LexerHollywood::Lex(Sci_PositionU startPos, Sci_Position length,
 				sc.SetState(SCE_HOLLYWOOD_DEFAULT);				
 			}
 		} else if (sc.state == SCE_HOLLYWOOD_OPERATOR) {
-
+			
 			// always reset to default on operators because otherwise
 			// comments won't be recognized in sequences like "+/* Hello*/"
 			// --> "+/*" would be recognized as a sequence of operators
-
+			
 			// if (!IsOperator(sc.ch)) sc.SetState(SCE_HOLLYWOOD_DEFAULT);
 			sc.SetState(SCE_HOLLYWOOD_DEFAULT);
-
+			
 		} else if (sc.state == SCE_HOLLYWOOD_PREPROCESSOR) {
 			if (!IsIdentifier(sc.ch))
 				sc.SetState(SCE_HOLLYWOOD_DEFAULT);
@@ -447,7 +443,7 @@ void SCI_METHOD LexerHollywood::Fold(Sci_PositionU startPos, Sci_Position length
 		return;
 
 	LexAccessor styler(pAccess);
-
+	
 	Sci_PositionU lengthDoc = startPos + length;
 	int visibleChars = 0;
 	Sci_Position lineCurrent = styler.GetLine(startPos);
@@ -458,7 +454,7 @@ void SCI_METHOD LexerHollywood::Fold(Sci_PositionU startPos, Sci_Position length
 	int done = 0;
 	char word[256];
 	int wordlen = 0;
-
+		
 	for (Sci_PositionU i = startPos; i < lengthDoc; i++) {
 		char ch = chNext;
 		chNext = styler.SafeGetCharAt(i + 1);

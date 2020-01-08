@@ -3,6 +3,7 @@
 // Copyright (c) 2011 Archaeopteryx Software, Inc. d/b/a Wingware
 
 #include <stdexcept>
+#include <string_view>
 #include <vector>
 #include <map>
 #include <memory>
@@ -216,8 +217,8 @@ int ScintillaDocument::lines_total() {
     return (static_cast<Document *>(pdoc))->LinesTotal();
 }
 
-void ScintillaDocument::start_styling(int position, char flags) {
-    (static_cast<Document *>(pdoc))->StartStyling(position, flags);
+void ScintillaDocument::start_styling(int position) {
+    (static_cast<Document *>(pdoc))->StartStyling(position);
 }
 
 bool ScintillaDocument::set_style_for(int length, char style) {

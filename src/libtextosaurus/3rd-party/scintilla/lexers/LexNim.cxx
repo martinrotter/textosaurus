@@ -225,7 +225,7 @@ class LexerNim : public DefaultLexer {
 
 public:
     LexerNim() :
-        DefaultLexer("nim", SCLEX_NIM, lexicalClasses, ELEMENTS(lexicalClasses)),
+        DefaultLexer(lexicalClasses, ELEMENTS(lexicalClasses)),
         setWord(CharacterSet::setAlphaNum, "_", 0x80, true) { }
 
     virtual ~LexerNim() { }
@@ -235,7 +235,7 @@ public:
     }
 
     int SCI_METHOD Version() const noexcept override {
-        return lvIdentity;
+        return lvRelease4;
     }
 
     const char * SCI_METHOD PropertyNames() override {
@@ -251,10 +251,6 @@ public:
     }
 
     Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
-
-	const char * SCI_METHOD PropertyGet(const char* key) override {
-		return osNim.PropertyGet(key);
-	}
 
     const char * SCI_METHOD DescribeWordListSets() override {
         return osNim.DescribeWordListSets();
@@ -277,7 +273,7 @@ public:
         return style;
     }
 
-    static ILexer *LexerFactoryNim() {
+    static ILexer4 *LexerFactoryNim() {
         return new LexerNim();
     }
 };
@@ -631,7 +627,7 @@ void SCI_METHOD LexerNim::Lex(Sci_PositionU startPos, Sci_Position length,
                 }
 
                 const int rawStrStyle = options.highlightRawStrIdent ? IsLetter(sc.ch) :
-                                  (sc.ch == 'r' || sc.ch == 'R');
+                                        (sc.ch == 'r' || sc.ch == 'R');
 
                 if (rawStrStyle) {
                     sc.Forward();

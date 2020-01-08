@@ -195,16 +195,10 @@ class ScintillaData:
         # Discover verion information
         with open(scintillaRoot + "version.txt") as f:
             self.version = f.read().strip()
-        if len(self.version) == 3:
-            self.versionDotted = self.version[0] + '.' + self.version[1] + '.' + \
-                self.version[2]
-            self.versionCommad = self.version[0] + ', ' + self.version[1] + ', ' + \
-                self.version[2] + ', 0'
-        else:
-            self.versionDotted = self.version[0] + '.' + self.version[1:3] + '.' + \
-                self.version[3]
-            self.versionCommad = self.version[0] + ', ' + self.version[1:3] + ', ' + \
-                self.version[3] + ', 0'
+        self.versionDotted = self.version[0] + '.' + self.version[1] + '.' + \
+            self.version[2]
+        self.versionCommad = self.version[0] + ', ' + self.version[1] + ', ' + \
+            self.version[2] + ', 0'
 
         with open(scintillaRoot + "doc/index.html") as f:
             self.dateModified = [l for l in f.readlines() if "Date.Modified" in l]\

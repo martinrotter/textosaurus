@@ -151,7 +151,7 @@ class LexerAsm : public DefaultLexer {
 	OptionSetAsm osAsm;
 	int commentChar;
 public:
-	LexerAsm(const char *languageName_, int language_, int commentChar_) : DefaultLexer(languageName_, language_) {
+	LexerAsm(int commentChar_) {
 		commentChar = commentChar_;
 	}
 	virtual ~LexerAsm() {
@@ -160,7 +160,7 @@ public:
 		delete this;
 	}
 	int SCI_METHOD Version() const override {
-		return lvIdentity;
+		return lvRelease4;
 	}
 	const char * SCI_METHOD PropertyNames() override {
 		return osAsm.PropertyNames();
@@ -172,9 +172,6 @@ public:
 		return osAsm.DescribeProperty(name);
 	}
 	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
-	const char * SCI_METHOD PropertyGet(const char *key) override {
-		return osAsm.PropertyGet(key);
-	}
 	const char * SCI_METHOD DescribeWordListSets() override {
 		return osAsm.DescribeWordListSets();
 	}
@@ -186,12 +183,12 @@ public:
 		return 0;
 	}
 
-	static ILexer *LexerFactoryAsm() {
-		return new LexerAsm("asm", SCLEX_ASM, ';');
+	static ILexer4 *LexerFactoryAsm() {
+		return new LexerAsm(';');
 	}
 
-	static ILexer *LexerFactoryAs() {
-		return new LexerAsm("as", SCLEX_AS, '#');
+	static ILexer4 *LexerFactoryAs() {
+		return new LexerAsm('#');
 	}
 };
 

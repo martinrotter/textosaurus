@@ -10,17 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ScintillaEdit
 TEMPLATE = lib
 CONFIG += lib_bundle
+CONFIG += c++1z
 
-unix {
-    # <regex> requires C++11 support
-    greaterThan(QT_MAJOR_VERSION, 4){
-        CONFIG += c++11
-    } else {
-        QMAKE_CXXFLAGS += -std=c++0x
-    }
-}
-
-VERSION = 3.11.2
+VERSION = 4.2.3
 
 SOURCES += \
     ScintillaEdit.cpp \

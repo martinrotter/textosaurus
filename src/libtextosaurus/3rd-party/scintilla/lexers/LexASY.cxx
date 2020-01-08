@@ -1,5 +1,4 @@
 // Scintilla source code edit control
-// @file LexASY.cxx
 //Author: instanton (email: soft_share<at>126<dot>com)
 // The License.txt file describes the conditions under which this software may be distributed.
 

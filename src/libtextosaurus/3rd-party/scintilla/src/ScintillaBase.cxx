@@ -12,6 +12,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -61,10 +62,6 @@
 #include "AutoComplete.h"
 #include "ScintillaBase.h"
 
-#ifdef SCI_LEXER
-#include "ExternalLexer.h"
-#endif
-
 using namespace Scintilla;
 
 ScintillaBase::ScintillaBase() {
@@ -72,9 +69,6 @@ ScintillaBase::ScintillaBase() {
 	listType = 0;
 	maxListWidth = 0;
 	multiAutoCMode = SC_MULTIAUTOC_ONCE;
-#ifdef SCI_LEXER
-	Scintilla_LinkLexers();
-#endif
 }
 
 ScintillaBase::~ScintillaBase() {
@@ -86,20 +80,20 @@ void ScintillaBase::Finalise() {
 }
 
 void ScintillaBase::AddCharUTF(const char *s, unsigned int len, bool /*treatAsDBCS*/) {
-	InsertCharacter(s, len, CharacterSource::directInput);
+	InsertCharacter(std::string_view(s, len), CharacterSource::directInput);
 }
 
-void ScintillaBase::InsertCharacter(const char *s, unsigned int len, CharacterSource charSource) {
-	const bool isFillUp = ac.Active() && ac.IsFillUpChar(s[0]);
+void ScintillaBase::InsertCharacter(std::string_view sv, CharacterSource charSource) {
+	const bool isFillUp = ac.Active() && ac.IsFillUpChar(sv[0]);
 	if (!isFillUp) {
-		Editor::InsertCharacter(s, len, charSource);
+		Editor::InsertCharacter(sv, charSource);
 	}
 	if (ac.Active()) {
-		AutoCompleteCharacterAdded(s[0]);
+		AutoCompleteCharacterAdded(sv[0]);
 		// For fill ups add the character after the autocompletion has
 		// triggered so containers see the key so can display a calltip.
 		if (isFillUp) {
-			Editor::InsertCharacter(s, len, charSource);
+			Editor::InsertCharacter(sv, charSource);
 		}
 	}
 }
@@ -602,7 +596,7 @@ public:
 LexState::LexState(Document *pdoc_) : LexInterface(pdoc_) {
 	lexCurrent = nullptr;
 	performingStyle = false;
-	interfaceVersion = lvOriginal;
+	interfaceVersion = lvRelease4;
 	lexLanguage = SCLEX_CONTAINER;
 }
 
@@ -626,7 +620,7 @@ void LexState::SetLexerModule(const LexerModule *lex) {
 			instance->Release();
 			instance = nullptr;
 		}
-		interfaceVersion = lvOriginal;
+		interfaceVersion = lvRelease4;
 		lexCurrent = lex;
 		if (lexCurrent) {
 			instance = lexCurrent->Create();
@@ -675,15 +669,7 @@ void LexState::SetWordList(int n, const char *wl) {
 }
 
 const char *LexState::GetName() const {
-	if (lexCurrent) {
-		return lexCurrent->languageName;
-	}
-	if (instance) {
-		if (instance->Version() >= lvIdentity) {
-			return static_cast<ILexerWithIdentity *>(instance)->GetName();
-		}
-	}
-	return "";
+	return lexCurrent ? lexCurrent->languageName : "";
 }
 
 void *LexState::PrivateCall(int operation, void *pointer) {
@@ -741,101 +727,101 @@ int LexState::PropGetExpanded(const char *key, char *result) const {
 }
 
 int LexState::LineEndTypesSupported() {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->LineEndTypesSupported();
+	if (instance) {
+		return instance->LineEndTypesSupported();
 	}
 	return 0;
 }
 
 int LexState::AllocateSubStyles(int styleBase, int numberStyles) {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->AllocateSubStyles(styleBase, numberStyles);
+	if (instance) {
+		return instance->AllocateSubStyles(styleBase, numberStyles);
 	}
 	return -1;
 }
 
 int LexState::SubStylesStart(int styleBase) {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->SubStylesStart(styleBase);
+	if (instance) {
+		return instance->SubStylesStart(styleBase);
 	}
 	return -1;
 }
 
 int LexState::SubStylesLength(int styleBase) {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->SubStylesLength(styleBase);
+	if (instance) {
+		return instance->SubStylesLength(styleBase);
 	}
 	return 0;
 }
 
 int LexState::StyleFromSubStyle(int subStyle) {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->StyleFromSubStyle(subStyle);
+	if (instance) {
+		return instance->StyleFromSubStyle(subStyle);
 	}
 	return 0;
 }
 
 int LexState::PrimaryStyleFromStyle(int style) {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->PrimaryStyleFromStyle(style);
+	if (instance) {
+		return instance->PrimaryStyleFromStyle(style);
 	}
 	return 0;
 }
 
 void LexState::FreeSubStyles() {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		static_cast<ILexerWithSubStyles *>(instance)->FreeSubStyles();
+	if (instance) {
+		instance->FreeSubStyles();
 	}
 }
 
 void LexState::SetIdentifiers(int style, const char *identifiers) {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		static_cast<ILexerWithSubStyles *>(instance)->SetIdentifiers(style, identifiers);
+	if (instance) {
+		instance->SetIdentifiers(style, identifiers);
 		pdoc->ModifiedAt(0);
 	}
 }
 
 int LexState::DistanceToSecondaryStyles() {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->DistanceToSecondaryStyles();
+	if (instance) {
+		return instance->DistanceToSecondaryStyles();
 	}
 	return 0;
 }
 
 const char *LexState::GetSubStyleBases() {
-	if (instance && (interfaceVersion >= lvSubStyles)) {
-		return static_cast<ILexerWithSubStyles *>(instance)->GetSubStyleBases();
+	if (instance) {
+		return instance->GetSubStyleBases();
 	}
 	return "";
 }
 
 int LexState::NamedStyles() {
-	if (instance && (interfaceVersion >= lvMetaData)) {
-		return static_cast<ILexerWithMetaData *>(instance)->NamedStyles();
+	if (instance) {
+		return instance->NamedStyles();
 	} else {
 		return -1;
 	}
 }
 
 const char *LexState::NameOfStyle(int style) {
-	if (instance && (interfaceVersion >= lvMetaData)) {
-		return static_cast<ILexerWithMetaData *>(instance)->NameOfStyle(style);
+	if (instance) {
+		return instance->NameOfStyle(style);
 	} else {
 		return nullptr;
 	}
 }
 
 const char *LexState::TagsOfStyle(int style) {
-	if (instance && (interfaceVersion >= lvMetaData)) {
-		return static_cast<ILexerWithMetaData *>(instance)->TagsOfStyle(style);
+	if (instance) {
+		return instance->TagsOfStyle(style);
 	} else {
 		return nullptr;
 	}
 }
 
 const char *LexState::DescriptionOfStyle(int style) {
-	if (instance && (interfaceVersion >= lvMetaData)) {
-		return static_cast<ILexerWithMetaData *>(instance)->DescriptionOfStyle(style);
+	if (instance) {
+		return instance->DescriptionOfStyle(style);
 	} else {
 		return nullptr;
 	}
@@ -1101,10 +1087,6 @@ sptr_t ScintillaBase::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lPara
 
 	case SCI_GETLEXERLANGUAGE:
 		return StringResult(lParam, DocumentLexState()->GetName());
-
-	case SCI_LOADLEXERLIBRARY:
-		ExternalLexerLoad(ConstCharPtrFromSPtr(lParam));
-		break;
 
 	case SCI_PRIVATELEXERCALL:
 		return reinterpret_cast<sptr_t>(

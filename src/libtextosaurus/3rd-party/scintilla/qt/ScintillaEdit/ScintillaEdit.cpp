@@ -1439,14 +1439,6 @@ void ScintillaEdit::appendText(sptr_t length, const char * text) {
     send(SCI_APPENDTEXT, length, (sptr_t)text);
 }
 
-bool ScintillaEdit::twoPhaseDraw() const {
-    return send(SCI_GETTWOPHASEDRAW, 0, 0);
-}
-
-void ScintillaEdit::setTwoPhaseDraw(bool twoPhase) {
-    send(SCI_SETTWOPHASEDRAW, twoPhase, 0);
-}
-
 sptr_t ScintillaEdit::phasesDraw() const {
     return send(SCI_GETPHASESDRAW, 0, 0);
 }
@@ -2933,6 +2925,14 @@ QByteArray ScintillaEdit::tagsOfStyle(sptr_t style) {
 
 QByteArray ScintillaEdit::descriptionOfStyle(sptr_t style) {
     return TextReturner(SCI_DESCRIPTIONOFSTYLE, style);
+}
+
+sptr_t ScintillaEdit::bidirectional() const {
+    return send(SCI_GETBIDIRECTIONAL, 0, 0);
+}
+
+void ScintillaEdit::setBidirectional(sptr_t bidirectional) {
+    send(SCI_SETBIDIRECTIONAL, bidirectional, 0);
 }
 
 sptr_t ScintillaEdit::lineCharacterIndex() const {

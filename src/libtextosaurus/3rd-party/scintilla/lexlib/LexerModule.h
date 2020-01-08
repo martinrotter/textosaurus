@@ -16,7 +16,7 @@ struct LexicalClass;
 
 typedef void (*LexerFunction)(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyle,
                   WordList *keywordlists[], Accessor &styler);
-typedef ILexer *(*LexerFactoryFunction)();
+typedef ILexer4 *(*LexerFactoryFunction)();
 
 /**
  * A LexerModule is responsible for lexing and folding a particular language.
@@ -58,14 +58,14 @@ public:
 	const LexicalClass *LexClasses() const;
 	size_t NamedStyles() const;
 
-	ILexer *Create() const;
+	ILexer4 *Create() const;
 
 	virtual void Lex(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyle,
                   WordList *keywordlists[], Accessor &styler) const;
 	virtual void Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyle,
                   WordList *keywordlists[], Accessor &styler) const;
 
-	friend class CatalogueModules;
+	friend class Catalogue;
 };
 
 inline int Maximum(int a, int b) {
@@ -80,12 +80,6 @@ inline int Maximum(int a, int b) {
 // Turn off shadow warnings for lexers as may be maintained by others
 #if defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Wshadow"
-#endif
-
-// Clang doesn't like omitting braces in array initialization but they just add
-// noise to LexicalClass arrays in lexers
-#if defined(__clang__)
-#pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
 
 }

@@ -393,14 +393,14 @@ class LexerBaan : public DefaultLexer {
 	OptionsBaan options;
 	OptionSetBaan osBaan;
 public:
-	LexerBaan() : DefaultLexer("baan", SCLEX_BAAN) {
+	LexerBaan() {
 	}
 
 	virtual ~LexerBaan() {
 	}
 
 	int SCI_METHOD Version() const override {
-		return lvIdentity;
+		return lvRelease4;
 	}
 
 	void SCI_METHOD Release() override {
@@ -421,10 +421,6 @@ public:
 
 	Sci_Position SCI_METHOD PropertySet(const char *key, const char *val) override;
 
-	const char * SCI_METHOD PropertyGet(const char *key) override {
-		return osBaan.PropertyGet(key);
-	}
-
 	const char * SCI_METHOD DescribeWordListSets() override {
 		return osBaan.DescribeWordListSets();
 	}
@@ -439,7 +435,7 @@ public:
 		return NULL;
 	}
 
-	static ILexer * LexerFactoryBaan() {
+	static ILexer4 * LexerFactoryBaan() {
 		return new LexerBaan();
 	}
 };

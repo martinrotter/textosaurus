@@ -1,5 +1,5 @@
 /* Scintilla source code edit control */
-/* ScintillaGTKAccessible.cxx - GTK+ accessibility for ScintillaGTK */
+/* ScintillaGTKAccessible.c - GTK+ accessibility for ScintillaGTK */
 /* Copyright 2016 by Colomban Wendling <colomban@geany.org>
  * The License.txt file describes the conditions under which this software may be distributed. */
 
@@ -58,6 +58,7 @@
 #include <stdexcept>
 #include <new>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -91,8 +92,14 @@
 #include "ILexer.h"
 #include "Scintilla.h"
 #include "ScintillaWidget.h"
+#ifdef SCI_LEXER
+#include "SciLexer.h"
+#endif
 #include "StringCopy.h"
 #include "CharacterCategory.h"
+#ifdef SCI_LEXER
+#include "LexerModule.h"
+#endif
 #include "Position.h"
 #include "UniqueString.h"
 #include "SplitVector.h"
