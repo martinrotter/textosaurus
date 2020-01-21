@@ -1,122 +1,164 @@
-# Make file for Scintilla on Linux or compatible OS
+# Make file for Scintilla on Linux, macOS, or Windows
+# @file makefile
 # Copyright 1998-2010 by Neil Hodgson <neilh@scintilla.org>
 # The License.txt file describes the conditions under which this software may be distributed.
-# This makefile assumes GCC 4.3 is used and changes will be needed to use other compilers.
-# GNU make does not like \r\n line endings so should be saved to CVS in binary form.
-# Builds for GTK+ 2 and no longer supports GTK+ 1.
+# This makefile assumes GCC 9.0+ is used and changes will be needed to use other compilers.
+# Clang 9.0+ can be used with CLANG=1 on command line.
+# Builds for GTK+ 2 and 3. GTK 3 requires GTK3=1 on command line.
 # Also works with ming32-make on Windows.
+
+.PHONY: all clean analyze depend
 
 .SUFFIXES: .cxx .c .o .h .a .list
 
 srcdir ?= .
+basedir = $(srcdir)/..
 
+WARNINGS = -Wpedantic -Wall
 ifdef CLANG
 CXX = clang++
-CXXWARNFLAGS = -Wall -pedantic -Wno-deprecated-register -Wno-missing-braces
 CC = clang
+WARNINGS += -Wno-deprecated-register
+ifdef windir
+# Turn off some warnings that occur when Clang is being used on Windows where it
+# is including Microsoft headers.
+# incompatible-ms-struct is because more complex structs are not quite the same as MSVC
+WARNINGS += -Wno-incompatible-ms-struct
+# language-extension-token is because of __int64 in glib-2.0 glibconfig.h
+WARNINGS += -Wno-language-extension-token
+# register may be used in glib
+# This produces a warning since -Wno-register is not valid for C files but it still works
+WARNINGS += -Wno-register
+DEFINES += -D_CRT_SECURE_NO_DEPRECATE
+endif
 # Can choose aspect to sanitize: address and undefined can simply change SANITIZE but for
 # thread also need to create Position Independent Executable -> search online documentation
 SANITIZE = address
 #SANITIZE = undefined
-else
-CXXWARNFLAGS = -Wall -pedantic
+BASE_FLAGS += -fsanitize=$(SANITIZE)
 endif
 ARFLAGS = rc
-RANLIB = touch
+RANLIB ?= ranlib
 
-ifdef GTK3
-GTKVERSION=gtk+-3.0
-else
-GTKVERSION=gtk+-2.0
-endif
+GTK_VERSION = $(if $(GTK3),gtk+-3.0,gtk+-2.0)
 
 # Environment variable windir always defined on Win32
 
-ifndef windir
-ifeq ($(shell uname),Darwin)
-RANLIB = ranlib
-endif
-endif
-
 # Enable Position Independent Code except on Windows where it is the default so the flag produces a warning
 ifndef windir
-PICFLAGS = -fPIC
+BASE_FLAGS += -fPIC
 endif
+
+# Take care of changing Unix style '/' directory separator to '\' on Windows
+normalize = $(if $(windir),$(subst /,\,$1),$1)
 
 ifdef windir
 CC = gcc
 DEL = del /q
-COMPLIB=$(srcdir)\..\bin\scintilla.a
 else
 DEL = rm -f
-COMPLIB=$(srcdir)/../bin/scintilla.a
 endif
+COMPLIB=$(basedir)/bin/scintilla.a
 
-vpath %.h $(srcdir) $(srcdir)/../src $(srcdir)/../include $(srcdir)/../lexlib
+vpath %.h $(srcdir) $(basedir)/src $(basedir)/include $(basedir)/lexlib
 vpath %.c $(srcdir)
-vpath %.cxx $(srcdir) $(srcdir)/../src $(srcdir)/../lexlib $(srcdir)/../lexers
+vpath %.cxx $(srcdir) $(basedir)/src $(basedir)/lexlib $(basedir)/lexers
 
-INCLUDEDIRS=-I $(srcdir)/../include -I $(srcdir)/../src -I $(srcdir)/../lexlib
-CXXBASEFLAGS=$(CXXWARNFLAGS) $(PICFLAGS) -DGTK -DSCI_LEXER $(INCLUDEDIRS)
-
-ifdef NOTHREADS
-THREADFLAGS=-DG_THREADS_IMPL_NONE
-else
-THREADFLAGS=
-endif
+INCLUDES=-I $(basedir)/include -I $(basedir)/src -I $(basedir)/lexlib
+DEFINES += -DGTK -DSCI_LEXER
+BASE_FLAGS += $(WARNINGS)
 
 ifdef NO_CXX11_REGEX
-REFLAGS=-DNO_CXX11_REGEX
+DEFINES += -DNO_CXX11_REGEX
 endif
 
-ifdef DEBUG
-ifdef CLANG
-CTFLAGS=-DDEBUG -g -fsanitize=$(SANITIZE) $(CXXBASEFLAGS) $(THREADFLAGS)
-else
-CTFLAGS=-DDEBUG -g $(CXXBASEFLAGS) $(THREADFLAGS)
-endif
-else
-CTFLAGS=-DNDEBUG -Os $(CXXBASEFLAGS) $(THREADFLAGS)
-endif
+DEFINES += -D$(if $(DEBUG),DEBUG,NDEBUG)
+BASE_FLAGS += $(if $(DEBUG),-g,-Os)
 
-CXXTFLAGS:=--std=gnu++17 $(CTFLAGS) $(REFLAGS)
+CXX_BASE_FLAGS =--std=c++17 $(BASE_FLAGS)
+CXX_ALL_FLAGS =$(DEFINES) $(INCLUDES) $(CXX_BASE_FLAGS) $(CONFIG_FLAGS)
 
-CONFIGFLAGS:=$(shell pkg-config --cflags $(GTKVERSION))
+CONFIG_FLAGS:=$(shell pkg-config --cflags $(GTK_VERSION))
 MARSHALLER=scintilla-marshal.o
 
 all: $(COMPLIB)
 
 clean:
-	$(DEL) *.o $(COMPLIB) *.plist
+	$(DEL) *.o $(call normalize,$(COMPLIB)) *.plist
 
-.cxx.o:
-	$(CXX) $(CONFIGFLAGS) $(CXXTFLAGS) $(CXXFLAGS) -c $<
-.c.o:
-	$(CC) $(CONFIGFLAGS) $(CTFLAGS) $(CFLAGS) -w -c $<
+%.o: %.cxx
+	$(CXX) $(CXX_ALL_FLAGS) $(CXXFLAGS) -c $<
+%.o: %.c
+	$(CC) $(DEFINES) $(INCLUDES) $(CONFIG_FLAGS) $(BASE_FLAGS) $(CFLAGS) -w -c $<
 
 GLIB_GENMARSHAL = glib-genmarshal
 GLIB_GENMARSHAL_FLAGS = --prefix=scintilla_marshal
 
-.list.h:
+%.h: %.list
 	$(GLIB_GENMARSHAL) --header $(GLIB_GENMARSHAL_FLAGS) $< > $@
-.list.c:
+%.c: %.list
 	$(GLIB_GENMARSHAL) --body $(GLIB_GENMARSHAL_FLAGS) $< > $@
 
-LEXOBJS:=$(addsuffix .o,$(basename $(sort $(notdir $(wildcard $(srcdir)/../lexers/Lex*.cxx)))))
-
 analyze:
-	clang --analyze $(CONFIGFLAGS) $(CXXTFLAGS) $(CXXFLAGS) $(srcdir)/*.cxx $(srcdir)/../src/*.cxx $(srcdir)/../lexlib/*.cxx $(srcdir)/../lexers/*.cxx
+	clang --analyze $(DEFINES) $(INCLUDES) $(CONFIG_FLAGS) $(CXX_BASE_FLAGS) $(CXXFLAGS) $(srcdir)/*.cxx $(basedir)/src/*.cxx $(basedir)/lexlib/*.cxx $(basedir)/lexers/*.cxx
 
 depend deps.mak:
 	python DepGen.py
 
-$(COMPLIB): Accessor.o CharacterSet.o DefaultLexer.o LexerBase.o LexerModule.o LexerSimple.o StyleContext.o WordList.o \
-	CharClassify.o Decoration.o Document.o PerLine.o Catalogue.o CallTip.o CaseConvert.o CaseFolder.o \
-	ScintillaBase.o ContractionState.o EditModel.o Editor.o EditView.o ExternalLexer.o MarginView.o \
-	PropSetSimple.o PlatGTK.o \
-	KeyMap.o LineMarker.o PositionCache.o ScintillaGTK.o ScintillaGTKAccessible.o CellBuffer.o CharacterCategory.o ViewStyle.o \
-	RESearch.o RunStyles.o Selection.o Style.o Indicator.o AutoComplete.o UniConversion.o UniqueString.o XPM.o \
-	$(MARSHALLER) $(LEXOBJS)
+LEX_OBJS:=$(addsuffix .o,$(basename $(sort $(notdir $(wildcard $(basedir)/lexers/Lex*.cxx)))))
+
+# Required for base Scintilla
+SRC_OBJS = \
+	AutoComplete.o \
+	CallTip.o \
+	CaseConvert.o \
+	CaseFolder.o \
+	CellBuffer.o \
+	CharacterCategory.o \
+	CharacterSet.o \
+	CharClassify.o \
+	ContractionState.o \
+	DBCS.o \
+	Decoration.o \
+	Document.o \
+	EditModel.o \
+	Editor.o \
+	EditView.o \
+	Indicator.o \
+	KeyMap.o \
+	LineMarker.o \
+	MarginView.o \
+	PerLine.o \
+	PositionCache.o \
+	RESearch.o \
+	RunStyles.o \
+	Selection.o \
+	Style.o \
+	UniConversion.o \
+	UniqueString.o \
+	ViewStyle.o \
+	XPM.o
+
+# Required by lexers
+LEXLIB_OBJS = \
+	Accessor.o \
+	Catalogue.o \
+	DefaultLexer.o \
+	ExternalLexer.o \
+	LexerBase.o \
+	LexerModule.o \
+	LexerSimple.o \
+	PropSetSimple.o \
+	StyleContext.o \
+	WordList.o
+
+GTK_OBJS = \
+	ScintillaBase.o \
+	PlatGTK.o \
+	ScintillaGTK.o \
+	ScintillaGTKAccessible.o
+
+$(COMPLIB): $(SRC_OBJS) $(LEXLIB_OBJS) $(GTK_OBJS) $(MARSHALLER) $(LEX_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 	$(RANLIB) $@
 

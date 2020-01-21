@@ -46,6 +46,8 @@ void ClipboardSidebar::load() {
     m_treeClipboard->setColumnHidden(0, true);
 
     connect(m_treeClipboard, &QTreeView::activated, this, &ClipboardSidebar::onEntryActivated);
+
+    m_model->processClipboardChange();
   }
 
   setWidget(m_treeClipboard);

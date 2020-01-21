@@ -2927,6 +2927,10 @@ QByteArray ScintillaEdit::descriptionOfStyle(sptr_t style) {
     return TextReturner(SCI_DESCRIPTIONOFSTYLE, style);
 }
 
+void ScintillaEdit::setILexer(sptr_t ilexer) {
+    send(SCI_SETILEXER, 0, ilexer);
+}
+
 sptr_t ScintillaEdit::bidirectional() const {
     return send(SCI_GETBIDIRECTIONAL, 0, 0);
 }

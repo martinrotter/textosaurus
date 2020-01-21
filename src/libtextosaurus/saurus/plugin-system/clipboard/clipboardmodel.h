@@ -4,6 +4,7 @@
 #define CLIPBOARDMODEL_H
 
 #include <QAbstractItemModel>
+#include <QClipboard>
 #include <QDateTime>
 
 class ClipboardItem : public QObject {
@@ -58,8 +59,6 @@ class ClipboardItem : public QObject {
     ClipboardItem* m_parentItem;
 };
 
-class QClipboard;
-
 class ClipboardModel : public QAbstractItemModel {
   Q_OBJECT
 
@@ -74,10 +73,12 @@ class ClipboardModel : public QAbstractItemModel {
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     ClipboardItem* itemForIndex(const QModelIndex& idx) const;
 
+  public slots:
+    void processClipboardChange(QClipboard::Mode mode = QClipboard::Mode::Clipboard);
+
   private:
     QScopedPointer<ClipboardItem> m_rootItem;
     QClipboard* m_clipboard;
-    QDateTime m_lastDetection;
 };
 
 #endif // CLIPBOARDMODEL_H

@@ -163,32 +163,28 @@ int ClipboardItem::row() const {
 }
 
 ClipboardModel::ClipboardModel(QObject* parent)
-  : QAbstractItemModel(parent), m_rootItem(new ClipboardItem(this)), m_clipboard(qApp->clipboard()),
-  m_lastDetection(QDateTime::currentDateTime().addSecs(-1)) {
-  connect(m_clipboard, &QClipboard::changed, this, [=](QClipboard::Mode mode) {
-    if (m_lastDetection.addMSecs(100) > QDateTime::currentDateTime()) {
+  : QAbstractItemModel(parent), m_rootItem(new ClipboardItem(this)), m_clipboard(qApp->clipboard()) {
+  connect(m_clipboard, &QClipboard::changed, this, &ClipboardModel::processClipboardChange);
+}
+
+void ClipboardModel::processClipboardChange(QClipboard::Mode mode) {
+  if (mode == QClipboard::Mode::Clipboard) {
+    auto* dat = m_clipboard->mimeData(QClipboard::Mode::Clipboard);
+
+    if (dat == nullptr) {
       return;
     }
 
-    if (mode == QClipboard::Mode::Clipboard) {
-      auto* dat = m_clipboard->mimeData(QClipboard::Mode::Clipboard);
+    auto* ite = new QMimeData();
 
-      if (dat == nullptr) {
-        return;
-      }
-
-      auto* ite = new QMimeData();
-
-      for (auto form : dat->formats()) {
-        ite->setData(form, QByteArray(dat->data(form)));
-      }
-
-      m_lastDetection = QDateTime::currentDateTime();
-      m_rootItem->prependChild(new ClipboardItem(ite, this));
-
-      emit layoutChanged();
+    for (auto form : dat->formats()) {
+      ite->setData(form, QByteArray(dat->data(form)));
     }
-  });
+
+    m_rootItem->prependChild(new ClipboardItem(ite, this));
+
+    emit layoutChanged();
+  }
 }
 
 QModelIndex ClipboardModel::index(int row, int column, const QModelIndex& parent) const {

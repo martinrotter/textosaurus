@@ -770,6 +770,7 @@ public:
 	QByteArray nameOfStyle(sptr_t style);
 	QByteArray tagsOfStyle(sptr_t style);
 	QByteArray descriptionOfStyle(sptr_t style);
+	void setILexer(sptr_t ilexer);
 	sptr_t bidirectional() const;
 	void setBidirectional(sptr_t bidirectional);
 	sptr_t lineCharacterIndex() const;

@@ -59,11 +59,6 @@
 #include "ScintillaBase.h"
 #include "CaseConvert.h"
 
-#ifdef SCI_LEXER
-#include "SciLexer.h"
-#include "PropSetSimple.h"
-#endif
-
 #include <QObject>
 #include <QAbstractScrollArea>
 #include <QAction>
