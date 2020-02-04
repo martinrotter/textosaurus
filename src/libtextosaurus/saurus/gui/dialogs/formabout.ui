@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>FormAbout</class>
  <widget class="QDialog" name="FormAbout">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -159,8 +162,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>685</width>
-            <height>275</height>
+            <width>98</width>
+            <height>69</height>
            </rect>
           </property>
           <property name="autoFillBackground">
@@ -235,7 +238,7 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>83</width>
+            <width>98</width>
             <height>69</height>
            </rect>
           </property>
@@ -305,7 +308,7 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>83</width>
+            <width>98</width>
             <height>69</height>
            </rect>
           </property>
@@ -375,8 +378,8 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>685</width>
-            <height>275</height>
+            <width>98</width>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">

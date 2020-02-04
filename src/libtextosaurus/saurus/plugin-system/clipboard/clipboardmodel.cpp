@@ -136,7 +136,7 @@ void ClipboardItem::decideType() {
     m_type = ItemType::Picture;
   }
   else {
-    // Return raw dat for first MIME type.
+    // Return raw data for first MIME type.
     m_type = ItemType::Unknown;
   }
 }
