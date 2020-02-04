@@ -2,7 +2,13 @@
 
 #include "saurus/miscellaneous/syntaxhighlighting.h"
 
-#include "3rd-party/scintilla/include/SciLexer.h"
+#include "definitions/definitions.h"
+
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,include/SciLexer.h)
+
+// *INDENT-ON*
+
 #include "common/exceptions/applicationexception.h"
 #include "definitions/definitions.h"
 #include "saurus/miscellaneous/application.h"

@@ -4,12 +4,13 @@
 #undef MAKING_LIBRARY
 #endif
 
+#define MAIN_CODE
+
 #include "common/dynamic-shortcuts/dynamicshortcuts.h"
 #include "common/gui/systemtrayicon.h"
 #include "common/gui/toolbar.h"
 #include "common/miscellaneous/debugging.h"
 #include "common/miscellaneous/iconfactory.h"
-#include "definitions/definitions.h"
 #include "saurus/gui/dialogs/formmain.h"
 #include "saurus/gui/statusbar.h"
 #include "saurus/miscellaneous/application.h"

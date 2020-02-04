@@ -20,10 +20,13 @@
 #include "saurus/miscellaneous/textapplication.h"
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
-#include "3rd-party/scintilla/include/ILoader.h"
-#include "3rd-party/scintilla/include/Platform.h"
-#include "3rd-party/scintilla/include/SciLexer.h"
-#include "3rd-party/scintilla/qt/ScintillaEditBase/PlatQt.h"
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,include/ILoader.h)
+#include PATH(SCINTILLA_DIR,include/Platform.h)
+#include PATH(SCINTILLA_DIR,include/SciLexer.h)
+#include PATH(SCINTILLA_DIR,qt/ScintillaEditBase/PlatQt.h)
+
+// *INDENT-ON*
 
 #include <QDir>
 #include <QElapsedTimer>

@@ -5,7 +5,13 @@
 
 #include <QtGlobal>
 
-#include "3rd-party/scintilla/include/Scintilla.h"
+// *INDENT-OFF*
+#define IDENT(x) x
+#define XSTR(x) #x
+#define STR(x) XSTR(x)
+#define PATH(x, y) STR(IDENT(x)IDENT(y))
+
+// *INDENT-ON*
 
 constexpr auto CRYPTO_RECOMMENDED_PASS_LENGTH = 8;
 constexpr char CRYPTO_FORMAT_BOUNDARY = 30;
@@ -17,7 +23,7 @@ constexpr auto MARGIN_LINE_NUMBERS_MIN_WIDTH = 10;
 constexpr auto MARGIN_LINE_NUMBERS = 0;
 constexpr auto MARGIN_SYMBOLS = 1;
 constexpr auto MARGIN_FOLDING = 2;
-constexpr auto MARGIN_LINE_NUMBERS_RIGHT_SPACE = SC_MAX_MARGIN + 1;
+constexpr auto MARGIN_LINE_NUMBERS_RIGHT_SPACE = 4 + 1; // SC_MAX_MARGIN = 4
 constexpr auto MARGIN_PADDING_LINE_NUMBERS = 7;
 constexpr auto MARGIN_WIDTH_FOLDING = 18;
 constexpr auto LINE_SPACING_MIN = -10;

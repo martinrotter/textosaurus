@@ -10,7 +10,10 @@
 #include "common/miscellaneous/iofactory.h"
 #include "common/miscellaneous/settingsproperties.h"
 
-#include "3rd-party/scintilla/include/Scintilla.h"
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,include/Scintilla.h)
+
+// *INDENT-ON*
 
 #include <QByteArray>
 #include <QColor>

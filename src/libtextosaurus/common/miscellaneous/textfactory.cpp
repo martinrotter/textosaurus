@@ -6,7 +6,11 @@
 #include "common/miscellaneous/iofactory.h"
 #include "definitions/definitions.h"
 
-#include "3rd-party/scintilla/include/Scintilla.h"
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,include/Scintilla.h)
+
+// *INDENT-ON*
+
 #include "3rd-party/uchardet/uchardet.h"
 
 #include <QDir>

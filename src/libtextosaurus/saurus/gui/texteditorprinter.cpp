@@ -2,7 +2,13 @@
 
 #include "saurus/gui/texteditorprinter.h"
 
-#include "3rd-party/scintilla/include/Scintilla.h"
+#include "definitions/definitions.h"
+
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,qt/ScintillaEdit/ScintillaEdit.h)
+
+// *INDENT-ON*
+
 #include "saurus/gui/texteditor.h"
 
 #include <QPainter>

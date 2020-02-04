@@ -2,7 +2,13 @@
 
 #include "saurus/plugin-system/macros/macros.h"
 
-#include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
+#include "definitions/definitions.h"
+
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,qt/ScintillaEdit/ScintillaEdit.h)
+
+// *INDENT-ON*
+
 #include "common/gui/messagebox.h"
 #include "common/miscellaneous/settings.h"
 #include "saurus/plugin-system/macros/macro.h"

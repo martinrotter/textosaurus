@@ -43,6 +43,18 @@ CONFIG(FLATPAK_MODE) {
   DEFINES *= FLATPAK_MODE=1
 }
 
+os2 {
+  SCINTILLA_DIR = $$PWD/../libtextosaurus/3rd-party/scintilla-lt
+  SCINTILLA_DIR_NAME = scintilla-lt
+}
+else {
+  SCINTILLA_DIR = $$PWD/../libtextosaurus/3rd-party/scintilla
+  SCINTILLA_DIR_NAME = scintilla
+}
+
+DEFINES *= SCINTILLA_DIR=$${SCINTILLA_DIR}/
+message($$MSG_PREFIX: Scintilla subdirectory: \"$$SCINTILLA_DIR\".)
+
 SOURCES += main.cpp
 INCLUDEPATH +=  ../libtextosaurus \
                 ../libtextosaurus/common/gui \

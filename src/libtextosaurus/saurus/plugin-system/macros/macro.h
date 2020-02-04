@@ -5,7 +5,12 @@
 
 #include <QObject>
 
-#include "3rd-party/scintilla/qt/ScintillaEdit/ScintillaEdit.h"
+#include "definitions/definitions.h"
+
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,qt/ScintillaEdit/ScintillaEdit.h)
+
+// *INDENT-ON*
 
 #include <QPointer>
 

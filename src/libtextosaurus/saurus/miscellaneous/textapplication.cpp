@@ -2,7 +2,11 @@
 
 #include "saurus/miscellaneous/textapplication.h"
 
-#include "3rd-party/scintilla/include/SciLexer.h"
+// *INDENT-OFF*
+#include PATH(SCINTILLA_DIR,include/SciLexer.h)
+
+// *INDENT-ON*
+
 #include "3rd-party/uchardet/uchardet.h"
 #include "common/gui/messagebox.h"
 #include "common/gui/toolbar.h"
