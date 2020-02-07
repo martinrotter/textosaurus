@@ -27,9 +27,9 @@ QList<QAction*> FilesystemPlugin::userActions() {
   return QList<QAction*>();
 }
 
-void FilesystemPlugin::start(QWidget* main_form_widget, TextApplication* text_app,
+void FilesystemPlugin::start(const QString& library_file, QWidget* main_form_widget, TextApplication* text_app,
                              Settings* settings, IconFactory* icon_factory, WebFactory* web_factory) {
-  PluginBase::start(main_form_widget, text_app, settings, icon_factory, web_factory);
+  PluginBase::start(library_file, main_form_widget, text_app, settings, icon_factory, web_factory);
 }
 
 void FilesystemPlugin::stop() {}

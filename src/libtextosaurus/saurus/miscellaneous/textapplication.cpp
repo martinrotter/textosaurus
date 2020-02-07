@@ -61,7 +61,7 @@ void TextApplication::loadTextEditorFromString(const QString& contents) {
   attachTextEditor(new_editor);
   m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
   new_editor->loadFromString(contents);
-  qobject_cast<QWidget*>(new_editor)->setFocus();
+  new_editor->setFocus();
 }
 
 TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
@@ -72,7 +72,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
 
   if (tab_already_opened_file != nullptr) {
     m_tabEditors->setCurrentWidget(tab_already_opened_file);
-    tab_already_opened_file->primaryEditor()->viewport()->setFocus();
+    tab_already_opened_file->primaryEditor()->setFocus();
     return tab_already_opened_file->primaryEditor();
   }
 
@@ -91,7 +91,7 @@ TextEditor* TextApplication::loadTextEditorFromFile(const QString& file_path,
     }
 
     m_tabEditors->setCurrentIndex(addTextEditor(new_editor));
-    qobject_cast<QWidget*>(new_editor)->setFocus();
+    new_editor->setFocus();
   }
 
   return new_editor;

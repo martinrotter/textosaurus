@@ -418,6 +418,10 @@ void TextEditor::askForSaveAgreement() {
   }
 }
 
+void TextEditor::setFocus() {
+  qobject_cast<QWidget*>(this)->setFocus();
+}
+
 void TextEditor::requestVisibility() {
   emit visibilityRequested();
 }

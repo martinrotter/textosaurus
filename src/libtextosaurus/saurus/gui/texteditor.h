@@ -57,6 +57,7 @@ class TEXTOSAURUS_DLLSPEC TextEditor : public ScintillaEdit {
     void resetSaveAgreement();
     void askForSaveAgreement();
 
+    void setFocus();
     void requestVisibility();
     void reloadFromDisk();
     void toggleFolding(int position, int modifiers, int margin);

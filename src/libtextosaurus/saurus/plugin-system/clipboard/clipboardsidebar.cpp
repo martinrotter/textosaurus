@@ -63,5 +63,5 @@ void ClipboardSidebar::onEntryActivated(const QModelIndex& idx) {
 }
 
 void ClipboardSidebar::importSelectedClipboardEntry(ClipboardItem* entry, TextEditor* editor) {
-  ClipboardImporter(entry, editor, m_mainForm).exec();
+  ClipboardImporter(entry, m_textApp, editor, m_mainForm).exec();
 }

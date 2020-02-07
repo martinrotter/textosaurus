@@ -53,6 +53,20 @@ int TextApplicationSettings::eolMode() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::EolMode)).toInt();
 }
 
+QString TextApplicationSettings::eolString() const {
+  switch (eolMode()) {
+    case SC_EOL_CRLF:
+      return QSL("\r\n");
+
+    case SC_EOL_CR:
+      return QSL("\r");
+
+    case SC_EOL_LF:
+    default:
+      return QSL("\n");
+  }
+}
+
 bool TextApplicationSettings::wordWrapEnabled() const {
   return qApp->settings()->value(GROUP(Editor), SETTING(Editor::WordWrap)).toBool();
 }

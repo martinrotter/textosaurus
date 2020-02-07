@@ -27,12 +27,10 @@ QList<QAction*> ClipboardPlugin::userActions() {
   return {};
 }
 
-void ClipboardPlugin::start(QWidget* main_form_widget,
-                            TextApplication* text_app,
-                            Settings* settings,
-                            IconFactory* icon_factory,
-                            WebFactory* web_factory) {
-  PluginBase::start(main_form_widget, text_app, settings, icon_factory, web_factory);
+void ClipboardPlugin::start(const QString& library_file, QWidget* main_form_widget,
+                            TextApplication* text_app, Settings* settings,
+                            IconFactory* icon_factory, WebFactory* web_factory) {
+  PluginBase::start(library_file, main_form_widget, text_app, settings, icon_factory, web_factory);
 }
 
 void ClipboardPlugin::stop() {}

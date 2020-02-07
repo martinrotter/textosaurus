@@ -20,7 +20,8 @@ class ClipboardPlugin : public QObject, public PluginBase {
     QString id() const override;
     QList<BaseSidebar*> sidebars() override;
     QList<QAction*> userActions() override;
-    void start(QWidget* main_form_widget,
+    void start(const QString& library_file,
+               QWidget* main_form_widget,
                TextApplication* text_app,
                Settings* settings,
                IconFactory* icon_factory,

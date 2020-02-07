@@ -28,14 +28,14 @@ class PluginBase {
     virtual QList<QAction*> userActions() = 0;
 
     // Gives plugin ability to access some
-    // fundemantals parts of main application
+    // fundamentals parts of main application
     // logic.
     //
-    // NOTE: This method gets called when all passed compoents are initialized and
+    // NOTE: This method gets called when all passed components are initialized and
     // could be called later than methods name(), sidebars() and userActions().
-    virtual void start(QWidget* main_form_widget, TextApplication* text_app,
-                       Settings* settings, IconFactory* icon_factory,
-                       WebFactory* web_factory);
+    virtual void start(const QString& library_file, QWidget* main_form_widget,
+                       TextApplication* text_app, Settings* settings,
+                       IconFactory* icon_factory, WebFactory* web_factory);
 
     // Stops the plugin.
     //
@@ -51,6 +51,7 @@ class PluginBase {
     WebFactory* webFactory() const;
 
   private:
+    QString m_libraryFile = QString();
     QWidget* m_mainForm = nullptr;
     TextApplication* m_textApp = nullptr;
     Settings* m_settings = nullptr;
@@ -78,9 +79,10 @@ inline WebFactory* PluginBase::webFactory() const {
   return m_webFactory;
 }
 
-inline void PluginBase::start(QWidget* main_form_widget, TextApplication* text_app,
-                              Settings* settings, IconFactory* icon_factory,
-                              WebFactory* web_factory) {
+inline void PluginBase::start(const QString& library_file, QWidget* main_form_widget,
+                              TextApplication* text_app, Settings* settings,
+                              IconFactory* icon_factory, WebFactory* web_factory) {
+  m_libraryFile = library_file;
   m_mainForm = main_form_widget;
   m_textApp = text_app;
   m_settings = settings;

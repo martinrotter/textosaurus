@@ -28,24 +28,35 @@ void PluginFactory::loadPlugins(TextApplication* text_app) {
             << new ClipboardPlugin(this);
 
   const QString plugins_path = pluginsLibPath();
+  const auto backup_current_dir = QDir::currentPath();
 
-  for (const QFileInfo& plugin_lib_file : QDir(plugins_path).entryInfoList({QSL("libtextosaurus-*") + pluginSuffix()})) {
-    if (QLibrary::isLibrary(plugin_lib_file.absoluteFilePath())) {
-      m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
+  for (const QFileInfo& plugin_subdir : QDir(plugins_path).entryInfoList(QDir::Filter::Dirs)) {
+    for (const QFileInfo& plugin_lib_file :
+         QDir(plugin_subdir.absoluteFilePath()).entryInfoList({QSL("libtextosaurus-*") + pluginSuffix()})) {
+      // Add plugin's base folder to library search path and
+      // temporarily switch application's working directory.
+      qApp->addLibraryPath(plugin_subdir.absoluteFilePath());
+      QDir::setCurrent(plugin_subdir.absoluteFilePath());
+
+      if (QLibrary::isLibrary(plugin_lib_file.absoluteFilePath())) {
+        m_plugins << PluginState(plugin_lib_file.absoluteFilePath());
+      }
     }
   }
+
+  QDir::setCurrent(backup_current_dir);
 
   for (PluginState& plugin_state : m_plugins) {
     auto plugin = plugin_state.plugin();
 
     if (plugin == nullptr) {
-      qCritical().noquote().nospace() << QSL("Cannot hook plugin '")
-                                      << plugin_state.pluginLibraryFile()
-                                      << QSL("' into application.");
+      qCriticalNN << QSL("Cannot hook plugin '") << plugin_state.pluginLibraryFile() << QSL("' into application.");
       continue;
     }
 
-    plugin->start(qApp->mainFormWidget(), text_app, qApp->settings(), qApp->icons(), qApp->web());
+    plugin->start(plugin_state.pluginLibraryFile(), qApp->mainFormWidget(),
+                  text_app, qApp->settings(),
+                  qApp->icons(), qApp->web());
 
     auto plugin_sidebars = plugin->sidebars();
 

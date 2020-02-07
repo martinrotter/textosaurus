@@ -13,6 +13,7 @@
 
 // *INDENT-ON*
 
+constexpr auto DATA_CLIPBOARD_TOO_BIG_WARNING = 30 * 1024;
 constexpr auto CRYPTO_RECOMMENDED_PASS_LENGTH = 8;
 constexpr char CRYPTO_FORMAT_BOUNDARY = 30;
 constexpr auto CRYPTED_FILE_ENCODING = "UTF-8";

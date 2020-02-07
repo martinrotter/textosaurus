@@ -2,15 +2,141 @@
 
 #include "saurus/plugin-system/clipboard/clipboardimporter.h"
 
+#include "common/gui/messagebox.h"
+#include "common/miscellaneous/iofactory.h"
 #include "saurus/gui/texteditor.h"
+#include "saurus/miscellaneous/textapplication.h"
+#include "saurus/miscellaneous/textapplicationsettings.h"
 #include "saurus/plugin-system/clipboard/clipboardmodel.h"
 
-ClipboardImporter::ClipboardImporter(ClipboardItem* entry, TextEditor* editor, QWidget* parent)
-  : QDialog(parent), m_entry(entry), m_activeEditor(editor) {
+#include <QDebug>
+#include <QFileInfo>
+#include <QUrl>
+
+ClipboardImporter::ClipboardImporter(ClipboardItem* entry, TextApplication* text_app, TextEditor* editor, QWidget* parent)
+  : QDialog(parent), m_entry(entry), m_textApp(text_app), m_activeEditor(editor) {
   m_ui.setupUi(this);
 
   addSupportedActions();
   adjustSize();
+
+  connect(this, &ClipboardImporter::accepted, this, &ClipboardImporter::performImport);
+}
+
+void ClipboardImporter::performImport() {
+  switch (selectedTarget()) {
+    case ClipboardImporter::ImportTarget::ImportUrl: {
+      QStringList urls;
+
+      for (const QUrl& url : m_entry->data()->urls()) {
+        urls << url.toString();
+      }
+
+      QString text = urls.join(QL1S(", "));
+
+      if (m_activeEditor->selectionEmpty()) {
+        m_activeEditor->insertText(m_activeEditor->currentPos(), text.toUtf8().constData());
+        m_activeEditor->gotoPos(m_activeEditor->currentPos() + text.size());
+      }
+      else {
+        m_activeEditor->replaceSel(text.toUtf8().constData());
+      }
+
+      m_activeEditor->setFocus();
+      break;
+    }
+
+    case ClipboardImporter::ImportTarget::ImportHtml: {
+      QString text = m_entry->data()->html();
+
+      if (m_activeEditor->selectionEmpty()) {
+        m_activeEditor->insertText(m_activeEditor->currentPos(), text.toUtf8().constData());
+        m_activeEditor->gotoPos(m_activeEditor->currentPos() + text.size());
+      }
+      else {
+        m_activeEditor->replaceSel(text.toUtf8().constData());
+      }
+
+      m_activeEditor->setFocus();
+      break;
+    }
+
+    case ClipboardImporter::ImportTarget::ImportText: {
+      QString text = m_entry->data()->text();
+
+      if (m_activeEditor->selectionEmpty()) {
+        m_activeEditor->insertText(m_activeEditor->currentPos(), text.toUtf8().constData());
+        m_activeEditor->gotoPos(m_activeEditor->currentPos() + text.size());
+      }
+      else {
+        m_activeEditor->replaceSel(text.toUtf8().constData());
+      }
+
+      m_activeEditor->setFocus();
+      break;
+    }
+
+    case ClipboardImporter::ImportTarget::ImportBase64FileUrlData: {
+      QString text;
+
+      for (const QUrl& url : m_entry->data()->urls()) {
+        if (url.isLocalFile()) {
+          QFileInfo file(url.toLocalFile());
+
+          if (file.exists()) {
+
+            text += file.fileName();
+            text += m_textApp->settings()->eolString();
+            text += IOFactory::readFile(file.absoluteFilePath()).toBase64();
+            text += m_textApp->settings()->eolString();
+            text += m_textApp->settings()->eolString();
+          }
+          else {
+            qWarningNN << tr("File '") << file.absoluteFilePath() << tr("' does not exist and cannot be imported as Base64.");
+          }
+        }
+      }
+
+      break;
+    }
+
+    case ClipboardImporter::ImportTarget::SaveBase64ClipboardData:
+      break;
+
+    case ClipboardImporter::ImportTarget::ImportBase64ClipboardData:  {
+      QByteArray data = m_entry->data()->data(m_entry->data()->formats().at(0));
+
+      if (data.size() > DATA_CLIPBOARD_TOO_BIG_WARNING) {
+        if (MessageBox::show(parentWidget(),
+                             QMessageBox::Icon::Question,
+                             tr("Clipboard Data Too Big"),
+                             tr("Clipboard data you want to import in Base64 format is quite big."),
+                             tr("Do you want to import data to editor anyway?"),
+                             QString(),
+                             QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No,
+                             QMessageBox::StandardButton::Yes) != QMessageBox::StandardButton::Yes) {
+          return;
+        }
+      }
+
+      QString text = data.toBase64();
+
+      if (m_activeEditor->selectionEmpty()) {
+        m_activeEditor->insertText(m_activeEditor->currentPos(), text.toUtf8().constData());
+        m_activeEditor->gotoPos(m_activeEditor->currentPos() + text.size());
+      }
+      else {
+        m_activeEditor->replaceSel(text.toUtf8().constData());
+      }
+
+      m_activeEditor->setFocus();
+      break;
+    }
+  }
+}
+
+ClipboardImporter::ImportTarget ClipboardImporter::selectedTarget() const {
+  return ClipboardImporter::ImportTarget(m_ui.m_cmbOptions->currentData().toInt());
 }
 
 void ClipboardImporter::addSupportedActions() {

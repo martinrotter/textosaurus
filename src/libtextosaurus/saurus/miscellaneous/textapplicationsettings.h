@@ -26,6 +26,7 @@ class TEXTOSAURUS_DLLSPEC TextApplicationSettings : public QObject {
     bool autoIndentEnabled() const;
     QStringList recentFiles() const;
     int eolMode() const;
+    QString eolString() const;
     bool wordWrapEnabled() const;
     bool lineNumbersEnabled() const;
     QString loadSaveDefaultDirectory() const;
