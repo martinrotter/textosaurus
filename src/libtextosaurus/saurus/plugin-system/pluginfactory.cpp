@@ -86,7 +86,11 @@ QString PluginFactory::pluginSuffix() const {
 
 QString PluginFactory::pluginsLibPath() const {
 #if defined(Q_OS_LINUX)
-  return qApp->applicationDirPath() + QDir::separator() + QL1S("..") + QDir::separator() + QL1S("lib");
+  return qApp->applicationDirPath() + QDir::separator() +
+          QL1S("..") + QDir::separator() +
+          QL1S("lib") + QDir::separator() +
+          QL1S(APP_LOW_NAME) + QDir::separator() +
+          QL1S("plugins");
 #else
   return qApp->applicationDirPath() + QDir::separator() + QL1S("plugins");
 #endif
