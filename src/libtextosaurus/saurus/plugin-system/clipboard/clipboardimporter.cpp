@@ -10,6 +10,7 @@
 #include "saurus/plugin-system/clipboard/clipboardmodel.h"
 
 #include <QDebug>
+#include <QFileDialog>
 #include <QFileInfo>
 #include <QUrl>
 
@@ -97,11 +98,56 @@ void ClipboardImporter::performImport() {
         }
       }
 
+      if (!text.isEmpty()) {
+        if (m_activeEditor->selectionEmpty()) {
+          m_activeEditor->insertText(m_activeEditor->currentPos(), text.toUtf8().constData());
+          m_activeEditor->gotoPos(m_activeEditor->currentPos() + text.size());
+        }
+        else {
+          m_activeEditor->replaceSel(text.toUtf8().constData());
+        }
+
+        m_activeEditor->setFocus();
+      }
+
       break;
     }
 
-    case ClipboardImporter::ImportTarget::SaveBase64ClipboardData:
+    case ClipboardImporter::ImportTarget::SaveBase64ClipboardData: {
+      if (m_entry->data()->hasUrls() && m_entry->data()->urls().at(0).isLocalFile()) {
+        // Save linked files into folder.
+        QString folder = QFileDialog::getExistingDirectory(parentWidget(),
+                                                           tr("Select Output Folder"),
+                                                           QDir::homePath());
+
+        if (!folder.isEmpty()) {
+          for (const QUrl& url : m_entry->data()->urls()) {
+            if (url.isLocalFile()) {
+              QString source_file = url.toLocalFile();
+              QString target_file = folder + QDir::separator() + QFileInfo(source_file).fileName();
+
+              if (!QFile::copy(source_file, target_file)) {
+                qCriticalNN << QSL("Failed to copy file '") << QDir::toNativeSeparators(source_file)
+                            << QSL("' to destination '") << QDir::toNativeSeparators(target_file) << QSL("'.");
+              }
+            }
+          }
+        }
+      }
+      else {
+        // Save raw clipboard contents to single file.
+        QString file = QFileDialog::getSaveFileName(parentWidget(),
+                                                    tr("Save Clipboard To File"),
+                                                    QDir::homePath(),
+                                                    tr("All files (*)"));
+
+        if (!file.isEmpty()) {
+          IOFactory::writeFile(file, m_entry->data()->data(m_entry->data()->formats().at(0)));
+        }
+      }
+
       break;
+    }
 
     case ClipboardImporter::ImportTarget::ImportBase64ClipboardData:  {
       QByteArray data = m_entry->data()->data(m_entry->data()->formats().at(0));
@@ -157,5 +203,5 @@ void ClipboardImporter::addSupportedActions() {
   }
 
   m_ui.m_cmbOptions->addItem(tr("Import raw clipboard data as Base64"), int(ImportTarget::ImportBase64ClipboardData));
-  m_ui.m_cmbOptions->addItem(tr("Save raw clipboard data to file"), int(ImportTarget::SaveBase64ClipboardData));
+  m_ui.m_cmbOptions->addItem(tr("Save raw clipboard data (or files) to file (or folder)"), int(ImportTarget::SaveBase64ClipboardData));
 }

@@ -171,7 +171,7 @@ void ClipboardModel::processClipboardChange(QClipboard::Mode mode) {
   if (mode == QClipboard::Mode::Clipboard) {
     auto* dat = m_clipboard->mimeData(QClipboard::Mode::Clipboard);
 
-    if (dat == nullptr) {
+    if (dat == nullptr || dat->formats().empty()) {
       return;
     }
 
