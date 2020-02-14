@@ -9,8 +9,8 @@
 #include <QLocale>
 #include <QPointer>
 
-Settings::Settings(const QString& file_name, Format format, SettingsType status, QObject* parent)
-  : QSettings(file_name, format, parent), m_initializationStatus(status) {}
+Settings::Settings(const QString& file_name, Format format, SettingsType type, QObject* parent)
+  : QSettings(file_name, format, parent), m_settingsType(type) {}
 
 QString Settings::baseFolder() const {
   return QFileInfo(fileName()).absolutePath();
@@ -24,7 +24,7 @@ QSettings::Status Settings::checkSettings() {
 
 void Settings::printSettingsInfo() {
   // Check if portable settings are available.
-  if (m_initializationStatus == SettingsType::Portable) {
+  if (m_settingsType == SettingsType::Portable) {
     qDebug().noquote().nospace() << QSL("Initializing settings in '")
                                  << QDir::toNativeSeparators(QFileInfo(fileName()).absoluteFilePath())
                                  << QSL("' (portable way).");

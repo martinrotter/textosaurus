@@ -445,7 +445,7 @@ void TextEditor::updateUrlHighlights() {
   sptr_t first_visible_position = positionFromPoint(1, 1);
   int start_position = int(first_visible_position);
 
-  // Firs line visible on screen.
+  // First line visible on screen.
   sptr_t first_visible_line = lineFromPosition(start_position);
   sptr_t ideal_end_position = positionFromLine(first_visible_line + visible_lines_count) +
                               lineLength(first_visible_line + visible_lines_count);

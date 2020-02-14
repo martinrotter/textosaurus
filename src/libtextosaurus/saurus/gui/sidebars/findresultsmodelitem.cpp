@@ -16,10 +16,10 @@ QVariant FindResultsModelItem::data(int role) const {
   return QVariant();
 }
 
-void FindResultsModelItem::appendChild(FindResultsModelItem* item) {
-  m_childItems.append(item);
-  item->setParentItem(this);
-  item->setParent(this);
+void FindResultsModelItem::appendChild(FindResultsModelItem* child) {
+  m_childItems.append(child);
+  child->setParentItem(this);
+  child->setParent(this);
 }
 
 FindResultsModelItem* FindResultsModelItem::child(int row) {

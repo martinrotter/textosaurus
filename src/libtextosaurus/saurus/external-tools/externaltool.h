@@ -126,7 +126,7 @@ class ExternalTool : public QObject {
 
   signals:
     void partialOutputObtained(QString output);
-    void toolFinished(QPointer<TextEditor>& editor, QString standard_output, QString error_output, bool);
+    void toolFinished(QPointer<TextEditor> editor, QString standard_output, QString error_output, bool);
 
   private:
     bool m_isRunning;

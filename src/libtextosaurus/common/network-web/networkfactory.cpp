@@ -102,7 +102,7 @@ QString NetworkFactory::networkErrorText(QNetworkReply::NetworkError error_code)
 
 Downloader* NetworkFactory::performAsyncNetworkOperation(const QString& url, int timeout, const QByteArray& input_data,
                                                          QNetworkAccessManager::Operation operation,
-                                                         QList<QPair<QByteArray, QByteArray>> additional_headers,
+                                                         const QList<QPair<QByteArray, QByteArray>>& additional_headers,
                                                          bool protected_contents, const QString& username,
                                                          const QString& password) {
   auto* downloader = new Downloader();
@@ -121,7 +121,7 @@ Downloader* NetworkFactory::performAsyncNetworkOperation(const QString& url, int
 
 NetworkResult NetworkFactory::performNetworkOperation(const QString& url, int timeout, const QByteArray& input_data,
                                                       QByteArray& output, QNetworkAccessManager::Operation operation,
-                                                      QList<QPair<QByteArray, QByteArray>> additional_headers,
+                                                      const QList<QPair<QByteArray, QByteArray>>& additional_headers,
                                                       bool protected_contents,
                                                       const QString& username, const QString& password) {
   Downloader downloader;

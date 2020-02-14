@@ -213,11 +213,11 @@ class TEXTOSAURUS_DLLSPEC Settings : public QSettings {
   private:
     explicit Settings(const QString& file_name, Format format, SettingsType type, QObject* parent = nullptr);
 
-    SettingsType m_initializationStatus;
+    SettingsType m_settingsType;
 };
 
 inline SettingsType Settings::type() const {
-  return m_initializationStatus;
+  return m_settingsType;
 }
 
 inline QVariant Settings::value(const QString& section, const QString& key, const QVariant& default_value) const {
