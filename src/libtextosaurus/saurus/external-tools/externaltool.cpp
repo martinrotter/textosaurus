@@ -11,6 +11,7 @@
 #include <QAction>
 #include <QPointer>
 #include <QProcess>
+#include <QDir>
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false), m_addToEditMenu(false),
   m_actionObjectName(QString()), m_action(nullptr), m_input(ToolInput::SelectionDocument),
@@ -46,8 +47,15 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
   // Run in interpreter.
   auto* bash_process = new QProcess(this);
+  auto env = QProcessEnvironment::systemEnvironment();
 
-  bash_process->setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+  // Add a set of variables to have info about some
+  // Textosaurus-related properties.
+  env.insert("SAURUS_DOCUMENT_PATH", QDir::toNativeSeparators(editor->filePath()));
+  env.insert("SAURUS_DOCUMENT_FOLDER", QDir::toNativeSeparators(QFileInfo(editor->filePath()).canonicalPath()));
+  env.insert("SAURUS_DOCUMENT_FILE", QDir::toNativeSeparators(QFileInfo(editor->filePath()).fileName()));
+
+  bash_process->setProcessEnvironment(env);
 
   connect(bash_process, &QProcess::readyReadStandardOutput, this, [this, bash_process]() {
     if (m_output == ToolOutput::DumpToOutputWindow) {
