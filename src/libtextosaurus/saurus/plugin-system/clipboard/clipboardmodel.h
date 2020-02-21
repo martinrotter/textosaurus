@@ -71,10 +71,16 @@ class ClipboardModel : public QAbstractItemModel {
     virtual int columnCount(const QModelIndex& parent) const override;
     virtual QVariant data(const QModelIndex& index, int role) const override;
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    ClipboardItem* newestEntry();
+
+    bool isEmpty() const;
     ClipboardItem* itemForIndex(const QModelIndex& idx) const;
 
   public slots:
     void processClipboardChange(QClipboard::Mode mode = QClipboard::Mode::Clipboard);
+
+  signals:
+    void clipboardChanged();
 
   private:
     QScopedPointer<ClipboardItem> m_rootItem;

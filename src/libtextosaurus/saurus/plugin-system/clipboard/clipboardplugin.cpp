@@ -16,15 +16,11 @@ QString ClipboardPlugin::id() const {
 }
 
 QList<BaseSidebar*> ClipboardPlugin::sidebars() {
-  if (m_sidebar == nullptr) {
-    m_sidebar = new ClipboardSidebar(this, nullptr);
-  }
-
-  return QList<BaseSidebar*>() << m_sidebar;
+  return { sidebar() };
 }
 
 QList<QAction*> ClipboardPlugin::userActions() {
-  return {};
+  return { sidebar()->m_actionInsertLatestText };
 }
 
 void ClipboardPlugin::start(const QString& library_file, QWidget* main_form_widget,
@@ -34,3 +30,11 @@ void ClipboardPlugin::start(const QString& library_file, QWidget* main_form_widg
 }
 
 void ClipboardPlugin::stop() {}
+
+ClipboardSidebar* ClipboardPlugin::sidebar() {
+  if (m_sidebar == nullptr) {
+    m_sidebar = new ClipboardSidebar(this, nullptr);
+  }
+
+  return m_sidebar;
+}

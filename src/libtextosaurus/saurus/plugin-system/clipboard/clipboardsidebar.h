@@ -14,6 +14,8 @@ class QTreeView;
 class ClipboardSidebar : public BaseSidebar {
   Q_OBJECT
 
+  friend class ClipboardPlugin;
+
   public:
     explicit ClipboardSidebar(ClipboardPlugin* plugin, QWidget* parent = nullptr);
 
@@ -26,6 +28,7 @@ class ClipboardSidebar : public BaseSidebar {
 
   private slots:
     void onEntryActivated(const QModelIndex& idx);
+    void importNewestText();
 
   private:
     void importSelectedClipboardEntry(ClipboardItem* entry, TextEditor* editor);
@@ -34,6 +37,7 @@ class ClipboardSidebar : public BaseSidebar {
     QTreeView* m_treeClipboard;
     QWidget* m_mainForm;
     ClipboardModel* m_model;
+    QAction* m_actionInsertLatestText;
 };
 
 #endif // CLIPBOARDSIDEBAR_H

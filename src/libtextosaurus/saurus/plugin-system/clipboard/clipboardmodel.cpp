@@ -184,6 +184,7 @@ void ClipboardModel::processClipboardChange(QClipboard::Mode mode) {
     m_rootItem->prependChild(new ClipboardItem(ite, this));
 
     emit layoutChanged();
+    emit clipboardChanged();
   }
 }
 
@@ -316,6 +317,19 @@ QVariant ClipboardModel::headerData(int section, Qt::Orientation orientation, in
         return QVariant();
     }
   }
+}
+
+ClipboardItem* ClipboardModel::newestEntry() {
+  if (m_rootItem->childItems().isEmpty()) {
+    return nullptr;
+  }
+  else {
+    return m_rootItem->child(0);
+  }
+}
+
+bool ClipboardModel::isEmpty() const {
+  return m_rootItem->childCount() <= 0;
 }
 
 ClipboardItem* ClipboardModel::itemForIndex(const QModelIndex& idx) const {

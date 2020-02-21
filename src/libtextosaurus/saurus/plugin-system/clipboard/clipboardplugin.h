@@ -29,6 +29,9 @@ class ClipboardPlugin : public QObject, public PluginBase {
     void stop() override;
 
   private:
+    ClipboardSidebar* sidebar();
+
+  private:
     ClipboardSidebar* m_sidebar;
 };
 

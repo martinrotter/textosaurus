@@ -8,8 +8,8 @@
     <file>./graphics/Papirus/actions/document-open.svg</file>
     <file>./graphics/Papirus/actions/document-properties.svg</file>
     <file>./graphics/Papirus/actions/document-revert.svg</file>
-    <file>./graphics/Papirus/actions/document-save-as.svg</file>
     <file>./graphics/Papirus/actions/document-save.svg</file>
+    <file>./graphics/Papirus/actions/document-save-as.svg</file>
     <file>./graphics/Papirus/actions/down.svg</file>
     <file>./graphics/Papirus/actions/edit-copy.svg</file>
     <file>./graphics/Papirus/actions/edit-cut.svg</file>
@@ -27,10 +27,11 @@
     <file>./graphics/Papirus/actions/gtk-file.svg</file>
     <file>./graphics/Papirus/actions/gtk-media-record.svg</file>
     <file>./graphics/Papirus/actions/gtk-media-stop.svg</file>
-    <file>./graphics/Papirus/actions/gtk-print-preview.svg</file>
     <file>./graphics/Papirus/actions/gtk-print.svg</file>
+    <file>./graphics/Papirus/actions/gtk-print-preview.svg</file>
     <file>./graphics/Papirus/actions/help-about.svg</file>
     <file>./graphics/Papirus/actions/insert-object.svg</file>
+    <file>./graphics/Papirus/actions/insert-text.svg</file>
     <file>./graphics/Papirus/actions/list-add.svg</file>
     <file>./graphics/Papirus/actions/list-remove.svg</file>
     <file>./graphics/Papirus/actions/lock.svg</file>
@@ -44,8 +45,8 @@
     <file>./graphics/Papirus/devices/media-flash.svg</file>
     <file>./graphics/Papirus/index.theme</file>
     <file>./graphics/Papirus/mimetypes/multipart-encrypted.svg</file>
-    <file>./graphics/Papirus/places/folder-favorites.svg</file>
     <file>./graphics/Papirus/places/folder.svg</file>
+    <file>./graphics/Papirus/places/folder-favorites.svg</file>
     <file>./graphics/Papirus/status/gtk-dialog-error.svg</file>
     <file>./graphics/Papirus/status/gtk-dialog-info.svg</file>
     <file>./graphics/Papirus/status/gtk-dialog-question.svg</file>
