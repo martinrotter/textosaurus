@@ -548,7 +548,7 @@ QList<Lexer> SyntaxHighlighting::lexers() {
       QSL("m"), QSL("mat")
     }, SCLEX_MATLAB, {}, {QSL("Matlab v5 mat-file")}, {}, true)
       << Lexer(QSL("NSIS"), QStringList {
-      QSL("nsis")
+      QSL("nsis"), QSL("ns")
     }, SCLEX_NSIS, {}, {}, {}, true)
       << Lexer(QSL("Octave"), QStringList {
       QSL("m")

@@ -9,9 +9,9 @@
 #include "saurus/miscellaneous/textapplicationsettings.h"
 
 #include <QAction>
+#include <QDir>
 #include <QPointer>
 #include <QProcess>
-#include <QDir>
 
 ExternalTool::ExternalTool(QObject* parent) : QObject(parent), m_isRunning(false), m_addToEditMenu(false),
   m_actionObjectName(QString()), m_action(nullptr), m_input(ToolInput::SelectionDocument),
@@ -44,10 +44,16 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
   // Save script to file and make it executable.
   QString script_file = IOFactory::writeToTempFile(script().toUtf8());
+  QString work_script_directory = QDir::toNativeSeparators(QFileInfo(script_file).canonicalPath());
+
+  // Now make script file a relative filename with leading ".\" or "./".
+  script_file = QL1C('.') + QDir::separator() + QFileInfo(script_file).fileName();
 
   // Run in interpreter.
-  auto* bash_process = new QProcess(this);
+  auto* script_process = new QProcess(this);
   auto env = QProcessEnvironment::systemEnvironment();
+
+  script_process->setWorkingDirectory(work_script_directory);
 
   // Add a set of variables to have info about some
   // Textosaurus-related properties.
@@ -55,11 +61,11 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
   env.insert("SAURUS_DOCUMENT_FOLDER", QDir::toNativeSeparators(QFileInfo(editor->filePath()).canonicalPath()));
   env.insert("SAURUS_DOCUMENT_FILE", QDir::toNativeSeparators(QFileInfo(editor->filePath()).fileName()));
 
-  bash_process->setProcessEnvironment(env);
+  script_process->setProcessEnvironment(env);
 
-  connect(bash_process, &QProcess::readyReadStandardOutput, this, [this, bash_process]() {
+  connect(script_process, &QProcess::readyReadStandardOutput, this, [this, script_process]() {
     if (m_output == ToolOutput::DumpToOutputWindow) {
-      QString available_output = QString::fromUtf8(bash_process->readAllStandardOutput());
+      QString available_output = QString::fromUtf8(script_process->readAllStandardOutput());
 
       if (!available_output.isEmpty()) {
         emit partialOutputObtained(available_output);
@@ -67,28 +73,28 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
     }
   });
 
-  connect(bash_process, &QProcess::started, this, [data, bash_process] {
-    bash_process->write(data.toUtf8());
-    bash_process->closeWriteChannel();
+  connect(script_process, &QProcess::started, this, [data, script_process] {
+    script_process->write(data.toUtf8());
+    script_process->closeWriteChannel();
   });
 
-  connect(bash_process, &QProcess::errorOccurred, this, [editor, this] {
+  connect(script_process, &QProcess::errorOccurred, this, [editor, this] {
     onProcessError(editor);
   });
 
-  connect(bash_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
+  connect(script_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
           this, [editor, this](int exit_code, QProcess::ExitStatus exit_status) {
     onProcessFinished(editor, exit_code, exit_status);
   });
 
 #if defined (Q_OS_WIN)
-  QString intepr = interpreter();
+  QString interp = interpreter();
 
-  if (!intepr.endsWith(QL1S(".exe"))) {
-    intepr += QSL(".exe");
+  if (!interp.endsWith(QL1S(".exe"))) {
+    interp += QSL(".exe");
   }
 
-  bash_process->start(intepr, QStringList() << script_file);
+  script_process->start(interp, QStringList() << script_file);
 #else
   bash_process->start(interpreter(), QStringList() << script_file);
 #endif
@@ -107,19 +113,19 @@ void ExternalTool::onProcessError(QPointer<TextEditor> editor) {
 }
 
 void ExternalTool::onProcessFinished(QPointer<TextEditor> editor, int exit_code, QProcess::ExitStatus exit_status) {
-  auto* bash_process = qobject_cast<QProcess*>(sender());
+  auto* script_process = qobject_cast<QProcess*>(sender());
 
-  if (bash_process != nullptr) {
+  if (script_process != nullptr) {
     if (exit_status == QProcess::ExitStatus::NormalExit) {
-      QByteArray tool_output = bash_process->readAllStandardOutput();
-      QByteArray tool_error = bash_process->readAllStandardError();
+      QByteArray tool_output = script_process->readAllStandardOutput();
+      QByteArray tool_error = script_process->readAllStandardError();
       emit toolFinished(editor, QString::fromUtf8(tool_output), QString::fromUtf8(tool_error), exit_code == 0);
     }
     else {
-      emit toolFinished(editor, QString(), bash_process->errorString(), false);
+      emit toolFinished(editor, QString(), script_process->errorString(), false);
     }
 
-    bash_process->deleteLater();
+    script_process->deleteLater();
   }
 
   m_isRunning = false;

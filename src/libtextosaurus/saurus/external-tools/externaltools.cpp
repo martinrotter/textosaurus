@@ -670,8 +670,8 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
   Q_UNUSED(success)
 
   if (editor.isNull()) {
-    qCritical().noquote()
-      << QSL("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
+    qCriticalNN <<
+      QSL("Cannot work properly with tool output, assigned text editor was already destroyed, dumping text to output toolbox.");
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
                                                   tr("Cannot deliver output of external tool, assigned text editor no longer exists."),
                                                   QMessageBox::Icon::Critical);
@@ -773,7 +773,7 @@ void ExternalTools::onToolFinished(const QPointer<TextEditor>& editor, const QSt
       break;
   }
 
-  if (!error_text.isEmpty()) {
+  if (!error_text.isEmpty() && !success) {
     m_application->outputSidebar()->displayOutput(OutputSource::ExternalTool, error_text, QMessageBox::Icon::Critical);
     m_application->outputSidebar()->displayOutput(OutputSource::Application,
                                                   tr("Tool '%1' finished with error(s)...").arg(tool->name()),
