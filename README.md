@@ -1,6 +1,6 @@
 Textosaurus
 =============
-[![Bountysource](https://img.shields.io/bountysource/team/textosaurus/activity.svg)](https://www.bountysource.com/teams/textosaurus/issues)
+[![Bountysource](https://img.shields.io/bountysource/team/textosaurus/activity.svg?maxAge=360)](https://www.bountysource.com/teams/textosaurus/issues)
 [![AppVeyor](https://img.shields.io/appveyor/ci/martinrotter/textosaurus.svg?maxAge=360)](https://ci.appveyor.com/project/martinrotter/textosaurus)
 [![Travis CI](https://img.shields.io/travis/martinrotter/textosaurus.svg?maxAge=360)](https://travis-ci.org/martinrotter/textosaurus)
 [![Total downloads](https://img.shields.io/github/downloads/martinrotter/textosaurus/total.svg?maxAge=360)](http://www.somsubhra.com/github-release-stats/?username=martinrotter&repository=textosaurus)
