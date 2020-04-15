@@ -96,7 +96,7 @@ void ExternalTool::runTool(QPointer<TextEditor> editor, const QString& data) {
 
   script_process->start(interp, QStringList() << script_file);
 #else
-  bash_process->start(interpreter(), QStringList() << script_file);
+  script_process->start(interpreter(), QStringList() << script_file);
 #endif
 }
 
