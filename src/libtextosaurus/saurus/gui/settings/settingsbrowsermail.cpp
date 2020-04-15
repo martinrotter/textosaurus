@@ -3,11 +3,12 @@
 #include "saurus/gui/settings/settingsbrowsermail.h"
 
 #include "common/gui/guiutilities.h"
+#include "common/gui/messagebox.h"
 #include "common/miscellaneous/textfactory.h"
 #include "common/network-web/silentnetworkaccessmanager.h"
 #include "saurus/miscellaneous/application.h"
 
-#include <QFileDialog>
+#include <QDir>
 #include <QInputDialog>
 #include <QNetworkProxy>
 
@@ -49,15 +50,15 @@ void SettingsBrowserMail::changeDefaultBrowserArguments(int index) {
 }
 
 void SettingsBrowserMail::selectBrowserExecutable() {
-  const QString executable_file = QFileDialog::getOpenFileName(this,
-                                                               tr("Select web browser executable"),
-                                                               qApp->homeFolder(),
+  const QString executable_file = MessageBox::getOpenFileName(this,
+                                                              tr("Select Web Browser Executable"),
+                                                              qApp->homeFolder(),
 
-                                                               //: File filter for external browser selection dialog.
+                                                              //: File filter for external browser selection dialog.
 #if defined(Q_OS_LINUX)
-                                                               tr("Executables (*)"));
+                                                              QStringList() << tr("Executables (*)"));
 #else
-                                                               tr("Executables (*.*)"));
+                                                              QStringList() << tr("Executables (*.*)"));
 #endif
 
   if (!executable_file.isEmpty()) {
@@ -97,15 +98,15 @@ void SettingsBrowserMail::changeDefaultEmailArguments(int index) {
 }
 
 void SettingsBrowserMail::selectEmailExecutable() {
-  QString executable_file = QFileDialog::getOpenFileName(this,
-                                                         tr("Select e-mail executable"),
-                                                         qApp->homeFolder(),
+  QString executable_file = MessageBox::getOpenFileName(this,
+                                                        tr("Select E-mail Executable"),
+                                                        qApp->homeFolder(),
 
-                                                         //: File filter for external e-mail selection dialog.
+                                                        //: File filter for external e-mail selection dialog.
 #if defined(Q_OS_LINUX)
-                                                         tr("Executables (*)"));
+                                                        QStringList() << tr("Executables (*)"));
 #else
-                                                         tr("Executables (*.*)"));
+                                                        QStringList() << tr("Executables (*.*)"));
 #endif
 
   if (!executable_file.isEmpty()) {

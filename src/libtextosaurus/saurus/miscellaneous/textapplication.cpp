@@ -830,7 +830,7 @@ void TextApplication::reopenTextFile(QAction* action) {
 void TextApplication::openTextFile(QAction* action) {
   QString encoding = (action != nullptr && !action->data().isNull()) ? action->data().toString() : QString();
   QString selected_filter;
-  QString file_path = MessageBox::getOpenFileName(qApp->mainFormWidget(), tr("Open file"),
+  QString file_path = MessageBox::getOpenFileName(qApp->mainFormWidget(), tr("Open File"),
                                                   m_settings->loadSaveDefaultDirectory(),
                                                   m_settings->syntaxHighlighting()->fileFilters(),
                                                   &selected_filter);

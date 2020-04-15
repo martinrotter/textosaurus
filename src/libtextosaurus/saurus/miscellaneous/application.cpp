@@ -60,6 +60,10 @@ bool Application::forcesNewInstance() const {
   return m_cmdParser.isSet(APP_NOSINGLE_INSTANCE_SHORT);
 }
 
+bool Application::forcesNativeDialogs() const {
+  return m_cmdParser.isSet(APP_NAT_DLGS_CONFIG);
+}
+
 QList<QAction*> Application::userActions() {
   QList<QAction*> user_actions;
 
@@ -241,11 +245,13 @@ void Application::parseCmdArguments() {
   QCommandLineOption opt_no_single({APP_NOSINGLE_INSTANCE_SHORT, APP_NOSINGLE_INSTANCE},
                                    QSL("Forces the application to start completely new instance. "
                                        "This is particularly useful when combined with '-%1' option.").arg(opt_config.names().at(0)));
+  QCommandLineOption opt_native_dlgs(APP_NAT_DLGS_CONFIG, QSL("Forces usage of native open/save dialogs."));
 
   m_cmdParser.addOption(opt_config);
   m_cmdParser.addOption(opt_no_single);
   m_cmdParser.addOption(opt_quit);
   m_cmdParser.addOption(opt_already_running);
+  m_cmdParser.addOption(opt_native_dlgs);
   m_cmdParser.addPositionalArgument(QSL("files"), QSL("Text files to be opened."), QSL("file-1 ... file-n"));
   m_cmdParser.addHelpOption();
   m_cmdParser.addVersionOption();

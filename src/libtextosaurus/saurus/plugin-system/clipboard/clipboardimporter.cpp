@@ -116,9 +116,9 @@ void ClipboardImporter::performImport() {
     case ClipboardImporter::ImportTarget::SaveBase64ClipboardData: {
       if (m_entry->data()->hasUrls() && m_entry->data()->urls().at(0).isLocalFile()) {
         // Save linked files into folder.
-        QString folder = QFileDialog::getExistingDirectory(parentWidget(),
-                                                           tr("Select Output Folder"),
-                                                           QDir::homePath());
+        QString folder = MessageBox::getExistingDirectory(parentWidget(),
+                                                          tr("Select Output Directory"),
+                                                          QDir::homePath());
 
         if (!folder.isEmpty()) {
           for (const QUrl& url : m_entry->data()->urls()) {
@@ -136,10 +136,11 @@ void ClipboardImporter::performImport() {
       }
       else {
         // Save raw clipboard contents to single file.
-        QString file = QFileDialog::getSaveFileName(parentWidget(),
-                                                    tr("Save Clipboard To File"),
-                                                    QDir::homePath(),
-                                                    tr("All files (*)"));
+        QString file = MessageBox::getSaveFileName(parentWidget(),
+                                                   tr("Save Clipboard to File"),
+                                                   QDir::homePath(),
+                                                   QStringList() << tr("All files (*)"),
+                                                   nullptr);
 
         if (!file.isEmpty()) {
           IOFactory::writeFile(file, m_entry->data()->data(m_entry->data()->formats().at(0)));

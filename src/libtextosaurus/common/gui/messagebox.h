@@ -3,8 +3,10 @@
 #ifndef MESSAGEBOX_H
 #define MESSAGEBOX_H
 
-#include <QDialogButtonBox>
 #include <QMessageBox>
+
+#include <QDialogButtonBox>
+#include <QFileDialog>
 
 class MessageBox : public QMessageBox {
   Q_OBJECT
@@ -17,10 +19,11 @@ class MessageBox : public QMessageBox {
     void setIcon(Icon icon);
 
     static void setCheckBox(QMessageBox* msg_box, const QString& text, bool* data);
+    static QString getExistingDirectory(QWidget* parent, const QString& caption, const QString& initial_dir);
     static QString getOpenFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
-                                   const QStringList& filters, QString* selected_filter);
+                                   const QStringList& filters, QString* selected_filter = nullptr);
     static QString getSaveFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
-                                   const QStringList& filters, QString* selected_filter);
+                                   const QStringList& filters, QString* selected_filter = nullptr);
 
     // Displays custom message box.
     static QMessageBox::StandardButton show(QWidget* parent,
@@ -34,6 +37,10 @@ class MessageBox : public QMessageBox {
                                             bool* dont_show_again = nullptr,
                                             const QString& dont_show_again_text = QString());
     static QIcon iconForStatus(QMessageBox::Icon status);
+
+  private:
+    static QFileDialog* getFileDialog(QWidget* parent, const QString& caption, const QString& initial_dir,
+                                      const QStringList& filters, QFileDialog::FileMode mode);
 };
 
 #endif // MESSAGEBOX_H

@@ -42,6 +42,7 @@ class TEXTOSAURUS_DLLSPEC Application : public QtSingleApplication {
 
     bool isRunning();
     bool forcesNewInstance() const;
+    bool forcesNativeDialogs() const;
 
     // Globally accessible actions.
     QList<QAction*> userActions();

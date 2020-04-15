@@ -35,23 +35,27 @@ void MessageBox::setCheckBox(QMessageBox* msg_box, const QString& text, bool* da
   msg_box->setCheckBox(check_box);
 }
 
+QString MessageBox::getExistingDirectory(QWidget* parent, const QString& caption, const QString& initial_dir) {
+  QScopedPointer<QFileDialog> dialog(getFileDialog(parent, caption, initial_dir, {}, QFileDialog::FileMode::Directory));
+
+  if (dialog->exec() == QDialog::DialogCode::Accepted) {
+    return dialog->selectedFiles().isEmpty() ? QString() : dialog->selectedFiles().at(0);
+  }
+  else {
+    return QString();
+  }
+}
+
 QString MessageBox::getOpenFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
                                     const QStringList& filters, QString* selected_filter) {
-  QFileDialog dialog(parent, caption, initial_dir, filters.join(QSL(";;")));
+  QScopedPointer<QFileDialog> dialog(getFileDialog(parent, caption, initial_dir, filters, QFileDialog::FileMode::ExistingFile));
 
-  dialog.setFileMode(QFileDialog::FileMode::ExistingFile);
-  dialog.setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
-  dialog.setOption(QFileDialog::Option::ShowDirsOnly, false);
-  dialog.setOption(QFileDialog::Option::DontConfirmOverwrite, false);
-  dialog.setOption(QFileDialog::Option::DontUseNativeDialog, true);
-  dialog.setOption(QFileDialog::Option::HideNameFilterDetails, false);
-
-  if (dialog.exec() == QDialog::DialogCode::Accepted) {
+  if (dialog->exec() == QDialog::DialogCode::Accepted) {
     if (selected_filter != nullptr) {
-      *selected_filter = dialog.selectedNameFilter();
+      *selected_filter = dialog->selectedNameFilter();
     }
 
-    return dialog.selectedFiles().isEmpty() ? QString() : dialog.selectedFiles().at(0);
+    return dialog->selectedFiles().isEmpty() ? QString() : dialog->selectedFiles().at(0);
   }
   else {
     return QString();
@@ -60,21 +64,14 @@ QString MessageBox::getOpenFileName(QWidget* parent, const QString& caption, con
 
 QString MessageBox::getSaveFileName(QWidget* parent, const QString& caption, const QString& initial_dir,
                                     const QStringList& filters, QString* selected_filter) {
-  QFileDialog dialog(parent, caption, initial_dir, filters.join(QSL(";;")));
+  QScopedPointer<QFileDialog> dialog(getFileDialog(parent, caption, initial_dir, filters, QFileDialog::FileMode::AnyFile));
 
-  dialog.setFileMode(QFileDialog::FileMode::AnyFile);
-  dialog.setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
-  dialog.setOption(QFileDialog::Option::ShowDirsOnly, false);
-  dialog.setOption(QFileDialog::Option::DontConfirmOverwrite, false);
-  dialog.setOption(QFileDialog::Option::DontUseNativeDialog, false);
-  dialog.setOption(QFileDialog::Option::HideNameFilterDetails, false);
-
-  if (dialog.exec() == QDialog::DialogCode::Accepted) {
+  if (dialog->exec() == QDialog::DialogCode::Accepted) {
     if (selected_filter != nullptr) {
-      *selected_filter = dialog.selectedNameFilter();
+      *selected_filter = dialog->selectedNameFilter();
     }
 
-    return dialog.selectedFiles().isEmpty() ? QString() : dialog.selectedFiles().at(0);
+    return dialog->selectedFiles().isEmpty() ? QString() : dialog->selectedFiles().at(0);
   }
   else {
     return QString();
@@ -98,6 +95,22 @@ QIcon MessageBox::iconForStatus(QMessageBox::Icon status) {
     default:
       return QIcon();
   }
+}
+
+QFileDialog* MessageBox::getFileDialog(QWidget* parent, const QString& caption, const QString& initial_dir,
+                                       const QStringList& filters, QFileDialog::FileMode mode) {
+  QFileDialog* dialog = new QFileDialog(parent, caption, initial_dir, filters.join(QSL(";;")));
+
+  dialog->setFileMode(mode);
+  dialog->setAcceptMode(mode == QFileDialog::FileMode::AnyFile
+                        ? QFileDialog::AcceptMode::AcceptSave
+                        : QFileDialog::AcceptMode::AcceptOpen);
+  dialog->setOption(QFileDialog::Option::ShowDirsOnly, mode == QFileDialog::FileMode::Directory);
+  dialog->setOption(QFileDialog::Option::DontConfirmOverwrite, false);
+  dialog->setOption(QFileDialog::Option::DontUseNativeDialog, !qApp->forcesNativeDialogs());
+  dialog->setOption(QFileDialog::Option::HideNameFilterDetails, mode == QFileDialog::FileMode::Directory);
+
+  return dialog;
 }
 
 QMessageBox::StandardButton MessageBox::show(QWidget* parent,

@@ -68,6 +68,7 @@ constexpr auto APP_NOSINGLE_INSTANCE_SHORT = "n";
 constexpr auto APP_NOSINGLE_INSTANCE = "no-single-instance";
 constexpr auto APP_OPT_CONFIG_SHORT = "c";
 constexpr auto APP_OPT_CONFIG = "config";
+constexpr auto APP_NAT_DLGS_CONFIG = "nativedialogs";
 constexpr auto APP_IS_RUNNING_SHORT = "r";
 constexpr auto APP_IS_RUNNING = "appisrunning";
 

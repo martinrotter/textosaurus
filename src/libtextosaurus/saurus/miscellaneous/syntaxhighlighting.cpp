@@ -299,7 +299,7 @@ void SyntaxHighlighting::saveColorThemes(const QList<SyntaxColorTheme>& themes, 
 QStringList SyntaxHighlighting::fileFilters() {
   if (m_fileFilters.isEmpty()) {
     for (const Lexer& lex : lexers()) {
-      m_fileFilters << lex.m_name + tr(" files (*") + lex.m_suffices.join(QL1S(" *")) + QL1C(')');
+      m_fileFilters << lex.m_name + tr(" (*") + lex.m_suffices.join(QL1S(" *")) + QL1C(')');
     }
   }
 
