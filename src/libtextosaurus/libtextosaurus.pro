@@ -378,14 +378,14 @@ TRANSLATIONS += $$TRANSLATIONS_WO_QT \
                 $$PWD/../../localization/qtbase_zh_CN.ts
 
 # Exclude some directories from lupdate.
-TR_EXCLUDE += $(QTDIR)/* 3rd-party/*
+TR_EXCLUDE += $(QTDIR) 3rd-party/*
 
 load(uic)
 uic.commands -= -no-stringliteral
 
 # Create new "make lupdate" target.
 lupdate.target = lupdate
-lupdate.commands = lupdate -no-obsolete -pro-debug -pro-debug -pro $$shell_path($$PWD/libtextosaurus.pro) -ts $$TRANSLATIONS_WO_QT
+lupdate.commands = lupdate -no-obsolete -pro $$shell_path($$PWD/libtextosaurus.pro) -ts $$TRANSLATIONS_WO_QT
 
 QMAKE_EXTRA_TARGETS += lupdate
 
