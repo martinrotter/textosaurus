@@ -12,7 +12,7 @@
 #include "saurus/plugin-system/markdown/markdowntextbrowser.h"
 
 #include "3rd-party/md4c/md4c.h"
-#include "3rd-party/md4c/render_html.h"
+#include "3rd-party/md4c/md4c-html.h"
 
 #include <QTextBrowser>
 #include <QToolBar>
@@ -100,12 +100,12 @@ QString MarkdownSidebar::convertMarkdownToHtml(char* raw_data) {
   }
   else {
     QByteArray array;
-    int render_result = md_render_html(raw_data,
-                                       MD_SIZE(data_len),
-                                       &MarkdownSidebar::captureHtmlFragment,
-                                       &array,
-                                       MD_DIALECT_GITHUB | MD_FLAG_WIKILINKS | MD_FLAG_LATEXMATHSPANS | MD_FLAG_PERMISSIVEATXHEADERS,
-                                       0);
+    int render_result = md_html(raw_data,
+                                MD_SIZE(data_len),
+                                &MarkdownSidebar::captureHtmlFragment,
+                                &array,
+                                MD_DIALECT_GITHUB | MD_FLAG_WIKILINKS | MD_FLAG_LATEXMATHSPANS | MD_FLAG_PERMISSIVEATXHEADERS | MD_FLAG_UNDERLINE,
+                                0);
 
     if (render_result == 0) {
       return QString::fromUtf8(array);
