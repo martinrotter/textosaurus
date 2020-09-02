@@ -9,3 +9,11 @@
 		{5}else{10}:{0}
 			{11}d{0} {10}={0} {11}d{0} {10}+{0} {3}" "{0}
 	{5}return{0} {11}d{0}
+
+{5}import{0} {11}contextlib{0}
+
+{15}@contextlib{10}.{11}contextmanager{0}
+{5}def{0} {9}singleuse{10}():{0}
+	{5}print{10}({3}"Before"{10}){0}
+	{5}yield{0}
+{5}with{0} {11}singleuse{10}():{0} {5}pass{0}

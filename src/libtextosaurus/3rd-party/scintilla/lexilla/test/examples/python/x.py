@@ -9,3 +9,11 @@ def depunctuate(s):
 		else:
 			d = d + " "
 	return d
+
+import contextlib
+
+@contextlib.contextmanager
+def singleuse():
+	print("Before")
+	yield
+with singleuse(): pass
