@@ -573,15 +573,17 @@
       </li>
     </ul>
     <h3>
-       <a href="https://www.scintilla.org/scite444.zip">Release 4.4.4</a>
+       <a href="https://www.scintilla.org/scite445.zip">Release 4.4.5</a>
     </h3>
     <ul>
 	<li>
-	Released 21 July 2020.
+	Released 11 September 2020.
 	</li>
 	<li>
-	Fix position of marker symbols for SC_MARGIN_RTEXT which were being moved based on
-	width of text.
+	Lexilla interface supports setting initialisation properties on lexer libraries with
+	SetLibraryProperty and GetLibraryPropertyNames functions.
+	These are called by SciTE which will forward properties to lexer libraries that are prefixed with
+	"lexilla.context.".
 	</li>
 	<li>
 	Allow cross-building for GTK by choosing pkg-config.
@@ -594,6 +596,10 @@
 	<li>
 	Changed SciTE's indent.auto mode to set tab size to indent size when file uses tabs for indentation.
 	<a href="https://sourceforge.net/p/scintilla/bugs/2198/">Bug #2198</a>.
+	</li>
+	<li>
+	Fix position of marker symbols for SC_MARGIN_RTEXT which were being moved based on
+	width of text.
 	</li>
 	<li>
 	Fixed bug on Win32 where cursor was flickering between hand and text over an
