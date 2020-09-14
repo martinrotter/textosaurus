@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Requires Python 2.7 or later
 
@@ -1000,6 +1001,39 @@ class TestMarkers(unittest.TestCase):
 		self.ed.MarkerDefine(1,3)
 		self.assertEquals(self.ed.MarkerSymbolDefined(1), 3)
 
+	def markerFromLineIndex(self, line, index):
+		""" Helper that returns (handle, number) """
+		return (self.ed.MarkerHandleFromLine(line, index), self.ed.MarkerNumberFromLine(line, index))
+
+	def markerSetFromLine(self, line):
+		""" Helper that returns set of (handle, number) """
+		markerSet = set()
+		index = 0
+		while 1:
+			marker = self.markerFromLineIndex(line, index)
+			if marker[0] == -1:
+				return markerSet
+			markerSet.add(marker)
+			index += 1
+
+	def testMarkerFromLine(self):
+		self.assertEquals(self.ed.MarkerHandleFromLine(1, 0), -1)
+		self.assertEquals(self.ed.MarkerNumberFromLine(1, 0), -1)
+		self.assertEquals(self.markerFromLineIndex(1, 0), (-1, -1))
+		self.assertEquals(self.markerSetFromLine(1), set())
+
+		handle = self.ed.MarkerAdd(1,10)
+		self.assertEquals(self.markerFromLineIndex(1, 0), (handle, 10))
+		self.assertEquals(self.markerFromLineIndex(1, 1), (-1, -1))
+		self.assertEquals(self.markerSetFromLine(1), {(handle, 10)})
+
+		handle2 = self.ed.MarkerAdd(1,11)
+		# Don't want to depend on ordering so check as sets
+		self.assertEquals(self.markerSetFromLine(1), {(handle, 10), (handle2, 11)})
+
+		self.ed.MarkerDeleteHandle(handle2)
+		self.assertEquals(self.markerSetFromLine(1), {(handle, 10)})
+
 class TestIndicators(unittest.TestCase):
 
 	def setUp(self):
@@ -1053,7 +1087,7 @@ class TestIndicators(unittest.TestCase):
 
 	def testIndicatorMovement(self):
 		# Create a two character indicator over "BC" in "aBCd" and ensure that it doesn't
-		# leak onto surrounding characters when insertions made at either end but 
+		# leak onto surrounding characters when insertions made at either end but
 		# insertion inside indicator does extend length
 		self.ed.InsertText(0, b"aBCd")
 		self.ed.IndicatorCurrent = 3
@@ -1398,7 +1432,7 @@ class TestMultiSelection(unittest.TestCase):
 		# 3 lines of 3 characters
 		t = b"xxx\nxxx\nxxx"
 		self.ed.AddText(len(t), t)
-		
+
 	def textOfSelection(self, n):
 		self.ed.TargetStart = self.ed.GetSelectionNStart(n)
 		self.ed.TargetEnd = self.ed.GetSelectionNEnd(n)
@@ -1605,7 +1639,7 @@ class TestMultiSelection(unittest.TestCase):
 		self.assertEquals(self.ed.Selections, 2)
 		self.assertEquals(self.textOfSelection(0), texts[1])
 		self.assertEquals(self.textOfSelection(1), texts[0])
-	
+
 	def selectionRepresentation(self, n):
 		anchor = (self.ed.GetSelectionNAnchor(0), self.ed.GetSelectionNAnchorVirtualSpace(0))
 		caret = (self.ed.GetSelectionNCaret(0), self.ed.GetSelectionNCaretVirtualSpace(0))
@@ -2284,6 +2318,46 @@ class TestCallTip(unittest.TestCase):
 		self.assertEquals(self.ed.CallTipPosStart(), 1)
 		self.ed.CallTipCancel()
 		self.assertEquals(self.ed.CallTipActive(), 0)
+
+class TestEdge(unittest.TestCase):
+
+	def setUp(self):
+		self.xite = Xite.xiteFrame
+		self.ed = self.xite.ed
+		self.ed.ClearAll()
+
+	def testBasics(self):
+		self.ed.EdgeColumn = 3
+		self.assertEquals(self.ed.EdgeColumn, 3)
+		self.ed.SetEdgeColour(0xA0)
+		self.assertEquals(self.ed.GetEdgeColour(), 0xA0)
+
+	def testMulti(self):
+		self.assertEquals(self.ed.GetMultiEdgeColumn(-1), -1)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(0), -1)
+		self.ed.MultiEdgeAddLine(5, 0x50)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(0), 5)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(1), -1)
+		self.ed.MultiEdgeAddLine(6, 0x60)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(0), 5)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(1), 6)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(2), -1)
+		self.ed.MultiEdgeAddLine(4, 0x40)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(0), 4)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(1), 5)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(2), 6)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(3), -1)
+		self.ed.MultiEdgeClearAll()
+		self.assertEquals(self.ed.GetMultiEdgeColumn(0), -1)
+
+	def testSameTwice(self):
+		# Tests that adding a column twice retains both
+		self.ed.MultiEdgeAddLine(5, 0x50)
+		self.ed.MultiEdgeAddLine(5, 0x55)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(0), 5)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(1), 5)
+		self.assertEquals(self.ed.GetMultiEdgeColumn(2), -1)
+		self.ed.MultiEdgeClearAll()
 
 class TestAutoComplete(unittest.TestCase):
 

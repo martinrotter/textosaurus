@@ -34,6 +34,8 @@ WINDRES ?= windres
 # Take care of changing Unix style '/' directory separator to '\' on Windows
 normalize = $(if $(windir),$(subst /,\,$1),$1)
 
+PYTHON = $(if $(windir),pyw,python3)
+
 ifdef windir
 DEL = $(if $(wildcard $(dir $(SHELL))rm.exe), $(dir $(SHELL))rm.exe -f, del /q)
 else
@@ -76,7 +78,7 @@ analyze:
 	$(CXX) --analyze $(CXX_ALL_FLAGS) $(CXXFLAGS) *.cxx ../src/*.cxx ../lexlib/*.cxx ../lexers/*.cxx
 
 depend deps.mak:
-	python DepGen.py
+	$(PYTHON) DepGen.py
 
 LEX_OBJS:=$(addsuffix .o,$(basename $(sort $(notdir $(wildcard ../lexers/Lex*.cxx)))))
 
@@ -161,7 +163,7 @@ $(COMPONENT): $(COMPONENT_OBJS)
 $(LEXCOMPONENT): $(LEXCOMPONENT_OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $(STRIPFLAG) $^ $(CXXFLAGS) $(LIBS)
 
-$(LIBSCI): $(SCILEX_OBJS)
+$(LIBSCI): $(COMPONENT_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 	$(RANLIB) $@
 
