@@ -3,6 +3,7 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+#include <limits>
 #include <QtGlobal>
 
 // *INDENT-OFF*
