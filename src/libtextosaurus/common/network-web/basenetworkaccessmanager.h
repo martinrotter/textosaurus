@@ -16,9 +16,6 @@ class BaseNetworkAccessManager : public QNetworkAccessManager {
   public slots:
     virtual void loadSettings();
 
-  protected slots:
-    void onSslErrors(QNetworkReply* reply, const QList<QSslError>& error);
-
   protected:
     virtual QNetworkReply* createRequest(Operation op, const QNetworkRequest& request, QIODevice* outgoingData) override;
 };
