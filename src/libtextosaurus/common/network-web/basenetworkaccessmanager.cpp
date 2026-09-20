@@ -11,7 +11,6 @@
 
 BaseNetworkAccessManager::BaseNetworkAccessManager(QObject* parent)
   : QNetworkAccessManager(parent) {
-  connect(this, &BaseNetworkAccessManager::sslErrors, this, &BaseNetworkAccessManager::onSslErrors);
   loadSettings();
 }
 
@@ -43,18 +42,6 @@ void BaseNetworkAccessManager::loadSettings() {
   }
 
   qDebug().noquote() << QSL("Settings of BaseNetworkAccessManager loaded.");
-}
-
-void BaseNetworkAccessManager::onSslErrors(QNetworkReply* reply, const QList<QSslError>& error) {
-  qWarning().noquote().nospace() << QSL("Ignoring SSL errors for '")
-                                 << reply->url()
-                                 << QSL("': '")
-                                 << reply->errorString()
-                                 << QSL("' (code ")
-                                 << reply->error()
-                                 << QSL(").");
-
-  reply->ignoreSslErrors(error);
 }
 
 QNetworkReply* BaseNetworkAccessManager::createRequest(QNetworkAccessManager::Operation op,
